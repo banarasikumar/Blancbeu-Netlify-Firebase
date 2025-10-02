@@ -1,20 +1,36 @@
 # Blancbeu - Premium Beauty & Wellness Salon
 
 ## Overview
-A premium beauty salon website with a luxurious black and gold theme, featuring modern animations and responsive design.
+A truly luxurious beauty salon website with premium 24k gold and black theme, featuring stunning animations, interactive elements, and a magical user experience.
 
-## Recent Changes (October 2, 2025)
-### Complete Redesign
-- **Theme**: Premium black and gold color scheme with dark mode by default
-- **Theme Toggle**: Light/dark mode toggle button in top-right corner
-- **Hero Section**: Elegant typography with gradient gold text
-- **Special Offers**: 
-  - All haircuts starting at ₹99 (limited time)
+## Latest Update (October 2, 2025)
+### Complete Premium Redesign
+- **Premium Theme**: True 24k gold (#FFD700) on deep black color scheme
+- **Hero Carousel**: 4 beautiful banner images with auto-play and smooth transitions
+- **Iconic Contact Buttons**: 
+  - 📍 Locate Our Salon (pink gradient)
+  - 💬 Chat on WhatsApp (green gradient)
+  - 📞 Call +91 92299 15277 (gold border)
+- **Special Offers**:
+  - All haircuts @ ₹99 (limited time)
   - Durga Puja festive special (up to 50% off)
   - College student discount (25% off with valid ID)
-- **Gallery**: Showcase of beauty services with hover effects
-- **Services**: Categorized and prioritized services with updated pricing
-- **Reviews**: Customer testimonials from Google Maps
+  - Glow effects with CSS animations (no borders)
+- **Interactive Features**:
+  - 🎉✨ "Surprise me" button plays Sundari song
+  - 🌹 Rose petal rain animation when music plays
+  - ✨ Sparkling particle effects throughout
+- **8 Service Categories** with images:
+  1. Hair cutting (✂️) - All cuts at ₹99
+  2. Clean up (✨)
+  3. Facial (💆)
+  4. Hairs & Treatment (💇)
+  5. Premium services (👑)
+  6. Hair colour (🎨)
+  7. Makeup & Styling (💄)
+  8. Nails & Beauty (💅)
+- **Gallery**: 4 stunning transformation images with hover effects
+- **Customer Reviews**: Real Google Maps testimonials with star ratings
 - **Footer**: Updated to 2025
 
 ## Project Architecture
@@ -22,58 +38,66 @@ A premium beauty salon website with a luxurious black and gold theme, featuring 
 - **Frontend**: Vanilla HTML, CSS, JavaScript
 - **Server**: http-server (Node.js)
 - **PWA**: Service Worker for offline capability
-- **Fonts**: Playfair Display (headings), Poppins (body)
+- **Fonts**: Cinzel (luxury headings), Poppins (body text)
+- **Audio**: Background music player with Sundari song
 
 ### File Structure
 ```
-├── index.html          # Main HTML file
-├── styles.css          # All styling and themes
-├── script.js           # Dynamic content rendering
-├── manifest.json       # PWA configuration
-├── sw.js              # Service Worker
-└── attached_assets/stock_images/  # Beauty service images
+├── index.html                  # Main HTML file with carousel
+├── styles.css                  # Premium gold theme & animations
+├── script.js                   # Carousel, music player, rose petals
+├── manifest.json               # PWA configuration
+├── sw.js                      # Service Worker
+└── attached_assets/
+    ├── stock_images/          # Beauty service & carousel images
+    └── SpotiDownloader.com... # Sundari background music
 ```
 
-### Services Categories (Priority Order)
-1. Hair cutting (✂️) - All cuts at ₹99
-2. Clean up (✨)
-3. Facial (💆)
-4. Hairs & Treatment (💇)
-5. Premium services (👑)
-6. Hair colour (🎨)
-
-### Color Scheme
-**Dark Theme (Default)**:
-- Background: #000000
-- Secondary: #1a1a1a
-- Gold Accent: #D4AF37
-- Text: #ffffff
-
-**Light Theme**:
-- Background: #ffffff
-- Secondary: #f8f8f8
-- Gold Accent: #B8941F
-- Text: #1a1a1a
+### Color Palette
+**24k Gold Premium Theme**:
+- Primary Gold: #FFD700
+- Bright Gold: #FFC700
+- Dark Gold: #B8860B
+- Light Gold: #FFED4E
+- Deep Black: #0a0a0a
+- Pure Black: #000000
+- Pink Rose: #FFB6C1
+- WhatsApp Green: #25D366
 
 ## Features
-- ✅ Responsive design for mobile and desktop
-- ✅ Smooth scrolling navigation
-- ✅ CSS animations on offer cards
-- ✅ Image hover effects in gallery
-- ✅ Theme persistence (localStorage)
-- ✅ PWA support for mobile installation
-- ✅ Dark/Light theme toggle
+✅ Auto-playing carousel with 4 banner images
+✅ Manual carousel navigation (arrows & dots)
+✅ Premium iconic contact buttons
+✅ Sparkling particle background effects
+✅ Glow animations on offer cards
+✅ 8 categorized service groups with images
+✅ Expanded services list (60+ services)
+✅ Music player with "Surprise me" button
+✅ Rose petal falling animation
+✅ Smooth transitions throughout
+✅ Responsive design for all devices
+✅ PWA support for mobile installation
+✅ Customer reviews with star ratings
+✅ Image gallery with hover overlays
 
 ## Contact Information
 - Phone: +91 92299 15277
-- WhatsApp: Available
-- Location: Quick booking and directions available on site
+- WhatsApp: https://wa.me/919229915277
+- Location: Google Maps integration
 
 ## Development
 Run locally:
 ```bash
-npm install http-server
 npx http-server . -p 5000 -a 0.0.0.0 --cors -c-1
 ```
 
 Visit: http://localhost:5000
+
+## Special Effects
+1. **Sparkle Background**: Floating golden particles
+2. **Carousel Auto-play**: Changes every 5 seconds
+3. **Glow Animations**: Rotating gradient effects on offer cards
+4. **Rose Petals**: Falling animation when music plays
+5. **Shimmer Text**: Animated gold gradient on titles
+6. **Hover Effects**: Scale and glow transformations
+7. **Smooth Scrolling**: Navigation with easing

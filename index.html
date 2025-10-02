@@ -12,98 +12,166 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Poppins:wght@300;400;500;600;700&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="styles.css">
 </head>
-<body class="dark-theme">
-    <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">
-        <svg class="sun-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="5"></circle>
-            <line x1="12" y1="1" x2="12" y2="3"></line>
-            <line x1="12" y1="21" x2="12" y2="23"></line>
-            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-            <line x1="1" y1="12" x2="3" y2="12"></line>
-            <line x1="21" y1="12" x2="23" y2="12"></line>
-            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-        </svg>
-        <svg class="moon-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-        </svg>
+<body>
+    <div class="sparkles"></div>
+    <div class="rose-petals" id="rosePetals"></div>
+    
+    <button id="surpriseBtn" class="surprise-btn" aria-label="Surprise me">
+        <span class="surprise-icon">🎉</span>
+        <span class="surprise-text">Surprise me ✨</span>
     </button>
+
+    <audio id="bgMusic" loop>
+        <source src="attached_assets/SpotiDownloader.com - Sundari - Sanju Rathod_1759421841829.mp3" type="audio/mpeg">
+    </audio>
 
     <header class="header">
         <div class="container">
-            <div class="logo">Blancbeu</div>
+            <div class="logo">
+                <span class="sparkle">✨</span>
+                Blancbeu
+                <span class="sparkle">✨</span>
+            </div>
             <nav class="nav">
                 <a href="#home">Home</a>
                 <a href="#offers">Offers</a>
                 <a href="#services">Services</a>
+                <a href="#gallery">Gallery</a>
                 <a href="#reviews">Reviews</a>
-                <a href="#contact">Contact</a>
             </nav>
         </div>
     </header>
 
     <section id="home" class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1 class="hero-title">Premium Beauty & Wellness</h1>
-                <p class="hero-subtitle">✨ Luxury Experience • Expert Care • Natural Beauty ✨</p>
-                <div class="hero-buttons">
-                    <a href="tel:+919229915277" class="btn btn-primary">Book Appointment</a>
-                    <a href="https://wa.me/919229915277" class="btn btn-secondary">WhatsApp Us</a>
+        <div class="carousel">
+            <div class="carousel-track" id="carouselTrack">
+                <div class="carousel-slide active">
+                    <img src="attached_assets/stock_images/glamorous_woman_luxu_658b74ed.jpg" alt="Glamorous Beauty">
+                    <div class="carousel-overlay">
+                        <h1 class="hero-title">Blancbeu</h1>
+                        <p class="hero-subtitle">Premium Beauty & Wellness</p>
+                        <p class="hero-tagline">• Luxury Experience • Expert Care • Natural Beauty •</p>
+                    </div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="attached_assets/stock_images/glamorous_woman_luxu_370f1816.jpg" alt="Professional Beauty Care">
+                    <div class="carousel-overlay">
+                        <h1 class="hero-title">Transform Your Beauty</h1>
+                        <p class="hero-subtitle">Experience Luxury Like Never Before</p>
+                    </div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="attached_assets/stock_images/glamorous_woman_luxu_ea2d2063.jpg" alt="Elegant Style">
+                    <div class="carousel-overlay">
+                        <h1 class="hero-title">Where Beauty Meets Excellence</h1>
+                        <p class="hero-subtitle">Premium Services, Perfect Results</p>
+                    </div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="attached_assets/stock_images/glamorous_woman_luxu_1e3349a9.jpg" alt="Luxury Treatment">
+                    <div class="carousel-overlay">
+                        <h1 class="hero-title">Your Beauty Sanctuary</h1>
+                        <p class="hero-subtitle">Indulge in Pure Elegance</p>
+                    </div>
                 </div>
             </div>
+            <button class="carousel-btn prev" onclick="moveCarousel(-1)">❮</button>
+            <button class="carousel-btn next" onclick="moveCarousel(1)">❯</button>
+            <div class="carousel-dots" id="carouselDots"></div>
+        </div>
+        
+        <div class="contact-buttons">
+            <h3 class="contact-title">✨ Connect With Us ✨</h3>
+            <a href="https://maps.google.com" target="_blank" class="contact-btn locate-btn">
+                <span class="btn-icon">📍</span>
+                <span class="btn-text">Locate Our Salon</span>
+                <span class="btn-arrow">»</span>
+            </a>
+            <a href="https://wa.me/919229915277" target="_blank" class="contact-btn whatsapp-btn">
+                <span class="btn-icon">💬</span>
+                <span class="btn-text">Chat on WhatsApp</span>
+                <span class="btn-emoji">✨</span>
+            </a>
+            <a href="tel:+919229915277" class="contact-btn call-btn">
+                <span class="btn-icon">📞</span>
+                <span class="btn-text">Call +91 92299 15277</span>
+                <span class="btn-emoji">⚙️</span>
+            </a>
         </div>
     </section>
 
     <section id="offers" class="offers-section">
         <div class="container">
-            <h2 class="section-title">Special Offers</h2>
+            <h2 class="section-title">
+                <span class="title-decoration">✨</span>
+                Special Offers
+                <span class="title-decoration">✨</span>
+            </h2>
             <p class="section-subtitle">Limited time deals just for you</p>
             
             <div class="offers-grid">
-                <div class="offer-card featured">
-                    <div class="offer-badge">HOT DEAL</div>
+                <div class="offer-card glow-card">
+                    <div class="offer-badge hot">HOT DEAL</div>
                     <div class="offer-icon">✂️</div>
-                    <h3>All Haircuts Starting at ₹99</h3>
-                    <p>Get any haircut style for just ₹99! Limited time offer.</p>
+                    <h3>All Haircuts @ ₹99</h3>
+                    <p>Get any haircut style for just ₹99! Limited time offer on all cuts.</p>
                     <div class="offer-price">
-                        <span class="original-price">₹100-600</span>
-                        <span class="offer-price-tag">₹99</span>
+                        <span class="old-price">₹100-600</span>
+                        <span class="new-price">₹99</span>
                     </div>
+                    <div class="sparkle-line"></div>
                 </div>
 
-                <div class="offer-card festive">
-                    <div class="offer-badge">FESTIVE SPECIAL</div>
+                <div class="offer-card glow-card">
+                    <div class="offer-badge festive">FESTIVE SPECIAL</div>
                     <div class="offer-icon">🪔</div>
                     <h3>Durga Puja Special</h3>
-                    <p>Celebrate the festival with special beauty packages and treatments</p>
+                    <p>Celebrate the festival with exclusive beauty packages</p>
                     <div class="offer-price">
-                        <span class="offer-price-tag">Up to 50% OFF</span>
+                        <span class="new-price">Up to 50% OFF</span>
                     </div>
+                    <div class="sparkle-line"></div>
                 </div>
 
-                <div class="offer-card student">
-                    <div class="offer-badge">STUDENT OFFER</div>
+                <div class="offer-card glow-card">
+                    <div class="offer-badge student">STUDENT OFFER</div>
                     <div class="offer-icon">🎓</div>
                     <h3>College Student Discount</h3>
                     <p>Get 25% off on all services with valid student ID</p>
                     <div class="offer-price">
-                        <span class="offer-price-tag">25% OFF</span>
+                        <span class="new-price">25% OFF</span>
                     </div>
+                    <div class="sparkle-line"></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="gallery-section">
+    <section id="services" class="services-section">
         <div class="container">
-            <h2 class="section-title">Our Work</h2>
-            <p class="section-subtitle">Experience luxury and beauty transformation</p>
+            <h2 class="section-title">
+                <span class="title-decoration">💎</span>
+                Our Services
+                <span class="title-decoration">💎</span>
+            </h2>
+            <p class="section-subtitle">Premium beauty treatments tailored for you</p>
+            
+            <div class="services-container" id="servicesContainer"></div>
+        </div>
+    </section>
+
+    <section id="gallery" class="gallery-section">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="title-decoration">🌟</span>
+                Gallery
+                <span class="title-decoration">🌟</span>
+            </h2>
+            <p class="section-subtitle">Witness the transformation</p>
             
             <div class="gallery-grid">
                 <div class="gallery-item">
@@ -113,7 +181,7 @@
                     </div>
                 </div>
                 <div class="gallery-item">
-                    <img src="attached_assets/stock_images/attractive_model_wit_bcb81b4f.jpg" alt="Haircut Services">
+                    <img src="attached_assets/stock_images/attractive_model_wit_bcb81b4f.jpg" alt="Professional Haircut">
                     <div class="gallery-overlay">
                         <h3>Professional Haircuts</h3>
                     </div>
@@ -125,44 +193,25 @@
                     </div>
                 </div>
                 <div class="gallery-item">
-                    <img src="attached_assets/stock_images/beautiful_woman_gett_6dc3de2b.jpg" alt="Beauty Services">
+                    <img src="attached_assets/stock_images/luxury_spa_massage_w_43d50481.jpg" alt="Spa Treatment">
                     <div class="gallery-overlay">
-                        <h3>Beauty Services</h3>
+                        <h3>Spa & Wellness</h3>
                     </div>
                 </div>
-                <div class="gallery-item">
-                    <img src="attached_assets/stock_images/attractive_model_wit_99f5a700.jpg" alt="Hair Styling">
-                    <div class="gallery-overlay">
-                        <h3>Hair Styling</h3>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="attached_assets/stock_images/luxury_beauty_salon__3aa7fa66.jpg" alt="Premium Treatments">
-                    <div class="gallery-overlay">
-                        <h3>Premium Treatments</h3>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="services" class="services-section">
-        <div class="container">
-            <h2 class="section-title">Our Services</h2>
-            <p class="section-subtitle">Premium beauty treatments tailored for you</p>
-            
-            <div class="services-container" id="servicesContainer">
             </div>
         </div>
     </section>
 
     <section id="reviews" class="reviews-section">
         <div class="container">
-            <h2 class="section-title">Customer Reviews</h2>
+            <h2 class="section-title">
+                <span class="title-decoration">⭐</span>
+                Customer Reviews
+                <span class="title-decoration">⭐</span>
+            </h2>
             <p class="section-subtitle">What our clients say about us</p>
             
-            <div class="reviews-grid" id="reviewsContainer">
-            </div>
+            <div class="reviews-grid" id="reviewsContainer"></div>
         </div>
     </section>
 
@@ -171,8 +220,8 @@
             <h2>Ready to Transform Your Look?</h2>
             <p>Book your appointment today and experience premium beauty care</p>
             <div class="cta-buttons">
-                <a href="tel:+919229915277" class="btn btn-primary btn-large">📞 Call Now</a>
-                <a href="https://wa.me/919229915277" class="btn btn-secondary btn-large">💬 WhatsApp</a>
+                <a href="tel:+919229915277" class="btn-cta primary">📞 Call Now</a>
+                <a href="https://wa.me/919229915277" class="btn-cta secondary">💬 WhatsApp</a>
             </div>
         </div>
     </section>
@@ -183,6 +232,7 @@
                 <div class="footer-section">
                     <h3>Blancbeu</h3>
                     <p>Premium Beauty & Wellness Salon</p>
+                    <p>✨ Where Beauty Meets Excellence ✨</p>
                 </div>
                 <div class="footer-section">
                     <h4>Quick Links</h4>
@@ -195,6 +245,7 @@
                     <h4>Contact</h4>
                     <p>📞 +91 92299 15277</p>
                     <p>💬 WhatsApp Available</p>
+                    <p>📍 Location on Maps</p>
                 </div>
             </div>
             <div class="footer-bottom">

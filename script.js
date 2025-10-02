@@ -1,66 +1,115 @@
 const servicesData = {
-  "generatedAt": "2025-10-02T13:44:21.632Z",
-  "groups": [
+  groups: [
     {
-      "group": "Hair cutting",
-      "icon": "✂️",
-      "services": [
-        { "name": "Plain Haircut", "price": 100, "offerPrice": 99 },
-        { "name": "U-cut", "price": 150, "offerPrice": 99 },
-        { "name": "V-cut", "price": 150, "offerPrice": 99 },
-        { "name": "Deep U-cut", "price": 200, "offerPrice": 99 },
-        { "name": "Deep v-cut", "price": 200, "offerPrice": 99 },
-        { "name": "Step cut", "price": 300, "offerPrice": 99 },
-        { "name": "Layer cut", "price": 500, "offerPrice": 99 },
-        { "name": "Butterfly cut", "price": 500, "offerPrice": 99 },
-        { "name": "Bob cut", "price": 400, "offerPrice": 99 },
-        { "name": "Baby cut", "price": 200, "offerPrice": 99 },
-        { "name": "Advance haircut", "price": 600, "offerPrice": 99 }
+      group: "Hair cutting",
+      icon: "✂️",
+      image: "attached_assets/stock_images/professional_hair_st_3fab25e9.jpg",
+      services: [
+        { name: "Plain Haircut", price: 100, offerPrice: 99 },
+        { name: "U-cut", price: 150, offerPrice: 99 },
+        { name: "V-cut", price: 150, offerPrice: 99 },
+        { name: "Deep U-cut", price: 200, offerPrice: 99 },
+        { name: "Deep v-cut", price: 200, offerPrice: 99 },
+        { name: "Step cut", price: 300, offerPrice: 99 },
+        { name: "Layer cut", price: 500, offerPrice: 99 },
+        { name: "Butterfly cut", price: 500, offerPrice: 99 },
+        { name: "Bob cut", price: 400, offerPrice: 99 },
+        { name: "Baby cut", price: 200, offerPrice: 99 },
+        { name: "Advance haircut", price: 600, offerPrice: 99 },
+        { name: "Feather cut", price: 450, offerPrice: 99 },
+        { name: "Pixie cut", price: 500, offerPrice: 99 }
       ]
     },
     {
-      "group": "Clean up",
-      "icon": "✨",
-      "services": [
-        { "name": "Fruit cleanup", "price": 500, "offerPrice": 250 }
+      group: "Clean up",
+      icon: "✨",
+      image: "attached_assets/stock_images/beautiful_woman_gett_9dc7243a.jpg",
+      services: [
+        { name: "Fruit cleanup", price: 500, offerPrice: 250 },
+        { name: "Diamond cleanup", price: 800, offerPrice: 499 },
+        { name: "Gold cleanup", price: 1000, offerPrice: 599 },
+        { name: "Charcoal cleanup", price: 700, offerPrice: 399 }
       ]
     },
     {
-      "group": "Facial",
-      "icon": "💆",
-      "services": [
-        { "name": "Lotus professional facial", "price": 1500, "offerPrice": 699 },
-        { "name": "03+ Facial", "price": 1500, "offerPrice": 699 }
+      group: "Facial",
+      icon: "💆",
+      image: "attached_assets/stock_images/beautiful_woman_gett_6dc3de2b.jpg",
+      services: [
+        { name: "Lotus professional facial", price: 1500, offerPrice: 699 },
+        { name: "03+ Facial", price: 1500, offerPrice: 699 },
+        { name: "Fruit facial", price: 1200, offerPrice: 599 },
+        { name: "Gold facial", price: 2000, offerPrice: 999 },
+        { name: "Diamond facial", price: 2500, offerPrice: 1299 },
+        { name: "Anti-aging facial", price: 2200, offerPrice: 1199 }
       ]
     },
     {
-      "group": "Hairs & Treatment",
-      "icon": "💇",
-      "services": [
-        { "name": "Keratin", "price": 2500, "offerPrice": 1499 },
-        { "name": "Straightening/Smoothening", "price": 3000, "offerPrice": 1999 },
-        { "name": "Botox", "price": 3500, "offerPrice": 2499 },
-        { "name": "Rebounding", "price": 3500, "offerPrice": 2400 },
-        { "name": "Nanoplastia", "price": 7000, "offerPrice": 2999 }
+      group: "Hairs & Treatment",
+      icon: "💇",
+      image: "attached_assets/stock_images/professional_hair_st_673b25ad.jpg",
+      services: [
+        { name: "Keratin", price: 2500, offerPrice: 1499 },
+        { name: "Straightening/Smoothening", price: 3000, offerPrice: 1999 },
+        { name: "Botox", price: 3500, offerPrice: 2499 },
+        { name: "Rebounding", price: 3500, offerPrice: 2400 },
+        { name: "Nanoplastia", price: 7000, offerPrice: 2999 },
+        { name: "Hair Spa", price: 1500, offerPrice: 799 },
+        { name: "Protein treatment", price: 2000, offerPrice: 1199 },
+        { name: "Anti-dandruff treatment", price: 1800, offerPrice: 999 }
       ]
     },
     {
-      "group": "Premium services",
-      "icon": "👑",
-      "services": [
-        { "name": "Head massage", "price": 250, "offerPrice": 199 },
-        { "name": "Deep Nourish HairSpa", "price": 1500, "offerPrice": 799 },
-        { "name": "Full body Massage", "price": 5000, "offerPrice": 999 },
-        { "name": "Blow dry", "price": 500, "offerPrice": 199 }
+      group: "Premium services",
+      icon: "👑",
+      image: "attached_assets/stock_images/luxury_spa_massage_w_43d50481.jpg",
+      services: [
+        { name: "Head massage", price: 250, offerPrice: 199 },
+        { name: "Deep Nourish HairSpa", price: 1500, offerPrice: 799 },
+        { name: "Full body Massage", price: 5000, offerPrice: 999 },
+        { name: "Blow dry", price: 500, offerPrice: 199 },
+        { name: "Aroma therapy", price: 3000, offerPrice: 1499 },
+        { name: "Hot stone massage", price: 3500, offerPrice: 1799 },
+        { name: "Thai massage", price: 4000, offerPrice: 1999 }
       ]
     },
     {
-      "group": "Hair colour",
-      "icon": "🎨",
-      "services": [
-        { "name": "Global hair colour", "price": 1199, "offerPrice": null },
-        { "name": "Global highlight", "price": 1299, "offerPrice": null },
-        { "name": "Highlight perstrik", "price": 149, "offerPrice": null }
+      group: "Hair colour",
+      icon: "🎨",
+      image: "attached_assets/stock_images/hair_coloring_treatm_f184b598.jpg",
+      services: [
+        { name: "Global hair colour", price: 1199, offerPrice: null },
+        { name: "Global highlight", price: 1299, offerPrice: null },
+        { name: "Highlight perstrik", price: 149, offerPrice: null },
+        { name: "Balayage", price: 2500, offerPrice: 1999 },
+        { name: "Ombre", price: 2200, offerPrice: 1799 },
+        { name: "Root touch-up", price: 599, offerPrice: 399 }
+      ]
+    },
+    {
+      group: "Makeup & Styling",
+      icon: "💄",
+      image: "attached_assets/stock_images/glamorous_woman_luxu_658b74ed.jpg",
+      services: [
+        { name: "Party makeup", price: 2000, offerPrice: 1499 },
+        { name: "Bridal makeup", price: 8000, offerPrice: 5999 },
+        { name: "HD makeup", price: 3500, offerPrice: 2499 },
+        { name: "Airbrush makeup", price: 4000, offerPrice: 2999 },
+        { name: "Pre-bridal package", price: 15000, offerPrice: 9999 }
+      ]
+    },
+    {
+      group: "Nails & Beauty",
+      icon: "💅",
+      image: "attached_assets/stock_images/attractive_model_wit_bcb81b4f.jpg",
+      services: [
+        { name: "Manicure", price: 500, offerPrice: 299 },
+        { name: "Pedicure", price: 600, offerPrice: 349 },
+        { name: "Gel nails", price: 1500, offerPrice: 999 },
+        { name: "Nail art", price: 800, offerPrice: 499 },
+        { name: "Threading", price: 100, offerPrice: 50 },
+        { name: "Waxing full arms", price: 400, offerPrice: 299 },
+        { name: "Waxing full legs", price: 600, offerPrice: 399 }
       ]
     }
   ]
@@ -68,67 +117,119 @@ const servicesData = {
 
 const reviewsData = [
   {
-    "reviewer_name": "Nikita Kumari",
-    "reviewer_details": "1 review",
-    "rating_hearts": 5,
-    "review_date": "a month ago",
-    "review_text": "I recently visited BlancBeu Family beauty salon for a haircut and highlights, and I'm very impressed with the overall experience. The salon is beautiful and well-maintained!"
+    reviewer_name: "Nikita Kumari",
+    reviewer_details: "1 review",
+    rating_hearts: 5,
+    review_date: "a month ago",
+    review_text: "I recently visited BlancBeu Family beauty salon for a haircut and highlights, and I'm very impressed with the overall experience. The salon is beautiful and well-maintained!"
   },
   {
-    "reviewer_name": "Parwati Lohar",
-    "reviewer_details": "2 reviews",
-    "rating_hearts": 5,
-    "review_date": "9 month ago",
-    "review_text": "It was my first time visiting this salon, and I was nervous - but they made me feel so comfortable! The beautician listened to me patiently and suggested the perfect style.",
-    "edited": true
+    reviewer_name: "Parwati Lohar",
+    reviewer_details: "2 reviews",
+    rating_hearts: 5,
+    review_date: "9 month ago",
+    review_text: "It was my first time visiting this salon, and I was nervous - but they made me feel so comfortable! The beautician listened to me patiently and suggested the perfect style."
   },
   {
-    "reviewer_name": "Rajendra Kumar Lohra",
-    "reviewer_details": "2 reviews",
-    "rating_hearts": 5,
-    "review_date": "a month ago",
-    "review_text": "My wife loves this place. She got her haircut and facial done that was awesome all service is wow! I've never been so happy with them. I'd highly recommend!"
+    reviewer_name: "Rajendra Kumar Lohra",
+    reviewer_details: "2 reviews",
+    rating_hearts: 5,
+    review_date: "a month ago",
+    review_text: "My wife loves this place. She got her haircut and facial done that was awesome all service is wow! I've never been so happy with them. I'd highly recommend!"
   },
   {
-    "reviewer_name": "Ujala Oraon",
-    "reviewer_details": "4 reviews",
-    "rating_hearts": 5,
-    "review_date": "5 days ago",
-    "review_text": "Best service... I done my cleanup.. Thank you blanc beu"
+    reviewer_name: "Ujala Oraon",
+    reviewer_details: "4 reviews",
+    rating_hearts: 5,
+    review_date: "5 days ago",
+    review_text: "Best service... I done my cleanup.. Thank you blanc beu"
   },
   {
-    "reviewer_name": "Fehran Saifi",
-    "reviewer_details": "1 review",
-    "rating_hearts": 5,
-    "review_date": "a month ago",
-    "review_text": "Highly recommended, all services are premium and result was very good in behaviour.. maine waha global highlight karwaya 😍😍😍❤️",
-    "translation_available": true
+    reviewer_name: "Fehran Saifi",
+    reviewer_details: "1 review",
+    rating_hearts: 5,
+    review_date: "a month ago",
+    review_text: "Highly recommended, all services are premium and result was very good in behaviour.. maine waha global highlight karwaya 😍😍😍❤️"
   },
   {
-    "reviewer_name": "Aditi Singh",
-    "reviewer_details": "5 reviews",
-    "rating_hearts": 5,
-    "review_date": "2 months ago",
-    "review_text": "Such a great place! I was glad to have your pampering sessions, recently visited there, felt so comfortable..."
+    reviewer_name: "Aditi Singh",
+    reviewer_details: "5 reviews",
+    rating_hearts: 5,
+    review_date: "2 months ago",
+    review_text: "Such a great place! I was glad to have your pampering sessions, recently visited there, felt so comfortable..."
   }
 ];
 
-const priorityOrder = ["Hair cutting", "Clean up", "Facial", "Hairs & Treatment", "Premium services", "Hair colour"];
+let currentSlide = 0;
+let carouselInterval;
+let isPlaying = false;
+
+function initCarousel() {
+  const dots = document.getElementById('carouselDots');
+  const slides = document.querySelectorAll('.carousel-slide');
+  
+  slides.forEach((_, index) => {
+    const dot = document.createElement('div');
+    dot.className = 'dot';
+    if (index === 0) dot.classList.add('active');
+    dot.onclick = () => goToSlide(index);
+    dots.appendChild(dot);
+  });
+  
+  startAutoPlay();
+}
+
+function startAutoPlay() {
+  carouselInterval = setInterval(() => {
+    moveCarousel(1);
+  }, 5000);
+}
+
+function moveCarousel(direction) {
+  const slides = document.querySelectorAll('.carousel-slide');
+  const dots = document.querySelectorAll('.dot');
+  
+  slides[currentSlide].classList.remove('active');
+  dots[currentSlide].classList.remove('active');
+  
+  currentSlide = (currentSlide + direction + slides.length) % slides.length;
+  
+  slides[currentSlide].classList.add('active');
+  dots[currentSlide].classList.add('active');
+  
+  clearInterval(carouselInterval);
+  startAutoPlay();
+}
+
+function goToSlide(index) {
+  const slides = document.querySelectorAll('.carousel-slide');
+  const dots = document.querySelectorAll('.dot');
+  
+  slides[currentSlide].classList.remove('active');
+  dots[currentSlide].classList.remove('active');
+  
+  currentSlide = index;
+  
+  slides[currentSlide].classList.add('active');
+  dots[currentSlide].classList.add('active');
+  
+  clearInterval(carouselInterval);
+  startAutoPlay();
+}
 
 function renderServices() {
   const container = document.getElementById('servicesContainer');
-  const sortedGroups = servicesData.groups.sort((a, b) => {
-    return priorityOrder.indexOf(a.group) - priorityOrder.indexOf(b.group);
-  });
-
-  sortedGroups.forEach(group => {
+  
+  servicesData.groups.forEach(group => {
     const categoryDiv = document.createElement('div');
     categoryDiv.className = 'service-category';
     
     const headerHTML = `
       <div class="category-header">
-        <span class="category-icon">${group.icon || '💎'}</span>
-        <h3 class="category-title">${group.group}</h3>
+        <img src="${group.image}" alt="${group.group}" class="category-image">
+        <div class="category-info">
+          <h3 class="category-title">${group.icon} ${group.group}</h3>
+        </div>
       </div>
     `;
     
@@ -180,18 +281,57 @@ function renderReviews() {
   });
 }
 
-function initThemeToggle() {
-  const themeToggle = document.getElementById('themeToggle');
-  const savedTheme = localStorage.getItem('theme') || 'dark';
+function createRosePetal() {
+  const petal = document.createElement('div');
+  petal.className = 'petal';
+  petal.textContent = '🌹';
+  petal.style.left = Math.random() * 100 + '%';
+  petal.style.animationDuration = (Math.random() * 3 + 4) + 's';
+  petal.style.animationDelay = Math.random() * 2 + 's';
+  return petal;
+}
+
+function startRosePetals() {
+  const container = document.getElementById('rosePetals');
+  container.classList.add('active');
   
-  document.body.className = savedTheme === 'dark' ? 'dark-theme' : 'light-theme';
+  for (let i = 0; i < 30; i++) {
+    container.appendChild(createRosePetal());
+  }
   
-  themeToggle.addEventListener('click', () => {
-    const currentTheme = document.body.classList.contains('dark-theme') ? 'dark' : 'light';
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    
-    document.body.className = newTheme === 'dark' ? 'dark-theme' : 'light-theme';
-    localStorage.setItem('theme', newTheme);
+  setInterval(() => {
+    if (isPlaying && container.children.length < 50) {
+      container.appendChild(createRosePetal());
+    }
+  }, 500);
+}
+
+function stopRosePetals() {
+  const container = document.getElementById('rosePetals');
+  container.classList.remove('active');
+  setTimeout(() => {
+    container.innerHTML = '';
+  }, 1000);
+}
+
+function initSurpriseButton() {
+  const btn = document.getElementById('surpriseBtn');
+  const music = document.getElementById('bgMusic');
+  
+  btn.addEventListener('click', () => {
+    if (!isPlaying) {
+      music.play();
+      isPlaying = true;
+      btn.classList.add('playing');
+      btn.innerHTML = '<span class="surprise-icon">🎵</span><span class="surprise-text">Playing... ✨</span>';
+      startRosePetals();
+    } else {
+      music.pause();
+      isPlaying = false;
+      btn.classList.remove('playing');
+      btn.innerHTML = '<span class="surprise-icon">🎉</span><span class="surprise-text">Surprise me ✨</span>';
+      stopRosePetals();
+    }
   });
 }
 
@@ -208,9 +348,10 @@ function initSmoothScroll() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  initCarousel();
   renderServices();
   renderReviews();
-  initThemeToggle();
+  initSurpriseButton();
   initSmoothScroll();
 });
 

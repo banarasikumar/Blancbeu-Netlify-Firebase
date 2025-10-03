@@ -168,6 +168,8 @@ function initCarousel() {
   const dots = document.getElementById('carouselDots');
   const slides = document.querySelectorAll('.carousel-slide');
   
+  console.log(`🎠 Carousel initialized with ${slides.length} slides`);
+  
   slides.forEach((_, index) => {
     const dot = document.createElement('div');
     dot.className = 'dot';
@@ -180,6 +182,7 @@ function initCarousel() {
 }
 
 function startAutoPlay() {
+  console.log('▶️ Starting carousel auto-play');
   carouselInterval = setInterval(() => {
     moveCarousel(1);
   }, 5000);
@@ -189,10 +192,14 @@ function moveCarousel(direction) {
   const slides = document.querySelectorAll('.carousel-slide');
   const dots = document.querySelectorAll('.dot');
   
+  console.log(`🔄 Moving carousel: current=${currentSlide}, direction=${direction}`);
+  
   slides[currentSlide].classList.remove('active');
   dots[currentSlide].classList.remove('active');
   
   currentSlide = (currentSlide + direction + slides.length) % slides.length;
+  
+  console.log(`✅ New slide: ${currentSlide}`);
   
   slides[currentSlide].classList.add('active');
   dots[currentSlide].classList.add('active');

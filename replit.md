@@ -4,29 +4,27 @@
 A truly luxurious beauty salon website with premium 24k gold and black theme, featuring stunning animations, interactive elements, and a magical user experience.
 
 ## Latest Update (October 3, 2025)
-### Enhanced UI & Mobile Optimization
-- **Surprise Me Button**: 
-  - Relocated to bottom-left corner (no longer blocks brand name)
-  - Smaller, stylish design (13px font, compact padding)
-  - Blurred transparent background with backdrop-filter effect
-  - Smooth pulse animation
-- **Carousel Navigation**:
-  - Smaller circular buttons (40px diameter)
-  - Transparent with backdrop blur
-  - Improved hover effects with scale animation
-  - 5 stunning beauty model images (upgraded from 4)
-- **Service Categories**: 
-  - Images now display BELOW titles (centered layout)
-  - Larger showcase images (600px x 300px)
-  - Flex-direction column layout for better visual hierarchy
-  - Enhanced gold border and shadow effects
-- **Contact Buttons**:
-  - Optimized for smartphone screens (max-width 350px)
-  - Smaller, more elegant sizing (14px padding)
-  - SlideInUp CSS animations with staggered delays
-  - Enhanced hover effects (scale + translateY)
-  - Animated icons with pulse and bounce effects
+### Brand Identity Enhancement & Banner Carousel Redesign
+- **Brand Name Styling**:
+  - **"BLANCBEU"** now displayed in large, attractive uppercase (42px)
+  - Premium gold gradient with shimmer animation
+  - Prominent positioning with enhanced glow effects
+  - **"Family Beauty Salon"** as smaller subtitle below (14px)
+  - Clear visual hierarchy in header
+- **Banner Carousel**:
+  - NEW: 4 professional banner images in assets/banner_carousel_images/
+  - Properly positioned below brand header (no overlap)
+  - Clean layout without text overlays
+  - Smooth fade transitions between slides
+  - All carousel images load correctly (no empty slides)
+- **Folder Structure**:
+  - Organized asset management with assets/banner_carousel_images/
+  - Clean separation of banner and service images
 - **Previous Features** (October 2, 2025):
+  - Surprise Me button with blurred background
+  - Transparent carousel navigation buttons
+  - Smartphone-optimized contact buttons with animations
+  - Service categories with images below titles
   - Premium 24k gold theme on deep black background
   - 8 service categories with 60+ services
   - Special offers with glow animations
@@ -49,8 +47,10 @@ A truly luxurious beauty salon website with premium 24k gold and black theme, fe
 ├── script.js                   # Carousel, music player, rose petals
 ├── manifest.json               # PWA configuration
 ├── sw.js                      # Service Worker
+├── assets/
+│   └── banner_carousel_images/ # Banner carousel images (4 images)
 └── attached_assets/
-    ├── stock_images/          # Beauty service & carousel images
+    ├── stock_images/          # Beauty service images
     └── SpotiDownloader.com... # Sundari background music
 ```
 
@@ -66,9 +66,12 @@ A truly luxurious beauty salon website with premium 24k gold and black theme, fe
 - WhatsApp Green: #25D366
 
 ## Features
-✅ Auto-playing carousel with 5 stunning beauty model images
+✅ Large, attractive brand name "BLANCBEU" with shimmer animation
+✅ Clear brand hierarchy with "Family Beauty Salon" subtitle
+✅ Auto-playing banner carousel with 4 professional beauty images
+✅ Clean carousel layout below header (no overlap)
 ✅ Small transparent carousel navigation buttons
-✅ Bottom-left "Surprise me" button with blurred background
+✅ Bottom-right "Surprise me" button with blurred background
 ✅ Smartphone-optimized contact buttons with animations
 ✅ Service categories with large images below titles (600x300px)
 ✅ Sparkling particle background effects
@@ -81,6 +84,7 @@ A truly luxurious beauty salon website with premium 24k gold and black theme, fe
 ✅ PWA support for mobile installation
 ✅ Customer reviews with star ratings
 ✅ Image gallery with hover overlays
+✅ Well-organized asset folder structure
 
 ## Contact Information
 - Phone: +91 92299 15277
@@ -96,14 +100,15 @@ npx http-server . -p 5000 -a 0.0.0.0 --cors -c-1
 Visit: http://localhost:5000
 
 ## Special Effects & Animations
-1. **Sparkle Background**: Floating golden particles
-2. **Carousel Auto-play**: Changes every 5 seconds
-3. **Carousel Controls**: Circular transparent buttons with backdrop blur
-4. **Contact Buttons**: SlideInUp animation with 0.1s, 0.2s, 0.3s delays
-5. **Glow Animations**: Rotating gradient effects on offer cards
-6. **Rose Petals**: Falling animation when music plays
-7. **Shimmer Text**: Animated gold gradient on titles
-8. **Hover Effects**: Scale and glow transformations
-9. **Pulse & Bounce**: Icon animations on contact buttons
-10. **Smooth Scrolling**: Navigation with easing
-11. **Blurred Backgrounds**: Modern glassmorphism effects
+1. **Brand Name Shimmer**: Pulsing glow effect on BLANCBEU logo
+2. **Sparkle Background**: Floating golden particles
+3. **Carousel Auto-play**: Smooth fade transitions every 5 seconds
+4. **Carousel Controls**: Circular transparent buttons with backdrop blur
+5. **Contact Buttons**: SlideInUp animation with 0.1s, 0.2s, 0.3s delays
+6. **Glow Animations**: Rotating gradient effects on offer cards
+7. **Rose Petals**: Falling animation when music plays
+8. **Shimmer Text**: Animated gold gradient on titles
+9. **Hover Effects**: Scale and glow transformations
+10. **Pulse & Bounce**: Icon animations on contact buttons
+11. **Smooth Scrolling**: Navigation with easing
+12. **Blurred Backgrounds**: Modern glassmorphism effects

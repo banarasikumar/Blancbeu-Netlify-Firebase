@@ -29,11 +29,14 @@
         <source src="attached_assets/SpotiDownloader.com - Sundari - Sanju Rathod_1759421841829.mp3" type="audio/mpeg">
     </audio>
 
-    <header class="header">
+    <header class="header" id="mainHeader">
         <div class="container">
             <div class="logo">
                 <span class="sparkle">✨</span>
-                Blancbeu
+                <div class="logo-content">
+                    <span class="brand-name">BlancBeu - Family Beauty Salon</span>
+                    <span class="brand-slogan">Where Every Family Member Shines ✨</span>
+                </div>
                 <span class="sparkle">✨</span>
             </div>
             <nav class="nav">
@@ -50,36 +53,36 @@
         <div class="carousel">
             <div class="carousel-track" id="carouselTrack">
                 <div class="carousel-slide active">
-                    <img src="attached_assets/stock_images/stunning_beautiful_w_d60bc25c.jpg" alt="Stunning Beauty Model">
+                    <img src="attached_assets/stock_images/beautiful_woman_mode_c7e25374.jpg" alt="Stunning Beauty Model">
                     <div class="carousel-overlay">
-                        <h1 class="hero-title">Blancbeu</h1>
-                        <p class="hero-subtitle">Premium Beauty & Wellness</p>
+                        <h1 class="hero-title">BlancBeu - Family Beauty Salon</h1>
+                        <p class="hero-subtitle">Where Every Family Member Shines</p>
                         <p class="hero-tagline">• Luxury Experience • Expert Care • Natural Beauty •</p>
                     </div>
                 </div>
                 <div class="carousel-slide">
-                    <img src="attached_assets/stock_images/stunning_beautiful_w_4fae0019.jpg" alt="Beautiful Model Portrait">
+                    <img src="attached_assets/stock_images/beautiful_woman_mode_feefb04f.jpg" alt="Beautiful Model Portrait">
                     <div class="carousel-overlay">
                         <h1 class="hero-title">Transform Your Beauty</h1>
                         <p class="hero-subtitle">Experience Luxury Like Never Before</p>
                     </div>
                 </div>
                 <div class="carousel-slide">
-                    <img src="attached_assets/stock_images/stunning_beautiful_w_3ad92edc.jpg" alt="Elegant Beauty">
+                    <img src="attached_assets/stock_images/beautiful_woman_mode_7e54e2b1.jpg" alt="Elegant Beauty">
                     <div class="carousel-overlay">
                         <h1 class="hero-title">Where Beauty Meets Excellence</h1>
                         <p class="hero-subtitle">Premium Services, Perfect Results</p>
                     </div>
                 </div>
                 <div class="carousel-slide">
-                    <img src="attached_assets/stock_images/stunning_beautiful_w_f6e2ab0c.jpg" alt="Professional Beauty">
+                    <img src="attached_assets/stock_images/beautiful_woman_mode_848de48f.jpg" alt="Professional Beauty">
                     <div class="carousel-overlay">
                         <h1 class="hero-title">Your Beauty Sanctuary</h1>
                         <p class="hero-subtitle">Indulge in Pure Elegance</p>
                     </div>
                 </div>
                 <div class="carousel-slide">
-                    <img src="attached_assets/stock_images/stunning_beautiful_w_96d07ba8.jpg" alt="Stunning Salon Model">
+                    <img src="attached_assets/stock_images/beautiful_woman_mode_1a74f53b.jpg" alt="Stunning Salon Model">
                     <div class="carousel-overlay">
                         <h1 class="hero-title">Embrace Your Radiance</h1>
                         <p class="hero-subtitle">Modern Beauty, Timeless Elegance</p>
@@ -131,17 +134,19 @@
                         <span class="new-price">₹99</span>
                     </div>
                     <div class="sparkle-line"></div>
+                    <button class="tc-btn" onclick="showTC()">T&C</button>
                 </div>
 
                 <div class="offer-card glow-card">
                     <div class="offer-badge festive">FESTIVE SPECIAL</div>
                     <div class="offer-icon">🪔</div>
-                    <h3>Durga Puja Special</h3>
-                    <p>Celebrate the festival with exclusive beauty packages</p>
+                    <h3>Festive Beauty Package</h3>
+                    <p>50% off* prices are inclusive of the offer</p>
                     <div class="offer-price">
-                        <span class="new-price">Up to 50% OFF</span>
+                        <span class="new-price">50% OFF*</span>
                     </div>
                     <div class="sparkle-line"></div>
+                    <button class="tc-btn" onclick="showTC()">T&C</button>
                 </div>
 
                 <div class="offer-card glow-card">
@@ -153,6 +158,7 @@
                         <span class="new-price">25% OFF</span>
                     </div>
                     <div class="sparkle-line"></div>
+                    <button class="tc-btn" onclick="showTC()">T&C</button>
                 </div>
             </div>
         </div>
@@ -249,10 +255,18 @@
                     <a href="#reviews">Reviews</a>
                 </div>
                 <div class="footer-section">
-                    <h4>Contact</h4>
-                    <p>📞 +91 92299 15277</p>
-                    <p>💬 WhatsApp Available</p>
-                    <p>📍 Location on Maps</p>
+                    <h4>Connect With Us</h4>
+                    <div class="social-icons">
+                        <a href="https://youtube.com" target="_blank" class="social-icon youtube" aria-label="YouTube">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
+                        </a>
+                        <a href="https://instagram.com" target="_blank" class="social-icon instagram" aria-label="Instagram">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        </a>
+                        <a href="https://facebook.com" target="_blank" class="social-icon facebook" aria-label="Facebook">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>
+                        </a>
+                    </div>
                 </div>
             </div>
             <div class="footer-bottom">
@@ -260,6 +274,28 @@
             </div>
         </div>
     </footer>
+
+    <!-- T&C Modal -->
+    <div id="tcModal" class="tc-modal">
+        <div class="tc-modal-content">
+            <span class="tc-close" onclick="closeTC()">&times;</span>
+            <h2>✨ Offer Terms & Conditions ✨</h2>
+            <div class="tc-content">
+                <ol>
+                    <li>Only one offer is applicable per transaction at a time.</li>
+                    <li>A maximum of 10% of the total bill can be redeemed through coupon cash on the final price.</li>
+                    <li>All offers are subject to cancellation at any time without prior notice.</li>
+                    <li>The same offer may not be applicable multiple times for the same customer.</li>
+                    <li>Offers cannot be combined with other ongoing promotions or discounts.</li>
+                    <li>Valid ID proof is required for student discounts and other eligibility-based offers.</li>
+                    <li>Services must be availed within the offer validity period mentioned.</li>
+                    <li>BlancBeu reserves the right to modify or withdraw any offer without prior intimation.</li>
+                    <li>Prices mentioned are inclusive of all applicable taxes unless stated otherwise.</li>
+                    <li>Advance booking is recommended for availing festive and special offers.</li>
+                </ol>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>

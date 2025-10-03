@@ -6,18 +6,18 @@ const servicesData = {
       image: "attached_assets/stock_images/professional_hair_st_3fab25e9.jpg",
       services: [
         { name: "Plain Haircut", price: 100, offerPrice: 99 },
-        { name: "U-cut", price: 150, offerPrice: 99 },
-        { name: "V-cut", price: 150, offerPrice: 99 },
-        { name: "Deep U-cut", price: 200, offerPrice: 99 },
-        { name: "Deep v-cut", price: 200, offerPrice: 99 },
-        { name: "Step cut", price: 300, offerPrice: 99 },
-        { name: "Layer cut", price: 500, offerPrice: 99 },
-        { name: "Butterfly cut", price: 500, offerPrice: 99 },
-        { name: "Bob cut", price: 400, offerPrice: 99 },
-        { name: "Baby cut", price: 200, offerPrice: 99 },
-        { name: "Advance haircut", price: 600, offerPrice: 99 },
-        { name: "Feather cut", price: 450, offerPrice: 99 },
-        { name: "Pixie cut", price: 500, offerPrice: 99 }
+        { name: "U-Cut", price: 150, offerPrice: 99 },
+        { name: "V-Cut", price: 150, offerPrice: 99 },
+        { name: "Deep U-Cut", price: 200, offerPrice: 99 },
+        { name: "Deep V-Cut", price: 200, offerPrice: 99 },
+        { name: "Step Cut", price: 300, offerPrice: 99 },
+        { name: "Layer Cut", price: 500, offerPrice: 99 },
+        { name: "Butterfly Cut", price: 500, offerPrice: 99 },
+        { name: "Bob Cut", price: 400, offerPrice: 99 },
+        { name: "Baby Cut", price: 200, offerPrice: 99 },
+        { name: "Advance Haircut", price: 600, offerPrice: 99 },
+        { name: "Feather Cut", price: 450, offerPrice: 99 },
+        { name: "Pixie Cut", price: 500, offerPrice: 99 }
       ]
     },
     {
@@ -25,10 +25,10 @@ const servicesData = {
       icon: "✨",
       image: "attached_assets/stock_images/beautiful_woman_gett_9dc7243a.jpg",
       services: [
-        { name: "Fruit cleanup", price: 500, offerPrice: 250 },
-        { name: "Diamond cleanup", price: 800, offerPrice: 499 },
-        { name: "Gold cleanup", price: 1000, offerPrice: 599 },
-        { name: "Charcoal cleanup", price: 700, offerPrice: 399 }
+        { name: "Fruit Cleanup", price: 500, offerPrice: 250 },
+        { name: "Diamond Cleanup", price: 800, offerPrice: 499 },
+        { name: "Gold Cleanup", price: 1000, offerPrice: 599 },
+        { name: "Charcoal Cleanup", price: 700, offerPrice: 399 }
       ]
     },
     {
@@ -36,12 +36,12 @@ const servicesData = {
       icon: "💆",
       image: "attached_assets/stock_images/beautiful_woman_gett_6dc3de2b.jpg",
       services: [
-        { name: "Lotus professional facial", price: 1500, offerPrice: 699 },
+        { name: "Lotus Professional Facial", price: 1500, offerPrice: 699 },
         { name: "03+ Facial", price: 1500, offerPrice: 699 },
-        { name: "Fruit facial", price: 1200, offerPrice: 599 },
-        { name: "Gold facial", price: 2000, offerPrice: 999 },
-        { name: "Diamond facial", price: 2500, offerPrice: 1299 },
-        { name: "Anti-aging facial", price: 2200, offerPrice: 1199 }
+        { name: "Fruit Facial", price: 1200, offerPrice: 599 },
+        { name: "Gold Facial", price: 2000, offerPrice: 999 },
+        { name: "Diamond Facial", price: 2500, offerPrice: 1299 },
+        { name: "Anti-Aging Facial", price: 2200, offerPrice: 1199 }
       ]
     },
     {
@@ -55,8 +55,8 @@ const servicesData = {
         { name: "Rebounding", price: 3500, offerPrice: 2400 },
         { name: "Nanoplastia", price: 7000, offerPrice: 2999 },
         { name: "Hair Spa", price: 1500, offerPrice: 799 },
-        { name: "Protein treatment", price: 2000, offerPrice: 1199 },
-        { name: "Anti-dandruff treatment", price: 1800, offerPrice: 999 }
+        { name: "Protein Treatment", price: 2000, offerPrice: 1199 },
+        { name: "Anti-Dandruff Treatment", price: 1800, offerPrice: 999 }
       ]
     },
     {
@@ -64,13 +64,13 @@ const servicesData = {
       icon: "👑",
       image: "attached_assets/stock_images/luxury_spa_massage_w_43d50481.jpg",
       services: [
-        { name: "Head massage", price: 250, offerPrice: 199 },
+        { name: "Head Massage", price: 250, offerPrice: 199 },
         { name: "Deep Nourish HairSpa", price: 1500, offerPrice: 799 },
-        { name: "Full body Massage", price: 5000, offerPrice: 999 },
-        { name: "Blow dry", price: 500, offerPrice: 199 },
-        { name: "Aroma therapy", price: 3000, offerPrice: 1499 },
-        { name: "Hot stone massage", price: 3500, offerPrice: 1799 },
-        { name: "Thai massage", price: 4000, offerPrice: 1999 }
+        { name: "Full Body Massage", price: 5000, offerPrice: 999 },
+        { name: "Blow Dry", price: 500, offerPrice: 199 },
+        { name: "Aroma Therapy", price: 3000, offerPrice: 1499 },
+        { name: "Hot Stone Massage", price: 3500, offerPrice: 1799 },
+        { name: "Thai Massage", price: 4000, offerPrice: 1999 }
       ]
     },
     {
@@ -78,12 +78,12 @@ const servicesData = {
       icon: "🎨",
       image: "attached_assets/stock_images/hair_coloring_treatm_f184b598.jpg",
       services: [
-        { name: "Global hair colour", price: 1199, offerPrice: null },
-        { name: "Global highlight", price: 1299, offerPrice: null },
-        { name: "Highlight perstrik", price: 149, offerPrice: null },
+        { name: "Global Hair Colour", price: 1199, offerPrice: null },
+        { name: "Global Highlight", price: 1299, offerPrice: null },
+        { name: "Highlight Perstrik", price: 149, offerPrice: null },
         { name: "Balayage", price: 2500, offerPrice: 1999 },
         { name: "Ombre", price: 2200, offerPrice: 1799 },
-        { name: "Root touch-up", price: 599, offerPrice: 399 }
+        { name: "Root Touch-Up", price: 599, offerPrice: 399 }
       ]
     },
     {
@@ -91,11 +91,11 @@ const servicesData = {
       icon: "💄",
       image: "attached_assets/stock_images/glamorous_woman_luxu_658b74ed.jpg",
       services: [
-        { name: "Party makeup", price: 2000, offerPrice: 1499 },
-        { name: "Bridal makeup", price: 8000, offerPrice: 5999 },
-        { name: "HD makeup", price: 3500, offerPrice: 2499 },
-        { name: "Airbrush makeup", price: 4000, offerPrice: 2999 },
-        { name: "Pre-bridal package", price: 15000, offerPrice: 9999 }
+        { name: "Party Makeup", price: 2000, offerPrice: 1499 },
+        { name: "Bridal Makeup", price: 8000, offerPrice: 5999 },
+        { name: "HD Makeup", price: 3500, offerPrice: 2499 },
+        { name: "Airbrush Makeup", price: 4000, offerPrice: 2999 },
+        { name: "Pre-Bridal Package", price: 15000, offerPrice: 9999 }
       ]
     },
     {
@@ -105,11 +105,11 @@ const servicesData = {
       services: [
         { name: "Manicure", price: 500, offerPrice: 299 },
         { name: "Pedicure", price: 600, offerPrice: 349 },
-        { name: "Gel nails", price: 1500, offerPrice: 999 },
-        { name: "Nail art", price: 800, offerPrice: 499 },
+        { name: "Gel Nails", price: 1500, offerPrice: 999 },
+        { name: "Nail Art", price: 800, offerPrice: 499 },
         { name: "Threading", price: 100, offerPrice: 50 },
-        { name: "Waxing full arms", price: 400, offerPrice: 299 },
-        { name: "Waxing full legs", price: 600, offerPrice: 399 }
+        { name: "Waxing Full Arms", price: 400, offerPrice: 299 },
+        { name: "Waxing Full Legs", price: 600, offerPrice: 399 }
       ]
     }
   ]
@@ -347,12 +347,52 @@ function initSmoothScroll() {
   });
 }
 
+function showTC() {
+  const modal = document.getElementById('tcModal');
+  modal.style.display = 'block';
+}
+
+function closeTC() {
+  const modal = document.getElementById('tcModal');
+  modal.style.display = 'none';
+}
+
+window.onclick = function(event) {
+  const modal = document.getElementById('tcModal');
+  if (event.target === modal) {
+    modal.style.display = 'none';
+  }
+}
+
+function initScrollBehavior() {
+  let lastScroll = 0;
+  const header = document.getElementById('mainHeader');
+  
+  window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
+    
+    if (currentScroll <= 0) {
+      header.classList.remove('hidden');
+      return;
+    }
+    
+    if (currentScroll > lastScroll && currentScroll > 100) {
+      header.classList.add('hidden');
+    } else if (currentScroll < lastScroll) {
+      header.classList.remove('hidden');
+    }
+    
+    lastScroll = currentScroll;
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initCarousel();
   renderServices();
   renderReviews();
   initSurpriseButton();
   initSmoothScroll();
+  initScrollBehavior();
 });
 
 if ('serviceWorker' in navigator) {

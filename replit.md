@@ -3,35 +3,36 @@
 ## Overview
 A truly luxurious beauty salon website with premium 24k gold and black theme, featuring stunning animations, interactive elements, and a magical user experience.
 
-## Latest Update (October 2, 2025)
-### Complete Premium Redesign
-- **Premium Theme**: True 24k gold (#FFD700) on deep black color scheme
-- **Hero Carousel**: 4 beautiful banner images with auto-play and smooth transitions
-- **Iconic Contact Buttons**: 
-  - 📍 Locate Our Salon (pink gradient)
-  - 💬 Chat on WhatsApp (green gradient)
-  - 📞 Call +91 92299 15277 (gold border)
-- **Special Offers**:
-  - All haircuts @ ₹99 (limited time)
-  - Durga Puja festive special (up to 50% off)
-  - College student discount (25% off with valid ID)
-  - Glow effects with CSS animations (no borders)
-- **Interactive Features**:
-  - 🎉✨ "Surprise me" button plays Sundari song
-  - 🌹 Rose petal rain animation when music plays
-  - ✨ Sparkling particle effects throughout
-- **8 Service Categories** with images:
-  1. Hair cutting (✂️) - All cuts at ₹99
-  2. Clean up (✨)
-  3. Facial (💆)
-  4. Hairs & Treatment (💇)
-  5. Premium services (👑)
-  6. Hair colour (🎨)
-  7. Makeup & Styling (💄)
-  8. Nails & Beauty (💅)
-- **Gallery**: 4 stunning transformation images with hover effects
-- **Customer Reviews**: Real Google Maps testimonials with star ratings
-- **Footer**: Updated to 2025
+## Latest Update (October 3, 2025)
+### Enhanced UI & Mobile Optimization
+- **Surprise Me Button**: 
+  - Relocated to bottom-left corner (no longer blocks brand name)
+  - Smaller, stylish design (13px font, compact padding)
+  - Blurred transparent background with backdrop-filter effect
+  - Smooth pulse animation
+- **Carousel Navigation**:
+  - Smaller circular buttons (40px diameter)
+  - Transparent with backdrop blur
+  - Improved hover effects with scale animation
+  - 5 stunning beauty model images (upgraded from 4)
+- **Service Categories**: 
+  - Images now display BELOW titles (centered layout)
+  - Larger showcase images (600px x 300px)
+  - Flex-direction column layout for better visual hierarchy
+  - Enhanced gold border and shadow effects
+- **Contact Buttons**:
+  - Optimized for smartphone screens (max-width 350px)
+  - Smaller, more elegant sizing (14px padding)
+  - SlideInUp CSS animations with staggered delays
+  - Enhanced hover effects (scale + translateY)
+  - Animated icons with pulse and bounce effects
+- **Previous Features** (October 2, 2025):
+  - Premium 24k gold theme on deep black background
+  - 8 service categories with 60+ services
+  - Special offers with glow animations
+  - Rose petal rain with background music
+  - Customer reviews and gallery
+  - PWA support
 
 ## Project Architecture
 ### Tech Stack
@@ -65,16 +66,17 @@ A truly luxurious beauty salon website with premium 24k gold and black theme, fe
 - WhatsApp Green: #25D366
 
 ## Features
-✅ Auto-playing carousel with 4 banner images
-✅ Manual carousel navigation (arrows & dots)
-✅ Premium iconic contact buttons
+✅ Auto-playing carousel with 5 stunning beauty model images
+✅ Small transparent carousel navigation buttons
+✅ Bottom-left "Surprise me" button with blurred background
+✅ Smartphone-optimized contact buttons with animations
+✅ Service categories with large images below titles (600x300px)
 ✅ Sparkling particle background effects
 ✅ Glow animations on offer cards
-✅ 8 categorized service groups with images
-✅ Expanded services list (60+ services)
-✅ Music player with "Surprise me" button
-✅ Rose petal falling animation
-✅ Smooth transitions throughout
+✅ 8 categorized service groups with 60+ services
+✅ Music player with rose petal rain animation
+✅ Smooth slideInUp animations with staggered delays
+✅ Enhanced hover effects throughout
 ✅ Responsive design for all devices
 ✅ PWA support for mobile installation
 ✅ Customer reviews with star ratings
@@ -93,11 +95,15 @@ npx http-server . -p 5000 -a 0.0.0.0 --cors -c-1
 
 Visit: http://localhost:5000
 
-## Special Effects
+## Special Effects & Animations
 1. **Sparkle Background**: Floating golden particles
 2. **Carousel Auto-play**: Changes every 5 seconds
-3. **Glow Animations**: Rotating gradient effects on offer cards
-4. **Rose Petals**: Falling animation when music plays
-5. **Shimmer Text**: Animated gold gradient on titles
-6. **Hover Effects**: Scale and glow transformations
-7. **Smooth Scrolling**: Navigation with easing
+3. **Carousel Controls**: Circular transparent buttons with backdrop blur
+4. **Contact Buttons**: SlideInUp animation with 0.1s, 0.2s, 0.3s delays
+5. **Glow Animations**: Rotating gradient effects on offer cards
+6. **Rose Petals**: Falling animation when music plays
+7. **Shimmer Text**: Animated gold gradient on titles
+8. **Hover Effects**: Scale and glow transformations
+9. **Pulse & Bounce**: Icon animations on contact buttons
+10. **Smooth Scrolling**: Navigation with easing
+11. **Blurred Backgrounds**: Modern glassmorphism effects

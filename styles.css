@@ -172,13 +172,32 @@ body {
 
 .brand-name {
     font-family: 'Cinzel', serif;
-    font-size: 28px;
-    font-weight: 700;
-    background: linear-gradient(135deg, var(--gold-24k), var(--gold-light));
+    font-size: 42px;
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--gold-24k), var(--gold-light), var(--gold-24k));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    letter-spacing: 1px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    animation: shimmerText 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.6));
+}
+
+@keyframes shimmerText {
+    0%, 100% { filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.6)); }
+    50% { filter: drop-shadow(0 0 50px rgba(255, 215, 0, 0.9)); }
+}
+
+.brand-subtitle {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    color: var(--gold-light);
+    font-weight: 500;
+    letter-spacing: 2px;
+    opacity: 0.95;
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+    margin-top: 2px;
 }
 
 .brand-slogan {
@@ -235,6 +254,7 @@ body {
 }
 
 .hero {
+    padding-top: 120px;
     padding-bottom: 60px;
 }
 

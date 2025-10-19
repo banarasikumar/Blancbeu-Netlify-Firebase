@@ -403,11 +403,19 @@
         fireworksBtn.addEventListener('click', () => {
             fireworksOverlay.classList.add('active');
             document.body.style.overflow = 'hidden';
+            // Enable sound when fireworks overlay opens
+            if (typeof toggleSound === 'function') {
+                toggleSound(true);
+            }
         });
 
         closeFireworks.addEventListener('click', () => {
             fireworksOverlay.classList.remove('active');
             document.body.style.overflow = '';
+            // Optionally disable sound when closing
+            if (typeof toggleSound === 'function') {
+                toggleSound(false);
+            }
         });
     </script>
 </body>

@@ -1,35 +1,26 @@
-* {
+/* Scope all fireworks styles to the overlay only */
+.fireworks-overlay * {
   position: relative;
   box-sizing: border-box;
 }
 
-html,
-body {
-  height: 100%;
-}
-
-html {
-  background-color: #000;
-}
-
-body {
-  overflow: hidden;
-  color: rgba(255, 255, 255, 0.5);
+.fireworks-overlay {
   font-family: "Russo One", arial, sans-serif;
   line-height: 1.25;
   letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.5);
 }
 
-.hide {
+.fireworks-overlay .hide {
   opacity: 0;
   visibility: hidden;
 }
 
-.remove {
+.fireworks-overlay .remove {
   display: none !important;
 }
 
-.blur {
+.fireworks-overlay .blur {
   filter: blur(12px);
 }
 
@@ -40,46 +31,46 @@ body {
   align-items: center;
 }
 
-.loading-init {
+.fireworks-overlay .loading-init {
   width: 100%;
   align-self: center;
   text-align: center;
   text-transform: uppercase;
 }
-.loading-init__header {
+.fireworks-overlay .loading-init__header {
   font-size: 2.2em;
 }
-.loading-init__status {
+.fireworks-overlay .loading-init__status {
   margin-top: 1em;
   font-size: 0.8em;
   opacity: 0.75;
 }
 
-.stage-container {
+.fireworks-overlay .stage-container {
   overflow: hidden;
   box-sizing: initial;
   border: 1px solid #222;
   margin: -1px;
 }
 @media (max-width: 840px) {
-  .stage-container {
+  .fireworks-overlay .stage-container {
     border: none;
     margin: 0;
   }
 }
 
-.canvas-container {
+.fireworks-overlay .canvas-container {
   width: 100%;
   height: 100%;
   transition: filter 0.3s;
 }
-.canvas-container canvas {
+.fireworks-overlay .canvas-container canvas {
   position: absolute;
   mix-blend-mode: lighten;
   transform: translateZ(0);
 }
 
-.controls {
+.fireworks-overlay .controls {
   position: absolute;
   top: 0;
   width: 100%;
@@ -89,15 +80,15 @@ body {
   transition: opacity 0.3s, visibility 0.3s;
 }
 @media (min-width: 840px) {
-  .controls {
+  .fireworks-overlay .controls {
     visibility: visible;
   }
-  .controls.hide:hover {
+  .fireworks-overlay .controls.hide:hover {
     opacity: 1;
   }
 }
 
-.menu {
+.fireworks-overlay .menu {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -106,7 +97,7 @@ body {
   background-color: rgba(0, 0, 0, 0.42);
   transition: opacity 0.3s, visibility 0.3s;
 }
-.menu__inner-wrap {
+.fireworks-overlay .menu__inner-wrap {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -118,33 +109,33 @@ body {
   right: 0;
   transition: opacity 0.3s;
 }
-.menu__header {
+.fireworks-overlay .menu__header {
   margin-top: auto;
   margin-bottom: 8px;
   padding-top: 16px;
   font-size: 2em;
   text-transform: uppercase;
 }
-.menu__subheader {
+.fireworks-overlay .menu__subheader {
   margin-bottom: auto;
   padding-bottom: 12px;
   font-size: 0.86em;
   opacity: 0.8;
 }
-.menu form {
+.fireworks-overlay .menu form {
   width: 100%;
   max-width: 400px;
   padding: 0 10px;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
 }
-.menu .form-option {
+.fireworks-overlay .menu .form-option {
   display: flex;
   align-items: center;
   margin: 16px 0;
   transition: opacity 0.3s;
 }
-.menu .form-option label {
+.fireworks-overlay .menu .form-option label {
   display: block;
   width: 50%;
   padding-right: 12px;
@@ -155,7 +146,7 @@ body {
       -ms-user-select: none;
           user-select: none;
 }
-.menu .form-option--select select {
+.fireworks-overlay .menu .form-option--select select {
   display: block;
   width: 50%;
   height: 30px;
@@ -166,10 +157,10 @@ body {
   background-color: transparent;
   border: 1px solid rgba(255, 255, 255, 0.5);
 }
-.menu .form-option--select select option {
+.fireworks-overlay .menu .form-option--select select option {
   background-color: black;
 }
-.menu .form-option--checkbox input {
+.fireworks-overlay .menu .form-option--checkbox input {
   display: block;
   width: 26px;
   height: 26px;
@@ -177,18 +168,18 @@ body {
   opacity: 0.5;
 }
 @media (max-width: 840px) {
-  .menu .form-option select, .menu .form-option input {
+  .fireworks-overlay .menu .form-option select, .fireworks-overlay .menu .form-option input {
     outline: none;
   }
 }
 
-.close-menu-btn {
+.fireworks-overlay .close-menu-btn {
   position: absolute;
   top: 0;
   right: 0;
 }
 
-.btn {
+.fireworks-overlay .btn {
   opacity: 0.16;
   width: 50px;
   height: 50px;
@@ -200,39 +191,39 @@ body {
   cursor: default;
   transition: opacity 0.3s;
 }
-.btn--bright {
+.fireworks-overlay .btn--bright {
   opacity: 0.5;
 }
 @media (min-width: 840px) {
-  .btn:hover {
+  .fireworks-overlay .btn:hover {
     opacity: 0.32;
   }
-  .btn--bright:hover {
+  .fireworks-overlay .btn--bright:hover {
     opacity: 0.75;
   }
 }
-.btn svg {
+.fireworks-overlay .btn svg {
   display: block;
   margin: auto;
 }
 
-.credits {
+.fireworks-overlay .credits {
   margin-top: auto;
   margin-bottom: 10px;
   padding-top: 6px;
   font-size: 0.8em;
   opacity: 0.75;
 }
-.credits a {
+.fireworks-overlay .credits a {
   color: rgba(255, 255, 255, 0.5);
   text-decoration: none;
 }
-.credits a:hover, .credits a:active {
+.fireworks-overlay .credits a:hover, .fireworks-overlay .credits a:active {
   color: rgba(255, 255, 255, 0.75);
   text-decoration: underline;
 }
 
-.help-modal {
+.fireworks-overlay .help-modal {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -245,7 +236,7 @@ body {
   transition-property: visibility;
   transition-duration: 0.25s;
 }
-.help-modal__overlay {
+.fireworks-overlay .help-modal__overlay {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -256,7 +247,7 @@ body {
   transition-timing-function: ease-in;
   transition-duration: 0.25s;
 }
-.help-modal__dialog {
+.fireworks-overlay .help-modal__dialog {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -273,17 +264,17 @@ body {
   transition-duration: 0.25s;
 }
 @media (min-width: 840px) {
-  .help-modal__dialog {
+  .fireworks-overlay .help-modal__dialog {
     font-size: 1.25rem;
     max-width: 500px;
   }
 }
-.help-modal__header {
+.fireworks-overlay .help-modal__header {
   font-size: 1.75em;
   text-transform: uppercase;
   text-align: center;
 }
-.help-modal__body {
+.fireworks-overlay .help-modal__body {
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   margin: 1em 0;
@@ -293,7 +284,7 @@ body {
   line-height: 1.5;
   color: rgba(255, 255, 255, 0.75);
 }
-.help-modal__close-btn {
+.fireworks-overlay .help-modal__close-btn {
   flex-shrink: 0;
   outline: none;
   border: none;
@@ -308,20 +299,20 @@ body {
   background-color: rgba(255, 255, 255, 0.25);
   transition: color 0.3s, background-color 0.3s;
 }
-.help-modal__close-btn:hover, .help-modal__close-btn:active, .help-modal__close-btn:focus {
+.fireworks-overlay .help-modal__close-btn:hover, .fireworks-overlay .help-modal__close-btn:active, .fireworks-overlay .help-modal__close-btn:focus {
   color: #FFF;
   background-color: #09F;
 }
-.help-modal.active {
+.fireworks-overlay .help-modal.active {
   visibility: visible;
   transition-duration: 0.4s;
 }
-.help-modal.active .help-modal__overlay {
+.fireworks-overlay .help-modal.active .help-modal__overlay {
   opacity: 1;
   transition-timing-function: ease-out;
   transition-duration: 0.4s;
 }
-.help-modal.active .help-modal__dialog {
+.fireworks-overlay .help-modal.active .help-modal__dialog {
   opacity: 1;
   transform: scale(1, 1);
   transition-timing-function: ease-out;

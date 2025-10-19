@@ -1148,7 +1148,7 @@ body {
 }
 
 .fireworks-overlay * {
-    pointer-events: auto;
+    pointer-events: none;
 }
 
 .fireworks-overlay.active {
@@ -1177,6 +1177,7 @@ body {
 .fireworks-overlay .fw-container {
     position: relative;
     box-sizing: border-box;
+    background: transparent !important;
 }
 
 .fireworks-overlay .stage-container {

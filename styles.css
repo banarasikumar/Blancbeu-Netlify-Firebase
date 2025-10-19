@@ -1132,55 +1132,7 @@ body {
     .carousel { height: 50vh; }
 }
 
-/* Diwali Fireworks Button */
-.fireworks-btn {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 1000;
-    background: linear-gradient(135deg, #ff6b35, #f7931e);
-    border: 1px solid rgba(255, 215, 0, 0.3);
-    padding: 12px 24px;
-    border-radius: 30px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600;
-    font-size: 14px;
-    color: white;
-    box-shadow: 0 4px 20px rgba(255, 107, 53, 0.6), 0 0 30px rgba(255, 107, 53, 0.4);
-    transition: all 0.3s;
-    animation: diwaliGlow 2s ease-in-out infinite;
-}
-
-.fireworks-btn:hover {
-    transform: scale(1.1) translateY(-3px);
-    box-shadow: 0 8px 40px rgba(255, 107, 53, 0.8), 0 0 50px rgba(255, 107, 53, 0.6);
-}
-
-@keyframes diwaliGlow {
-    0%, 100% { 
-        box-shadow: 0 4px 20px rgba(255, 107, 53, 0.6), 0 0 30px rgba(255, 107, 53, 0.4);
-        transform: scale(1);
-    }
-    50% { 
-        box-shadow: 0 8px 30px rgba(255, 107, 53, 0.8), 0 0 50px rgba(255, 107, 53, 0.6);
-        transform: scale(1.05);
-    }
-}
-
-.fireworks-icon {
-    font-size: 20px;
-    animation: rotate 3s linear infinite;
-}
-
-.fireworks-text {
-    font-weight: 700;
-}
-
-/* Fireworks Overlay */
+/* Fireworks Overlay - Auto-play on website */
 .fireworks-overlay {
     position: fixed;
     top: 0;
@@ -1212,34 +1164,16 @@ body {
     align-items: center;
 }
 
-.close-fireworks-btn {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    z-index: 10001;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.1);
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    color: white;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s;
-    backdrop-filter: blur(10px);
+/* Hide all fireworks controls */
+.fireworks-overlay .controls,
+.fireworks-overlay .btn,
+.fireworks-overlay .menu,
+.fireworks-overlay .credits {
+    display: none !important;
+    visibility: hidden !important;
 }
 
-.close-fireworks-btn:hover {
-    background: rgba(255, 255, 255, 0.2);
-    border-color: rgba(255, 255, 255, 0.5);
-    transform: rotate(90deg) scale(1.1);
-}
-
-/* Override fireworks.css container to fit full screen */
+/* Override fireworks.css container to fit full screen with transparent background */
 .fireworks-overlay .fw-container {
     position: relative;
     box-sizing: border-box;
@@ -1248,4 +1182,14 @@ body {
 .fireworks-overlay .stage-container {
     width: 100vw;
     height: 100vh;
+    background: transparent !important;
+}
+
+.fireworks-overlay .canvas-container {
+    background: transparent !important;
+}
+
+/* Make sure canvas blends properly */
+.fireworks-overlay canvas {
+    mix-blend-mode: screen !important;
 }

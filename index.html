@@ -22,16 +22,8 @@
     <div class="sparkles"></div>
     <div class="rose-petals" id="rosePetals"></div>
 
-    <!-- Diwali Fireworks Button -->
-    <button id="fireworksBtn" class="fireworks-btn" aria-label="Diwali Fireworks">
-        <span class="fireworks-icon">🪔</span>
-        <span class="fireworks-text">Diwali Fireworks ✨</span>
-    </button>
-
-    <!-- Fireworks Overlay -->
-    <div id="fireworksOverlay" class="fireworks-overlay">
-        <button id="closeFireworks" class="close-fireworks-btn">✕</button>
-        
+    <!-- Fireworks Overlay (Auto-play on website) -->
+    <div id="fireworksOverlay" class="fireworks-overlay active">
         <!-- SVG Spritesheet -->
         <div style="height: 0; width: 0; position: absolute; visibility: hidden;">
             <svg xmlns="http://www.w3.org/2000/svg">
@@ -395,27 +387,14 @@
     <script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/329180/MyMath.js'></script>
     <script src="fireworks.js"></script>
     <script>
-        // Fireworks overlay control
-        const fireworksBtn = document.getElementById('fireworksBtn');
-        const fireworksOverlay = document.getElementById('fireworksOverlay');
-        const closeFireworks = document.getElementById('closeFireworks');
-
-        fireworksBtn.addEventListener('click', () => {
-            fireworksOverlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
-            // Enable sound when fireworks overlay opens
-            if (typeof toggleSound === 'function') {
-                toggleSound(true);
-            }
-        });
-
-        closeFireworks.addEventListener('click', () => {
-            fireworksOverlay.classList.remove('active');
-            document.body.style.overflow = '';
-            // Optionally disable sound when closing
-            if (typeof toggleSound === 'function') {
-                toggleSound(false);
-            }
+        // Auto-start fireworks with sound on page load
+        window.addEventListener('load', () => {
+            // Enable sound automatically
+            setTimeout(() => {
+                if (typeof toggleSound === 'function') {
+                    toggleSound(true);
+                }
+            }, 500);
         });
     </script>
 </body>

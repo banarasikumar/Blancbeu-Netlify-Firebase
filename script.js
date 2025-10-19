@@ -162,7 +162,6 @@ const reviewsData = [
 
 let currentSlide = 0;
 let carouselInterval;
-let isPlaying = false;
 
 function initCarousel() {
   const dots = document.getElementById('carouselDots');
@@ -288,60 +287,6 @@ function renderReviews() {
   });
 }
 
-function createRosePetal() {
-  const petal = document.createElement('div');
-  petal.className = 'petal';
-  petal.textContent = '🌹';
-  petal.style.left = Math.random() * 100 + '%';
-  petal.style.animationDuration = (Math.random() * 3 + 4) + 's';
-  petal.style.animationDelay = Math.random() * 2 + 's';
-  return petal;
-}
-
-function startRosePetals() {
-  const container = document.getElementById('rosePetals');
-  container.classList.add('active');
-  
-  for (let i = 0; i < 30; i++) {
-    container.appendChild(createRosePetal());
-  }
-  
-  setInterval(() => {
-    if (isPlaying && container.children.length < 50) {
-      container.appendChild(createRosePetal());
-    }
-  }, 500);
-}
-
-function stopRosePetals() {
-  const container = document.getElementById('rosePetals');
-  container.classList.remove('active');
-  setTimeout(() => {
-    container.innerHTML = '';
-  }, 1000);
-}
-
-function initSurpriseButton() {
-  const btn = document.getElementById('surpriseBtn');
-  const music = document.getElementById('bgMusic');
-  
-  btn.addEventListener('click', () => {
-    if (!isPlaying) {
-      music.play();
-      isPlaying = true;
-      btn.classList.add('playing');
-      btn.innerHTML = '<span class="surprise-icon">🎵</span><span class="surprise-text">Playing... ✨</span>';
-      startRosePetals();
-    } else {
-      music.pause();
-      isPlaying = false;
-      btn.classList.remove('playing');
-      btn.innerHTML = '<span class="surprise-icon">🎉</span><span class="surprise-text">Surprise me ✨</span>';
-      stopRosePetals();
-    }
-  });
-}
-
 function initSmoothScroll() {
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
@@ -397,7 +342,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initCarousel();
   renderServices();
   renderReviews();
-  initSurpriseButton();
   initSmoothScroll();
   initScrollBehavior();
 });

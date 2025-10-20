@@ -89,17 +89,17 @@ body {
 }
 
 .header {
-    background: rgba(0, 0, 0, 0.95);
-    padding: 20px 0;
+    background: rgba(0, 0, 0, 0.98);
+    padding: 15px 0;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 100;
-    border-bottom: 2px solid var(--gold-24k);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 4px 20px rgba(255, 215, 0, 0.2);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 2px 30px rgba(0, 0, 0, 0.8);
     transition: transform 0.3s ease-in-out;
+    border-bottom: 1px solid rgba(255, 215, 0, 0.1);
 }
 
 .header.hidden {
@@ -115,36 +115,35 @@ body {
 .logo {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 20px;
     flex: 1;
 }
 
-.logo-image-wrapper {
-    background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 50%, #1a1a1a 100%);
-    padding: 15px 25px;
-    border-radius: 20px;
-    box-shadow: 
-        0 10px 30px rgba(255, 215, 0, 0.2),
-        inset 0 1px 0 rgba(255, 215, 0, 0.1),
-        0 0 40px rgba(0, 0, 0, 0.5);
-    border: 1px solid rgba(255, 215, 0, 0.2);
-    backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
+.brand-icon-wrapper {
+    position: relative;
+    padding: 8px;
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 215, 0, 0.05));
+    border-radius: 50%;
+    transition: all 0.4s ease;
 }
 
-.logo-image-wrapper:hover {
-    box-shadow: 
-        0 15px 40px rgba(255, 215, 0, 0.3),
-        inset 0 1px 0 rgba(255, 215, 0, 0.2),
-        0 0 50px rgba(255, 215, 0, 0.1);
-    transform: translateY(-2px);
+.brand-icon-wrapper:hover {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 215, 0, 0.08));
+    transform: rotate(5deg) scale(1.05);
+    box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);
 }
 
-.logo-image {
-    height: 60px;
-    width: auto;
+.brand-icon {
+    height: 65px;
+    width: 65px;
     display: block;
-    filter: drop-shadow(0 2px 8px rgba(255, 215, 0, 0.3));
+    border-radius: 50%;
+    filter: drop-shadow(0 4px 12px rgba(255, 215, 0, 0.4));
+    transition: filter 0.3s ease;
+}
+
+.brand-icon-wrapper:hover .brand-icon {
+    filter: drop-shadow(0 6px 18px rgba(255, 215, 0, 0.6));
 }
 
 .logo-content {
@@ -155,32 +154,38 @@ body {
 
 .brand-name {
     font-family: 'Cinzel', serif;
-    font-size: 42px;
+    font-size: 32px;
     font-weight: 900;
-    background: linear-gradient(135deg, var(--gold-24k), var(--gold-light), var(--gold-24k));
+    background: linear-gradient(135deg, #FFD700 0%, #FFF4A3 50%, #FFD700 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    letter-spacing: 3px;
+    letter-spacing: 4px;
     text-transform: uppercase;
     animation: shimmerText 3s ease-in-out infinite;
-    filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.6));
+    filter: drop-shadow(0 2px 8px rgba(255, 215, 0, 0.4));
+    line-height: 1;
 }
 
 @keyframes shimmerText {
-    0%, 100% { filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.6)); }
-    50% { filter: drop-shadow(0 0 50px rgba(255, 215, 0, 0.9)); }
+    0%, 100% { 
+        filter: drop-shadow(0 2px 8px rgba(255, 215, 0, 0.4));
+    }
+    50% { 
+        filter: drop-shadow(0 2px 15px rgba(255, 215, 0, 0.6));
+    }
 }
 
 .brand-subtitle {
     font-family: 'Poppins', sans-serif;
-    font-size: 14px;
-    color: var(--gold-light);
+    font-size: 11px;
+    color: rgba(255, 237, 78, 0.9);
     font-weight: 500;
-    letter-spacing: 2px;
-    opacity: 0.95;
-    text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
-    margin-top: 2px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: 0.85;
+    text-shadow: 0 1px 4px rgba(255, 215, 0, 0.3);
+    margin-top: 4px;
 }
 
 .brand-slogan {
@@ -204,32 +209,35 @@ body {
 
 .nav {
     display: flex;
-    gap: 40px;
+    gap: 35px;
 }
 
 .nav a {
-    color: var(--text-white);
+    color: rgba(255, 255, 255, 0.9);
     text-decoration: none;
     font-weight: 500;
-    font-size: 16px;
-    transition: all 0.3s;
+    font-size: 15px;
+    transition: all 0.3s ease;
     position: relative;
+    padding: 5px 0;
 }
 
 .nav a::before {
     content: '';
     position: absolute;
-    bottom: -5px;
+    bottom: 0;
     left: 50%;
     transform: translateX(-50%);
     width: 0;
     height: 2px;
     background: linear-gradient(90deg, var(--gold-24k), var(--gold-bright));
-    transition: width 0.3s;
+    transition: width 0.3s ease;
+    border-radius: 2px;
 }
 
 .nav a:hover {
     color: var(--gold-24k);
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
 }
 
 .nav a:hover::before {
@@ -1171,11 +1179,23 @@ body {
         max-width: 100%;
         height: 400px;
     }
-    .logo-image {
-        height: 40px;
+    .brand-icon {
+        height: 50px;
+        width: 50px;
     }
-    .logo-image-wrapper {
-        padding: 10px 15px;
+    .brand-icon-wrapper {
+        padding: 6px;
+    }
+    .brand-name {
+        font-size: 24px;
+        letter-spacing: 2px;
+    }
+    .brand-subtitle {
+        font-size: 9px;
+        letter-spacing: 2px;
+    }
+    .logo {
+        gap: 12px;
     }
 }
 
@@ -1308,21 +1328,22 @@ body {
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: #4a2332;
-        background-image: linear-gradient(135deg, #3d1f29 0%, #4a2332 50%, #3d1f29 100%);
+        background-color: #000000;
+        background-image: none;
         z-index: -1;
     }
     
     body {
-        background-color: #4a2332;
+        background-color: #000000;
+        background-image: none;
     }
 }
 
-/* iOS Splash Screen Background - Seamless matching */
+/* iOS Splash Screen Background - Pure Black */
 @supports (-webkit-touch-callout: none) {
     body {
-        background-color: #4a2332;
-        background-image: linear-gradient(to bottom, #3d1f29 0%, #4a2332 30%, #4a2332 70%, #3d1f29 100%);
+        background-color: #000000;
+        background-image: none;
     }
 }
 
@@ -1333,7 +1354,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: #4a2332;
+    background: #000000;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     z-index: 999999;
@@ -1358,16 +1379,21 @@ body {
     width: 200px;
     height: 200px;
     margin: 0 auto 30px;
-    border-radius: 30px;
-    box-shadow: 0 20px 60px rgba(255, 215, 0, 0.3);
-    background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 215, 0, 0.05));
+    border-radius: 50%;
+    box-shadow: 0 20px 60px rgba(255, 215, 0, 0.5);
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 215, 0, 0.08));
     backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .pwa-splash-logo img {
     width: 100%;
     height: 100%;
     object-fit: contain;
+    border-radius: 50%;
+    filter: drop-shadow(0 8px 20px rgba(255, 215, 0, 0.4));
 }
 
 .pwa-splash-text {

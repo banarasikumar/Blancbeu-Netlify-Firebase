@@ -4,13 +4,31 @@
   "description": "Luxury beauty salon offering premium hair care, rejuvenating facial treatments, glamorous makeup artistry, and relaxing wellness services. Experience modern elegance and professional beauty care.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#121216",
-  "theme_color": "#E8A5A5",
+  "background_color": "#0a0a0a",
+  "theme_color": "#FFD700",
   "orientation": "portrait-primary",
   "scope": "/",
   "lang": "en",
   "categories": ["beauty", "lifestyle", "health"],
   "icons": [
+    {
+      "src": "/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any"
+    },
     {
       "src": "/icon-192x192.png",
       "sizes": "192x192",
@@ -26,13 +44,15 @@
   ],
   "screenshots": [
     {
-      "src": "/screenshot-mobile.png",
-      "sizes": "390x844",
+      "src": "/splash-750x1334.png",
+      "sizes": "750x1334",
       "type": "image/png",
-      "form_factor": "narrow"
+      "form_factor": "narrow",
+      "label": "Blancbeu Beauty Salon"
     }
   ],
   "prefer_related_applications": false,
+  "related_applications": [],
   "shortcuts": [
     {
       "name": "Book Appointment",
@@ -49,5 +69,9 @@
       "url": "https://wa.me/919229915277",
       "description": "Chat with us on WhatsApp"
     }
-  ]
+  ],
+  "display_override": ["standalone", "minimal-ui"],
+  "edge_side_panel": {
+    "preferred_width": 400
+  }
 }

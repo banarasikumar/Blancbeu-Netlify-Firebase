@@ -346,10 +346,157 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollBehavior();
 });
 
+let deferredPrompt;
+let installButton;
+
+function initPWA() {
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    showInstallPromotion();
+  });
+
+  window.addEventListener('appinstalled', () => {
+    console.log('PWA was installed');
+    sessionStorage.setItem('appInstalled', 'true');
+    deferredPrompt = null;
+    hideInstallPromotion();
+  });
+
+  const isStandalone = checkIfStandalone();
+  
+  if (!isStandalone && !deferredPrompt) {
+    setTimeout(() => {
+      showBrowserSpecificInstallPrompt();
+    }, 5000);
+  }
+}
+
+function showInstallPromotion() {
+  const isStandalone = checkIfStandalone();
+  if (isStandalone || sessionStorage.getItem('installPromptDismissed') === 'true') {
+    return;
+  }
+
+  if (!installButton) {
+    installButton = document.createElement('button');
+    installButton.className = 'install-app-button';
+    installButton.innerHTML = `
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+      </svg>
+      <span>Install App</span>
+    `;
+    installButton.onclick = async () => {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        console.log(`User response to install prompt: ${outcome}`);
+        if (outcome === 'accepted') {
+          sessionStorage.setItem('appInstalled', 'true');
+        } else {
+          sessionStorage.setItem('installPromptDismissed', 'true');
+        }
+        deferredPrompt = null;
+        hideInstallPromotion();
+      } else {
+        showBrowserSpecificInstructions();
+      }
+    };
+    document.body.appendChild(installButton);
+  }
+  
+  setTimeout(() => {
+    if (installButton) {
+      installButton.classList.add('show');
+    }
+  }, 3000);
+}
+
+function showBrowserSpecificInstallPrompt() {
+  const isStandalone = checkIfStandalone();
+  if (isStandalone || sessionStorage.getItem('installPromptDismissed') === 'true') {
+    return;
+  }
+
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  const isFirefox = /Firefox/.test(navigator.userAgent);
+  const isSafari = /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
+  
+  if (isIOS || isSafari || isFirefox) {
+    showInstallPromotion();
+  }
+}
+
+function showBrowserSpecificInstructions() {
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  const isFirefox = /Firefox/.test(navigator.userAgent);
+  const isSafari = /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
+  
+  let message = '';
+  
+  if (isIOS || isSafari) {
+    message = 'To install this app:\n\n1. Tap the Share button (box with arrow)\n2. Scroll down and tap "Add to Home Screen"\n3. Tap "Add" in the top right corner';
+  } else if (isFirefox) {
+    message = 'To install this app:\n\n1. Tap the menu button (three dots)\n2. Tap "Install"\n3. Follow the prompts to add to home screen';
+  } else {
+    message = 'To install this app:\n\nPlease use your browser\'s menu to add this website to your home screen.';
+  }
+  
+  alert(message);
+}
+
+function hideInstallPromotion() {
+  if (installButton) {
+    installButton.classList.remove('show');
+    setTimeout(() => {
+      if (installButton && installButton.parentNode) {
+        installButton.parentNode.removeChild(installButton);
+        installButton = null;
+      }
+    }, 300);
+  }
+}
+
+function checkIfStandalone() {
+  const isStandalone = window.matchMedia('(display-mode: standalone)').matches || 
+                       window.navigator.standalone === true ||
+                       document.referrer.includes('android-app://');
+  
+  if (isStandalone) {
+    console.log('App is running in standalone mode');
+    sessionStorage.setItem('appInstalled', 'true');
+    sessionStorage.setItem('isStandalone', 'true');
+    showSplashScreen();
+  }
+  
+  return isStandalone;
+}
+
+function showSplashScreen() {
+  const splash = document.getElementById('pwaSplash');
+  if (splash) {
+    splash.classList.remove('hidden');
+    
+    setTimeout(() => {
+      hideSplashScreen();
+    }, 2500);
+  }
+}
+
+function hideSplashScreen() {
+  const splash = document.getElementById('pwaSplash');
+  if (splash) {
+    splash.classList.add('hidden');
+  }
+}
+
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/sw.js')
       .then(registration => console.log('✨ PWA Service Worker registered:', registration))
       .catch(error => console.log('PWA Service Worker registration failed:', error));
+    
+    initPWA();
   });
 }

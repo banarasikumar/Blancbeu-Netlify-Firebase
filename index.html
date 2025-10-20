@@ -6,9 +6,15 @@
     <title>Blancbeu - Premium Beauty & Wellness Salon</title>
     
     <link rel="manifest" href="/manifest.json">
-    <meta name="theme-color" content="#000000">
+    <meta name="theme-color" content="#FFD700">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Blancbeu">
     <link rel="apple-touch-icon" href="/icon-192x192.png">
-    <link rel="icon" href="/icon.svg">
+    <link rel="apple-touch-startup-image" href="/splash-750x1334.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)">
+    <link rel="apple-touch-startup-image" href="/splash-1170x2532.png" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3)">
+    <link rel="icon" href="/icon-192x192.png">
+    <link rel="shortcut icon" href="/icon-192x192.png">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,6 +25,17 @@
     <link href="https://fonts.googleapis.com/css?family=Russo+One" rel="stylesheet">
 </head>
 <body>
+    <!-- PWA Splash Screen -->
+    <div id="pwaSplash" class="pwa-splash-overlay hidden">
+        <div class="pwa-splash-content">
+            <div class="pwa-splash-logo">
+                <img src="/icon-192x192.png" alt="Blancbeu Logo">
+            </div>
+            <div class="pwa-splash-text">BLANCBEU</div>
+            <div class="pwa-splash-subtitle">Family Beauty Salon</div>
+        </div>
+    </div>
+
     <div class="sparkles"></div>
     <div class="rose-petals" id="rosePetals"></div>
 

@@ -1,9 +1,21 @@
-const CACHE_NAME = 'blancbeu-v1';
+const CACHE_NAME = 'blancbeu-v3';
 const urlsToCache = [
   '/',
-  '/static/js/bundle.js',
-  '/static/css/main.css',
-  '/manifest.json'
+  '/index.html',
+  '/styles.css',
+  '/script.js',
+  '/fireworks.css',
+  '/fireworks.js',
+  '/manifest.json',
+  '/icon-192x192.png',
+  '/icon-512x512.png',
+  '/assets/homepage_brand_logo.png',
+  '/assets/banner_carousel_images/banner1.png',
+  '/assets/banner_carousel_images/banner2.png',
+  '/assets/banner_carousel_images/banner3.png',
+  '/assets/banner_carousel_images/banner4.png',
+  '/assets/banner_carousel_images/banner5.png',
+  '/assets/banner_carousel_images/banner6.png'
 ];
 
 // Install event
@@ -34,11 +46,10 @@ self.addEventListener('activate', (event) => {
     caches.keys().then((cacheNames) => {
       return Promise.all(
         cacheNames.map((cacheName) => {
-          if (cacheName !== CACHE_NAME) {
-            return caches.delete(cacheName);
-          }
+          return caches.delete(cacheName);
         })
       );
-    })
+    }).then(() => self.clients.claim())
   );
+  self.skipWaiting();
 });

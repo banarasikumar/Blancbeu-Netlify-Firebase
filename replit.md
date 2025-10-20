@@ -4,31 +4,47 @@
 A truly luxurious beauty salon website with premium 24k gold and black theme, featuring stunning animations, interactive elements, and a magical user experience.
 
 ## Latest Update (October 20, 2025)
-### Complete PWA Enhancement with New Brand Icons
-- **New App Icons & Splash Screens**:
-  - Custom brand logo icons in multiple sizes (72x72, 96x96, 144x144, 192x192, 512x512)
-  - Professional splash screen images (750x1334, 1170x2532)
-  - Golden beauty salon logo with elegant design
-- **Cross-Browser Install Prompt**:
+### Brand Asset Refresh & Banner Carousel Expansion
+- **Updated App Icons & Splash Screens**:
+  - New brand logo icons in multiple sizes (72x72, 96x96, 144x144, 192x192, 512x512)
+  - New splash screen images (750x1334, 1170x2532)
+  - Created from user-provided app_icon.png and app_splash_screen.png
+  - Optimized with ImageMagick at 90% quality
+- **New Homepage Logo**:
+  - Replaced text logo with actual brand image (assets/homepage_brand_logo.png)
+  - Seamless dark gradient background (#1a1a1a to #0a0a0a)
+  - 20px border radius with golden glow effects
+  - Responsive sizing: 60px (desktop), 40px (mobile)
+  - Hover animations with transform and enhanced glow
+- **Expanded Banner Carousel (4 → 6 slides)**:
+  - NEW: 6 professional square banner images (1024x1024px)
+  - Optimized carousel dimensions: 800x800px (desktop), 600x600px (tablet), 400px (mobile)
+  - Changed object-fit to 'contain' for proper square image display
+  - Radial gradient background for seamless appearance
+  - All 6 banners load correctly (banner1.png through banner6.png)
+- **Theme Color Updated to Black**:
+  - Mobile address bar now shows black (#000000) instead of gold
+  - Updated in manifest.json and HTML meta tags
+  - Professional appearance on all devices
+- **Service Worker Cache Optimized**:
+  - Cache version bumped to v3 for asset refresh
+  - Removed non-existent /static/* paths (eliminated 404 errors)
+  - Added correct project assets to cache list
+  - Aggressive cache clearing with skipWaiting and clients.claim()
+- **Cross-Browser Install Prompt** (existing):
   - Chrome/Edge: Native install prompt with golden install button
   - Safari/iOS: Custom install button with step-by-step instructions
   - Firefox: Browser-specific installation guidance
   - Smart detection to prevent duplicate prompts
-- **Seamless Splash Screen**:
+- **Seamless Splash Screen** (existing):
   - Burgundy/maroon background (#4a2332) matching splash image
   - Blur effects for professional appearance
   - Auto-displays in standalone mode
   - Auto-hides after 2.5 seconds
-  - Golden branded logo and text with shimmer animation
-- **Standalone Mode Detection**:
+- **Standalone Mode Detection** (existing):
   - Detects when app is running as installed PWA
   - Consistent session storage tracking
   - Works on iOS, Android, and desktop
-- **Enhanced Manifest**:
-  - Multiple icon sizes for all platforms
-  - Updated theme color to gold (#FFD700)
-  - Display overrides for better app experience
-  - Screenshot metadata for app stores
 
 ### Previous Update (October 19, 2025)
 #### Diwali Fireworks Animation Integration
@@ -56,8 +72,8 @@ A truly luxurious beauty salon website with premium 24k gold and black theme, fe
   - Prominent positioning with enhanced glow effects
   - **"Family Beauty Salon"** as smaller subtitle below (14px)
   - Clear visual hierarchy in header
-- **Banner Carousel**:
-  - NEW: 4 professional banner images in assets/banner_carousel_images/
+- **Banner Carousel** (updated to 6 images):
+  - 6 professional square banner images (1024x1024px) in assets/banner_carousel_images/
   - Properly positioned below brand header (no overlap)
   - Clean layout without text overlays
   - Smooth fade transitions between slides

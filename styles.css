@@ -119,6 +119,18 @@ body {
     flex: 1;
 }
 
+@media (max-width: 768px) {
+    .logo {
+        gap: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo {
+        gap: 12px;
+    }
+}
+
 .brand-icon-wrapper {
     position: relative;
     padding: 10px;
@@ -148,8 +160,8 @@ body {
 }
 
 .brand-icon {
-    height: 75px;
-    width: 75px;
+    height: 85px;
+    width: 85px;
     display: block;
     border-radius: 50%;
     filter: drop-shadow(0 6px 15px rgba(255, 215, 0, 0.5));
@@ -160,6 +172,13 @@ body {
     filter: drop-shadow(0 8px 25px rgba(255, 215, 0, 0.8));
 }
 
+@media (max-width: 768px) {
+    .brand-icon {
+        height: 60px;
+        width: 60px;
+    }
+}
+
 .logo-content {
     display: flex;
     flex-direction: column;
@@ -168,7 +187,7 @@ body {
 
 .brand-name {
     font-family: 'Cinzel', serif;
-    font-size: 38px;
+    font-size: 42px;
     font-weight: 900;
     background: linear-gradient(135deg, #FFD700 0%, #FFF8DC 30%, #FFD700 60%, #FFA500 100%);
     background-size: 200% 200%;
@@ -180,6 +199,20 @@ body {
     animation: shimmerGradient 4s ease-in-out infinite, textGlow 2s ease-in-out infinite;
     filter: drop-shadow(0 3px 12px rgba(255, 215, 0, 0.6));
     line-height: 1;
+}
+
+@media (max-width: 768px) {
+    .brand-name {
+        font-size: 28px;
+        letter-spacing: 3px;
+    }
+}
+
+@media (max-width: 480px) {
+    .brand-name {
+        font-size: 24px;
+        letter-spacing: 2px;
+    }
 }
 
 @keyframes shimmerGradient {
@@ -204,7 +237,7 @@ body {
 
 .brand-subtitle {
     font-family: 'Poppins', sans-serif;
-    font-size: 12px;
+    font-size: 13px;
     color: rgba(255, 237, 78, 0.95);
     font-weight: 600;
     letter-spacing: 3.5px;
@@ -212,6 +245,20 @@ body {
     text-shadow: 0 2px 8px rgba(255, 215, 0, 0.5);
     margin-top: 6px;
     animation: subtitlePulse 3s ease-in-out infinite;
+}
+
+@media (max-width: 768px) {
+    .brand-subtitle {
+        font-size: 10px;
+        letter-spacing: 2px;
+    }
+}
+
+@media (max-width: 480px) {
+    .brand-subtitle {
+        font-size: 9px;
+        letter-spacing: 1.5px;
+    }
 }
 
 @keyframes subtitlePulse {

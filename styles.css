@@ -19,7 +19,7 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background: var(--black);
+    background: #000000;
     color: var(--text-white);
     line-height: 1.6;
     overflow-x: hidden;
@@ -116,6 +116,7 @@ body {
     display: flex;
     align-items: center;
     gap: 15px;
+    flex: 1;
 }
 
 .logo-image-wrapper {
@@ -247,7 +248,7 @@ body {
     height: 800px;
     margin: 0 auto;
     overflow: hidden;
-    border-radius: 30px;
+    border-radius: 0;
     box-shadow: 0 20px 60px rgba(255, 215, 0, 0.3);
 }
 
@@ -284,7 +285,7 @@ body {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    background: radial-gradient(circle at center, #1a1a1a 0%, #000000 100%);
+    background: #000000;
 }
 
 .carousel-overlay {
@@ -538,7 +539,7 @@ body {
 
 .offers-section {
     padding: 100px 0;
-    background: radial-gradient(circle at center, var(--deep-black), var(--black));
+    background: #000000;
 }
 
 .offers-grid {
@@ -786,7 +787,7 @@ body {
 
 .gallery-section {
     padding: 100px 0;
-    background: radial-gradient(circle at center, var(--deep-black), var(--black));
+    background: #000000;
 }
 
 .gallery-grid {
@@ -909,7 +910,7 @@ body {
 .cta-section {
     padding: 120px 0;
     text-align: center;
-    background: linear-gradient(135deg, var(--deep-black), var(--black));
+    background: #000000;
 }
 
 .cta-section h2 {

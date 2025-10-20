@@ -124,7 +124,7 @@ const store = {
                 // Note that config values used for <select>s must be strings, unless manually converting values to strings
                 // at render time, and parsing on change.
                 config: {
-                        quality: String(IS_HIGH_END_DEVICE ? QUALITY_HIGH : QUALITY_NORMAL), // will be mirrored to a global variable named `quality` in `configDidUpdate`, for perf.
+                        quality: String(QUALITY_HIGH), // Always use highest quality
                         shell: 'Random',
                         size: IS_DESKTOP
                                 ? '3' // Desktop default
@@ -134,7 +134,7 @@ const store = {
                         autoLaunch: true,
                         finale: false,
                         skyLighting: SKY_LIGHT_NONE + '',
-                        hideControls: IS_HEADER,
+                        hideControls: true,
                         longExposure: false,
                         scaleFactor: getDefaultScaleFactor()
                 }
@@ -835,6 +835,11 @@ function init() {
                 .map(value => ({ value: value.toFixed(2), label: `${value*100}%` }))
         );
         
+        // Force highest quality and hide controls (override any localStorage settings)
+        store.state.config.quality = String(QUALITY_HIGH);
+        store.state.config.hideControls = true;
+        store.state.config.skyLighting = String(SKY_LIGHT_NONE);
+        
         // Begin simulation
         togglePause(false);
         
@@ -1378,9 +1383,10 @@ function render(speed) {
         trailsCtx.scale(dpr * scaleFactor, dpr * scaleFactor);
         mainCtx.scale(dpr * scaleFactor, dpr * scaleFactor);
         
-        trailsCtx.globalCompositeOperation = 'source-over';
+        trailsCtx.globalCompositeOperation = 'destination-out';
         trailsCtx.fillStyle = `rgba(0, 0, 0, ${store.state.config.longExposure ? 0.0025 : 0.175 * speed})`;
         trailsCtx.fillRect(0, 0, width, height);
+        trailsCtx.globalCompositeOperation = 'source-over';
         
         mainCtx.clearRect(0, 0, width, height);
         

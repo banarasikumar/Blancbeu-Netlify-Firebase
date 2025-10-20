@@ -350,18 +350,50 @@ let deferredPrompt;
 let installButton;
 
 function initPWA() {
+  const navInstallBtn = document.getElementById('installBtn');
+  
   window.addEventListener('beforeinstallprompt', (e) => {
+    console.log('📲 PWA Install prompt available');
     e.preventDefault();
     deferredPrompt = e;
+    
+    // Show nav install button
+    if (navInstallBtn) {
+      navInstallBtn.style.display = 'flex';
+    }
     showInstallPromotion();
   });
 
   window.addEventListener('appinstalled', () => {
-    console.log('PWA was installed');
+    console.log('✅ PWA was installed');
     sessionStorage.setItem('appInstalled', 'true');
     deferredPrompt = null;
+    
+    if (navInstallBtn) {
+      navInstallBtn.style.display = 'none';
+    }
     hideInstallPromotion();
   });
+  
+  // Nav button click handler
+  if (navInstallBtn) {
+    navInstallBtn.addEventListener('click', async () => {
+      if (deferredPrompt) {
+        try {
+          await deferredPrompt.prompt();
+          const { outcome } = await deferredPrompt.userChoice;
+          console.log(`User response: ${outcome}`);
+          if (outcome === 'accepted') {
+            sessionStorage.setItem('appInstalled', 'true');
+          }
+          deferredPrompt = null;
+          navInstallBtn.style.display = 'none';
+        } catch (error) {
+          console.error('Install error:', error);
+        }
+      }
+    });
+  }
 
   const isStandalone = checkIfStandalone();
   

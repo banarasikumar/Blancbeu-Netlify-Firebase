@@ -121,29 +121,43 @@ body {
 
 .brand-icon-wrapper {
     position: relative;
-    padding: 8px;
-    background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 215, 0, 0.05));
+    padding: 10px;
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 140, 0, 0.15));
     border-radius: 50%;
     transition: all 0.4s ease;
+    animation: iconPulse 3s ease-in-out infinite;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+}
+
+@keyframes iconPulse {
+    0%, 100% { 
+        transform: scale(1);
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+    }
+    50% { 
+        transform: scale(1.05);
+        box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+    }
 }
 
 .brand-icon-wrapper:hover {
-    background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 215, 0, 0.08));
-    transform: rotate(5deg) scale(1.05);
-    box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(255, 140, 0, 0.2));
+    transform: rotate(5deg) scale(1.1);
+    box-shadow: 0 8px 35px rgba(255, 215, 0, 0.6);
+    animation: none;
 }
 
 .brand-icon {
-    height: 65px;
-    width: 65px;
+    height: 75px;
+    width: 75px;
     display: block;
     border-radius: 50%;
-    filter: drop-shadow(0 4px 12px rgba(255, 215, 0, 0.4));
+    filter: drop-shadow(0 6px 15px rgba(255, 215, 0, 0.5));
     transition: filter 0.3s ease;
 }
 
 .brand-icon-wrapper:hover .brand-icon {
-    filter: drop-shadow(0 6px 18px rgba(255, 215, 0, 0.6));
+    filter: drop-shadow(0 8px 25px rgba(255, 215, 0, 0.8));
 }
 
 .logo-content {
@@ -154,38 +168,59 @@ body {
 
 .brand-name {
     font-family: 'Cinzel', serif;
-    font-size: 32px;
+    font-size: 38px;
     font-weight: 900;
-    background: linear-gradient(135deg, #FFD700 0%, #FFF4A3 50%, #FFD700 100%);
+    background: linear-gradient(135deg, #FFD700 0%, #FFF8DC 30%, #FFD700 60%, #FFA500 100%);
+    background-size: 200% 200%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    letter-spacing: 4px;
+    letter-spacing: 5px;
     text-transform: uppercase;
-    animation: shimmerText 3s ease-in-out infinite;
-    filter: drop-shadow(0 2px 8px rgba(255, 215, 0, 0.4));
+    animation: shimmerGradient 4s ease-in-out infinite, textGlow 2s ease-in-out infinite;
+    filter: drop-shadow(0 3px 12px rgba(255, 215, 0, 0.6));
     line-height: 1;
 }
 
-@keyframes shimmerText {
+@keyframes shimmerGradient {
     0%, 100% { 
-        filter: drop-shadow(0 2px 8px rgba(255, 215, 0, 0.4));
+        background-position: 0% 50%;
+        filter: drop-shadow(0 3px 12px rgba(255, 215, 0, 0.6));
     }
     50% { 
-        filter: drop-shadow(0 2px 15px rgba(255, 215, 0, 0.6));
+        background-position: 100% 50%;
+        filter: drop-shadow(0 4px 20px rgba(255, 215, 0, 0.9));
+    }
+}
+
+@keyframes textGlow {
+    0%, 100% { 
+        opacity: 1;
+    }
+    50% { 
+        opacity: 0.95;
     }
 }
 
 .brand-subtitle {
     font-family: 'Poppins', sans-serif;
-    font-size: 11px;
-    color: rgba(255, 237, 78, 0.9);
-    font-weight: 500;
-    letter-spacing: 3px;
+    font-size: 12px;
+    color: rgba(255, 237, 78, 0.95);
+    font-weight: 600;
+    letter-spacing: 3.5px;
     text-transform: uppercase;
-    opacity: 0.85;
-    text-shadow: 0 1px 4px rgba(255, 215, 0, 0.3);
-    margin-top: 4px;
+    text-shadow: 0 2px 8px rgba(255, 215, 0, 0.5);
+    margin-top: 6px;
+    animation: subtitlePulse 3s ease-in-out infinite;
+}
+
+@keyframes subtitlePulse {
+    0%, 100% { 
+        opacity: 0.9;
+    }
+    50% { 
+        opacity: 1;
+    }
 }
 
 .brand-slogan {
@@ -209,7 +244,8 @@ body {
 
 .nav {
     display: flex;
-    gap: 35px;
+    gap: 30px;
+    align-items: center;
 }
 
 .nav a {
@@ -244,6 +280,87 @@ body {
     width: 100%;
 }
 
+.install-app-btn {
+    background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+    color: #000000;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 25px;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    box-shadow: 0 4px 20px rgba(255, 215, 0, 0.5);
+    animation: installPulse 2s ease-in-out infinite;
+    position: relative;
+    overflow: hidden;
+}
+
+@keyframes installPulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 4px 20px rgba(255, 215, 0, 0.5);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 6px 30px rgba(255, 215, 0, 0.8);
+    }
+}
+
+.install-app-btn::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transform: rotate(45deg);
+    animation: installShine 3s linear infinite;
+}
+
+@keyframes installShine {
+    0% {
+        left: -200%;
+    }
+    100% {
+        left: 200%;
+    }
+}
+
+.install-app-btn:hover {
+    transform: translateY(-3px) scale(1.08);
+    box-shadow: 0 8px 35px rgba(255, 215, 0, 0.9);
+    animation: none;
+}
+
+.install-app-btn:active {
+    transform: translateY(-1px) scale(1.05);
+}
+
+.install-icon {
+    font-size: 18px;
+    animation: bounce 1.5s ease-in-out infinite;
+}
+
+.install-text {
+    position: relative;
+    z-index: 1;
+}
+
+.install-sparkle {
+    font-size: 14px;
+    animation: sparkleRotate 2s linear infinite;
+}
+
+@keyframes sparkleRotate {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(180deg); }
+}
+
 .hero {
     padding-top: 120px;
     padding-bottom: 60px;
@@ -252,12 +369,36 @@ body {
 .carousel {
     position: relative;
     width: 100%;
-    max-width: 800px;
+    max-width: 850px;
     height: 800px;
     margin: 0 auto;
     overflow: hidden;
-    border-radius: 0;
-    box-shadow: 0 20px 60px rgba(255, 215, 0, 0.3);
+    border-radius: 20px;
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 140, 0, 0.05) 100%);
+    padding: 15px;
+    box-shadow: 
+        0 0 40px rgba(255, 215, 0, 0.4),
+        inset 0 0 30px rgba(255, 215, 0, 0.1),
+        0 20px 60px rgba(0, 0, 0, 0.8);
+    border: 2px solid rgba(255, 215, 0, 0.3);
+    animation: carouselGlow 4s ease-in-out infinite;
+}
+
+@keyframes carouselGlow {
+    0%, 100% {
+        box-shadow: 
+            0 0 40px rgba(255, 215, 0, 0.4),
+            inset 0 0 30px rgba(255, 215, 0, 0.1),
+            0 20px 60px rgba(0, 0, 0, 0.8);
+        border-color: rgba(255, 215, 0, 0.3);
+    }
+    50% {
+        box-shadow: 
+            0 0 60px rgba(255, 215, 0, 0.6),
+            inset 0 0 40px rgba(255, 215, 0, 0.15),
+            0 25px 70px rgba(0, 0, 0, 0.9);
+        border-color: rgba(255, 215, 0, 0.5);
+    }
 }
 
 @media (max-width: 1024px) {
@@ -271,6 +412,9 @@ body {
     position: relative;
     width: 100%;
     height: 100%;
+    border-radius: 15px;
+    overflow: hidden;
+    background: #000000;
 }
 
 .carousel-slide {

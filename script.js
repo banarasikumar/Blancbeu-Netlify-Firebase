@@ -316,26 +316,90 @@ window.onclick = function(event) {
   }
 }
 
-function initScrollBehavior() {
-  let lastScroll = 0;
-  const header = document.getElementById('mainHeader');
-  
-  window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset;
+class ScrollBehaviorManager {
+  constructor() {
+    this.lastScroll = 0;
+    this.scrollThreshold = 5;
+    this.header = null;
+    this.fireworksResumeTimer = null;
+    this.isScrolling = false;
+    this.fireworksWerePausedByScroll = false;
+  }
+
+  init() {
+    this.header = document.getElementById('mainHeader');
     
+    if (!this.header) {
+      console.warn('Header element not found - navbar auto-hide disabled');
+    }
+
+    window.addEventListener('scroll', this.handleScroll.bind(this), { passive: true });
+  }
+
+  handleScroll() {
+    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+    
+    this.updateNavbarVisibility(currentScroll);
+    
+    this.handleFireworksScroll();
+    
+    this.lastScroll = currentScroll;
+  }
+
+  updateNavbarVisibility(currentScroll) {
+    if (!this.header) return;
+
     if (currentScroll <= 0) {
-      header.classList.remove('hidden');
+      this.header.classList.remove('hidden');
       return;
     }
+
+    const scrollDiff = currentScroll - this.lastScroll;
     
-    if (currentScroll > lastScroll && currentScroll > 100) {
-      header.classList.add('hidden');
-    } else if (currentScroll < lastScroll) {
-      header.classList.remove('hidden');
+    if (Math.abs(scrollDiff) < this.scrollThreshold) {
+      return;
     }
+
+    if (scrollDiff > 0 && currentScroll > 100) {
+      this.header.classList.add('hidden');
+    } else if (scrollDiff < 0) {
+      this.header.classList.remove('hidden');
+    }
+  }
+
+  handleFireworksScroll() {
+    if (typeof togglePause !== 'function' || typeof store === 'undefined') {
+      return;
+    }
+
+    if (!this.isScrolling) {
+      this.isScrolling = true;
+      
+      const wasAlreadyPaused = store.state && store.state.paused;
+      
+      if (!wasAlreadyPaused) {
+        this.fireworksWerePausedByScroll = true;
+        togglePause(true);
+      } else {
+        this.fireworksWerePausedByScroll = false;
+      }
+    }
+
+    clearTimeout(this.fireworksResumeTimer);
     
-    lastScroll = currentScroll;
-  });
+    this.fireworksResumeTimer = setTimeout(() => {
+      this.isScrolling = false;
+      if (this.fireworksWerePausedByScroll) {
+        togglePause(false);
+        this.fireworksWerePausedByScroll = false;
+      }
+    }, 150);
+  }
+}
+
+function initScrollBehavior() {
+  const scrollManager = new ScrollBehaviorManager();
+  scrollManager.init();
 }
 
 document.addEventListener('DOMContentLoaded', () => {

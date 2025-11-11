@@ -532,3 +532,156 @@ if ('serviceWorker' in navigator) {
     initPWA();
   });
 }
+
+// ========================================
+// iOS-Style Bottom Navigation Controller
+// ========================================
+
+class BottomNavController {
+  constructor() {
+    this.bottomNav = document.getElementById('bottomNav');
+    this.navItems = document.querySelectorAll('.nav-item');
+    this.lastScrollY = window.scrollY;
+    this.scrollThreshold = 10;
+    this.ticking = false;
+    this.sections = [];
+    
+    this.init();
+  }
+  
+  init() {
+    if (!this.bottomNav) return;
+    
+    // Initialize sections for scrollspy
+    this.initSections();
+    
+    // Set up scroll listener with throttling
+    window.addEventListener('scroll', this.handleScroll.bind(this), { passive: true });
+    
+    // Handle hash changes
+    window.addEventListener('hashchange', this.handleHashChange.bind(this));
+    
+    // Handle nav item clicks
+    this.navItems.forEach(item => {
+      item.addEventListener('click', this.handleNavClick.bind(this));
+    });
+    
+    // Initial active state
+    this.updateActiveState();
+  }
+  
+  initSections() {
+    const sectionIds = ['home', 'offers', 'services', 'gallery', 'reviews'];
+    this.sections = sectionIds
+      .map(id => document.getElementById(id))
+      .filter(section => section !== null)
+      .map(section => ({
+        id: section.id,
+        element: section,
+        offsetTop: section.offsetTop,
+        offsetBottom: section.offsetTop + section.offsetHeight
+      }));
+  }
+  
+  handleScroll() {
+    if (!this.ticking) {
+      window.requestAnimationFrame(() => {
+        this.updateNavVisibility();
+        this.updateActiveState();
+        this.ticking = false;
+      });
+      this.ticking = true;
+    }
+  }
+  
+  updateNavVisibility() {
+    const currentScrollY = window.scrollY;
+    const scrollDiff = currentScrollY - this.lastScrollY;
+    
+    // Only update if scroll difference exceeds threshold
+    if (Math.abs(scrollDiff) < this.scrollThreshold) return;
+    
+    if (scrollDiff > 0 && currentScrollY > 100) {
+      // Scrolling down - hide nav
+      this.bottomNav.classList.add('hidden');
+    } else if (scrollDiff < 0) {
+      // Scrolling up - show nav
+      this.bottomNav.classList.remove('hidden');
+    }
+    
+    this.lastScrollY = currentScrollY;
+  }
+  
+  updateActiveState() {
+    const scrollPosition = window.scrollY + window.innerHeight / 3;
+    
+    // Find current section
+    let currentSection = this.sections[0]?.id || 'home';
+    
+    for (const section of this.sections) {
+      if (scrollPosition >= section.offsetTop) {
+        currentSection = section.id;
+      }
+    }
+    
+    // Update active nav item
+    this.navItems.forEach(item => {
+      const page = item.getAttribute('data-page');
+      if (page === currentSection) {
+        item.classList.add('active');
+      } else {
+        item.classList.remove('active');
+      }
+    });
+  }
+  
+  handleHashChange() {
+    const hash = window.location.hash.slice(1);
+    this.setActivePage(hash || 'home');
+  }
+  
+  handleNavClick(event) {
+    const item = event.currentTarget;
+    const page = item.getAttribute('data-page');
+    
+    // Don't prevent default for external links (like WhatsApp)
+    if (item.getAttribute('href').startsWith('http')) {
+      return;
+    }
+    
+    // Smooth scroll to section
+    const section = document.getElementById(page);
+    if (section) {
+      event.preventDefault();
+      const offsetTop = section.offsetTop - 80;
+      window.scrollTo({
+        top: offsetTop,
+        behavior: 'smooth'
+      });
+      
+      // Update URL hash without jumping
+      history.pushState(null, '', `#${page}`);
+      this.setActivePage(page);
+    }
+  }
+  
+  setActivePage(page) {
+    this.navItems.forEach(item => {
+      const itemPage = item.getAttribute('data-page');
+      if (itemPage === page) {
+        item.classList.add('active');
+      } else {
+        item.classList.remove('active');
+      }
+    });
+  }
+}
+
+// Initialize bottom nav controller when DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => {
+    new BottomNavController();
+  });
+} else {
+  new BottomNavController();
+}

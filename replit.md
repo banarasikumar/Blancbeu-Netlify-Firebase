@@ -4,6 +4,26 @@
 A truly luxurious beauty salon website with premium 24k gold and black theme, featuring stunning animations, interactive elements, native app-like experience, and a magical user experience.
 
 ## Latest Update (November 11, 2025)
+### Enhanced Scroll Behavior & Performance Optimization
+- **Unified ScrollBehaviorManager**:
+  - Robust scroll handling with proper guards and threshold detection
+  - Smart navbar auto-hide/unhide (hides when scrolling down, shows when scrolling up)
+  - Works independently even if header element is missing
+  - 5px scroll threshold to prevent direction jitter
+  - Better browser compatibility with fallback scroll position detection
+- **Fireworks Pause During Scroll**:
+  - Fireworks automatically pause when scrolling for ultra-smooth scrolling performance
+  - Auto-resume 150ms after scrolling stops for seamless experience
+  - Respects manual pause state (won't override user's pause preference)
+  - Smart state tracking to avoid conflicts between scroll and manual pause
+  - Significantly improves scrolling performance on all devices
+- **Technical Implementation**:
+  - Class-based ScrollBehaviorManager for better code organization
+  - Passive scroll listeners for optimal performance
+  - Debounced resume timer to prevent premature fireworks restart
+  - Pre-scroll state detection to preserve manual pause
+  - Separate navbar and fireworks handling for reliability
+
 ### iOS-Style Bottom Navigation Bar
 - **Native App Experience**:
   - Beautiful bottom navigation bar with iOS-style glassmorphism

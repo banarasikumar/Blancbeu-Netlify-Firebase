@@ -550,7 +550,12 @@ class BottomNavController {
   }
   
   init() {
-    if (!this.bottomNav) return;
+    if (!this.bottomNav) {
+      console.log('❌ Bottom nav element not found');
+      return;
+    }
+    
+    console.log('✅ Bottom nav controller initialized');
     
     // Initialize sections for scrollspy
     this.initSections();
@@ -603,9 +608,11 @@ class BottomNavController {
     
     if (scrollDiff > 0 && currentScrollY > 100) {
       // Scrolling down - hide nav
+      console.log('⬇️ Hiding nav - scroll:', currentScrollY);
       this.bottomNav.classList.add('hidden');
     } else if (scrollDiff < 0) {
       // Scrolling up - show nav
+      console.log('⬆️ Showing nav - scroll:', currentScrollY);
       this.bottomNav.classList.remove('hidden');
     }
     

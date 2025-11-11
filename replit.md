@@ -1,9 +1,35 @@
 # Blancbeu - Premium Beauty & Wellness Salon
 
 ## Overview
-A truly luxurious beauty salon website with premium 24k gold and black theme, featuring stunning animations, interactive elements, and a magical user experience.
+A truly luxurious beauty salon website with premium 24k gold and black theme, featuring stunning animations, interactive elements, native app-like experience, and a magical user experience.
 
-## Latest Update (October 20, 2025)
+## Latest Update (November 11, 2025)
+### iOS-Style Bottom Navigation Bar
+- **Native App Experience**:
+  - Beautiful bottom navigation bar with iOS-style glassmorphism
+  - Modern touch-optimized design with 5 navigation items
+  - Smooth hide/show behavior on scroll (hides when scrolling down, shows when scrolling up)
+- **Design Features**:
+  - Glassmorphism effect with 20px backdrop blur and semi-transparent background
+  - Golden active state with gradient background and shadow effects
+  - Safe-area inset support for iPhone X+ devices
+  - Clean SVG icons for Home, Bookings, Chat, Notifications, Profile
+  - Smooth cubic-bezier transitions for premium feel
+- **Technical Implementation**:
+  - Throttled scroll listener using requestAnimationFrame for optimal performance
+  - Scrollspy logic for automatic active state based on scroll position
+  - Hash change handling for proper navigation state
+  - Z-index 999 for proper layering above content
+  - Body padding (80px + safe-area-inset) to prevent content overlap
+- **Fireworks Enhancement**:
+  - Touch/click firework launching disabled for better UX
+  - Fireworks now purely decorative overlay
+- **Service Worker Fixes**:
+  - Updated carousel image cache from .png to .webp
+  - Fixed cache activation to preserve current cache and only delete old versions
+  - Proper offline support maintained
+
+### Previous Update (October 20, 2025)
 ### Brand Asset Refresh & Banner Carousel Expansion
 - **Updated App Icons & Splash Screens**:
   - New brand logo icons in multiple sizes (72x72, 96x96, 144x144, 192x192, 512x512)

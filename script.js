@@ -689,7 +689,6 @@ class BottomNavController {
     
     // Only update if scroll difference exceeds threshold
     if (Math.abs(scrollDiff) < this.scrollThreshold) {
-      this.lastScrollY = currentScrollY;
       return;
     }
     

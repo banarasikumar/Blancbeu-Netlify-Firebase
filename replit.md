@@ -6,8 +6,9 @@ A truly luxurious beauty salon website with premium 24k gold and black theme, fe
 ## Latest Update (November 11, 2025)
 ### Enhanced Scroll Behavior & Performance Optimization
 - **Unified ScrollBehaviorManager**:
-  - Robust scroll handling with proper guards and threshold detection
-  - Smart navbar auto-hide/unhide (hides when scrolling down, shows when scrolling up)
+  - Single scroll handler manages BOTH header and bottom navigation
+  - Smart auto-hide/unhide for both elements (hide when scrolling down, show when scrolling up)
+  - Both navigation bars stay synchronized - hide and show together
   - Works independently even if header element is missing
   - 5px scroll threshold to prevent direction jitter
   - Better browser compatibility with fallback scroll position detection
@@ -18,11 +19,12 @@ A truly luxurious beauty salon website with premium 24k gold and black theme, fe
   - Smart state tracking to avoid conflicts between scroll and manual pause
   - Significantly improves scrolling performance on all devices
 - **Technical Implementation**:
-  - Class-based ScrollBehaviorManager for better code organization
+  - Class-based ScrollBehaviorManager controls both header and bottom nav
+  - Single working scroll listener eliminates duplicate handlers
   - Passive scroll listeners for optimal performance
+  - BottomNavController now focused solely on scrollspy and navigation clicks
   - Debounced resume timer to prevent premature fireworks restart
   - Pre-scroll state detection to preserve manual pause
-  - Separate navbar and fireworks handling for reliability
 
 ### iOS-Style Bottom Navigation Bar
 - **Native App Experience**:

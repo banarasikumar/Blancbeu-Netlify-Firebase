@@ -556,12 +556,18 @@ class BottomNavController {
     }
     
     console.log('✅ Bottom nav controller initialized');
+    console.log('📍 Initial scrollY:', window.scrollY);
+    console.log('📍 Body scrollTop:', document.body.scrollTop);
+    console.log('📍 documentElement scrollTop:', document.documentElement.scrollTop);
     
     // Initialize sections for scrollspy
     this.initSections();
     
     // Set up scroll listener with throttling
     window.addEventListener('scroll', this.handleScroll.bind(this), { passive: true });
+    
+    // Also listen on document for safety
+    document.addEventListener('scroll', this.handleScroll.bind(this), { passive: true });
     
     // Handle hash changes
     window.addEventListener('hashchange', this.handleHashChange.bind(this));
@@ -573,6 +579,11 @@ class BottomNavController {
     
     // Initial active state
     this.updateActiveState();
+    
+    // Debug: Log scroll events
+    setTimeout(() => {
+      console.log('🔍 After 2s - scrollY:', window.scrollY, 'body.scrollTop:', document.body.scrollTop);
+    }, 2000);
   }
   
   initSections() {
@@ -589,6 +600,7 @@ class BottomNavController {
   }
   
   handleScroll() {
+    console.log('📜 SCROLL EVENT FIRED! scrollY:', window.scrollY);
     if (!this.ticking) {
       window.requestAnimationFrame(() => {
         this.updateNavVisibility();
@@ -603,6 +615,14 @@ class BottomNavController {
     const currentScrollY = window.scrollY;
     const scrollDiff = currentScrollY - this.lastScrollY;
     
+    console.log('🎯 updateNavVisibility:', {
+      currentScrollY,
+      lastScrollY: this.lastScrollY,
+      scrollDiff,
+      threshold: this.scrollThreshold,
+      willUpdate: Math.abs(scrollDiff) >= this.scrollThreshold
+    });
+    
     // Only update if scroll difference exceeds threshold
     if (Math.abs(scrollDiff) < this.scrollThreshold) {
       this.lastScrollY = currentScrollY;
@@ -611,9 +631,11 @@ class BottomNavController {
     
     if (scrollDiff > 0 && currentScrollY > 100) {
       // Scrolling down - hide nav
+      console.log('⬇️ HIDING NAV');
       this.bottomNav.classList.add('hidden');
     } else if (scrollDiff < 0) {
       // Scrolling up - show nav
+      console.log('⬆️ SHOWING NAV');
       this.bottomNav.classList.remove('hidden');
     }
     

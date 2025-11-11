@@ -17,12 +17,16 @@
     box-sizing: border-box;
 }
 
+html, body {
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+}
+
 body {
     font-family: 'Poppins', sans-serif;
     background: #000000;
     color: var(--text-white);
     line-height: 1.6;
-    overflow-x: hidden;
 }
 
 .container {
@@ -1402,11 +1406,13 @@ body {
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.5s, visibility 0.5s;
-    pointer-events: none;
+    pointer-events: none !important;
+    touch-action: none !important;
 }
 
 .fireworks-overlay * {
-    pointer-events: none;
+    pointer-events: none !important;
+    touch-action: none !important;
 }
 
 .fireworks-overlay.active {

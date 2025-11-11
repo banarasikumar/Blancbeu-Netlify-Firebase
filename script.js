@@ -603,14 +603,6 @@ class BottomNavController {
     const currentScrollY = window.scrollY;
     const scrollDiff = currentScrollY - this.lastScrollY;
     
-    console.log('📊 Scroll:', { 
-      current: currentScrollY, 
-      last: this.lastScrollY, 
-      diff: scrollDiff,
-      threshold: this.scrollThreshold,
-      willUpdate: Math.abs(scrollDiff) >= this.scrollThreshold
-    });
-    
     // Only update if scroll difference exceeds threshold
     if (Math.abs(scrollDiff) < this.scrollThreshold) {
       this.lastScrollY = currentScrollY;
@@ -619,11 +611,9 @@ class BottomNavController {
     
     if (scrollDiff > 0 && currentScrollY > 100) {
       // Scrolling down - hide nav
-      console.log('⬇️ HIDING NAV - scroll:', currentScrollY);
       this.bottomNav.classList.add('hidden');
     } else if (scrollDiff < 0) {
       // Scrolling up - show nav
-      console.log('⬆️ SHOWING NAV - scroll:', currentScrollY);
       this.bottomNav.classList.remove('hidden');
     }
     

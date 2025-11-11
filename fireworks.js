@@ -1182,9 +1182,10 @@ function handleKeydown(event) {
         }
 }
 
-mainStage.addEventListener('pointerstart', handlePointerStart);
-mainStage.addEventListener('pointerend', handlePointerEnd);
-mainStage.addEventListener('pointermove', handlePointerMove);
+// Disabled pointer events for fireworks - navigation bar scroll takes priority
+// mainStage.addEventListener('pointerstart', handlePointerStart);
+// mainStage.addEventListener('pointerend', handlePointerEnd);
+// mainStage.addEventListener('pointermove', handlePointerMove);
 window.addEventListener('keydown', handleKeydown);
 
 

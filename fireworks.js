@@ -1147,9 +1147,10 @@ function handlePointerStart(event) {
         // if (updateSpeedFromEvent(event)) {
         //      isUpdatingSpeed = true;
         // }
-        if (event.onCanvas) {
-                launchShellFromConfig(event);
-        }
+        // Touch/click firework launching disabled
+        // if (event.onCanvas) {
+        //      launchShellFromConfig(event);
+        // }
 }
 
 function handlePointerEnd(event) {

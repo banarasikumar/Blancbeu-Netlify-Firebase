@@ -3,7 +3,7 @@ const servicesData = {
     {
       group: "Hair cutting",
       icon: "✂️",
-      image: "attached_assets/stock_images/professional_hair_st_3fab25e9.jpg",
+      image: "assets/service_images/professional_hair_st_3fab25e9.webp",
       services: [
         { name: "Plain Haircut", price: 100, offerPrice: 99 },
         { name: "U-Cut", price: 150, offerPrice: 99 },
@@ -23,7 +23,7 @@ const servicesData = {
     {
       group: "Clean up",
       icon: "✨",
-      image: "attached_assets/stock_images/beautiful_woman_gett_9dc7243a.jpg",
+      image: "assets/service_images/beautiful_woman_gett_9dc7243a.webp",
       services: [
         { name: "Fruit Cleanup", price: 500, offerPrice: 250 },
         { name: "Diamond Cleanup", price: 800, offerPrice: 499 },
@@ -34,7 +34,7 @@ const servicesData = {
     {
       group: "Facial",
       icon: "💆",
-      image: "attached_assets/stock_images/beautiful_woman_gett_6dc3de2b.jpg",
+      image: "assets/service_images/beautiful_woman_gett_6dc3de2b.webp",
       services: [
         { name: "Lotus Professional Facial", price: 1500, offerPrice: 699 },
         { name: "03+ Facial", price: 1500, offerPrice: 699 },
@@ -47,7 +47,7 @@ const servicesData = {
     {
       group: "Hairs & Treatment",
       icon: "💇",
-      image: "attached_assets/stock_images/professional_hair_st_673b25ad.jpg",
+      image: "assets/service_images/professional_hair_st_673b25ad.webp",
       services: [
         { name: "Keratin", price: 2500, offerPrice: 1499 },
         { name: "Straightening/Smoothening", price: 3000, offerPrice: 1999 },
@@ -62,7 +62,7 @@ const servicesData = {
     {
       group: "Premium services",
       icon: "👑",
-      image: "attached_assets/stock_images/luxury_spa_massage_w_43d50481.jpg",
+      image: "assets/service_images/luxury_spa_massage_w_43d50481.webp",
       services: [
         { name: "Head Massage", price: 250, offerPrice: 199 },
         { name: "Deep Nourish HairSpa", price: 1500, offerPrice: 799 },
@@ -76,7 +76,7 @@ const servicesData = {
     {
       group: "Hair colour",
       icon: "🎨",
-      image: "attached_assets/stock_images/hair_coloring_treatm_f184b598.jpg",
+      image: "assets/service_images/hair_coloring_treatm_f184b598.webp",
       services: [
         { name: "Global Hair Colour", price: 1199, offerPrice: null },
         { name: "Global Highlight", price: 1299, offerPrice: null },
@@ -89,7 +89,7 @@ const servicesData = {
     {
       group: "Makeup & Styling",
       icon: "💄",
-      image: "attached_assets/stock_images/glamorous_woman_luxu_658b74ed.jpg",
+      image: "assets/service_images/glamorous_woman_luxu_658b74ed.webp",
       services: [
         { name: "Party Makeup", price: 2000, offerPrice: 1499 },
         { name: "Bridal Makeup", price: 8000, offerPrice: 5999 },
@@ -101,7 +101,7 @@ const servicesData = {
     {
       group: "Nails & Beauty",
       icon: "💅",
-      image: "attached_assets/stock_images/attractive_model_wit_bcb81b4f.jpg",
+      image: "assets/service_images/attractive_model_wit_bcb81b4f.webp",
       services: [
         { name: "Manicure", price: 500, offerPrice: 299 },
         { name: "Pedicure", price: 600, offerPrice: 349 },

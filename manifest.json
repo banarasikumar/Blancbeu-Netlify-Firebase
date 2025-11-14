@@ -36,17 +36,29 @@
       "purpose": "maskable any"
     },
     {
+      "src": "/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
       "src": "/icon-512x512.webp",
       "sizes": "512x512",
       "type": "image/webp",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
       "purpose": "maskable any"
     }
   ],
   "screenshots": [
     {
-      "src": "/splash-750x1334.webp",
+      "src": "/splash-750x1334.png",
       "sizes": "750x1334",
-      "type": "image/webp",
+      "type": "image/png",
       "form_factor": "narrow",
       "label": "Blancbeu Beauty Salon"
     }

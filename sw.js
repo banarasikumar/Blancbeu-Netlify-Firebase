@@ -1,4 +1,4 @@
-const CACHE_NAME = 'blancbeu-v6-optimized';
+const CACHE_NAME = 'blancbeu-v7-optimized';
 const urlsToCache = [
   '/',
   '/index.html',
@@ -11,7 +11,11 @@ const urlsToCache = [
   '/icon-96x96.webp',
   '/icon-144x144.webp',
   '/icon-192x192.webp',
+  '/icon-192x192.png',
   '/icon-512x512.webp',
+  '/icon-512x512.png',
+  '/splash-750x1334.png',
+  '/splash-1170x2532.png',
   '/assets/homepage_brand_logo.webp',
   '/assets/brand_icon_optimized.webp',
   '/assets/banner_carousel_images/banner1.webp',

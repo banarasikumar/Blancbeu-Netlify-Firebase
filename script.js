@@ -235,7 +235,7 @@ function renderServices() {
         <div class="category-info">
           <h3 class="category-title">${group.icon} ${group.group}</h3>
         </div>
-        <img src="${group.image}" alt="${group.group}" class="category-image">
+        <img src="${group.image}" alt="${group.group}" class="category-image" loading="lazy" decoding="async">
       </div>
     `;
     

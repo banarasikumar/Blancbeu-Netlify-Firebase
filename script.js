@@ -415,14 +415,14 @@ class ScrollBehaviorManager {
 
     clearTimeout(this.fireworksResumeTimer);
     
-    // Resume fireworks after 1 second of no scrolling
+    // Resume fireworks after 0.5 seconds of no scrolling
     this.fireworksResumeTimer = setTimeout(() => {
       this.isScrolling = false;
       if (this.fireworksWerePausedByScroll) {
         togglePause(false);
         this.fireworksWerePausedByScroll = false;
       }
-    }, 1000);
+    }, 500);
   }
 }
 

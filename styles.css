@@ -1404,6 +1404,10 @@ body {
     z-index: 10000;
     background: transparent;
     opacity: 0;
+    /* Performance optimizations for scroll smoothness */
+    pointer-events: none;
+    will-change: contents;
+    contain: layout style;
     visibility: hidden;
     transition: opacity 0.5s, visibility 0.5s;
     pointer-events: none !important;
@@ -1452,11 +1456,19 @@ body {
 
 .fireworks-overlay .canvas-container {
     background: transparent !important;
+    /* Performance optimizations */
+    will-change: transform;
+    contain: layout style paint;
 }
 
 /* Make sure canvas blends properly */
 .fireworks-overlay canvas {
     mix-blend-mode: screen !important;
+    /* GPU acceleration and performance hints */
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+    will-change: transform, opacity;
 }
 
 /* PWA Install Button */

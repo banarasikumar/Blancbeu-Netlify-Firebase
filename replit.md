@@ -3,28 +3,30 @@
 ## Overview
 A truly luxurious beauty salon website with premium 24k gold and black theme, featuring stunning animations, interactive elements, native app-like experience, and a magical user experience.
 
-## Latest Update (November 11, 2025)
-### Enhanced Scroll Behavior & Performance Optimization
-- **Unified ScrollBehaviorManager**:
-  - Single scroll handler manages BOTH header and bottom navigation
-  - Smart auto-hide/unhide for both elements (hide when scrolling down, show when scrolling up)
-  - Both navigation bars stay synchronized - hide and show together
-  - Works independently even if header element is missing
-  - 5px scroll threshold to prevent direction jitter
-  - Better browser compatibility with fallback scroll position detection
-- **Fireworks Pause During Scroll**:
-  - Fireworks automatically pause when scrolling for ultra-smooth scrolling performance
-  - Auto-resume 150ms after scrolling stops for seamless experience
-  - Respects manual pause state (won't override user's pause preference)
-  - Smart state tracking to avoid conflicts between scroll and manual pause
-  - Significantly improves scrolling performance on all devices
+## Latest Update (November 14, 2025)
+### Scroll Performance Optimization & Fireworks Behavior Enhancement
+- **Fixed Bottom Navigation Scroll Behavior**:
+  - Removed conflicting CSS animation (`slideUpNav`) that was blocking the `.hidden` class
+  - Bottom navigation now properly hides/shows in sync with header during scroll
+  - Both elements controlled by unified ScrollBehaviorManager
+- **Enhanced Fireworks Scroll Behavior**:
+  - Fireworks pause when scrolling starts
+  - **2-second delay** after scroll stops before fireworks resume (increased from 150ms)
+  - Prevents premature animation restart for better UX
+  - Smart state tracking respects manual pause preferences
+- **Advanced Scroll Performance Optimizations**:
+  - **RequestAnimationFrame throttling**: Scroll events batched to screen refresh rate
+  - **GPU-accelerated canvas rendering**: Added `transform: translateZ(0)` for hardware acceleration
+  - **CSS Containment**: `contain: layout style paint` to isolate canvas repaints
+  - **Will-change hints**: Optimized for transform and opacity changes
+  - **Backface visibility**: Hidden to prevent unnecessary back-face rendering
+  - **Passive event listeners**: Non-blocking scroll handlers
+  - Significantly improved scroll smoothness without removing fireworks
 - **Technical Implementation**:
-  - Class-based ScrollBehaviorManager controls both header and bottom nav
-  - Single working scroll listener eliminates duplicate handlers
-  - Passive scroll listeners for optimal performance
-  - BottomNavController now focused solely on scrollspy and navigation clicks
-  - Debounced resume timer to prevent premature fireworks restart
-  - Pre-scroll state detection to preserve manual pause
+  - RequestAnimationFrame-based scroll throttling prevents excessive handler calls
+  - CSS performance hints for GPU-accelerated rendering
+  - Canvas isolation to prevent full-page repaints during scroll
+  - Optimized paint/composite layers for smoother animations
 
 ### iOS-Style Bottom Navigation Bar
 - **Native App Experience**:

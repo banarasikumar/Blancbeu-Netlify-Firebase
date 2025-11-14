@@ -325,6 +325,7 @@ class ScrollBehaviorManager {
     this.fireworksResumeTimer = null;
     this.isScrolling = false;
     this.fireworksWerePausedByScroll = false;
+    this.ticking = false; // For requestAnimationFrame throttling
   }
 
   init() {
@@ -338,7 +339,18 @@ class ScrollBehaviorManager {
     if (!this.bottomNav) {
       console.warn('❌ Bottom nav element not found - bottom nav auto-hide disabled');
     }
-    window.addEventListener('scroll', this.handleScroll.bind(this), { passive: true });
+    window.addEventListener('scroll', this.onScroll.bind(this), { passive: true });
+  }
+
+  onScroll() {
+    // Use requestAnimationFrame for smooth, throttled scroll handling
+    if (!this.ticking) {
+      window.requestAnimationFrame(() => {
+        this.handleScroll();
+        this.ticking = false;
+      });
+      this.ticking = true;
+    }
   }
 
   handleScroll() {
@@ -403,13 +415,14 @@ class ScrollBehaviorManager {
 
     clearTimeout(this.fireworksResumeTimer);
     
+    // Resume fireworks after 2 seconds of no scrolling
     this.fireworksResumeTimer = setTimeout(() => {
       this.isScrolling = false;
       if (this.fireworksWerePausedByScroll) {
         togglePause(false);
         this.fireworksWerePausedByScroll = false;
       }
-    }, 150);
+    }, 2000);
   }
 }
 

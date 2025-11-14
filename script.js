@@ -332,13 +332,18 @@ class ScrollBehaviorManager {
     this.bottomNav = document.getElementById('bottomNav');
     
     if (!this.header) {
-      console.warn('Header element not found - navbar auto-hide disabled');
+      console.warn('❌ Header element not found - navbar auto-hide disabled');
+    } else {
+      console.log('✅ Header element found for scroll behavior');
     }
     
     if (!this.bottomNav) {
-      console.warn('Bottom nav element not found - bottom nav auto-hide disabled');
+      console.warn('❌ Bottom nav element not found - bottom nav auto-hide disabled');
+    } else {
+      console.log('✅ Bottom nav element found for scroll behavior');
     }
 
+    console.log('✅ ScrollBehaviorManager initialized - controls BOTH header and bottom nav hiding/showing');
     window.addEventListener('scroll', this.handleScroll.bind(this), { passive: true });
   }
 
@@ -366,13 +371,21 @@ class ScrollBehaviorManager {
     }
 
     if (scrollDiff > 0 && currentScroll > 100) {
-      // Scrolling down - hide both
-      if (this.header) this.header.classList.add('hidden');
-      if (this.bottomNav) this.bottomNav.classList.add('hidden');
+      // Scrolling down - hide both header and bottom nav together
+      if (this.header) {
+        this.header.classList.add('hidden');
+      }
+      if (this.bottomNav) {
+        this.bottomNav.classList.add('hidden');
+      }
     } else if (scrollDiff < 0) {
-      // Scrolling up - show both
-      if (this.header) this.header.classList.remove('hidden');
-      if (this.bottomNav) this.bottomNav.classList.remove('hidden');
+      // Scrolling up - show both header and bottom nav together
+      if (this.header) {
+        this.header.classList.remove('hidden');
+      }
+      if (this.bottomNav) {
+        this.bottomNav.classList.remove('hidden');
+      }
     }
   }
 

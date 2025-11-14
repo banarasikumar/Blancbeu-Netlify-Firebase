@@ -11,7 +11,7 @@ A truly luxurious beauty salon website with premium 24k gold and black theme, fe
   - Both elements controlled by unified ScrollBehaviorManager
 - **Enhanced Fireworks Scroll Behavior**:
   - Fireworks pause when scrolling starts
-  - **2-second delay** after scroll stops before fireworks resume (increased from 150ms)
+  - **1-second delay** after scroll stops before fireworks resume
   - Prevents premature animation restart for better UX
   - Smart state tracking respects manual pause preferences
 - **Advanced Scroll Performance Optimizations**:

@@ -333,17 +333,11 @@ class ScrollBehaviorManager {
     
     if (!this.header) {
       console.warn('❌ Header element not found - navbar auto-hide disabled');
-    } else {
-      console.log('✅ Header element found for scroll behavior');
     }
     
     if (!this.bottomNav) {
       console.warn('❌ Bottom nav element not found - bottom nav auto-hide disabled');
-    } else {
-      console.log('✅ Bottom nav element found for scroll behavior');
     }
-
-    console.log('✅ ScrollBehaviorManager initialized - controls BOTH header and bottom nav hiding/showing');
     window.addEventListener('scroll', this.handleScroll.bind(this), { passive: true });
   }
 

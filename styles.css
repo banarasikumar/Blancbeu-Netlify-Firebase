@@ -1762,18 +1762,4 @@ body {
     }
 }
 
-/* Smooth animations for nav appearance */
-@keyframes slideUpNav {
-    from {
-        transform: translateY(100%);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-.bottom-nav {
-    animation: slideUpNav 0.6s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
-}
+/* Smooth animations for nav appearance removed - conflicts with scroll behavior */

@@ -775,10 +775,10 @@ class ThemeController {
   init() {
     const savedTheme = localStorage.getItem('theme');
     
-    if (savedTheme === 'light') {
-      this.enableLightMode();
-    } else {
+    if (savedTheme === 'dark') {
       this.enableDarkMode();
+    } else {
+      this.enableLightMode();
     }
     
     if (this.themeToggleBtn) {

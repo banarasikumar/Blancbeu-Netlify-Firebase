@@ -106,6 +106,10 @@ body {
     border-bottom: 1px solid rgba(255, 215, 0, 0.1);
 }
 
+.header .container {
+    position: relative;
+}
+
 .header.hidden {
     transform: translateY(-100%);
 }
@@ -420,16 +424,22 @@ body {
     cursor: pointer;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 5px;
     transition: all 0.3s ease;
-    position: relative;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
     overflow: hidden;
     box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+    z-index: 1000;
+    min-width: 50px;
 }
 
 .theme-toggle-btn:hover {
     background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(255, 140, 0, 0.2));
-    transform: scale(1.1);
+    transform: translateY(-50%) scale(1.1);
     box-shadow: 0 6px 25px rgba(255, 215, 0, 0.5);
 }
 
@@ -464,10 +474,22 @@ body.light-mode .theme-icon.moon {
 @media (max-width: 768px) {
     .theme-toggle-btn {
         padding: 8px 12px;
+        right: 10px;
     }
     
     .theme-icon {
         font-size: 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .theme-toggle-btn {
+        padding: 6px 10px;
+        right: 5px;
+    }
+    
+    .theme-icon {
+        font-size: 16px;
     }
 }
 

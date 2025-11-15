@@ -1,277 +1,50 @@
 # Blancbeu - Premium Beauty & Wellness Salon
 
 ## Overview
-A truly luxurious beauty salon website with premium 24k gold and black theme, featuring stunning animations, interactive elements, native app-like experience, and a magical user experience.
+Blancbeu is a luxurious beauty salon website designed to provide a premium, native app-like experience. It features a sophisticated 24k gold and black theme, stunning animations, and interactive elements. The project aims to offer a magical user experience with a focus on high-end aesthetics and seamless functionality, including a light/dark mode toggle for diverse viewing preferences. Key capabilities include PWA support for installability, optimized performance, and a rich set of beauty service showcases.
 
-## Latest Update (November 14, 2025)
-### Image Optimization for Ultra-Fast Mobile Loading
-- **Smart Image Optimization**:
-  - **90% overall reduction** in total image weight (~20MB → ~2MB)
-  - Images resized to match actual display size on 1080x2400px screens
-  - WebP format for modern browsers (86-99% smaller files)
-  - PNG preserved only where iOS requires it (app icons, splash screens)
-- **Brand Logo Optimization**:
-  - **99% smaller**: 1.4MB → 11KB (displayed at only 60px!)
-  - WebP format with quality optimization
-- **Banner Carousel** (6 images):
-  - **92-94% smaller**: Average 1.4MB → 100KB per image
-  - Resized to 800x800px max (matches display size)
-  - WebP format for instant loading
-- **Service Images** (48 images):
-  - **85% average reduction**: ~200KB → ~25KB per image
-  - Resized to 600x300px (matches layout)
-  - Lazy loading implemented for better initial page load
-- **App Icons & Splash Screens**:
-  - **76-93% smaller** WebP versions for modern browsers
-  - Original PNG versions kept for iOS compatibility
-  - Hybrid approach ensures perfect display on all devices
-- **Performance Improvements**:
-  - Lazy loading on carousel and service images
-  - Service worker cache updated (v6) for both PNG and WebP formats
-  - Images optimized to exact display resolution
-  - Zero quality loss on visual appearance
+## User Preferences
+I want to ensure a smooth, professional development process.
+- **Communication Style**: Please use clear, concise language. Avoid jargon where simpler terms suffice.
+- **Workflow Preferences**: I prefer an iterative development approach. Break down complex tasks into smaller, manageable steps.
+- **Interaction Preferences**: Always ask for confirmation before implementing significant changes or refactoring large portions of code. Provide a brief explanation of the proposed changes and their impact.
+- **Code Style**: Adhere to modern web standards (HTML5, CSS3, ES6+). Focus on clean, readable, and maintainable code.
+- **Deployment**: Ensure all changes are thoroughly tested for cross-browser compatibility and responsiveness before deployment.
+- **Design Adherence**: Maintain the premium 24k gold and black aesthetic as a primary design principle.
 
-### Modern Navigation Bar Redesign & Scroll Performance
-- **Completely Redesigned Bottom Navigation Bar**:
-  - **Bigger, bolder icons**: Increased from 24px to 28px with filled Material Design icons
-  - **Modern typography**: Using SF Pro Display/Text system fonts with bolder 600/700 weights
-  - **Seamless design**: Removed border for app-like unified appearance
-  - **Reordered navigation**: Home, Notifications, My Bookings, Chat, Account (renamed from Profile)
-  - Enhanced icon animations with bounce effect and golden glow on active state
-  - Improved glassmorphism with stronger blur (30px) and better shadow depth
-  - Larger touch targets (68px min-width) for better mobile usability
-- **Fixed Bottom Navigation Scroll Behavior**:
-  - Removed conflicting CSS animation (`slideUpNav`) that was blocking the `.hidden` class
-  - Bottom navigation now properly hides/shows in sync with header during scroll
-  - Both elements controlled by unified ScrollBehaviorManager
-- **Enhanced Fireworks Scroll Behavior**:
-  - Fireworks pause when scrolling starts
-  - **0.5-second delay** after scroll stops before fireworks resume
-  - Prevents premature animation restart for better UX
-  - Smart state tracking respects manual pause preferences
-- **Advanced Scroll Performance Optimizations**:
-  - **RequestAnimationFrame throttling**: Scroll events batched to screen refresh rate
-  - **GPU-accelerated canvas rendering**: Added `transform: translateZ(0)` for hardware acceleration
-  - **CSS Containment**: `contain: layout style paint` to isolate canvas repaints
-  - **Will-change hints**: Optimized for transform and opacity changes
-  - **Backface visibility**: Hidden to prevent unnecessary back-face rendering
-  - **Passive event listeners**: Non-blocking scroll handlers
-  - Significantly improved scroll smoothness without removing fireworks
-- **Technical Implementation**:
-  - RequestAnimationFrame-based scroll throttling prevents excessive handler calls
-  - CSS performance hints for GPU-accelerated rendering
-  - Canvas isolation to prevent full-page repaints during scroll
-  - Optimized paint/composite layers for smoother animations
+## System Architecture
+The Blancbeu website is built using a modern, client-side focused architecture, leveraging vanilla JavaScript, HTML, and CSS for a lightweight and highly performant experience.
 
-### iOS-Style Bottom Navigation Bar
-- **Native App Experience**:
-  - Beautiful bottom navigation bar with iOS-style glassmorphism
-  - Modern touch-optimized design with 5 navigation items
-  - Smooth hide/show behavior on scroll (hides when scrolling down, shows when scrolling up)
-- **Design Features**:
-  - Glassmorphism effect with 20px backdrop blur and semi-transparent background
-  - Golden active state with gradient background and shadow effects
-  - Safe-area inset support for iPhone X+ devices
-  - Clean SVG icons for Home, Bookings, Chat, Notifications, Profile
-  - Smooth cubic-bezier transitions for premium feel
-- **Technical Implementation**:
-  - Throttled scroll listener using requestAnimationFrame for optimal performance
-  - Scrollspy logic for automatic active state based on scroll position
-  - Hash change handling for proper navigation state
-  - Z-index 999 for proper layering above content
-  - Body padding (80px + safe-area-inset) to prevent content overlap
-- **Fireworks Enhancement**:
-  - Touch/click firework launching disabled for better UX
-  - Fireworks now purely decorative overlay
-- **Service Worker Fixes**:
-  - Updated carousel image cache from .png to .webp
-  - Fixed cache activation to preserve current cache and only delete old versions
-  - Proper offline support maintained
+### UI/UX Decisions
+- **Theming**: Features a dual-theme system: a default premium 24k gold on deep black (Dark Mode) and a vibrant, colorful Light Mode. Themes are user-toggleable with persistence via `localStorage`.
+- **Navigation**: Utilizes an iOS-style bottom navigation bar with glassmorphism effects, larger icons, and a reordered structure (Home, Notifications, My Bookings, Chat, Account) for enhanced mobile usability. It hides on scroll down and shows on scroll up.
+- **Animations**: Incorporates extensive animations including a transparent Diwali fireworks overlay, brand name shimmer, sparkling particle backgrounds, offer card glow effects, rose petal rain, and responsive hover effects. Animations are optimized for performance with `requestAnimationFrame` throttling and GPU acceleration.
+- **Design Elements**: Uses `Cinzel` for luxury headings and `Poppins` for body text. Features glassmorphism with strong blur and shadow depth for interactive elements.
+- **Responsiveness**: Designed to be fully responsive across all devices, with images optimized for various screen sizes.
 
-### Previous Update (October 20, 2025)
-### Brand Asset Refresh & Banner Carousel Expansion
-- **Updated App Icons & Splash Screens**:
-  - New brand logo icons in multiple sizes (72x72, 96x96, 144x144, 192x192, 512x512)
-  - New splash screen images (750x1334, 1170x2532)
-  - Created from user-provided app_icon.png and app_splash_screen.png
-  - Optimized with ImageMagick at 90% quality
-- **New Homepage Logo**:
-  - Replaced text logo with actual brand image (assets/homepage_brand_logo.png)
-  - Seamless dark gradient background (#1a1a1a to #0a0a0a)
-  - 20px border radius with golden glow effects
-  - Responsive sizing: 60px (desktop), 40px (mobile)
-  - Hover animations with transform and enhanced glow
-- **Expanded Banner Carousel (4 → 6 slides)**:
-  - NEW: 6 professional square banner images (1024x1024px)
-  - Optimized carousel dimensions: 800x800px (desktop), 600x600px (tablet), 400px (mobile)
-  - Changed object-fit to 'contain' for proper square image display
-  - Radial gradient background for seamless appearance
-  - All 6 banners load correctly (banner1.png through banner6.png)
-- **Theme Color Updated to Black**:
-  - Mobile address bar now shows black (#000000) instead of gold
-  - Updated in manifest.json and HTML meta tags
-  - Professional appearance on all devices
-- **Service Worker Cache Optimized**:
-  - Cache version bumped to v3 for asset refresh
-  - Removed non-existent /static/* paths (eliminated 404 errors)
-  - Added correct project assets to cache list
-  - Aggressive cache clearing with skipWaiting and clients.claim()
-- **Cross-Browser Install Prompt** (existing):
-  - Chrome/Edge: Native install prompt with golden install button
-  - Safari/iOS: Custom install button with step-by-step instructions
-  - Firefox: Browser-specific installation guidance
-  - Smart detection to prevent duplicate prompts
-- **Seamless Splash Screen** (existing):
-  - Burgundy/maroon background (#4a2332) matching splash image
-  - Blur effects for professional appearance
-  - Auto-displays in standalone mode
-  - Auto-hides after 2.5 seconds
-- **Standalone Mode Detection** (existing):
-  - Detects when app is running as installed PWA
-  - Consistent session storage tracking
-  - Works on iOS, Android, and desktop
+### Technical Implementations
+- **Frontend**: Primarily Vanilla HTML, CSS, JavaScript for maximum control and performance.
+- **State Management**: A `ThemeController` class manages theme state and transitions.
+- **Image Optimization**: Implements WebP format where supported, with PNG fallbacks for iOS. Images are resized to display dimensions, significantly reducing load times. Lazy loading is used for performance-critical images.
+- **Scroll Behavior**: A `ScrollBehaviorManager` unifies header and bottom navigation visibility, and manages fireworks pausing/resuming based on scroll events.
+- **PWA Support**: Comprehensive Progressive Web App features including custom brand icons, seamless splash screens, cross-browser install prompts, and standalone mode detection.
+- **Asset Management**: Organized folder structure for banners, service images, and other assets.
 
-### Previous Update (October 19, 2025)
-#### Diwali Fireworks Animation Integration
-- **Transparent Fireworks Overlay**:
-  - Fireworks display on top of website content with full transparency
-  - No opaque black background blocking website elements
-  - Pointer-events disabled to allow full website interaction
-  - Fixed 60% speed for smooth, consistent animations
-- **Sound & Effects**:
-  - Continuous sound playback at 60% speed (no more stopping)
-  - Removed swipe/drag speed control (fixed speed only)
-  - Sky lighting disabled for complete transparency
-  - Multiple firework types with sound effects
-- **Technical Implementation**:
-  - Canvas backgrounds set to transparent
-  - Sky lighting mode: NONE (no background illumination)
-  - Speed locked at 0.6 (60%) - no user adjustment
-  - All controls hidden for clean overlay effect
+### Feature Specifications
+- **Light/Dark Mode**: User-toggleable with smooth transitions, preference persistence, and meta theme-color updates.
+- **Image Optimization**: 90% overall reduction in image weight using WebP, resizing, and lazy loading.
+- **Modern Navigation**: Redesigned iOS-style bottom navigation with enhanced icons, typography, and scroll behavior.
+- **Fireworks Overlay**: Transparent, continuous Diwali fireworks animation at 60% speed with sound, acting as a decorative overlay without blocking interaction.
+- **Banner Carousel**: Auto-playing banner carousel with 6 professional square images, optimized dimensions, and radial gradient backgrounds.
+- **Brand Identity**: Prominent "BLANCBEU" brand name with a gold gradient shimmer and "Family Beauty Salon" subtitle.
+- **Contact & Services**: Smartphone-optimized contact buttons, 8 categorized service groups with 60+ services, and special offers with glow animations.
+- **Music Player**: Background music player with a rose petal rain animation.
+- **Customer Engagement**: Customer reviews with star ratings and an image gallery.
 
-### Previous Update (October 3, 2025)
-#### Brand Identity Enhancement & Banner Carousel Redesign
-- **Brand Name Styling**:
-  - **"BLANCBEU"** now displayed in large, attractive uppercase (42px)
-  - Premium gold gradient with shimmer animation
-  - Prominent positioning with enhanced glow effects
-  - **"Family Beauty Salon"** as smaller subtitle below (14px)
-  - Clear visual hierarchy in header
-- **Banner Carousel** (updated to 6 images):
-  - 6 professional square banner images (1024x1024px) in assets/banner_carousel_images/
-  - Properly positioned below brand header (no overlap)
-  - Clean layout without text overlays
-  - Smooth fade transitions between slides
-  - All carousel images load correctly (no empty slides)
-- **Folder Structure**:
-  - Organized asset management with assets/banner_carousel_images/
-  - Clean separation of banner and service images
-- **Previous Features** (October 2, 2025):
-  - Surprise Me button with blurred background
-  - Transparent carousel navigation buttons
-  - Smartphone-optimized contact buttons with animations
-  - Service categories with images below titles
-  - Premium 24k gold theme on deep black background
-  - 8 service categories with 60+ services
-  - Special offers with glow animations
-  - Rose petal rain with background music
-  - Customer reviews and gallery
-  - PWA support
-
-## Project Architecture
-### Tech Stack
-- **Frontend**: Vanilla HTML, CSS, JavaScript
-- **Server**: http-server (Node.js)
-- **PWA**: Service Worker for offline capability
-- **Fonts**: Cinzel (luxury headings), Poppins (body text)
-- **Audio**: Background music player with Sundari song
-
-### File Structure
-```
-├── index.html                  # Main HTML file with carousel & fireworks
-├── styles.css                  # Premium gold theme & animations
-├── fireworks.css               # Fireworks overlay styles
-├── fireworks.js                # Fireworks animation engine
-├── script.js                   # Carousel, music player, rose petals
-├── manifest.json               # PWA configuration
-├── sw.js                      # Service Worker
-├── assets/
-│   └── banner_carousel_images/ # Banner carousel images (4 images)
-└── attached_assets/
-    ├── diwali_animation/      # Fireworks source files
-    ├── stock_images/          # Beauty service images
-    └── SpotiDownloader.com... # Sundari background music
-```
-
-### Color Palette
-**24k Gold Premium Theme**:
-- Primary Gold: #FFD700
-- Bright Gold: #FFC700
-- Dark Gold: #B8860B
-- Light Gold: #FFED4E
-- Deep Black: #0a0a0a
-- Pure Black: #000000
-- Pink Rose: #FFB6C1
-- WhatsApp Green: #25D366
-
-## Features
-✅ **Full PWA Support**: Cross-browser install prompts for Chrome, Safari, Firefox, Edge
-✅ **Custom Brand Icons**: Professional app icons in 5 sizes with golden beauty logo
-✅ **Seamless Splash Screen**: Burgundy background with blur effects and auto-hide
-✅ **Standalone Mode**: Detects and adapts when running as installed app
-✅ **Golden Install Button**: Animated install prompt with bounce effect
-✅ **Diwali Fireworks**: Transparent overlay with continuous sound at 60% speed
-✅ Large, attractive brand name "BLANCBEU" with shimmer animation
-✅ Clear brand hierarchy with "Family Beauty Salon" subtitle
-✅ Auto-playing banner carousel with 4 professional beauty images
-✅ Clean carousel layout below header (no overlap)
-✅ Small transparent carousel navigation buttons
-✅ Bottom-right "Surprise me" button with blurred background
-✅ Smartphone-optimized contact buttons with animations
-✅ Service categories with large images below titles (600x300px)
-✅ Sparkling particle background effects
-✅ Glow animations on offer cards
-✅ 8 categorized service groups with 60+ services
-✅ Music player with rose petal rain animation
-✅ Smooth slideInUp animations with staggered delays
-✅ Enhanced hover effects throughout
-✅ Responsive design for all devices
-✅ Customer reviews with star ratings
-✅ Image gallery with hover overlays
-✅ Well-organized asset folder structure
-✅ Click-through fireworks (website fully interactive underneath)
-
-## Contact Information
-- Phone: +91 92299 15277
-- WhatsApp: https://wa.me/919229915277
-- Location: Google Maps integration
-
-## Development
-Run locally:
-```bash
-npx http-server . -p 5000 -a 0.0.0.0 --cors -c-1
-```
-
-Visit: http://localhost:5000
-
-## Special Effects & Animations
-1. **Diwali Fireworks**: Transparent overlay with multi-color explosions, trails, and sound
-2. **Brand Name Shimmer**: Pulsing glow effect on BLANCBEU logo
-3. **Sparkle Background**: Floating golden particles
-4. **Carousel Auto-play**: Smooth fade transitions every 5 seconds
-5. **Carousel Controls**: Circular transparent buttons with backdrop blur
-6. **Contact Buttons**: SlideInUp animation with 0.1s, 0.2s, 0.3s delays
-7. **Glow Animations**: Rotating gradient effects on offer cards
-8. **Rose Petals**: Falling animation when music plays
-9. **Shimmer Text**: Animated gold gradient on titles
-10. **Hover Effects**: Scale and glow transformations
-11. **Pulse & Bounce**: Icon animations on contact buttons
-12. **Smooth Scrolling**: Navigation with easing
-13. **Blurred Backgrounds**: Modern glassmorphism effects
-
-## Fireworks Configuration
-- **Speed**: Fixed at 60% (0.6) - optimized for smooth performance
-- **Transparency**: Full transparent background - fireworks only, no dark overlay
-- **Interaction**: Click-through enabled - website remains fully functional
-- **Sound**: Continuous playback with explosion and launch sounds
-- **Controls**: All UI controls hidden for clean visual presentation
+## External Dependencies
+- **http-server (Node.js)**: Used for serving the application locally during development.
+- **PWA Service Worker**: For offline capabilities, caching assets, and enabling installability.
+- **Fonts**: `Cinzel` and `Poppins` (likely sourced from Google Fonts or local assets).
+- **Audio**: `Sundari` (SpotiDownloader.com) for background music.
+- **Google Maps**: Integration for salon location.
+- **WhatsApp**: Integration for direct messaging.

@@ -412,6 +412,382 @@ body {
     50% { transform: rotate(180deg); }
 }
 
+.theme-toggle-btn {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 140, 0, 0.15));
+    border: 2px solid rgba(255, 215, 0, 0.4);
+    padding: 10px 15px;
+    border-radius: 50px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+}
+
+.theme-toggle-btn:hover {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(255, 140, 0, 0.2));
+    transform: scale(1.1);
+    box-shadow: 0 6px 25px rgba(255, 215, 0, 0.5);
+}
+
+.theme-icon {
+    font-size: 20px;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+body:not(.light-mode) .theme-icon.sun {
+    opacity: 0;
+    transform: scale(0) rotate(-180deg);
+    position: absolute;
+}
+
+body:not(.light-mode) .theme-icon.moon {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+}
+
+body.light-mode .theme-icon.sun {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+}
+
+body.light-mode .theme-icon.moon {
+    opacity: 0;
+    transform: scale(0) rotate(180deg);
+    position: absolute;
+}
+
+@media (max-width: 768px) {
+    .theme-toggle-btn {
+        padding: 8px 12px;
+    }
+    
+    .theme-icon {
+        font-size: 18px;
+    }
+}
+
+body.light-mode {
+    background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 50%, #fff9c4 100%);
+    background-attachment: fixed;
+    color: #1a1a1a;
+}
+
+body.light-mode .sparkles {
+    background-image: 
+        radial-gradient(3px 3px at 20% 30%, #FF6B6B, transparent),
+        radial-gradient(3px 3px at 60% 70%, #4ECDC4, transparent),
+        radial-gradient(2px 2px at 50% 50%, #FFE66D, transparent),
+        radial-gradient(2px 2px at 80% 10%, #95E1D3, transparent),
+        radial-gradient(3px 3px at 90% 60%, #A8E6CF, transparent),
+        radial-gradient(2px 2px at 33% 80%, #FF6B9D, transparent);
+    animation: colorfulSparkle 15s ease-in-out infinite;
+}
+
+@keyframes colorfulSparkle {
+    0%, 100% { 
+        opacity: 0.6; 
+        background-position: 0% 0%;
+        filter: hue-rotate(0deg);
+    }
+    33% { 
+        opacity: 0.8; 
+        background-position: 50% 50%;
+        filter: hue-rotate(120deg);
+    }
+    66% { 
+        opacity: 0.7; 
+        background-position: 100% 100%;
+        filter: hue-rotate(240deg);
+    }
+}
+
+body.light-mode .header {
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(212, 160, 23, 0.2);
+}
+
+body.light-mode .brand-icon-wrapper {
+    background: linear-gradient(135deg, rgba(212, 160, 23, 0.3), rgba(230, 184, 0, 0.25));
+    box-shadow: 0 0 20px rgba(212, 160, 23, 0.4);
+}
+
+body.light-mode .brand-icon-wrapper:hover {
+    background: linear-gradient(135deg, rgba(212, 160, 23, 0.4), rgba(230, 184, 0, 0.3));
+    box-shadow: 0 8px 35px rgba(212, 160, 23, 0.6);
+}
+
+body.light-mode .brand-name {
+    background: linear-gradient(135deg, #b8860b 0%, #d4a017 30%, #e6b800 60%, #b8860b 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 2px 8px rgba(212, 160, 23, 0.3));
+}
+
+body.light-mode .brand-subtitle {
+    color: rgba(184, 134, 11, 0.9);
+    text-shadow: 0 1px 4px rgba(212, 160, 23, 0.3);
+}
+
+body.light-mode .nav a {
+    color: rgba(26, 26, 26, 0.9);
+}
+
+body.light-mode .nav a:hover {
+    color: #b8860b;
+    text-shadow: 0 0 8px rgba(212, 160, 23, 0.3);
+}
+
+body.light-mode .theme-toggle-btn {
+    background: linear-gradient(135deg, rgba(255, 193, 7, 0.3), rgba(255, 152, 0, 0.25));
+    border: 2px solid rgba(212, 160, 23, 0.5);
+}
+
+body.light-mode .theme-toggle-btn:hover {
+    background: linear-gradient(135deg, rgba(255, 193, 7, 0.4), rgba(255, 152, 0, 0.3));
+}
+
+body.light-mode .install-app-btn {
+    background: linear-gradient(135deg, #FFD54F 0%, #FF9800 100%);
+    color: #1a1a1a;
+    box-shadow: 0 4px 20px rgba(255, 193, 7, 0.5);
+}
+
+body.light-mode .carousel {
+    background: linear-gradient(135deg, rgba(255, 193, 7, 0.15) 0%, rgba(255, 152, 0, 0.1) 100%);
+    box-shadow: 
+        0 0 30px rgba(255, 193, 7, 0.3),
+        inset 0 0 20px rgba(255, 193, 7, 0.1),
+        0 15px 50px rgba(0, 0, 0, 0.15);
+    border: 2px solid rgba(255, 193, 7, 0.4);
+}
+
+body.light-mode .carousel-track {
+    background: #ffffff;
+}
+
+body.light-mode .carousel-slide img {
+    background: #ffffff;
+}
+
+body.light-mode .fireworks-overlay {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+}
+
+@keyframes rainbowPulse {
+    0% { 
+        box-shadow: 0 0 20px rgba(255, 107, 107, 0.6), 0 0 40px rgba(78, 205, 196, 0.4);
+    }
+    25% { 
+        box-shadow: 0 0 20px rgba(78, 205, 196, 0.6), 0 0 40px rgba(255, 230, 109, 0.4);
+    }
+    50% { 
+        box-shadow: 0 0 20px rgba(255, 230, 109, 0.6), 0 0 40px rgba(149, 225, 211, 0.4);
+    }
+    75% { 
+        box-shadow: 0 0 20px rgba(149, 225, 211, 0.6), 0 0 40px rgba(255, 107, 157, 0.4);
+    }
+    100% { 
+        box-shadow: 0 0 20px rgba(255, 107, 107, 0.6), 0 0 40px rgba(78, 205, 196, 0.4);
+    }
+}
+
+@keyframes floatBounce {
+    0%, 100% { 
+        transform: translateY(0px) scale(1);
+    }
+    50% { 
+        transform: translateY(-10px) scale(1.05);
+    }
+}
+
+body.light-mode .section-title {
+    color: #1a1a1a;
+    text-shadow: 0 2px 15px rgba(212, 160, 23, 0.4);
+}
+
+body.light-mode .section-subtitle {
+    color: #333333;
+}
+
+body.light-mode .offer-card,
+body.light-mode .service-card,
+body.light-mode .review-card {
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid rgba(212, 160, 23, 0.3);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    animation: floatBounce 3s ease-in-out infinite;
+}
+
+body.light-mode .offer-card:hover,
+body.light-mode .service-card:hover,
+body.light-mode .review-card:hover {
+    animation: rainbowPulse 2s ease-in-out infinite;
+    transform: translateY(-8px) scale(1.02);
+}
+
+body.light-mode .glow-card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 250, 240, 0.9) 100%);
+}
+
+body.light-mode .contact-btn {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 245, 220, 0.95));
+    color: #1a1a1a;
+    border: 2px solid rgba(212, 160, 23, 0.4);
+    box-shadow: 0 6px 25px rgba(255, 193, 7, 0.3);
+}
+
+body.light-mode .contact-btn:hover {
+    background: linear-gradient(135deg, rgba(255, 245, 220, 1), rgba(255, 255, 255, 1));
+    animation: rainbowPulse 1.5s ease-in-out infinite;
+}
+
+body.light-mode .footer {
+    background: rgba(26, 26, 26, 0.95);
+    color: #e0e0e0;
+}
+
+body.light-mode .carousel-btn {
+    background: rgba(255, 255, 255, 0.9);
+    color: #1a1a1a;
+    border: 2px solid rgba(212, 160, 23, 0.4);
+    box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
+}
+
+body.light-mode .carousel-btn:hover {
+    background: rgba(255, 255, 255, 1);
+    transform: scale(1.1);
+    box-shadow: 0 6px 25px rgba(255, 193, 7, 0.5);
+}
+
+body.light-mode .carousel-dots span {
+    background: rgba(212, 160, 23, 0.4);
+    border: 2px solid rgba(212, 160, 23, 0.6);
+}
+
+body.light-mode .carousel-dots span.active {
+    background: linear-gradient(135deg, #FFD54F, #FF9800);
+    box-shadow: 0 0 15px rgba(255, 193, 7, 0.6);
+}
+
+body.light-mode .contact-title {
+    color: #1a1a1a;
+    text-shadow: 0 2px 10px rgba(212, 160, 23, 0.3);
+}
+
+body.light-mode .locate-btn {
+    background: linear-gradient(135deg, rgba(156, 39, 176, 0.1), rgba(103, 58, 183, 0.15));
+    color: #4A148C;
+    border: 2px solid rgba(156, 39, 176, 0.4);
+    box-shadow: 0 6px 20px rgba(156, 39, 176, 0.3);
+}
+
+body.light-mode .locate-btn:hover {
+    background: linear-gradient(135deg, rgba(156, 39, 176, 0.2), rgba(103, 58, 183, 0.25));
+    box-shadow: 0 8px 30px rgba(156, 39, 176, 0.5);
+    animation: rainbowPulse 1.5s ease-in-out infinite;
+}
+
+body.light-mode .whatsapp-btn {
+    background: linear-gradient(135deg, rgba(37, 211, 102, 0.15), rgba(18, 140, 126, 0.2));
+    color: #0a5f4f;
+    border: 2px solid rgba(37, 211, 102, 0.5);
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.3);
+}
+
+body.light-mode .whatsapp-btn:hover {
+    background: linear-gradient(135deg, rgba(37, 211, 102, 0.25), rgba(18, 140, 126, 0.3));
+    box-shadow: 0 8px 30px rgba(37, 211, 102, 0.5);
+    animation: rainbowPulse 1.5s ease-in-out infinite;
+}
+
+body.light-mode .call-btn {
+    background: linear-gradient(135deg, rgba(33, 150, 243, 0.15), rgba(25, 118, 210, 0.2));
+    color: #0d47a1;
+    border: 2px solid rgba(33, 150, 243, 0.5);
+    box-shadow: 0 6px 20px rgba(33, 150, 243, 0.3);
+}
+
+body.light-mode .call-btn:hover {
+    background: linear-gradient(135deg, rgba(33, 150, 243, 0.25), rgba(25, 118, 210, 0.3));
+    box-shadow: 0 8px 30px rgba(33, 150, 243, 0.5);
+    animation: rainbowPulse 1.5s ease-in-out infinite;
+}
+
+body.light-mode .offer-badge {
+    background: linear-gradient(135deg, #FF6B6B, #FF8E53);
+    color: #ffffff;
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.5);
+}
+
+body.light-mode .offer-badge.hot {
+    background: linear-gradient(135deg, #FF416C, #FF4B2B);
+}
+
+body.light-mode .offer-badge.festive {
+    background: linear-gradient(135deg, #4ECDC4, #44A08D);
+}
+
+body.light-mode .offer-badge.student {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+}
+
+body.light-mode .old-price {
+    color: #666666;
+}
+
+body.light-mode .new-price {
+    color: #d4a017;
+    text-shadow: 0 2px 8px rgba(212, 160, 23, 0.3);
+}
+
+body.light-mode .offer-icon,
+body.light-mode .service-icon {
+    filter: drop-shadow(0 4px 10px rgba(212, 160, 23, 0.4));
+}
+
+body.light-mode h3,
+body.light-mode h2 {
+    color: #1a1a1a;
+}
+
+body.light-mode p {
+    color: #333333;
+}
+
+body.light-mode .service-name {
+    color: #1a1a1a;
+}
+
+body.light-mode .service-price {
+    color: #d4a017;
+}
+
+body.light-mode .review-text {
+    color: #444444;
+}
+
+body.light-mode .reviewer-name {
+    color: #1a1a1a;
+}
+
+body.light-mode .review-date {
+    color: #666666;
+}
+
+body.light-mode .stars,
+body.light-mode .hearts {
+    filter: drop-shadow(0 2px 8px rgba(255, 193, 7, 0.4));
+}
+
 .hero {
     padding-top: 120px;
     padding-bottom: 60px;

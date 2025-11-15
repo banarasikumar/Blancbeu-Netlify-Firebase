@@ -762,3 +762,67 @@ if (document.readyState === 'loading') {
 } else {
   new BottomNavController();
 }
+
+class ThemeController {
+  constructor() {
+    this.themeToggleBtn = document.getElementById('themeToggle');
+    this.fireworksOverlay = document.getElementById('fireworksOverlay');
+    this.body = document.body;
+    
+    this.init();
+  }
+  
+  init() {
+    const savedTheme = localStorage.getItem('theme');
+    
+    if (savedTheme === 'light') {
+      this.enableLightMode();
+    } else {
+      this.enableDarkMode();
+    }
+    
+    if (this.themeToggleBtn) {
+      this.themeToggleBtn.addEventListener('click', () => this.toggleTheme());
+    }
+  }
+  
+  toggleTheme() {
+    if (this.body.classList.contains('light-mode')) {
+      this.enableDarkMode();
+      localStorage.setItem('theme', 'dark');
+    } else {
+      this.enableLightMode();
+      localStorage.setItem('theme', 'light');
+    }
+  }
+  
+  enableLightMode() {
+    this.body.classList.add('light-mode');
+    
+    if (this.fireworksOverlay) {
+      this.fireworksOverlay.classList.remove('active');
+      this.fireworksOverlay.style.display = 'none';
+    }
+    
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#e3f2fd');
+  }
+  
+  enableDarkMode() {
+    this.body.classList.remove('light-mode');
+    
+    if (this.fireworksOverlay) {
+      this.fireworksOverlay.classList.add('active');
+      this.fireworksOverlay.style.display = '';
+    }
+    
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#000000');
+  }
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => {
+    new ThemeController();
+  });
+} else {
+  new ThemeController();
+}

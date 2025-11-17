@@ -370,6 +370,14 @@ class ScrollBehaviorManager {
       return;
     }
 
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
+    const isAtBottom = (currentScroll + windowHeight) >= (documentHeight - 50);
+    
+    if (isAtBottom) {
+      if (this.bottomNav) this.bottomNav.classList.remove('hidden');
+    }
+
     const scrollDiff = currentScroll - this.lastScroll;
     
     if (Math.abs(scrollDiff) < this.scrollThreshold) {
@@ -381,7 +389,7 @@ class ScrollBehaviorManager {
       if (this.header) {
         this.header.classList.add('hidden');
       }
-      if (this.bottomNav) {
+      if (this.bottomNav && !isAtBottom) {
         this.bottomNav.classList.add('hidden');
       }
     } else if (scrollDiff < 0) {

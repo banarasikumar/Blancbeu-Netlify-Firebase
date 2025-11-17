@@ -793,7 +793,7 @@ class ThemeController {
   detectTimeOfDay() {
     const currentHour = new Date().getHours();
     
-    if (currentHour >= 6 && currentHour < 18) {
+    if (currentHour >= 6 && currentHour < 17) {
       this.enableLightMode();
     } else {
       this.enableDarkMode();

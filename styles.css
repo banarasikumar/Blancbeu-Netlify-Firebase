@@ -428,7 +428,7 @@ body {
     gap: 5px;
     transition: all 0.3s ease;
     position: absolute;
-    right: 20px;
+    right: 40px;
     top: 50%;
     transform: translateY(-50%);
     overflow: hidden;
@@ -474,7 +474,7 @@ body.light-mode .theme-icon.moon {
 @media (max-width: 768px) {
     .theme-toggle-btn {
         padding: 8px 12px;
-        right: 10px;
+        right: 25px;
     }
     
     .theme-icon {
@@ -485,7 +485,7 @@ body.light-mode .theme-icon.moon {
 @media (max-width: 480px) {
     .theme-toggle-btn {
         padding: 6px 10px;
-        right: 5px;
+        right: 20px;
     }
     
     .theme-icon {
@@ -494,7 +494,7 @@ body.light-mode .theme-icon.moon {
 }
 
 body.light-mode {
-    background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 50%, #fff9c4 100%);
+    background: linear-gradient(135deg, #fef5e7 0%, #fdecea 50%, #f8f9f9 100%);
     background-attachment: fixed;
     color: #1a1a1a;
 }
@@ -673,8 +673,35 @@ body.light-mode .contact-btn:hover {
 }
 
 body.light-mode .footer {
-    background: rgba(26, 26, 26, 0.95);
-    color: #e0e0e0;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    color: #2c3e50;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+    border-top: 3px solid rgba(212, 160, 23, 0.4);
+}
+
+body.light-mode .footer-section h3 {
+    background: linear-gradient(135deg, #b8860b 0%, #d4a017 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+body.light-mode .footer-section h4 {
+    color: #d4a017;
+}
+
+body.light-mode .footer-section p,
+body.light-mode .footer-section a {
+    color: #555555;
+}
+
+body.light-mode .footer-section a:hover {
+    color: #b8860b;
+}
+
+body.light-mode .footer-bottom {
+    color: #666666;
+    border-top: 1px solid rgba(212, 160, 23, 0.3);
 }
 
 body.light-mode .carousel-btn {
@@ -808,6 +835,41 @@ body.light-mode .review-date {
 body.light-mode .stars,
 body.light-mode .hearts {
     filter: drop-shadow(0 2px 8px rgba(255, 193, 7, 0.4));
+}
+
+body.light-mode .offers-section {
+    background: linear-gradient(135deg, #ffffff 0%, #fef5e7 50%, #ffffff 100%);
+}
+
+body.light-mode .services-section {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 50%, #f8f9fa 100%);
+}
+
+body.light-mode .gallery-section {
+    background: linear-gradient(135deg, #ffffff 0%, #fdecea 50%, #ffffff 100%);
+}
+
+body.light-mode .reviews-section {
+    background: linear-gradient(135deg, #fef5e7 0%, #ffffff 50%, #fef5e7 100%);
+}
+
+body.light-mode .cta-section {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+}
+
+body.light-mode .section-title {
+    background: linear-gradient(135deg, #b8860b 0%, #d4a017 50%, #b8860b 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: none;
+    filter: drop-shadow(0 2px 8px rgba(212, 160, 23, 0.3));
+}
+
+body.light-mode .category-header {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(254, 245, 231, 0.8));
+    border-top: 3px solid #d4a017;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
 }
 
 .hero {
@@ -2167,6 +2229,62 @@ body {
     .bottom-nav {
         background: rgba(18, 18, 18, 0.9);
     }
+}
+
+/* Light mode styles for bottom navigation */
+body.light-mode .bottom-nav {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(30px) saturate(180%);
+    -webkit-backdrop-filter: blur(30px) saturate(180%);
+    box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.15);
+    border-top: 1px solid rgba(212, 160, 23, 0.2);
+}
+
+body.light-mode .bottom-nav::before {
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(212, 160, 23, 0.3) 20%,
+        rgba(212, 160, 23, 0.3) 80%,
+        transparent
+    );
+}
+
+body.light-mode .nav-item {
+    color: rgba(26, 26, 26, 0.7);
+}
+
+body.light-mode .nav-item.active {
+    color: #d4a017;
+    background: linear-gradient(
+        135deg,
+        rgba(212, 160, 23, 0.15),
+        rgba(212, 160, 23, 0.08)
+    );
+    box-shadow: 
+        0 2px 12px rgba(212, 160, 23, 0.2),
+        inset 0 1px 0 rgba(212, 160, 23, 0.25);
+}
+
+body.light-mode .nav-item.active .nav-icon {
+    filter: drop-shadow(0 0 8px rgba(212, 160, 23, 0.5));
+}
+
+body.light-mode .nav-item:hover:not(.active) {
+    color: rgba(26, 26, 26, 0.9);
+    background: rgba(212, 160, 23, 0.08);
+}
+
+body.light-mode .nav-icon {
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+body.light-mode .nav-item.active .nav-icon {
+    filter: drop-shadow(0 4px 8px rgba(212, 160, 23, 0.5));
+}
+
+body.light-mode .nav-label {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 /* Smooth animations for nav appearance removed - conflicts with scroll behavior */

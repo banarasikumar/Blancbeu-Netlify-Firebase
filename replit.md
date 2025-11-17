@@ -31,7 +31,7 @@ The Blancbeu website is built using a modern, client-side focused architecture, 
 - **Asset Management**: Organized folder structure for banners, service images, and other assets.
 
 ### Feature Specifications
-- **Light/Dark Mode**: User-toggleable with smooth transitions, preference persistence, and meta theme-color updates.
+- **Light/Dark Mode**: Intelligent automatic theme selection based on time of day (6 AM - 6 PM: Light Mode, 6 PM - 6 AM: Dark Mode) for first-time visitors. User-toggleable with smooth transitions, preference persistence via `localStorage`, and meta theme-color updates. Once a user manually toggles the theme, their preference is saved and respected on future visits.
 - **Image Optimization**: 90% overall reduction in image weight using WebP, resizing, and lazy loading.
 - **Modern Navigation**: Redesigned iOS-style bottom navigation with enhanced icons, typography, and scroll behavior.
 - **Fireworks Overlay**: Transparent, continuous Diwali fireworks animation at 60% speed with sound, acting as a decorative overlay without blocking interaction.

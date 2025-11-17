@@ -775,14 +775,28 @@ class ThemeController {
   init() {
     const savedTheme = localStorage.getItem('theme');
     
-    if (savedTheme === 'dark') {
-      this.enableDarkMode();
+    if (savedTheme) {
+      if (savedTheme === 'dark') {
+        this.enableDarkMode();
+      } else {
+        this.enableLightMode();
+      }
     } else {
-      this.enableLightMode();
+      this.detectTimeOfDay();
     }
     
     if (this.themeToggleBtn) {
       this.themeToggleBtn.addEventListener('click', () => this.toggleTheme());
+    }
+  }
+  
+  detectTimeOfDay() {
+    const currentHour = new Date().getHours();
+    
+    if (currentHour >= 6 && currentHour < 18) {
+      this.enableLightMode();
+    } else {
+      this.enableDarkMode();
     }
   }
   

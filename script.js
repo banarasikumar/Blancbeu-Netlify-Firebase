@@ -771,6 +771,44 @@ if (document.readyState === 'loading') {
   new BottomNavController();
 }
 
+// Visibility-based animation for offer cards
+class OfferCardAnimationController {
+  constructor() {
+    this.offerCards = document.querySelectorAll('.offer-card');
+    this.init();
+  }
+
+  init() {
+    if (!this.offerCards.length) return;
+
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px 0px -100px 0px',
+      threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate');
+        } else {
+          entry.target.classList.remove('animate');
+        }
+      });
+    }, observerOptions);
+
+    this.offerCards.forEach(card => observer.observe(card));
+  }
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => {
+    new OfferCardAnimationController();
+  });
+} else {
+  new OfferCardAnimationController();
+}
+
 class ThemeController {
   constructor() {
     this.themeToggleBtn = document.getElementById('themeToggle');

@@ -914,7 +914,7 @@ body.light-mode .category-header {
     position: relative;
     width: 100%;
     max-width: 1200px;
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 3 / 2;
     margin: 0 auto;
     overflow: hidden;
     border-radius: 20px;

@@ -1887,6 +1887,204 @@ body.light-mode .category-header {
     transform: scale(1.2) rotate(90deg);
 }
 
+/* Under Development Modal */
+.dev-modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
+    animation: fadeInBackdrop 0.3s ease-out;
+}
+
+@keyframes fadeInBackdrop {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.dev-modal-content {
+    position: relative;
+    background: linear-gradient(135deg, rgba(10, 10, 10, 0.98), rgba(20, 20, 20, 0.98));
+    margin: 50% auto;
+    padding: 60px 40px;
+    border: 3px solid var(--gold-24k);
+    border-radius: 30px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 
+        0 0 60px rgba(255, 215, 0, 0.5),
+        inset 0 0 40px rgba(255, 215, 0, 0.1),
+        0 20px 80px rgba(0, 0, 0, 0.9);
+    animation: slideUpModal 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform: translateY(-50%);
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+@keyframes slideUpModal {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(-50%);
+        opacity: 1;
+    }
+}
+
+.dev-modal-body {
+    text-align: center;
+}
+
+.dev-close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: transparent;
+    border: 2px solid var(--gold-24k);
+    color: var(--gold-24k);
+    font-size: 28px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dev-close-btn:hover {
+    background: var(--gold-24k);
+    color: var(--black);
+    transform: rotate(90deg) scale(1.1);
+}
+
+.dev-icon {
+    font-size: 80px;
+    margin-bottom: 20px;
+    animation: floatIcon 3s ease-in-out infinite;
+}
+
+@keyframes floatIcon {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+.dev-modal-content h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 48px;
+    background: linear-gradient(135deg, var(--gold-24k), var(--gold-light), var(--gold-24k));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 15px;
+    text-shadow: 0 0 40px rgba(255, 215, 0, 0.3);
+}
+
+.dev-message {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--text-white);
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.dev-subtitle {
+    font-size: 16px;
+    color: var(--text-gray);
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.dev-dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.dev-dots span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--gold-24k);
+    animation: pulse-dot 1.5s ease-in-out infinite;
+}
+
+.dev-dots span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.dev-dots span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes pulse-dot {
+    0%, 100% {
+        opacity: 0.3;
+        transform: scale(0.8);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+.dev-action-btn {
+    background: linear-gradient(135deg, var(--gold-24k), var(--gold-bright));
+    color: var(--black);
+    border: none;
+    padding: 15px 40px;
+    font-size: 16px;
+    font-weight: 700;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 30px rgba(255, 215, 0, 0.4);
+    font-family: 'Poppins', sans-serif;
+}
+
+.dev-action-btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 12px 40px rgba(255, 215, 0, 0.6);
+}
+
+.dev-action-btn:active {
+    transform: translateY(-1px) scale(1);
+}
+
+@media (max-width: 768px) {
+    .dev-modal-content {
+        padding: 50px 30px;
+        margin: 40% auto;
+    }
+
+    .dev-modal-content h2 {
+        font-size: 36px;
+    }
+
+    .dev-message {
+        font-size: 20px;
+    }
+
+    .dev-icon {
+        font-size: 60px;
+    }
+}
+
 @media (max-width: 768px) {
     .hero-title { font-size: 42px; }
     .section-title { font-size: 36px; }

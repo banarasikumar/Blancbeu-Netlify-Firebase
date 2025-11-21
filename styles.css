@@ -1816,7 +1816,7 @@ body.light-mode .category-header {
 .tc-modal {
     display: none;
     position: fixed;
-    z-index: 2000;
+    z-index: 40;
     left: 0;
     top: 0;
     width: 100%;
@@ -1893,7 +1893,7 @@ body.light-mode .category-header {
 .dev-modal {
     display: none;
     position: fixed;
-    z-index: 2000;
+    z-index: 40;
     left: 0;
     top: 0;
     width: 100%;

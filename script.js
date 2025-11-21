@@ -302,17 +302,20 @@ function initSmoothScroll() {
 function showTC() {
   const modal = document.getElementById('tcModal');
   modal.style.display = 'block';
+  document.body.style.overflow = 'hidden';
 }
 
 function closeTC() {
   const modal = document.getElementById('tcModal');
   modal.style.display = 'none';
+  document.body.style.overflow = 'auto';
 }
 
 window.onclick = function(event) {
   const modal = document.getElementById('tcModal');
   if (event.target === modal) {
     modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
   }
 }
 
@@ -896,6 +899,7 @@ function openDevModal() {
   if (modal) {
     modal.style.display = 'block';
     modal.style.animation = 'fadeInBackdrop 0.3s ease-out';
+    document.body.style.overflow = 'hidden';
   }
 }
 
@@ -903,6 +907,7 @@ function closeDevModal() {
   const modal = document.getElementById('devModal');
   if (modal) {
     modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
   }
 }
 
@@ -937,6 +942,7 @@ document.addEventListener('DOMContentLoaded', () => {
     devModal.addEventListener('click', (e) => {
       if (e.target === devModal) {
         closeDevModal();
+        document.body.style.overflow = 'auto';
       }
     });
   }

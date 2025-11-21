@@ -101,7 +101,7 @@ const servicesData = {
     {
       group: "Nails & Beauty",
       icon: "💅",
-      image: "assets/service_images/attractive_model_wit_bcb81b4f.webp",
+      image: "assets/service_images/nails_beauty_new.webp",
       services: [
         { name: "Manicure", price: 500, offerPrice: 299 },
         { name: "Pedicure", price: 600, offerPrice: 349 },

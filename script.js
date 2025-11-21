@@ -826,6 +826,14 @@ class ThemeController {
       this.fireworksOverlay.style.display = 'none';
     }
     
+    if (typeof togglePause === 'function') {
+      togglePause(true);
+    }
+    
+    if (typeof toggleSound === 'function') {
+      toggleSound(false);
+    }
+    
     document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#e3f2fd');
   }
   
@@ -835,6 +843,10 @@ class ThemeController {
     if (this.fireworksOverlay) {
       this.fireworksOverlay.classList.add('active');
       this.fireworksOverlay.style.display = '';
+    }
+    
+    if (typeof togglePause === 'function') {
+      togglePause(false);
     }
     
     document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#000000');

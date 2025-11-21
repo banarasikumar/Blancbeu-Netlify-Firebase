@@ -507,7 +507,7 @@ body.light-mode .sparkles {
         radial-gradient(2px 2px at 80% 10%, #95E1D3, transparent),
         radial-gradient(3px 3px at 90% 60%, #A8E6CF, transparent),
         radial-gradient(2px 2px at 33% 80%, #FF6B9D, transparent);
-    animation: colorfulSparkle 15s ease-in-out infinite;
+    animation: none !important;
 }
 
 @keyframes colorfulSparkle {
@@ -604,6 +604,15 @@ body.light-mode .fireworks-overlay {
     opacity: 0 !important;
 }
 
+body.light-mode *,
+body.light-mode *::before,
+body.light-mode *::after {
+    animation: none !important;
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+    animation-iteration-count: 1 !important;
+}
+
 @keyframes rainbowPulse {
     0% { 
         box-shadow: 0 0 20px rgba(255, 107, 107, 0.6), 0 0 40px rgba(78, 205, 196, 0.4);
@@ -646,13 +655,13 @@ body.light-mode .review-card {
     background: rgba(255, 255, 255, 0.9);
     border: 2px solid rgba(212, 160, 23, 0.3);
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-    animation: floatBounce 3s ease-in-out infinite;
+    animation: none !important;
 }
 
 body.light-mode .offer-card:hover,
 body.light-mode .service-card:hover,
 body.light-mode .review-card:hover {
-    animation: rainbowPulse 2s ease-in-out infinite;
+    animation: none !important;
     transform: translateY(-8px) scale(1.02);
 }
 
@@ -669,7 +678,6 @@ body.light-mode .contact-btn {
 
 body.light-mode .contact-btn:hover {
     background: linear-gradient(135deg, rgba(255, 245, 220, 1), rgba(255, 255, 255, 1));
-    animation: rainbowPulse 1.5s ease-in-out infinite;
 }
 
 body.light-mode .footer {
@@ -742,7 +750,6 @@ body.light-mode .locate-btn {
 body.light-mode .locate-btn:hover {
     background: linear-gradient(135deg, rgba(156, 39, 176, 0.2), rgba(103, 58, 183, 0.25));
     box-shadow: 0 8px 30px rgba(156, 39, 176, 0.5);
-    animation: rainbowPulse 1.5s ease-in-out infinite;
 }
 
 body.light-mode .whatsapp-btn {
@@ -755,7 +762,6 @@ body.light-mode .whatsapp-btn {
 body.light-mode .whatsapp-btn:hover {
     background: linear-gradient(135deg, rgba(37, 211, 102, 0.25), rgba(18, 140, 126, 0.3));
     box-shadow: 0 8px 30px rgba(37, 211, 102, 0.5);
-    animation: rainbowPulse 1.5s ease-in-out infinite;
 }
 
 body.light-mode .call-btn {
@@ -768,7 +774,6 @@ body.light-mode .call-btn {
 body.light-mode .call-btn:hover {
     background: linear-gradient(135deg, rgba(33, 150, 243, 0.25), rgba(25, 118, 210, 0.3));
     box-shadow: 0 8px 30px rgba(33, 150, 243, 0.5);
-    animation: rainbowPulse 1.5s ease-in-out infinite;
 }
 
 body.light-mode .offer-badge {

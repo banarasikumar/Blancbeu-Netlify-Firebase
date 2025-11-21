@@ -1827,12 +1827,14 @@ body.light-mode .category-header {
 
 .tc-modal-content {
     background: linear-gradient(135deg, rgba(10, 10, 10, 0.95), rgba(20, 20, 20, 0.95));
-    margin: 5% auto;
+    margin: 50px auto;
     padding: 40px;
     border: 2px solid var(--gold-24k);
     border-radius: 20px;
     width: 90%;
     max-width: 600px;
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
     box-shadow: 0 20px 60px rgba(255, 215, 0, 0.3);
     animation: modalSlideIn 0.3s ease-out;
 }

@@ -1837,6 +1837,8 @@ body.light-mode .category-header {
     overflow-y: auto;
     box-shadow: 0 20px 60px rgba(255, 215, 0, 0.3);
     animation: modalSlideIn 0.3s ease-out;
+    position: relative;
+    z-index: 101;
 }
 
 @keyframes modalSlideIn {

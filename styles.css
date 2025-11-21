@@ -1362,7 +1362,11 @@ body.light-mode .category-header {
 }
 
 .service-category {
-    margin-bottom: 80px;
+    margin-bottom: 60px;
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.05), rgba(255, 215, 0, 0.02));
+    border-radius: 25px;
+    padding: 30px;
+    border: 2px solid rgba(255, 215, 0, 0.15);
 }
 
 .category-header {
@@ -1370,18 +1374,14 @@ body.light-mode .category-header {
     flex-direction: column;
     align-items: center;
     gap: 20px;
-    margin-bottom: 40px;
-    padding: 30px;
-    background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 215, 0, 0.05));
-    border-radius: 20px;
-    border-top: 3px solid var(--gold-24k);
+    margin-bottom: 30px;
 }
 
 .category-image {
     width: 100%;
-    max-width: 600px;
-    height: 300px;
-    border-radius: 20px;
+    max-width: 900px;
+    aspect-ratio: 16 / 9;
+    border-radius: 15px;
     object-fit: cover;
     border: 3px solid var(--gold-24k);
     box-shadow: 0 15px 40px rgba(255, 215, 0, 0.4);
@@ -1395,7 +1395,7 @@ body.light-mode .category-header {
 
 .category-title {
     font-family: 'Cinzel', serif;
-    font-size: 36px;
+    font-size: 32px;
     background: linear-gradient(135deg, var(--gold-24k), var(--gold-light));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -1406,16 +1406,16 @@ body.light-mode .category-header {
 
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 25px;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
 }
 
 .service-card {
-    background: rgba(255, 215, 0, 0.05);
-    padding: 30px;
-    border-radius: 20px;
+    background: rgba(255, 215, 0, 0.08);
+    padding: 25px 20px;
+    border-radius: 15px;
     transition: all 0.3s;
-    border: 2px solid transparent;
+    border: 2px solid rgba(255, 215, 0, 0.2);
 }
 
 .service-card:hover {
@@ -1426,27 +1426,27 @@ body.light-mode .category-header {
 }
 
 .service-name {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
     color: var(--text-white);
 }
 
 .service-prices {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 12px;
     flex-wrap: wrap;
 }
 
 .service-original-price {
     text-decoration: line-through;
     color: #888;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .service-offer-price {
-    font-size: 28px;
+    font-size: 24px;
     font-weight: 700;
     color: var(--gold-24k);
 }

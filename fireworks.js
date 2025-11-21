@@ -2224,6 +2224,9 @@ const soundManager = {
          *                             Note that a scale of 0 will mute the sound.
          */
         playSound(type, scale=1) {
+                // Completely disable all fireworks audio
+                return;
+                
                 // Ensure `scale` is within valid range.
                 scale = MyMath.clamp(scale, 0, 1);
 

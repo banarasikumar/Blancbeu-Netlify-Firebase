@@ -898,6 +898,8 @@ body.light-mode .category-header {
 .hero {
     padding-top: 120px;
     padding-bottom: 60px;
+    overflow-x: hidden;
+    width: 100%;
 }
 
 .carousel {
@@ -943,8 +945,8 @@ body.light-mode .category-header {
 
 @media (max-width: 768px) {
     .carousel {
-        max-width: 100%;
-        margin: 0 10px;
+        max-width: calc(100% - 20px);
+        margin: 0 auto;
         padding: 8px;
         border-radius: 12px;
     }
@@ -952,7 +954,8 @@ body.light-mode .category-header {
 
 @media (max-width: 480px) {
     .carousel {
-        margin: 0 5px;
+        max-width: calc(100% - 10px);
+        margin: 0 auto;
         padding: 5px;
     }
 }
@@ -1241,6 +1244,8 @@ body.light-mode .category-header {
 .offers-section {
     padding: 100px 0;
     background: #000000;
+    overflow-x: hidden;
+    width: 100%;
 }
 
 .offers-grid {
@@ -1248,6 +1253,7 @@ body.light-mode .category-header {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 25px;
     margin-top: 60px;
+    padding: 0;
 }
 
 .offer-card {
@@ -1386,6 +1392,8 @@ body.light-mode .category-header {
 
 .services-section {
     padding: 100px 0;
+    overflow-x: hidden;
+    width: 100%;
 }
 
 .service-category {
@@ -1441,6 +1449,8 @@ body.light-mode .category-header {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 20px;
+    padding: 0;
+    margin: 0;
 }
 
 .service-card {

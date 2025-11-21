@@ -1928,7 +1928,7 @@ body.light-mode .category-header {
     transform: translate(-50%, -50%);
     max-height: 90vh;
     overflow-y: auto;
-    z-index: 2001;
+    z-index: 50;
 }
 
 @keyframes slideUpModal {

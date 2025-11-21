@@ -62,7 +62,7 @@ const servicesData = {
     {
       group: "Premium services",
       icon: "👑",
-      image: "assets/service_images/premium_services_luxury.webp",
+      image: "assets/service_images/premium_hair_spa_nourish.webp",
       services: [
         { name: "Head Massage", price: 250, offerPrice: 199 },
         { name: "Deep Nourish HairSpa", price: 1500, offerPrice: 799 },

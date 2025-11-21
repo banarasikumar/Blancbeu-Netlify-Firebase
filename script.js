@@ -76,7 +76,7 @@ const servicesData = {
     {
       group: "Hair colour",
       icon: "🎨",
-      image: "assets/service_images/hair_colour_vibrant.webp",
+      image: "assets/service_images/hair_colour_vibrant_pink.webp",
       services: [
         { name: "Global Hair Colour", price: 1199, offerPrice: null },
         { name: "Global Highlight", price: 1299, offerPrice: null },

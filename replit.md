@@ -16,10 +16,10 @@ I want to ensure a smooth, professional development process.
 The Blancbeu website is built using a modern, client-side focused architecture, leveraging vanilla JavaScript, HTML, and CSS for a lightweight and highly performant experience.
 
 ### UI/UX Decisions
-- **Theming**: Features a dual-theme system: a default premium 24k gold on deep black (Dark Mode) and a vibrant, colorful Light Mode. Themes are user-toggleable with persistence via `localStorage`.
+- **Theming**: Features a dual-theme system: a default premium 24k gold on deep black (Dark Mode) and a vibrant, colorful Light Mode. Themes are user-toggleable via a modern circular glassmorphism button with smooth transitions and persistence via `localStorage`. All animations are completely disabled in light mode for a clean, professional experience.
 - **Navigation**: Utilizes an iOS-style bottom navigation bar with glassmorphism effects, larger icons, and a reordered structure (Home, Notifications, My Bookings, Chat, Account) for enhanced mobile usability. It hides on scroll down and shows on scroll up.
-- **Animations**: Incorporates extensive animations including a transparent Diwali fireworks overlay, brand name shimmer, sparkling particle backgrounds, offer card glow effects, rose petal rain, and responsive hover effects. Animations are optimized for performance with `requestAnimationFrame` throttling and GPU acceleration.
-- **Design Elements**: Uses `Cinzel` for luxury headings and `Poppins` for body text. Features glassmorphism with strong blur and shadow depth for interactive elements.
+- **Animations**: In dark mode only, incorporates animations including a transparent Diwali fireworks overlay (with audio disabled), brand name shimmer, sparkling particle backgrounds, offer card glow effects, rose petal rain, and responsive hover effects. All animations are completely disabled in light mode. Fireworks audio is permanently muted.
+- **Design Elements**: Uses `Cinzel` for luxury headings and `Poppins` for body text. Features glassmorphism with strong blur and shadow depth for interactive elements. Modern circular theme toggle button with no borders.
 - **Responsiveness**: Designed to be fully responsive across all devices, with images optimized for various screen sizes.
 
 ### Technical Implementations
@@ -31,13 +31,13 @@ The Blancbeu website is built using a modern, client-side focused architecture, 
 - **Asset Management**: Organized folder structure for banners, service images, and other assets.
 
 ### Feature Specifications
-- **Light/Dark Mode**: Intelligent automatic theme selection based on time of day (6 AM - 5 PM: Light Mode, 5 PM - 6 AM: Dark Mode) for first-time visitors, optimized for India Standard Time (GMT+5:30) winter hours. User-toggleable with smooth transitions, preference persistence via `localStorage`, and meta theme-color updates. Once a user manually toggles the theme, their preference is saved and respected on future visits.
-- **Image Optimization**: 90% overall reduction in image weight using WebP, resizing, and lazy loading.
+- **Light/Dark Mode**: Intelligent automatic theme selection based on time of day (6 AM - 5 PM: Light Mode, 5 PM - 6 AM: Dark Mode) for first-time visitors, optimized for India Standard Time (GMT+5:30) winter hours. User-toggleable via modern circular glassmorphism button with smooth transitions, preference persistence via `localStorage`, and meta theme-color updates. All animations disabled in light mode for a clean experience.
+- **Image Optimization**: 90% overall reduction in image weight using WebP, resizing, and lazy loading. Banner carousel and service images use 16:9 widescreen aspect ratio.
 - **Modern Navigation**: Redesigned iOS-style bottom navigation with enhanced icons, typography, and scroll behavior.
-- **Fireworks Overlay**: Transparent, continuous Diwali fireworks animation at 60% speed with sound, acting as a decorative overlay without blocking interaction.
-- **Banner Carousel**: Auto-playing banner carousel with 6 professional square images, optimized dimensions, and radial gradient backgrounds.
+- **Fireworks Overlay**: Transparent, continuous Diwali fireworks animation at 60% speed (visual only, audio permanently disabled), acting as a decorative overlay without blocking interaction. Only active in dark mode.
+- **Banner Carousel**: Auto-playing banner carousel with 6 professional 16:9 widescreen images (max-width: 1200px), optimized dimensions, and radial gradient backgrounds. Provides a cinematic wide-screen viewing experience.
 - **Brand Identity**: Prominent "BLANCBEU" brand name with a gold gradient shimmer and "Family Beauty Salon" subtitle.
-- **Contact & Services**: Smartphone-optimized contact buttons, 8 categorized service groups with 60+ services, and special offers with glow animations.
+- **Contact & Services**: Smartphone-optimized contact buttons, 8 categorized service groups with 60+ services (displayed in compact cards within grouped category containers), and special offers with compact, beautiful design. Service categories feature 16:9 widescreen images (max-width: 900px) for visual impact.
 - **Music Player**: Background music player with a rose petal rain animation.
 - **Customer Engagement**: Customer reviews with star ratings and an image gallery.
 

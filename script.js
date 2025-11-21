@@ -34,7 +34,7 @@ const servicesData = {
     {
       group: "Facial",
       icon: "💆",
-      image: "assets/service_images/beautiful_woman_gett_6dc3de2b.webp",
+      image: "assets/service_images/facial_new.webp",
       services: [
         { name: "Lotus Professional Facial", price: 1500, offerPrice: 699 },
         { name: "03+ Facial", price: 1500, offerPrice: 699 },
@@ -89,7 +89,7 @@ const servicesData = {
     {
       group: "Makeup & Styling",
       icon: "💄",
-      image: "assets/service_images/glamorous_woman_luxu_658b74ed.webp",
+      image: "assets/service_images/makeup_styling_new.webp",
       services: [
         { name: "Party Makeup", price: 2000, offerPrice: 1499 },
         { name: "Bridal Makeup", price: 8000, offerPrice: 5999 },

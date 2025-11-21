@@ -1896,7 +1896,6 @@ body.light-mode .category-header {
     .reviews-grid { grid-template-columns: 1fr; }
     .carousel { 
         max-width: 100%;
-        height: 400px;
     }
     .brand-icon {
         height: 50px;

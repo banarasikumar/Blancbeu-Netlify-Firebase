@@ -1218,15 +1218,15 @@ body.light-mode .category-header {
 
 .offers-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 40px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
     margin-top: 60px;
 }
 
 .offer-card {
     background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 215, 0, 0.05));
-    padding: 50px;
-    border-radius: 30px;
+    padding: 30px 25px;
+    border-radius: 20px;
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -1263,13 +1263,13 @@ body.light-mode .category-header {
 
 .offer-badge {
     position: absolute;
-    top: 20px;
-    right: 20px;
-    padding: 8px 20px;
-    border-radius: 25px;
-    font-size: 12px;
+    top: 15px;
+    right: 15px;
+    padding: 6px 15px;
+    border-radius: 20px;
+    font-size: 11px;
     font-weight: 700;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
     z-index: 2;
 }
 
@@ -1292,8 +1292,8 @@ body.light-mode .category-header {
 }
 
 .offer-icon {
-    font-size: 80px;
-    margin: 20px 0;
+    font-size: 50px;
+    margin: 15px 0;
     filter: drop-shadow(0 0 15px var(--gold-24k));
     z-index: 2;
     position: relative;
@@ -1301,17 +1301,18 @@ body.light-mode .category-header {
 
 .offer-card h3 {
     font-family: 'Cinzel', serif;
-    font-size: 32px;
+    font-size: 24px;
     color: var(--gold-24k);
-    margin-bottom: 20px;
+    margin-bottom: 12px;
     z-index: 2;
     position: relative;
 }
 
 .offer-card p {
     color: var(--text-gray);
-    margin-bottom: 30px;
-    font-size: 16px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    line-height: 1.6;
     z-index: 2;
     position: relative;
 }

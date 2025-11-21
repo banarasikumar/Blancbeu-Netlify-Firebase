@@ -20,6 +20,8 @@
 html, body {
     overflow-x: hidden !important;
     overflow-y: auto !important;
+    margin: 0;
+    padding: 0;
 }
 
 body {
@@ -27,6 +29,12 @@ body {
     background: #000000;
     color: var(--text-white);
     line-height: 1.6;
+}
+
+body.light-mode {
+    background: linear-gradient(135deg, #fef5e7 0%, #fdecea 50%, #f8f9f9 100%);
+    background-attachment: fixed;
+    color: #1a1a1a;
 }
 
 .container {
@@ -906,7 +914,7 @@ body.light-mode .category-header {
     position: relative;
     width: 100%;
     max-width: 1200px;
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 4 / 3;
     margin: 0 auto;
     overflow: hidden;
     border-radius: 20px;
@@ -1264,7 +1272,6 @@ body.light-mode .category-header {
     position: relative;
     overflow: hidden;
     transition: all 0.4s;
-    animation: float 6s ease-in-out infinite;
 }
 
 .offer-card::before {
@@ -1275,6 +1282,11 @@ body.light-mode .category-header {
     width: 200%;
     height: 200%;
     background: conic-gradient(from 0deg, transparent, var(--gold-24k), transparent);
+    animation: none;
+    opacity: 0;
+}
+
+.offer-card.animate::before {
     animation: rotateGlow 4s linear infinite;
     opacity: 0.3;
 }
@@ -1282,11 +1294,6 @@ body.light-mode .category-header {
 @keyframes rotateGlow {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
-}
-
-@keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-20px); }
 }
 
 .offer-card:hover {

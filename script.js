@@ -62,7 +62,7 @@ const servicesData = {
     {
       group: "Premium services",
       icon: "👑",
-      image: "assets/service_images/luxury_spa_massage_w_43d50481.webp",
+      image: "assets/service_images/premium_services_luxury.webp",
       services: [
         { name: "Head Massage", price: 250, offerPrice: 199 },
         { name: "Deep Nourish HairSpa", price: 1500, offerPrice: 799 },
@@ -76,7 +76,7 @@ const servicesData = {
     {
       group: "Hair colour",
       icon: "🎨",
-      image: "assets/service_images/hair_coloring_treatm_f184b598.webp",
+      image: "assets/service_images/hair_colour_vibrant.webp",
       services: [
         { name: "Global Hair Colour", price: 1199, offerPrice: null },
         { name: "Global Highlight", price: 1299, offerPrice: null },

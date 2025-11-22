@@ -375,6 +375,7 @@ body.light-mode {
 }
 
 .install-app-btn {
+    background: #FFD700 !important;
     background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%) !important;
     color: #000000 !important;
     border: 2px solid #FFD700 !important;
@@ -390,8 +391,19 @@ body.light-mode {
     box-shadow: 0 4px 20px rgba(255, 215, 0, 0.8), 0 0 15px rgba(255, 215, 0, 0.5) !important;
     animation: installPulse 2s ease-in-out infinite !important;
     position: relative !important;
-    overflow: hidden !important;
+    overflow: visible !important;
     opacity: 1 !important;
+    z-index: 1000 !important;
+    mix-blend-mode: normal !important;
+    filter: none !important;
+}
+
+.install-app-btn::before {
+    display: none !important;
+}
+
+.install-app-btn::after {
+    display: none !important;
 }
 
 @keyframes installPulse {
@@ -402,27 +414,6 @@ body.light-mode {
     50% {
         transform: scale(1.05);
         box-shadow: 0 6px 30px rgba(255, 215, 0, 0.8);
-    }
-}
-
-.install-app-btn::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-    transform: rotate(45deg);
-    animation: installShine 3s linear infinite;
-}
-
-@keyframes installShine {
-    0% {
-        left: -200%;
-    }
-    100% {
-        left: 200%;
     }
 }
 
@@ -621,14 +612,18 @@ body.light-mode .theme-toggle-btn:hover {
     box-shadow: 0 12px 40px rgba(212, 160, 23, 0.35), inset 0 1px 2px rgba(255, 255, 255, 0.4);
 }
 
-/* Dark mode - ensure install button is NOT transparent */
+/* Dark mode - ensure install button is SOLID GOLD */
 html:not([data-theme="light"]) .install-app-btn {
+    background: #FFD700 !important;
     background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%) !important;
     color: #000000 !important;
     border: 2px solid #FFD700 !important;
     box-shadow: 0 4px 20px rgba(255, 215, 0, 0.8), 0 0 15px rgba(255, 215, 0, 0.5) !important;
     opacity: 1 !important;
     backdrop-filter: none !important;
+    filter: none !important;
+    mix-blend-mode: normal !important;
+    z-index: 1000 !important;
 }
 
 body.light-mode .install-app-btn {

@@ -2862,3 +2862,18 @@ html:not([data-theme="light"]) h6 {
 html:not([data-theme="light"]) [style*="webkit-text-fill-color"] {
     -webkit-text-fill-color: currentColor !important;
 }
+
+/* DARK MODE FIX FOR CALL NOW BUTTON */
+html:not([data-theme="light"]) .contact-btn {
+    color: var(--gold-primary) !important;
+    -webkit-text-fill-color: currentColor !important;
+}
+
+html:not([data-theme="light"]) .call-btn {
+    color: var(--gold-primary) !important;
+    -webkit-text-fill-color: currentColor !important;
+}
+
+html:not([data-theme="light"]) .contact-btn::before {
+    background: rgba(255, 215, 0, 0.1) !important;
+}

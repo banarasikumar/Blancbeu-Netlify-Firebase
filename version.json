@@ -1,6 +1,6 @@
 {
-  "version": "21.0.0",
-  "lastUpdated": "2025-11-22T16:08:00Z",
-  "timestamp": 1763827680000,
-  "changes": "ULTIMATE FINAL: Added cascade-final rule at END of styles.css with max specificity and all visual properties to force solid gold button visibility"
+  "version": "22.0.0",
+  "lastUpdated": "2025-11-22T16:09:00Z",
+  "timestamp": 1763827740000,
+  "changes": "FIXED: Removed display:none from inline HTML button style - was blocking all CSS overrides"
 }

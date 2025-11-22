@@ -557,7 +557,7 @@ function updateInstallButtonVisibility() {
   
   if (navInstallBtn) {
     if (isStandalone || !deferredPrompt) {
-      navInstallBtn.style.display = 'none';
+      navInstallBtn.style.display = 'none'; navInstallBtn.style.opacity = '1'; navInstallBtn.style.background = 'linear-gradient(135deg, #FFD700 0%, #FFA500 100%)';
       console.log('🔒 Install button hidden - app is installed or cannot be installed');
     } else {
       navInstallBtn.style.display = 'flex';

@@ -1,6 +1,6 @@
 {
-  "version": "17.6.0",
-  "lastUpdated": "2025-11-22T15:56:47Z",
-  "timestamp": 1763827007000,
-  "changes": "Restored original high-resolution banner images, service images at max 1250px"
+  "version": "17.7.0",
+  "lastUpdated": "2025-11-22T15:57:30Z",
+  "timestamp": 1763827050000,
+  "changes": "Restored original banner and service category images without cropping"
 }

@@ -13,38 +13,76 @@ I want to ensure a smooth, professional development process.
 - **Design Adherence**: Maintain the premium 24k gold and black aesthetic as a primary design principle.
 
 ## System Architecture
-The Blancbeu website is built using a modern, client-side focused architecture, leveraging vanilla JavaScript, HTML, and CSS for a lightweight and highly performant experience.
+The Blancbeu website now uses a **true system-wide theme architecture** leveraging CSS custom properties (variables) to control all colors and styles dynamically across light and dark modes.
+
+### Theme System (NEW - Version 16.0.0+)
+- **CSS Variable-Based Architecture**: Complete theme separation using `:root` with dual theme definitions
+  - Dark theme (default): 40+ CSS variables for backgrounds, text, shadows, borders, etc.
+  - Light theme: Activated via `data-theme="light"` attribute on HTML element
+  - All colors defined in `theme-variables.css` and applied throughout styles via `var(--*)` references
+- **Dynamic Theme Switching**: JavaScript `ThemeController` updates `data-theme` attribute, triggering instant CSS variable changes
+- **Zero Theme Mixing**: When theme switches, ALL elements receive updated colors simultaneously from CSS variables
+- **Smart Detection**: Automatic theme selection based on time of day (6 AM - 5 PM: Light, 5 PM - 6 AM: Dark) for first-time visitors
+- **Persistence**: User theme preference saved in localStorage and restored on subsequent visits
 
 ### UI/UX Decisions
-- **Theming**: Features a dual-theme system: a default premium 24k gold on deep black (Dark Mode) and a vibrant, colorful Light Mode. Themes are user-toggleable via a modern circular glassmorphism button with smooth transitions and persistence via `localStorage`. All animations are completely disabled in light mode for a clean, professional experience.
-- **Navigation**: Utilizes an iOS-style bottom navigation bar with glassmorphism effects, larger icons, and a reordered structure (Home, Notifications, My Bookings, Chat, Account) for enhanced mobile usability. It hides on scroll down and shows on scroll up.
-- **Animations**: In dark mode only, incorporates animations including a transparent Diwali fireworks overlay (with audio disabled), brand name shimmer, sparkling particle backgrounds, offer card glow effects, rose petal rain, and responsive hover effects. All animations are completely disabled in light mode. Fireworks audio is permanently muted.
-- **Design Elements**: Uses `Cinzel` for luxury headings and `Poppins` for body text. Features glassmorphism with strong blur and shadow depth for interactive elements. Modern circular theme toggle button with no borders.
-- **Responsiveness**: Designed to be fully responsive across all devices, with images optimized for various screen sizes.
+- **Theming**: Dual-theme system with dynamic CSS variables. Dark Mode is premium 24k gold on deep black, Light Mode is sophisticated warm/cream on white. Themes are user-toggleable via modern circular glassmorphism button with smooth transitions.
+- **Navigation**: iOS-style bottom navigation bar with glassmorphism effects, scroll-based visibility toggling, and theme-aware styling.
+- **Animations**: In dark mode only, incorporates animations including transparent Diwali fireworks overlay, brand name shimmer, sparkling particle backgrounds, offer card glow effects, and rose petal rain. All animations disabled in light mode.
+- **Design Elements**: Uses `Cinzel` for luxury headings and `Poppins` for body text. Features glassmorphism with strong blur and shadow depth for interactive elements.
+- **Responsiveness**: Fully responsive across all devices with optimized images for various screen sizes.
 
 ### Technical Implementations
-- **Frontend**: Primarily Vanilla HTML, CSS, JavaScript for maximum control and performance.
-- **State Management**: A `ThemeController` class manages theme state and transitions.
-- **Image Optimization**: Implements WebP format where supported, with PNG fallbacks for iOS. Images are resized to display dimensions, significantly reducing load times. Lazy loading is used for performance-critical images.
-- **Scroll Behavior**: A `ScrollBehaviorManager` unifies header and bottom navigation visibility, and manages fireworks pausing/resuming based on scroll events.
-- **PWA Support**: Comprehensive Progressive Web App features including custom brand icons, seamless splash screens, cross-browser install prompts, and standalone mode detection.
-- **Asset Management**: Organized folder structure for banners, service images, and other assets.
+- **Frontend**: Vanilla HTML, CSS, JavaScript for maximum control and performance.
+- **Theme System**: CSS custom properties (`--bg-primary`, `--text-primary`, `--shadow-dark`, etc.) defined in `theme-variables.css`. Two complete theme definitions: one for `:root` (dark) and one for `:root[data-theme="light"]`.
+- **State Management**: `ThemeController` class manages theme state, synchronizes with localStorage, and updates DOM attributes.
+- **CSS Architecture**: Refactored to use CSS variables throughout for colors, backgrounds, shadows, and borders. All hardcoded colors replaced with variable references.
+- **Image Optimization**: WebP format with PNG fallbacks for iOS, resized to display dimensions, lazy loading for performance.
+- **Scroll Behavior**: Unified header and bottom navigation visibility management based on scroll events.
+- **PWA Support**: Comprehensive Progressive Web App features with custom brand icons, splash screens, and install prompts.
 
 ### Feature Specifications
-- **Light/Dark Mode**: Intelligent automatic theme selection based on time of day (6 AM - 5 PM: Light Mode, 5 PM - 6 AM: Dark Mode) for first-time visitors, optimized for India Standard Time (GMT+5:30) winter hours. User-toggleable via modern circular glassmorphism button with smooth transitions, preference persistence via `localStorage`, and meta theme-color updates. All animations disabled in light mode for a clean experience.
-- **Image Optimization**: 90% overall reduction in image weight using WebP, resizing, and lazy loading. Banner carousel and service images use 16:9 widescreen aspect ratio.
-- **Modern Navigation**: Redesigned iOS-style bottom navigation with enhanced icons, typography, and scroll behavior.
-- **Fireworks Overlay**: Transparent, continuous Diwali fireworks animation at 60% speed (visual only, audio permanently disabled), acting as a decorative overlay without blocking interaction. Only active in dark mode.
-- **Banner Carousel**: Auto-playing banner carousel with 6 professional 16:9 widescreen images (max-width: 1200px), optimized dimensions, and radial gradient backgrounds. Provides a cinematic wide-screen viewing experience.
-- **Brand Identity**: Prominent "BLANCBEU" brand name with a gold gradient shimmer and "Family Beauty Salon" subtitle.
-- **Contact & Services**: Smartphone-optimized contact buttons, 8 categorized service groups with 60+ services (displayed in compact cards within grouped category containers), and special offers with compact, beautiful design. Service categories feature 16:9 widescreen images (max-width: 900px) for visual impact.
-- **Music Player**: Background music player with a rose petal rain animation.
-- **Customer Engagement**: Customer reviews with star ratings and an image gallery.
+- **Light/Dark Mode**: System-wide CSS variable-based theme switching. Intelligent automatic detection based on time (IST), user-toggleable with preference persistence. All elements use theme variables—no class-based patches or mixed states.
+- **Image Optimization**: 90% reduction in image weight using WebP, resizing, and lazy loading.
+- **Modern Navigation**: iOS-style bottom navigation with theme-aware styling and scroll behavior.
+- **Fireworks Overlay**: Transparent Diwali fireworks (dark mode only) at 60% speed, visual-only, audio disabled.
+- **Banner Carousel**: Auto-playing carousel with user-provided 16:9 widescreen images.
+- **Brand Identity**: "BLANCBEU" name with gold gradient, "Family Beauty Salon" subtitle, premium aesthetic.
+- **Contact & Services**: Smartphone-optimized buttons, 8 categorized service groups with 60+ services, special offers with compact design.
+- **Music Player**: Background music with rose petal rain animation.
+- **Customer Engagement**: Customer reviews with star ratings and image gallery.
+
+## Recent Changes (v16.0.0)
+- **Implemented true system-wide theme architecture** using CSS custom properties
+- **Created `theme-variables.css`** with 40+ theme variables for dark and light modes
+- **Refactored `script.js` ThemeController** to use `data-theme` attribute instead of class-based toggling
+- **Updated `styles.css`** to reference CSS variables for all colors and styles
+- **Replaced hardcoded colors** with variable references (dark shadows, backgrounds, text colors)
+- **Added theme-variables.css link** to index.html for immediate theme application
+- **Bumped version to 16.0.0** for cache clearance on PWA reinstall
 
 ## External Dependencies
-- **http-server (Node.js)**: Used for serving the application locally during development.
-- **PWA Service Worker**: For offline capabilities, caching assets, and enabling installability.
-- **Fonts**: `Cinzel` and `Poppins` (likely sourced from Google Fonts or local assets).
-- **Audio**: `Sundari` (SpotiDownloader.com) for background music.
-- **Google Maps**: Integration for salon location.
-- **WhatsApp**: Integration for direct messaging.
+- **http-server (Node.js)**: Local development server
+- **PWA Service Worker**: Offline capabilities and caching
+- **Fonts**: Cinzel (headings), Poppins (body text) from Google Fonts
+- **Audio**: Background music ("Sundari")
+- **Google Maps**: Salon location integration
+- **WhatsApp**: Direct messaging integration
+
+## File Structure
+```
+├── index.html              (Main entry point with early theme script)
+├── styles.css              (Refactored with CSS variable references)
+├── theme-variables.css     (NEW: Complete theme definitions)
+├── script.js               (Updated ThemeController with data-theme)
+├── manifest.json           (PWA manifest)
+├── version.json            (Cache versioning - v16.0.0)
+├── sw.js                   (Service worker)
+├── fireworks.css           (Fireworks animations)
+├── assets/                 (Optimized images: banners, services, gallery)
+└── splash-*.png            (PWA splash screens)
+```
+
+## Known Limitations & Future Improvements
+- Some older CSS references may still use legacy color values (gradients with hardcoded gold values)—these will be systematically converted to variables in future updates
+- Theme switching CSS transitions are quick but could benefit from staggered animations for ultra-smooth UX

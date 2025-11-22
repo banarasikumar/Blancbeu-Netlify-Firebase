@@ -375,9 +375,9 @@ body.light-mode {
 }
 
 .install-app-btn {
-    background: linear-gradient(135deg, var(--gold-24k) 0%, var(--gold-bright) 100%);
-    color: var(--bg-primary);
-    border: 2px solid var(--gold-24k);
+    background: linear-gradient(135deg, #FFD700 0%, #FFC700 100%);
+    color: #000000;
+    border: 2px solid #FFD700;
     padding: 10px 22px;
     border-radius: 25px;
     font-weight: 700;

@@ -69,7 +69,7 @@ The Blancbeu website now uses a **true system-wide theme architecture** leveragi
   - **Features**: Backdrop blur effect, multi-layer shadows (depth + glow + inset highlight), semi-transparent colors, smooth hover animations
 - **Special Offers pricing**: Displays in gold color for better visual hierarchy
 - **All elements**: Properly colored and visible in both light and dark modes
-- **Buttons feature**: iOS-inspired glass morphism, depth shadows, inset highlights, hover lift effect
+- **Buttons feature**: iOS-inspired glass morphism, vibrant colors, depth shadows, inset highlights, hover lift effect
 
 ## External Dependencies
 - **http-server (Node.js)**: Local development server

@@ -28,8 +28,14 @@
           if (shouldBeLightMode) {
             document.documentElement.setAttribute('data-theme', 'light');
             document.body.classList.add('light-mode');
+            // Update system UI colors for light mode
+            document.getElementById('metaThemeColor').setAttribute('content', '#ffffff');
+            document.documentElement.style.colorScheme = 'light';
+          } else {
+            // Update system UI colors for dark mode
+            document.getElementById('metaThemeColor').setAttribute('content', '#0a0a0a');
+            document.documentElement.style.colorScheme = 'dark';
           }
-          // Dark mode is default (no attribute needed)
         } catch(e) {
           // Fail silently if localStorage is not available
         }

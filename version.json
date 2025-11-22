@@ -1,6 +1,6 @@
 {
-  "version": "20.0.0",
-  "lastUpdated": "2025-11-22T16:07:00Z",
-  "timestamp": 1763827620000,
-  "changes": "ABSOLUTE FINAL: Expanded nuclear override with display flex, pointer-events, and all appearance resets to force button visibility"
+  "version": "21.0.0",
+  "lastUpdated": "2025-11-22T16:08:00Z",
+  "timestamp": 1763827680000,
+  "changes": "ULTIMATE FINAL: Added cascade-final rule at END of styles.css with max specificity and all visual properties to force solid gold button visibility"
 }

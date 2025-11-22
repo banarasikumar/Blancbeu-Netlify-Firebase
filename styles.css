@@ -3915,14 +3915,6 @@ body.light-mode .contact-btn .btn-icon {
     -webkit-text-fill-color: currentColor !important;
 }
 
-/* ===== iOS GLASS MORPHISM CONTACT BUTTONS - VIBRANT ===== */
-
-/* Base glass morphism styling */
-.contact-btn {
-    backdrop-filter: blur(10px) !important;
-    background: rgba(255, 255, 255, 0.1) !important;
-    border: 1.5px solid rgba(255, 255, 255, 0.2) !important;
-}
 
 /* DARK MODE - Vibrant iOS Glass Effect */
 
@@ -4054,6 +4046,150 @@ body.light-mode .call-btn:hover {
         0 4px 8px rgba(0, 0, 0, 0.2),
         0 14px 40px rgba(212, 160, 23, 0.45),
         inset 0 1px 2px rgba(255, 255, 255, 0.55) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* Button text visibility */
+html:not([data-theme="light"]) .contact-btn .btn-text,
+html:not([data-theme="light"]) .contact-btn .btn-icon,
+body.light-mode .contact-btn .btn-text,
+body.light-mode .contact-btn .btn-icon {
+    -webkit-text-fill-color: currentColor !important;
+}
+
+/* ===== iOS GLASS MORPHISM CONTACT BUTTONS - ENHANCED ===== */
+
+/* Base glass morphism styling */
+.contact-btn {
+    backdrop-filter: blur(10px) !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+/* DARK MODE - Vibrant Glass Effect */
+
+/* Locate button: Vibrant Glass Pink */
+html:not([data-theme="light"]) .locate-btn {
+    background: rgba(232, 130, 181, 0.55) !important;
+    backdrop-filter: blur(14px) !important;
+    border: 1.5px solid rgba(232, 130, 181, 0.75) !important;
+    box-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.3),
+        0 12px 32px rgba(232, 130, 181, 0.45),
+        inset 0 1px 2px rgba(255, 255, 255, 0.3) !important;
+    color: #ffffff !important;
+    -webkit-text-fill-color: currentColor !important;
+}
+
+html:not([data-theme="light"]) .locate-btn:hover {
+    background: rgba(232, 130, 181, 0.65) !important;
+    box-shadow: 
+        0 4px 8px rgba(0, 0, 0, 0.35),
+        0 16px 44px rgba(232, 130, 181, 0.55),
+        inset 0 1px 2px rgba(255, 255, 255, 0.35) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* WhatsApp button: Vibrant Glass Green */
+html:not([data-theme="light"]) .whatsapp-btn {
+    background: rgba(91, 169, 107, 0.55) !important;
+    backdrop-filter: blur(14px) !important;
+    border: 1.5px solid rgba(91, 169, 107, 0.75) !important;
+    box-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.3),
+        0 12px 32px rgba(91, 169, 107, 0.45),
+        inset 0 1px 2px rgba(255, 255, 255, 0.3) !important;
+    color: #ffffff !important;
+    -webkit-text-fill-color: currentColor !important;
+}
+
+html:not([data-theme="light"]) .whatsapp-btn:hover {
+    background: rgba(91, 169, 107, 0.65) !important;
+    box-shadow: 
+        0 4px 8px rgba(0, 0, 0, 0.35),
+        0 16px 44px rgba(91, 169, 107, 0.55),
+        inset 0 1px 2px rgba(255, 255, 255, 0.35) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* Call button: Vibrant Glass Gold */
+html:not([data-theme="light"]) .call-btn {
+    background: rgba(212, 160, 23, 0.55) !important;
+    backdrop-filter: blur(14px) !important;
+    border: 1.5px solid rgba(212, 160, 23, 0.75) !important;
+    box-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.3),
+        0 12px 32px rgba(212, 160, 23, 0.45),
+        inset 0 1px 2px rgba(255, 255, 255, 0.25) !important;
+    color: #ffffff !important;
+    -webkit-text-fill-color: currentColor !important;
+}
+
+html:not([data-theme="light"]) .call-btn:hover {
+    background: rgba(212, 160, 23, 0.65) !important;
+    box-shadow: 
+        0 4px 8px rgba(0, 0, 0, 0.35),
+        0 16px 44px rgba(212, 160, 23, 0.55),
+        inset 0 1px 2px rgba(255, 255, 255, 0.3) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* LIGHT MODE - Crystal Clear (NO BLUR/SMOKE) */
+
+/* Locate button: Solid Vibrant Pink */
+body.light-mode .locate-btn {
+    background: #E882B5 !important;
+    backdrop-filter: none !important;
+    border: 1.5px solid #D97BAF !important;
+    box-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.12),
+        0 8px 20px rgba(232, 130, 181, 0.25) !important;
+    color: #ffffff !important;
+}
+
+body.light-mode .locate-btn:hover {
+    background: #D97BAF !important;
+    box-shadow: 
+        0 4px 8px rgba(0, 0, 0, 0.15),
+        0 12px 28px rgba(232, 130, 181, 0.35) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* WhatsApp button: Solid Vibrant Green */
+body.light-mode .whatsapp-btn {
+    background: #5BA96B !important;
+    backdrop-filter: none !important;
+    border: 1.5px solid #4A9B5F !important;
+    box-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.12),
+        0 8px 20px rgba(91, 169, 107, 0.25) !important;
+    color: #ffffff !important;
+}
+
+body.light-mode .whatsapp-btn:hover {
+    background: #4A9B5F !important;
+    box-shadow: 
+        0 4px 8px rgba(0, 0, 0, 0.15),
+        0 12px 28px rgba(91, 169, 107, 0.35) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* Call button: Solid Vibrant Gold */
+body.light-mode .call-btn {
+    background: #D4A017 !important;
+    backdrop-filter: none !important;
+    border: 1.5px solid #B8860B !important;
+    box-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.12),
+        0 8px 20px rgba(212, 160, 23, 0.25) !important;
+    color: #ffffff !important;
+}
+
+body.light-mode .call-btn:hover {
+    background: #B8860B !important;
+    box-shadow: 
+        0 4px 8px rgba(0, 0, 0, 0.15),
+        0 12px 28px rgba(212, 160, 23, 0.35) !important;
     transform: translateY(-2px) !important;
 }
 

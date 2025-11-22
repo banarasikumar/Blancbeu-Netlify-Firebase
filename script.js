@@ -324,6 +324,7 @@ function goToSlide(index) {
 
 function renderServices() {
   const container = document.getElementById('servicesContainer');
+  if (!container) return;
   
   servicesData.groups.forEach(group => {
     const categoryDiv = document.createElement('div');
@@ -361,6 +362,7 @@ function renderServices() {
 
 function renderReviews() {
   const container = document.getElementById('reviewsContainer');
+  if (!container) return;
   
   reviewsData.forEach(review => {
     const reviewCard = document.createElement('div');

@@ -3035,69 +3035,54 @@ html:not([data-theme="light"]) [style*="text-fill-color: transparent"] {
     color: var(--gold-primary) !important;
 }
 
-/* ===== DARK MODE COLORFUL CONTACT BUTTONS ===== */
+
+/* ===== PREMIUM DARK MODE CONTACT BUTTONS - THEME ALIGNED ===== */
+
+/* Locate button: Deep Purple (premium luxury) */
 html:not([data-theme="light"]) .locate-btn {
-    background: linear-gradient(135deg, #FFB6C1, #FF69B4) !important;
+    background: linear-gradient(135deg, rgba(123, 31, 162, 0.3), rgba(75, 0, 130, 0.25)) !important;
     color: #ffffff !important;
-    border: 2px solid rgba(255, 107, 107, 0.5) !important;
-    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4) !important;
+    border: 2px solid rgba(200, 124, 255, 0.4) !important;
+    box-shadow: 0 6px 20px rgba(200, 124, 255, 0.3) !important;
     -webkit-text-fill-color: currentColor !important;
 }
 
 html:not([data-theme="light"]) .locate-btn:hover {
-    background: linear-gradient(135deg, #FF69B4, #FF1493) !important;
-    box-shadow: 0 8px 30px rgba(255, 107, 107, 0.6) !important;
+    background: linear-gradient(135deg, rgba(156, 39, 176, 0.4), rgba(103, 58, 183, 0.35)) !important;
+    box-shadow: 0 8px 30px rgba(200, 124, 255, 0.5) !important;
 }
 
+/* WhatsApp button: Emerald Green (premium eco) */
 html:not([data-theme="light"]) .whatsapp-btn {
-    background: linear-gradient(135deg, #25D366, #128C7E) !important;
+    background: linear-gradient(135deg, rgba(0, 128, 96, 0.3), rgba(0, 100, 80, 0.25)) !important;
     color: #ffffff !important;
-    border: 2px solid rgba(37, 211, 102, 0.6) !important;
-    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4) !important;
+    border: 2px solid rgba(102, 187, 155, 0.4) !important;
+    box-shadow: 0 6px 20px rgba(102, 187, 155, 0.3) !important;
     -webkit-text-fill-color: currentColor !important;
 }
 
 html:not([data-theme="light"]) .whatsapp-btn:hover {
-    background: linear-gradient(135deg, #128C7E, #0A7E5E) !important;
-    box-shadow: 0 8px 30px rgba(37, 211, 102, 0.6) !important;
+    background: linear-gradient(135deg, rgba(27, 94, 32, 0.4), rgba(0, 77, 64, 0.35)) !important;
+    box-shadow: 0 8px 30px rgba(102, 187, 155, 0.5) !important;
 }
 
+/* Call button: Sapphire Blue (premium elegant) */
 html:not([data-theme="light"]) .call-btn {
-    background: linear-gradient(135deg, #2196F3, #1976D2) !important;
+    background: linear-gradient(135deg, rgba(13, 71, 161, 0.3), rgba(25, 103, 210, 0.25)) !important;
     color: #ffffff !important;
-    border: 2px solid rgba(33, 150, 243, 0.6) !important;
-    box-shadow: 0 6px 20px rgba(33, 150, 243, 0.4) !important;
+    border: 2px solid rgba(100, 149, 237, 0.4) !important;
+    box-shadow: 0 6px 20px rgba(100, 149, 237, 0.3) !important;
     -webkit-text-fill-color: currentColor !important;
 }
 
 html:not([data-theme="light"]) .call-btn:hover {
-    background: linear-gradient(135deg, #1976D2, #0D47A1) !important;
-    box-shadow: 0 8px 30px rgba(33, 150, 243, 0.6) !important;
+    background: linear-gradient(135deg, rgba(25, 103, 210, 0.4), rgba(33, 150, 243, 0.35)) !important;
+    box-shadow: 0 8px 30px rgba(100, 149, 237, 0.5) !important;
 }
 
-/* Ensure button text is always visible */
+/* Button text visibility */
 html:not([data-theme="light"]) .contact-btn .btn-text,
 html:not([data-theme="light"]) .contact-btn .btn-icon {
     color: #ffffff !important;
     -webkit-text-fill-color: currentColor !important;
-}
-
-/* ===== DARK MODE SPECIAL OFFERS PRICES - GOLD/YELLOW COLOR ===== */
-html:not([data-theme="light"]) .new-price,
-html:not([data-theme="light"]) .offer-price {
-    background: none !important;
-    -webkit-background-clip: unset !important;
-    -webkit-text-fill-color: currentColor !important;
-    background-clip: unset !important;
-    color: var(--gold-primary) !important;
-    text-shadow: 0 0 20px rgba(255, 215, 0, 0.6) !important;
-}
-
-html:not([data-theme="light"]) .old-price {
-    background: none !important;
-    -webkit-background-clip: unset !important;
-    -webkit-text-fill-color: currentColor !important;
-    background-clip: unset !important;
-    color: var(--text-muted) !important;
-    text-decoration: line-through !important;
 }

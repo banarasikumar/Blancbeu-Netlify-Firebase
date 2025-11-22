@@ -222,9 +222,6 @@ body.light-mode {
     font-weight: 900;
     background: var(--button-bg);
     background-size: 200% 200%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
     letter-spacing: 5px;
     text-transform: uppercase;
     animation: shimmerGradient 4s ease-in-out infinite, textGlow 2s ease-in-out infinite;
@@ -573,9 +570,6 @@ body.light-mode .brand-icon-wrapper:hover {
 
 body.light-mode .brand-name {
     background: linear-gradient(135deg, var(--gold-primary) 0%, var(--gold-bright) 30%, var(--gold-light) 60%, var(--gold-primary) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
     filter: drop-shadow(0 2px 8px rgba(212, 160, 23, 0.3));
 }
 
@@ -716,9 +710,6 @@ body.light-mode .footer {
 
 body.light-mode .footer-section h3 {
     background: linear-gradient(135deg, #b8860b 0%, #d4a017 100%) !important;
-    -webkit-background-clip: text !important;
-    -webkit-text-fill-color: transparent !important;
-    background-clip: text !important;
 }
 
 body.light-mode .footer-section h4 {
@@ -898,9 +889,6 @@ body.light-mode .cta-section {
 
 body.light-mode .section-title {
     background: linear-gradient(135deg, #b8860b 0%, #d4a017 50%, #b8860b 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
     text-shadow: none;
     filter: drop-shadow(0 2px 8px rgba(212, 160, 23, 0.3));
 }
@@ -1023,9 +1011,6 @@ body.light-mode .category-header {
     font-size: 72px;
     font-weight: 900;
     background: linear-gradient(135deg, var(--gold-primary), var(--gold-light), var(--gold-primary));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
     margin-bottom: 20px;
     text-shadow: 0 0 40px rgba(255, 215, 0, 0.8);
     animation: shimmer 3s ease-in-out infinite;
@@ -1402,9 +1387,6 @@ body.light-mode .offer-card p {
     font-size: 42px;
     font-weight: 800;
     background: linear-gradient(135deg, var(--gold-primary), var(--gold-light));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
     text-shadow: 0 0 30px var(--gold-primary);
 }
 
@@ -1415,9 +1397,6 @@ body.light-mode .old-price {
 
 body.light-mode .new-price {
     background: linear-gradient(135deg, #8B6914, #B8860B);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
     text-shadow: none;
     font-weight: 900;
 }
@@ -1488,9 +1467,6 @@ body.light-mode .new-price {
     font-family: 'Cinzel', serif;
     font-size: 32px;
     background: linear-gradient(135deg, var(--gold-primary), var(--gold-light));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
     margin: 0;
     padding: 0;
 }
@@ -1706,9 +1682,6 @@ body.light-mode .gallery-section {
     font-size: 52px;
     margin-bottom: 25px;
     background: linear-gradient(135deg, var(--gold-primary), var(--gold-light));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
 }
 
 .cta-section p {
@@ -1774,9 +1747,6 @@ body.light-mode .gallery-section {
     font-family: 'Cinzel', serif;
     font-size: 32px;
     background: linear-gradient(135deg, var(--gold-primary), var(--gold-light));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
     margin-bottom: 20px;
 }
 
@@ -1916,9 +1886,6 @@ body.light-mode .gallery-section {
 .tc-modal-content h2 {
     font-family: 'Cinzel', serif;
     background: linear-gradient(135deg, var(--gold-primary), var(--gold-light));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
     margin-bottom: 25px;
     text-align: center;
 }
@@ -2054,9 +2021,6 @@ body.light-mode .gallery-section {
     font-family: 'Cinzel', serif;
     font-size: 48px;
     background: linear-gradient(135deg, var(--gold-primary), var(--gold-light), var(--gold-primary));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
     margin-bottom: 15px;
     text-shadow: 0 0 40px rgba(255, 215, 0, 0.3);
 }
@@ -2148,9 +2112,6 @@ body.light-mode .dev-modal-content {
 
 body.light-mode .dev-modal-content h2 {
     background: linear-gradient(135deg, #b8860b 0%, #d4a017 50%, #b8860b 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
     text-shadow: none;
 }
 
@@ -2450,9 +2411,6 @@ body.light-mode .dev-action-btn:hover {
     font-size: 32px;
     font-weight: 700;
     background: linear-gradient(135deg, var(--gold-primary), var(--gold-bright));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
     margin-bottom: 10px;
     animation: shimmerSplash 2s ease-in-out infinite;
 }

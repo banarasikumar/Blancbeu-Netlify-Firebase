@@ -398,29 +398,65 @@ function initSmoothScroll() {
   });
 }
 
+let scrollPosition = 0;
+
 function showTC() {
   const modal = document.getElementById('tcModal');
+  const html = document.documentElement;
+  const body = document.body;
+  
+  // Store current scroll position
+  scrollPosition = window.scrollY;
+  
+  // Lock all scrolling
+  html.style.overflow = 'hidden';
+  body.style.overflow = 'hidden';
+  html.style.height = '100%';
+  body.style.height = '100%';
+  
+  // Prevent scroll propagation
+  document.addEventListener('touchmove', blockPageScroll, { passive: false });
+  document.addEventListener('wheel', blockPageScroll, { passive: false });
+  document.addEventListener('scroll', lockScroll);
+  
   modal.style.display = 'block';
-  document.body.style.overflow = 'hidden';
-  document.body.style.touchAction = 'none';
-  document.addEventListener('touchmove', preventScroll, { passive: false });
 }
 
 function closeTC() {
   const modal = document.getElementById('tcModal');
+  const html = document.documentElement;
+  const body = document.body;
+  
+  // Restore scrolling
+  html.style.overflow = 'auto';
+  body.style.overflow = 'auto';
+  html.style.height = 'auto';
+  body.style.height = 'auto';
+  
+  // Remove event listeners
+  document.removeEventListener('touchmove', blockPageScroll);
+  document.removeEventListener('wheel', blockPageScroll);
+  document.removeEventListener('scroll', lockScroll);
+  
   modal.style.display = 'none';
-  document.body.style.overflow = 'auto';
-  document.body.style.touchAction = 'auto';
-  document.removeEventListener('touchmove', preventScroll);
+  
+  // Restore scroll position
+  window.scrollTo(0, scrollPosition);
 }
 
-function preventScroll(e) {
-  const modal = document.getElementById('tcModal');
+function blockPageScroll(e) {
   const modalContent = document.querySelector('.tc-modal-content');
   
-  // Allow scrolling only if the touch is on the modal content
-  if (modalContent && !modalContent.contains(e.target)) {
+  // Only prevent if not scrolling inside the modal content
+  if (!modalContent || !modalContent.contains(e.target)) {
     e.preventDefault();
+  }
+}
+
+function lockScroll() {
+  // Force page to stay at stored position
+  if (window.scrollY !== scrollPosition) {
+    window.scrollTo(0, scrollPosition);
   }
 }
 

@@ -67,12 +67,12 @@ body.light-mode {
     pointer-events: none;
     z-index: 1;
     background-image: 
-        radial-gradient(2px 2px at 20% 30%, var(--gold-primary), transparent),
+        radial-gradient(2px 2px at 20% 30%, var(--gold-24k), transparent),
         radial-gradient(2px 2px at 60% 70%, var(--gold-bright), transparent),
         radial-gradient(1px 1px at 50% 50%, var(--gold-light), transparent),
-        radial-gradient(1px 1px at 80% 10%, var(--gold-primary), transparent),
+        radial-gradient(1px 1px at 80% 10%, var(--gold-24k), transparent),
         radial-gradient(2px 2px at 90% 60%, var(--gold-bright), transparent),
-        radial-gradient(1px 1px at 33% 80%, var(--gold-primary), transparent);
+        radial-gradient(1px 1px at 33% 80%, var(--gold-24k), transparent);
     background-size: 200% 200%;
     animation: sparkleFloat 20s ease-in-out infinite;
 }
@@ -304,7 +304,7 @@ body.light-mode {
 .brand-slogan {
     font-family: 'Poppins', sans-serif;
     font-size: 12px;
-    color: var(--gold-primary);
+    color: var(--gold-24k);
     font-weight: 400;
     font-style: italic;
     opacity: 0.9;
@@ -344,13 +344,13 @@ body.light-mode {
     transform: translateX(-50%);
     width: 0;
     height: 2px;
-    background: linear-gradient(90deg, var(--gold-primary), var(--gold-bright));
+    background: linear-gradient(90deg, var(--gold-24k), var(--gold-bright));
     transition: width 0.3s ease;
     border-radius: 2px;
 }
 
 .nav a:hover {
-    color: var(--gold-primary);
+    color: var(--gold-24k);
     text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
 }
 
@@ -1022,7 +1022,7 @@ body.light-mode .category-header {
     font-family: 'Cinzel', serif;
     font-size: 72px;
     font-weight: 900;
-    background: linear-gradient(135deg, var(--gold-primary), var(--gold-light), var(--gold-primary));
+    background: linear-gradient(135deg, var(--gold-24k), var(--gold-light), var(--gold-24k));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -1038,7 +1038,7 @@ body.light-mode .category-header {
 
 .hero-subtitle {
     font-size: 32px;
-    color: var(--text-primary);
+    color: var(--text-white);
     margin-bottom: 10px;
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
 }
@@ -1055,7 +1055,7 @@ body.light-mode .category-header {
     transform: translateY(-50%);
     background: var(--shadow-medium);
     border: 1px solid rgba(255, 215, 0, 0.4);
-    color: var(--gold-primary);
+    color: var(--gold-24k);
     font-size: 20px;
     padding: 8px 15px;
     cursor: pointer;
@@ -1072,7 +1072,7 @@ body.light-mode .category-header {
 
 .carousel-btn:hover {
     background: rgba(255, 215, 0, 0.3);
-    border-color: var(--gold-primary);
+    border-color: var(--gold-24k);
     transform: translateY(-50%) scale(1.1);
     box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
 }
@@ -1101,9 +1101,9 @@ body.light-mode .category-header {
 }
 
 .dot.active {
-    background: var(--gold-primary);
+    background: var(--gold-24k);
     transform: scale(1.3);
-    box-shadow: 0 0 15px var(--gold-primary);
+    box-shadow: 0 0 15px var(--gold-24k);
 }
 
 .contact-buttons {
@@ -1186,7 +1186,7 @@ body.light-mode .category-header {
 
 .whatsapp-btn {
     background: linear-gradient(135deg, var(--green-whatsapp), #20BA5C);
-    color: var(--text-primary);
+    color: var(--text-white);
     box-shadow: 0 8px 30px rgba(37, 211, 102, 0.4);
     animation-delay: 0.2s;
 }
@@ -1198,14 +1198,14 @@ body.light-mode .category-header {
 
 .call-btn {
     background: transparent;
-    border: 2px solid var(--gold-primary);
-    color: var(--gold-primary);
+    border: 2px solid var(--gold-24k);
+    color: var(--gold-24k);
     box-shadow: 0 8px 30px rgba(255, 215, 0, 0.3);
     animation-delay: 0.3s;
 }
 
 .call-btn:hover {
-    background: var(--gold-primary);
+    background: var(--gold-24k);
     color: var(--black);
     transform: translateY(-5px) scale(1.02);
     box-shadow: 0 12px 40px rgba(255, 215, 0, 0.6);
@@ -1232,8 +1232,12 @@ body.light-mode .category-header {
     font-size: 56px;
     text-align: center;
     margin-bottom: 10px;
-    color: var(--gold-primary);
+    background: linear-gradient(135deg, var(--gold-24k), var(--gold-light), var(--gold-24k));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+    color: var(--gold-primary);
     animation: shimmer 3s ease-in-out infinite;
 }
 
@@ -1295,7 +1299,7 @@ body.light-mode .offers-section {
     left: -50%;
     width: 200%;
     height: 200%;
-    background: conic-gradient(from 0deg, transparent, var(--gold-primary), transparent);
+    background: conic-gradient(from 0deg, transparent, var(--gold-24k), transparent);
     animation: none;
     opacity: 0;
 }
@@ -1348,7 +1352,7 @@ body.light-mode .offers-section {
 .offer-icon {
     font-size: 50px;
     margin: 15px 0;
-    filter: drop-shadow(0 0 15px var(--gold-primary));
+    filter: drop-shadow(0 0 15px var(--gold-24k));
     z-index: 2;
     position: relative;
 }
@@ -1356,7 +1360,7 @@ body.light-mode .offers-section {
 .offer-card h3 {
     font-family: 'Cinzel', serif;
     font-size: 24px;
-    color: var(--gold-primary);
+    color: var(--gold-24k);
     margin-bottom: 12px;
     z-index: 2;
     position: relative;
@@ -1398,11 +1402,11 @@ body.light-mode .offer-card p {
 .new-price {
     font-size: 42px;
     font-weight: 800;
-    background: linear-gradient(135deg, var(--gold-primary), var(--gold-light));
+    background: linear-gradient(135deg, var(--gold-24k), var(--gold-light));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-shadow: 0 0 30px var(--gold-primary);
+    text-shadow: 0 0 30px var(--gold-24k);
 }
 
 body.light-mode .old-price {
@@ -1421,7 +1425,7 @@ body.light-mode .new-price {
 
 .sparkle-line {
     height: 3px;
-    background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
+    background: linear-gradient(90deg, transparent, var(--gold-24k), transparent);
     margin-top: 30px;
     animation: shimmerLine 2s ease-in-out infinite;
     position: relative;
@@ -1467,7 +1471,7 @@ body.light-mode .new-price {
     aspect-ratio: 16 / 9;
     border-radius: 15px;
     object-fit: cover;
-    border: 3px solid var(--gold-primary);
+    border: 3px solid var(--gold-24k);
     box-shadow: 0 15px 40px rgba(255, 215, 0, 0.4);
 }
 
@@ -1480,8 +1484,12 @@ body.light-mode .new-price {
 .category-title {
     font-family: 'Cinzel', serif;
     font-size: 32px;
-    color: var(--gold-primary);
+    background: linear-gradient(135deg, var(--gold-24k), var(--gold-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     margin: 0;
+    color: var(--gold-primary);
     padding: 0;
 }
 
@@ -1503,7 +1511,7 @@ body.light-mode .new-price {
 
 .service-card:hover {
     background: rgba(255, 215, 0, 0.1);
-    border-color: var(--gold-primary);
+    border-color: var(--gold-24k);
     transform: translateY(-8px);
     box-shadow: 0 15px 40px rgba(255, 215, 0, 0.3);
 }
@@ -1512,7 +1520,7 @@ body.light-mode .new-price {
     font-size: 16px;
     font-weight: 600;
     margin-bottom: 8px;
-    color: var(--text-primary);
+    color: var(--text-white);
     line-height: 1.3;
 }
 
@@ -1545,7 +1553,7 @@ body.light-mode .service-original-price {
 .service-offer-price {
     font-size: 20px;
     font-weight: 700;
-    color: var(--gold-primary);
+    color: var(--gold-24k);
 }
 
 .service-discount {
@@ -1585,7 +1593,7 @@ body.light-mode .gallery-section {
 }
 
 .gallery-item:hover {
-    border-color: var(--gold-primary);
+    border-color: var(--gold-24k);
     box-shadow: 0 20px 50px rgba(255, 215, 0, 0.5);
 }
 
@@ -1616,7 +1624,7 @@ body.light-mode .gallery-section {
 }
 
 .gallery-overlay h3 {
-    color: var(--gold-primary);
+    color: var(--gold-24k);
     font-family: 'Cinzel', serif;
     font-size: 24px;
 }
@@ -1640,7 +1648,7 @@ body.light-mode .gallery-section {
 }
 
 .review-card:hover {
-    border-color: var(--gold-primary);
+    border-color: var(--gold-24k);
     box-shadow: 0 15px 40px rgba(255, 215, 0, 0.3);
     transform: translateY(-8px);
 }
@@ -1655,7 +1663,7 @@ body.light-mode .gallery-section {
 .reviewer-info h4 {
     font-size: 20px;
     margin-bottom: 5px;
-    color: var(--gold-primary);
+    color: var(--gold-24k);
 }
 
 .reviewer-details {
@@ -1669,9 +1677,9 @@ body.light-mode .gallery-section {
 }
 
 .star {
-    color: var(--gold-primary);
+    color: var(--gold-24k);
     font-size: 22px;
-    filter: drop-shadow(0 0 5px var(--gold-primary));
+    filter: drop-shadow(0 0 5px var(--gold-24k));
 }
 
 .review-text {
@@ -1695,7 +1703,7 @@ body.light-mode .gallery-section {
     font-family: 'Cinzel', serif;
     font-size: 52px;
     margin-bottom: 25px;
-    background: linear-gradient(135deg, var(--gold-primary), var(--gold-light));
+    background: linear-gradient(135deg, var(--gold-24k), var(--gold-light));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -1725,7 +1733,7 @@ body.light-mode .gallery-section {
 }
 
 .btn-cta.primary {
-    background: linear-gradient(135deg, var(--gold-primary), var(--gold-bright));
+    background: linear-gradient(135deg, var(--gold-24k), var(--gold-bright));
     color: var(--black);
     box-shadow: 0 10px 40px rgba(255, 215, 0, 0.4);
 }
@@ -1737,12 +1745,12 @@ body.light-mode .gallery-section {
 
 .btn-cta.secondary {
     background: transparent;
-    border: 3px solid var(--gold-primary);
-    color: var(--gold-primary);
+    border: 3px solid var(--gold-24k);
+    color: var(--gold-24k);
 }
 
 .btn-cta.secondary:hover {
-    background: var(--gold-primary);
+    background: var(--gold-24k);
     color: var(--black);
     transform: translateY(-5px);
 }
@@ -1750,7 +1758,7 @@ body.light-mode .gallery-section {
 .footer {
     background: var(--deep-black);
     padding: 80px 0 30px;
-    border-top: 3px solid var(--gold-primary);
+    border-top: 3px solid var(--gold-24k);
 }
 
 .footer-content {
@@ -1763,7 +1771,7 @@ body.light-mode .gallery-section {
 .footer-section h3 {
     font-family: 'Cinzel', serif;
     font-size: 32px;
-    background: linear-gradient(135deg, var(--gold-primary), var(--gold-light));
+    background: linear-gradient(135deg, var(--gold-24k), var(--gold-light));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -1771,7 +1779,7 @@ body.light-mode .gallery-section {
 }
 
 .footer-section h4 {
-    color: var(--gold-primary);
+    color: var(--gold-24k);
     margin-bottom: 20px;
     font-size: 20px;
 }
@@ -1786,7 +1794,7 @@ body.light-mode .gallery-section {
 }
 
 .footer-section a:hover {
-    color: var(--gold-primary);
+    color: var(--gold-24k);
 }
 
 .footer-bottom {
@@ -1843,8 +1851,8 @@ body.light-mode .gallery-section {
     bottom: 15px;
     right: 15px;
     background: rgba(255, 215, 0, 0.2);
-    border: 1px solid var(--gold-primary);
-    color: var(--gold-primary);
+    border: 1px solid var(--gold-24k);
+    color: var(--gold-24k);
     padding: 6px 14px;
     border-radius: 20px;
     font-size: 12px;
@@ -1855,7 +1863,7 @@ body.light-mode .gallery-section {
 }
 
 .tc-btn:hover {
-    background: var(--gold-primary);
+    background: var(--gold-24k);
     color: var(--black);
     transform: scale(1.05);
 }
@@ -1880,7 +1888,7 @@ body.light-mode .gallery-section {
     background: linear-gradient(135deg, rgba(10, 10, 10, 0.95), rgba(20, 20, 20, 0.95));
     margin: 50px auto;
     padding: 40px;
-    border: 2px solid var(--gold-primary);
+    border: 2px solid var(--gold-24k);
     border-radius: 20px;
     width: 90%;
     max-width: 600px;
@@ -1905,7 +1913,7 @@ body.light-mode .gallery-section {
 
 .tc-modal-content h2 {
     font-family: 'Cinzel', serif;
-    background: linear-gradient(135deg, var(--gold-primary), var(--gold-light));
+    background: linear-gradient(135deg, var(--gold-24k), var(--gold-light));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -1914,7 +1922,7 @@ body.light-mode .gallery-section {
 }
 
 .tc-content {
-    color: var(--text-primary);
+    color: var(--text-white);
     line-height: 1.8;
 }
 
@@ -1928,7 +1936,7 @@ body.light-mode .gallery-section {
 }
 
 .tc-close {
-    color: var(--gold-primary);
+    color: var(--gold-24k);
     float: right;
     font-size: 40px;
     font-weight: bold;
@@ -1971,7 +1979,7 @@ body.light-mode .gallery-section {
     left: 50%;
     background: linear-gradient(135deg, rgba(10, 10, 10, 0.98), rgba(20, 20, 20, 0.98));
     padding: 60px 40px;
-    border: 3px solid var(--gold-primary);
+    border: 3px solid var(--gold-24k);
     border-radius: 30px;
     width: 90%;
     max-width: 500px;
@@ -2006,8 +2014,8 @@ body.light-mode .gallery-section {
     top: 20px;
     right: 20px;
     background: transparent;
-    border: 2px solid var(--gold-primary);
-    color: var(--gold-primary);
+    border: 2px solid var(--gold-24k);
+    color: var(--gold-24k);
     font-size: 28px;
     width: 40px;
     height: 40px;
@@ -2020,7 +2028,7 @@ body.light-mode .gallery-section {
 }
 
 .dev-close-btn:hover {
-    background: var(--gold-primary);
+    background: var(--gold-24k);
     color: var(--black);
     transform: rotate(90deg) scale(1.1);
 }
@@ -2043,7 +2051,7 @@ body.light-mode .gallery-section {
 .dev-modal-content h2 {
     font-family: 'Cinzel', serif;
     font-size: 48px;
-    background: linear-gradient(135deg, var(--gold-primary), var(--gold-light), var(--gold-primary));
+    background: linear-gradient(135deg, var(--gold-24k), var(--gold-light), var(--gold-24k));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -2054,7 +2062,7 @@ body.light-mode .gallery-section {
 .dev-message {
     font-size: 24px;
     font-weight: 600;
-    color: var(--text-primary);
+    color: var(--text-white);
     margin-bottom: 10px;
     letter-spacing: 1px;
 }
@@ -2077,7 +2085,7 @@ body.light-mode .gallery-section {
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background: var(--gold-primary);
+    background: var(--gold-24k);
     animation: pulse-dot 1.5s ease-in-out infinite;
 }
 
@@ -2101,7 +2109,7 @@ body.light-mode .gallery-section {
 }
 
 .dev-action-btn {
-    background: linear-gradient(135deg, var(--gold-primary), var(--gold-bright));
+    background: linear-gradient(135deg, var(--gold-24k), var(--gold-bright));
     color: var(--black);
     border: none;
     padding: 15px 40px;
@@ -2307,7 +2315,7 @@ body.light-mode .dev-action-btn:hover {
     bottom: 100px;
     right: 20px;
     z-index: 10000;
-    background: linear-gradient(135deg, var(--gold-primary), var(--gold-bright));
+    background: linear-gradient(135deg, var(--gold-24k), var(--gold-bright));
     color: var(--black);
     border: none;
     padding: 15px 25px;
@@ -2439,7 +2447,7 @@ body.light-mode .dev-action-btn:hover {
     font-family: 'Cinzel', serif;
     font-size: 32px;
     font-weight: 700;
-    background: linear-gradient(135deg, var(--gold-primary), var(--gold-bright));
+    background: linear-gradient(135deg, var(--gold-24k), var(--gold-bright));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -2523,7 +2531,7 @@ body.light-mode .dev-action-btn:hover {
 }
 
 .nav-item.active {
-    color: var(--gold-primary);
+    color: var(--gold-24k);
     background: linear-gradient(
         135deg,
         rgba(255, 215, 0, 0.12),

@@ -1,6 +1,6 @@
 {
-  "version": "19.1.0",
-  "lastUpdated": "2025-11-22T16:05:00Z",
-  "timestamp": 1763827500000,
-  "changes": "FIXED! Removed backdrop-filter: blur(15px) from .header - was making ALL children transparent"
+  "version": "19.2.0",
+  "lastUpdated": "2025-11-22T16:06:00Z",
+  "timestamp": 1763827560000,
+  "changes": "FINAL FIX: Added nuclear-level CSS override for install button with multi-selector specificity to force full opacity and visibility"
 }

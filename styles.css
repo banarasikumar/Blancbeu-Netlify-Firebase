@@ -408,6 +408,22 @@ body.light-mode {
     display: none !important;
 }
 
+/* NUCLEAR FIX: Force button visibility above ALL CSS rules */
+.nav .install-app-btn,
+button.install-app-btn,
+#installBtn.install-app-btn {
+    opacity: 1 !important;
+    visibility: visible !important;
+    background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%) !important;
+    color: #000000 !important;
+    border: 2px solid #FFD700 !important;
+    filter: none !important;
+    -webkit-filter: none !important;
+    mix-blend-mode: normal !important;
+    text-shadow: none !important;
+    box-shadow: 0 4px 20px rgba(255, 215, 0, 0.8), 0 0 15px rgba(255, 215, 0, 0.5) !important;
+}
+
 @keyframes installPulse {
     0%, 100% {
         transform: scale(1);

@@ -266,6 +266,8 @@ function initCarousel() {
   const dots = document.getElementById('carouselDots');
   const slides = document.querySelectorAll('.carousel-slide');
   
+  if (!dots || slides.length === 0) return;
+  
   console.log(`🎠 Carousel initialized with ${slides.length} slides`);
   
   slides.forEach((_, index) => {
@@ -280,6 +282,9 @@ function initCarousel() {
 }
 
 function startAutoPlay() {
+  const slides = document.querySelectorAll('.carousel-slide');
+  if (slides.length === 0) return;
+  
   console.log('▶️ Starting carousel auto-play');
   carouselInterval = setInterval(() => {
     moveCarousel(1);
@@ -289,6 +294,8 @@ function startAutoPlay() {
 function moveCarousel(direction) {
   const slides = document.querySelectorAll('.carousel-slide');
   const dots = document.querySelectorAll('.dot');
+  
+  if (slides.length === 0 || !slides[currentSlide] || !dots[currentSlide]) return;
   
   console.log(`🔄 Moving carousel: current=${currentSlide}, direction=${direction}`);
   
@@ -309,6 +316,8 @@ function moveCarousel(direction) {
 function goToSlide(index) {
   const slides = document.querySelectorAll('.carousel-slide');
   const dots = document.querySelectorAll('.dot');
+  
+  if (slides.length === 0 || !slides[currentSlide] || !dots[currentSlide]) return;
   
   slides[currentSlide].classList.remove('active');
   dots[currentSlide].classList.remove('active');

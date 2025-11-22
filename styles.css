@@ -608,12 +608,10 @@ body.light-mode .install-app-btn {
 }
 
 body.light-mode .carousel {
-    background: linear-gradient(135deg, rgba(255, 193, 7, 0.15) 0%, rgba(255, 152, 0, 0.1) 100%);
-    box-shadow: 
-        0 0 30px rgba(255, 193, 7, 0.3),
-        inset 0 0 20px rgba(255, 193, 7, 0.1),
-        0 15px 50px rgba(0, 0, 0, 0.15);
-    border: 2px solid rgba(255, 193, 7, 0.4);
+    background: linear-gradient(135deg, #fef5e7 0%, #fdecea 50%, #f8f9f9 100%);
+    background-attachment: fixed;
+    box-shadow: 0 8px 30px rgba(212, 160, 23, 0.25);
+    border: 2px solid rgba(212, 160, 23, 0.3);
 }
 
 body.light-mode .carousel-track {
@@ -761,9 +759,16 @@ body.light-mode .carousel-dots span.active {
     box-shadow: 0 0 15px rgba(255, 193, 7, 0.6);
 }
 
+body.light-mode .contact-buttons {
+    background: linear-gradient(135deg, #fef5e7 0%, #fdecea 50%, #f8f9f9 100%);
+    background-attachment: fixed;
+}
+
 body.light-mode .contact-title {
-    color: #1a1a1a;
-    text-shadow: 0 2px 10px rgba(212, 160, 23, 0.3);
+    color: #8B6914;
+    font-weight: 700;
+    text-shadow: 0 2px 8px rgba(139, 105, 20, 0.3);
+    animation: none !important;
 }
 
 body.light-mode .locate-btn {

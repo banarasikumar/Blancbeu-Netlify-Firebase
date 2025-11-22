@@ -70,7 +70,7 @@ The Blancbeu website now uses a **true system-wide theme architecture** leveragi
 - **Special Offers pricing**: Displays in gold color for better visual hierarchy
 - **All elements**: Properly colored and visible in both light and dark modes
 - **Buttons feature**: 
-  - Dark Mode: iOS glass morphism with vibrant colors (0.55-0.65 opacity), backdrop blur, depth shadows
+  - Dark Mode: iOS glass morphism with highly vibrant colors (0.70-0.80 opacity), backdrop blur, depth shadows
   - Light Mode: Crystal clear solid colors (no blur/smoke), clean shadows, pure vibrant appearance
 
 ## External Dependencies

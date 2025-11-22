@@ -3155,16 +3155,6 @@ body.light-mode .contact-btn .btn-icon {
     -webkit-text-fill-color: currentColor !important;
 }
 
-/* ===== THEME-ALIGNED CONTACT BUTTONS ===== */
-
-/* DARK MODE: Gold buttons with elegant shadows (matching 24k gold theme) */
-html:not([data-theme="light"]) .locate-btn {
-    background: linear-gradient(135deg, #FFD700, #FFC700) !important;
-    color: #000000 !important;
-    border: 2px solid #FFE55C !important;
-    box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4), inset 0 -2px 4px rgba(0, 0, 0, 0.1) !important;
-    -webkit-text-fill-color: currentColor !important;
-}
 
 html:not([data-theme="light"]) .locate-btn:hover {
     background: linear-gradient(135deg, #FFC700, #FFB700) !important;
@@ -3241,6 +3231,107 @@ body.light-mode .call-btn:hover {
 }
 
 /* Ensure text is always visible */
+html:not([data-theme="light"]) .contact-btn .btn-text,
+html:not([data-theme="light"]) .contact-btn .btn-icon,
+body.light-mode .contact-btn .btn-text,
+body.light-mode .contact-btn .btn-icon {
+    -webkit-text-fill-color: currentColor !important;
+}
+
+/* ===== THEME-ALIGNED CONTACT BUTTONS - DIFFERENT COLORS ===== */
+
+/* DARK MODE: Different gold/warm tones matching luxury salon theme */
+
+/* Locate Button: Deep Gold (location/place = grounded) */
+html:not([data-theme="light"]) .locate-btn {
+    background: linear-gradient(135deg, #D4A017, #B8860B) !important;
+    color: #ffffff !important;
+    border: 2px solid #E8C566 !important;
+    box-shadow: 0 8px 22px rgba(212, 160, 23, 0.45) !important;
+    -webkit-text-fill-color: currentColor !important;
+}
+
+html:not([data-theme="light"]) .locate-btn:hover {
+    background: linear-gradient(135deg, #B8860B, #9E7A1F) !important;
+    box-shadow: 0 12px 30px rgba(212, 160, 23, 0.55) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* WhatsApp Button: Bright Gold (communication = bright) */
+html:not([data-theme="light"]) .whatsapp-btn {
+    background: linear-gradient(135deg, #FFD700, #FFC700) !important;
+    color: #000000 !important;
+    border: 2px solid #FFED4E !important;
+    box-shadow: 0 8px 22px rgba(255, 215, 0, 0.45) !important;
+    -webkit-text-fill-color: currentColor !important;
+}
+
+html:not([data-theme="light"]) .whatsapp-btn:hover {
+    background: linear-gradient(135deg, #FFC700, #FFB700) !important;
+    box-shadow: 0 12px 30px rgba(255, 215, 0, 0.55) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* Call Button: Warm Gold (direct contact = warm) */
+html:not([data-theme="light"]) .call-btn {
+    background: linear-gradient(135deg, #F0C040, #E8B633) !important;
+    color: #1a1a1a !important;
+    border: 2px solid #F5D575 !important;
+    box-shadow: 0 8px 22px rgba(240, 192, 64, 0.45) !important;
+    -webkit-text-fill-color: currentColor !important;
+}
+
+html:not([data-theme="light"]) .call-btn:hover {
+    background: linear-gradient(135deg, #E8B633, #D4A017) !important;
+    box-shadow: 0 12px 30px rgba(240, 192, 64, 0.55) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* LIGHT MODE: Different rich gold tones for white background */
+
+/* Locate Button: Rich Deep Brown-Gold */
+body.light-mode .locate-btn {
+    background: linear-gradient(135deg, #8B6914, #704D0C) !important;
+    color: #ffffff !important;
+    border: 2px solid #B8860B !important;
+    box-shadow: 0 8px 22px rgba(139, 105, 20, 0.4) !important;
+}
+
+body.light-mode .locate-btn:hover {
+    background: linear-gradient(135deg, #704D0C, #5C3E0A) !important;
+    box-shadow: 0 12px 30px rgba(139, 105, 20, 0.5) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* WhatsApp Button: Bright Bold Gold */
+body.light-mode .whatsapp-btn {
+    background: linear-gradient(135deg, #D4A017, #B8860B) !important;
+    color: #ffffff !important;
+    border: 2px solid #E8C566 !important;
+    box-shadow: 0 8px 22px rgba(212, 160, 23, 0.4) !important;
+}
+
+body.light-mode .whatsapp-btn:hover {
+    background: linear-gradient(135deg, #B8860B, #9E7A1F) !important;
+    box-shadow: 0 12px 30px rgba(212, 160, 23, 0.5) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* Call Button: Warm Medium Gold */
+body.light-mode .call-btn {
+    background: linear-gradient(135deg, #C9A961, #B89552) !important;
+    color: #ffffff !important;
+    border: 2px solid #DCC080 !important;
+    box-shadow: 0 8px 22px rgba(201, 169, 97, 0.4) !important;
+}
+
+body.light-mode .call-btn:hover {
+    background: linear-gradient(135deg, #B89552, #A68140) !important;
+    box-shadow: 0 12px 30px rgba(201, 169, 97, 0.5) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* Ensure text is visible */
 html:not([data-theme="light"]) .contact-btn .btn-text,
 html:not([data-theme="light"]) .contact-btn .btn-icon,
 body.light-mode .contact-btn .btn-text,

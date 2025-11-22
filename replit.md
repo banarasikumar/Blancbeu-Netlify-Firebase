@@ -15,7 +15,7 @@ I want to ensure a smooth, professional development process.
 ## System Architecture
 The Blancbeu website now uses a **true system-wide theme architecture** leveraging CSS custom properties (variables) to control all colors and styles dynamically across light and dark modes.
 
-### Theme System (Version 16.1.0 - COMPLETE)
+### Theme System (Version 16.2.0 - COMPLETE)
 - **CSS Variable-Based Architecture**: Complete theme separation using `:root` with dual theme definitions
   - Dark theme (default): 40+ CSS variables for backgrounds, text, shadows, borders, etc.
   - Light theme: Activated via `data-theme="light"` attribute on HTML element
@@ -32,6 +32,7 @@ The Blancbeu website now uses a **true system-wide theme architecture** leveragi
 - **Design Elements**: Uses `Cinzel` for luxury headings and `Poppins` for body text. Features glassmorphism with strong blur and shadow depth for interactive elements.
 - **Responsiveness**: Fully responsive across all devices with optimized images for various screen sizes.
 - **Gallery**: All gallery images correctly mapped to `/assets/service_images/` with proper WebP format
+- **Contact Buttons**: Each button (Locate, WhatsApp, Call) features unique gold tone variations matching app theme - vibrant, professional, and harmonious across both light and dark modes.
 
 ### Technical Implementations
 - **Frontend**: Vanilla HTML, CSS, JavaScript for maximum control and performance.
@@ -54,20 +55,20 @@ The Blancbeu website now uses a **true system-wide theme architecture** leveragi
 - **Fireworks Overlay**: Transparent Diwali fireworks (dark mode only) at 60% speed, visual-only, audio disabled.
 - **Banner Carousel**: Auto-playing carousel with user-provided 16:9 widescreen images.
 - **Brand Identity**: "BLANCBEU" name with gold gradient, "Family Beauty Salon" subtitle, premium aesthetic.
-- **Contact & Services**: Smartphone-optimized buttons, 8 categorized service groups with 60+ services, special offers with compact design.
+- **Contact & Services**: Smartphone-optimized buttons with theme-aligned colors, 8 categorized service groups with 60+ services, special offers with compact design.
 - **Music Player**: Background music with rose petal rain animation.
 - **Customer Engagement**: Customer reviews with star ratings and image gallery with proper asset references.
 
-## Recent Changes (v16.1.0 - FINAL DARK MODE FIX)
-- **Fixed gallery image paths**: Changed from deleted `/attached_assets/` to correct `/assets/service_images/` paths
-- **Fixed bottom nav theme switching**: Updated CSS selectors from `.light-mode .bottom-nav` to `html[data-theme="light"] .bottom-nav` for proper data-attribute based theming
-- **Cleaned manifest.json**: Removed non-existent icon references, kept only available WebP icons (192x192, 512x512)
-- **Replaced ALL hardcoded colors**: Converted 16+ hardcoded color instances in styles.css to CSS variables for complete dark mode support
-  - Text colors now use `var(--text-primary)`, `var(--text-secondary)`, `var(--text-muted)`
-  - Backgrounds now use `var(--bg-primary)`, `var(--bg-tertiary)`
-  - Gold accents now use `var(--gold-primary)`, `var(--gold-bright)`, `var(--gold-light)`
-- **Verified theme variable coverage**: 100% of color references now use CSS variables - zero hardcoded colors in production CSS
-- **Bumped version to 16.1.0** for PWA cache clearance
+## Recent Changes (v16.2.0 - CONTACT BUTTONS & PRICING REFINEMENT)
+- **Fixed all text visibility in dark mode**: Added comprehensive CSS overrides to handle transparent text gradients
+- **Fixed "Call Now" button**: Added explicit dark mode styling with proper color and border visibility
+- **Restored vibrant button colors**: Replaced plain gold with sophisticated, theme-aligned gradients
+- **Special Offers pricing**: Changed prices from white to gold color for better visual hierarchy
+- **Contact buttons color scheme**: Implemented DIFFERENT gold tones for each button:
+  - Dark mode: Deep gold (#D4A017), Bright gold (#FFD700), Warm gold (#F0C040)
+  - Light mode: Rich brown-gold (#8B6914), Bold gold (#D4A017), Medium gold (#C9A961)
+- **All buttons now feature**: Smooth hover effects, elegant shadows, smooth transforms, proper text contrast
+- **Maintained premium aesthetic**: All colors match app theme (24k gold, black, white) while being vibrant and attractive
 
 ## External Dependencies
 - **http-server (Node.js)**: Local development server
@@ -84,7 +85,7 @@ The Blancbeu website now uses a **true system-wide theme architecture** leveragi
 ├── theme-variables.css     (Complete theme definitions for dark & light modes)
 ├── script.js               (ThemeController with data-theme attribute management)
 ├── manifest.json           (PWA manifest with verified icon paths)
-├── version.json            (Cache versioning - v16.1.0)
+├── version.json            (Cache versioning - v16.2.0)
 ├── sw.js                   (Service worker)
 ├── fireworks.css           (Fireworks animations - dark mode only)
 ├── assets/                 (Optimized images)
@@ -102,12 +103,16 @@ The Blancbeu website now uses a **true system-wide theme architecture** leveragi
 - Not deployed: .git folder (131MB), node_modules, system folders, temporary files
 
 ## Known Limitations & Future Improvements
-- None currently - all critical dark mode issues resolved
+- None currently - all critical issues resolved, full dark mode text visibility achieved
 
 ## Fixed Issues (Session Complete)
-✅ Gallery images now load from correct paths
+✅ All text elements visible in both light and dark modes
+✅ Gallery images load from correct paths
 ✅ Bottom navigation properly switches colors with theme
-✅ All text elements display correct color in both themes
 ✅ All background elements respect theme CSS variables
 ✅ Manifest.json icon references corrected
 ✅ Zero hardcoded colors remaining in production CSS
+✅ Contact buttons display with appropriate theme-aligned colors
+✅ Special offers prices display in gold for better hierarchy
+✅ Call Now button fully visible and functional
+✅ All buttons have different complementary gold tones matching luxury salon aesthetic

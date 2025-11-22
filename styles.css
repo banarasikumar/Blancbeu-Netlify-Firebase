@@ -220,8 +220,11 @@ body.light-mode {
     font-family: 'Cinzel', serif;
     font-size: 42px;
     font-weight: 900;
-    background: var(--button-bg);
+    background: linear-gradient(135deg, #FFD700 0%, #FFF8DC 30%, #FFD700 60%, #FFA500 100%);
     background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     letter-spacing: 5px;
     text-transform: uppercase;
     animation: shimmerGradient 4s ease-in-out infinite, textGlow 2s ease-in-out infinite;
@@ -266,7 +269,7 @@ body.light-mode {
 .brand-subtitle {
     font-family: 'Poppins', sans-serif;
     font-size: 13px;
-    color: var(--gold-light);
+    color: rgba(255, 237, 78, 0.95);
     font-weight: 600;
     letter-spacing: 3.5px;
     text-transform: uppercase;
@@ -324,7 +327,7 @@ body.light-mode {
 }
 
 .nav a {
-    color: var(--text-primary);
+    color: rgba(255, 255, 255, 0.9);
     text-decoration: none;
     font-weight: 500;
     font-size: 15px;
@@ -518,9 +521,9 @@ body.light-mode .theme-icon.moon {
 }
 
 body.light-mode {
-    background: var(--carousel-bg);
+    background: linear-gradient(135deg, #fef5e7 0%, #fdecea 50%, #f8f9f9 100%);
     background-attachment: fixed;
-    color: var(--text-primary);
+    color: #1a1a1a;
 }
 
 body.light-mode .sparkles {
@@ -553,9 +556,9 @@ body.light-mode .sparkles {
 }
 
 body.light-mode .header {
-    background: var(--bg-tertiary);
+    background: rgba(255, 255, 255, 0.95);
     box-shadow: 0 2px 20px var(--shadow-light);
-    border-bottom: var(--header-border);
+    border-bottom: 1px solid rgba(212, 160, 23, 0.2);
 }
 
 body.light-mode .brand-icon-wrapper {
@@ -569,21 +572,24 @@ body.light-mode .brand-icon-wrapper:hover {
 }
 
 body.light-mode .brand-name {
-    background: linear-gradient(135deg, var(--gold-primary) 0%, var(--gold-bright) 30%, var(--gold-light) 60%, var(--gold-primary) 100%);
+    background: linear-gradient(135deg, #b8860b 0%, #d4a017 30%, #e6b800 60%, #b8860b 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     filter: drop-shadow(0 2px 8px rgba(212, 160, 23, 0.3));
 }
 
 body.light-mode .brand-subtitle {
-    color: var(--gold-primary);
+    color: rgba(184, 134, 11, 0.9);
     text-shadow: 0 1px 4px rgba(212, 160, 23, 0.3);
 }
 
 body.light-mode .nav a {
-    color: var(--text-primary);
+    color: rgba(26, 26, 26, 0.9);
 }
 
 body.light-mode .nav a:hover {
-    color: var(--gold-primary);
+    color: #b8860b;
     text-shadow: 0 0 8px rgba(212, 160, 23, 0.3);
 }
 
@@ -600,23 +606,23 @@ body.light-mode .theme-toggle-btn:hover {
 
 body.light-mode .install-app-btn {
     background: linear-gradient(135deg, #FFD54F 0%, #FF9800 100%);
-    color: var(--text-primary);
+    color: #1a1a1a;
     box-shadow: 0 4px 20px rgba(255, 193, 7, 0.5);
 }
 
 body.light-mode .carousel {
-    background: var(--carousel-bg);
+    background: linear-gradient(135deg, #fef5e7 0%, #fdecea 50%, #f8f9f9 100%);
     background-attachment: fixed;
     box-shadow: 0 8px 30px rgba(212, 160, 23, 0.25);
     border: 2px solid rgba(212, 160, 23, 0.3);
 }
 
 body.light-mode .carousel-track {
-    background: var(--bg-primary);
+    background: #ffffff;
 }
 
 body.light-mode .carousel-slide img {
-    background: var(--bg-primary);
+    background: #ffffff;
 }
 
 body.light-mode .fireworks-overlay {
@@ -662,18 +668,18 @@ body.light-mode *::after {
 }
 
 body.light-mode .section-title {
-    color: var(--text-primary);
+    color: #1a1a1a;
     text-shadow: 0 2px 15px rgba(212, 160, 23, 0.4);
 }
 
 body.light-mode .section-subtitle {
-    color: var(--text-secondary);
+    color: #333333;
 }
 
 body.light-mode .offer-card,
 body.light-mode .service-card,
 body.light-mode .review-card {
-    background: var(--bg-tertiary);
+    background: rgba(255, 255, 255, 0.9);
     border: 2px solid rgba(212, 160, 23, 0.3);
     box-shadow: 0 8px 30px var(--shadow-light);
     animation: none !important;
@@ -692,7 +698,7 @@ body.light-mode .glow-card {
 
 body.light-mode .contact-btn {
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 245, 220, 0.95));
-    color: var(--text-primary);
+    color: #1a1a1a;
     border: 2px solid rgba(212, 160, 23, 0.4);
     box-shadow: 0 6px 25px rgba(255, 193, 7, 0.3);
 }
@@ -703,36 +709,39 @@ body.light-mode .contact-btn:hover {
 
 body.light-mode .footer {
     background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%) !important;
-    color: var(--text-primary) !important;
+    color: #2c3e50 !important;
     box-shadow: 0 -4px 20px var(--shadow-light) !important;
     border-top: 3px solid rgba(212, 160, 23, 0.4) !important;
 }
 
 body.light-mode .footer-section h3 {
     background: linear-gradient(135deg, #b8860b 0%, #d4a017 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
 }
 
 body.light-mode .footer-section h4 {
-    color: var(--gold-bright) !important;
+    color: #d4a017 !important;
 }
 
 body.light-mode .footer-section p,
 body.light-mode .footer-section a {
-    color: var(--text-muted) !important;
+    color: #555555 !important;
 }
 
 body.light-mode .footer-section a:hover {
-    color: var(--gold-primary);
+    color: #b8860b;
 }
 
 body.light-mode .footer-bottom {
-    color: var(--text-muted);
+    color: #666666;
     border-top: 1px solid rgba(212, 160, 23, 0.3);
 }
 
 body.light-mode .carousel-btn {
-    background: var(--bg-tertiary);
-    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.9);
+    color: #1a1a1a;
     border: 2px solid rgba(212, 160, 23, 0.4);
     box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
 }
@@ -754,7 +763,7 @@ body.light-mode .carousel-dots span.active {
 }
 
 body.light-mode .contact-buttons {
-    background: var(--carousel-bg);
+    background: linear-gradient(135deg, #fef5e7 0%, #fdecea 50%, #f8f9f9 100%);
     background-attachment: fixed;
 }
 
@@ -820,7 +829,7 @@ body.light-mode .offer-badge.student {
 }
 
 body.light-mode .old-price {
-    color: var(--text-muted);
+    color: #666666;
 }
 
 body.light-mode .new-price {
@@ -835,15 +844,15 @@ body.light-mode .service-icon {
 
 body.light-mode h3,
 body.light-mode h2 {
-    color: var(--text-primary);
+    color: #1a1a1a;
 }
 
 body.light-mode p {
-    color: var(--text-secondary);
+    color: #333333;
 }
 
 body.light-mode .service-name {
-    color: var(--text-primary);
+    color: #1a1a1a;
 }
 
 body.light-mode .service-price {
@@ -855,11 +864,11 @@ body.light-mode .review-text {
 }
 
 body.light-mode .reviewer-name {
-    color: var(--text-primary);
+    color: #1a1a1a;
 }
 
 body.light-mode .review-date {
-    color: var(--text-muted);
+    color: #666666;
 }
 
 body.light-mode .stars,
@@ -868,10 +877,14 @@ body.light-mode .hearts {
 }
 
 body.light-mode .offers-section {
+    position: relative;
+    z-index: 10;
     background: linear-gradient(135deg, #ffffff 0%, #fef5e7 50%, #ffffff 100%);
 }
 
 body.light-mode .services-section {
+    position: relative;
+    z-index: 10;
     background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 50%, #f8f9fa 100%);
 }
 
@@ -889,6 +902,9 @@ body.light-mode .cta-section {
 
 body.light-mode .section-title {
     background: linear-gradient(135deg, #b8860b 0%, #d4a017 50%, #b8860b 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     text-shadow: none;
     filter: drop-shadow(0 2px 8px rgba(212, 160, 23, 0.3));
 }
@@ -1011,6 +1027,9 @@ body.light-mode .category-header {
     font-size: 72px;
     font-weight: 900;
     background: linear-gradient(135deg, var(--gold-primary), var(--gold-light), var(--gold-primary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     margin-bottom: 20px;
     text-shadow: 0 0 40px rgba(255, 215, 0, 0.8);
     animation: shimmer 3s ease-in-out infinite;
@@ -1217,7 +1236,10 @@ body.light-mode .category-header {
     font-size: 56px;
     text-align: center;
     margin-bottom: 10px;
-    color: var(--gold-primary);
+    background: linear-gradient(135deg, var(--gold-primary), var(--gold-light), var(--gold-primary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
     animation: shimmer 3s ease-in-out infinite;
 }
@@ -1240,20 +1262,22 @@ body.light-mode .category-header {
 }
 
 body.light-mode .section-subtitle {
-    color: var(--text-muted);
+    color: #666666;
 }
 
 .offers-section {
+    position: relative;
+    z-index: 10;
     padding: 100px 0;
     background: var(--bg-primary);
     overflow-x: hidden;
     width: 100%;
-    position: relative;
-    z-index: 10;
 }
 
 body.light-mode .offers-section {
-    background: var(--carousel-bg);
+    position: relative;
+    z-index: 10;
+    background: linear-gradient(135deg, #fef5e7 0%, #fdecea 50%, #f8f9f9 100%);
     background-attachment: fixed;
 }
 
@@ -1273,7 +1297,6 @@ body.light-mode .offers-section {
     position: relative;
     overflow: hidden;
     transition: all 0.4s;
-    z-index: 2;
 }
 
 .offer-card::before {
@@ -1351,7 +1374,7 @@ body.light-mode .offers-section {
 }
 
 .offer-card p {
-    color: var(--text-primary);
+    color: var(--text-secondary);
     margin-bottom: 20px;
     font-size: 14px;
     line-height: 1.6;
@@ -1364,7 +1387,7 @@ body.light-mode .offer-card {
 }
 
 body.light-mode .offer-card p {
-    color: var(--text-muted);
+    color: #666666;
 }
 
 .offer-price {
@@ -1387,6 +1410,9 @@ body.light-mode .offer-card p {
     font-size: 42px;
     font-weight: 800;
     background: linear-gradient(135deg, var(--gold-primary), var(--gold-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     text-shadow: 0 0 30px var(--gold-primary);
 }
 
@@ -1397,6 +1423,9 @@ body.light-mode .old-price {
 
 body.light-mode .new-price {
     background: linear-gradient(135deg, #8B6914, #B8860B);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     text-shadow: none;
     font-weight: 900;
 }
@@ -1416,18 +1445,16 @@ body.light-mode .new-price {
 }
 
 .services-section {
+    position: relative;
+    z-index: 10;
     padding: 100px 0;
     overflow-x: hidden;
     width: 100%;
-    position: relative;
-    z-index: 10;
 }
 
 .service-category {
     margin-bottom: 50px;
     background: linear-gradient(135deg, rgba(255, 215, 0, 0.05), rgba(255, 215, 0, 0.02));
-    position: relative;
-    z-index: 2;
     border-radius: 20px;
     padding: 20px 15px;
     border: 2px solid rgba(255, 215, 0, 0.15);
@@ -1467,6 +1494,9 @@ body.light-mode .new-price {
     font-family: 'Cinzel', serif;
     font-size: 32px;
     background: linear-gradient(135deg, var(--gold-primary), var(--gold-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     margin: 0;
     padding: 0;
 }
@@ -1503,7 +1533,7 @@ body.light-mode .new-price {
 }
 
 body.light-mode .service-name {
-    color: var(--text-primary);
+    color: #1a1a1a;
 }
 
 body.light-mode .service-card {
@@ -1550,7 +1580,7 @@ body.light-mode .service-original-price {
 }
 
 body.light-mode .gallery-section {
-    background: var(--carousel-bg);
+    background: linear-gradient(135deg, #fef5e7 0%, #fdecea 50%, #f8f9f9 100%);
     background-attachment: fixed;
 }
 
@@ -1661,7 +1691,7 @@ body.light-mode .gallery-section {
 }
 
 .review-text {
-    color: var(--text-primary);
+    color: var(--text-secondary);
     line-height: 1.8;
     margin-bottom: 15px;
 }
@@ -1682,11 +1712,14 @@ body.light-mode .gallery-section {
     font-size: 52px;
     margin-bottom: 25px;
     background: linear-gradient(135deg, var(--gold-primary), var(--gold-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .cta-section p {
     font-size: 20px;
-    color: var(--text-primary);
+    color: var(--text-secondary);
     margin-bottom: 50px;
 }
 
@@ -1747,6 +1780,9 @@ body.light-mode .gallery-section {
     font-family: 'Cinzel', serif;
     font-size: 32px;
     background: linear-gradient(135deg, var(--gold-primary), var(--gold-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     margin-bottom: 20px;
 }
 
@@ -1758,7 +1794,7 @@ body.light-mode .gallery-section {
 
 .footer-section p,
 .footer-section a {
-    color: var(--text-primary);
+    color: var(--text-secondary);
     text-decoration: none;
     display: block;
     margin-bottom: 12px;
@@ -1773,7 +1809,7 @@ body.light-mode .gallery-section {
     text-align: center;
     padding-top: 30px;
     border-top: 1px solid rgba(255, 215, 0, 0.2);
-    color: var(--text-primary);
+    color: var(--text-secondary);
 }
 
 .social-icons {
@@ -1886,6 +1922,9 @@ body.light-mode .gallery-section {
 .tc-modal-content h2 {
     font-family: 'Cinzel', serif;
     background: linear-gradient(135deg, var(--gold-primary), var(--gold-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     margin-bottom: 25px;
     text-align: center;
 }
@@ -1901,7 +1940,7 @@ body.light-mode .gallery-section {
 
 .tc-content li {
     margin-bottom: 15px;
-    color: var(--text-primary);
+    color: var(--text-secondary);
 }
 
 .tc-close {
@@ -2021,6 +2060,9 @@ body.light-mode .gallery-section {
     font-family: 'Cinzel', serif;
     font-size: 48px;
     background: linear-gradient(135deg, var(--gold-primary), var(--gold-light), var(--gold-primary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     margin-bottom: 15px;
     text-shadow: 0 0 40px rgba(255, 215, 0, 0.3);
 }
@@ -2035,7 +2077,7 @@ body.light-mode .gallery-section {
 
 .dev-subtitle {
     font-size: 16px;
-    color: var(--text-primary);
+    color: var(--text-secondary);
     margin-bottom: 30px;
     line-height: 1.6;
 }
@@ -2098,7 +2140,7 @@ body.light-mode .gallery-section {
 }
 
 body.light-mode .dev-modal {
-    background: var(--bg-tertiary);
+    background: rgba(255, 255, 255, 0.9);
 }
 
 body.light-mode .dev-modal-content {
@@ -2112,15 +2154,18 @@ body.light-mode .dev-modal-content {
 
 body.light-mode .dev-modal-content h2 {
     background: linear-gradient(135deg, #b8860b 0%, #d4a017 50%, #b8860b 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     text-shadow: none;
 }
 
 body.light-mode .dev-message {
-    color: var(--text-primary);
+    color: #1a1a1a;
 }
 
 body.light-mode .dev-subtitle {
-    color: var(--text-muted);
+    color: #555555;
 }
 
 body.light-mode .dev-close-btn {
@@ -2411,6 +2456,9 @@ body.light-mode .dev-action-btn:hover {
     font-size: 32px;
     font-weight: 700;
     background: linear-gradient(135deg, var(--gold-primary), var(--gold-bright));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     margin-bottom: 10px;
     animation: shimmerSplash 2s ease-in-out infinite;
 }
@@ -2545,7 +2593,7 @@ body {
 }
 
 body.light-mode {
-    background: var(--carousel-bg);
+    background: linear-gradient(135deg, #fef5e7 0%, #fdecea 50%, #f8f9f9 100%);
     background-attachment: fixed;
 }
 
@@ -2617,7 +2665,7 @@ body.light-mode .nav-item.active .nav-icon {
 }
 
 body.light-mode .nav-item:hover:not(.active) {
-    color: var(--text-primary);
+    color: rgba(26, 26, 26, 0.9);
     background: rgba(212, 160, 23, 0.08);
 }
 

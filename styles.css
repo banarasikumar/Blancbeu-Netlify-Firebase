@@ -4210,8 +4210,8 @@ html:not([data-theme="light"]) .locate-btn {
     backdrop-filter: none !important;
     border: 1.5px solid #C08BA8 !important;
     box-shadow: 
-        0 2px 4px rgba(0, 0, 0, 0.3),
-        0 6px 16px rgba(192, 139, 168, 0.20) !important;
+        0 2px 4px rgba(0, 0, 0, 0.2),
+        0 8px 20px rgba(192, 139, 168, 0.35) !important;
     color: #ffffff !important;
     -webkit-text-fill-color: #ffffff !important;
 }
@@ -4220,8 +4220,8 @@ html:not([data-theme="light"]) .locate-btn:hover {
     background: #A65885 !important;
     color: #ffffff !important;
     box-shadow: 
-        0 4px 8px rgba(0, 0, 0, 0.35),
-        0 10px 24px rgba(192, 139, 168, 0.30) !important;
+        0 4px 8px rgba(0, 0, 0, 0.25),
+        0 12px 32px rgba(192, 139, 168, 0.45) !important;
     transform: translateY(-2px) !important;
 }
 
@@ -4231,8 +4231,8 @@ html:not([data-theme="light"]) .whatsapp-btn {
     backdrop-filter: none !important;
     border: 1.5px solid #7BA589 !important;
     box-shadow: 
-        0 2px 4px rgba(0, 0, 0, 0.3),
-        0 6px 16px rgba(123, 165, 137, 0.20) !important;
+        0 2px 4px rgba(0, 0, 0, 0.2),
+        0 8px 20px rgba(123, 165, 137, 0.35) !important;
     color: #ffffff !important;
     -webkit-text-fill-color: #ffffff !important;
 }
@@ -4241,8 +4241,8 @@ html:not([data-theme="light"]) .whatsapp-btn:hover {
     background: #5A7D62 !important;
     color: #ffffff !important;
     box-shadow: 
-        0 4px 8px rgba(0, 0, 0, 0.35),
-        0 10px 24px rgba(123, 165, 137, 0.30) !important;
+        0 4px 8px rgba(0, 0, 0, 0.25),
+        0 12px 32px rgba(123, 165, 137, 0.45) !important;
     transform: translateY(-2px) !important;
 }
 
@@ -4252,8 +4252,8 @@ html:not([data-theme="light"]) .call-btn {
     backdrop-filter: none !important;
     border: 1.5px solid #7BA5C0 !important;
     box-shadow: 
-        0 2px 4px rgba(0, 0, 0, 0.3),
-        0 6px 16px rgba(123, 165, 192, 0.20) !important;
+        0 2px 4px rgba(0, 0, 0, 0.2),
+        0 8px 20px rgba(123, 165, 192, 0.35) !important;
     color: #ffffff !important;
     -webkit-text-fill-color: #ffffff !important;
 }
@@ -4262,8 +4262,8 @@ html:not([data-theme="light"]) .call-btn:hover {
     background: #5A7DA3 !important;
     color: #ffffff !important;
     box-shadow: 
-        0 4px 8px rgba(0, 0, 0, 0.35),
-        0 10px 24px rgba(123, 165, 192, 0.30) !important;
+        0 4px 8px rgba(0, 0, 0, 0.25),
+        0 12px 32px rgba(123, 165, 192, 0.45) !important;
     transform: translateY(-2px) !important;
 }
 
@@ -4276,7 +4276,7 @@ body.light-mode .locate-btn {
     border: 1.5px solid #D899C8 !important;
     box-shadow: 
         0 2px 4px rgba(0, 0, 0, 0.08),
-        0 6px 16px rgba(216, 153, 200, 0.25) !important;
+        0 8px 20px rgba(216, 153, 200, 0.35) !important;
     color: #6B3A50 !important;
 }
 
@@ -4284,7 +4284,7 @@ body.light-mode .locate-btn:hover {
     background: #E896BD !important;
     box-shadow: 
         0 4px 8px rgba(0, 0, 0, 0.12),
-        0 10px 24px rgba(232, 130, 181, 0.25) !important;
+        0 12px 32px rgba(216, 153, 200, 0.45) !important;
     transform: translateY(-2px) !important;
 }
 
@@ -4295,7 +4295,7 @@ body.light-mode .whatsapp-btn {
     border: 1.5px solid #81C784 !important;
     box-shadow: 
         0 2px 4px rgba(0, 0, 0, 0.08),
-        0 6px 16px rgba(129, 199, 132, 0.25) !important;
+        0 8px 20px rgba(129, 199, 132, 0.35) !important;
     color: #2E5A47 !important;
 }
 
@@ -4303,7 +4303,7 @@ body.light-mode .whatsapp-btn:hover {
     background: #A5D6A7 !important;
     box-shadow: 
         0 4px 8px rgba(0, 0, 0, 0.12),
-        0 10px 24px rgba(91, 169, 107, 0.25) !important;
+        0 12px 32px rgba(129, 199, 132, 0.45) !important;
     transform: translateY(-2px) !important;
 }
 
@@ -4314,7 +4314,7 @@ body.light-mode .call-btn {
     border: 1.5px solid #64B5F6 !important;
     box-shadow: 
         0 2px 4px rgba(0, 0, 0, 0.08),
-        0 6px 16px rgba(100, 181, 246, 0.25) !important;
+        0 8px 20px rgba(100, 181, 246, 0.35) !important;
     color: #1565C0 !important;
 }
 
@@ -4322,7 +4322,7 @@ body.light-mode .call-btn:hover {
     background: #64B5F6 !important;
     box-shadow: 
         0 4px 8px rgba(0, 0, 0, 0.12),
-        0 10px 24px rgba(100, 181, 246, 0.35) !important;
+        0 12px 32px rgba(100, 181, 246, 0.45) !important;
     transform: translateY(-2px) !important;
 }
 

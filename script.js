@@ -402,17 +402,13 @@ let scrollPosition = 0;
 
 function showTC() {
   const modal = document.getElementById('tcModal');
-  const html = document.documentElement;
   const body = document.body;
   
   // Store current scroll position
   scrollPosition = window.scrollY;
   
-  // Lock all scrolling
-  html.style.overflow = 'hidden';
+  // Lock background scrolling while keeping header/nav visible
   body.style.overflow = 'hidden';
-  html.style.height = '100%';
-  body.style.height = '100%';
   
   // Prevent scroll propagation
   document.addEventListener('touchmove', blockPageScroll, { passive: false });
@@ -424,14 +420,10 @@ function showTC() {
 
 function closeTC() {
   const modal = document.getElementById('tcModal');
-  const html = document.documentElement;
   const body = document.body;
   
   // Restore scrolling
-  html.style.overflow = 'auto';
   body.style.overflow = 'auto';
-  html.style.height = 'auto';
-  body.style.height = 'auto';
   
   // Remove event listeners
   document.removeEventListener('touchmove', blockPageScroll);
@@ -446,8 +438,18 @@ function closeTC() {
 
 function blockPageScroll(e) {
   const modalContent = document.querySelector('.tc-modal-content');
+  const header = document.getElementById('mainHeader');
+  const bottomNav = document.getElementById('bottomNav');
   
-  // Only prevent if not scrolling inside the modal content
+  // Allow interactions with header and nav
+  if (header && header.contains(e.target)) {
+    return;
+  }
+  if (bottomNav && bottomNav.contains(e.target)) {
+    return;
+  }
+  
+  // Only prevent scrolling if not scrolling inside the modal content
   if (!modalContent || !modalContent.contains(e.target)) {
     e.preventDefault();
   }

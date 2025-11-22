@@ -1,6 +1,6 @@
 {
-  "version": "17.8.0",
-  "lastUpdated": "2025-11-22T15:58:00Z",
-  "timestamp": 1763827080000,
-  "changes": "Fixed Install App button styling - now visible with gold gradient and border in both dark and light modes"
+  "version": "17.9.0",
+  "lastUpdated": "2025-11-22T15:59:15Z",
+  "timestamp": 1763827155000,
+  "changes": "Restored original images, fixed Install App button styling, optimized service category display"
 }

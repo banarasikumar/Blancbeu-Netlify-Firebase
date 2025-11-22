@@ -465,26 +465,24 @@
 
     <!-- T&C Modal Content Template -->
     <template id="tcModalTemplate">
-        <div class="tc-header">
-            <div class="tc-icon">✨</div>
-            <h2>Offer Terms & Conditions</h2>
-            <p class="tc-subtitle">Please read carefully before availing offers</p>
+        <div style="text-align: center; margin-bottom: 25px;">
+            <div style="font-size: 50px; margin-bottom: 15px;">✨</div>
+            <h2 style="font-family: 'Cinzel', serif; font-size: 32px; background: linear-gradient(135deg, var(--gold-24k), var(--gold-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 8px; letter-spacing: 1px;">Terms & Conditions</h2>
+            <p style="color: var(--text-secondary); font-size: 13px; letter-spacing: 0.5px;">Please read before availing offers</p>
         </div>
-        <div class="tc-modal-content">
-            <ol class="tc-list">
-                <li><span class="tc-number">1</span><span class="tc-text">Only one offer is applicable per transaction at a time.</span></li>
-                <li><span class="tc-number">2</span><span class="tc-text">A maximum of 10% of the total bill can be redeemed through coupon cash on the final price.</span></li>
-                <li><span class="tc-number">3</span><span class="tc-text">All offers are subject to cancellation at any time without prior notice.</span></li>
-                <li><span class="tc-number">4</span><span class="tc-text">The same offer may not be applicable multiple times for the same customer.</span></li>
-                <li><span class="tc-number">5</span><span class="tc-text">Offers cannot be combined with other ongoing promotions or discounts.</span></li>
-                <li><span class="tc-number">6</span><span class="tc-text">Valid ID proof is required for student discounts and other eligibility-based offers.</span></li>
-                <li><span class="tc-number">7</span><span class="tc-text">Services must be availed within the offer validity period mentioned.</span></li>
-                <li><span class="tc-number">8</span><span class="tc-text">Blancbeu reserves the right to modify or withdraw any offer without prior notice.</span></li>
-                <li><span class="tc-number">9</span><span class="tc-text">Offer is valid only at Blancbeu salon locations.</span></li>
-                <li><span class="tc-number">10</span><span class="tc-text">Customers must present the valid offer code or ID proof at the time of service.</span></li>
-            </ol>
+        <div style="max-height: 380px; overflow-y: auto; padding: 15px 0; color: var(--text-secondary); font-size: 13px; line-height: 1.8;">
+            <div style="margin-bottom: 14px; padding: 10px 12px; background: rgba(255, 215, 0, 0.06); border-radius: 10px;"><strong style="color: var(--gold-24k);">1.</strong> Only one offer is applicable per transaction at a time.</div>
+            <div style="margin-bottom: 14px; padding: 10px 12px; background: rgba(255, 215, 0, 0.06); border-radius: 10px;"><strong style="color: var(--gold-24k);">2.</strong> A maximum of 10% of the total bill can be redeemed through coupon cash on the final price.</div>
+            <div style="margin-bottom: 14px; padding: 10px 12px; background: rgba(255, 215, 0, 0.06); border-radius: 10px;"><strong style="color: var(--gold-24k);">3.</strong> All offers are subject to cancellation at any time without prior notice.</div>
+            <div style="margin-bottom: 14px; padding: 10px 12px; background: rgba(255, 215, 0, 0.06); border-radius: 10px;"><strong style="color: var(--gold-24k);">4.</strong> The same offer may not be applicable multiple times for the same customer.</div>
+            <div style="margin-bottom: 14px; padding: 10px 12px; background: rgba(255, 215, 0, 0.06); border-radius: 10px;"><strong style="color: var(--gold-24k);">5.</strong> Offers cannot be combined with other ongoing promotions or discounts.</div>
+            <div style="margin-bottom: 14px; padding: 10px 12px; background: rgba(255, 215, 0, 0.06); border-radius: 10px;"><strong style="color: var(--gold-24k);">6.</strong> Valid ID proof is required for student discounts and other eligibility-based offers.</div>
+            <div style="margin-bottom: 14px; padding: 10px 12px; background: rgba(255, 215, 0, 0.06); border-radius: 10px;"><strong style="color: var(--gold-24k);">7.</strong> Services must be availed within the offer validity period mentioned.</div>
+            <div style="margin-bottom: 14px; padding: 10px 12px; background: rgba(255, 215, 0, 0.06); border-radius: 10px;"><strong style="color: var(--gold-24k);">8.</strong> Blancbeu reserves the right to modify or withdraw any offer without prior notice.</div>
+            <div style="margin-bottom: 14px; padding: 10px 12px; background: rgba(255, 215, 0, 0.06); border-radius: 10px;"><strong style="color: var(--gold-24k);">9.</strong> Offer is valid only at Blancbeu salon locations.</div>
+            <div style="padding: 10px 12px; background: rgba(255, 215, 0, 0.06); border-radius: 10px;"><strong style="color: var(--gold-24k);">10.</strong> Customers must present the valid offer code or ID proof at the time of service.</div>
         </div>
-        <button class="dev-action-btn tc-action-btn" onclick="closeDevModal()">I Understand</button>
+        <button class="dev-action-btn" onclick="closeDevModal()" style="margin-top: 20px; width: 100%; max-width: 280px; padding: 12px 30px;">I Understand</button>
     </template>
 
     <nav class="bottom-nav" id="bottomNav">

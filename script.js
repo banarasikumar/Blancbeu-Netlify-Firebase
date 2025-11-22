@@ -402,19 +402,32 @@ function showTC() {
   const modal = document.getElementById('tcModal');
   modal.style.display = 'block';
   document.body.style.overflow = 'hidden';
+  document.body.style.touchAction = 'none';
+  document.addEventListener('touchmove', preventScroll, { passive: false });
 }
 
 function closeTC() {
   const modal = document.getElementById('tcModal');
   modal.style.display = 'none';
   document.body.style.overflow = 'auto';
+  document.body.style.touchAction = 'auto';
+  document.removeEventListener('touchmove', preventScroll);
+}
+
+function preventScroll(e) {
+  const modal = document.getElementById('tcModal');
+  const modalContent = document.querySelector('.tc-modal-content');
+  
+  // Allow scrolling only if the touch is on the modal content
+  if (modalContent && !modalContent.contains(e.target)) {
+    e.preventDefault();
+  }
 }
 
 window.onclick = function(event) {
   const modal = document.getElementById('tcModal');
   if (event.target === modal) {
-    modal.style.display = 'none';
-    document.body.style.overflow = 'auto';
+    closeTC();
   }
 }
 

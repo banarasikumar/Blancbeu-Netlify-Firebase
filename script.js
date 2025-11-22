@@ -989,6 +989,54 @@ class ThemeController {
     }
   }
   
+  updateSystemUIColor(colorValue, isLightMode) {
+    // Update theme-color meta tag with multiple strategies for reliability
+    const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+    if (metaThemeColor) {
+      metaThemeColor.setAttribute('content', colorValue);
+      // Force a reflow to ensure browser recognizes the change
+      void metaThemeColor.offsetHeight;
+    }
+    
+    // Also try updating via id (the initial setup method)
+    const metaById = document.getElementById('metaThemeColor');
+    if (metaById) {
+      metaById.setAttribute('content', colorValue);
+      void metaById.offsetHeight;
+    }
+    
+    // Update color-scheme property
+    document.documentElement.style.colorScheme = isLightMode ? 'light' : 'dark';
+    
+    // Update apple status bar
+    const appleStatusBar = document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]');
+    if (appleStatusBar) {
+      appleStatusBar.setAttribute('content', isLightMode ? 'black' : 'black-translucent');
+      void appleStatusBar.offsetHeight;
+    }
+    
+    // Retry mechanism: update again after short delay to catch async reads
+    setTimeout(() => {
+      if (metaThemeColor) {
+        metaThemeColor.setAttribute('content', colorValue);
+      }
+      if (metaById) {
+        metaById.setAttribute('content', colorValue);
+      }
+      document.documentElement.style.colorScheme = isLightMode ? 'light' : 'dark';
+    }, 50);
+    
+    // Third update for extra reliability
+    setTimeout(() => {
+      if (metaThemeColor) {
+        metaThemeColor.setAttribute('content', colorValue);
+      }
+      if (metaById) {
+        metaById.setAttribute('content', colorValue);
+      }
+    }, 150);
+  }
+
   enableLightMode() {
     // Set data-theme attribute to trigger CSS variable changes
     this.html.setAttribute('data-theme', 'light');
@@ -1008,10 +1056,8 @@ class ThemeController {
       toggleSound(false);
     }
     
-    // Update system UI colors for light mode
-    document.documentElement.style.colorScheme = 'light';
-    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#ffffff');
-    document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]')?.setAttribute('content', 'black');
+    // Update system UI colors for light mode with retry mechanism
+    this.updateSystemUIColor('#ffffff', true);
   }
   
   enableDarkMode() {
@@ -1029,10 +1075,8 @@ class ThemeController {
       togglePause(false);
     }
     
-    // Update system UI colors for dark mode
-    document.documentElement.style.colorScheme = 'dark';
-    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#0a0a0a');
-    document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]')?.setAttribute('content', 'black-translucent');
+    // Update system UI colors for dark mode with retry mechanism
+    this.updateSystemUIColor('#0a0a0a', false);
   }
 }
 

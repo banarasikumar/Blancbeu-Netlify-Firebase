@@ -25,17 +25,40 @@
             shouldBeLightMode = currentHour >= 6 && currentHour < 17;
           }
           
+          const themeColor = shouldBeLightMode ? '#ffffff' : '#0a0a0a';
+          const colorScheme = shouldBeLightMode ? 'light' : 'dark';
+          const appleStatusBarStyle = shouldBeLightMode ? 'black' : 'black-translucent';
+          
+          // Apply theme immediately
           if (shouldBeLightMode) {
             document.documentElement.setAttribute('data-theme', 'light');
             document.body.classList.add('light-mode');
-            // Update system UI colors for light mode
-            document.getElementById('metaThemeColor').setAttribute('content', '#ffffff');
-            document.documentElement.style.colorScheme = 'light';
-          } else {
-            // Update system UI colors for dark mode
-            document.getElementById('metaThemeColor').setAttribute('content', '#0a0a0a');
-            document.documentElement.style.colorScheme = 'dark';
           }
+          
+          // Update system UI colors immediately
+          document.documentElement.style.colorScheme = colorScheme;
+          
+          // Update meta tags with retries for reliability
+          const updateMetaTags = () => {
+            const metaThemeColor = document.getElementById('metaThemeColor') || document.querySelector('meta[name="theme-color"]');
+            if (metaThemeColor) {
+              metaThemeColor.setAttribute('content', themeColor);
+              void metaThemeColor.offsetHeight; // Force reflow
+            }
+            
+            const appleStatusBar = document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]');
+            if (appleStatusBar) {
+              appleStatusBar.setAttribute('content', appleStatusBarStyle);
+              void appleStatusBar.offsetHeight; // Force reflow
+            }
+          };
+          
+          // Update immediately
+          updateMetaTags();
+          
+          // Retry with delays for extra reliability
+          setTimeout(updateMetaTags, 50);
+          setTimeout(updateMetaTags, 150);
         } catch(e) {
           // Fail silently if localStorage is not available
         }

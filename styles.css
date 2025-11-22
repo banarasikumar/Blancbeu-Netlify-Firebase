@@ -5,62 +5,18 @@
 /* ===== DARK MODE COLOR OVERRIDES ===== */
 /* These override transparent text gradients with visible colors */
 
-html:not([data-theme="light"]) .section-title {
-    color: var(--gold-primary) !important;
-}
 
-html:not([data-theme="light"]) .category-title {
-    color: var(--gold-primary) !important;
-}
 
-html:not([data-theme="light"]) .section-subtitle {
-    color: var(--text-secondary) !important;
-}
 
-html:not([data-theme="light"]) .offer-card h3 {
-    color: var(--gold-primary) !important;
-}
 
-html:not([data-theme="light"]) .offer-card p {
-    color: var(--text-secondary) !important;
-}
 
-html:not([data-theme="light"]) .service-name {
-    color: var(--text-primary) !important;
-}
 
-html:not([data-theme="light"]) .category-subtitle {
-    color: var(--text-secondary) !important;
-}
 
-html:not([data-theme="light"]) .new-price {
-    color: var(--gold-bright) !important;
-}
 
-html:not([data-theme="light"]) .footer-section h3 {
-    color: var(--gold-primary) !important;
-}
 
-html:not([data-theme="light"]) .review-card h3 {
-    color: var(--gold-primary) !important;
-}
 
-html:not([data-theme="light"]) .offer-badge {
-    color: var(--text-primary) !important;
-}
 
-html:not([data-theme="light"]) .tc-modal-content h2,
-html:not([data-theme="light"]) .dev-modal-content h2 {
-    color: var(--gold-primary) !important;
-}
 
-html:not([data-theme="light"]) h1,
-html:not([data-theme="light"]) h2,
-html:not([data-theme="light"]) h3,
-html:not([data-theme="light"]) h4,
-html:not([data-theme="light"]) h5 {
-    color: var(--text-primary) !important;
-}
 /* Legacy variable mappings for backward compatibility */
 :root {
     --black: var(--bg-primary);
@@ -2734,3 +2690,45 @@ body.light-mode .nav-label {
 }
 
 /* Smooth animations for nav appearance removed - conflicts with scroll behavior */
+
+/* ===== DARK MODE WEBKIT PROPERTY OVERRIDES ===== */
+/* Override -webkit-text-fill-color: transparent to make text visible */
+
+html:not([data-theme="light"]) .section-title {
+    -webkit-text-fill-color: currentColor !important;
+    color: var(--gold-primary) !important;
+}
+
+html:not([data-theme="light"]) .category-title {
+    -webkit-text-fill-color: currentColor !important;
+    color: var(--gold-primary) !important;
+}
+
+html:not([data-theme="light"]) .new-price {
+    -webkit-text-fill-color: currentColor !important;
+    color: var(--gold-bright) !important;
+}
+
+html:not([data-theme="light"]) .footer-section h3 {
+    -webkit-text-fill-color: currentColor !important;
+    color: var(--gold-primary) !important;
+}
+
+html:not([data-theme="light"]) .review-card h3 {
+    -webkit-text-fill-color: currentColor !important;
+    color: var(--gold-primary) !important;
+}
+
+html:not([data-theme="light"]) .tc-modal-content h2,
+html:not([data-theme="light"]) .dev-modal-content h2 {
+    -webkit-text-fill-color: currentColor !important;
+    color: var(--gold-primary) !important;
+}
+
+html:not([data-theme="light"]) h1,
+html:not([data-theme="light"]) h2,
+html:not([data-theme="light"]) h3,
+html:not([data-theme="light"]) h4,
+html:not([data-theme="light"]) h5 {
+    -webkit-text-fill-color: currentColor !important;
+}

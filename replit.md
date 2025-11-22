@@ -68,7 +68,7 @@ The Blancbeu website now uses a **true system-wide theme architecture** leveragi
   - Call Button: Muted Gold (#D4A017)
 - **Special Offers pricing**: Displays in gold color for better visual hierarchy
 - **All elements**: Properly colored and visible in both light and dark modes
-- **Buttons feature**: Smooth hover effects, elegant shadows, subtle gradients, proper text contrast
+- **Buttons feature**: Smooth hover effects, elegant shadows, solid single-shade colors, proper text contrast
 
 ## External Dependencies
 - **http-server (Node.js)**: Local development server

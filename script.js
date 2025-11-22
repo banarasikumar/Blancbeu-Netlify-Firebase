@@ -1126,7 +1126,23 @@ class ThemeController {
 
 function openDevModal() {
   const modal = document.getElementById('devModal');
+  const modalBody = document.getElementById('devModalBody');
   if (modal) {
+    // Reset modal body to show default "Coming Soon" content
+    if (modalBody) {
+      modalBody.innerHTML = `
+        <div class="dev-icon">🚀</div>
+        <h2>✨ Coming Soon ✨</h2>
+        <p class="dev-message">The App is under development</p>
+        <p class="dev-subtitle">We're working to bring you amazing features! Stay tuned.</p>
+        <div class="dev-dots">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <button class="dev-action-btn" onclick="closeDevModal()">Got it!</button>
+      `;
+    }
     modal.style.display = 'flex';
     modal.style.animation = 'fadeInBackdrop 0.3s ease-out';
     document.body.style.overflow = 'hidden';

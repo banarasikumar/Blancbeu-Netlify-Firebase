@@ -4279,7 +4279,7 @@ html:not([data-theme="light"]) .call-btn:hover {
 body.light-mode .locate-btn {
     background: #F0BCD4 !important;
     backdrop-filter: none !important;
-    border: 2.5px solid #D899C8 !important;
+    border: 1.5px solid #D899C8 !important;
     box-shadow: 
         0 2px 4px rgba(0, 0, 0, 0.08),
         0 6px 16px rgba(216, 153, 200, 0.25) !important;
@@ -4298,7 +4298,7 @@ body.light-mode .locate-btn:hover {
 body.light-mode .whatsapp-btn {
     background: #C8E6C9 !important;
     backdrop-filter: none !important;
-    border: 2.5px solid #81C784 !important;
+    border: 1.5px solid #81C784 !important;
     box-shadow: 
         0 2px 4px rgba(0, 0, 0, 0.08),
         0 6px 16px rgba(129, 199, 132, 0.25) !important;
@@ -4317,7 +4317,7 @@ body.light-mode .whatsapp-btn:hover {
 body.light-mode .call-btn {
     background: #BBDEFB !important;
     backdrop-filter: none !important;
-    border: 2.5px solid #64B5F6 !important;
+    border: 1.5px solid #64B5F6 !important;
     box-shadow: 
         0 2px 4px rgba(0, 0, 0, 0.08),
         0 6px 16px rgba(100, 181, 246, 0.25) !important;

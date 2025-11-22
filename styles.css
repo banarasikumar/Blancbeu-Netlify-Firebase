@@ -2873,13 +2873,6 @@ html:not([data-theme="light"]) .contact-btn::before {
     background: rgba(255, 215, 0, 0.1) !important;
 }
 
-/* ===== COMPLETE DARK MODE FIX FOR CONTACT BUTTONS ===== */
-html:not([data-theme="light"]) .contact-btn {
-    background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 140, 0, 0.1)) !important;
-    color: var(--gold-primary) !important;
-    border: 2px solid var(--gold-primary) !important;
-    -webkit-text-fill-color: currentColor !important;
-}
 
 html:not([data-theme="light"]) .contact-btn:hover {
     background: linear-gradient(135deg, rgba(255, 215, 0, 0.25), rgba(255, 140, 0, 0.15)) !important;
@@ -2915,4 +2908,162 @@ html:not([data-theme="light"]) .locate-btn {
     background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 140, 0, 0.1)) !important;
     color: var(--gold-primary) !important;
     border: 2px solid var(--gold-primary) !important;
+}
+
+/* ===== FINAL COMPREHENSIVE DARK MODE OVERRIDE - FIX ALL HARDCODED LIGHT COLORS ===== */
+
+/* Generic element overrides for dark mode */
+html:not([data-theme="light"]) h1,
+html:not([data-theme="light"]) h2,
+html:not([data-theme="light"]) h3,
+html:not([data-theme="light"]) h4,
+html:not([data-theme="light"]) h5,
+html:not([data-theme="light"]) h6,
+html:not([data-theme="light"]) p,
+html:not([data-theme="light"]) a,
+html:not([data-theme="light"]) span,
+html:not([data-theme="light"]) div {
+    -webkit-text-fill-color: currentColor !important;
+}
+
+/* Override all hardcoded light colors to use proper dark mode colors */
+html:not([data-theme="light"]) .nav a {
+    color: var(--text-primary) !important;
+}
+
+html:not([data-theme="light"]) .offer-section {
+    color: var(--text-primary) !important;
+}
+
+html:not([data-theme="light"]) .offer-card {
+    color: var(--text-primary) !important;
+}
+
+html:not([data-theme="light"]) .offer-card h3 {
+    color: var(--gold-primary) !important;
+}
+
+html:not([data-theme="light"]) .offer-card p {
+    color: var(--text-secondary) !important;
+}
+
+html:not([data-theme="light"]) .category-title {
+    color: var(--gold-primary) !important;
+    -webkit-text-fill-color: currentColor !important;
+}
+
+html:not([data-theme="light"]) .service-name {
+    color: var(--text-primary) !important;
+}
+
+html:not([data-theme="light"]) .service-price {
+    color: var(--gold-bright) !important;
+}
+
+html:not([data-theme="light"]) .review-card {
+    color: var(--text-primary) !important;
+}
+
+html:not([data-theme="light"]) .review-card h3 {
+    color: var(--gold-primary) !important;
+    -webkit-text-fill-color: currentColor !important;
+}
+
+html:not([data-theme="light"]) .review-text {
+    color: var(--text-secondary) !important;
+}
+
+html:not([data-theme="light"]) .reviewer-name {
+    color: var(--gold-primary) !important;
+}
+
+html:not([data-theme="light"]) .review-date {
+    color: var(--text-muted) !important;
+}
+
+html:not([data-theme="light"]) .modal-content h2,
+html:not([data-theme="light"]) .tc-modal-content h2,
+html:not([data-theme="light"]) .dev-modal-content h2 {
+    color: var(--gold-primary) !important;
+    -webkit-text-fill-color: currentColor !important;
+}
+
+html:not([data-theme="light"]) .modal-content p,
+html:not([data-theme="light"]) .tc-modal-content p,
+html:not([data-theme="light"]) .dev-modal-content p {
+    color: var(--text-primary) !important;
+}
+
+html:not([data-theme="light"]) .modal-close {
+    color: var(--text-primary) !important;
+}
+
+html:not([data-theme="light"]) .footer-section h3,
+html:not([data-theme="light"]) .footer-section h4 {
+    color: var(--gold-primary) !important;
+    -webkit-text-fill-color: currentColor !important;
+}
+
+html:not([data-theme="light"]) .footer-section p,
+html:not([data-theme="light"]) .footer-section li {
+    color: var(--text-secondary) !important;
+}
+
+html:not([data-theme="light"]) .footer-link {
+    color: var(--gold-primary) !important;
+}
+
+html:not([data-theme="light"]) .footer-link:hover {
+    color: var(--gold-bright) !important;
+}
+
+html:not([data-theme="light"]) .offer-badge {
+    color: var(--text-primary) !important;
+}
+
+html:not([data-theme="light"]) .brand-name {
+    color: var(--gold-primary) !important;
+    -webkit-text-fill-color: currentColor !important;
+}
+
+html:not([data-theme="light"]) .section-title {
+    color: var(--gold-primary) !important;
+    -webkit-text-fill-color: currentColor !important;
+}
+
+html:not([data-theme="light"]) .new-price {
+    color: var(--gold-bright) !important;
+    -webkit-text-fill-color: currentColor !important;
+}
+
+html:not([data-theme="light"]) .old-price {
+    color: var(--text-muted) !important;
+}
+
+/* Contact buttons (already fixed but ensuring completeness) */
+html:not([data-theme="light"]) .contact-btn {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 140, 0, 0.1)) !important;
+    color: var(--gold-primary) !important;
+    border: 2px solid var(--gold-primary) !important;
+    -webkit-text-fill-color: currentColor !important;
+}
+
+html:not([data-theme="light"]) .btn-text,
+html:not([data-theme="light"]) .btn-icon {
+    color: var(--gold-primary) !important;
+    -webkit-text-fill-color: currentColor !important;
+}
+
+/* Ensure all text in buttons and interactive elements is visible */
+html:not([data-theme="light"]) button,
+html:not([data-theme="light"]) .button,
+html:not([data-theme="light"]) .btn {
+    color: var(--text-primary) !important;
+    -webkit-text-fill-color: currentColor !important;
+}
+
+/* Fallback: any element with transparent text should show properly in dark mode */
+html:not([data-theme="light"]) [style*="text-fill-color: transparent"] {
+    -webkit-text-fill-color: currentColor !important;
+    color: var(--gold-primary) !important;
 }

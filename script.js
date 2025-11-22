@@ -950,25 +950,12 @@ class ThemeController {
     this.currentColorScheme = null;
     this.pollingInterval = null;
     
-    // Detect if running in PWA standalone mode
-    this.isPWAMode = this.detectPWAMode();
-    
     this.init();
     this.startForcedThemePolling();
     this.setupMetaTagObserver();
   }
   
-  detectPWAMode() {
-    // Check if running in standalone PWA mode
-    return window.matchMedia('(display-mode: standalone)').matches || 
-           navigator.standalone === true ||
-           window.navigator.standalone === true;
-  }
-  
   init() {
-    // Mark that we're in initialization (not user-triggered theme change)
-    this.isInitializing = true;
-    
     const savedTheme = localStorage.getItem('theme');
     
     if (savedTheme) {
@@ -980,9 +967,6 @@ class ThemeController {
     } else {
       this.detectTimeOfDay();
     }
-    
-    // Done initializing - now user-triggered changes will trigger reload in PWA mode
-    this.isInitializing = false;
     
     if (this.themeToggleBtn) {
       this.themeToggleBtn.addEventListener('click', () => this.toggleTheme());
@@ -1080,43 +1064,26 @@ class ThemeController {
       void appleStatusBar.offsetHeight;
     }
     
-    // For PWA mode: reload the app so system re-reads the updated meta tags
-    // Only reload on user-triggered theme changes, not during initialization
-    if (this.isPWAMode && !this.isInitializing && !sessionStorage.getItem('_theme_reload_guard')) {
-      // Set guard to prevent reload loops
-      sessionStorage.setItem('_theme_reload_guard', 'true');
-      
-      // Small delay to ensure theme preference is saved to localStorage
+    // Use retry waves for dynamic updates
+    const updateWave = (delay) => {
       setTimeout(() => {
-        window.location.href = '/';
-      }, 500);
-    } else {
-      // Clear guard after reload
-      if (sessionStorage.getItem('_theme_reload_guard')) {
-        sessionStorage.removeItem('_theme_reload_guard');
-      }
-      
-      // For browser mode or after reload: use retry waves for dynamic updates
-      const updateWave = (delay) => {
-        setTimeout(() => {
-          if (metaThemeColor) {
-            metaThemeColor.setAttribute('content', colorValue);
-            void metaThemeColor.offsetHeight;
-          }
-          if (metaById) {
-            metaById.setAttribute('content', colorValue);
-            void metaById.offsetHeight;
-          }
-          document.documentElement.style.colorScheme = this.currentColorScheme;
-          document.documentElement.style.setProperty('color-scheme', this.currentColorScheme, 'important');
-        }, delay);
-      };
-      
-      updateWave(50);
-      updateWave(150);
-      updateWave(300);
-      updateWave(600);
-    }
+        if (metaThemeColor) {
+          metaThemeColor.setAttribute('content', colorValue);
+          void metaThemeColor.offsetHeight;
+        }
+        if (metaById) {
+          metaById.setAttribute('content', colorValue);
+          void metaById.offsetHeight;
+        }
+        document.documentElement.style.colorScheme = this.currentColorScheme;
+        document.documentElement.style.setProperty('color-scheme', this.currentColorScheme, 'important');
+      }, delay);
+    };
+    
+    updateWave(50);
+    updateWave(150);
+    updateWave(300);
+    updateWave(600);
   }
 
   enableLightMode() {

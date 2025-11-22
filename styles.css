@@ -1,12 +1,16 @@
+/* Import comprehensive theme variables */
+@import url('theme-variables.css');
+
+/* Legacy variable mappings for backward compatibility */
 :root {
-    --black: #000000;
-    --deep-black: #0a0a0a;
-    --gold-24k: #FFD700;
-    --gold-bright: #FFC700;
-    --gold-dark: #B8860B;
-    --gold-light: #FFED4E;
-    --text-white: #ffffff;
-    --text-gray: #e0e0e0;
+    --black: var(--bg-primary);
+    --deep-black: var(--bg-secondary);
+    --gold-24k: var(--gold-primary);
+    --gold-bright: var(--gold-bright);
+    --gold-dark: var(--gold-dark);
+    --gold-light: var(--gold-light);
+    --text-white: var(--text-primary);
+    --text-gray: var(--text-secondary);
     --pink-rose: #FFB6C1;
     --green-whatsapp: #25D366;
 }
@@ -26,15 +30,14 @@ html, body {
 
 body {
     font-family: 'Poppins', sans-serif;
-    background: #000000;
-    color: var(--text-white);
+    background: var(--bg-primary);
+    color: var(--text-primary);
     line-height: 1.6;
+    transition: background 0.3s ease, color 0.3s ease;
 }
 
 body.light-mode {
-    background: linear-gradient(135deg, #fef5e7 0%, #fdecea 50%, #f8f9f9 100%);
-    background-attachment: fixed;
-    color: #1a1a1a;
+    /* Styles controlled by CSS variables through data-theme attribute */
 }
 
 .container {
@@ -113,7 +116,7 @@ body.light-mode {
 }
 
 .header {
-    background: rgba(0, 0, 0, 0.98);
+    background: var(--header-bg);
     padding: 15px 0;
     position: fixed;
     top: 0;
@@ -121,9 +124,9 @@ body.light-mode {
     right: 0;
     z-index: 100;
     backdrop-filter: blur(15px);
-    box-shadow: 0 2px 30px rgba(0, 0, 0, 0.8);
-    transition: transform 0.3s ease-in-out;
-    border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+    box-shadow: var(--header-shadow);
+    transition: transform 0.3s ease-in-out, background 0.3s ease, box-shadow 0.3s ease;
+    border-bottom: var(--header-border);
 }
 
 .header .container {

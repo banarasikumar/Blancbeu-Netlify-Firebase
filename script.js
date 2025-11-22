@@ -944,6 +944,7 @@ class ThemeController {
   constructor() {
     this.themeToggleBtn = document.getElementById('themeToggle');
     this.fireworksOverlay = document.getElementById('fireworksOverlay');
+    this.html = document.documentElement;
     this.body = document.body;
     
     this.init();
@@ -978,7 +979,8 @@ class ThemeController {
   }
   
   toggleTheme() {
-    if (this.body.classList.contains('light-mode')) {
+    const currentTheme = this.html.getAttribute('data-theme');
+    if (currentTheme === 'light') {
       this.enableDarkMode();
       localStorage.setItem('theme', 'dark');
     } else {
@@ -988,6 +990,9 @@ class ThemeController {
   }
   
   enableLightMode() {
+    // Set data-theme attribute to trigger CSS variable changes
+    this.html.setAttribute('data-theme', 'light');
+    // Keep light-mode class for legacy animations
     this.body.classList.add('light-mode');
     
     if (this.fireworksOverlay) {
@@ -1007,6 +1012,9 @@ class ThemeController {
   }
   
   enableDarkMode() {
+    // Set data-theme attribute to trigger CSS variable changes
+    this.html.removeAttribute('data-theme');
+    // Remove light-mode class
     this.body.classList.remove('light-mode');
     
     if (this.fireworksOverlay) {

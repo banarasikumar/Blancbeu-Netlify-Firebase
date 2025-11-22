@@ -4208,7 +4208,7 @@ body.light-mode .contact-btn .btn-icon {
 html:not([data-theme="light"]) .locate-btn {
     background: rgba(232, 130, 181, 0.40) !important;
     backdrop-filter: blur(12px) !important;
-    border: 1px solid rgba(232, 130, 181, 0.50) !important;
+    border: 1.5px solid rgba(232, 130, 181, 0.65) !important;
     box-shadow: 
         0 2px 4px rgba(0, 0, 0, 0.2),
         0 8px 20px rgba(232, 130, 181, 0.25),
@@ -4231,7 +4231,7 @@ html:not([data-theme="light"]) .locate-btn:hover {
 html:not([data-theme="light"]) .whatsapp-btn {
     background: rgba(91, 169, 107, 0.40) !important;
     backdrop-filter: blur(12px) !important;
-    border: 1px solid rgba(91, 169, 107, 0.50) !important;
+    border: 1.5px solid rgba(91, 169, 107, 0.65) !important;
     box-shadow: 
         0 2px 4px rgba(0, 0, 0, 0.2),
         0 8px 20px rgba(91, 169, 107, 0.25),
@@ -4254,7 +4254,7 @@ html:not([data-theme="light"]) .whatsapp-btn:hover {
 html:not([data-theme="light"]) .call-btn {
     background: rgba(212, 160, 23, 0.40) !important;
     backdrop-filter: blur(12px) !important;
-    border: 1px solid rgba(212, 160, 23, 0.50) !important;
+    border: 1.5px solid rgba(212, 160, 23, 0.65) !important;
     box-shadow: 
         0 2px 4px rgba(0, 0, 0, 0.2),
         0 8px 20px rgba(212, 160, 23, 0.25),

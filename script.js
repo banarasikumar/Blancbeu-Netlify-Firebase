@@ -1,3 +1,98 @@
+// ===== Smart Cache Update System =====
+let lastKnownVersion = null;
+
+async function initUpdateChecker() {
+  try {
+    // Get stored version from localStorage
+    const storedVersion = localStorage.getItem('blancbeu_version');
+    const storedTimestamp = localStorage.getItem('blancbeu_timestamp');
+    
+    // Fetch latest version from server (always from network)
+    const versionResponse = await fetch('/version.json?t=' + Date.now(), {
+      cache: 'no-store',
+      headers: { 'Cache-Control': 'no-cache, no-store, must-revalidate' }
+    });
+    
+    if (versionResponse.ok) {
+      const serverVersion = await versionResponse.json();
+      const serverTimestamp = serverVersion.timestamp;
+      
+      lastKnownVersion = serverVersion;
+      
+      // Check if this is first load or if server has newer version
+      const isFirstLoad = !storedVersion || !storedTimestamp;
+      const hasNewerVersion = serverTimestamp > parseInt(storedTimestamp || 0);
+      
+      if (isFirstLoad) {
+        console.log('🎉 First time load - caching version', serverVersion.version);
+        localStorage.setItem('blancbeu_version', serverVersion.version);
+        localStorage.setItem('blancbeu_timestamp', serverTimestamp);
+      } else if (hasNewerVersion) {
+        console.warn('🔄 Newer version detected! Clearing cache and reloading...');
+        console.log('Old version:', storedVersion, '| New version:', serverVersion.version);
+        
+        // Clear all cache and cookies
+        await clearAllCacheAndCookies();
+        
+        // Update stored version
+        localStorage.setItem('blancbeu_version', serverVersion.version);
+        localStorage.setItem('blancbeu_timestamp', serverTimestamp);
+        
+        // Notify service worker to clear cache
+        if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+          navigator.serviceWorker.controller.postMessage({
+            type: 'CLEAR_CACHE'
+          });
+        }
+        
+        // Force reload with fresh content
+        window.location.reload(true);
+      } else {
+        console.log('✅ Cache is fresh - version', storedVersion);
+        localStorage.setItem('blancbeu_version', serverVersion.version);
+      }
+    }
+  } catch (error) {
+    console.log('ℹ️ Could not check for updates:', error.message);
+    // Continue app loading even if version check fails
+  }
+}
+
+async function clearAllCacheAndCookies() {
+  try {
+    // Clear all cookies
+    document.cookie.split(";").forEach((c) => {
+      document.cookie = c
+        .replace(/^ +/, "")
+        .replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+    });
+    
+    // Clear localStorage (except version info which we just set)
+    const versionData = {
+      version: localStorage.getItem('blancbeu_version'),
+      timestamp: localStorage.getItem('blancbeu_timestamp')
+    };
+    localStorage.clear();
+    localStorage.setItem('blancbeu_version', versionData.version);
+    localStorage.setItem('blancbeu_timestamp', versionData.timestamp);
+    
+    // Clear sessionStorage
+    sessionStorage.clear();
+    
+    // Clear all caches (for service worker)
+    if ('caches' in window) {
+      const cacheNames = await caches.keys();
+      await Promise.all(
+        cacheNames.map(cacheName => caches.delete(cacheName))
+      );
+    }
+    
+    console.log('✨ All cache and cookies cleared!');
+  } catch (error) {
+    console.error('Error clearing cache:', error);
+  }
+}
+
 const servicesData = {
   groups: [
     {

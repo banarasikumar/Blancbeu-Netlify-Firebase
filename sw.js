@@ -1,4 +1,6 @@
 const CACHE_NAME = 'blancbeu-v7-optimized';
+const VERSION_URL = '/version.json';
+
 const urlsToCache = [
   '/',
   '/index.html',
@@ -7,6 +9,7 @@ const urlsToCache = [
   '/fireworks.css',
   '/fireworks.js',
   '/manifest.json',
+  '/version.json',
   '/icon-72x72.webp',
   '/icon-96x96.webp',
   '/icon-144x144.webp',
@@ -44,15 +47,41 @@ self.addEventListener('install', (event) => {
   );
 });
 
-// Fetch event
+// Fetch event with version checking
 self.addEventListener('fetch', (event) => {
+  const request = event.request;
+  
+  // Always fetch version.json from network to check for updates
+  if (request.url.includes('version.json')) {
+    event.respondWith(
+      fetch(request)
+        .then((response) => {
+          return response;
+        })
+        .catch(() => {
+          return caches.match(request);
+        })
+    );
+    return;
+  }
+
+  // For other requests, use cache-first strategy
   event.respondWith(
-    caches.match(event.request)
+    caches.match(request)
       .then((response) => {
-        // Return cached version or fetch from network
-        return response || fetch(event.request);
-      }
-    )
+        return response || fetch(request)
+          .then((networkResponse) => {
+            // Cache new responses
+            if (networkResponse && networkResponse.status === 200) {
+              const cache = caches.open(CACHE_NAME);
+              cache.then((c) => c.put(request, networkResponse.clone()));
+            }
+            return networkResponse;
+          });
+      })
+      .catch(() => {
+        return fetch(request);
+      })
   );
 });
 
@@ -70,4 +99,16 @@ self.addEventListener('activate', (event) => {
     }).then(() => self.clients.claim())
   );
   self.skipWaiting();
+});
+
+// Message handler for cache invalidation
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.type === 'CLEAR_CACHE') {
+    caches.delete(CACHE_NAME).then(() => {
+      caches.open(CACHE_NAME).then((cache) => {
+        cache.addAll(urlsToCache);
+        event.ports[0].postMessage({ success: true });
+      });
+    });
+  }
 });

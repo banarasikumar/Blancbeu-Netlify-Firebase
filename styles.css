@@ -339,6 +339,7 @@ body.light-mode {
     display: flex;
     gap: 30px;
     align-items: center;
+    /* NO OPACITY ON NAV - Allow buttons to be visible */
 }
 
 .nav a {
@@ -408,20 +409,30 @@ body.light-mode {
     display: none !important;
 }
 
-/* NUCLEAR FIX: Force button visibility above ALL CSS rules */
+/* ABSOLUTE NUCLEAR OVERRIDE - MAXIMUM PRIORITY */
 .nav .install-app-btn,
 button.install-app-btn,
-#installBtn.install-app-btn {
-    opacity: 1 !important;
+#installBtn.install-app-btn,
+[id="installBtn"] {
+    opacity: 1.0 !important;
     visibility: visible !important;
+    display: flex !important;
+    pointer-events: auto !important;
     background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%) !important;
     color: #000000 !important;
     border: 2px solid #FFD700 !important;
+    padding: 10px 22px !important;
+    border-radius: 25px !important;
+    font-weight: 700 !important;
+    font-size: 14px !important;
     filter: none !important;
     -webkit-filter: none !important;
     mix-blend-mode: normal !important;
     text-shadow: none !important;
     box-shadow: 0 4px 20px rgba(255, 215, 0, 0.8), 0 0 15px rgba(255, 215, 0, 0.5) !important;
+    text-decoration: none !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
 }
 
 @keyframes installPulse {

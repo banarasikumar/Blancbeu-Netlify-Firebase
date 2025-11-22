@@ -1,6 +1,6 @@
 {
-  "version": "19.2.0",
-  "lastUpdated": "2025-11-22T16:06:00Z",
-  "timestamp": 1763827560000,
-  "changes": "FINAL FIX: Added nuclear-level CSS override for install button with multi-selector specificity to force full opacity and visibility"
+  "version": "20.0.0",
+  "lastUpdated": "2025-11-22T16:07:00Z",
+  "timestamp": 1763827620000,
+  "changes": "ABSOLUTE FINAL: Expanded nuclear override with display flex, pointer-events, and all appearance resets to force button visibility"
 }

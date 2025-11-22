@@ -2616,7 +2616,7 @@ body.light-mode {
 }
 
 /* Light mode styles for bottom navigation */
-body.light-mode .bottom-nav {
+html[data-theme="light"] .bottom-nav {
     background: rgba(255, 255, 255, 0.95) !important;
     backdrop-filter: blur(30px) saturate(180%) !important;
     -webkit-backdrop-filter: blur(30px) saturate(180%) !important;
@@ -2624,7 +2624,7 @@ body.light-mode .bottom-nav {
     border-top: 1px solid rgba(212, 160, 23, 0.2) !important;
 }
 
-body.light-mode .bottom-nav::before {
+html[data-theme="light"] .bottom-nav::before {
     background: linear-gradient(
         90deg,
         transparent,

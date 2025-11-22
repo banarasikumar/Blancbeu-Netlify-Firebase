@@ -303,7 +303,7 @@
                         <span class="new-price">₹99</span>
                     </div>
                     <div class="sparkle-line"></div>
-                    <button class="tc-btn" onclick="showTC()">T&C</button>
+                    <button class="tc-btn" data-page="terms">T&C</button>
                 </div>
 
                 <div class="offer-card glow-card">
@@ -315,7 +315,7 @@
                         <span class="new-price">50% OFF*</span>
                     </div>
                     <div class="sparkle-line"></div>
-                    <button class="tc-btn" onclick="showTC()">T&C</button>
+                    <button class="tc-btn" data-page="terms">T&C</button>
                 </div>
 
                 <div class="offer-card glow-card">
@@ -327,7 +327,7 @@
                         <span class="new-price">25% OFF</span>
                     </div>
                     <div class="sparkle-line"></div>
-                    <button class="tc-btn" onclick="showTC()">T&C</button>
+                    <button class="tc-btn" data-page="terms">T&C</button>
                 </div>
             </div>
         </div>
@@ -448,7 +448,7 @@
     <div id="devModal" class="dev-modal">
         <div class="dev-modal-content">
             <button class="dev-close-btn" onclick="closeDevModal()">✕</button>
-            <div class="dev-modal-body">
+            <div class="dev-modal-body" id="devModalBody">
                 <div class="dev-icon">🚀</div>
                 <h2>✨ Coming Soon ✨</h2>
                 <p class="dev-message">The App is under development</p>
@@ -462,6 +462,27 @@
             </div>
         </div>
     </div>
+
+    <!-- T&C Modal Content Template -->
+    <template id="tcModalTemplate">
+        <div class="dev-icon">✨</div>
+        <h2>Offer Terms & Conditions</h2>
+        <div class="tc-modal-content">
+            <ol style="text-align: left; padding: 20px 0;">
+                <li>Only one offer is applicable per transaction at a time.</li>
+                <li>A maximum of 10% of the total bill can be redeemed through coupon cash on the final price.</li>
+                <li>All offers are subject to cancellation at any time without prior notice.</li>
+                <li>The same offer may not be applicable multiple times for the same customer.</li>
+                <li>Offers cannot be combined with other ongoing promotions or discounts.</li>
+                <li>Valid ID proof is required for student discounts and other eligibility-based offers.</li>
+                <li>Services must be availed within the offer validity period mentioned.</li>
+                <li>Blancbeu reserves the right to modify or withdraw any offer without prior notice.</li>
+                <li>Offer is valid only at Blancbeu salon locations.</li>
+                <li>Customers must present the valid offer code or ID proof at the time of service.</li>
+            </ol>
+        </div>
+        <button class="dev-action-btn" onclick="closeDevModal()">Understood</button>
+    </template>
 
     <nav class="bottom-nav" id="bottomNav">
         <a href="#home" class="nav-item active" data-page="home">

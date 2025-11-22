@@ -1133,6 +1133,21 @@ function openDevModal() {
   }
 }
 
+function showTC() {
+  const modal = document.getElementById('devModal');
+  const modalBody = document.getElementById('devModalBody');
+  const template = document.getElementById('tcModalTemplate');
+  
+  if (modal && modalBody && template) {
+    const tcContent = template.content.cloneNode(true);
+    modalBody.innerHTML = '';
+    modalBody.appendChild(tcContent);
+    modal.style.display = 'block';
+    modal.style.animation = 'fadeInBackdrop 0.3s ease-out';
+    document.body.style.overflow = 'hidden';
+  }
+}
+
 function closeDevModal() {
   const modal = document.getElementById('devModal');
   if (modal) {
@@ -1145,6 +1160,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const notificationsBtn = document.querySelector('[data-page="notifications"]');
   const bookingsBtn = document.querySelector('[data-page="bookings"]');
   const accountBtn = document.querySelector('[data-page="account"]');
+  const termsBtn = document.querySelector('[data-page="terms"]');
+  const termsButtons = document.querySelectorAll('[data-page="terms"]');
   const devModal = document.getElementById('devModal');
 
   if (notificationsBtn) {
@@ -1167,6 +1184,13 @@ document.addEventListener('DOMContentLoaded', () => {
       openDevModal();
     });
   }
+
+  termsButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      showTC();
+    });
+  });
 
   if (devModal) {
     devModal.addEventListener('click', (e) => {

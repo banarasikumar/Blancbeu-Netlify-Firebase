@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms & Conditions - Blancbeu</title>
+    
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#000000" id="metaThemeColor">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" id="appleStatusBar">
+    <meta name="apple-mobile-web-app-title" content="Blancbeu">
+    
+    <!-- Critical: Apply theme IMMEDIATELY before page renders using data-theme attribute -->
+    <script>
+      (function() {
+        try {
+          const savedTheme = localStorage.getItem('theme');
+          const currentHour = new Date().getHours();
+          let shouldBeLightMode = false;
+          
+          if (savedTheme) {
+            shouldBeLightMode = savedTheme === 'light';
+          } else {
+            shouldBeLightMode = currentHour >= 6 && currentHour < 17;
+          }
+          
+          const themeColor = shouldBeLightMode ? '#ffffff' : '#0a0a0a';
+          const colorScheme = shouldBeLightMode ? 'light' : 'dark';
+          const appleStatusBarStyle = shouldBeLightMode ? 'black' : 'black-translucent';
+          
+          // Apply theme immediately
+          if (shouldBeLightMode) {
+            document.documentElement.setAttribute('data-theme', 'light');
+            document.body.classList.add('light-mode');
+          }
+          
+          // Update system UI colors immediately
+          document.documentElement.style.colorScheme = colorScheme;
+          
+          // Update meta tags with retries for reliability
+          const updateMetaTags = () => {
+            const metaThemeColor = document.getElementById('metaThemeColor') || document.querySelector('meta[name="theme-color"]');
+            if (metaThemeColor) {
+              metaThemeColor.setAttribute('content', themeColor);
+              void metaThemeColor.offsetHeight;
+            }
+            
+            const appleStatusBar = document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]');
+            if (appleStatusBar) {
+              appleStatusBar.setAttribute('content', appleStatusBarStyle);
+              void appleStatusBar.offsetHeight;
+            }
+          };
+          
+          updateMetaTags();
+          setTimeout(updateMetaTags, 50);
+          setTimeout(updateMetaTags, 150);
+        } catch(e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="theme-variables.css">
+    <link rel="icon" type="image/webp" href="/icon-192x192.webp">
+    <link rel="icon" type="image/png" href="/icon-192x192.png">
+    <link rel="shortcut icon" href="/icon-192x192.webp">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Poppins:wght@300;400;500;600;700&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="fireworks.css">
+    <style>
+        .terms-page {
+            min-height: 100vh;
+            padding-top: 80px;
+            padding-bottom: 100px;
+        }
+        
+        .terms-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .terms-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .terms-header h1 {
+            font-family: 'Cinzel', serif;
+            background: linear-gradient(135deg, var(--gold-24k), var(--gold-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .terms-header p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+        
+        .terms-content {
+            color: var(--text-primary);
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+        
+        .terms-content ol {
+            padding-left: 25px;
+            list-style-position: outside;
+        }
+        
+        .terms-content li {
+            margin-bottom: 20px;
+            color: var(--text-secondary);
+        }
+        
+        .terms-content strong {
+            color: var(--text-primary);
+        }
+        
+        .back-button {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, var(--gold-24k), var(--gold-bright));
+            color: #000;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            position: fixed;
+            top: 100px;
+            left: 20px;
+            z-index: 100;
+        }
+        
+        .back-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 35px rgba(255, 215, 0, 0.9);
+        }
+        
+        @media (max-width: 768px) {
+            .terms-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .back-button {
+                top: 70px;
+                left: 15px;
+                padding: 8px 16px;
+                font-size: 12px;
+            }
+        }
+        
+        body.light-mode .back-button {
+            background: linear-gradient(135deg, #FFD54F 0%, #FF9800 100%);
+            color: #1a1a1a;
+            box-shadow: 0 4px 20px rgba(255, 193, 7, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <a href="/" class="back-button">← Back</a>
+    
+    <div class="terms-page">
+        <div class="terms-container">
+            <div class="terms-header">
+                <h1>✨ Offer Terms & Conditions ✨</h1>
+                <p>Please read our terms carefully before availing any offer</p>
+            </div>
+            
+            <div class="terms-content">
+                <ol>
+                    <li>Only one offer is applicable per transaction at a time.</li>
+                    <li>A maximum of 10% of the total bill can be redeemed through coupon cash on the final price.</li>
+                    <li>All offers are subject to cancellation at any time without prior notice.</li>
+                    <li>The same offer may not be applicable multiple times for the same customer.</li>
+                    <li>Offers cannot be combined with other ongoing promotions or discounts.</li>
+                    <li>Valid ID proof is required for student discounts and other eligibility-based offers.</li>
+                    <li>Services must be availed within the offer validity period mentioned.</li>
+                    <li>BlancBeu reserves the right to modify or withdraw any offer without prior intimation.</li>
+                    <li>Prices mentioned are inclusive of all applicable taxes unless stated otherwise.</li>
+                    <li>Advance booking is recommended for availing festive and special offers.</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <nav class="bottom-nav" id="bottomNav">
+        <a href="/" class="nav-item" data-page="home">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+            </svg>
+            <span class="nav-label">Home</span>
+        </a>
+        <a href="/#notifications" class="nav-item" data-page="notifications">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/>
+            </svg>
+            <span class="nav-label">Notifications</span>
+        </a>
+        <a href="/#bookings" class="nav-item" data-page="bookings">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/>
+            </svg>
+            <span class="nav-label">My Bookings</span>
+        </a>
+        <a href="https://wa.me/919229915277" class="nav-item" data-page="chat">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/>
+            </svg>
+            <span class="nav-label">Chat</span>
+        </a>
+        <a href="/#account" class="nav-item" data-page="account">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+            </svg>
+            <span class="nav-label">Account</span>
+        </a>
+    </nav>
+
+    <script src="script.js"></script>
+</body>
+</html>

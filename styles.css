@@ -375,9 +375,9 @@ body.light-mode {
 }
 
 .install-app-btn {
-    background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
-    color: #000000;
-    border: none;
+    background: linear-gradient(135deg, var(--gold-24k) 0%, var(--gold-bright) 100%);
+    color: var(--bg-primary);
+    border: 2px solid var(--gold-24k);
     padding: 10px 22px;
     border-radius: 25px;
     font-weight: 700;
@@ -387,7 +387,7 @@ body.light-mode {
     align-items: center;
     gap: 8px;
     transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    box-shadow: 0 4px 20px rgba(255, 215, 0, 0.5);
+    box-shadow: 0 4px 20px rgba(255, 215, 0, 0.6), 0 0 15px rgba(255, 215, 0, 0.3);
     animation: installPulse 2s ease-in-out infinite;
     position: relative;
     overflow: hidden;
@@ -623,7 +623,8 @@ body.light-mode .theme-toggle-btn:hover {
 body.light-mode .install-app-btn {
     background: linear-gradient(135deg, #FFD54F 0%, #FF9800 100%);
     color: #1a1a1a;
-    box-shadow: 0 4px 20px rgba(255, 193, 7, 0.5);
+    border: 2px solid #b8860b;
+    box-shadow: 0 4px 20px rgba(255, 193, 7, 0.6), 0 0 15px rgba(255, 193, 7, 0.3);
 }
 
 body.light-mode .tc-modal-content {

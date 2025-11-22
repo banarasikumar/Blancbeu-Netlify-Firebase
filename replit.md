@@ -64,7 +64,7 @@ The Blancbeu website now uses a **true system-wide theme architecture** leveragi
 - **Fixed "Call Now" button**: Fully visible with proper dark mode styling
 - **Contact Buttons**: Muted solid colors for sophisticated appearance:
   - Locate Button: Muted Pink (#E882B5)
-  - WhatsApp Button: Muted Teal/Blue-Green (#5BA3A3)
+  - WhatsApp Button: Muted Green (#5BA96B) - like actual WhatsApp tone, less vibrant
   - Call Button: Muted Gold (#D4A017)
 - **Special Offers pricing**: Displays in gold color for better visual hierarchy
 - **All elements**: Properly colored and visible in both light and dark modes

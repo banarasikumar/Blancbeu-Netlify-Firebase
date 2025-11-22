@@ -3616,16 +3616,16 @@ html:not([data-theme="light"]) .locate-btn:hover {
 
 /* WhatsApp button: Muted Teal/Blue-Green */
 html:not([data-theme="light"]) .whatsapp-btn {
-    background: linear-gradient(135deg, #5BA3A3, #4A9B9B) !important;
+    background: linear-gradient(135deg, #5BA96B, #4A9B5F) !important;
     color: #ffffff !important;
-    border: 2px solid #5BA3A3 !important;
-    box-shadow: 0 8px 20px rgba(91, 163, 163, 0.35) !important;
+    border: 2px solid #5BA96B !important;
+    box-shadow: 0 8px 20px rgba(91, 169, 107, 0.35) !important;
     -webkit-text-fill-color: currentColor !important;
 }
 
 html:not([data-theme="light"]) .whatsapp-btn:hover {
-    background: linear-gradient(135deg, #4A9B9B, #3D8A8A) !important;
-    box-shadow: 0 12px 28px rgba(91, 163, 163, 0.45) !important;
+    background: linear-gradient(135deg, #4A9B5F, #3D8A50) !important;
+    box-shadow: 0 12px 28px rgba(91, 169, 107, 0.45) !important;
     transform: translateY(-2px) !important;
 }
 
@@ -3662,15 +3662,15 @@ body.light-mode .locate-btn:hover {
 
 /* WhatsApp button: Muted Teal/Blue-Green */
 body.light-mode .whatsapp-btn {
-    background: linear-gradient(135deg, #5BA3A3, #4A9B9B) !important;
+    background: linear-gradient(135deg, #5BA96B, #4A9B5F) !important;
     color: #ffffff !important;
-    border: 2px solid #5BA3A3 !important;
-    box-shadow: 0 8px 20px rgba(91, 163, 163, 0.35) !important;
+    border: 2px solid #5BA96B !important;
+    box-shadow: 0 8px 20px rgba(91, 169, 107, 0.35) !important;
 }
 
 body.light-mode .whatsapp-btn:hover {
-    background: linear-gradient(135deg, #4A9B9B, #3D8A8A) !important;
-    box-shadow: 0 12px 28px rgba(91, 163, 163, 0.45) !important;
+    background: linear-gradient(135deg, #4A9B5F, #3D8A50) !important;
+    box-shadow: 0 12px 28px rgba(91, 169, 107, 0.45) !important;
     transform: translateY(-2px) !important;
 }
 

@@ -1,4 +1,4 @@
-/* Light Mode Theme - Complete Light Theme Overrides */
+/* Light Mode Theme - Complete System-wide Theme with Intelligent Text Contrast */
 
 :root {
     --black: #1a1a1a;
@@ -17,8 +17,20 @@ body {
     background: linear-gradient(135deg, #fef5e7 0%, #fdecea 50%, #f8f9f9 100%);
     background-attachment: fixed;
     color: #1a1a1a;
+    font-family: 'Poppins', sans-serif;
 }
 
+/* Base text color contrast for light backgrounds */
+h1, h2, h3, h4, h5, h6 {
+    color: #1a1a1a;
+    font-weight: 700;
+}
+
+p, span, div, a {
+    color: #333333;
+}
+
+/* Sparkles - colorful in light mode */
 .sparkles {
     background-image: 
         radial-gradient(3px 3px at 20% 30%, #FF6B6B, transparent),
@@ -30,8 +42,9 @@ body {
     animation: none !important;
 }
 
+/* Header - white background with dark text */
 .header {
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 0.98);
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
     border-bottom: 1px solid rgba(212, 160, 23, 0.2);
 }
@@ -47,36 +60,37 @@ body {
 }
 
 .brand-name {
-    background: linear-gradient(135deg, #b8860b 0%, #d4a017 30%, #e6b800 60%, #b8860b 100%);
+    background: linear-gradient(135deg, #8B6914 0%, #B8860B 30%, #A0851D 60%, #704914 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    filter: drop-shadow(0 2px 8px rgba(212, 160, 23, 0.3));
+    filter: drop-shadow(0 2px 8px rgba(139, 105, 20, 0.4));
 }
 
 .brand-subtitle {
-    color: rgba(184, 134, 11, 0.9);
-    text-shadow: 0 1px 4px rgba(212, 160, 23, 0.3);
+    color: #8B6914;
+    text-shadow: 0 1px 4px rgba(139, 105, 20, 0.3);
+    font-weight: 600;
 }
 
 .nav a {
-    color: rgba(26, 26, 26, 0.9);
+    color: #1a1a1a;
 }
 
 .nav a:hover {
-    color: #b8860b;
-    text-shadow: 0 0 8px rgba(212, 160, 23, 0.3);
+    color: #8B6914;
+    text-shadow: 0 0 8px rgba(139, 105, 20, 0.3);
 }
 
 .theme-toggle-btn {
-    background: linear-gradient(135deg, rgba(255, 193, 7, 0.2), rgba(255, 152, 0, 0.15));
+    background: linear-gradient(135deg, rgba(139, 105, 20, 0.15), rgba(180, 134, 11, 0.1));
     backdrop-filter: blur(10px);
-    box-shadow: 0 8px 32px rgba(212, 160, 23, 0.25), inset 0 1px 2px rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px rgba(139, 105, 20, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.4);
 }
 
 .theme-toggle-btn:hover {
-    background: linear-gradient(135deg, rgba(255, 193, 7, 0.3), rgba(255, 152, 0, 0.2));
-    box-shadow: 0 12px 40px rgba(212, 160, 23, 0.35), inset 0 1px 2px rgba(255, 255, 255, 0.4);
+    background: linear-gradient(135deg, rgba(139, 105, 20, 0.25), rgba(180, 134, 11, 0.15));
+    box-shadow: 0 12px 40px rgba(139, 105, 20, 0.3), inset 0 1px 2px rgba(255, 255, 255, 0.5);
 }
 
 .install-app-btn {
@@ -85,11 +99,16 @@ body {
     box-shadow: 0 4px 20px rgba(255, 193, 7, 0.5);
 }
 
+.install-app-btn:hover {
+    background: linear-gradient(135deg, #FFE082 0%, #FFB74D 100%);
+}
+
+/* Carousel with light background and dark text */
 .carousel {
-    background: linear-gradient(135deg, #fef5e7 0%, #fdecea 50%, #f8f9f9 100%);
+    background: linear-gradient(135deg, #ffffff 0%, #fef5e7 50%, #ffffff 100%);
     background-attachment: fixed;
-    box-shadow: 0 8px 30px rgba(212, 160, 23, 0.25);
-    border: 2px solid rgba(212, 160, 23, 0.3);
+    box-shadow: 0 8px 30px rgba(139, 105, 20, 0.25);
+    border: 2px solid rgba(139, 105, 20, 0.3);
 }
 
 .carousel-track {
@@ -101,34 +120,37 @@ body {
 }
 
 .carousel-btn {
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.95);
     color: #1a1a1a;
-    border: 2px solid rgba(212, 160, 23, 0.4);
-    box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
+    border: 2px solid rgba(139, 105, 20, 0.4);
+    box-shadow: 0 4px 15px rgba(139, 105, 20, 0.25);
 }
 
 .carousel-btn:hover {
     background: rgba(255, 255, 255, 1);
+    color: #8B6914;
     transform: scale(1.1);
-    box-shadow: 0 6px 25px rgba(255, 193, 7, 0.5);
+    box-shadow: 0 6px 25px rgba(139, 105, 20, 0.5);
 }
 
 .carousel-dots span {
-    background: rgba(212, 160, 23, 0.4);
-    border: 2px solid rgba(212, 160, 23, 0.6);
+    background: rgba(139, 105, 20, 0.4);
+    border: 2px solid rgba(139, 105, 20, 0.6);
 }
 
 .carousel-dots span.active {
-    background: linear-gradient(135deg, #FFD54F, #FF9800);
-    box-shadow: 0 0 15px rgba(255, 193, 7, 0.6);
+    background: linear-gradient(135deg, #8B6914, #B8860B);
+    box-shadow: 0 0 15px rgba(139, 105, 20, 0.6);
 }
 
+/* Hide fireworks in light mode */
 .fireworks-overlay {
     display: none !important;
     visibility: hidden !important;
     opacity: 0 !important;
 }
 
+/* Disable animations in light mode */
 * {
     animation: none !important;
     animation-duration: 0s !important;
@@ -136,20 +158,23 @@ body {
     animation-iteration-count: 1 !important;
 }
 
+/* Sections with light backgrounds and contrasting text */
 .section-title {
     color: #1a1a1a;
-    text-shadow: 0 2px 15px rgba(212, 160, 23, 0.4);
+    text-shadow: 0 2px 15px rgba(139, 105, 20, 0.3);
+    font-weight: 700;
 }
 
 .section-subtitle {
     color: #333333;
+    font-weight: 500;
 }
 
 .offer-card,
 .service-card,
 .review-card {
-    background: rgba(255, 255, 255, 0.9);
-    border: 2px solid rgba(212, 160, 23, 0.3);
+    background: rgba(255, 255, 255, 0.95);
+    border: 2px solid rgba(139, 105, 20, 0.3);
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
     animation: none !important;
 }
@@ -159,14 +184,12 @@ body {
 .review-card:hover {
     animation: none !important;
     transform: translateY(-8px) scale(1.02);
+    background: rgba(255, 255, 255, 1);
 }
 
-.glow-card {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 250, 240, 0.9) 100%);
-}
-
+/* Contact section with intelligent text contrast */
 .contact-buttons {
-    background: linear-gradient(135deg, #fef5e7 0%, #fdecea 50%, #f8f9f9 100%);
+    background: linear-gradient(135deg, #ffffff 0%, #fef5e7 50%, #ffffff 100%);
     background-attachment: fixed;
 }
 
@@ -178,18 +201,19 @@ body {
 }
 
 .contact-btn {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 245, 220, 0.95));
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(255, 245, 220, 0.95));
     color: #1a1a1a;
-    border: 2px solid rgba(212, 160, 23, 0.4);
-    box-shadow: 0 6px 25px rgba(255, 193, 7, 0.3);
+    border: 2px solid rgba(139, 105, 20, 0.4);
+    box-shadow: 0 6px 25px rgba(139, 105, 20, 0.25);
 }
 
 .contact-btn:hover {
-    background: linear-gradient(135deg, rgba(255, 245, 220, 1), rgba(255, 255, 255, 1));
+    background: linear-gradient(135deg, rgba(255, 250, 240, 1), rgba(255, 255, 255, 1));
+    color: #8B6914;
 }
 
 .locate-btn {
-    background: linear-gradient(135deg, rgba(156, 39, 176, 0.1), rgba(103, 58, 183, 0.15));
+    background: linear-gradient(135deg, rgba(156, 39, 176, 0.12), rgba(103, 58, 183, 0.15));
     color: #4A148C;
     border: 2px solid rgba(156, 39, 176, 0.4);
     box-shadow: 0 6px 20px rgba(156, 39, 176, 0.3);
@@ -197,11 +221,10 @@ body {
 
 .locate-btn:hover {
     background: linear-gradient(135deg, rgba(156, 39, 176, 0.2), rgba(103, 58, 183, 0.25));
-    box-shadow: 0 8px 30px rgba(156, 39, 176, 0.5);
 }
 
 .whatsapp-btn {
-    background: linear-gradient(135deg, rgba(37, 211, 102, 0.15), rgba(18, 140, 126, 0.2));
+    background: linear-gradient(135deg, rgba(37, 211, 102, 0.12), rgba(18, 140, 126, 0.15));
     color: #0a5f4f;
     border: 2px solid rgba(37, 211, 102, 0.5);
     box-shadow: 0 6px 20px rgba(37, 211, 102, 0.3);
@@ -209,11 +232,10 @@ body {
 
 .whatsapp-btn:hover {
     background: linear-gradient(135deg, rgba(37, 211, 102, 0.25), rgba(18, 140, 126, 0.3));
-    box-shadow: 0 8px 30px rgba(37, 211, 102, 0.5);
 }
 
 .call-btn {
-    background: linear-gradient(135deg, rgba(33, 150, 243, 0.15), rgba(25, 118, 210, 0.2));
+    background: linear-gradient(135deg, rgba(33, 150, 243, 0.12), rgba(25, 118, 210, 0.15));
     color: #0d47a1;
     border: 2px solid rgba(33, 150, 243, 0.5);
     box-shadow: 0 6px 20px rgba(33, 150, 243, 0.3);
@@ -221,9 +243,9 @@ body {
 
 .call-btn:hover {
     background: linear-gradient(135deg, rgba(33, 150, 243, 0.25), rgba(25, 118, 210, 0.3));
-    box-shadow: 0 8px 30px rgba(33, 150, 243, 0.5);
 }
 
+/* Offer badges with high contrast */
 .offer-badge {
     background: linear-gradient(135deg, #FF6B6B, #FF8E53);
     color: #ffffff;
@@ -242,83 +264,84 @@ body {
     background: linear-gradient(135deg, #667eea, #764ba2);
 }
 
+/* Price text with dark color for visibility on light backgrounds */
 .old-price {
     color: #999999;
     text-decoration-color: #999999;
+    font-size: 14px;
 }
 
 .new-price {
-    background: linear-gradient(135deg, #8B6914, #B8860B);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-shadow: none;
+    color: #8B6914;
     font-weight: 900;
+    font-size: 28px;
+    text-shadow: 0 2px 8px rgba(139, 105, 20, 0.3);
 }
 
 .offer-icon,
 .service-icon {
-    filter: drop-shadow(0 4px 10px rgba(212, 160, 23, 0.4));
-}
-
-h3, h2 {
-    color: #1a1a1a;
-}
-
-p {
-    color: #333333;
+    filter: drop-shadow(0 4px 10px rgba(139, 105, 20, 0.4));
 }
 
 .service-name {
     color: #1a1a1a;
+    font-weight: 600;
 }
 
 .service-price {
-    color: #d4a017;
+    color: #8B6914;
+    font-weight: 700;
 }
 
 .review-text {
-    color: #444444;
+    color: #333333;
+    line-height: 1.6;
 }
 
 .reviewer-name {
     color: #1a1a1a;
+    font-weight: 600;
 }
 
 .review-date {
-    color: #666666;
+    color: #999999;
+    font-size: 13px;
 }
 
 .stars,
 .hearts {
-    filter: drop-shadow(0 2px 8px rgba(255, 193, 7, 0.4));
+    filter: drop-shadow(0 2px 8px rgba(139, 105, 20, 0.4));
 }
 
+/* Offers section */
 .offers-section {
     background: linear-gradient(135deg, #ffffff 0%, #fef5e7 50%, #ffffff 100%);
 }
 
+/* Gallery section */
 .gallery-section {
-    background: linear-gradient(135deg, #fef5e7 0%, #fdecea 50%, #f8f9f9 100%);
+    background: linear-gradient(135deg, #ffffff 0%, #fef5e7 50%, #ffffff 100%);
     background-attachment: fixed;
 }
 
+/* Footer with dark text on light background */
 .footer {
     background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
     color: #2c3e50;
     box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
-    border-top: 3px solid rgba(212, 160, 23, 0.4);
+    border-top: 3px solid rgba(139, 105, 20, 0.4);
 }
 
 .footer-section h3 {
-    background: linear-gradient(135deg, #b8860b 0%, #d4a017 100%);
+    background: linear-gradient(135deg, #8B6914 0%, #B8860B 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
 
 .footer-section h4 {
-    color: #d4a017;
+    color: #8B6914;
+    font-weight: 600;
 }
 
 .footer-section p,
@@ -327,22 +350,23 @@ p {
 }
 
 .footer-section a:hover {
-    color: #b8860b;
+    color: #8B6914;
 }
 
 .footer-bottom {
     color: #666666;
-    border-top: 1px solid rgba(212, 160, 23, 0.3);
+    border-top: 1px solid rgba(139, 105, 20, 0.3);
 }
 
+/* Status bar and navigation */
 .status-bar {
-    background: rgba(255, 255, 255, 0.95);
-    border-top: 1px solid rgba(212, 160, 23, 0.2);
+    background: rgba(255, 255, 255, 0.98);
+    border-top: 1px solid rgba(139, 105, 20, 0.2);
 }
 
 .bottom-nav {
-    background: rgba(255, 255, 255, 0.95);
-    border-top: 1px solid rgba(212, 160, 23, 0.15);
+    background: rgba(255, 255, 255, 0.98);
+    border-top: 1px solid rgba(139, 105, 20, 0.15);
     box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.1);
 }
 
@@ -351,5 +375,6 @@ p {
 }
 
 .nav-item.active {
-    color: #b8860b;
+    color: #8B6914;
+    font-weight: 700;
 }

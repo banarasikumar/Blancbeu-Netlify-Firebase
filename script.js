@@ -945,8 +945,19 @@ class ThemeController {
     this.themeToggleBtn = document.getElementById('themeToggle');
     this.fireworksOverlay = document.getElementById('fireworksOverlay');
     this.body = document.body;
+    this.themeLink = this.getThemeLink();
     
     this.init();
+  }
+  
+  getThemeLink() {
+    let link = document.querySelector('link[href="light-mode.css"], link[href="dark-mode.css"]');
+    if (!link) {
+      link = document.createElement('link');
+      link.rel = 'stylesheet';
+      document.head.appendChild(link);
+    }
+    return link;
   }
   
   init() {
@@ -978,7 +989,8 @@ class ThemeController {
   }
   
   toggleTheme() {
-    if (this.body.classList.contains('light-mode')) {
+    const currentTheme = localStorage.getItem('theme');
+    if (currentTheme === 'light') {
       this.enableDarkMode();
       localStorage.setItem('theme', 'dark');
     } else {
@@ -987,8 +999,12 @@ class ThemeController {
     }
   }
   
+  switchThemeCSS(themeName) {
+    this.themeLink.href = themeName === 'light' ? 'light-mode.css' : 'dark-mode.css';
+  }
+  
   enableLightMode() {
-    this.body.classList.add('light-mode');
+    this.switchThemeCSS('light');
     
     if (this.fireworksOverlay) {
       this.fireworksOverlay.classList.remove('active');
@@ -1003,11 +1019,11 @@ class ThemeController {
       toggleSound(false);
     }
     
-    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#e3f2fd');
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#fef5e7');
   }
   
   enableDarkMode() {
-    this.body.classList.remove('light-mode');
+    this.switchThemeCSS('dark');
     
     if (this.fireworksOverlay) {
       this.fireworksOverlay.classList.add('active');

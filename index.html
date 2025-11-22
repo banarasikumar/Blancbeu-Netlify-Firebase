@@ -11,7 +11,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" id="appleStatusBar">
     <meta name="apple-mobile-web-app-title" content="Blancbeu">
     
-    <!-- Critical: Apply theme IMMEDIATELY before page renders to prevent dark flash -->
+    <!-- Critical: Load correct theme CSS before page renders -->
     <script>
       (function() {
         try {
@@ -22,22 +22,16 @@
           if (savedTheme) {
             shouldBeLightMode = savedTheme === 'light';
           } else {
-            // Auto-detect: 6 AM to 5 PM = light mode
             shouldBeLightMode = currentHour >= 6 && currentHour < 17;
           }
           
-          if (shouldBeLightMode) {
-            document.documentElement.classList.add('theme-light-early');
-            document.body.classList.add('light-mode');
-            const themeColorMeta = document.getElementById('metaThemeColor');
-            if (themeColorMeta) themeColorMeta.setAttribute('content', '#fef5e7');
-          } else {
-            document.documentElement.classList.add('theme-dark-early');
-            const themeColorMeta = document.getElementById('metaThemeColor');
-            if (themeColorMeta) themeColorMeta.setAttribute('content', '#000000');
-          }
+          const themeFile = shouldBeLightMode ? 'light-mode.css' : 'dark-mode.css';
+          document.write('<link rel="stylesheet" href="' + themeFile + '">');
+          
+          const themeColorMeta = document.getElementById('metaThemeColor');
+          if (themeColorMeta) themeColorMeta.setAttribute('content', shouldBeLightMode ? '#fef5e7' : '#000000');
         } catch(e) {
-          // Fail silently if localStorage is not available
+          document.write('<link rel="stylesheet" href="dark-mode.css">');
         }
       })();
     </script>
@@ -52,7 +46,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Poppins:wght@300;400;500;600;700&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="dark-mode.css">
     <link rel="stylesheet" href="fireworks.css">
     <link href="https://fonts.googleapis.com/css?family=Russo+One" rel="stylesheet">
 </head>

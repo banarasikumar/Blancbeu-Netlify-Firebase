@@ -1,6 +1,66 @@
 /* Import comprehensive theme variables */
 @import url('theme-variables.css');
 
+
+/* ===== DARK MODE COLOR OVERRIDES ===== */
+/* These override transparent text gradients with visible colors */
+
+html:not([data-theme="light"]) .section-title {
+    color: var(--gold-primary) !important;
+}
+
+html:not([data-theme="light"]) .category-title {
+    color: var(--gold-primary) !important;
+}
+
+html:not([data-theme="light"]) .section-subtitle {
+    color: var(--text-secondary) !important;
+}
+
+html:not([data-theme="light"]) .offer-card h3 {
+    color: var(--gold-primary) !important;
+}
+
+html:not([data-theme="light"]) .offer-card p {
+    color: var(--text-secondary) !important;
+}
+
+html:not([data-theme="light"]) .service-name {
+    color: var(--text-primary) !important;
+}
+
+html:not([data-theme="light"]) .category-subtitle {
+    color: var(--text-secondary) !important;
+}
+
+html:not([data-theme="light"]) .new-price {
+    color: var(--gold-bright) !important;
+}
+
+html:not([data-theme="light"]) .footer-section h3 {
+    color: var(--gold-primary) !important;
+}
+
+html:not([data-theme="light"]) .review-card h3 {
+    color: var(--gold-primary) !important;
+}
+
+html:not([data-theme="light"]) .offer-badge {
+    color: var(--text-primary) !important;
+}
+
+html:not([data-theme="light"]) .tc-modal-content h2,
+html:not([data-theme="light"]) .dev-modal-content h2 {
+    color: var(--gold-primary) !important;
+}
+
+html:not([data-theme="light"]) h1,
+html:not([data-theme="light"]) h2,
+html:not([data-theme="light"]) h3,
+html:not([data-theme="light"]) h4,
+html:not([data-theme="light"]) h5 {
+    color: var(--text-primary) !important;
+}
 /* Legacy variable mappings for backward compatibility */
 :root {
     --black: var(--bg-primary);

@@ -2697,10 +2697,6 @@ html:not([data-theme="light"]) .category-title {
     color: var(--gold-primary) !important;
 }
 
-html:not([data-theme="light"]) .new-price {
-    -webkit-text-fill-color: currentColor !important;
-    color: var(--gold-bright) !important;
-}
 
 html:not([data-theme="light"]) .footer-section h3 {
     -webkit-text-fill-color: currentColor !important;
@@ -2758,9 +2754,6 @@ html:not([data-theme="light"]) .brand-name {
 }
 
 html:not([data-theme="light"]) .new-price,
-html:not([data-theme="light"]) .offer-price {
-    color: var(--gold-bright) !important;
-}
 
 html:not([data-theme="light"]) .old-price {
     color: var(--text-secondary) !important;
@@ -2812,10 +2805,6 @@ html:not([data-theme="light"]) .category-title {
 }
 
 html:not([data-theme="light"]) .offer-price,
-html:not([data-theme="light"]) .new-price {
-    color: var(--gold-bright) !important;
-    -webkit-text-fill-color: currentColor !important;
-}
 
 html:not([data-theme="light"]) .old-price {
     color: var(--text-secondary) !important;
@@ -3021,10 +3010,6 @@ html:not([data-theme="light"]) .section-title {
     -webkit-text-fill-color: currentColor !important;
 }
 
-html:not([data-theme="light"]) .new-price {
-    color: var(--gold-bright) !important;
-    -webkit-text-fill-color: currentColor !important;
-}
 
 html:not([data-theme="light"]) .old-price {
     color: var(--text-muted) !important;
@@ -3095,4 +3080,24 @@ html:not([data-theme="light"]) .contact-btn .btn-text,
 html:not([data-theme="light"]) .contact-btn .btn-icon {
     color: #ffffff !important;
     -webkit-text-fill-color: currentColor !important;
+}
+
+/* ===== DARK MODE SPECIAL OFFERS PRICES - GOLD/YELLOW COLOR ===== */
+html:not([data-theme="light"]) .new-price,
+html:not([data-theme="light"]) .offer-price {
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    -webkit-text-fill-color: currentColor !important;
+    background-clip: unset !important;
+    color: var(--gold-primary) !important;
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.6) !important;
+}
+
+html:not([data-theme="light"]) .old-price {
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    -webkit-text-fill-color: currentColor !important;
+    background-clip: unset !important;
+    color: var(--text-muted) !important;
+    text-decoration: line-through !important;
 }

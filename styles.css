@@ -139,6 +139,7 @@ body.light-mode {
     left: 0;
     right: 0;
     z-index: 100;
+    backdrop-filter: blur(15px);
     box-shadow: var(--header-shadow);
     transition: transform 0.3s ease-in-out, background 0.3s ease, box-shadow 0.3s ease;
     border-bottom: var(--header-border);
@@ -339,7 +340,6 @@ body.light-mode {
     display: flex;
     gap: 30px;
     align-items: center;
-    /* NO OPACITY ON NAV - Allow buttons to be visible */
 }
 
 .nav a {
@@ -375,64 +375,22 @@ body.light-mode {
 }
 
 .install-app-btn {
-    background: #FFD700 !important;
-    background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%) !important;
-    color: #000000 !important;
-    border: 2px solid #FFD700 !important;
-    padding: 10px 22px !important;
-    border-radius: 25px !important;
-    font-weight: 700 !important;
-    font-size: 14px !important;
-    cursor: pointer !important;
-    display: flex !important;
-    align-items: center !important;
-    gap: 8px !important;
-    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important;
-    box-shadow: 0 4px 20px rgba(255, 215, 0, 0.8), 0 0 15px rgba(255, 215, 0, 0.5) !important;
-    animation: installPulse 2s ease-in-out infinite !important;
-    position: relative !important;
-    overflow: visible !important;
-    opacity: 1 !important;
-    z-index: 1000 !important;
-    mix-blend-mode: normal !important;
-    filter: none !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-    background-attachment: fixed !important;
-}
-
-.install-app-btn::before {
-    display: none !important;
-}
-
-.install-app-btn::after {
-    display: none !important;
-}
-
-/* ABSOLUTE NUCLEAR OVERRIDE - MAXIMUM PRIORITY */
-.nav .install-app-btn,
-button.install-app-btn,
-#installBtn.install-app-btn,
-[id="installBtn"] {
-    opacity: 1.0 !important;
-    visibility: visible !important;
-    display: flex !important;
-    pointer-events: auto !important;
-    background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%) !important;
-    color: #000000 !important;
-    border: 2px solid #FFD700 !important;
-    padding: 10px 22px !important;
-    border-radius: 25px !important;
-    font-weight: 700 !important;
-    font-size: 14px !important;
-    filter: none !important;
-    -webkit-filter: none !important;
-    mix-blend-mode: normal !important;
-    text-shadow: none !important;
-    box-shadow: 0 4px 20px rgba(255, 215, 0, 0.8), 0 0 15px rgba(255, 215, 0, 0.5) !important;
-    text-decoration: none !important;
-    -webkit-appearance: none !important;
-    appearance: none !important;
+    background: linear-gradient(135deg, var(--gold-24k) 0%, var(--gold-bright) 100%);
+    color: var(--bg-primary);
+    border: 2px solid var(--gold-24k);
+    padding: 10px 22px;
+    border-radius: 25px;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    box-shadow: 0 4px 20px rgba(255, 215, 0, 0.6), 0 0 15px rgba(255, 215, 0, 0.3);
+    animation: installPulse 2s ease-in-out infinite;
+    position: relative;
+    overflow: hidden;
 }
 
 @keyframes installPulse {
@@ -443,6 +401,27 @@ button.install-app-btn,
     50% {
         transform: scale(1.05);
         box-shadow: 0 6px 30px rgba(255, 215, 0, 0.8);
+    }
+}
+
+.install-app-btn::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transform: rotate(45deg);
+    animation: installShine 3s linear infinite;
+}
+
+@keyframes installShine {
+    0% {
+        left: -200%;
+    }
+    100% {
+        left: 200%;
     }
 }
 
@@ -639,20 +618,6 @@ body.light-mode .theme-toggle-btn {
 body.light-mode .theme-toggle-btn:hover {
     background: linear-gradient(135deg, rgba(255, 193, 7, 0.3), rgba(255, 152, 0, 0.2));
     box-shadow: 0 12px 40px rgba(212, 160, 23, 0.35), inset 0 1px 2px rgba(255, 255, 255, 0.4);
-}
-
-/* Dark mode - ensure install button is SOLID GOLD */
-html:not([data-theme="light"]) .install-app-btn {
-    background: #FFD700 !important;
-    background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%) !important;
-    color: #000000 !important;
-    border: 2px solid #FFD700 !important;
-    box-shadow: 0 4px 20px rgba(255, 215, 0, 0.8), 0 0 15px rgba(255, 215, 0, 0.5) !important;
-    opacity: 1 !important;
-    backdrop-filter: none !important;
-    filter: none !important;
-    mix-blend-mode: normal !important;
-    z-index: 1000 !important;
 }
 
 body.light-mode .install-app-btn {
@@ -4516,54 +4481,4 @@ body.light-mode .call-btn .btn-text,
 body.light-mode .call-btn .btn-icon {
     color: #1565C0 !important;
     -webkit-text-fill-color: #1565C0 !important;
-}
-
-/* ========== ULTIMATE FINAL OVERRIDE - INSTALL BUTTON VISIBILITY ========== */
-/* This rule comes LAST so it overrides everything in the cascade */
-
-#installBtn,
-.nav button#installBtn,
-button.install-app-btn,
-.install-app-btn {
-    opacity: 1.0 !important;
-    visibility: visible !important;
-    display: flex !important;
-    pointer-events: auto !important;
-    background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%) !important;
-    background-color: #FFD700 !important;
-    color: #000000 !important;
-    border: 2px solid #FFD700 !important;
-    padding: 10px 22px !important;
-    border-radius: 25px !important;
-    font-weight: 700 !important;
-    font-size: 14px !important;
-    gap: 8px !important;
-    align-items: center !important;
-    justify-content: center !important;
-    filter: none !important;
-    -webkit-filter: none !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-    mix-blend-mode: normal !important;
-    text-shadow: none !important;
-    -webkit-text-fill-color: #000000 !important;
-    box-shadow: 0 4px 20px rgba(255, 215, 0, 0.8), 0 0 15px rgba(255, 215, 0, 0.5) !important;
-    text-decoration: none !important;
-    -webkit-appearance: none !important;
-    appearance: none !important;
-    position: relative !important;
-    z-index: 1000 !important;
-    overflow: visible !important;
-    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important;
-    animation: installPulse 2s ease-in-out infinite !important;
-}
-
-/* Ensure spans inside the button are also visible */
-#installBtn *,
-.nav button#installBtn *,
-button.install-app-btn *,
-.install-app-btn * {
-    opacity: 1 !important;
-    color: #000000 !important;
-    -webkit-text-fill-color: #000000 !important;
 }

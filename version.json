@@ -1,6 +1,6 @@
 {
-  "version": "24.0.0",
-  "lastUpdated": "2025-11-22T16:11:00Z",
-  "timestamp": 1763827860000,
-  "changes": "Cache refresh v24 - Solid gold button with inline styles"
+  "version": "17.8.0",
+  "lastUpdated": "2025-11-22T15:58:00Z",
+  "timestamp": 1763827080000,
+  "changes": "Fixed Install App button styling - now visible with gold gradient and border in both dark and light modes"
 }

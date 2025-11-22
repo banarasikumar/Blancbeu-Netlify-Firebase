@@ -165,11 +165,11 @@ body.light-mode {
 .brand-icon-wrapper {
     position: relative;
     padding: 10px;
-    background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 140, 0, 0.15));
+    background: var(--gold-accent);
     border-radius: 50%;
     transition: all 0.4s ease;
     animation: iconPulse 3s ease-in-out infinite;
-    box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+    box-shadow: 0 0 20px var(--gold-accent);
 }
 
 @keyframes iconPulse {
@@ -184,9 +184,9 @@ body.light-mode {
 }
 
 .brand-icon-wrapper:hover {
-    background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(255, 140, 0, 0.2));
+    background: var(--gold-accent);
     transform: rotate(5deg) scale(1.1);
-    box-shadow: 0 8px 35px rgba(255, 215, 0, 0.6);
+    box-shadow: 0 8px 35px var(--gold-primary);
     animation: none;
 }
 

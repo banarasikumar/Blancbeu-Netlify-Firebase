@@ -11,7 +11,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" id="appleStatusBar">
     <meta name="apple-mobile-web-app-title" content="Blancbeu">
     
-    <!-- Critical: Apply theme IMMEDIATELY before page renders -->
+    <!-- Critical: Apply theme IMMEDIATELY before page renders using data-theme attribute -->
     <script>
       (function() {
         try {
@@ -26,16 +26,16 @@
           }
           
           if (shouldBeLightMode) {
-            document.documentElement.classList.add('theme-light-early');
+            document.documentElement.setAttribute('data-theme', 'light');
             document.body.classList.add('light-mode');
-          } else {
-            document.documentElement.classList.add('theme-dark-early');
           }
+          // Dark mode is default (no attribute needed)
         } catch(e) {
           // Fail silently if localStorage is not available
         }
       })();
     </script>
+    <link rel="stylesheet" href="theme-variables.css">
     <link rel="apple-touch-icon" href="/icon-192x192.png">
     <link rel="apple-touch-startup-image" href="/splash-750x1334.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)">
     <link rel="apple-touch-startup-image" href="/splash-1170x2532.png" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3)">

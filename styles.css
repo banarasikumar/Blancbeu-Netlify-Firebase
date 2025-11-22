@@ -139,7 +139,6 @@ body.light-mode {
     left: 0;
     right: 0;
     z-index: 100;
-    backdrop-filter: blur(15px);
     box-shadow: var(--header-shadow);
     transition: transform 0.3s ease-in-out, background 0.3s ease, box-shadow 0.3s ease;
     border-bottom: var(--header-border);

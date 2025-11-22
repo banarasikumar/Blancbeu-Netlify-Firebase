@@ -1,6 +1,6 @@
 {
-  "version": "19.0.0",
-  "lastUpdated": "2025-11-22T16:04:00Z",
-  "timestamp": 1763827440000,
-  "changes": "Fixed Install App button transparency - added inline styles with maximum specificity to override parent backdrop-filter"
+  "version": "19.1.0",
+  "lastUpdated": "2025-11-22T16:05:00Z",
+  "timestamp": 1763827500000,
+  "changes": "FIXED! Removed backdrop-filter: blur(15px) from .header - was making ALL children transparent"
 }

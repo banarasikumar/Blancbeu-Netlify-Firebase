@@ -1,5 +1,6 @@
 {
-  "version": "16.0.0",
-  "lastUpdated": "2025-11-22T15:30:00Z",
-  "timestamp": 1732288200000
+  "version": "17.0.0",
+  "lastUpdated": "2025-11-22T16:45:00Z",
+  "timestamp": 1732292700000,
+  "changes": "Comprehensive PWA caching - all assets cached on install for super-fast offline-first loading"
 }

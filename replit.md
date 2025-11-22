@@ -59,19 +59,19 @@ The Blancbeu website now uses a **true system-wide theme architecture** leveragi
 - **Music Player**: Background music with rose petal rain animation.
 - **Customer Engagement**: Customer reviews with star ratings and image gallery with proper asset references.
 
-## Recent Changes (v16.2.0 - SMOOTH & SUBTLE CONNECT BUTTONS)
-- **Fixed all text visibility**: Added comprehensive CSS overrides for dark mode text rendering
-- **Fixed "Call Now" button**: Fully visible with proper dark mode styling
-- **Contact Buttons**: Redesigned for subtle, non-distracting appearance:
-  - Locate Button: Soft muted pink pastel (light mode), subtle glass effect (dark mode)
-  - WhatsApp Button: Soft muted green pastel (light mode), subtle glass effect (dark mode)
-  - Call Button: Soft muted gold pastel (light mode), subtle glass effect (dark mode)
-  - **Features**: Smooth glass morphism in dark mode, soft pastels in light mode, subtle shadows, dark text for light mode visibility
+## Recent Changes (v16.3.0 - PROFESSIONAL BORDERED BUTTONS)
+- **Contact Buttons**: Redesigned with elegant bordered style across both themes
+  - **Light Mode**: Soft muted pastels (pink, green, blue) with 1.5px colored borders, dark text for clarity
+    - Locate Button: Soft pink (#F0BCD4) with pink border (#D899C8)
+    - WhatsApp Button: Soft green (#C8E6C9) with green border (#81C784)
+    - Call Button: Light blue (#BBDEFB) with blue border (#64B5F6)
+  - **Dark Mode**: Muted darker shades with 1.5px colored borders, white text
+    - Locate Button: Muted dark pink (#8B4A6B) with light pink border (#C08BA8)
+    - WhatsApp Button: Muted dark green (#4A6B53) with light green border (#7BA589)
+    - Call Button: Muted dark blue (#4A6B8B) with light blue border (#7BA5C0)
+  - **Features**: Consistent 1.5px borders across both modes, professional appearance, hover animations with lift effect
 - **Special Offers pricing**: Displays in gold color for better visual hierarchy
-- **All elements**: Properly colored and visible in both light and dark modes
-- **Buttons feature**: 
-  - Dark Mode: Subtle iOS glass effect (0.40-0.50 opacity), soft blur, gentle shadows - focus on banner/brand
-  - Light Mode: Soft pastel colors with dark text, crystal clear appearance, smooth subtle shadows
+- **All elements**: Properly colored and visible in both light and dark modes with refined borders
 
 ## External Dependencies
 - **http-server (Node.js)**: Local development server

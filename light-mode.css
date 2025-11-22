@@ -1,0 +1,355 @@
+/* Light Mode Theme - Complete Light Theme Overrides */
+
+:root {
+    --black: #1a1a1a;
+    --deep-black: #2a2a2a;
+    --gold-24k: #8B6914;
+    --gold-bright: #A0851D;
+    --gold-dark: #704914;
+    --gold-light: #D4A017;
+    --text-white: #1a1a1a;
+    --text-gray: #555555;
+    --pink-rose: #8B6914;
+    --green-whatsapp: #0a5f4f;
+}
+
+body {
+    background: linear-gradient(135deg, #fef5e7 0%, #fdecea 50%, #f8f9f9 100%);
+    background-attachment: fixed;
+    color: #1a1a1a;
+}
+
+.sparkles {
+    background-image: 
+        radial-gradient(3px 3px at 20% 30%, #FF6B6B, transparent),
+        radial-gradient(3px 3px at 60% 70%, #4ECDC4, transparent),
+        radial-gradient(2px 2px at 50% 50%, #FFE66D, transparent),
+        radial-gradient(2px 2px at 80% 10%, #95E1D3, transparent),
+        radial-gradient(3px 3px at 90% 60%, #A8E6CF, transparent),
+        radial-gradient(2px 2px at 33% 80%, #FF6B9D, transparent);
+    animation: none !important;
+}
+
+.header {
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(212, 160, 23, 0.2);
+}
+
+.brand-icon-wrapper {
+    background: linear-gradient(135deg, rgba(212, 160, 23, 0.3), rgba(230, 184, 0, 0.25));
+    box-shadow: 0 0 20px rgba(212, 160, 23, 0.4);
+}
+
+.brand-icon-wrapper:hover {
+    background: linear-gradient(135deg, rgba(212, 160, 23, 0.4), rgba(230, 184, 0, 0.3));
+    box-shadow: 0 8px 35px rgba(212, 160, 23, 0.6);
+}
+
+.brand-name {
+    background: linear-gradient(135deg, #b8860b 0%, #d4a017 30%, #e6b800 60%, #b8860b 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 2px 8px rgba(212, 160, 23, 0.3));
+}
+
+.brand-subtitle {
+    color: rgba(184, 134, 11, 0.9);
+    text-shadow: 0 1px 4px rgba(212, 160, 23, 0.3);
+}
+
+.nav a {
+    color: rgba(26, 26, 26, 0.9);
+}
+
+.nav a:hover {
+    color: #b8860b;
+    text-shadow: 0 0 8px rgba(212, 160, 23, 0.3);
+}
+
+.theme-toggle-btn {
+    background: linear-gradient(135deg, rgba(255, 193, 7, 0.2), rgba(255, 152, 0, 0.15));
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(212, 160, 23, 0.25), inset 0 1px 2px rgba(255, 255, 255, 0.3);
+}
+
+.theme-toggle-btn:hover {
+    background: linear-gradient(135deg, rgba(255, 193, 7, 0.3), rgba(255, 152, 0, 0.2));
+    box-shadow: 0 12px 40px rgba(212, 160, 23, 0.35), inset 0 1px 2px rgba(255, 255, 255, 0.4);
+}
+
+.install-app-btn {
+    background: linear-gradient(135deg, #FFD54F 0%, #FF9800 100%);
+    color: #1a1a1a;
+    box-shadow: 0 4px 20px rgba(255, 193, 7, 0.5);
+}
+
+.carousel {
+    background: linear-gradient(135deg, #fef5e7 0%, #fdecea 50%, #f8f9f9 100%);
+    background-attachment: fixed;
+    box-shadow: 0 8px 30px rgba(212, 160, 23, 0.25);
+    border: 2px solid rgba(212, 160, 23, 0.3);
+}
+
+.carousel-track {
+    background: #ffffff;
+}
+
+.carousel-slide img {
+    background: #ffffff;
+}
+
+.carousel-btn {
+    background: rgba(255, 255, 255, 0.9);
+    color: #1a1a1a;
+    border: 2px solid rgba(212, 160, 23, 0.4);
+    box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
+}
+
+.carousel-btn:hover {
+    background: rgba(255, 255, 255, 1);
+    transform: scale(1.1);
+    box-shadow: 0 6px 25px rgba(255, 193, 7, 0.5);
+}
+
+.carousel-dots span {
+    background: rgba(212, 160, 23, 0.4);
+    border: 2px solid rgba(212, 160, 23, 0.6);
+}
+
+.carousel-dots span.active {
+    background: linear-gradient(135deg, #FFD54F, #FF9800);
+    box-shadow: 0 0 15px rgba(255, 193, 7, 0.6);
+}
+
+.fireworks-overlay {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+}
+
+* {
+    animation: none !important;
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+    animation-iteration-count: 1 !important;
+}
+
+.section-title {
+    color: #1a1a1a;
+    text-shadow: 0 2px 15px rgba(212, 160, 23, 0.4);
+}
+
+.section-subtitle {
+    color: #333333;
+}
+
+.offer-card,
+.service-card,
+.review-card {
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid rgba(212, 160, 23, 0.3);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    animation: none !important;
+}
+
+.offer-card:hover,
+.service-card:hover,
+.review-card:hover {
+    animation: none !important;
+    transform: translateY(-8px) scale(1.02);
+}
+
+.glow-card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 250, 240, 0.9) 100%);
+}
+
+.contact-buttons {
+    background: linear-gradient(135deg, #fef5e7 0%, #fdecea 50%, #f8f9f9 100%);
+    background-attachment: fixed;
+}
+
+.contact-title {
+    color: #8B6914;
+    font-weight: 700;
+    text-shadow: 0 2px 8px rgba(139, 105, 20, 0.3);
+    animation: none !important;
+}
+
+.contact-btn {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 245, 220, 0.95));
+    color: #1a1a1a;
+    border: 2px solid rgba(212, 160, 23, 0.4);
+    box-shadow: 0 6px 25px rgba(255, 193, 7, 0.3);
+}
+
+.contact-btn:hover {
+    background: linear-gradient(135deg, rgba(255, 245, 220, 1), rgba(255, 255, 255, 1));
+}
+
+.locate-btn {
+    background: linear-gradient(135deg, rgba(156, 39, 176, 0.1), rgba(103, 58, 183, 0.15));
+    color: #4A148C;
+    border: 2px solid rgba(156, 39, 176, 0.4);
+    box-shadow: 0 6px 20px rgba(156, 39, 176, 0.3);
+}
+
+.locate-btn:hover {
+    background: linear-gradient(135deg, rgba(156, 39, 176, 0.2), rgba(103, 58, 183, 0.25));
+    box-shadow: 0 8px 30px rgba(156, 39, 176, 0.5);
+}
+
+.whatsapp-btn {
+    background: linear-gradient(135deg, rgba(37, 211, 102, 0.15), rgba(18, 140, 126, 0.2));
+    color: #0a5f4f;
+    border: 2px solid rgba(37, 211, 102, 0.5);
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.3);
+}
+
+.whatsapp-btn:hover {
+    background: linear-gradient(135deg, rgba(37, 211, 102, 0.25), rgba(18, 140, 126, 0.3));
+    box-shadow: 0 8px 30px rgba(37, 211, 102, 0.5);
+}
+
+.call-btn {
+    background: linear-gradient(135deg, rgba(33, 150, 243, 0.15), rgba(25, 118, 210, 0.2));
+    color: #0d47a1;
+    border: 2px solid rgba(33, 150, 243, 0.5);
+    box-shadow: 0 6px 20px rgba(33, 150, 243, 0.3);
+}
+
+.call-btn:hover {
+    background: linear-gradient(135deg, rgba(33, 150, 243, 0.25), rgba(25, 118, 210, 0.3));
+    box-shadow: 0 8px 30px rgba(33, 150, 243, 0.5);
+}
+
+.offer-badge {
+    background: linear-gradient(135deg, #FF6B6B, #FF8E53);
+    color: #ffffff;
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.5);
+}
+
+.offer-badge.hot {
+    background: linear-gradient(135deg, #FF416C, #FF4B2B);
+}
+
+.offer-badge.festive {
+    background: linear-gradient(135deg, #4ECDC4, #44A08D);
+}
+
+.offer-badge.student {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+}
+
+.old-price {
+    color: #999999;
+    text-decoration-color: #999999;
+}
+
+.new-price {
+    background: linear-gradient(135deg, #8B6914, #B8860B);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: none;
+    font-weight: 900;
+}
+
+.offer-icon,
+.service-icon {
+    filter: drop-shadow(0 4px 10px rgba(212, 160, 23, 0.4));
+}
+
+h3, h2 {
+    color: #1a1a1a;
+}
+
+p {
+    color: #333333;
+}
+
+.service-name {
+    color: #1a1a1a;
+}
+
+.service-price {
+    color: #d4a017;
+}
+
+.review-text {
+    color: #444444;
+}
+
+.reviewer-name {
+    color: #1a1a1a;
+}
+
+.review-date {
+    color: #666666;
+}
+
+.stars,
+.hearts {
+    filter: drop-shadow(0 2px 8px rgba(255, 193, 7, 0.4));
+}
+
+.offers-section {
+    background: linear-gradient(135deg, #ffffff 0%, #fef5e7 50%, #ffffff 100%);
+}
+
+.gallery-section {
+    background: linear-gradient(135deg, #fef5e7 0%, #fdecea 50%, #f8f9f9 100%);
+    background-attachment: fixed;
+}
+
+.footer {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    color: #2c3e50;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+    border-top: 3px solid rgba(212, 160, 23, 0.4);
+}
+
+.footer-section h3 {
+    background: linear-gradient(135deg, #b8860b 0%, #d4a017 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.footer-section h4 {
+    color: #d4a017;
+}
+
+.footer-section p,
+.footer-section a {
+    color: #555555;
+}
+
+.footer-section a:hover {
+    color: #b8860b;
+}
+
+.footer-bottom {
+    color: #666666;
+    border-top: 1px solid rgba(212, 160, 23, 0.3);
+}
+
+.status-bar {
+    background: rgba(255, 255, 255, 0.95);
+    border-top: 1px solid rgba(212, 160, 23, 0.2);
+}
+
+.bottom-nav {
+    background: rgba(255, 255, 255, 0.95);
+    border-top: 1px solid rgba(212, 160, 23, 0.15);
+    box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.1);
+}
+
+.nav-item {
+    color: #8B6914;
+}
+
+.nav-item.active {
+    color: #b8860b;
+}

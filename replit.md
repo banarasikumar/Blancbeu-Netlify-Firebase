@@ -59,19 +59,19 @@ The Blancbeu website now uses a **true system-wide theme architecture** leveragi
 - **Music Player**: Background music with rose petal rain animation.
 - **Customer Engagement**: Customer reviews with star ratings and image gallery with proper asset references.
 
-## Recent Changes (v16.2.0 - iOS GLASS MORPHISM BUTTONS)
+## Recent Changes (v16.2.0 - SMOOTH & SUBTLE CONNECT BUTTONS)
 - **Fixed all text visibility**: Added comprehensive CSS overrides for dark mode text rendering
 - **Fixed "Call Now" button**: Fully visible with proper dark mode styling
-- **Contact Buttons**: iOS Glass Morphism Design:
-  - Locate Button: Glass Pink with frosted effect (#E882B5)
-  - WhatsApp Button: Glass Green with frosted effect (#5BA96B) - like actual WhatsApp tone
-  - Call Button: Glass Gold with frosted effect (#D4A017)
-  - **Features**: Backdrop blur effect, multi-layer shadows (depth + glow + inset highlight), semi-transparent colors, smooth hover animations
+- **Contact Buttons**: Redesigned for subtle, non-distracting appearance:
+  - Locate Button: Soft muted pink pastel (light mode), subtle glass effect (dark mode)
+  - WhatsApp Button: Soft muted green pastel (light mode), subtle glass effect (dark mode)
+  - Call Button: Soft muted gold pastel (light mode), subtle glass effect (dark mode)
+  - **Features**: Smooth glass morphism in dark mode, soft pastels in light mode, subtle shadows, dark text for light mode visibility
 - **Special Offers pricing**: Displays in gold color for better visual hierarchy
 - **All elements**: Properly colored and visible in both light and dark modes
 - **Buttons feature**: 
-  - Dark Mode: iOS glass morphism with highly vibrant colors (0.70-0.80 opacity), backdrop blur, depth shadows
-  - Light Mode: Crystal clear solid colors (no blur/smoke), clean shadows, pure vibrant appearance
+  - Dark Mode: Subtle iOS glass effect (0.40-0.50 opacity), soft blur, gentle shadows - focus on banner/brand
+  - Light Mode: Soft pastel colors with dark text, crystal clear appearance, smooth subtle shadows
 
 ## External Dependencies
 - **http-server (Node.js)**: Local development server

@@ -1,6 +1,6 @@
 {
-  "version": "18.3.0",
-  "lastUpdated": "2025-11-22T16:03:00Z",
-  "timestamp": 1763827380000,
-  "changes": "Fixed Install App button transparency - removed parent backdrop-filter inheritance with backdrop-filter: none and background-attachment: fixed"
+  "version": "19.0.0",
+  "lastUpdated": "2025-11-22T16:04:00Z",
+  "timestamp": 1763827440000,
+  "changes": "Fixed Install App button transparency - added inline styles with maximum specificity to override parent backdrop-filter"
 }

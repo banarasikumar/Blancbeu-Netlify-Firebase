@@ -2898,17 +2898,7 @@ html:not([data-theme="light"]) .call-btn .btn-text {
     color: var(--gold-primary) !important;
 }
 
-html:not([data-theme="light"]) .whatsapp-btn {
-    background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 140, 0, 0.1)) !important;
-    color: var(--gold-primary) !important;
-    border: 2px solid var(--gold-primary) !important;
-}
 
-html:not([data-theme="light"]) .locate-btn {
-    background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 140, 0, 0.1)) !important;
-    color: var(--gold-primary) !important;
-    border: 2px solid var(--gold-primary) !important;
-}
 
 /* ===== FINAL COMPREHENSIVE DARK MODE OVERRIDE - FIX ALL HARDCODED LIGHT COLORS ===== */
 
@@ -3041,14 +3031,6 @@ html:not([data-theme="light"]) .old-price {
 }
 
 /* Contact buttons (already fixed but ensuring completeness) */
-html:not([data-theme="light"]) .contact-btn {
-    background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 140, 0, 0.1)) !important;
-    color: var(--gold-primary) !important;
-    border: 2px solid var(--gold-primary) !important;
-    -webkit-text-fill-color: currentColor !important;
-}
-
-html:not([data-theme="light"]) .btn-text,
 html:not([data-theme="light"]) .btn-icon {
     color: var(--gold-primary) !important;
     -webkit-text-fill-color: currentColor !important;
@@ -3066,4 +3048,51 @@ html:not([data-theme="light"]) .btn {
 html:not([data-theme="light"]) [style*="text-fill-color: transparent"] {
     -webkit-text-fill-color: currentColor !important;
     color: var(--gold-primary) !important;
+}
+
+/* ===== DARK MODE COLORFUL CONTACT BUTTONS ===== */
+html:not([data-theme="light"]) .locate-btn {
+    background: linear-gradient(135deg, #FFB6C1, #FF69B4) !important;
+    color: #ffffff !important;
+    border: 2px solid rgba(255, 107, 107, 0.5) !important;
+    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4) !important;
+    -webkit-text-fill-color: currentColor !important;
+}
+
+html:not([data-theme="light"]) .locate-btn:hover {
+    background: linear-gradient(135deg, #FF69B4, #FF1493) !important;
+    box-shadow: 0 8px 30px rgba(255, 107, 107, 0.6) !important;
+}
+
+html:not([data-theme="light"]) .whatsapp-btn {
+    background: linear-gradient(135deg, #25D366, #128C7E) !important;
+    color: #ffffff !important;
+    border: 2px solid rgba(37, 211, 102, 0.6) !important;
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4) !important;
+    -webkit-text-fill-color: currentColor !important;
+}
+
+html:not([data-theme="light"]) .whatsapp-btn:hover {
+    background: linear-gradient(135deg, #128C7E, #0A7E5E) !important;
+    box-shadow: 0 8px 30px rgba(37, 211, 102, 0.6) !important;
+}
+
+html:not([data-theme="light"]) .call-btn {
+    background: linear-gradient(135deg, #2196F3, #1976D2) !important;
+    color: #ffffff !important;
+    border: 2px solid rgba(33, 150, 243, 0.6) !important;
+    box-shadow: 0 6px 20px rgba(33, 150, 243, 0.4) !important;
+    -webkit-text-fill-color: currentColor !important;
+}
+
+html:not([data-theme="light"]) .call-btn:hover {
+    background: linear-gradient(135deg, #1976D2, #0D47A1) !important;
+    box-shadow: 0 8px 30px rgba(33, 150, 243, 0.6) !important;
+}
+
+/* Ensure button text is always visible */
+html:not([data-theme="light"]) .contact-btn .btn-text,
+html:not([data-theme="light"]) .contact-btn .btn-icon {
+    color: #ffffff !important;
+    -webkit-text-fill-color: currentColor !important;
 }

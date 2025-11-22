@@ -1,6 +1,6 @@
 {
-  "version": "22.0.0",
-  "lastUpdated": "2025-11-22T16:09:00Z",
-  "timestamp": 1763827740000,
-  "changes": "FIXED: Removed display:none from inline HTML button style - was blocking all CSS overrides"
+  "version": "23.0.0",
+  "lastUpdated": "2025-11-22T16:10:00Z",
+  "timestamp": 1763827800000,
+  "changes": "Fixed button: Added solid inline background-color #FFD700 gold, display flex, and removed gradient"
 }

@@ -67,14 +67,18 @@ async function clearAllCacheAndCookies() {
         .replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
     });
     
-    // Clear localStorage (except version info which we just set)
+    // Clear localStorage (except version info and theme preference which we need to preserve)
     const versionData = {
       version: localStorage.getItem('blancbeu_version'),
-      timestamp: localStorage.getItem('blancbeu_timestamp')
+      timestamp: localStorage.getItem('blancbeu_timestamp'),
+      theme: localStorage.getItem('theme')
     };
     localStorage.clear();
     localStorage.setItem('blancbeu_version', versionData.version);
     localStorage.setItem('blancbeu_timestamp', versionData.timestamp);
+    if (versionData.theme) {
+      localStorage.setItem('theme', versionData.theme);
+    }
     
     // Clear sessionStorage
     sessionStorage.clear();

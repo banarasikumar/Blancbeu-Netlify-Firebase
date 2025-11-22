@@ -465,23 +465,26 @@
 
     <!-- T&C Modal Content Template -->
     <template id="tcModalTemplate">
-        <div class="dev-icon">✨</div>
-        <h2>Offer Terms & Conditions</h2>
+        <div class="tc-header">
+            <div class="tc-icon">✨</div>
+            <h2>Offer Terms & Conditions</h2>
+            <p class="tc-subtitle">Please read carefully before availing offers</p>
+        </div>
         <div class="tc-modal-content">
-            <ol style="text-align: left; padding: 20px 0;">
-                <li>Only one offer is applicable per transaction at a time.</li>
-                <li>A maximum of 10% of the total bill can be redeemed through coupon cash on the final price.</li>
-                <li>All offers are subject to cancellation at any time without prior notice.</li>
-                <li>The same offer may not be applicable multiple times for the same customer.</li>
-                <li>Offers cannot be combined with other ongoing promotions or discounts.</li>
-                <li>Valid ID proof is required for student discounts and other eligibility-based offers.</li>
-                <li>Services must be availed within the offer validity period mentioned.</li>
-                <li>Blancbeu reserves the right to modify or withdraw any offer without prior notice.</li>
-                <li>Offer is valid only at Blancbeu salon locations.</li>
-                <li>Customers must present the valid offer code or ID proof at the time of service.</li>
+            <ol class="tc-list">
+                <li><span class="tc-number">1</span><span class="tc-text">Only one offer is applicable per transaction at a time.</span></li>
+                <li><span class="tc-number">2</span><span class="tc-text">A maximum of 10% of the total bill can be redeemed through coupon cash on the final price.</span></li>
+                <li><span class="tc-number">3</span><span class="tc-text">All offers are subject to cancellation at any time without prior notice.</span></li>
+                <li><span class="tc-number">4</span><span class="tc-text">The same offer may not be applicable multiple times for the same customer.</span></li>
+                <li><span class="tc-number">5</span><span class="tc-text">Offers cannot be combined with other ongoing promotions or discounts.</span></li>
+                <li><span class="tc-number">6</span><span class="tc-text">Valid ID proof is required for student discounts and other eligibility-based offers.</span></li>
+                <li><span class="tc-number">7</span><span class="tc-text">Services must be availed within the offer validity period mentioned.</span></li>
+                <li><span class="tc-number">8</span><span class="tc-text">Blancbeu reserves the right to modify or withdraw any offer without prior notice.</span></li>
+                <li><span class="tc-number">9</span><span class="tc-text">Offer is valid only at Blancbeu salon locations.</span></li>
+                <li><span class="tc-number">10</span><span class="tc-text">Customers must present the valid offer code or ID proof at the time of service.</span></li>
             </ol>
         </div>
-        <button class="dev-action-btn" onclick="closeDevModal()">Understood</button>
+        <button class="dev-action-btn tc-action-btn" onclick="closeDevModal()">I Understand</button>
     </template>
 
     <nav class="bottom-nav" id="bottomNav">

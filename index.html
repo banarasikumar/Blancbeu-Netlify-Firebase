@@ -6,10 +6,43 @@
     <title>Blancbeu - Premium Beauty & Wellness Salon</title>
     
     <link rel="manifest" href="/manifest.json">
-    <meta name="theme-color" content="#000000">
+    <meta name="theme-color" content="#000000" id="metaThemeColor">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" id="appleStatusBar">
     <meta name="apple-mobile-web-app-title" content="Blancbeu">
+    
+    <!-- Critical: Apply theme IMMEDIATELY before page renders to prevent dark flash -->
+    <script>
+      (function() {
+        try {
+          const savedTheme = localStorage.getItem('theme');
+          const currentHour = new Date().getHours();
+          let shouldBeLightMode = false;
+          
+          if (savedTheme) {
+            shouldBeLightMode = savedTheme === 'light';
+          } else {
+            // Auto-detect: 6 AM to 5 PM = light mode
+            shouldBeLightMode = currentHour >= 6 && currentHour < 17;
+          }
+          
+          if (shouldBeLightMode) {
+            document.documentElement.classList.add('theme-light-early');
+            document.body.classList.add('light-mode');
+            const themeColorMeta = document.getElementById('metaThemeColor');
+            const statusBarMeta = document.getElementById('appleStatusBar');
+            if (themeColorMeta) themeColorMeta.setAttribute('content', '#f5f5f5');
+            if (statusBarMeta) statusBarMeta.setAttribute('content', 'light-content');
+          } else {
+            document.documentElement.classList.add('theme-dark-early');
+            const themeColorMeta = document.getElementById('metaThemeColor');
+            if (themeColorMeta) themeColorMeta.setAttribute('content', '#000000');
+          }
+        } catch(e) {
+          // Fail silently if localStorage is not available
+        }
+      })();
+    </script>
     <link rel="apple-touch-icon" href="/icon-192x192.png">
     <link rel="apple-touch-startup-image" href="/splash-750x1334.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)">
     <link rel="apple-touch-startup-image" href="/splash-1170x2532.png" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3)">

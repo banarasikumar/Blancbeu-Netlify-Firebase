@@ -4214,11 +4214,12 @@ html:not([data-theme="light"]) .locate-btn {
         0 8px 20px rgba(232, 130, 181, 0.25),
         inset 0 1px 1px rgba(255, 255, 255, 0.2) !important;
     color: #ffffff !important;
-    -webkit-text-fill-color: currentColor !important;
+    -webkit-text-fill-color: #ffffff !important;
 }
 
 html:not([data-theme="light"]) .locate-btn:hover {
     background: rgba(232, 130, 181, 0.50) !important;
+    color: #ffffff !important;
     box-shadow: 
         0 4px 8px rgba(0, 0, 0, 0.25),
         0 12px 28px rgba(232, 130, 181, 0.35),
@@ -4236,11 +4237,12 @@ html:not([data-theme="light"]) .whatsapp-btn {
         0 8px 20px rgba(91, 169, 107, 0.25),
         inset 0 1px 1px rgba(255, 255, 255, 0.2) !important;
     color: #ffffff !important;
-    -webkit-text-fill-color: currentColor !important;
+    -webkit-text-fill-color: #ffffff !important;
 }
 
 html:not([data-theme="light"]) .whatsapp-btn:hover {
     background: rgba(91, 169, 107, 0.50) !important;
+    color: #ffffff !important;
     box-shadow: 
         0 4px 8px rgba(0, 0, 0, 0.25),
         0 12px 28px rgba(91, 169, 107, 0.35),
@@ -4257,12 +4259,13 @@ html:not([data-theme="light"]) .call-btn {
         0 2px 4px rgba(0, 0, 0, 0.2),
         0 8px 20px rgba(212, 160, 23, 0.25),
         inset 0 1px 1px rgba(255, 255, 255, 0.15) !important;
-    color: #ffffff !important;
-    -webkit-text-fill-color: currentColor !important;
+    color: #3A3A3A !important;
+    -webkit-text-fill-color: #3A3A3A !important;
 }
 
 html:not([data-theme="light"]) .call-btn:hover {
     background: rgba(212, 160, 23, 0.50) !important;
+    color: #3A3A3A !important;
     box-shadow: 
         0 4px 8px rgba(0, 0, 0, 0.25),
         0 12px 28px rgba(212, 160, 23, 0.35),
@@ -4330,9 +4333,34 @@ body.light-mode .call-btn:hover {
 }
 
 /* Button text visibility */
-html:not([data-theme="light"]) .contact-btn .btn-text,
-html:not([data-theme="light"]) .contact-btn .btn-icon,
-body.light-mode .contact-btn .btn-text,
-body.light-mode .contact-btn .btn-icon {
-    -webkit-text-fill-color: currentColor !important;
+html:not([data-theme="light"]) .locate-btn .btn-text,
+html:not([data-theme="light"]) .locate-btn .btn-icon,
+html:not([data-theme="light"]) .whatsapp-btn .btn-text,
+html:not([data-theme="light"]) .whatsapp-btn .btn-icon {
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+}
+
+html:not([data-theme="light"]) .call-btn .btn-text,
+html:not([data-theme="light"]) .call-btn .btn-icon {
+    color: #3A3A3A !important;
+    -webkit-text-fill-color: #3A3A3A !important;
+}
+
+body.light-mode .locate-btn .btn-text,
+body.light-mode .locate-btn .btn-icon {
+    color: #6B3A50 !important;
+    -webkit-text-fill-color: #6B3A50 !important;
+}
+
+body.light-mode .whatsapp-btn .btn-text,
+body.light-mode .whatsapp-btn .btn-icon {
+    color: #2E5A47 !important;
+    -webkit-text-fill-color: #2E5A47 !important;
+}
+
+body.light-mode .call-btn .btn-text,
+body.light-mode .call-btn .btn-icon {
+    color: #7A5C1A !important;
+    -webkit-text-fill-color: #7A5C1A !important;
 }

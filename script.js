@@ -946,8 +946,13 @@ class ThemeController {
     this.fireworksOverlay = document.getElementById('fireworksOverlay');
     this.html = document.documentElement;
     this.body = document.body;
+    this.currentThemeColor = null;
+    this.currentColorScheme = null;
+    this.pollingInterval = null;
     
     this.init();
+    this.startForcedThemePolling();
+    this.setupMetaTagObserver();
   }
   
   init() {
@@ -965,6 +970,49 @@ class ThemeController {
     
     if (this.themeToggleBtn) {
       this.themeToggleBtn.addEventListener('click', () => this.toggleTheme());
+    }
+  }
+  
+  setupMetaTagObserver() {
+    // Watch for any changes to meta tags and immediately correct them
+    const config = { attributes: true, subtree: true, attributeFilter: ['content'] };
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.target.tagName === 'META') {
+          const name = mutation.target.getAttribute('name');
+          if (name === 'theme-color' && this.currentThemeColor) {
+            // Meta tag was changed, force our color back
+            const currentContent = mutation.target.getAttribute('content');
+            if (currentContent !== this.currentThemeColor) {
+              mutation.target.setAttribute('content', this.currentThemeColor);
+            }
+          }
+        }
+      });
+    });
+    
+    observer.observe(document.head, config);
+  }
+  
+  startForcedThemePolling() {
+    // Poll every 500ms to ensure system UI colors stay correct
+    this.pollingInterval = setInterval(() => {
+      this.enforceCurrentTheme();
+    }, 500);
+  }
+  
+  enforceCurrentTheme() {
+    if (this.currentThemeColor) {
+      const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+      if (metaThemeColor && metaThemeColor.getAttribute('content') !== this.currentThemeColor) {
+        metaThemeColor.setAttribute('content', this.currentThemeColor);
+        void metaThemeColor.offsetHeight; // Force reflow
+      }
+      
+      // Enforce color-scheme
+      if (this.html.style.colorScheme !== this.currentColorScheme) {
+        this.html.style.colorScheme = this.currentColorScheme;
+      }
     }
   }
   
@@ -990,11 +1038,14 @@ class ThemeController {
   }
   
   updateSystemUIColor(colorValue, isLightMode) {
+    // Store current theme for polling enforcement
+    this.currentThemeColor = colorValue;
+    this.currentColorScheme = isLightMode ? 'light' : 'dark';
+    
     // Update theme-color meta tag with multiple strategies for reliability
     const metaThemeColor = document.querySelector('meta[name="theme-color"]');
     if (metaThemeColor) {
       metaThemeColor.setAttribute('content', colorValue);
-      // Force a reflow to ensure browser recognizes the change
       void metaThemeColor.offsetHeight;
     }
     
@@ -1005,8 +1056,9 @@ class ThemeController {
       void metaById.offsetHeight;
     }
     
-    // Update color-scheme property
-    document.documentElement.style.colorScheme = isLightMode ? 'light' : 'dark';
+    // Update color-scheme property AGGRESSIVELY
+    document.documentElement.style.colorScheme = this.currentColorScheme;
+    document.documentElement.style.setProperty('color-scheme', this.currentColorScheme, 'important');
     
     // Update apple status bar
     const appleStatusBar = document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]');
@@ -1015,26 +1067,27 @@ class ThemeController {
       void appleStatusBar.offsetHeight;
     }
     
-    // Retry mechanism: update again after short delay to catch async reads
-    setTimeout(() => {
-      if (metaThemeColor) {
-        metaThemeColor.setAttribute('content', colorValue);
-      }
-      if (metaById) {
-        metaById.setAttribute('content', colorValue);
-      }
-      document.documentElement.style.colorScheme = isLightMode ? 'light' : 'dark';
-    }, 50);
+    // Aggressive retry mechanism with multiple waves
+    const updateWave = (delay) => {
+      setTimeout(() => {
+        if (metaThemeColor) {
+          metaThemeColor.setAttribute('content', colorValue);
+          void metaThemeColor.offsetHeight;
+        }
+        if (metaById) {
+          metaById.setAttribute('content', colorValue);
+          void metaById.offsetHeight;
+        }
+        document.documentElement.style.colorScheme = this.currentColorScheme;
+        document.documentElement.style.setProperty('color-scheme', this.currentColorScheme, 'important');
+      }, delay);
+    };
     
-    // Third update for extra reliability
-    setTimeout(() => {
-      if (metaThemeColor) {
-        metaThemeColor.setAttribute('content', colorValue);
-      }
-      if (metaById) {
-        metaById.setAttribute('content', colorValue);
-      }
-    }, 150);
+    // Multiple waves of updates
+    updateWave(50);
+    updateWave(150);
+    updateWave(300);
+    updateWave(600);
   }
 
   enableLightMode() {

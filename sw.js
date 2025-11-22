@@ -1,4 +1,4 @@
-const CACHE_NAME = 'blancbeu-v8-theme-fixed';
+const CACHE_NAME = 'blancbeu-v9-light-mode-fix';
 const VERSION_URL = '/version.json';
 
 // Assets to cache (NO HTML FILES - they must be fresh)

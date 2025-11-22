@@ -4279,10 +4279,10 @@ html:not([data-theme="light"]) .call-btn:hover {
 body.light-mode .locate-btn {
     background: #F0BCD4 !important;
     backdrop-filter: none !important;
-    border: 1px solid #E896BD !important;
+    border: 2.5px solid #D899C8 !important;
     box-shadow: 
         0 2px 4px rgba(0, 0, 0, 0.08),
-        0 6px 16px rgba(232, 130, 181, 0.15) !important;
+        0 6px 16px rgba(216, 153, 200, 0.25) !important;
     color: #6B3A50 !important;
 }
 
@@ -4298,10 +4298,10 @@ body.light-mode .locate-btn:hover {
 body.light-mode .whatsapp-btn {
     background: #C8E6C9 !important;
     backdrop-filter: none !important;
-    border: 1px solid #A5D6A7 !important;
+    border: 2.5px solid #81C784 !important;
     box-shadow: 
         0 2px 4px rgba(0, 0, 0, 0.08),
-        0 6px 16px rgba(91, 169, 107, 0.15) !important;
+        0 6px 16px rgba(129, 199, 132, 0.25) !important;
     color: #2E5A47 !important;
 }
 
@@ -4313,22 +4313,22 @@ body.light-mode .whatsapp-btn:hover {
     transform: translateY(-2px) !important;
 }
 
-/* Call button: Soft Muted Gold */
+/* Call button: Soft Muted Blue */
 body.light-mode .call-btn {
-    background: #F9E5B8 !important;
+    background: #BBDEFB !important;
     backdrop-filter: none !important;
-    border: 1px solid #F4D998 !important;
+    border: 2.5px solid #64B5F6 !important;
     box-shadow: 
         0 2px 4px rgba(0, 0, 0, 0.08),
-        0 6px 16px rgba(212, 160, 23, 0.15) !important;
-    color: #7A5C1A !important;
+        0 6px 16px rgba(100, 181, 246, 0.25) !important;
+    color: #1565C0 !important;
 }
 
 body.light-mode .call-btn:hover {
-    background: #F4D998 !important;
+    background: #64B5F6 !important;
     box-shadow: 
         0 4px 8px rgba(0, 0, 0, 0.12),
-        0 10px 24px rgba(212, 160, 23, 0.25) !important;
+        0 10px 24px rgba(100, 181, 246, 0.35) !important;
     transform: translateY(-2px) !important;
 }
 
@@ -4361,6 +4361,6 @@ body.light-mode .whatsapp-btn .btn-icon {
 
 body.light-mode .call-btn .btn-text,
 body.light-mode .call-btn .btn-icon {
-    color: #7A5C1A !important;
-    -webkit-text-fill-color: #7A5C1A !important;
+    color: #1565C0 !important;
+    -webkit-text-fill-color: #1565C0 !important;
 }

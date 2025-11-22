@@ -62,13 +62,13 @@ The Blancbeu website now uses a **true system-wide theme architecture** leveragi
 ## Recent Changes (v16.2.0 - FINAL BUTTON & TEXT STYLING)
 - **Fixed all text visibility**: Added comprehensive CSS overrides for dark mode text rendering
 - **Fixed "Call Now" button**: Fully visible with proper dark mode styling
-- **Contact Buttons**: Light pastel, semi-transparent colors:
-  - Locate Button: Light Pink (rgba(255, 182, 193, 0.4))
-  - WhatsApp Button: Light Green (rgba(144, 238, 144, 0.4))
-  - Call Button: Light Gold (rgba(255, 215, 0, 0.4))
+- **Contact Buttons**: Solid vibrant colors:
+  - Locate Button: Solid Pink (#FF69B4)
+  - WhatsApp Button: Solid Teal/Blue-Green (#20B2AA)
+  - Call Button: Solid Gold (#FFD700)
 - **Special Offers pricing**: Displays in gold color for better visual hierarchy
 - **All elements**: Properly colored and visible in both light and dark modes
-- **Buttons feature**: Smooth hover effects, elegant shadows, transparency effects, proper text contrast
+- **Buttons feature**: Smooth hover effects, elegant shadows, bold gradients, proper text contrast
 
 ## External Dependencies
 - **http-server (Node.js)**: Local development server

@@ -1,6 +1,6 @@
 {
-  "version": "18.0.0",
-  "lastUpdated": "2025-11-22T16:00:00Z",
-  "timestamp": 1763827200000,
-  "changes": "Fixed Install App button - now displays solid opaque gold background instead of transparent"
+  "version": "18.1.0",
+  "lastUpdated": "2025-11-22T16:01:00Z",
+  "timestamp": 1763827260000,
+  "changes": "Fixed Install App button transparency in dark mode - now displays solid gold gradient with no backdrop-filter"
 }

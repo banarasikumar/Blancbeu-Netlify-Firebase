@@ -1,6 +1,6 @@
 {
-  "version": "17.9.0",
-  "lastUpdated": "2025-11-22T15:59:00Z",
-  "timestamp": 1763827140000,
-  "changes": "Fixed Install App button - now displays vibrant gold gradient (#FFD700 to #FFC700) in dark mode"
+  "version": "18.0.0",
+  "lastUpdated": "2025-11-22T16:00:00Z",
+  "timestamp": 1763827200000,
+  "changes": "Fixed Install App button - now displays solid opaque gold background instead of transparent"
 }

@@ -3506,18 +3506,6 @@ body.light-mode .contact-btn .btn-icon {
     -webkit-text-fill-color: currentColor !important;
 }
 
-/* ===== SOLID COLOR CONTACT BUTTONS ===== */
-
-/* DARK MODE - Solid vibrant colors */
-
-/* Locate button: Solid Pink */
-html:not([data-theme="light"]) .locate-btn {
-    background: linear-gradient(135deg, #FF69B4, #FF1493) !important;
-    color: #ffffff !important;
-    border: 2px solid #FF69B4 !important;
-    box-shadow: 0 8px 20px rgba(255, 105, 180, 0.4) !important;
-    -webkit-text-fill-color: currentColor !important;
-}
 
 html:not([data-theme="light"]) .locate-btn:hover {
     background: linear-gradient(135deg, #FF1493, #E60B9C) !important;
@@ -3596,6 +3584,107 @@ body.light-mode .call-btn {
 body.light-mode .call-btn:hover {
     background: linear-gradient(135deg, #FFC700, #FFB700) !important;
     box-shadow: 0 12px 28px rgba(255, 215, 0, 0.55) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* Button text visibility */
+html:not([data-theme="light"]) .contact-btn .btn-text,
+html:not([data-theme="light"]) .contact-btn .btn-icon,
+body.light-mode .contact-btn .btn-text,
+body.light-mode .contact-btn .btn-icon {
+    -webkit-text-fill-color: currentColor !important;
+}
+
+/* ===== MUTED CONTACT BUTTONS ===== */
+
+/* DARK MODE - Reduced vibrance */
+
+/* Locate button: Muted Pink */
+html:not([data-theme="light"]) .locate-btn {
+    background: linear-gradient(135deg, #E882B5, #D97BAF) !important;
+    color: #ffffff !important;
+    border: 2px solid #E882B5 !important;
+    box-shadow: 0 8px 20px rgba(232, 130, 181, 0.35) !important;
+    -webkit-text-fill-color: currentColor !important;
+}
+
+html:not([data-theme="light"]) .locate-btn:hover {
+    background: linear-gradient(135deg, #D97BAF, #CB6FA5) !important;
+    box-shadow: 0 12px 28px rgba(232, 130, 181, 0.45) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* WhatsApp button: Muted Teal/Blue-Green */
+html:not([data-theme="light"]) .whatsapp-btn {
+    background: linear-gradient(135deg, #5BA3A3, #4A9B9B) !important;
+    color: #ffffff !important;
+    border: 2px solid #5BA3A3 !important;
+    box-shadow: 0 8px 20px rgba(91, 163, 163, 0.35) !important;
+    -webkit-text-fill-color: currentColor !important;
+}
+
+html:not([data-theme="light"]) .whatsapp-btn:hover {
+    background: linear-gradient(135deg, #4A9B9B, #3D8A8A) !important;
+    box-shadow: 0 12px 28px rgba(91, 163, 163, 0.45) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* Call button: Muted Gold */
+html:not([data-theme="light"]) .call-btn {
+    background: linear-gradient(135deg, #D4A017, #C9A961) !important;
+    color: #ffffff !important;
+    border: 2px solid #D4A017 !important;
+    box-shadow: 0 8px 20px rgba(212, 160, 23, 0.35) !important;
+    -webkit-text-fill-color: currentColor !important;
+}
+
+html:not([data-theme="light"]) .call-btn:hover {
+    background: linear-gradient(135deg, #C9A961, #B8860B) !important;
+    box-shadow: 0 12px 28px rgba(212, 160, 23, 0.45) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* LIGHT MODE - Reduced vibrance */
+
+/* Locate button: Muted Pink */
+body.light-mode .locate-btn {
+    background: linear-gradient(135deg, #E882B5, #D97BAF) !important;
+    color: #ffffff !important;
+    border: 2px solid #E882B5 !important;
+    box-shadow: 0 8px 20px rgba(232, 130, 181, 0.35) !important;
+}
+
+body.light-mode .locate-btn:hover {
+    background: linear-gradient(135deg, #D97BAF, #CB6FA5) !important;
+    box-shadow: 0 12px 28px rgba(232, 130, 181, 0.45) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* WhatsApp button: Muted Teal/Blue-Green */
+body.light-mode .whatsapp-btn {
+    background: linear-gradient(135deg, #5BA3A3, #4A9B9B) !important;
+    color: #ffffff !important;
+    border: 2px solid #5BA3A3 !important;
+    box-shadow: 0 8px 20px rgba(91, 163, 163, 0.35) !important;
+}
+
+body.light-mode .whatsapp-btn:hover {
+    background: linear-gradient(135deg, #4A9B9B, #3D8A8A) !important;
+    box-shadow: 0 12px 28px rgba(91, 163, 163, 0.45) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* Call button: Muted Gold */
+body.light-mode .call-btn {
+    background: linear-gradient(135deg, #D4A017, #C9A961) !important;
+    color: #ffffff !important;
+    border: 2px solid #D4A017 !important;
+    box-shadow: 0 8px 20px rgba(212, 160, 23, 0.35) !important;
+}
+
+body.light-mode .call-btn:hover {
+    background: linear-gradient(135deg, #C9A961, #B8860B) !important;
+    box-shadow: 0 12px 28px rgba(212, 160, 23, 0.45) !important;
     transform: translateY(-2px) !important;
 }
 

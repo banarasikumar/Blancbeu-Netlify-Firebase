@@ -1,6 +1,6 @@
 {
-  "version": "17.3.0",
-  "lastUpdated": "2025-11-22T16:55:00Z",
-  "timestamp": 1732293300000,
-  "changes": "Resized all images: banners to 1200x800, service images to max 1250px width (100% quality)"
+  "version": "17.4.0",
+  "lastUpdated": "2025-11-22T16:58:00Z",
+  "timestamp": 1732293480000,
+  "changes": "Optimized images: banners to 1200x800, service images downscaled only if > 1250px (kept smaller originals)"
 }

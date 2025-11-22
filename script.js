@@ -548,29 +548,56 @@ document.addEventListener('DOMContentLoaded', () => {
 let deferredPrompt;
 let installButton;
 
+function updateInstallButtonVisibility() {
+  const navInstallBtn = document.getElementById('installBtn');
+  const isStandalone = window.matchMedia('(display-mode: standalone)').matches || 
+                       window.navigator.standalone === true ||
+                       document.referrer.includes('android-app://') ||
+                       sessionStorage.getItem('isStandalone') === 'true' ||
+                       sessionStorage.getItem('appInstalled') === 'true';
+  
+  if (navInstallBtn) {
+    if (isStandalone || !deferredPrompt) {
+      navInstallBtn.style.display = 'none';
+      console.log('🔒 Install button hidden - app is installed or cannot be installed');
+    } else {
+      navInstallBtn.style.display = 'flex';
+      console.log('📲 Install button visible - app can be installed');
+    }
+  }
+}
+
 function initPWA() {
   const navInstallBtn = document.getElementById('installBtn');
+  
+  // Initial check - hide button if already installed
+  updateInstallButtonVisibility();
+  
+  // Monitor display mode changes
+  const displayModeQuery = window.matchMedia('(display-mode: standalone)');
+  displayModeQuery.addListener(() => updateInstallButtonVisibility());
   
   window.addEventListener('beforeinstallprompt', (e) => {
     console.log('📲 PWA Install prompt available');
     e.preventDefault();
     deferredPrompt = e;
     
-    // Show nav install button
-    if (navInstallBtn) {
+    // Show nav install button only if not standalone
+    if (!checkIfStandalone() && navInstallBtn) {
       navInstallBtn.style.display = 'flex';
+      console.log('✅ Showing install button - prompt is available');
     }
     showInstallPromotion();
   });
 
   window.addEventListener('appinstalled', () => {
-    console.log('✅ PWA was installed');
+    console.log('✅ PWA was installed successfully');
     sessionStorage.setItem('appInstalled', 'true');
+    sessionStorage.setItem('isStandalone', 'true');
     deferredPrompt = null;
     
-    if (navInstallBtn) {
-      navInstallBtn.style.display = 'none';
-    }
+    // Hide install button
+    updateInstallButtonVisibility();
     hideInstallPromotion();
   });
   
@@ -584,9 +611,10 @@ function initPWA() {
           console.log(`User response: ${outcome}`);
           if (outcome === 'accepted') {
             sessionStorage.setItem('appInstalled', 'true');
+            sessionStorage.setItem('isStandalone', 'true');
           }
           deferredPrompt = null;
-          navInstallBtn.style.display = 'none';
+          updateInstallButtonVisibility();
         } catch (error) {
           console.error('Install error:', error);
         }
@@ -695,10 +723,11 @@ function checkIfStandalone() {
                        document.referrer.includes('android-app://');
   
   if (isStandalone) {
-    console.log('App is running in standalone mode');
+    console.log('🎉 App is running in standalone (installed) mode');
     sessionStorage.setItem('appInstalled', 'true');
     sessionStorage.setItem('isStandalone', 'true');
     showSplashScreen();
+    updateInstallButtonVisibility();
   }
   
   return isStandalone;

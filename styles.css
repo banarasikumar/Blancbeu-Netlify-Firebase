@@ -2218,160 +2218,105 @@ body.light-mode .dev-action-btn:hover {
     box-shadow: 0 12px 40px rgba(212, 160, 23, 0.5);
 }
 
-/* ===== PREMIUM T&C MODAL STYLING ===== */
-.tc-header {
+/* ===== T&C MODAL STYLING ===== */
+.tc-modal-header {
     text-align: center;
-    margin-bottom: 30px;
-    padding-bottom: 25px;
-    border-bottom: 2px solid var(--gold-24k);
-}
-
-.tc-icon {
-    font-size: 60px;
-    margin-bottom: 15px;
-    display: block;
+    font-size: 48px;
+    margin-bottom: 12px;
     animation: floatIcon 3s ease-in-out infinite;
 }
 
-.dev-modal-content h2.tc-header h2 {
+.tc-modal-title {
     font-family: 'Cinzel', serif;
-    font-size: 38px;
-    background: linear-gradient(135deg, var(--gold-24k), var(--gold-light), var(--gold-24k));
+    font-size: 36px;
+    background: linear-gradient(135deg, var(--gold-24k), var(--gold-light));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    margin-bottom: 10px;
+    text-align: center;
+    margin: 0 0 8px 0;
     letter-spacing: 1px;
 }
 
-.tc-header h2 {
-    font-family: 'Cinzel', serif;
-    font-size: 38px;
-    background: linear-gradient(135deg, var(--gold-24k), var(--gold-light), var(--gold-24k));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-bottom: 10px;
-    letter-spacing: 1px;
-}
-
-.tc-subtitle {
-    font-size: 14px;
+.tc-modal-subtitle {
+    text-align: center;
     color: var(--text-secondary);
+    font-size: 13px;
+    margin-bottom: 20px;
     letter-spacing: 0.5px;
-    font-weight: 500;
 }
 
-.tc-modal-content {
-    max-height: 400px;
+.tc-modal-list {
+    max-height: 340px;
     overflow-y: auto;
-    padding: 20px 0;
+    margin-bottom: 20px;
+    padding-right: 8px;
 }
 
-.tc-modal-content::-webkit-scrollbar {
-    width: 8px;
+.tc-modal-list::-webkit-scrollbar {
+    width: 6px;
 }
 
-.tc-modal-content::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-.tc-modal-content::-webkit-scrollbar-thumb {
+.tc-modal-list::-webkit-scrollbar-thumb {
     background: var(--gold-24k);
-    border-radius: 4px;
-    opacity: 0.6;
+    border-radius: 3px;
+    opacity: 0.5;
 }
 
-.tc-modal-content::-webkit-scrollbar-thumb:hover {
-    opacity: 1;
-}
-
-.tc-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.tc-list li {
+.tc-item {
     display: flex;
-    gap: 15px;
-    margin-bottom: 18px;
-    padding: 12px 15px;
-    border-radius: 12px;
-    background: rgba(255, 215, 0, 0.05);
-    transition: all 0.3s ease;
+    gap: 12px;
+    margin-bottom: 12px;
+    padding: 10px;
+    background: rgba(255, 215, 0, 0.08);
+    border-radius: 8px;
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--text-secondary);
     align-items: flex-start;
+    transition: all 0.2s ease;
 }
 
-.tc-list li:hover {
-    background: rgba(255, 215, 0, 0.12);
-    transform: translateX(5px);
+.tc-item:hover {
+    background: rgba(255, 215, 0, 0.15);
+    transform: translateX(3px);
 }
 
-.tc-number {
+.tc-num {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 32px;
-    height: 32px;
-    min-width: 32px;
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
     background: linear-gradient(135deg, var(--gold-24k), var(--gold-bright));
     color: var(--black);
     border-radius: 50%;
     font-weight: 700;
-    font-size: 14px;
+    font-size: 11px;
     font-family: 'Cinzel', serif;
-    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+    flex-shrink: 0;
 }
 
-.tc-text {
-    color: var(--text-secondary);
-    font-size: 14px;
-    line-height: 1.7;
-    padding-top: 2px;
-}
-
-.tc-action-btn {
-    margin-top: 25px;
-    width: 100%;
-    max-width: 300px;
-    font-size: 15px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-}
-
-/* Light Mode T&C Styles */
-body.light-mode .tc-header {
-    border-bottom: 2px solid #d4a017;
-}
-
-body.light-mode .tc-header h2 {
-    background: linear-gradient(135deg, #b8860b 0%, #d4a017 50%, #b8860b 100%);
+/* Light Mode T&C */
+body.light-mode .tc-modal-title {
+    background: linear-gradient(135deg, #b8860b 0%, #d4a017 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
 
-body.light-mode .tc-subtitle {
-    color: #666666;
+body.light-mode .tc-item {
+    background: rgba(212, 160, 23, 0.1);
 }
 
-body.light-mode .tc-list li {
-    background: rgba(212, 160, 23, 0.08);
+body.light-mode .tc-item:hover {
+    background: rgba(212, 160, 23, 0.18);
 }
 
-body.light-mode .tc-list li:hover {
-    background: rgba(212, 160, 23, 0.15);
-}
-
-body.light-mode .tc-number {
+body.light-mode .tc-num {
     background: linear-gradient(135deg, #b8860b, #d4a017);
     color: #ffffff;
-    box-shadow: 0 4px 15px rgba(212, 160, 23, 0.3);
-}
-
-body.light-mode .tc-text {
-    color: #333333;
 }
 
 @media (max-width: 768px) {

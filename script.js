@@ -1221,6 +1221,22 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+// Initialize Update Checker FIRST (before anything else)
+initUpdateChecker();
+
+// Register Service Worker for PWA caching
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js', { scope: '/' })
+    .then(registration => {
+      console.log('✅ Service Worker registered for PWA offline-first caching');
+      // Check for updates every 30 seconds
+      setInterval(() => {
+        registration.update();
+      }, 30000);
+    })
+    .catch(error => console.log('Service Worker registration failed:', error));
+}
+
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
     new ThemeController();

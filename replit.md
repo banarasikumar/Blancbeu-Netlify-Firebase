@@ -13,7 +13,21 @@ I want to ensure a smooth, professional development process.
 - **Design Adherence**: Maintain the premium 24k gold and black aesthetic as a primary design principle.
 
 ## System Architecture
-The Blancbeu website now uses a **true system-wide theme architecture** leveraging CSS custom properties (variables) to control all colors and styles dynamically across light and dark modes.
+
+### PWA & Caching System (Version 17.0.0)
+- **Offline-First Strategy**: Service Worker caches ALL static assets on install for instant loading
+- **Comprehensive Asset Caching**: All 44 service images, 5 banner images, icons, splashscreens, and core JS/CSS cached
+- **Browser Caching**: Every asset visited is cached for next visit super-fast loading
+- **Version Detection System**:
+  - Main script checks `/version.json` on every page load (never cached)
+  - When server version > cached version: clears ALL caches and forces full reload
+  - System re-caches everything fresh after update
+  - Works seamlessly for both browser and PWA app installations
+- **Service Worker Updates**: Checks for SW updates every 30 seconds in background
+- **Intelligent Update Trigger**: 
+  - Browser: `initUpdateChecker()` runs on page load
+  - PWA App: Continuous background checks via Service Worker
+  - Both trigger full cache refresh when new version detected
 
 ### Theme System (Version 16.2.0 - COMPLETE)
 - **CSS Variable-Based Architecture**: Complete theme separation using `:root` with dual theme definitions
@@ -31,22 +45,22 @@ The Blancbeu website now uses a **true system-wide theme architecture** leveragi
 - **Animations**: In dark mode only, incorporates animations including transparent Diwali fireworks overlay, brand name shimmer, sparkling particle backgrounds, offer card glow effects, and rose petal rain. All animations disabled in light mode.
 - **Design Elements**: Uses `Cinzel` for luxury headings and `Poppins` for body text. Features glassmorphism with strong blur and shadow depth for interactive elements.
 - **Responsiveness**: Fully responsive across all devices with optimized images for various screen sizes.
-- **Gallery**: All gallery images correctly mapped to `/assets/service_images/` with proper WebP format
+- **Gallery**: All gallery images correctly mapped to `/assets/service_images/` with proper WebP format.
 - **Contact Buttons**: Light pastel colors with semi-transparency - Pink (Locate), Green (WhatsApp), Gold (Call) - creating an elegant, sophisticated "Connect with Us" section.
+- **Modal System**: T&C and Coming Soon modals with NO page reload, background scroll locked, beautiful animations
+- **T&C Modal**: Beautiful numbered terms display with gold badges, smooth hover effects, proper theme support
 
 ### Technical Implementations
 - **Frontend**: Vanilla HTML, CSS, JavaScript for maximum control and performance.
 - **Theme System**: CSS custom properties (`--bg-primary`, `--text-primary`, `--shadow-dark`, etc.) defined in `theme-variables.css`. Two complete theme definitions: one for `:root` (dark) and one for `:root[data-theme="light"]`.
-- **Color Conversion**: All hardcoded colors in styles.css have been replaced with CSS variables:
-  - Text colors: `#1a1a1a`, `#333333`, `#555555`, `#666666`, `#2c3e50` → `var(--text-primary)`, `var(--text-secondary)`, `var(--text-muted)`
-  - Background colors: `#ffffff`, `rgba(255, 255, 255, 0.95/0.9)` → `var(--bg-primary)`, `var(--bg-tertiary)`
-  - Gold colors: `#b8860b`, `#d4a017` → `var(--gold-primary)`, `var(--gold-bright)`
-  - Gradients: All gradient backgrounds now use theme-aware color variables
+- **Color Conversion**: All hardcoded colors in styles.css have been replaced with CSS variables.
 - **State Management**: `ThemeController` class manages theme state, synchronizes with localStorage, and updates DOM attributes.
 - **CSS Architecture**: Refactored to use CSS variables throughout for colors, backgrounds, shadows, and borders. All hardcoded colors replaced with variable references.
 - **Image Optimization**: WebP format with proper paths to `/assets/service_images/` and `/assets/banner_carousel_images/`, resized to display dimensions, lazy loading for performance.
 - **Scroll Behavior**: Unified header and bottom navigation visibility management based on scroll events.
 - **PWA Support**: Comprehensive Progressive Web App features with custom brand icons, splash screens, and install prompts. Manifest.json configured with correct icon paths.
+- **Update Detection**: Smart version checking system that detects server updates and forces cache refresh
+- **Service Worker**: Offline-first caching strategy with all static assets pre-cached on install
 
 ### Feature Specifications
 - **Light/Dark Mode**: System-wide CSS variable-based theme switching. Intelligent automatic detection based on time (IST), user-toggleable with preference persistence. All elements use theme variables—no class-based patches or mixed states.
@@ -58,29 +72,24 @@ The Blancbeu website now uses a **true system-wide theme architecture** leveragi
 - **Contact & Services**: Smartphone-optimized buttons with light pastel semi-transparent colors, 8 categorized service groups with 60+ services, special offers with compact design.
 - **Music Player**: Background music with rose petal rain animation.
 - **Customer Engagement**: Customer reviews with star ratings and image gallery with proper asset references.
+- **Offline Support**: Full offline functionality with comprehensive asset caching via Service Worker.
+- **Smart Updates**: Automatic detection of server updates with complete cache refresh cycle.
 
-## Recent Changes (v16.4.0 - SYSTEM NAV BAR SYNC IN PWA)
-- **PWA Theme Color Synchronization**: Implemented intelligent app reload on theme switch in PWA mode
-  - In browser mode: System navigation bar color updates dynamically with retry waves
-  - In PWA app mode: When user switches light/dark mode, theme preference is saved and app reloads cleanly
-  - On reload, the system re-reads the updated meta tags and applies the correct navigation bar color
-  - This solves the Android PWA limitation where theme colors are only read at app startup
-- **Continuous Enforcement**: Added MutationObserver and polling (500ms intervals) to enforce correct theme colors
-- **PWA Mode Detection**: Automatically detects if running in standalone PWA mode and applies appropriate strategy
+## Recent Changes (v17.0.0 - COMPREHENSIVE PWA CACHING)
+- **Complete Offline-First Caching System**: Service Worker caches ALL static assets (44 service images, 5 banners, all CSS/JS/icons) on install
+- **Browser Auto-Caching**: Every asset visited is cached for next time instant loading
+- **Version Detection Integration**: `initUpdateChecker()` now called on page load to detect server updates
+- **Service Worker Auto-Update**: Checks for updates every 30 seconds in background
+- **Zero Downtime Updates**: When new version detected, clears all caches and forces fresh reload with complete re-caching
+- **Unified Update System**: Works identically for both browser and PWA app installations
+- **Production Ready**: v17.0.0 features complete offline-first caching + automatic update detection
 
-## Previous Changes (v16.3.0 - PROFESSIONAL BORDERED BUTTONS)
-- **Contact Buttons**: Redesigned with elegant bordered style across both themes
-  - **Light Mode**: Soft muted pastels (pink, green, blue) with 1.5px colored borders, dark text for clarity
-    - Locate Button: Soft pink (#F0BCD4) with pink border (#D899C8)
-    - WhatsApp Button: Soft green (#C8E6C9) with green border (#81C784)
-    - Call Button: Light blue (#BBDEFB) with blue border (#64B5F6)
-  - **Dark Mode**: Muted darker shades with 1.5px colored borders, white text
-    - Locate Button: Muted dark pink (#8B4A6B) with light pink border (#C08BA8)
-    - WhatsApp Button: Muted dark green (#4A6B53) with light green border (#7BA589)
-    - Call Button: Muted dark blue (#4A6B8B) with light blue border (#7BA5C0)
-  - **Features**: Consistent 1.5px borders across both modes, professional appearance, hover animations with lift effect
-- **Special Offers pricing**: Displays in gold color for better visual hierarchy
-- **All elements**: Properly colored and visible in both light and dark modes with refined borders
+## Previous Session Changes
+- Fixed T&C modal UI with beautiful design, proper scrolling, and theme support
+- Fixed background page scrolling when modal is open (locked background)
+- Fixed modal content bug (Coming Soon vs T&C display)
+- Comprehensive PWA asset caching implementation
+- Version-based update detection system
 
 ## External Dependencies
 - **http-server (Node.js)**: Local development server
@@ -93,16 +102,17 @@ The Blancbeu website now uses a **true system-wide theme architecture** leveragi
 ## File Structure
 ```
 ├── index.html              (Main entry point with early theme script)
-├── styles.css              (Refactored with 100% CSS variable color references)
-├── theme-variables.css     (Complete theme definitions for dark & light modes)
-├── script.js               (ThemeController with data-theme attribute management)
-├── manifest.json           (PWA manifest with verified icon paths)
-├── version.json            (Cache versioning - v16.2.0)
-├── sw.js                   (Service worker)
-├── fireworks.css           (Fireworks animations - dark mode only)
+├── styles.css              (100% CSS variable color references)
+├── theme-variables.css     (Complete dark/light theme definitions)
+├── script.js               (ThemeController + update checker)
+├── sw.js                   (Service Worker - offline-first caching)
+├── manifest.json           (PWA manifest)
+├── version.json            (v17.0.0 - Cache versioning)
+├── fireworks.css           (Animations - dark mode only)
+├── fireworks.js            (Animation controller)
 ├── assets/                 (Optimized images)
-│   ├── banner_carousel_images/ (5 widescreen banners, 5.1MB total, WebP)
-│   ├── service_images/     (44 optimized service images, 2.8MB, WebP)
+│   ├── banner_carousel_images/ (5 WebP images)
+│   ├── service_images/     (44 optimized WebP images)
 │   ├── brand_icon_optimized.webp
 │   └── app_splash_screen.webp
 ├── icon-192x192.webp       (PWA icon)
@@ -118,13 +128,13 @@ The Blancbeu website now uses a **true system-wide theme architecture** leveragi
 - None currently - all critical issues resolved and fully styled
 
 ## Fixed Issues (Session Complete)
-✅ All text elements visible in both light and dark modes
-✅ Gallery images load from correct paths
-✅ Bottom navigation properly switches colors with theme
-✅ All background elements respect theme CSS variables
-✅ Manifest.json icon references corrected
-✅ Zero hardcoded colors remaining in production CSS
-✅ Contact buttons display with light pastel semi-transparent colors
-✅ Special offers prices display in gold for better hierarchy
-✅ Call Now button fully visible and functional
-✅ All elements properly styled and themed for luxury salon aesthetic
+✅ T&C modal displays beautifully with all 10 terms
+✅ Background page doesn't scroll when modal is open
+✅ Correct modal content displayed (Coming Soon vs T&C)
+✅ Service Worker caches ALL assets on install
+✅ Browser caches every asset visited for next-time fast loading
+✅ Version detection triggers complete cache refresh
+✅ Update system works for both browser and PWA app
+✅ Offline-first strategy implemented for instant loading
+✅ Automatic Service Worker update checks every 30 seconds
+✅ All elements properly themed for dark/light modes

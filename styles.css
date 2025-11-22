@@ -2691,13 +2691,6 @@ body.light-mode .nav-label {
 
 /* Smooth animations for nav appearance removed - conflicts with scroll behavior */
 
-/* ===== DARK MODE WEBKIT PROPERTY OVERRIDES ===== */
-/* Override -webkit-text-fill-color: transparent to make text visible */
-
-html:not([data-theme="light"]) .section-title {
-    -webkit-text-fill-color: currentColor !important;
-    color: var(--gold-primary) !important;
-}
 
 html:not([data-theme="light"]) .category-title {
     -webkit-text-fill-color: currentColor !important;
@@ -2730,5 +2723,142 @@ html:not([data-theme="light"]) h2,
 html:not([data-theme="light"]) h3,
 html:not([data-theme="light"]) h4,
 html:not([data-theme="light"]) h5 {
+    -webkit-text-fill-color: currentColor !important;
+}
+
+
+html:not([data-theme="light"]) .section-title,
+html:not([data-theme="light"]) .brand-name,
+html:not([data-theme="light"]) .category-title,
+html:not([data-theme="light"]) .new-price,
+html:not([data-theme="light"]) .old-price,
+html:not([data-theme="light"]) .offer-price,
+html:not([data-theme="light"]) .footer-section h3,
+html:not([data-theme="light"]) .footer-section h4,
+html:not([data-theme="light"]) .review-card h3,
+html:not([data-theme="light"]) .review-author,
+html:not([data-theme="light"]) .tc-modal-content h2,
+html:not([data-theme="light"]) .dev-modal-content h2,
+html:not([data-theme="light"]) .offer-badge,
+html:not([data-theme="light"]) .sparkle-text,
+html:not([data-theme="light"]) .shimmer-text {
+    -webkit-text-fill-color: currentColor !important;
+}
+
+html:not([data-theme="light"]) .section-title {
+    color: var(--gold-primary) !important;
+}
+
+html:not([data-theme="light"]) .category-title {
+    color: var(--gold-primary) !important;
+}
+
+html:not([data-theme="light"]) .brand-name {
+    color: var(--gold-primary) !important;
+}
+
+html:not([data-theme="light"]) .new-price,
+html:not([data-theme="light"]) .offer-price {
+    color: var(--gold-bright) !important;
+}
+
+html:not([data-theme="light"]) .old-price {
+    color: var(--text-secondary) !important;
+}
+
+html:not([data-theme="light"]) .footer-section h3,
+html:not([data-theme="light"]) .footer-section h4,
+html:not([data-theme="light"]) .review-card h3 {
+    color: var(--gold-primary) !important;
+}
+
+html:not([data-theme="light"]) .review-author {
+    color: var(--text-primary) !important;
+}
+
+html:not([data-theme="light"]) .tc-modal-content h2,
+html:not([data-theme="light"]) .dev-modal-content h2 {
+    color: var(--gold-primary) !important;
+}
+
+html:not([data-theme="light"]) .offer-badge {
+    color: var(--text-primary) !important;
+}
+
+html:not([data-theme="light"]) h1,
+html:not([data-theme="light"]) h2,
+html:not([data-theme="light"]) h3,
+html:not([data-theme="light"]) h4,
+html:not([data-theme="light"]) h5,
+html:not([data-theme="light"]) h6 {
+    -webkit-text-fill-color: currentColor !important;
+}
+
+/* ===== DARK MODE COLOR OVERRIDES - COMPLETE FIX ===== */
+
+html:not([data-theme="light"]) .section-title {
+    color: var(--gold-primary) !important;
+    -webkit-text-fill-color: currentColor !important;
+}
+
+html:not([data-theme="light"]) .brand-name {
+    color: var(--gold-primary) !important;
+    -webkit-text-fill-color: currentColor !important;
+}
+
+html:not([data-theme="light"]) .category-title {
+    color: var(--gold-primary) !important;
+    -webkit-text-fill-color: currentColor !important;
+}
+
+html:not([data-theme="light"]) .offer-price,
+html:not([data-theme="light"]) .new-price {
+    color: var(--gold-bright) !important;
+    -webkit-text-fill-color: currentColor !important;
+}
+
+html:not([data-theme="light"]) .old-price {
+    color: var(--text-secondary) !important;
+    -webkit-text-fill-color: currentColor !important;
+}
+
+html:not([data-theme="light"]) .footer-section h3,
+html:not([data-theme="light"]) .footer-section h4 {
+    color: var(--gold-primary) !important;
+    -webkit-text-fill-color: currentColor !important;
+}
+
+html:not([data-theme="light"]) .review-card h3 {
+    color: var(--gold-primary) !important;
+    -webkit-text-fill-color: currentColor !important;
+}
+
+html:not([data-theme="light"]) .review-author {
+    color: var(--text-primary) !important;
+    -webkit-text-fill-color: currentColor !important;
+}
+
+html:not([data-theme="light"]) .tc-modal-content h2,
+html:not([data-theme="light"]) .dev-modal-content h2 {
+    color: var(--gold-primary) !important;
+    -webkit-text-fill-color: currentColor !important;
+}
+
+html:not([data-theme="light"]) .offer-badge {
+    color: var(--text-primary) !important;
+    -webkit-text-fill-color: currentColor !important;
+}
+
+html:not([data-theme="light"]) h1,
+html:not([data-theme="light"]) h2,
+html:not([data-theme="light"]) h3,
+html:not([data-theme="light"]) h4,
+html:not([data-theme="light"]) h5,
+html:not([data-theme="light"]) h6 {
+    -webkit-text-fill-color: currentColor !important;
+}
+
+/* Fallback for any element with transparent text in dark mode */
+html:not([data-theme="light"]) [style*="webkit-text-fill-color"] {
     -webkit-text-fill-color: currentColor !important;
 }

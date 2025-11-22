@@ -1,6 +1,6 @@
 {
-  "version": "17.1.0",
-  "lastUpdated": "2025-11-22T16:50:00Z",
-  "timestamp": 1732293000000,
-  "changes": "Optimized banner images to 1200x800 (3:2 aspect ratio) for faster loading and better performance"
+  "version": "17.2.0",
+  "lastUpdated": "2025-11-22T16:52:00Z",
+  "timestamp": 1732293120000,
+  "changes": "Resized banner images to 1200x800 (3:2 aspect ratio) with 100% maximum quality"
 }

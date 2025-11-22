@@ -1400,6 +1400,20 @@ body.light-mode .offer-card p {
     text-shadow: 0 0 30px var(--gold-24k);
 }
 
+body.light-mode .old-price {
+    color: #999999;
+    text-decoration-color: #999999;
+}
+
+body.light-mode .new-price {
+    background: linear-gradient(135deg, #8B6914, #B8860B);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: none;
+    font-weight: 900;
+}
+
 .sparkle-line {
     height: 3px;
     background: linear-gradient(90deg, transparent, var(--gold-24k), transparent);

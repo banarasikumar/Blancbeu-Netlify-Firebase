@@ -2863,11 +2863,6 @@ html:not([data-theme="light"]) [style*="webkit-text-fill-color"] {
     -webkit-text-fill-color: currentColor !important;
 }
 
-/* DARK MODE FIX FOR CALL NOW BUTTON */
-html:not([data-theme="light"]) .contact-btn {
-    color: var(--gold-primary) !important;
-    -webkit-text-fill-color: currentColor !important;
-}
 
 html:not([data-theme="light"]) .call-btn {
     color: var(--gold-primary) !important;
@@ -2876,4 +2871,48 @@ html:not([data-theme="light"]) .call-btn {
 
 html:not([data-theme="light"]) .contact-btn::before {
     background: rgba(255, 215, 0, 0.1) !important;
+}
+
+/* ===== COMPLETE DARK MODE FIX FOR CONTACT BUTTONS ===== */
+html:not([data-theme="light"]) .contact-btn {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 140, 0, 0.1)) !important;
+    color: var(--gold-primary) !important;
+    border: 2px solid var(--gold-primary) !important;
+    -webkit-text-fill-color: currentColor !important;
+}
+
+html:not([data-theme="light"]) .contact-btn:hover {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.25), rgba(255, 140, 0, 0.15)) !important;
+    box-shadow: 0 8px 30px rgba(255, 215, 0, 0.4) !important;
+}
+
+html:not([data-theme="light"]) .btn-text {
+    color: var(--gold-primary) !important;
+    -webkit-text-fill-color: currentColor !important;
+}
+
+html:not([data-theme="light"]) .btn-icon {
+    color: var(--gold-primary) !important;
+}
+
+html:not([data-theme="light"]) .call-btn {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 140, 0, 0.1)) !important;
+    color: var(--gold-primary) !important;
+    border: 2px solid var(--gold-primary) !important;
+}
+
+html:not([data-theme="light"]) .call-btn .btn-text {
+    color: var(--gold-primary) !important;
+}
+
+html:not([data-theme="light"]) .whatsapp-btn {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 140, 0, 0.1)) !important;
+    color: var(--gold-primary) !important;
+    border: 2px solid var(--gold-primary) !important;
+}
+
+html:not([data-theme="light"]) .locate-btn {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 140, 0, 0.1)) !important;
+    color: var(--gold-primary) !important;
+    border: 2px solid var(--gold-primary) !important;
 }

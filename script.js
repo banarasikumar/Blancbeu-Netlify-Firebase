@@ -1052,46 +1052,7 @@ class ThemeController {
     this.currentThemeColor = colorValue;
     this.currentColorScheme = isLightMode ? 'light' : 'dark';
     
-    // For PWA mode: Force a system-level update by reloading the page
-    // This makes the system re-read meta tags and respects the new theme
-    if (this.isPWAMode) {
-      this.forcePWAThemeUpdate(colorValue, isLightMode);
-    } else {
-      // For browser mode: Use dynamic meta tag updates
-      this.updateMetaTagsDynamically(colorValue, isLightMode);
-    }
-  }
-  
-  forcePWAThemeUpdate(colorValue, isLightMode) {
-    // Update meta tags with immediate effect
-    this.updateMetaTagsDynamically(colorValue, isLightMode);
-    
-    // Force system UI refresh by briefly manipulating viewport
-    // This triggers the system to re-read the theme-color meta tag
-    const viewport = document.querySelector('meta[name="viewport"]');
-    if (viewport) {
-      const originalContent = viewport.getAttribute('content');
-      
-      // Trigger a viewport recalculation
-      viewport.setAttribute('content', originalContent + ', maximum-scale=1');
-      void viewport.offsetHeight;
-      
-      setTimeout(() => {
-        viewport.setAttribute('content', originalContent);
-        void viewport.offsetHeight;
-      }, 100);
-    }
-    
-    // Force a hard reload after a short delay to ensure system UI updates
-    // This reloads the page silently in PWA mode to make the system respect the new theme
-    setTimeout(() => {
-      // Use location.reload with cache bypass
-      window.location.href = window.location.href + (window.location.href.includes('?') ? '&' : '?') + '_theme_update=' + Date.now();
-    }, 500);
-  }
-  
-  updateMetaTagsDynamically(colorValue, isLightMode) {
-    // Update theme-color meta tag with multiple strategies for reliability
+    // Update meta tags with multiple strategies for reliability
     const metaThemeColor = document.querySelector('meta[name="theme-color"]');
     if (metaThemeColor) {
       metaThemeColor.setAttribute('content', colorValue);
@@ -1116,29 +1077,27 @@ class ThemeController {
       void appleStatusBar.offsetHeight;
     }
     
-    // Aggressive retry mechanism with multiple waves for browser mode
-    if (!this.isPWAMode) {
-      const updateWave = (delay) => {
-        setTimeout(() => {
-          if (metaThemeColor) {
-            metaThemeColor.setAttribute('content', colorValue);
-            void metaThemeColor.offsetHeight;
-          }
-          if (metaById) {
-            metaById.setAttribute('content', colorValue);
-            void metaById.offsetHeight;
-          }
-          document.documentElement.style.colorScheme = this.currentColorScheme;
-          document.documentElement.style.setProperty('color-scheme', this.currentColorScheme, 'important');
-        }, delay);
-      };
-      
-      // Multiple waves of updates for browser mode
-      updateWave(50);
-      updateWave(150);
-      updateWave(300);
-      updateWave(600);
-    }
+    // Aggressive retry mechanism with multiple waves
+    const updateWave = (delay) => {
+      setTimeout(() => {
+        if (metaThemeColor) {
+          metaThemeColor.setAttribute('content', colorValue);
+          void metaThemeColor.offsetHeight;
+        }
+        if (metaById) {
+          metaById.setAttribute('content', colorValue);
+          void metaById.offsetHeight;
+        }
+        document.documentElement.style.colorScheme = this.currentColorScheme;
+        document.documentElement.style.setProperty('color-scheme', this.currentColorScheme, 'important');
+      }, delay);
+    };
+    
+    // Multiple waves of updates
+    updateWave(50);
+    updateWave(150);
+    updateWave(300);
+    updateWave(600);
   }
 
   enableLightMode() {

@@ -966,6 +966,9 @@ class ThemeController {
   }
   
   init() {
+    // Mark that we're in initialization (not user-triggered theme change)
+    this.isInitializing = true;
+    
     const savedTheme = localStorage.getItem('theme');
     
     if (savedTheme) {
@@ -977,6 +980,9 @@ class ThemeController {
     } else {
       this.detectTimeOfDay();
     }
+    
+    // Done initializing - now user-triggered changes will trigger reload in PWA mode
+    this.isInitializing = false;
     
     if (this.themeToggleBtn) {
       this.themeToggleBtn.addEventListener('click', () => this.toggleTheme());
@@ -1075,13 +1081,22 @@ class ThemeController {
     }
     
     // For PWA mode: reload the app so system re-reads the updated meta tags
-    if (this.isPWAMode) {
+    // Only reload on user-triggered theme changes, not during initialization
+    if (this.isPWAMode && !this.isInitializing && !sessionStorage.getItem('_theme_reload_guard')) {
+      // Set guard to prevent reload loops
+      sessionStorage.setItem('_theme_reload_guard', 'true');
+      
       // Small delay to ensure theme preference is saved to localStorage
       setTimeout(() => {
         window.location.href = '/';
-      }, 300);
+      }, 500);
     } else {
-      // For browser mode: use retry waves for dynamic updates
+      // Clear guard after reload
+      if (sessionStorage.getItem('_theme_reload_guard')) {
+        sessionStorage.removeItem('_theme_reload_guard');
+      }
+      
+      // For browser mode or after reload: use retry waves for dynamic updates
       const updateWave = (delay) => {
         setTimeout(() => {
           if (metaThemeColor) {

@@ -1,6 +1,6 @@
 {
-  "version": "18.2.0",
-  "lastUpdated": "2025-11-22T16:02:00Z",
-  "timestamp": 1763827320000,
-  "changes": "Fixed Install App button - disabled pseudo-elements, removed filters, added z-index, now displays solid opaque gold"
+  "version": "18.3.0",
+  "lastUpdated": "2025-11-22T16:03:00Z",
+  "timestamp": 1763827380000,
+  "changes": "Fixed Install App button transparency - removed parent backdrop-filter inheritance with backdrop-filter: none and background-attachment: fixed"
 }

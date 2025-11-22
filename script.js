@@ -1008,7 +1008,8 @@ class ThemeController {
       toggleSound(false);
     }
     
-    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#fef5e7');
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#ffffff');
+    document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]')?.setAttribute('content', 'black');
   }
   
   enableDarkMode() {
@@ -1026,7 +1027,8 @@ class ThemeController {
       togglePause(false);
     }
     
-    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#000000');
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#0a0a0a');
+    document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]')?.setAttribute('content', 'black-translucent');
   }
 }
 

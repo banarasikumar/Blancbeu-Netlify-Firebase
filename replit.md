@@ -59,16 +59,17 @@ The Blancbeu website now uses a **true system-wide theme architecture** leveragi
 - **Music Player**: Background music with rose petal rain animation.
 - **Customer Engagement**: Customer reviews with star ratings and image gallery with proper asset references.
 
-## Recent Changes (v16.2.0 - FINAL BUTTON & TEXT STYLING)
+## Recent Changes (v16.2.0 - iOS GLASS MORPHISM BUTTONS)
 - **Fixed all text visibility**: Added comprehensive CSS overrides for dark mode text rendering
 - **Fixed "Call Now" button**: Fully visible with proper dark mode styling
-- **Contact Buttons**: Muted solid colors for sophisticated appearance:
-  - Locate Button: Muted Pink (#E882B5)
-  - WhatsApp Button: Muted Green (#5BA96B) - like actual WhatsApp tone, less vibrant
-  - Call Button: Muted Gold (#D4A017)
+- **Contact Buttons**: iOS Glass Morphism Design:
+  - Locate Button: Glass Pink with frosted effect (#E882B5)
+  - WhatsApp Button: Glass Green with frosted effect (#5BA96B) - like actual WhatsApp tone
+  - Call Button: Glass Gold with frosted effect (#D4A017)
+  - **Features**: Backdrop blur effect, multi-layer shadows (depth + glow + inset highlight), semi-transparent colors, smooth hover animations
 - **Special Offers pricing**: Displays in gold color for better visual hierarchy
 - **All elements**: Properly colored and visible in both light and dark modes
-- **Buttons feature**: Smooth hover effects, elegant shadows, solid single-shade colors, proper text contrast
+- **Buttons feature**: iOS-inspired glass morphism, depth shadows, inset highlights, hover lift effect
 
 ## External Dependencies
 - **http-server (Node.js)**: Local development server

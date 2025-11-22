@@ -3684,18 +3684,6 @@ body.light-mode .contact-btn .btn-icon {
     -webkit-text-fill-color: currentColor !important;
 }
 
-/* ===== MUTED CONTACT BUTTONS - SOLID SINGLE COLOR ===== */
-
-/* DARK MODE - Solid single shade */
-
-/* Locate button: Solid Muted Pink */
-html:not([data-theme="light"]) .locate-btn {
-    background: #E882B5 !important;
-    color: #ffffff !important;
-    border: 2px solid #E882B5 !important;
-    box-shadow: 0 8px 20px rgba(232, 130, 181, 0.35) !important;
-    -webkit-text-fill-color: currentColor !important;
-}
 
 html:not([data-theme="light"]) .locate-btn:hover {
     background: #D97BAF !important;
@@ -3774,6 +3762,156 @@ body.light-mode .call-btn {
 body.light-mode .call-btn:hover {
     background: #B8860B !important;
     box-shadow: 0 12px 28px rgba(212, 160, 23, 0.45) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* Button text visibility */
+html:not([data-theme="light"]) .contact-btn .btn-text,
+html:not([data-theme="light"]) .contact-btn .btn-icon,
+body.light-mode .contact-btn .btn-text,
+body.light-mode .contact-btn .btn-icon {
+    -webkit-text-fill-color: currentColor !important;
+}
+
+/* ===== iOS GLASS MORPHISM CONTACT BUTTONS ===== */
+
+/* Base glass morphism styling */
+.contact-btn {
+    backdrop-filter: blur(10px) !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+/* DARK MODE - iOS Glass Effect */
+
+/* Locate button: Glass Pink */
+html:not([data-theme="light"]) .locate-btn {
+    background: rgba(232, 130, 181, 0.25) !important;
+    backdrop-filter: blur(12px) !important;
+    border: 1.5px solid rgba(232, 130, 181, 0.4) !important;
+    box-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.2),
+        0 8px 24px rgba(232, 130, 181, 0.25),
+        inset 0 1px 1px rgba(255, 255, 255, 0.2) !important;
+    color: #ffffff !important;
+    -webkit-text-fill-color: currentColor !important;
+}
+
+html:not([data-theme="light"]) .locate-btn:hover {
+    background: rgba(232, 130, 181, 0.35) !important;
+    box-shadow: 
+        0 4px 8px rgba(0, 0, 0, 0.25),
+        0 12px 32px rgba(232, 130, 181, 0.35),
+        inset 0 1px 1px rgba(255, 255, 255, 0.25) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* WhatsApp button: Glass Green */
+html:not([data-theme="light"]) .whatsapp-btn {
+    background: rgba(91, 169, 107, 0.25) !important;
+    backdrop-filter: blur(12px) !important;
+    border: 1.5px solid rgba(91, 169, 107, 0.4) !important;
+    box-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.2),
+        0 8px 24px rgba(91, 169, 107, 0.25),
+        inset 0 1px 1px rgba(255, 255, 255, 0.2) !important;
+    color: #ffffff !important;
+    -webkit-text-fill-color: currentColor !important;
+}
+
+html:not([data-theme="light"]) .whatsapp-btn:hover {
+    background: rgba(91, 169, 107, 0.35) !important;
+    box-shadow: 
+        0 4px 8px rgba(0, 0, 0, 0.25),
+        0 12px 32px rgba(91, 169, 107, 0.35),
+        inset 0 1px 1px rgba(255, 255, 255, 0.25) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* Call button: Glass Gold */
+html:not([data-theme="light"]) .call-btn {
+    background: rgba(212, 160, 23, 0.25) !important;
+    backdrop-filter: blur(12px) !important;
+    border: 1.5px solid rgba(212, 160, 23, 0.4) !important;
+    box-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.2),
+        0 8px 24px rgba(212, 160, 23, 0.25),
+        inset 0 1px 1px rgba(255, 255, 255, 0.15) !important;
+    color: #ffffff !important;
+    -webkit-text-fill-color: currentColor !important;
+}
+
+html:not([data-theme="light"]) .call-btn:hover {
+    background: rgba(212, 160, 23, 0.35) !important;
+    box-shadow: 
+        0 4px 8px rgba(0, 0, 0, 0.25),
+        0 12px 32px rgba(212, 160, 23, 0.35),
+        inset 0 1px 1px rgba(255, 255, 255, 0.2) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* LIGHT MODE - iOS Glass Effect */
+
+/* Locate button: Glass Pink */
+body.light-mode .locate-btn {
+    background: rgba(232, 130, 181, 0.25) !important;
+    backdrop-filter: blur(12px) !important;
+    border: 1.5px solid rgba(232, 130, 181, 0.4) !important;
+    box-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.15),
+        0 8px 24px rgba(232, 130, 181, 0.2),
+        inset 0 1px 1px rgba(255, 255, 255, 0.4) !important;
+    color: #ffffff !important;
+}
+
+body.light-mode .locate-btn:hover {
+    background: rgba(232, 130, 181, 0.35) !important;
+    box-shadow: 
+        0 4px 8px rgba(0, 0, 0, 0.2),
+        0 12px 32px rgba(232, 130, 181, 0.3),
+        inset 0 1px 1px rgba(255, 255, 255, 0.5) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* WhatsApp button: Glass Green */
+body.light-mode .whatsapp-btn {
+    background: rgba(91, 169, 107, 0.25) !important;
+    backdrop-filter: blur(12px) !important;
+    border: 1.5px solid rgba(91, 169, 107, 0.4) !important;
+    box-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.15),
+        0 8px 24px rgba(91, 169, 107, 0.2),
+        inset 0 1px 1px rgba(255, 255, 255, 0.4) !important;
+    color: #ffffff !important;
+}
+
+body.light-mode .whatsapp-btn:hover {
+    background: rgba(91, 169, 107, 0.35) !important;
+    box-shadow: 
+        0 4px 8px rgba(0, 0, 0, 0.2),
+        0 12px 32px rgba(91, 169, 107, 0.3),
+        inset 0 1px 1px rgba(255, 255, 255, 0.5) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* Call button: Glass Gold */
+body.light-mode .call-btn {
+    background: rgba(212, 160, 23, 0.25) !important;
+    backdrop-filter: blur(12px) !important;
+    border: 1.5px solid rgba(212, 160, 23, 0.4) !important;
+    box-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.15),
+        0 8px 24px rgba(212, 160, 23, 0.2),
+        inset 0 1px 1px rgba(255, 255, 255, 0.35) !important;
+    color: #ffffff !important;
+}
+
+body.light-mode .call-btn:hover {
+    background: rgba(212, 160, 23, 0.35) !important;
+    box-shadow: 
+        0 4px 8px rgba(0, 0, 0, 0.2),
+        0 12px 32px rgba(212, 160, 23, 0.3),
+        inset 0 1px 1px rgba(255, 255, 255, 0.45) !important;
     transform: translateY(-2px) !important;
 }
 

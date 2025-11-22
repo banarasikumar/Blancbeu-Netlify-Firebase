@@ -398,17 +398,8 @@ function initSmoothScroll() {
   });
 }
 
-let scrollPosition = 0;
-
 function showTC() {
   window.location.href = '/terms.html';
-}
-
-window.onclick = function(event) {
-  const modal = document.getElementById('tcModal');
-  if (event.target === modal) {
-    closeTC();
-  }
 }
 
 class ScrollBehaviorManager {

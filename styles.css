@@ -1987,6 +1987,9 @@ body.light-mode .gallery-section {
 /* Under Development Modal */
 .dev-modal {
     display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     position: fixed;
     z-index: 40;
     left: 0;
@@ -1996,6 +1999,7 @@ body.light-mode .gallery-section {
     background: rgba(0, 0, 0, 0.95);
     backdrop-filter: blur(10px);
     animation: fadeInBackdrop 0.3s ease-out;
+    overflow: hidden;
 }
 
 @keyframes fadeInBackdrop {

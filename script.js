@@ -1127,9 +1127,10 @@ class ThemeController {
 function openDevModal() {
   const modal = document.getElementById('devModal');
   if (modal) {
-    modal.style.display = 'block';
+    modal.style.display = 'flex';
     modal.style.animation = 'fadeInBackdrop 0.3s ease-out';
     document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
   }
 }
 
@@ -1142,9 +1143,10 @@ function showTC() {
     const tcContent = template.content.cloneNode(true);
     modalBody.innerHTML = '';
     modalBody.appendChild(tcContent);
-    modal.style.display = 'block';
+    modal.style.display = 'flex';
     modal.style.animation = 'fadeInBackdrop 0.3s ease-out';
     document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
   }
 }
 
@@ -1152,7 +1154,8 @@ function closeDevModal() {
   const modal = document.getElementById('devModal');
   if (modal) {
     modal.style.display = 'none';
-    document.body.style.overflow = 'auto';
+    document.body.style.overflow = '';
+    document.documentElement.style.overflow = '';
   }
 }
 

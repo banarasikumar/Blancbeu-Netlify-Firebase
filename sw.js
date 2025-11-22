@@ -1,9 +1,8 @@
-const CACHE_NAME = 'blancbeu-v7-optimized';
+const CACHE_NAME = 'blancbeu-v8-theme-fixed';
 const VERSION_URL = '/version.json';
 
+// Assets to cache (NO HTML FILES - they must be fresh)
 const urlsToCache = [
-  '/',
-  '/index.html',
   '/styles.css',
   '/script.js',
   '/fireworks.css',
@@ -37,7 +36,7 @@ const urlsToCache = [
   '/assets/service_images/attractive_model_wit_bcb81b4f.webp'
 ];
 
-// Install event
+// Install event - cache assets only
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME)
@@ -45,13 +44,35 @@ self.addEventListener('install', (event) => {
         return cache.addAll(urlsToCache);
       })
   );
+  self.skipWaiting();
 });
 
-// Fetch event with version checking
+// Fetch event - NETWORK-FIRST for HTML, CACHE-FIRST for assets
 self.addEventListener('fetch', (event) => {
   const request = event.request;
+  const url = new URL(request.url);
   
-  // Always fetch version.json from network to check for updates
+  // NETWORK-FIRST for HTML files (always get fresh theme detection)
+  if (url.pathname === '/' || url.pathname === '/index.html' || request.destination === 'document') {
+    event.respondWith(
+      fetch(request)
+        .then((response) => {
+          // Cache the fresh response
+          if (response && response.status === 200) {
+            const cache = caches.open(CACHE_NAME);
+            cache.then((c) => c.put(request, response.clone()));
+          }
+          return response;
+        })
+        .catch(() => {
+          // Fallback to cache if network fails
+          return caches.match(request);
+        })
+    );
+    return;
+  }
+
+  // Always fetch version.json from network
   if (request.url.includes('version.json')) {
     event.respondWith(
       fetch(request)
@@ -65,13 +86,12 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // For other requests, use cache-first strategy
+  // CACHE-FIRST for all other assets
   event.respondWith(
     caches.match(request)
       .then((response) => {
         return response || fetch(request)
           .then((networkResponse) => {
-            // Cache new responses
             if (networkResponse && networkResponse.status === 200) {
               const cache = caches.open(CACHE_NAME);
               cache.then((c) => c.put(request, networkResponse.clone()));
@@ -85,20 +105,20 @@ self.addEventListener('fetch', (event) => {
   );
 });
 
-// Activate event
+// Activate event - clean up old caches
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
       return Promise.all(
         cacheNames.map((cacheName) => {
           if (cacheName !== CACHE_NAME) {
+            console.log('Deleting old cache:', cacheName);
             return caches.delete(cacheName);
           }
         })
       );
     }).then(() => self.clients.claim())
   );
-  self.skipWaiting();
 });
 
 // Message handler for cache invalidation

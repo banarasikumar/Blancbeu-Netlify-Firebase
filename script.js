@@ -1052,52 +1052,56 @@ class ThemeController {
     this.currentThemeColor = colorValue;
     this.currentColorScheme = isLightMode ? 'light' : 'dark';
     
-    // Update meta tags with multiple strategies for reliability
+    // Update meta tags immediately
     const metaThemeColor = document.querySelector('meta[name="theme-color"]');
     if (metaThemeColor) {
       metaThemeColor.setAttribute('content', colorValue);
       void metaThemeColor.offsetHeight;
     }
     
-    // Also try updating via id (the initial setup method)
     const metaById = document.getElementById('metaThemeColor');
     if (metaById) {
       metaById.setAttribute('content', colorValue);
       void metaById.offsetHeight;
     }
     
-    // Update color-scheme property AGGRESSIVELY
     document.documentElement.style.colorScheme = this.currentColorScheme;
     document.documentElement.style.setProperty('color-scheme', this.currentColorScheme, 'important');
     
-    // Update apple status bar
     const appleStatusBar = document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]');
     if (appleStatusBar) {
       appleStatusBar.setAttribute('content', isLightMode ? 'black' : 'black-translucent');
       void appleStatusBar.offsetHeight;
     }
     
-    // Aggressive retry mechanism with multiple waves
-    const updateWave = (delay) => {
+    // For PWA mode: reload the app so system re-reads the updated meta tags
+    if (this.isPWAMode) {
+      // Small delay to ensure theme preference is saved to localStorage
       setTimeout(() => {
-        if (metaThemeColor) {
-          metaThemeColor.setAttribute('content', colorValue);
-          void metaThemeColor.offsetHeight;
-        }
-        if (metaById) {
-          metaById.setAttribute('content', colorValue);
-          void metaById.offsetHeight;
-        }
-        document.documentElement.style.colorScheme = this.currentColorScheme;
-        document.documentElement.style.setProperty('color-scheme', this.currentColorScheme, 'important');
-      }, delay);
-    };
-    
-    // Multiple waves of updates
-    updateWave(50);
-    updateWave(150);
-    updateWave(300);
-    updateWave(600);
+        window.location.href = '/';
+      }, 300);
+    } else {
+      // For browser mode: use retry waves for dynamic updates
+      const updateWave = (delay) => {
+        setTimeout(() => {
+          if (metaThemeColor) {
+            metaThemeColor.setAttribute('content', colorValue);
+            void metaThemeColor.offsetHeight;
+          }
+          if (metaById) {
+            metaById.setAttribute('content', colorValue);
+            void metaById.offsetHeight;
+          }
+          document.documentElement.style.colorScheme = this.currentColorScheme;
+          document.documentElement.style.setProperty('color-scheme', this.currentColorScheme, 'important');
+        }, delay);
+      };
+      
+      updateWave(50);
+      updateWave(150);
+      updateWave(300);
+      updateWave(600);
+    }
   }
 
   enableLightMode() {

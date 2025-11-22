@@ -59,7 +59,16 @@ The Blancbeu website now uses a **true system-wide theme architecture** leveragi
 - **Music Player**: Background music with rose petal rain animation.
 - **Customer Engagement**: Customer reviews with star ratings and image gallery with proper asset references.
 
-## Recent Changes (v16.3.0 - PROFESSIONAL BORDERED BUTTONS)
+## Recent Changes (v16.4.0 - SYSTEM NAV BAR SYNC IN PWA)
+- **PWA Theme Color Synchronization**: Implemented intelligent app reload on theme switch in PWA mode
+  - In browser mode: System navigation bar color updates dynamically with retry waves
+  - In PWA app mode: When user switches light/dark mode, theme preference is saved and app reloads cleanly
+  - On reload, the system re-reads the updated meta tags and applies the correct navigation bar color
+  - This solves the Android PWA limitation where theme colors are only read at app startup
+- **Continuous Enforcement**: Added MutationObserver and polling (500ms intervals) to enforce correct theme colors
+- **PWA Mode Detection**: Automatically detects if running in standalone PWA mode and applies appropriate strategy
+
+## Previous Changes (v16.3.0 - PROFESSIONAL BORDERED BUTTONS)
 - **Contact Buttons**: Redesigned with elegant bordered style across both themes
   - **Light Mode**: Soft muted pastels (pink, green, blue) with 1.5px colored borders, dark text for clarity
     - Locate Button: Soft pink (#F0BCD4) with pink border (#D899C8)

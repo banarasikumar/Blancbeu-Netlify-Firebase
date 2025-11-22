@@ -945,7 +945,6 @@ class ThemeController {
     this.themeToggleBtn = document.getElementById('themeToggle');
     this.fireworksOverlay = document.getElementById('fireworksOverlay');
     this.body = document.body;
-    this.themeStylesheet = document.getElementById('themeStylesheet');
     
     this.init();
   }
@@ -979,8 +978,7 @@ class ThemeController {
   }
   
   toggleTheme() {
-    const currentTheme = localStorage.getItem('theme') || 'dark';
-    if (currentTheme === 'light') {
+    if (this.body.classList.contains('light-mode')) {
       this.enableDarkMode();
       localStorage.setItem('theme', 'dark');
     } else {
@@ -990,11 +988,7 @@ class ThemeController {
   }
   
   enableLightMode() {
-    console.log('🌞 Switching to Light Mode');
     this.body.classList.add('light-mode');
-    if (this.themeStylesheet) {
-      this.themeStylesheet.href = 'light-mode.css';
-    }
     
     if (this.fireworksOverlay) {
       this.fireworksOverlay.classList.remove('active');
@@ -1013,11 +1007,7 @@ class ThemeController {
   }
   
   enableDarkMode() {
-    console.log('🌙 Switching to Dark Mode');
     this.body.classList.remove('light-mode');
-    if (this.themeStylesheet) {
-      this.themeStylesheet.href = 'dark-mode.css';
-    }
     
     if (this.fireworksOverlay) {
       this.fireworksOverlay.classList.add('active');

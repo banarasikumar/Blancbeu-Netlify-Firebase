@@ -1,6 +1,6 @@
 {
-  "version": "17.0.0",
-  "lastUpdated": "2025-11-22T16:45:00Z",
-  "timestamp": 1732292700000,
-  "changes": "Comprehensive PWA caching - all assets cached on install for super-fast offline-first loading"
+  "version": "17.1.0",
+  "lastUpdated": "2025-11-22T16:50:00Z",
+  "timestamp": 1732293000000,
+  "changes": "Optimized banner images to 1200x800 (3:2 aspect ratio) for faster loading and better performance"
 }

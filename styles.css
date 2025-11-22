@@ -3327,18 +3327,6 @@ body.light-mode .contact-btn .btn-icon {
     -webkit-text-fill-color: currentColor !important;
 }
 
-/* ===== VIBRANT COLORFUL CONTACT BUTTONS ===== */
-
-/* DARK MODE - More Vibrant */
-
-/* Locate button: Rich Purple - More saturated */
-html:not([data-theme="light"]) .locate-btn {
-    background: linear-gradient(135deg, #B039D4, #8B35B8) !important;
-    color: #ffffff !important;
-    border: 2px solid #D574E8 !important;
-    box-shadow: 0 8px 25px rgba(176, 57, 212, 0.55) !important;
-    -webkit-text-fill-color: currentColor !important;
-}
 
 html:not([data-theme="light"]) .locate-btn:hover {
     background: linear-gradient(135deg, #8B35B8, #7A2FA8) !important;
@@ -3426,5 +3414,106 @@ html:not([data-theme="light"]) .contact-btn .btn-icon,
 body.light-mode .contact-btn .btn-text,
 body.light-mode .contact-btn .btn-icon {
     color: #ffffff !important;
+    -webkit-text-fill-color: currentColor !important;
+}
+
+/* ===== LIGHT PASTEL CONTACT BUTTONS - TRANSPARENT ===== */
+
+/* DARK MODE - Light pastel with transparency */
+
+/* Locate button: Light Pink - Transparent */
+html:not([data-theme="light"]) .locate-btn {
+    background: linear-gradient(135deg, rgba(255, 182, 193, 0.4), rgba(255, 192, 203, 0.35)) !important;
+    color: #ffffff !important;
+    border: 2px solid rgba(255, 182, 193, 0.6) !important;
+    box-shadow: 0 8px 20px rgba(255, 192, 203, 0.3) !important;
+    -webkit-text-fill-color: currentColor !important;
+}
+
+html:not([data-theme="light"]) .locate-btn:hover {
+    background: linear-gradient(135deg, rgba(255, 192, 203, 0.5), rgba(255, 182, 193, 0.45)) !important;
+    box-shadow: 0 12px 28px rgba(255, 192, 203, 0.45) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* WhatsApp button: Light Green - Transparent */
+html:not([data-theme="light"]) .whatsapp-btn {
+    background: linear-gradient(135deg, rgba(144, 238, 144, 0.4), rgba(152, 251, 152, 0.35)) !important;
+    color: #ffffff !important;
+    border: 2px solid rgba(144, 238, 144, 0.6) !important;
+    box-shadow: 0 8px 20px rgba(144, 238, 144, 0.3) !important;
+    -webkit-text-fill-color: currentColor !important;
+}
+
+html:not([data-theme="light"]) .whatsapp-btn:hover {
+    background: linear-gradient(135deg, rgba(152, 251, 152, 0.5), rgba(144, 238, 144, 0.45)) !important;
+    box-shadow: 0 12px 28px rgba(144, 238, 144, 0.45) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* Call button: Light Gold - Transparent */
+html:not([data-theme="light"]) .call-btn {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.4), rgba(255, 228, 128, 0.35)) !important;
+    color: #ffffff !important;
+    border: 2px solid rgba(255, 215, 0, 0.6) !important;
+    box-shadow: 0 8px 20px rgba(255, 215, 0, 0.3) !important;
+    -webkit-text-fill-color: currentColor !important;
+}
+
+html:not([data-theme="light"]) .call-btn:hover {
+    background: linear-gradient(135deg, rgba(255, 228, 128, 0.5), rgba(255, 215, 0, 0.45)) !important;
+    box-shadow: 0 12px 28px rgba(255, 215, 0, 0.45) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* LIGHT MODE - Light pastel with transparency */
+
+/* Locate button: Light Pink - Transparent */
+body.light-mode .locate-btn {
+    background: linear-gradient(135deg, rgba(255, 182, 193, 0.45), rgba(255, 192, 203, 0.4)) !important;
+    color: #E91E63 !important;
+    border: 2px solid rgba(255, 105, 180, 0.5) !important;
+    box-shadow: 0 8px 20px rgba(255, 192, 203, 0.3) !important;
+}
+
+body.light-mode .locate-btn:hover {
+    background: linear-gradient(135deg, rgba(255, 192, 203, 0.55), rgba(255, 182, 193, 0.5)) !important;
+    box-shadow: 0 12px 28px rgba(255, 192, 203, 0.45) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* WhatsApp button: Light Green - Transparent */
+body.light-mode .whatsapp-btn {
+    background: linear-gradient(135deg, rgba(144, 238, 144, 0.45), rgba(152, 251, 152, 0.4)) !important;
+    color: #4CAF50 !important;
+    border: 2px solid rgba(76, 175, 80, 0.5) !important;
+    box-shadow: 0 8px 20px rgba(144, 238, 144, 0.3) !important;
+}
+
+body.light-mode .whatsapp-btn:hover {
+    background: linear-gradient(135deg, rgba(152, 251, 152, 0.55), rgba(144, 238, 144, 0.5)) !important;
+    box-shadow: 0 12px 28px rgba(144, 238, 144, 0.45) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* Call button: Light Gold - Transparent */
+body.light-mode .call-btn {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.45), rgba(255, 228, 128, 0.4)) !important;
+    color: #D4A017 !important;
+    border: 2px solid rgba(212, 160, 23, 0.5) !important;
+    box-shadow: 0 8px 20px rgba(255, 215, 0, 0.3) !important;
+}
+
+body.light-mode .call-btn:hover {
+    background: linear-gradient(135deg, rgba(255, 228, 128, 0.55), rgba(255, 215, 0, 0.5)) !important;
+    box-shadow: 0 12px 28px rgba(255, 215, 0, 0.45) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* Button text visibility */
+html:not([data-theme="light"]) .contact-btn .btn-text,
+html:not([data-theme="light"]) .contact-btn .btn-icon,
+body.light-mode .contact-btn .btn-text,
+body.light-mode .contact-btn .btn-icon {
     -webkit-text-fill-color: currentColor !important;
 }

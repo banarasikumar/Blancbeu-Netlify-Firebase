@@ -1652,3 +1652,63 @@ input:focus, select:focus, textarea:focus {
 .btn, .nav-item, .carousel-slide {
     will-change: transform, opacity;
 }
+
+/* Premium Tier Badges */
+.tier-badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+}
+
+.tier-silver {
+    background: linear-gradient(135deg, #c0c0c0, #e8e8e8);
+    color: #333;
+}
+
+.tier-gold {
+    background: linear-gradient(135deg, #d4af37, #ffd700);
+    color: #000;
+}
+
+.tier-platinum {
+    background: linear-gradient(135deg, #e5e4e2, #ffffff);
+    color: #333;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+}
+
+/* Service Filter Tags */
+.filter-tag {
+    display: inline-block;
+    background-color: var(--bg-secondary-dark);
+    border: 1px solid var(--border-color-dark);
+    padding: 6px 12px;
+    border-radius: 16px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin: 4px 4px 4px 0;
+}
+
+.filter-tag:hover {
+    border-color: var(--primary-color);
+    background-color: var(--bg-dark);
+}
+
+.filter-tag.active {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--text-light);
+}
+
+/* Enhanced Form Elements */
+.form-group select, .form-group input[type="date"], .form-group input[type="time"] {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 20px;
+    padding-right: 32px;
+}

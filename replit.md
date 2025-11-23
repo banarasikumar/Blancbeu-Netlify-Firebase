@@ -9,6 +9,7 @@ Blancbeu is a luxurious beauty salon website featuring premium 24k gold and blac
 - Always ask before significant changes or large refactoring
 - Modern web standards (HTML5, CSS3, ES6+)
 - Premium 24k gold and black aesthetic as primary design principle
+- Premium Unicode icons for documentation (no casual emojis)
 
 ## System Architecture
 

@@ -5454,16 +5454,34 @@ body.light-mode .account-section-page .logout-btn {
     }
 }
 
-/* Page Section Isolation */
+/* Page Section Isolation - STRICT HIDING */
 .page-view {
     position: relative;
     z-index: 10;
     width: 100%;
 }
 
+.page-view[style*="display: none"] {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none;
+}
+
+#home {
+    display: block !important;
+    visibility: visible !important;
+}
+
+#offers, #services, #gallery, #reviews, #account {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none;
+    height: 0;
+    overflow: hidden;
+}
+
 #account {
     z-index: 20 !important;
-    overflow: hidden;
 }
 
 #cta-section, #footer {

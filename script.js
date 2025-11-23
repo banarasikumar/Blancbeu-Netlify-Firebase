@@ -1178,10 +1178,13 @@ function closeDevModal() {
 
 // FLIPKART-STYLE PAGE NAVIGATION - Show/Hide Pages
 function goToPage(pageName) {
-  // Hide all pages
-  document.querySelectorAll('.page-view').forEach(page => {
-    page.style.display = 'none';
-  });
+  // Strictly hide ALL pages first
+  document.getElementById('home').style.display = 'none';
+  document.getElementById('offers').style.display = 'none';
+  document.getElementById('services').style.display = 'none';
+  document.getElementById('gallery').style.display = 'none';
+  document.getElementById('reviews').style.display = 'none';
+  document.getElementById('account').style.display = 'none';
   
   // Show selected page
   const targetPage = document.getElementById(pageName);
@@ -1191,7 +1194,7 @@ function goToPage(pageName) {
     console.log(`✅ Navigated to ${pageName} page`);
   }
   
-  // Manage CTA and footer - ONLY on home page, hide elsewhere
+  // Manage CTA and footer - ONLY on home page
   const ctaSection = document.getElementById('cta-section');
   const footer = document.getElementById('footer');
   

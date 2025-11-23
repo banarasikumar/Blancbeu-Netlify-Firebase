@@ -404,7 +404,7 @@ Object.keys(appNodes).forEach(key => {
 
 // Remove fullscreen control if not supported.
 if (!fullscreenEnabled()) {
-        appNodes.fullscreenFormOption.classList.add('remove');
+        if (appNodes.fullscreenFormOption) appNodes.fullscreenFormOption.classList.add('remove');
 }
 
 // First render is called in init()
@@ -475,17 +475,17 @@ function getConfigFromDOM() {
 };
 
 const updateConfigNoEvent = () => updateConfig();
-appNodes.quality.addEventListener('input', updateConfigNoEvent);
-appNodes.shellType.addEventListener('input', updateConfigNoEvent);
-appNodes.shellSize.addEventListener('input', updateConfigNoEvent);
-appNodes.autoLaunch.addEventListener('click', () => setTimeout(updateConfig, 0));
-appNodes.finaleMode.addEventListener('click', () => setTimeout(updateConfig, 0));
-appNodes.skyLighting.addEventListener('input', updateConfigNoEvent);
-appNodes.longExposure.addEventListener('click', () => setTimeout(updateConfig, 0));
-appNodes.hideControls.addEventListener('click', () => setTimeout(updateConfig, 0));
-appNodes.fullscreen.addEventListener('click', () => setTimeout(toggleFullscreen, 0));
+if (appNodes.quality) appNodes.quality.addEventListener('input', updateConfigNoEvent);
+if (appNodes.shellType) appNodes.shellType.addEventListener('input', updateConfigNoEvent);
+if (appNodes.shellSize) appNodes.shellSize.addEventListener('input', updateConfigNoEvent);
+if (appNodes.autoLaunch) appNodes.autoLaunch.addEventListener('click', () => setTimeout(updateConfig, 0));
+if (appNodes.finaleMode) appNodes.finaleMode.addEventListener('click', () => setTimeout(updateConfig, 0));
+if (appNodes.skyLighting) appNodes.skyLighting.addEventListener('input', updateConfigNoEvent);
+if (appNodes.longExposure) appNodes.longExposure.addEventListener('click', () => setTimeout(updateConfig, 0));
+if (appNodes.hideControls) appNodes.hideControls.addEventListener('click', () => setTimeout(updateConfig, 0));
+if (appNodes.fullscreen) appNodes.fullscreen.addEventListener('click', () => setTimeout(toggleFullscreen, 0));
 // Changing scaleFactor requires triggering resize handling code as well.
-appNodes.scaleFactor.addEventListener('input', () => {
+if (appNodes.scaleFactor) appNodes.scaleFactor.addEventListener('input', () => {
         updateConfig();
         handleResize();
 });
@@ -497,11 +497,11 @@ Object.keys(nodeKeyToHelpKey).forEach(nodeKey => {
         });
 });
 
-appNodes.helpModalCloseBtn.addEventListener('click', () => {
+if (appNodes.helpModalCloseBtn) appNodes.helpModalCloseBtn.addEventListener('click', () => {
         store.setState({ openHelpTopic: null });
 });
 
-appNodes.helpModalOverlay.addEventListener('click', () => {
+if (appNodes.helpModalOverlay) appNodes.helpModalOverlay.addEventListener('click', () => {
         store.setState({ openHelpTopic: null });
 });
 

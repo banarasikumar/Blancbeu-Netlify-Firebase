@@ -2672,3 +2672,151 @@ body.light-mode .nav-label {
 }
 
 /* Smooth animations for nav appearance removed - conflicts with scroll behavior */
+
+/* ===== TAB SYSTEM STYLES (Flipkart-style) ===== */
+
+.tabs-container {
+    min-height: calc(100vh - 130px);
+    margin-bottom: 80px;
+    position: relative;
+}
+
+.tab-page {
+    opacity: 1;
+    transition: opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform: translateY(0);
+    animation: slideUp 0.4s ease;
+}
+
+.tab-page.hidden {
+    display: none !important;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideDown 0.4s ease;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+}
+
+.tab-content-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    padding: 40px 20px;
+    text-align: center;
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    margin: 20px auto;
+    max-width: 500px;
+    animation: fadeInScale 0.5s ease;
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.tab-content-placeholder .dev-icon {
+    font-size: 60px;
+    margin-bottom: 20px;
+    animation: bounce 2s ease-in-out infinite;
+}
+
+.tab-content-placeholder h2 {
+    color: var(--text-primary);
+    font-size: 28px;
+    margin-bottom: 10px;
+    font-family: 'Cinzel', serif;
+}
+
+.tab-content-placeholder p {
+    color: var(--text-secondary);
+    font-size: 16px;
+    margin: 8px 0;
+}
+
+/* Bottom Navigation Tab Indicators */
+.bottom-nav .nav-item {
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.bottom-nav .nav-item.active {
+    color: var(--gold-24k);
+}
+
+.bottom-nav .nav-item.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold-24k), var(--gold-bright));
+    border-radius: 2px 2px 0 0;
+    animation: expandWidth 0.4s ease;
+}
+
+@keyframes expandWidth {
+    from {
+        width: 0;
+        left: 50%;
+    }
+    to {
+        width: 100%;
+        left: 0;
+    }
+}
+
+/* Install Button Positioning */
+#installBtn {
+    display: none !important;
+}
+
+@media (max-width: 768px) {
+    .tabs-container {
+        margin-bottom: 70px;
+    }
+    
+    .tab-content-placeholder {
+        min-height: 50vh;
+        margin: 15px 10px;
+    }
+    
+    .tab-content-placeholder .dev-icon {
+        font-size: 48px;
+    }
+    
+    .tab-content-placeholder h2 {
+        font-size: 22px;
+    }
+}
+

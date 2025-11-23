@@ -1091,3 +1091,84 @@ if (document.readyState === 'loading') {
 } else {
   new ThemeController();
 }
+
+// ===== TAB NAVIGATION SYSTEM (Flipkart-style) =====
+
+class TabManager {
+    constructor() {
+        this.currentPage = 'home';
+        this.init();
+    }
+
+    init() {
+        this.setupEventListeners();
+        this.loadInitialPage();
+    }
+
+    setupEventListeners() {
+        const navItems = document.querySelectorAll('.nav-item');
+        navItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                const page = item.getAttribute('data-page');
+                if (page) {
+                    e.preventDefault();
+                    this.switchPage(page);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            });
+        });
+    }
+
+    switchPage(pageName) {
+        if (this.currentPage === pageName) return;
+
+        const tabPages = document.querySelectorAll('.tab-page');
+        const navItems = document.querySelectorAll('.nav-item');
+
+        // Hide current page with animation
+        const currentPage = document.querySelector(`[data-page="${this.currentPage}"]`);
+        if (currentPage) {
+            currentPage.classList.add('hidden');
+            setTimeout(() => {
+                currentPage.style.display = 'none';
+            }, 400);
+        }
+
+        // Show new page with animation
+        setTimeout(() => {
+            const newPage = document.querySelector(`.tab-page[data-page="${pageName}"]`);
+            if (newPage) {
+                newPage.style.display = 'block';
+                newPage.classList.remove('hidden');
+                this.currentPage = pageName;
+            }
+        }, 200);
+
+        // Update nav active states
+        navItems.forEach(item => {
+            if (item.getAttribute('data-page') === pageName) {
+                item.classList.add('active');
+            } else {
+                item.classList.remove('active');
+            }
+        });
+
+        // Save to localStorage for page persistence
+        localStorage.setItem('lastPage', pageName);
+    }
+
+    loadInitialPage() {
+        const savedPage = localStorage.getItem('lastPage') || 'home';
+        if (document.querySelector(`.tab-page[data-page="${savedPage}"]`)) {
+            this.switchPage(savedPage);
+        } else {
+            this.switchPage('home');
+        }
+    }
+}
+
+// Initialize tab manager when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    window.tabManager = new TabManager();
+});
+

@@ -1,6 +1,6 @@
 {
-  "version": "19.0.0",
-  "lastUpdated": "2025-11-22T16:20:00Z",
-  "timestamp": 1763828400000,
-  "changes": "Flipkart-style page navigation - Account is now a full page tab like Home/Services/Gallery/Reviews - tab switching, not modal overlay"
+  "version": "20.1.0",
+  "lastUpdated": "2025-11-23T13:59:00Z",
+  "timestamp": 1763906340000,
+  "changes": "Final navigation fix - strict page isolation, contact buttons display fixed, carousel height adjusted for proper content flow"
 }

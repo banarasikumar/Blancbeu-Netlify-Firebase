@@ -5449,6 +5449,20 @@ body.light-mode .account-section-page .logout-btn {
     position: relative;
     z-index: 10;
     width: 100%;
+    height: auto;
+    max-height: none;
+    overflow: visible;
+}
+
+.page-view * {
+    max-height: none;
+    height: auto;
+}
+
+#home {
+    display: block !important;
+    visibility: visible !important;
+    min-height: auto;
 }
 
 #account {

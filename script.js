@@ -1200,16 +1200,24 @@ function goToPage(pageName) {
   
   if (pageName === 'home') {
     if (ctaSection) {
-      ctaSection.style.display = 'block';
+      ctaSection.style.display = 'block !important';
       ctaSection.style.zIndex = '5';
+      ctaSection.style.visibility = 'visible';
     }
     if (footer) {
-      footer.style.display = 'block';
+      footer.style.display = 'block !important';
       footer.style.zIndex = '5';
+      footer.style.visibility = 'visible';
     }
   } else {
-    if (ctaSection) ctaSection.style.display = 'none';
-    if (footer) footer.style.display = 'none';
+    if (ctaSection) {
+      ctaSection.style.display = 'none !important';
+      ctaSection.style.visibility = 'hidden';
+    }
+    if (footer) {
+      footer.style.display = 'none !important';
+      footer.style.visibility = 'hidden';
+    }
   }
 }
 

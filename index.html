@@ -350,31 +350,182 @@
 
         <!-- NOTIFICATIONS TAB -->
         <div class="tab-page" data-page="notifications">
-            <div class="tab-content-placeholder">
-                <div class="dev-icon">🔔</div>
-                <h2>Notifications</h2>
-                <p>Coming Soon!</p>
-                <p>We're preparing exciting updates for you.</p>
+            <div class="container">
+                <div class="page-header">
+                    <h1>🔔 Notifications</h1>
+                    <p>Stay updated with exclusive offers and reminders</p>
+                </div>
+                <div class="notifications-list" id="notificationsList">
+                    <div class="notification-item">
+                        <div class="notification-icon">🎉</div>
+                        <div class="notification-content">
+                            <h3>Special Offer: Haircuts @₹99!</h3>
+                            <p>Limited time offer on all haircut styles. Book now!</p>
+                            <span class="notification-time">2 hours ago</span>
+                        </div>
+                        <button class="notification-btn" onclick="openBooking()">Book Now</button>
+                    </div>
+                    <div class="notification-item">
+                        <div class="notification-icon">💝</div>
+                        <div class="notification-content">
+                            <h3>Loyalty Reward Unlocked!</h3>
+                            <p>You've earned 50 reward points. Use them for discounts!</p>
+                            <span class="notification-time">1 day ago</span>
+                        </div>
+                        <button class="notification-btn">View Rewards</button>
+                    </div>
+                    <div class="notification-item">
+                        <div class="notification-icon">⭐</div>
+                        <div class="notification-content">
+                            <h3>Rate Your Recent Visit</h3>
+                            <p>Tell us about your experience at BlancBeu</p>
+                            <span class="notification-time">3 days ago</span>
+                        </div>
+                        <button class="notification-btn">Rate Now</button>
+                    </div>
+                    <div class="notification-item">
+                        <div class="notification-icon">🪔</div>
+                        <div class="notification-content">
+                            <h3>Festive Special: 50% OFF!</h3>
+                            <p>Celebrate with us - Get 50% off on beauty packages</p>
+                            <span class="notification-time">5 days ago</span>
+                        </div>
+                        <button class="notification-btn">Explore Offers</button>
+                    </div>
+                </div>
             </div>
         </div>
 
         <!-- MY BOOKINGS TAB -->
         <div class="tab-page" data-page="bookings">
-            <div class="tab-content-placeholder">
-                <div class="dev-icon">📅</div>
-                <h2>My Bookings</h2>
-                <p>Coming Soon!</p>
-                <p>Manage your salon appointments here.</p>
+            <div class="container">
+                <div class="page-header">
+                    <h1>📅 My Bookings</h1>
+                    <p>Manage your salon appointments</p>
+                </div>
+                <div class="bookings-section">
+                    <div class="section-tabs">
+                        <button class="section-tab active" onclick="filterBookings('upcoming')">Upcoming</button>
+                        <button class="section-tab" onclick="filterBookings('completed')">Completed</button>
+                        <button class="section-tab" onclick="filterBookings('cancelled')">Cancelled</button>
+                    </div>
+                    <div class="bookings-list" id="bookingsList">
+                        <div class="booking-card">
+                            <div class="booking-date">
+                                <div class="date-box">
+                                    <div class="day">28</div>
+                                    <div class="month">Nov</div>
+                                </div>
+                            </div>
+                            <div class="booking-details">
+                                <h3>Haircut + Styling</h3>
+                                <p class="booking-time">⏰ 2:30 PM - 3:30 PM</p>
+                                <p class="booking-service">✂️ Service: Premium Haircut</p>
+                                <p class="booking-price">₹599</p>
+                            </div>
+                            <div class="booking-actions">
+                                <button class="btn-reschedule">Reschedule</button>
+                                <button class="btn-cancel">Cancel</button>
+                            </div>
+                        </div>
+                        <div class="booking-card">
+                            <div class="booking-date">
+                                <div class="date-box completed">
+                                    <div class="day">25</div>
+                                    <div class="month">Nov</div>
+                                </div>
+                            </div>
+                            <div class="booking-details">
+                                <h3>Facial Treatment</h3>
+                                <p class="booking-time">⏰ 11:00 AM - 12:00 PM</p>
+                                <p class="booking-service">✨ Service: Hydrating Facial</p>
+                                <p class="booking-price">₹799</p>
+                            </div>
+                            <div class="booking-status">✅ Completed</div>
+                        </div>
+                    </div>
+                    <button class="btn-new-booking" onclick="alert('Booking system coming soon!')">+ New Booking</button>
+                </div>
             </div>
         </div>
 
         <!-- ACCOUNT TAB -->
         <div class="tab-page" data-page="account">
-            <div class="tab-content-placeholder">
-                <div class="dev-icon">👤</div>
-                <h2>My Account</h2>
-                <p>Coming Soon!</p>
-                <p>Your profile and settings will be available here.</p>
+            <div class="container">
+                <div class="page-header">
+                    <h1>👤 My Account</h1>
+                    <p>Manage your profile and preferences</p>
+                </div>
+                <div class="account-section">
+                    <div class="profile-card">
+                        <div class="profile-avatar">
+                            <div class="avatar-placeholder">👩‍🦰</div>
+                        </div>
+                        <div class="profile-info">
+                            <h2>Welcome, Beauty Lover! 💄</h2>
+                            <p class="profile-email">user@example.com</p>
+                            <p class="profile-phone">+91 98765 43210</p>
+                            <button class="btn-edit-profile">Edit Profile</button>
+                        </div>
+                    </div>
+
+                    <div class="account-stats">
+                        <div class="stat-card">
+                            <div class="stat-icon">💳</div>
+                            <div class="stat-info">
+                                <div class="stat-value">280</div>
+                                <div class="stat-label">Reward Points</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">💄</div>
+                            <div class="stat-info">
+                                <div class="stat-value">12</div>
+                                <div class="stat-label">Services Used</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">⭐</div>
+                            <div class="stat-info">
+                                <div class="stat-value">4.8</div>
+                                <div class="stat-label">Your Rating</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="account-menu">
+                        <div class="menu-item" onclick="alert('Feature coming soon!')">
+                            <span class="menu-icon">❤️</span>
+                            <span class="menu-text">My Favorites</span>
+                            <span class="menu-arrow">›</span>
+                        </div>
+                        <div class="menu-item" onclick="alert('Feature coming soon!')">
+                            <span class="menu-icon">🎁</span>
+                            <span class="menu-text">Redeem Rewards</span>
+                            <span class="menu-arrow">›</span>
+                        </div>
+                        <div class="menu-item" onclick="alert('Feature coming soon!')">
+                            <span class="menu-icon">📋</span>
+                            <span class="menu-text">Address Book</span>
+                            <span class="menu-arrow">›</span>
+                        </div>
+                        <div class="menu-item" onclick="alert('Feature coming soon!')">
+                            <span class="menu-icon">🔐</span>
+                            <span class="menu-text">Privacy & Security</span>
+                            <span class="menu-arrow">›</span>
+                        </div>
+                        <div class="menu-item" onclick="alert('Feature coming soon!')">
+                            <span class="menu-icon">⚙️</span>
+                            <span class="menu-text">Settings</span>
+                            <span class="menu-arrow">›</span>
+                        </div>
+                        <div class="menu-item logout" onclick="alert('Logout feature coming soon!')">
+                            <span class="menu-icon">🚪</span>
+                            <span class="menu-text">Logout</span>
+                            <span class="menu-arrow">›</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

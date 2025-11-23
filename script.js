@@ -1172,3 +1172,17 @@ document.addEventListener('DOMContentLoaded', () => {
     window.tabManager = new TabManager();
 });
 
+
+// ===== TAB PAGE UTILITIES =====
+
+function openBooking() {
+    alert('Booking system coming soon! Contact us on WhatsApp or call +91 92299 15277');
+}
+
+function filterBookings(type) {
+    const buttons = document.querySelectorAll('.section-tab');
+    buttons.forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+    alert(`Showing ${type} bookings. Full filtering coming soon!`);
+}
+

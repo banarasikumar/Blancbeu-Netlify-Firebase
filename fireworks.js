@@ -801,22 +801,23 @@ const shellNames = Object.keys(shellTypes);
 
 function init() {
         // Remove loading state
-        document.querySelector('.loading-init').remove();
-        appNodes.stageContainer.classList.remove('remove');
+        const loadingInit = document.querySelector('.loading-init');
+        if (loadingInit) loadingInit.remove();
+        if (appNodes.stageContainer) appNodes.stageContainer.classList.remove('remove');
         
         // Populate dropdowns
         function setOptionsForSelect(node, options) {
-                node.innerHTML = options.reduce((acc, opt) => acc += `<option value="${opt.value}">${opt.label}</option>`, '');
+                if (node) node.innerHTML = options.reduce((acc, opt) => acc += `<option value="${opt.value}">${opt.label}</option>`, '');
         }
 
         // shell type
         let options = '';
         shellNames.forEach(opt => options += `<option value="${opt}">${opt}</option>`);
-        appNodes.shellType.innerHTML = options;
+        if (appNodes.shellType) appNodes.shellType.innerHTML = options;
         // shell size
         options = '';
         ['3"', '4"', '6"', '8"', '12"', '16"'].forEach((opt, i) => options += `<option value="${i}">${opt}</option>`);
-        appNodes.shellSize.innerHTML = options;
+        if (appNodes.shellSize) appNodes.shellSize.innerHTML = options;
         
         setOptionsForSelect(appNodes.quality, [
                 { label: 'Low', value: QUALITY_LOW },
@@ -2283,7 +2284,8 @@ const soundManager = {
 
 // Kick things off.
 
-function setLoadingStatus(status) {
+        const loadingStatus = document.querySelector(".loading-init__status");
+        if (loadingStatus) loadingStatus.textContent = status;
         document.querySelector('.loading-init__status').textContent = status;
 }
 

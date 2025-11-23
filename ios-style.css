@@ -56,12 +56,13 @@ body {
 }
 
 /* Main content area - Safe area aware */
-main {
+main, .tabs-container {
   padding: 16px max(16px, env(safe-area-inset-left)) 16px max(16px, env(safe-area-inset-right));
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   scroll-behavior: smooth;
   flex: 1;
+  display: block;
 }
 
 /* iOS Tab Navigation at bottom */

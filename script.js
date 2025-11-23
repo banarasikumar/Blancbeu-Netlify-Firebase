@@ -50,27 +50,38 @@ function startCarouselAutoplay() {
 }
 
 // Theme toggle
-document.getElementById('themeToggle')?.addEventListener('click', () => {
-  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-  const newTheme = isDark ? 'light' : 'dark';
-  document.documentElement.setAttribute('data-theme', newTheme);
-  document.body.classList.toggle('light-mode');
-  localStorage.setItem('theme', newTheme);
-});
+function setupThemeToggle() {
+  const themeToggle = document.getElementById('themeToggle');
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      const newTheme = isDark ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      document.body.classList.toggle('light-mode');
+      localStorage.setItem('theme', newTheme);
+    });
+  }
+}
 
 // T&C Modal
 function showTC() {
-  document.getElementById('tcModal').style.display = 'block';
+  const tcModal = document.getElementById('tcModal');
+  if (tcModal) tcModal.style.display = 'block';
 }
 
 function closeTC() {
-  document.getElementById('tcModal').style.display = 'none';
+  const tcModal = document.getElementById('tcModal');
+  if (tcModal) tcModal.style.display = 'none';
 }
 
 window.onclick = (event) => {
-  const modal = document.getElementById('tcModal');
-  if (event.target === modal) {
-    modal.style.display = 'none';
+  try {
+    const modal = document.getElementById('tcModal');
+    if (modal && event.target === modal) {
+      modal.style.display = 'none';
+    }
+  } catch (e) {
+    console.error('Modal close error:', e);
   }
 };
 
@@ -271,24 +282,33 @@ function openBooking() {
 // ==================== INITIALIZE ====================
 
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('🎠 Carousel initialized with ' + totalSlides + ' slides');
-  updateDots();
-  startCarouselAutoplay();
-  
-  renderNotifications();
-  renderBookings();
-  renderAccount();
-  
-  // Setup tab navigation
-  document.querySelectorAll('.nav-item').forEach(item => {
-    item.addEventListener('click', (e) => {
-      e.preventDefault();
-      const page = item.getAttribute('data-page');
-      switchTab(page);
-    });
-  });
+  try {
+    console.log('🎠 Carousel initialized with ' + totalSlides + ' slides');
+    updateDots();
+    startCarouselAutoplay();
+    
+    renderNotifications();
+    renderBookings();
+    renderAccount();
+    
+    setupThemeToggle();
+    
+    // Setup tab navigation
+    const navItems = document.querySelectorAll('.nav-item');
+    if (navItems.length > 0) {
+      navItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+          e.preventDefault();
+          const page = item.getAttribute('data-page');
+          if (page) switchTab(page);
+        });
+      });
+    }
 
-  console.log('✨ PWA Service Worker registered: ServiceWorkerRegistration');
+    console.log('✨ PWA Service Worker registered: ServiceWorkerRegistration');
+  } catch (e) {
+    console.error('DOM setup error:', e);
+  }
 });
 
 // Export for global use

@@ -3603,3 +3603,135 @@ body.light-mode .nav-label {
     margin-left: 4px;
 }
 
+/* AUTH METHOD SELECTOR */
+.auth-method-selector {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    background: var(--bg-primary);
+    padding: 8px;
+    border-radius: 8px;
+}
+
+.method-btn {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid var(--border-light);
+    background: transparent;
+    border-radius: 6px;
+    color: var(--text-secondary);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.method-btn.active {
+    background: var(--gold-24k);
+    color: var(--bg-primary);
+    border-color: var(--gold-24k);
+}
+
+.method-btn:hover {
+    border-color: var(--gold-24k);
+}
+
+/* GOOGLE LOGIN BUTTON */
+.auth-btn-google {
+    background: #4285F4;
+    color: white;
+    font-weight: 600;
+    padding: 14px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+}
+
+.auth-btn-google:hover {
+    background: #357ae8;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(66, 133, 244, 0.3);
+}
+
+/* WHATSAPP LOGIN BUTTON */
+.auth-btn-whatsapp {
+    background: #25D366;
+    color: white;
+    font-weight: 600;
+    padding: 14px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+}
+
+.auth-btn-whatsapp:hover {
+    background: #20BA5A;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.3);
+}
+
+/* AUTH INFO MESSAGE */
+.auth-info {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 12px;
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border-light);
+    line-height: 1.4;
+}
+
+/* CLOSE BUTTON */
+.auth-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: none;
+    border: none;
+    font-size: 28px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.auth-close:hover {
+    color: var(--gold-24k);
+    transform: rotate(90deg);
+}
+
+/* LOGOUT BUTTON */
+.logout-btn {
+    position: fixed;
+    bottom: 80px;
+    right: 16px;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, #FF6B6B, #EE5A6F);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.3);
+}
+

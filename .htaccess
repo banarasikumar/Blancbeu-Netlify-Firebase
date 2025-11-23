@@ -1,0 +1,18 @@
+# Disable caching for HTML/JS during development, allow caching for assets
+<FilesMatch "\.(html|js|css)$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+</FilesMatch>
+
+<FilesMatch "\.(jpg|jpeg|png|webp|svg|woff|woff2|ttf|eot)$">
+    Header set Cache-Control "max-age=31536000, public"
+</FilesMatch>
+
+# Enable gzip compression
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+</IfModule>
+
+# Enable CORS for fonts
+<FilesMatch "\.(woff|woff2|ttf|eot)$">
+    Header set Access-Control-Allow-Origin "*"
+</FilesMatch>

@@ -2279,32 +2279,12 @@ const soundManager = {
         }
 };
 
-
-
-
 // Kick things off.
-
-        const loadingStatus = document.querySelector(".loading-init__status");
-        if (loadingStatus) loadingStatus.textContent = status;
-        document.querySelector('.loading-init__status').textContent = status;
-}
-
-// CodePen profile header doesn't need audio, just initialize.
-if (IS_HEADER) {
+if (typeof IS_HEADER !== 'undefined' && IS_HEADER) {
         init();
 } else {
         // Allow status to render, then preload assets and start app.
-        setLoadingStatus('');
         setTimeout(() => {
-                soundManager.preload()
-                .then(
-                        init,
-                        reason => {
-                                // Codepen preview doesn't like to load the audio, so just init to fix the preview for now.
-                                init();
-                                // setLoadingStatus('Error Loading Audio');
-                                return Promise.reject(reason);
-                        }
-                );
+                init();
         }, 0);
 }

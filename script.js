@@ -1186,3 +1186,243 @@ function filterBookings(type) {
     alert(`Showing ${type} bookings. Full filtering coming soon!`);
 }
 
+
+// ==================== ENHANCED API INTEGRATION ====================
+
+// Initialize API and load real data on page load
+async function initializeAPIIntegration() {
+  console.log('🔗 Initializing Firebase API integration...');
+  
+  // Load notifications count
+  const notificationsData = await loadNotificationsTab();
+  if (notificationsData.length > 0) {
+    updateNotificationsBadge(notificationsData.length);
+  }
+  
+  // Load bookings
+  const bookingsData = await loadBookingsTab('upcoming');
+  console.log('✅ API integration initialized');
+}
+
+// NOTIFICATIONS TAB - Load real data
+async function loadNotificationsTab(filterType = 'all') {
+  try {
+    const { getNotifications } = await import('./firebase-api.js');
+    const notifications = await getNotifications();
+    
+    const notificationsList = document.getElementById('notificationsList');
+    if (notificationsList) {
+      notificationsList.innerHTML = notifications.map(n => `
+        <div class="notification-item">
+          <div class="notification-icon">${getNotificationIcon(n.type)}</div>
+          <div class="notification-content">
+            <h3>${n.title}</h3>
+            <p>${n.message}</p>
+            <span class="notification-time">${n.time || 'Just now'}</span>
+          </div>
+          <button class="notification-btn" onclick="handleNotificationAction('${n.id}', '${n.type}')">Action</button>
+        </div>
+      `).join('');
+    }
+    
+    return notifications;
+  } catch (error) {
+    console.error('Error loading notifications:', error);
+    return [];
+  }
+}
+
+// BOOKINGS TAB - Load real data
+async function loadBookingsTab(status = 'upcoming') {
+  try {
+    const { getBookings } = await import('./firebase-api.js');
+    const bookings = await getBookings(status);
+    
+    const bookingsList = document.getElementById('bookingsList');
+    if (bookingsList) {
+      bookingsList.innerHTML = bookings.map(b => `
+        <div class="booking-card">
+          <div class="booking-date">
+            <div class="date-box">
+              <div class="day">${new Date(b.appointmentDate).getDate()}</div>
+              <div class="month">${new Date(b.appointmentDate).toLocaleDateString('en-US', { month: 'short' })}</div>
+            </div>
+          </div>
+          <div class="booking-details">
+            <h3>${b.serviceName}</h3>
+            <p class="booking-time">⏰ ${b.appointmentTime}</p>
+            <p class="booking-service">✂️ Service: ${b.serviceName}</p>
+            <p class="booking-price">₹${b.servicePrice}</p>
+          </div>
+          <div class="booking-actions" style="${b.status === 'completed' ? 'display:none;' : ''}">
+            <button class="btn-reschedule" onclick="rescheduleBooking('${b.id}')">Reschedule</button>
+            <button class="btn-cancel" onclick="cancelBookingAction('${b.id}')">Cancel</button>
+          </div>
+          ${b.status === 'completed' ? '<div class="booking-status">✅ Completed</div>' : ''}
+        </div>
+      `).join('');
+    }
+    
+    return bookings;
+  } catch (error) {
+    console.error('Error loading bookings:', error);
+    return [];
+  }
+}
+
+// ACCOUNT TAB - Load real data
+async function loadAccountTab() {
+  try {
+    const { getUserProfile, getUserStats } = await import('./firebase-api.js');
+    
+    const profile = await getUserProfile();
+    const stats = await getUserStats();
+    
+    // Update profile section
+    const profileCard = document.querySelector('.profile-card');
+    if (profileCard) {
+      profileCard.innerHTML = `
+        <div class="profile-avatar">
+          <div class="avatar-placeholder">${profile.avatar || '👩‍🦰'}</div>
+        </div>
+        <div class="profile-info">
+          <h2>Welcome, ${profile.name || 'Beauty Lover'}! 💄</h2>
+          <p class="profile-email">${profile.email || 'user@example.com'}</p>
+          <p class="profile-phone">${profile.phone || '+91 98765 43210'}</p>
+          <button class="btn-edit-profile" onclick="editProfile()">Edit Profile</button>
+        </div>
+      `;
+    }
+    
+    // Update stats
+    const statsContainer = document.querySelector('.account-stats');
+    if (statsContainer) {
+      statsContainer.innerHTML = `
+        <div class="stat-card">
+          <div class="stat-icon">💳</div>
+          <div class="stat-info">
+            <div class="stat-value">${stats.rewardPoints}</div>
+            <div class="stat-label">Reward Points</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">💄</div>
+          <div class="stat-info">
+            <div class="stat-value">${stats.servicesUsed}</div>
+            <div class="stat-label">Services Used</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">⭐</div>
+          <div class="stat-info">
+            <div class="stat-value">${stats.rating}</div>
+            <div class="stat-label">Your Rating</div>
+          </div>
+        </div>
+      `;
+    }
+  } catch (error) {
+    console.error('Error loading account:', error);
+  }
+}
+
+// Helper functions
+function getNotificationIcon(type) {
+  const icons = {
+    offer: '🎉',
+    reward: '💝',
+    review: '⭐',
+    festival: '🪔',
+    booking: '📅',
+    message: '💬'
+  };
+  return icons[type] || '🔔';
+}
+
+function updateNotificationsBadge(count) {
+  const badge = document.querySelector('[data-page="notifications"]');
+  if (badge && count > 0) {
+    badge.setAttribute('data-badge', count);
+  }
+}
+
+async function handleNotificationAction(id, type) {
+  console.log('Handling notification action:', id, type);
+  // Route to appropriate action based on type
+  if (type === 'offer') {
+    showBookingForm();
+  } else if (type === 'review') {
+    showReviewForm();
+  } else {
+    alert('Action for ' + type);
+  }
+}
+
+async function rescheduleBooking(bookingId) {
+  const newDate = prompt('Enter new appointment date (YYYY-MM-DD):');
+  if (newDate) {
+    try {
+      const { updateBooking } = await import('./firebase-api.js');
+      const result = await updateBooking({ bookingId, appointmentDate: newDate });
+      if (result.success) {
+        alert('Booking rescheduled successfully!');
+        loadBookingsTab('upcoming');
+      }
+    } catch (error) {
+      console.error('Error rescheduling:', error);
+    }
+  }
+}
+
+async function cancelBookingAction(bookingId) {
+  if (confirm('Are you sure you want to cancel this booking?')) {
+    try {
+      const { cancelBooking } = await import('./firebase-api.js');
+      const result = await cancelBooking(bookingId);
+      if (result.success) {
+        alert('Booking cancelled successfully!');
+        loadBookingsTab('upcoming');
+      }
+    } catch (error) {
+      console.error('Error cancelling:', error);
+    }
+  }
+}
+
+function editProfile() {
+  alert('Edit profile feature coming soon! Redirect to profile edit page.');
+}
+
+function showBookingForm() {
+  alert('Booking form would open here. Redirect to booking flow.');
+}
+
+function showReviewForm() {
+  alert('Review form would open here.');
+}
+
+// Load data when tabs are clicked
+function setupTabDataLoading() {
+  document.querySelectorAll('[onclick*="switchTab"]').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      setTimeout(() => {
+        const activeTab = document.querySelector('.tab-page:not([style*="display: none"])');
+        if (activeTab && activeTab.getAttribute('data-page') === 'notifications') {
+          loadNotificationsTab();
+        } else if (activeTab && activeTab.getAttribute('data-page') === 'bookings') {
+          loadBookingsTab();
+        } else if (activeTab && activeTab.getAttribute('data-page') === 'account') {
+          loadAccountTab();
+        }
+      }, 100);
+    });
+  });
+}
+
+// Initialize on page load
+window.addEventListener('load', () => {
+  initializeAPIIntegration();
+  setupTabDataLoading();
+  loadAccountTab(); // Load account data on startup
+});
+

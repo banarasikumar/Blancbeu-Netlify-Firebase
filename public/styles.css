@@ -2180,3 +2180,53 @@ img[src*="salon"], img[src*="hair"], img[src*="facial"], img[src*="nail"] {
 .service-card:hover::before {
     left: 100%;
 }
+
+/* FINAL PREMIUM POLISH */
+
+/* Ultra-smooth page transitions */
+* {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Optimized performance */
+.tab-content, .service-card, .booking-card {
+    will-change: auto;
+    transform: translateZ(0);
+}
+
+.carousel-slide, .gallery-item img {
+    will-change: transform;
+    backface-visibility: hidden;
+}
+
+/* Enhanced accessibility for keyboard navigation */
+*:focus-visible {
+    outline: 3px solid #d4af37;
+    outline-offset: 2px;
+}
+
+button:focus-visible {
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.3);
+}
+
+/* Premium transitions */
+button, a, [role="button"] {
+    transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Optimized images for retina displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    img { image-rendering: -webkit-optimize-contrast; }
+}
+
+/* Final elegance */
+::selection {
+    background: #d4af37;
+    color: #0a0a0a;
+}
+
+::-moz-selection {
+    background: #d4af37;
+    color: #0a0a0a;
+}

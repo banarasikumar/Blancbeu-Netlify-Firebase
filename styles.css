@@ -1712,3 +1712,178 @@ input:focus, select:focus, textarea:focus {
     background-size: 20px;
     padding-right: 32px;
 }
+
+/* Advanced Features: Support Chat */
+.support-chat-widget {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 350px;
+    max-height: 500px;
+    background-color: var(--bg-dark);
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+}
+
+.chat-header {
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-purple));
+    color: var(--text-light);
+    padding: 16px;
+    border-radius: 16px 16px 0 0;
+    font-weight: 600;
+}
+
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.chat-message {
+    max-width: 80%;
+    padding: 8px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+}
+
+.chat-message.user {
+    align-self: flex-end;
+    background-color: var(--primary-color);
+    color: var(--text-light);
+}
+
+.chat-message.support {
+    align-self: flex-start;
+    background-color: var(--bg-secondary-dark);
+    color: var(--text-dark);
+    border: 1px solid var(--border-color-dark);
+}
+
+.chat-input {
+    padding: 12px;
+    border-top: 1px solid var(--border-color-dark);
+    display: flex;
+    gap: 8px;
+}
+
+.chat-input input {
+    flex: 1;
+    background-color: var(--bg-secondary-dark);
+    border: 1px solid var(--border-color-dark);
+    border-radius: 20px;
+    padding: 8px 12px;
+    color: var(--text-dark);
+    font-size: 12px;
+}
+
+.chat-input button {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.chat-input button:hover {
+    background-color: var(--accent-purple);
+    transform: scale(1.1);
+}
+
+/* Health Preferences UI */
+.health-preferences {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 12px;
+    padding: 16px;
+}
+
+.pref-card {
+    background-color: var(--bg-secondary-dark);
+    border: 2px solid var(--border-color-dark);
+    border-radius: 12px;
+    padding: 12px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.pref-card:hover {
+    border-color: var(--primary-color);
+    transform: translateY(-4px);
+}
+
+.pref-card.selected {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--text-light);
+}
+
+/* FINAL TURN: Loyalty Tier Progress */
+.loyalty-progress-bar {
+    width: 100%;
+    height: 8px;
+    background-color: var(--bg-secondary-dark);
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 8px 0;
+}
+
+.loyalty-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-purple));
+    transition: width 0.5s ease;
+    border-radius: 4px;
+}
+
+/* FINAL TURN: Booking Status Indicator */
+.booking-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.status-pending { background-color: rgba(243, 156, 18, 0.15); color: #f39c12; }
+.status-confirmed { background-color: rgba(39, 174, 96, 0.15); color: #27ae60; }
+.status-completed { background-color: rgba(39, 174, 96, 0.15); color: #27ae60; }
+.status-cancelled { background-color: rgba(231, 76, 60, 0.15); color: #e74c3c; }
+
+/* FINAL TURN: Advanced Search */
+.advanced-search {
+    background: linear-gradient(135deg, var(--bg-secondary-dark), rgba(212, 175, 55, 0.05));
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 16px;
+}
+
+.search-filter-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 12px;
+    margin: 12px 0;
+}
+
+/* FINAL TURN: Recommended Stylists */
+.stylist-recommendation {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(155, 89, 182, 0.05));
+    border-radius: 12px;
+    padding: 12px;
+    margin: 8px 0;
+    border-left: 3px solid var(--primary-color);
+}
+
+.stylist-name { font-weight: 700; margin-bottom: 4px; }
+.stylist-specialty { font-size: 12px; opacity: 0.8; }
+.stylist-rating { color: var(--primary-color); font-size: 12px; margin-top: 4px; }

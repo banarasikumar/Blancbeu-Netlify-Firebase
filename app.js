@@ -1389,3 +1389,348 @@ const mlReadyData = {
 };
 
 console.log('🚀 ULTIMATE PAYMENT + EMAIL + MILESTONE SYSTEMS READY');
+
+// ADVANCED: Service bundles & packages
+const servicePackages = {
+    'bridal': {
+        name: 'Bridal Package',
+        price: 12999,
+        services: ['Hair Styling', 'Makeup', 'Nail Art'],
+        duration: '3 hours',
+        discount: 20,
+        inclusions: ['Trial session', 'Touch-up kit', 'Professional team']
+    },
+    'wellness': {
+        name: 'Wellness Package',
+        price: 8999,
+        services: ['Spa', 'Facial', 'Massage'],
+        duration: '2.5 hours',
+        discount: 15,
+        inclusions: ['Aromatherapy', 'Herbal tea', 'Relaxation music']
+    },
+    'pamper': {
+        name: 'Ultimate Pamper',
+        price: 5999,
+        services: ['Hair Spa', 'Facial', 'Manicure', 'Pedicure'],
+        duration: '2 hours',
+        discount: 18,
+        inclusions: ['Premium products', 'Refreshments', 'Takeaway pack']
+    }
+};
+
+function getPackageDetails(packageId) {
+    return servicePackages[packageId] || null;
+}
+
+function calculatePackageSavings(packageId) {
+    const pkg = servicePackages[packageId];
+    if (!pkg) return 0;
+    return Math.round(pkg.price * pkg.discount / 100);
+}
+
+// ADVANCED: User health preferences
+const userHealthPrefs = {
+    allergies: [],
+    skinType: 'combination',
+    hairType: 'wavy',
+    sensitivities: [],
+    medicalConditions: [],
+    preferences: {
+        productPreference: 'organic',
+        temperature: 'warm',
+        scent: 'floral'
+    }
+};
+
+function setHealthPreference(category, value) {
+    userHealthPrefs[category] = value;
+    showNotification(`✓ ${category} preference updated`, 'success');
+}
+
+// ADVANCED: Booking calendar with availability
+const calendarAvailability = {
+    '2024-12-01': { slots: 8, booked: 3, available: 5 },
+    '2024-12-02': { slots: 8, booked: 8, available: 0 },
+    '2024-12-03': { slots: 8, booked: 2, available: 6 }
+};
+
+function getAvailability(date) {
+    return calendarAvailability[date] || { slots: 8, booked: 0, available: 8 };
+}
+
+function getNextAvailableSlot() {
+    for (let date in calendarAvailability) {
+        if (calendarAvailability[date].available > 0) {
+            return date;
+        }
+    }
+    return null;
+}
+
+// ADVANCED: In-app support system
+const supportChat = {
+    messages: [],
+    isActive: false,
+    
+    sendMessage(text, sender = 'user') {
+        const msg = {
+            id: Date.now(),
+            text,
+            sender,
+            timestamp: new Date(),
+            read: false
+        };
+        this.messages.push(msg);
+        
+        if (sender === 'user') {
+            triggerHaptic(20);
+            setTimeout(() => this.autoReply(), 1000);
+        }
+        return msg;
+    },
+    
+    autoReply() {
+        const replies = [
+            'Thanks for reaching out! 😊',
+            'How can we help you today?',
+            'Our team is here to assist you.',
+            'Is there anything else I can help with?'
+        ];
+        const randomReply = replies[Math.floor(Math.random() * replies.length)];
+        this.sendMessage(randomReply, 'support');
+    },
+    
+    getUnreadCount() {
+        return this.messages.filter(m => !m.read && m.sender === 'support').length;
+    }
+};
+
+// ADVANCED: Booking waitlist
+const waitlist = {
+    entries: [],
+    
+    addToWaitlist(serviceId, preferredDate) {
+        const entry = {
+            id: 'WL' + Math.random().toString(36).substr(2, 8),
+            serviceId,
+            preferredDate,
+            position: this.entries.length + 1,
+            addedAt: new Date(),
+            notified: false
+        };
+        this.entries.push(entry);
+        showNotification(`Added to waitlist. Position: ${entry.position}`, 'success');
+        return entry;
+    },
+    
+    checkWaitlist() {
+        return this.entries.filter(e => !e.notified);
+    }
+};
+
+console.log('✨ ADVANCED: Service Packages + Health Prefs + Calendar + Support Chat + Waitlist');
+
+// FINAL: Advanced cancellation & rescheduling
+const bookingManagement = {
+    cancelBooking(bookingId, reason) {
+        showNotification(`✓ Booking cancelled. Refund will be processed in 3-5 business days.`, 'success');
+        return { cancelled: true, bookingId, reason, refundAmount: 850 };
+    },
+    
+    rescheduleBooking(bookingId, newDate, newTime) {
+        showNotification(`✓ Booking rescheduled to ${newDate} at ${newTime}`, 'success');
+        return { rescheduled: true, bookingId, newDate, newTime };
+    },
+    
+    estimateWaitTime(serviceId) {
+        const baseTime = 30; // 30 min base
+        const demand = Math.floor(Math.random() * 30); // 0-30 min additional
+        return baseTime + demand;
+    }
+};
+
+// FINAL: Advanced analytics
+const analyticsEngine = {
+    metrics: {
+        totalBookings: 24,
+        completionRate: 95.8,
+        cancellationRate: 2.3,
+        averageRating: 4.8,
+        topService: 'Hair Styling',
+        topTime: 'Evening',
+        avgSpending: 850,
+        monthOverMonthGrowth: 12
+    },
+    
+    getMonthlySummary() {
+        return {
+            bookings: 5,
+            revenue: 4250,
+            pointsEarned: 425,
+            cancellations: 1,
+            topRatedService: 'Facial Treatment (4.9 stars)'
+        };
+    },
+    
+    getMetrics() {
+        return this.metrics;
+    }
+};
+
+// FINAL: Staff assignment preferences
+const staffPreferences = {
+    primaryStaff: 'Sarah Johnson',
+    acceptedStaff: ['Sarah Johnson', 'Emma Williams'],
+    avoidStaff: [],
+    
+    setStaffPreference(staffName, action) {
+        if (action === 'primary') {
+            this.primaryStaff = staffName;
+        } else if (action === 'accept') {
+            if (!this.acceptedStaff.includes(staffName)) {
+                this.acceptedStaff.push(staffName);
+            }
+        } else if (action === 'avoid') {
+            this.avoidStaff.push(staffName);
+        }
+        showNotification('Staff preferences updated', 'success');
+    }
+};
+
+// FINAL: Service quality tracking
+const qualityMetrics = {
+    serviceRatings: {
+        'Hair Styling': 4.8,
+        'Facial Treatment': 4.9,
+        'Makeup': 4.7,
+        'Nail Art': 4.8,
+        'Spa': 4.9
+    },
+    
+    serviceReviews: {
+        'Hair Styling': 342,
+        'Facial Treatment': 298,
+        'Makeup': 156,
+        'Nail Art': 201,
+        'Spa': 245
+    },
+    
+    getQualityScore(serviceId) {
+        return {
+            rating: this.serviceRatings[serviceId] || 4.5,
+            reviews: this.serviceReviews[serviceId] || 0,
+            trend: 'up',
+            recommendation: 'Highly recommended'
+        };
+    }
+};
+
+// FINAL: Subscription/recurring packages
+const subscriptionPackages = {
+    monthly: {
+        name: 'Monthly Gold',
+        price: 4999,
+        services: 4,
+        savings: 1200,
+        features: ['Priority booking', 'Exclusive services', 'Free consultation']
+    },
+    quarterly: {
+        name: 'Quarterly Platinum',
+        price: 13999,
+        services: 12,
+        savings: 3600,
+        features: ['All Gold + Personal stylist', 'VIP support', 'Free upgrades']
+    },
+    annual: {
+        name: 'Annual Ultimate',
+        price: 49999,
+        services: 50,
+        savings: 15000,
+        features: ['All Platinum + Events', 'Exclusive products', 'Lifetime membership']
+    }
+};
+
+console.log('🎯 FINAL: Cancellation + Rescheduling + Analytics + Staff Prefs + Quality Metrics + Subscriptions');
+
+// FINAL TURN: Smart stylist recommendations
+function getRecommendedStylists(service, preferences = {}) {
+    const stylists = [
+        { name: 'Sarah Johnson', specialty: 'Hair Styling', rating: 4.9, experience: '8 years' },
+        { name: 'Emma Williams', specialty: 'Makeup', rating: 4.8, experience: '6 years' },
+        { name: 'Priya Sharma', specialty: 'Bridal', rating: 5.0, experience: '10 years' }
+    ];
+    return stylists.filter(s => s.specialty.toLowerCase().includes(service.toLowerCase()));
+}
+
+// FINAL TURN: Seasonal promotions
+const seasonalPromos = {
+    current: 'Winter Special: 20% off on spa packages',
+    upcoming: 'New Year: 30% off first booking',
+    codeList: ['WINTER20', 'NEWYEAR30', 'REFER500']
+};
+
+// FINAL TURN: Enhanced error handling
+function handleError(error, context) {
+    console.error(`❌ Error in ${context}:`, error);
+    showNotification('Something went wrong. Please try again.', 'error');
+    return { handled: true, context, timestamp: new Date() };
+}
+
+// FINAL TURN: Booking status tracker
+const bookingStatusTracker = {
+    statuses: {
+        'pending': { icon: '⏳', color: '#f39c12', label: 'Pending Confirmation' },
+        'confirmed': { icon: '✓', color: '#27ae60', label: 'Confirmed' },
+        'in_progress': { icon: '▶', color: '#3498db', label: 'In Progress' },
+        'completed': { icon: '✓✓', color: '#27ae60', label: 'Completed' },
+        'cancelled': { icon: '✗', color: '#e74c3c', label: 'Cancelled' },
+        'no_show': { icon: '○', color: '#e74c3c', label: 'No Show' }
+    },
+    
+    getStatus(status) {
+        return this.statuses[status] || this.statuses.pending;
+    }
+};
+
+// FINAL TURN: Loyalty tier visual status
+function getLoyaltyTierVisual(points) {
+    if (points < 500) return { tier: 'Silver', progress: (points / 500) * 100, color: '#c0c0c0' };
+    if (points < 1500) return { tier: 'Gold', progress: ((points - 500) / 1000) * 100, color: '#d4af37' };
+    if (points < 10000) return { tier: 'Platinum', progress: ((points - 1500) / 8500) * 100, color: '#e5e4e2' };
+    return { tier: 'VIP', progress: 100, color: '#ffd700' };
+}
+
+// FINAL TURN: Real-time booking counter
+function getAvailableSlots() {
+    const today = new Date();
+    const slots = {};
+    for (let i = 0; i < 7; i++) {
+        const date = new Date(today);
+        date.setDate(date.getDate() + i);
+        const dateStr = date.toLocaleDateString('en-IN');
+        slots[dateStr] = Math.floor(Math.random() * 8) + 1; // 1-8 slots
+    }
+    return slots;
+}
+
+// FINAL TURN: Advanced search filtering
+function advancedSearch(query, filters = {}) {
+    const results = services.filter(service => {
+        const matchesQuery = service.name.toLowerCase().includes(query.toLowerCase());
+        const matchesPrice = !filters.priceRange || 
+            (service.price >= filters.priceRange[0] && service.price <= filters.priceRange[1]);
+        const matchesRating = !filters.minRating || service.rating >= filters.minRating;
+        const matchesDuration = !filters.maxDuration || service.duration <= filters.maxDuration;
+        
+        return matchesQuery && matchesPrice && matchesRating && matchesDuration;
+    });
+    
+    return results.sort((a, b) => {
+        if (filters.sortBy === 'price') return a.price - b.price;
+        if (filters.sortBy === 'rating') return b.rating - a.rating;
+        if (filters.sortBy === 'duration') return a.duration - b.duration;
+        return 0;
+    });
+}
+
+console.log('✨ FINAL: Stylists + Seasonal + Error Handling + Booking Status + Loyalty Visual + Advanced Search');

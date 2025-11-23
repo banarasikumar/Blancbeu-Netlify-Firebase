@@ -5,13 +5,28 @@ let currentAuthMode = 'phone'; // phone | google | whatsapp
 let userSession = JSON.parse(localStorage.getItem('blancbeu_user')) || null;
 
 // Backend API Configuration
-const AUTH_API_BASE_URL = window.FIREBASE_CONFIG?.functionsUrl || 'http://localhost:5001/blancbeu-salon/us-central1/auth';
-const USE_BACKEND_API = window.FIREBASE_CONFIG?.functionsUrl ? true : false;
+let AUTH_API_BASE_URL = 'http://localhost:5001/blancbeu-salon/us-central1/auth';
+let USE_BACKEND_API = false;
+
+// Initialize API config when Firebase config loads
+function initializeAPIConfig() {
+  try {
+    if (typeof FIREBASE_CONFIG !== 'undefined' && FIREBASE_CONFIG?.functionsUrl) {
+      AUTH_API_BASE_URL = FIREBASE_CONFIG.functionsUrl + '/auth';
+      USE_BACKEND_API = true;
+      console.log('✅ Backend API configured:', AUTH_API_BASE_URL);
+    } else {
+      console.log('📱 Using demo mode (no Firebase config)');
+    }
+  } catch (e) {
+    console.log('📱 Demo mode enabled (Firebase config not available)');
+  }
+}
 
 // API helper function
 async function callAuthAPI(endpoint, data) {
   if (!USE_BACKEND_API) {
-    console.log(`Demo mode: ${endpoint}`, data);
+    console.log(`📱 Demo mode: ${endpoint}`, data);
     return { success: true, demo: true };
   }
   
@@ -19,13 +34,21 @@ async function callAuthAPI(endpoint, data) {
     const response = await fetch(`${AUTH_API_BASE_URL}/${endpoint}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
+      timeout: 5000
     });
     return await response.json();
   } catch (error) {
     console.error(`API error on ${endpoint}:`, error);
     return { error: error.message };
   }
+}
+
+// Call on load
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initializeAPIConfig);
+} else {
+  initializeAPIConfig();
 }
 
 // ==================== AUTHENTICATION STATE ====================
@@ -129,17 +152,17 @@ let phoneOTPSent = false;
 let sentPhoneNumber = '';
 
 async function sendPhoneOTP() {
-  const phone = document.getElementById('authPhone').value;
-  
-  if (!phone || phone.length < 10) {
-    alert('Please enter a valid phone number');
-    return;
-  }
-  
-  sentPhoneNumber = phone;
-  phoneOTPSent = true;
-  
   try {
+    const phone = document.getElementById('authPhone')?.value;
+    
+    if (!phone || phone.length < 10) {
+      alert('Please enter a valid phone number');
+      return;
+    }
+    
+    sentPhoneNumber = phone;
+    phoneOTPSent = true;
+    
     if (USE_BACKEND_API) {
       // Call backend API to send SMS OTP
       const result = await callAuthAPI('send-otp', { phone });
@@ -160,8 +183,10 @@ async function sendPhoneOTP() {
     }
     
     // Enable OTP input and verify button
-    document.getElementById('authOTP').disabled = false;
-    document.getElementById('verifyOTPBtn').style.display = 'block';
+    const otpInput = document.getElementById('authOTP');
+    const verifyBtn = document.getElementById('verifyOTPBtn');
+    if (otpInput) otpInput.disabled = false;
+    if (verifyBtn) verifyBtn.style.display = 'block';
   } catch (error) {
     console.error('OTP send error:', error);
     alert('Failed to send OTP. Please try again.');
@@ -280,17 +305,17 @@ let whatsappCodeSent = false;
 let sentWhatsAppNumber = '';
 
 async function sendWhatsAppLoginCode() {
-  const phone = document.getElementById('authWhatsAppPhone').value;
-  
-  if (!phone || phone.length < 10) {
-    alert('Please enter a valid phone number');
-    return;
-  }
-  
-  sentWhatsAppNumber = phone;
-  whatsappCodeSent = true;
-  
   try {
+    const phone = document.getElementById('authWhatsAppPhone')?.value;
+    
+    if (!phone || phone.length < 10) {
+      alert('Please enter a valid phone number');
+      return;
+    }
+    
+    sentWhatsAppNumber = phone;
+    whatsappCodeSent = true;
+    
     if (USE_BACKEND_API) {
       // Call backend API to send WhatsApp code
       const result = await callAuthAPI('send-whatsapp-code', { phone });
@@ -311,8 +336,10 @@ async function sendWhatsAppLoginCode() {
     }
     
     // Enable code input and verify button
-    document.getElementById('authWhatsAppCode').disabled = false;
-    document.getElementById('verifyWhatsAppBtn').style.display = 'block';
+    const codeInput = document.getElementById('authWhatsAppCode');
+    const verifyBtn = document.getElementById('verifyWhatsAppBtn');
+    if (codeInput) codeInput.disabled = false;
+    if (verifyBtn) verifyBtn.style.display = 'block';
   } catch (error) {
     console.error('WhatsApp send error:', error);
     alert('Failed to send WhatsApp code. Please try again.');
@@ -404,21 +431,29 @@ function checkPageAccess() {
 function updateUIForLoggedInUser() {
   if (!userSession) return;
   
-  // Update account page with user info
-  const profileName = document.querySelector('.profile-info h2');
-  const profilePhone = document.querySelector('.profile-info p');
-  
-  if (profileName) profileName.textContent = userSession.name || userSession.phone;
-  if (profilePhone) profilePhone.textContent = userSession.phone;
+  try {
+    // Update account page with user info if elements exist
+    const profileName = document.querySelector('.profile-info h2');
+    const profilePhone = document.querySelector('.profile-info p');
+    
+    if (profileName) profileName.textContent = userSession.name || userSession.phone;
+    if (profilePhone) profilePhone.textContent = userSession.phone;
+  } catch (e) {
+    console.log('Profile elements not available yet');
+  }
   
   // Add logout button if not exists
-  const nav = document.querySelector('.bottom-nav');
-  if (nav && !document.querySelector('.logout-btn')) {
-    const logoutBtn = document.createElement('button');
-    logoutBtn.className = 'logout-btn';
-    logoutBtn.innerHTML = '🚪 Logout';
-    logoutBtn.onclick = logoutUser;
-    nav.parentElement.appendChild(logoutBtn);
+  try {
+    const nav = document.querySelector('.bottom-nav');
+    if (nav && !document.querySelector('.logout-btn')) {
+      const logoutBtn = document.createElement('button');
+      logoutBtn.className = 'logout-btn';
+      logoutBtn.innerHTML = '► Logout';
+      logoutBtn.onclick = logoutUser;
+      nav.parentElement.appendChild(logoutBtn);
+    }
+  } catch (e) {
+    console.log('Could not add logout button');
   }
 }
 
@@ -454,24 +489,41 @@ function navigateToPage(page) {
 
 // ==================== INITIALIZATION ====================
 
-document.addEventListener('DOMContentLoaded', () => {
-  // Check if user is already logged in
-  if (isUserLoggedIn()) {
-    updateUIForLoggedInUser();
-    console.log('✅ User session restored:', userSession.phone);
-  } else {
-    console.log('🔓 No active user session');
-  }
-  
-  // Set up nav item click handlers
-  document.querySelectorAll('.nav-item').forEach(item => {
-    item.addEventListener('click', (e) => {
-      e.preventDefault();
-      const page = item.getAttribute('data-page');
-      navigateToPage(page);
+// Initialize auth when DOM is ready
+function initializeAuth() {
+  try {
+    // Check if user is already logged in
+    if (isUserLoggedIn()) {
+      updateUIForLoggedInUser();
+      console.log('✅ User session restored:', userSession.phone);
+    } else {
+      console.log('🔓 No active user session');
+    }
+    
+    // Set up nav item click handlers - but don't override existing ones
+    document.querySelectorAll('.nav-item').forEach(item => {
+      // Only add listener if not already added
+      if (!item.hasListener) {
+        item.addEventListener('click', (e) => {
+          e.preventDefault();
+          const page = item.getAttribute('data-page');
+          navigateToPage(page);
+        });
+        item.hasListener = true;
+      }
     });
-  });
-  
-  // Check page access on load
-  checkPageAccess();
-});
+    
+    // Check page access on load
+    checkPageAccess();
+  } catch (error) {
+    console.error('Auth initialization error:', error);
+  }
+}
+
+// Initialize on DOM ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initializeAuth);
+} else {
+  // DOM already loaded
+  setTimeout(initializeAuth, 100);
+}

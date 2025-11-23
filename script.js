@@ -1175,27 +1175,6 @@ function closeDevModal() {
   }
 }
 
-function openAccountModal() {
-  console.log('🎯 openAccountModal() called');
-  const modal = document.getElementById('accountModal');
-  if (modal) {
-    modal.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-    document.documentElement.style.overflow = 'hidden';
-    console.log('✅ Account Modal opened successfully');
-  } else {
-    console.error('❌ accountModal not found');
-  }
-}
-
-function closeAccountModal() {
-  const modal = document.getElementById('accountModal');
-  if (modal) {
-    modal.style.display = 'none';
-    document.body.style.overflow = '';
-    document.documentElement.style.overflow = '';
-  }
-}
 
 function saveAccountChanges() {
   const name = document.getElementById('accountName').value;
@@ -1243,7 +1222,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (accountBtn) {
     accountBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      openAccountModal();
+      document.getElementById('account').scrollIntoView({ behavior: 'smooth' });
     });
   }
 

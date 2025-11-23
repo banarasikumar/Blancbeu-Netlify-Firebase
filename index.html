@@ -444,22 +444,18 @@
         </div>
     </footer>
 
-    <!-- Account Page Modal -->
-    <div id="accountModal" class="account-modal" onclick="event.target === this && closeAccountModal()">
-        <div class="account-modal-content">
-            <button class="account-close-btn" onclick="closeAccountModal()">×</button>
-            
-            <!-- Profile Header -->
+    <!-- Account Page Section -->
+    <section id="account" class="account-section-page">
+        <div class="container">
             <div class="account-header">
                 <div class="profile-avatar">👤</div>
-                <h2>My Account</h2>
+                <h2 class="section-title">My Account</h2>
             </div>
 
-            <!-- Account Sections -->
-            <div class="account-sections">
+            <div class="account-content">
                 <!-- Profile Section -->
-                <div class="account-section">
-                    <h3 class="section-header">📋 Profile Information</h3>
+                <div class="account-panel">
+                    <h3 class="panel-header">📋 Profile Information</h3>
                     <div class="info-item">
                         <label>Name</label>
                         <input type="text" id="accountName" placeholder="Enter your name" class="account-input">
@@ -475,16 +471,16 @@
                 </div>
 
                 <!-- Bookings Section -->
-                <div class="account-section">
-                    <h3 class="section-header">📅 Recent Bookings</h3>
+                <div class="account-panel">
+                    <h3 class="panel-header">📅 Recent Bookings</h3>
                     <div class="bookings-list">
-                        <p class="empty-state">No bookings yet. <a href="#services" onclick="closeAccountModal()">Book a service!</a></p>
+                        <p class="empty-state">No bookings yet. <a href="#services">Book a service now!</a></p>
                     </div>
                 </div>
 
                 <!-- Settings Section -->
-                <div class="account-section">
-                    <h3 class="section-header">⚙️ Settings</h3>
+                <div class="account-panel">
+                    <h3 class="panel-header">⚙️ Settings</h3>
                     <div class="settings-item">
                         <label>
                             <input type="checkbox" id="reminders" checked>
@@ -512,7 +508,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
     <!-- Under Development Modal -->
     <div id="devModal" class="dev-modal">

@@ -4748,3 +4748,223 @@ body.light-mode .logout-btn {
     border-color: #b8860b;
     color: #b8860b;
 }
+
+/* Account Page Section Styling */
+.account-section-page {
+    padding: 60px 20px;
+    background: linear-gradient(135deg, rgba(10, 10, 10, 0.5), rgba(20, 20, 20, 0.5));
+    min-height: 100vh;
+}
+
+.account-section-page .account-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.profile-avatar {
+    font-size: 80px;
+    margin-bottom: 20px;
+    animation: float 3s ease-in-out infinite;
+}
+
+.account-section-page .section-title {
+    font-family: 'Cinzel', serif;
+    font-size: 48px;
+    background: linear-gradient(135deg, var(--gold-24k), var(--gold-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.account-content {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.account-panel {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.05), rgba(255, 215, 0, 0.02));
+    border: 2px solid rgba(255, 215, 0, 0.15);
+    border-radius: 15px;
+    padding: 30px;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.account-panel:hover {
+    border-color: rgba(255, 215, 0, 0.3);
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.08), rgba(255, 215, 0, 0.04));
+}
+
+.panel-header {
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--gold-24k);
+    margin: 0 0 25px 0;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.account-section-page .info-item {
+    margin-bottom: 20px;
+}
+
+.account-section-page .info-item label {
+    display: block;
+    font-size: 14px;
+    color: var(--text-gray);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.account-section-page .account-input {
+    width: 100%;
+    padding: 14px 16px;
+    background: rgba(255, 215, 0, 0.08);
+    border: 1px solid rgba(255, 215, 0, 0.25);
+    border-radius: 10px;
+    color: var(--text-white);
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.account-section-page .account-input:focus {
+    outline: none;
+    background: rgba(255, 215, 0, 0.12);
+    border-color: var(--gold-24k);
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.25);
+}
+
+.account-section-page .settings-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.account-section-page .settings-item label {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    cursor: pointer;
+    color: var(--text-white);
+    font-size: 15px;
+    margin: 0;
+}
+
+.account-section-page .settings-item input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: var(--gold-24k);
+}
+
+.account-section-page .empty-state {
+    color: var(--text-gray);
+    font-size: 15px;
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.account-section-page .empty-state a {
+    color: var(--gold-24k);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.account-section-page .account-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 30px;
+    padding-top: 30px;
+    border-top: 2px solid rgba(255, 215, 0, 0.1);
+}
+
+.account-section-page .save-btn,
+.account-section-page .logout-btn {
+    padding: 16px 32px;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+}
+
+.account-section-page .save-btn {
+    background: linear-gradient(135deg, var(--gold-24k), var(--gold-bright));
+    color: var(--black);
+    box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
+}
+
+.account-section-page .save-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(255, 215, 0, 0.6);
+}
+
+.account-section-page .logout-btn {
+    background: rgba(255, 215, 0, 0.1);
+    border: 2px solid var(--gold-24k);
+    color: var(--gold-24k);
+}
+
+.account-section-page .logout-btn:hover {
+    background: rgba(255, 215, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+body.light-mode .account-section-page {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.5), rgba(248, 248, 248, 0.5));
+}
+
+body.light-mode .account-panel {
+    background: linear-gradient(135deg, rgba(212, 160, 23, 0.08), rgba(212, 160, 23, 0.04));
+    border-color: rgba(184, 134, 11, 0.2);
+}
+
+body.light-mode .account-panel:hover {
+    border-color: rgba(184, 134, 11, 0.4);
+}
+
+body.light-mode .account-section-page .account-input {
+    background: rgba(212, 160, 23, 0.1);
+    border-color: rgba(184, 134, 11, 0.3);
+    color: #1a1a1a;
+}
+
+body.light-mode .account-section-page .account-input:focus {
+    background: rgba(212, 160, 23, 0.15);
+    border-color: #b8860b;
+}
+
+body.light-mode .account-section-page .settings-item label {
+    color: #333333;
+}
+
+body.light-mode .account-section-page .save-btn {
+    background: linear-gradient(135deg, #b8860b, #d4a017);
+    color: #ffffff;
+}
+
+body.light-mode .account-section-page .logout-btn {
+    background: rgba(184, 134, 11, 0.12);
+    border-color: #b8860b;
+    color: #b8860b;
+}
+
+@media (max-width: 768px) {
+    .account-section-page {
+        padding: 40px 15px;
+    }
+    
+    .account-panel {
+        padding: 20px;
+    }
+}

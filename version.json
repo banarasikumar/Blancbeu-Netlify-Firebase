@@ -1,6 +1,6 @@
 {
-  "version": "17.9.0",
-  "lastUpdated": "2025-11-22T15:59:15Z",
-  "timestamp": 1763827155000,
-  "changes": "Restored original images, fixed Install App button styling, optimized service category display"
+  "version": "18.3.0",
+  "lastUpdated": "2025-11-22T16:05:00Z",
+  "timestamp": 1763827500000,
+  "changes": "Converted Account from modal to full page section - displays like home/services pages"
 }

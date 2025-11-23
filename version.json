@@ -1,6 +1,6 @@
 {
-  "version": "18.3.0",
-  "lastUpdated": "2025-11-22T16:05:00Z",
-  "timestamp": 1763827500000,
-  "changes": "Converted Account from modal to full page section - displays like home/services pages"
+  "version": "18.4.0",
+  "lastUpdated": "2025-11-22T16:08:00Z",
+  "timestamp": 1763827680000,
+  "changes": "Repositioned Account page section before footer - displays properly like Home/Services pages"
 }

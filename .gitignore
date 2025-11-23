@@ -8,3 +8,6 @@ build/
 .firebase/
 .firebaserc
 firebase-debug.log
+.replit
+.vscode/
+.idea/

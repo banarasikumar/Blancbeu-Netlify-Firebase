@@ -25,12 +25,12 @@ function initializeAPIConfig() {
 
 // API helper function
 async function callAuthAPI(endpoint, data) {
-  if (!USE_BACKEND_API) {
-    console.log(`📱 Demo mode: ${endpoint}`, data);
-    return { success: true, demo: true };
-  }
-  
   try {
+    if (!USE_BACKEND_API) {
+      console.log(`📱 Demo mode: ${endpoint}`, data);
+      return { success: true, demo: true };
+    }
+    
     const response = await fetch(`${AUTH_API_BASE_URL}/${endpoint}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -44,11 +44,27 @@ async function callAuthAPI(endpoint, data) {
   }
 }
 
-// Call on load
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initializeAPIConfig);
-} else {
-  initializeAPIConfig();
+// Initialize safely - wrap in try-catch
+try {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      try {
+        initializeAPIConfig();
+      } catch (e) {
+        console.error('API config init error:', e);
+      }
+    });
+  } else {
+    setTimeout(() => {
+      try {
+        initializeAPIConfig();
+      } catch (e) {
+        console.error('API config init error:', e);
+      }
+    }, 100);
+  }
+} catch (e) {
+  console.error('Failed to initialize API config:', e);
 }
 
 // ==================== AUTHENTICATION STATE ====================

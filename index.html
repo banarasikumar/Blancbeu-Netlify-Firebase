@@ -25,40 +25,11 @@
             shouldBeLightMode = currentHour >= 6 && currentHour < 17;
           }
           
-          const themeColor = shouldBeLightMode ? '#ffffff' : '#0a0a0a';
-          const colorScheme = shouldBeLightMode ? 'light' : 'dark';
-          const appleStatusBarStyle = shouldBeLightMode ? 'black' : 'black-translucent';
-          
-          // Apply theme immediately
           if (shouldBeLightMode) {
             document.documentElement.setAttribute('data-theme', 'light');
             document.body.classList.add('light-mode');
           }
-          
-          // Update system UI colors immediately
-          document.documentElement.style.colorScheme = colorScheme;
-          
-          // Update meta tags with retries for reliability
-          const updateMetaTags = () => {
-            const metaThemeColor = document.getElementById('metaThemeColor') || document.querySelector('meta[name="theme-color"]');
-            if (metaThemeColor) {
-              metaThemeColor.setAttribute('content', themeColor);
-              void metaThemeColor.offsetHeight; // Force reflow
-            }
-            
-            const appleStatusBar = document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]');
-            if (appleStatusBar) {
-              appleStatusBar.setAttribute('content', appleStatusBarStyle);
-              void appleStatusBar.offsetHeight; // Force reflow
-            }
-          };
-          
-          // Update immediately
-          updateMetaTags();
-          
-          // Retry with delays for extra reliability
-          setTimeout(updateMetaTags, 50);
-          setTimeout(updateMetaTags, 150);
+          // Dark mode is default (no attribute needed)
         } catch(e) {
           // Fail silently if localStorage is not available
         }
@@ -225,12 +196,11 @@
                 <span class="theme-icon moon">🌙</span>
             </button>
             <nav class="nav">
-                <a href="#" onclick="goToPage('home'); return false;">Home</a>
-                <a href="#" onclick="goToPage('offers'); return false;">Offers</a>
-                <a href="#" onclick="goToPage('services'); return false;">Services</a>
-                <a href="#" onclick="goToPage('gallery'); return false;">Gallery</a>
-                <a href="#" onclick="goToPage('reviews'); return false;">Reviews</a>
-                <a href="#" onclick="goToPage('account'); return false;">Account</a>
+                <a href="#home">Home</a>
+                <a href="#offers">Offers</a>
+                <a href="#services">Services</a>
+                <a href="#gallery">Gallery</a>
+                <a href="#reviews">Reviews</a>
                 <button id="installBtn" class="install-app-btn" style="display: none;">
                     <span class="install-icon">📲</span>
                     <span class="install-text">Install App</span>
@@ -240,7 +210,7 @@
         </div>
     </header>
 
-    <section id="home" class="hero page-view">
+    <section id="home" class="hero">
         <div class="carousel">
             <div class="carousel-track" id="carouselTrack">
                 <div class="carousel-slide active">
@@ -284,7 +254,7 @@
         </div>
     </section>
 
-    <section id="offers" class="offers-section page-view" style="display: none;">
+    <section id="offers" class="offers-section">
         <div class="container">
             <h2 class="section-title">
                 <span class="title-decoration">✨</span>
@@ -304,7 +274,7 @@
                         <span class="new-price">₹99</span>
                     </div>
                     <div class="sparkle-line"></div>
-                    <button class="tc-btn" data-page="terms">T&C</button>
+                    <button class="tc-btn" onclick="showTC()">T&C</button>
                 </div>
 
                 <div class="offer-card glow-card">
@@ -316,7 +286,7 @@
                         <span class="new-price">50% OFF*</span>
                     </div>
                     <div class="sparkle-line"></div>
-                    <button class="tc-btn" data-page="terms">T&C</button>
+                    <button class="tc-btn" onclick="showTC()">T&C</button>
                 </div>
 
                 <div class="offer-card glow-card">
@@ -328,13 +298,13 @@
                         <span class="new-price">25% OFF</span>
                     </div>
                     <div class="sparkle-line"></div>
-                    <button class="tc-btn" data-page="terms">T&C</button>
+                    <button class="tc-btn" onclick="showTC()">T&C</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="services" class="services-section page-view" style="display: none;">
+    <section id="services" class="services-section">
         <div class="container">
             <h2 class="section-title">
                 <span class="title-decoration">💎</span>
@@ -347,7 +317,7 @@
         </div>
     </section>
 
-    <section id="gallery" class="gallery-section page-view" style="display: none;">
+    <section id="gallery" class="gallery-section">
         <div class="container">
             <h2 class="section-title">
                 <span class="title-decoration">🌟</span>
@@ -385,7 +355,7 @@
         </div>
     </section>
 
-    <section id="reviews" class="reviews-section page-view" style="display: none;">
+    <section id="reviews" class="reviews-section">
         <div class="container">
             <h2 class="section-title">
                 <span class="title-decoration">⭐</span>
@@ -398,60 +368,7 @@
         </div>
     </section>
 
-    <section id="account" class="account-page page-view" style="display: none;">
-        <div class="container account-container">
-            <div class="account-header">
-                <div class="profile-avatar">👤</div>
-                <h1>My Account</h1>
-            </div>
-
-            <div class="account-content">
-                <div class="account-card">
-                    <h2>📋 Profile Information</h2>
-                    <div class="form-group">
-                        <label>Name</label>
-                        <input type="text" id="accountName" placeholder="Enter your name" class="form-input">
-                    </div>
-                    <div class="form-group">
-                        <label>Phone Number</label>
-                        <input type="tel" id="accountPhone" placeholder="+91 92299 15277" class="form-input">
-                    </div>
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input type="email" id="accountEmail" placeholder="Enter your email" class="form-input">
-                    </div>
-                </div>
-
-                <div class="account-card">
-                    <h2>📅 Recent Bookings</h2>
-                    <p style="color: var(--text-gray); text-align: center; padding: 20px;">No bookings yet. <a href="#" onclick="goToPage('services'); return false;" style="color: var(--gold-24k); font-weight: 700;">Book a service!</a></p>
-                </div>
-
-                <div class="account-card">
-                    <h2>⚙️ Settings</h2>
-                    <label class="setting-item">
-                        <input type="checkbox" id="reminders" checked>
-                        <span>Booking reminders</span>
-                    </label>
-                    <label class="setting-item">
-                        <input type="checkbox" id="offers" checked>
-                        <span>Special offers & discounts</span>
-                    </label>
-                    <label class="setting-item">
-                        <input type="checkbox" id="sms">
-                        <span>SMS notifications</span>
-                    </label>
-                </div>
-
-                <div class="account-actions">
-                    <button class="btn-primary" onclick="saveAccountChanges()">💾 Save Changes</button>
-                    <button class="btn-danger" onclick="logoutAccount()">🚪 Logout</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="cta-section" class="cta-section">
+    <section class="cta-section">
         <div class="container">
             <h2>Ready to Transform Your Look?</h2>
             <p>Book your appointment today and experience premium beauty care</p>
@@ -462,7 +379,7 @@
         </div>
     </section>
 
-    <footer id="footer" class="footer">
+    <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
@@ -498,12 +415,33 @@
         </div>
     </footer>
 
+    <!-- T&C Modal -->
+    <div id="tcModal" class="tc-modal">
+        <div class="tc-modal-content">
+            <span class="tc-close" onclick="closeTC()">&times;</span>
+            <h2>✨ Offer Terms & Conditions ✨</h2>
+            <div class="tc-content">
+                <ol>
+                    <li>Only one offer is applicable per transaction at a time.</li>
+                    <li>A maximum of 10% of the total bill can be redeemed through coupon cash on the final price.</li>
+                    <li>All offers are subject to cancellation at any time without prior notice.</li>
+                    <li>The same offer may not be applicable multiple times for the same customer.</li>
+                    <li>Offers cannot be combined with other ongoing promotions or discounts.</li>
+                    <li>Valid ID proof is required for student discounts and other eligibility-based offers.</li>
+                    <li>Services must be availed within the offer validity period mentioned.</li>
+                    <li>BlancBeu reserves the right to modify or withdraw any offer without prior intimation.</li>
+                    <li>Prices mentioned are inclusive of all applicable taxes unless stated otherwise.</li>
+                    <li>Advance booking is recommended for availing festive and special offers.</li>
+                </ol>
+            </div>
+        </div>
+    </div>
 
     <!-- Under Development Modal -->
     <div id="devModal" class="dev-modal">
         <div class="dev-modal-content">
             <button class="dev-close-btn" onclick="closeDevModal()">✕</button>
-            <div class="dev-modal-body" id="devModalBody">
+            <div class="dev-modal-body">
                 <div class="dev-icon">🚀</div>
                 <h2>✨ Coming Soon ✨</h2>
                 <p class="dev-message">The App is under development</p>
@@ -517,26 +455,6 @@
             </div>
         </div>
     </div>
-
-    <!-- T&C Modal Content Template -->
-    <template id="tcModalTemplate">
-        <div class="tc-modal-header">✨</div>
-        <h2 class="tc-modal-title">Terms & Conditions</h2>
-        <p class="tc-modal-subtitle">Please read carefully before using offers</p>
-        <div class="tc-modal-list">
-            <div class="tc-item"><span class="tc-num">1</span> Only one offer is applicable per transaction at a time.</div>
-            <div class="tc-item"><span class="tc-num">2</span> A maximum of 10% can be redeemed through coupon cash on final price.</div>
-            <div class="tc-item"><span class="tc-num">3</span> All offers are subject to cancellation at any time without prior notice.</div>
-            <div class="tc-item"><span class="tc-num">4</span> The same offer may not be applicable multiple times for the same customer.</div>
-            <div class="tc-item"><span class="tc-num">5</span> Offers cannot be combined with other ongoing promotions or discounts.</div>
-            <div class="tc-item"><span class="tc-num">6</span> Valid ID proof required for student discounts and eligibility-based offers.</div>
-            <div class="tc-item"><span class="tc-num">7</span> Services must be availed within the offer validity period mentioned.</div>
-            <div class="tc-item"><span class="tc-num">8</span> Blancbeu reserves the right to modify or withdraw any offer.</div>
-            <div class="tc-item"><span class="tc-num">9</span> Offer is valid only at Blancbeu salon locations.</div>
-            <div class="tc-item"><span class="tc-num">10</span> Present valid offer code or ID proof at the time of service.</div>
-        </div>
-        <button class="dev-action-btn" onclick="closeDevModal()">I Understand</button>
-    </template>
 
     <nav class="bottom-nav" id="bottomNav">
         <a href="#home" class="nav-item active" data-page="home">

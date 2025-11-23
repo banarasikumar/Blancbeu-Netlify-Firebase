@@ -266,8 +266,6 @@ function initCarousel() {
   const dots = document.getElementById('carouselDots');
   const slides = document.querySelectorAll('.carousel-slide');
   
-  if (!dots || slides.length === 0) return;
-  
   console.log(`🎠 Carousel initialized with ${slides.length} slides`);
   
   slides.forEach((_, index) => {
@@ -282,9 +280,6 @@ function initCarousel() {
 }
 
 function startAutoPlay() {
-  const slides = document.querySelectorAll('.carousel-slide');
-  if (slides.length === 0) return;
-  
   console.log('▶️ Starting carousel auto-play');
   carouselInterval = setInterval(() => {
     moveCarousel(1);
@@ -294,8 +289,6 @@ function startAutoPlay() {
 function moveCarousel(direction) {
   const slides = document.querySelectorAll('.carousel-slide');
   const dots = document.querySelectorAll('.dot');
-  
-  if (slides.length === 0 || !slides[currentSlide] || !dots[currentSlide]) return;
   
   console.log(`🔄 Moving carousel: current=${currentSlide}, direction=${direction}`);
   
@@ -317,8 +310,6 @@ function goToSlide(index) {
   const slides = document.querySelectorAll('.carousel-slide');
   const dots = document.querySelectorAll('.dot');
   
-  if (slides.length === 0 || !slides[currentSlide] || !dots[currentSlide]) return;
-  
   slides[currentSlide].classList.remove('active');
   dots[currentSlide].classList.remove('active');
   
@@ -333,7 +324,6 @@ function goToSlide(index) {
 
 function renderServices() {
   const container = document.getElementById('servicesContainer');
-  if (!container) return;
   
   servicesData.groups.forEach(group => {
     const categoryDiv = document.createElement('div');
@@ -371,7 +361,6 @@ function renderServices() {
 
 function renderReviews() {
   const container = document.getElementById('reviewsContainer');
-  if (!container) return;
   
   reviewsData.forEach(review => {
     const reviewCard = document.createElement('div');
@@ -410,7 +399,23 @@ function initSmoothScroll() {
 }
 
 function showTC() {
-  window.location.href = '/terms.html';
+  const modal = document.getElementById('tcModal');
+  modal.style.display = 'block';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeTC() {
+  const modal = document.getElementById('tcModal');
+  modal.style.display = 'none';
+  document.body.style.overflow = 'auto';
+}
+
+window.onclick = function(event) {
+  const modal = document.getElementById('tcModal');
+  if (event.target === modal) {
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+  }
 }
 
 class ScrollBehaviorManager {
@@ -941,13 +946,8 @@ class ThemeController {
     this.fireworksOverlay = document.getElementById('fireworksOverlay');
     this.html = document.documentElement;
     this.body = document.body;
-    this.currentThemeColor = null;
-    this.currentColorScheme = null;
-    this.pollingInterval = null;
     
     this.init();
-    this.startForcedThemePolling();
-    this.setupMetaTagObserver();
   }
   
   init() {
@@ -965,49 +965,6 @@ class ThemeController {
     
     if (this.themeToggleBtn) {
       this.themeToggleBtn.addEventListener('click', () => this.toggleTheme());
-    }
-  }
-  
-  setupMetaTagObserver() {
-    // Watch for any changes to meta tags and immediately correct them
-    const config = { attributes: true, subtree: true, attributeFilter: ['content'] };
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        if (mutation.target.tagName === 'META') {
-          const name = mutation.target.getAttribute('name');
-          if (name === 'theme-color' && this.currentThemeColor) {
-            // Meta tag was changed, force our color back
-            const currentContent = mutation.target.getAttribute('content');
-            if (currentContent !== this.currentThemeColor) {
-              mutation.target.setAttribute('content', this.currentThemeColor);
-            }
-          }
-        }
-      });
-    });
-    
-    observer.observe(document.head, config);
-  }
-  
-  startForcedThemePolling() {
-    // Poll every 500ms to ensure system UI colors stay correct
-    this.pollingInterval = setInterval(() => {
-      this.enforceCurrentTheme();
-    }, 500);
-  }
-  
-  enforceCurrentTheme() {
-    if (this.currentThemeColor) {
-      const metaThemeColor = document.querySelector('meta[name="theme-color"]');
-      if (metaThemeColor && metaThemeColor.getAttribute('content') !== this.currentThemeColor) {
-        metaThemeColor.setAttribute('content', this.currentThemeColor);
-        void metaThemeColor.offsetHeight; // Force reflow
-      }
-      
-      // Enforce color-scheme
-      if (this.html.style.colorScheme !== this.currentColorScheme) {
-        this.html.style.colorScheme = this.currentColorScheme;
-      }
     }
   }
   
@@ -1032,55 +989,6 @@ class ThemeController {
     }
   }
   
-  updateSystemUIColor(colorValue, isLightMode) {
-    // Store current theme for polling enforcement
-    this.currentThemeColor = colorValue;
-    this.currentColorScheme = isLightMode ? 'light' : 'dark';
-    
-    // Update meta tags immediately
-    const metaThemeColor = document.querySelector('meta[name="theme-color"]');
-    if (metaThemeColor) {
-      metaThemeColor.setAttribute('content', colorValue);
-      void metaThemeColor.offsetHeight;
-    }
-    
-    const metaById = document.getElementById('metaThemeColor');
-    if (metaById) {
-      metaById.setAttribute('content', colorValue);
-      void metaById.offsetHeight;
-    }
-    
-    document.documentElement.style.colorScheme = this.currentColorScheme;
-    document.documentElement.style.setProperty('color-scheme', this.currentColorScheme, 'important');
-    
-    const appleStatusBar = document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]');
-    if (appleStatusBar) {
-      appleStatusBar.setAttribute('content', isLightMode ? 'black' : 'black-translucent');
-      void appleStatusBar.offsetHeight;
-    }
-    
-    // Use retry waves for dynamic updates
-    const updateWave = (delay) => {
-      setTimeout(() => {
-        if (metaThemeColor) {
-          metaThemeColor.setAttribute('content', colorValue);
-          void metaThemeColor.offsetHeight;
-        }
-        if (metaById) {
-          metaById.setAttribute('content', colorValue);
-          void metaById.offsetHeight;
-        }
-        document.documentElement.style.colorScheme = this.currentColorScheme;
-        document.documentElement.style.setProperty('color-scheme', this.currentColorScheme, 'important');
-      }, delay);
-    };
-    
-    updateWave(50);
-    updateWave(150);
-    updateWave(300);
-    updateWave(600);
-  }
-
   enableLightMode() {
     // Set data-theme attribute to trigger CSS variable changes
     this.html.setAttribute('data-theme', 'light');
@@ -1100,8 +1008,8 @@ class ThemeController {
       toggleSound(false);
     }
     
-    // Update system UI colors for light mode with retry mechanism
-    this.updateSystemUIColor('#ffffff', true);
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#ffffff');
+    document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]')?.setAttribute('content', 'black');
   }
   
   enableDarkMode() {
@@ -1119,50 +1027,17 @@ class ThemeController {
       togglePause(false);
     }
     
-    // Update system UI colors for dark mode with retry mechanism
-    this.updateSystemUIColor('#0a0a0a', false);
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#0a0a0a');
+    document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]')?.setAttribute('content', 'black-translucent');
   }
 }
 
 function openDevModal() {
   const modal = document.getElementById('devModal');
-  const modalBody = document.getElementById('devModalBody');
   if (modal) {
-    // Reset modal body to show default "Coming Soon" content
-    if (modalBody) {
-      modalBody.innerHTML = `
-        <div class="dev-icon">🚀</div>
-        <h2>✨ Coming Soon ✨</h2>
-        <p class="dev-message">The App is under development</p>
-        <p class="dev-subtitle">We're working to bring you amazing features! Stay tuned.</p>
-        <div class="dev-dots">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-        <button class="dev-action-btn" onclick="closeDevModal()">Got it!</button>
-      `;
-    }
-    modal.style.display = 'flex';
+    modal.style.display = 'block';
     modal.style.animation = 'fadeInBackdrop 0.3s ease-out';
     document.body.style.overflow = 'hidden';
-    document.documentElement.style.overflow = 'hidden';
-  }
-}
-
-function showTC() {
-  const modal = document.getElementById('devModal');
-  const modalBody = document.getElementById('devModalBody');
-  const template = document.getElementById('tcModalTemplate');
-  
-  if (modal && modalBody && template) {
-    const tcContent = template.content.cloneNode(true);
-    modalBody.innerHTML = '';
-    modalBody.appendChild(tcContent);
-    modal.style.display = 'flex';
-    modal.style.animation = 'fadeInBackdrop 0.3s ease-out';
-    document.body.style.overflow = 'hidden';
-    document.documentElement.style.overflow = 'hidden';
   }
 }
 
@@ -1170,72 +1045,14 @@ function closeDevModal() {
   const modal = document.getElementById('devModal');
   if (modal) {
     modal.style.display = 'none';
-    document.body.style.overflow = '';
-    document.documentElement.style.overflow = '';
+    document.body.style.overflow = 'auto';
   }
-}
-
-
-// FLIPKART-STYLE PAGE NAVIGATION - Show/Hide Pages
-function goToPage(pageName) {
-  // Strictly hide ALL pages first
-  document.getElementById('home').style.display = 'none';
-  document.getElementById('offers').style.display = 'none';
-  document.getElementById('services').style.display = 'none';
-  document.getElementById('gallery').style.display = 'none';
-  document.getElementById('reviews').style.display = 'none';
-  document.getElementById('account').style.display = 'none';
-  
-  // Show selected page
-  const targetPage = document.getElementById(pageName);
-  if (targetPage) {
-    targetPage.style.display = 'block';
-    window.scrollTo(0, 0);
-    console.log(`✅ Navigated to ${pageName} page`);
-  }
-  
-  // Manage CTA and footer - ONLY on home page
-  const ctaSection = document.getElementById('cta-section');
-  const footer = document.getElementById('footer');
-  
-  if (pageName === 'home') {
-    if (ctaSection) ctaSection.style.display = 'block';
-    if (footer) footer.style.display = 'block';
-  } else {
-    if (ctaSection) ctaSection.style.display = 'none';
-    if (footer) footer.style.display = 'none';
-  }
-}
-
-function saveAccountChanges() {
-  const name = document.getElementById('accountName').value;
-  const phone = document.getElementById('accountPhone').value;
-  const email = document.getElementById('accountEmail').value;
-  
-  localStorage.setItem('accountName', name);
-  localStorage.setItem('accountPhone', phone);
-  localStorage.setItem('accountEmail', email);
-  
-  alert('✨ Changes saved successfully!');
-}
-
-function logoutAccount() {
-  localStorage.removeItem('accountName');
-  localStorage.removeItem('accountPhone');
-  localStorage.removeItem('accountEmail');
-  alert('👋 Logged out!');
-  goToPage('home');
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  // INITIALIZE HOME PAGE ON LOAD
-  goToPage('home');
-  
   const notificationsBtn = document.querySelector('[data-page="notifications"]');
   const bookingsBtn = document.querySelector('[data-page="bookings"]');
   const accountBtn = document.querySelector('[data-page="account"]');
-  const termsBtn = document.querySelector('[data-page="terms"]');
-  const termsButtons = document.querySelectorAll('[data-page="terms"]');
   const devModal = document.getElementById('devModal');
 
   if (notificationsBtn) {
@@ -1255,16 +1072,9 @@ document.addEventListener('DOMContentLoaded', () => {
   if (accountBtn) {
     accountBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      goToPage('account');
+      openDevModal();
     });
   }
-
-  termsButtons.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      showTC();
-    });
-  });
 
   if (devModal) {
     devModal.addEventListener('click', (e) => {
@@ -1275,22 +1085,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
-
-// Initialize Update Checker FIRST (before anything else)
-initUpdateChecker();
-
-// Register Service Worker for PWA caching
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw.js', { scope: '/' })
-    .then(registration => {
-      console.log('✅ Service Worker registered for PWA offline-first caching');
-      // Check for updates every 30 seconds
-      setInterval(() => {
-        registration.update();
-      }, 30000);
-    })
-    .catch(error => console.log('Service Worker registration failed:', error));
-}
 
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {

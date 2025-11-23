@@ -580,11 +580,28 @@
         </a>
     </nav>
 
+    <!-- Auth Modal -->
+    <div id="authModal" class="auth-modal">
+        <div class="auth-modal-content">
+            <button class="auth-close" onclick="closeAuthModal()">×</button>
+            <div class="auth-modal-header" id="authModalHeader">🔐 Login</div>
+            <div class="auth-modal-subtitle">Welcome to Blancbeu</div>
+            <div class="auth-form" id="authForm">
+                <input type="email" id="authEmail" placeholder="Email address" required>
+                <input type="password" id="authPassword" placeholder="Password" required>
+                <div class="auth-form-buttons">
+                    <button class="auth-btn auth-btn-primary" onclick="handleAuthAction()">Login</button>
+                    <button class="auth-btn auth-btn-secondary" onclick="toggleAuthMode()">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/329180/fscreen%401.0.1.js'></script>
     <script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/329180/Stage%400.1.4.js'></script>
     <script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/329180/MyMath.js'></script>
     <script src="fireworks.js"></script>
-    <script type="module" src="script.js"></script>
+    <script src="script.js"></script>
     <script>
         window.addEventListener('load', () => {
             setTimeout(() => {

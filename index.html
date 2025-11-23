@@ -3,187 +3,618 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Blancbeu - Premium Beauty Salon</title>
-    <meta name="description" content="Premium beauty salon PWA with luxury 24k gold aesthetic, responsive design, and iOS native interface.">
-    <meta name="keywords" content="beauty, salon, haircut, makeup, facial, nails, booking">
-    <meta name="author" content="Blancbeu">
-    <meta name="theme-color" content="#000000">
-    
-    <link rel="manifest" href="/manifest.json">
-    <link rel="icon" type="image/webp" href="/assets/brand_icon_optimized.webp">
-    <link rel="apple-touch-icon" href="/assets/brand_icon_optimized.webp">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Blancbeu">
-    
-    <script>
-      (function() {
-        const saved = localStorage.getItem('theme') || (new Date().getHours() >= 6 && new Date().getHours() < 18 ? 'light' : 'dark');
-        document.documentElement.setAttribute('data-theme', saved);
-      })();
-    </script>
-    
+    <meta name="description" content="Beauty Family Salon - Premium Beauty Experience">
+    <meta name="theme-color" content="#0a0a0a">
+    <title>Beauty Family Salon</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect fill='%23d4af37' width='180' height='180' rx='45'/%3E%3Ctext x='90' y='110' font-size='80' font-weight='bold' fill='%230a0a0a' text-anchor='middle' font-family='system-ui'%3EBF%3C/text%3E%3C/svg%3E">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect fill='%23d4af37' width='180' height='180' rx='45'/%3E%3Ctext x='90' y='110' font-size='80' font-weight='bold' fill='%230a0a0a' text-anchor='middle' font-family='system-ui'%3EBF%3C/text%3E%3C/svg%3E">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <img src="assets/brand_icon_optimized.webp" alt="Logo" class="logo">
-        <div class="header-text">
-            <h1>BLANCBEU</h1>
-            <p>Beauty Salon</p>
-        </div>
-        <button id="themeBtn" class="theme-btn">🌙</button>
-    </header>
-
-    <!-- Main Content -->
-    <main class="main">
-        <!-- Home -->
-        <div class="page active" data-page="home">
-            <div class="carousel">
-                <div class="carousel-track" id="track">
-                    <img src="assets/banner_carousel_images/1.webp" alt="Salon 1">
-                    <img src="assets/banner_carousel_images/2.webp" alt="Salon 2">
-                    <img src="assets/banner_carousel_images/3.webp" alt="Salon 3">
-                    <img src="assets/banner_carousel_images/4.webp" alt="Salon 4">
-                    <img src="assets/banner_carousel_images/5.webp" alt="Salon 5">
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="32" height="32" rx="8" fill="#d4af37"/>
+                        <text x="16" y="24" font-size="18" font-weight="bold" fill="#0a0a0a" text-anchor="middle" font-family="system-ui">BF</text>
+                    </svg>
+                    <span class="brand-name">Beauty Family</span>
                 </div>
-                <div class="carousel-dots" id="dots"></div>
+                <div class="header-actions">
+                    <button class="theme-toggle" aria-label="Toggle theme">
+                        <svg class="sun-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                        </svg>
+                        <svg class="moon-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                        </svg>
+                    </button>
+                    <button class="notification-bell" aria-label="Notifications">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                        </svg>
+                        <span class="notification-dot"></span>
+                    </button>
+                </div>
             </div>
+        </header>
 
-            <div class="quick-links">
-                <a href="tel:+919229915277" class="link-btn">📞 Call</a>
-                <a href="https://wa.me/919229915277" target="_blank" class="link-btn">💬 WhatsApp</a>
-                <a href="https://maps.app.goo.gl/8eYa96AHu2VT8Qpq7" target="_blank" class="link-btn">📍 Location</a>
-                <button class="link-btn" onclick="switchPage('bookings')">📅 Book</button>
-            </div>
-
-            <section class="section">
-                <h2>Special Offers</h2>
-                <div class="cards">
-                    <div class="card">
-                        <div class="badge hot">HOT</div>
-                        <div class="text">
-                            <h3>Haircuts</h3>
-                            <p class="price">₹99</p>
-                            <p class="desc">All styles</p>
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Home Tab -->
+            <section class="tab-content active" data-tab="home">
+                <div class="hero-section">
+                    <div class="carousel-wrapper">
+                        <div class="carousel">
+                            <div class="carousel-slide active" style="background: linear-gradient(135deg, #2a1a4a 0%, #4a2a6a 100%); display: flex; align-items: center; justify-content: center;">
+                                <div class="carousel-content">
+                                    <h2>Luxury Hair Treatment</h2>
+                                    <p>Transform your locks with premium care</p>
+                                </div>
+                            </div>
+                            <div class="carousel-slide" style="background: linear-gradient(135deg, #1a3a5a 0%, #2a5a7a 100%); display: flex; align-items: center; justify-content: center;">
+                                <div class="carousel-content">
+                                    <h2>Premium Facial</h2>
+                                    <p>Rejuvenate your skin naturally</p>
+                                </div>
+                            </div>
+                            <div class="carousel-slide" style="background: linear-gradient(135deg, #3a1a2a 0%, #5a2a4a 100%); display: flex; align-items: center; justify-content: center;">
+                                <div class="carousel-content">
+                                    <h2>Makeup Artistry</h2>
+                                    <p>Express your unique beauty</p>
+                                </div>
+                            </div>
+                            <div class="carousel-slide" style="background: linear-gradient(135deg, #2a3a1a 0%, #4a5a2a 100%); display: flex; align-items: center; justify-content: center;">
+                                <div class="carousel-content">
+                                    <h2>Nail Design</h2>
+                                    <p>Stunning nails, every time</p>
+                                </div>
+                            </div>
+                            <div class="carousel-slide" style="background: linear-gradient(135deg, #3a2a1a 0%, #5a4a2a 100%); display: flex; align-items: center; justify-content: center;">
+                                <div class="carousel-content">
+                                    <h2>Spa Relaxation</h2>
+                                    <p>Ultimate wellness experience</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-controls">
+                            <button class="carousel-dot active" data-index="0"></button>
+                            <button class="carousel-dot" data-index="1"></button>
+                            <button class="carousel-dot" data-index="2"></button>
+                            <button class="carousel-dot" data-index="3"></button>
+                            <button class="carousel-dot" data-index="4"></button>
                         </div>
                     </div>
-                    <div class="card">
-                        <div class="badge special">50%</div>
-                        <div class="text">
-                            <h3>Packages</h3>
-                            <p class="price">Limited</p>
-                            <p class="desc">This season</p>
+                </div>
+
+                <div class="services-grid">
+                    <h3 class="section-title">Featured Services</h3>
+                    <div class="services">
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M24 4c-11.05 0-20 8.95-20 20s8.95 20 20 20 20-8.95 20-20-8.95-20-20-20zm0 32c-6.63 0-12-5.37-12-12s5.37-12 12-12 12 5.37 12 12-5.37 12-12 12z"/><circle cx="24" cy="24" r="4"/>
+                                </svg>
+                            </div>
+                            <h4>Hair Styling</h4>
+                            <p>Professional cuts & colors</p>
+                            <span class="service-price">From ₹500</span>
+                        </div>
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2">
+                                    <ellipse cx="24" cy="24" rx="16" ry="20"/><path d="M12 24h24M14 16h20M14 32h20"/>
+                                </svg>
+                            </div>
+                            <h4>Facial Care</h4>
+                            <p>Deep cleansing & treatment</p>
+                            <span class="service-price">From ₹800</span>
+                        </div>
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 20c0-4.42 3.58-8 8-8s8 3.58 8 8v8c0 4.42-3.58 8-8 8s-8-3.58-8-8v-8z"/><line x1="24" y1="12" x2="24" y2="4"/><line x1="24" y1="36" x2="24" y2="44"/>
+                                </svg>
+                            </div>
+                            <h4>Makeup</h4>
+                            <p>Bridal & special makeup</p>
+                            <span class="service-price">From ₹1200</span>
+                        </div>
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 16h24v16H12z"/><rect x="16" y="8" width="16" height="8" rx="2"/><path d="M20 32v4h8v-4"/>
+                                </svg>
+                            </div>
+                            <h4>Nail Art</h4>
+                            <p>Design & extension</p>
+                            <span class="service-price">From ₹400</span>
+                        </div>
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="24" cy="24" r="18"/><path d="M24 12v24M12 24h24"/>
+                                </svg>
+                            </div>
+                            <h4>Spa</h4>
+                            <p>Massage & wellness</p>
+                            <span class="service-price">From ₹1500</span>
+                        </div>
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M8 28c0 8.84 7.16 16 16 16s16-7.16 16-16"/><path d="M24 12v14l8-4"/>
+                                </svg>
+                            </div>
+                            <h4>Threading</h4>
+                            <p>Eyebrow shaping</p>
+                            <span class="service-price">From ₹200</span>
                         </div>
                     </div>
-                    <div class="card">
-                        <div class="badge student">STUDENT</div>
-                        <div class="text">
-                            <h3>Discount</h3>
-                            <p class="price">25% OFF</p>
-                            <p class="desc">With valid ID</p>
+                </div>
+
+                <div class="promo-section">
+                    <div class="promo-card">
+                        <div class="promo-badge">EXCLUSIVE</div>
+                        <h4>Summer Special</h4>
+                        <p>Get 30% off on all services this week</p>
+                        <button class="btn btn-primary">Book Now</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Services Tab -->
+            <section class="tab-content" data-tab="services">
+                <div class="services-detailed">
+                    <h2>All Services</h2>
+                    <div class="service-list">
+                        <div class="service-item">
+                            <div class="item-header">
+                                <h4>Hair Styling</h4>
+                                <span class="rating">★★★★★ 4.8</span>
+                            </div>
+                            <div class="item-details">
+                                <p>Expert hair cutting, coloring, and treatments</p>
+                                <div class="item-meta">
+                                    <span class="duration">45 min</span>
+                                    <span class="price">₹500-1200</span>
+                                </div>
+                            </div>
+                            <button class="btn btn-outline">Book Service</button>
+                        </div>
+
+                        <div class="service-item">
+                            <div class="item-header">
+                                <h4>Facial Treatment</h4>
+                                <span class="rating">★★★★★ 4.9</span>
+                            </div>
+                            <div class="item-details">
+                                <p>Deep cleansing, moisturizing & glowing facial</p>
+                                <div class="item-meta">
+                                    <span class="duration">60 min</span>
+                                    <span class="price">₹800-1500</span>
+                                </div>
+                            </div>
+                            <button class="btn btn-outline">Book Service</button>
+                        </div>
+
+                        <div class="service-item">
+                            <div class="item-header">
+                                <h4>Makeup Artistry</h4>
+                                <span class="rating">★★★★★ 4.9</span>
+                            </div>
+                            <div class="item-details">
+                                <p>Bridal, party & everyday makeup services</p>
+                                <div class="item-meta">
+                                    <span class="duration">90 min</span>
+                                    <span class="price">₹1200-3000</span>
+                                </div>
+                            </div>
+                            <button class="btn btn-outline">Book Service</button>
+                        </div>
+
+                        <div class="service-item">
+                            <div class="item-header">
+                                <h4>Nail Design</h4>
+                                <span class="rating">★★★★★ 4.8</span>
+                            </div>
+                            <div class="item-details">
+                                <p>Nail art, extensions & gel manicure</p>
+                                <div class="item-meta">
+                                    <span class="duration">45 min</span>
+                                    <span class="price">₹400-1000</span>
+                                </div>
+                            </div>
+                            <button class="btn btn-outline">Book Service</button>
+                        </div>
+
+                        <div class="service-item">
+                            <div class="item-header">
+                                <h4>Spa & Massage</h4>
+                                <span class="rating">★★★★★ 4.9</span>
+                            </div>
+                            <div class="item-details">
+                                <p>Relaxing massage & wellness therapy</p>
+                                <div class="item-meta">
+                                    <span class="duration">60 min</span>
+                                    <span class="price">₹1500-2500</span>
+                                </div>
+                            </div>
+                            <button class="btn btn-outline">Book Service</button>
+                        </div>
+
+                        <div class="service-item">
+                            <div class="item-header">
+                                <h4>Threading & Waxing</h4>
+                                <span class="rating">★★★★★ 4.7</span>
+                            </div>
+                            <div class="item-details">
+                                <p>Eyebrow shaping & body hair removal</p>
+                                <div class="item-meta">
+                                    <span class="duration">30 min</span>
+                                    <span class="price">₹200-600</span>
+                                </div>
+                            </div>
+                            <button class="btn btn-outline">Book Service</button>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <section class="section">
-                <h2>Services</h2>
-                <div class="services" id="services"></div>
-            </section>
+            <!-- Bookings Tab -->
+            <section class="tab-content" data-tab="bookings">
+                <div class="bookings-container">
+                    <h2>My Bookings</h2>
+                    
+                    <div class="booking-filters">
+                        <button class="filter-btn active" data-filter="upcoming">Upcoming</button>
+                        <button class="filter-btn" data-filter="completed">Completed</button>
+                        <button class="filter-btn" data-filter="cancelled">Cancelled</button>
+                    </div>
 
-            <section class="section">
-                <h2>Gallery</h2>
-                <div class="gallery">
-                    <img src="attached_assets/stock_images/beautiful_woman_gett_9dc7243a.jpg" alt="Facial">
-                    <img src="attached_assets/stock_images/gallery_eye_makeup.webp" alt="Makeup">
-                    <img src="attached_assets/stock_images/luxury_beauty_salon__046b2a84.jpg" alt="Hair">
-                    <img src="attached_assets/stock_images/gallery_hair_styling.webp" alt="Styling">
+                    <div class="booking-list" id="booking-list">
+                        <div class="booking-card" data-status="upcoming">
+                            <div class="booking-header">
+                                <h4>Hair Styling</h4>
+                                <span class="status-badge upcoming">Confirmed</span>
+                            </div>
+                            <div class="booking-info">
+                                <div class="info-row">
+                                    <span class="label">Date</span>
+                                    <span class="value">Dec 1, 2024</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="label">Time</span>
+                                    <span class="value">2:00 PM - 2:45 PM</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="label">Stylist</span>
+                                    <span class="value">Sarah Johnson</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="label">Price</span>
+                                    <span class="value price">₹850</span>
+                                </div>
+                            </div>
+                            <div class="booking-actions">
+                                <button class="btn btn-sm btn-outline">Reschedule</button>
+                                <button class="btn btn-sm btn-danger">Cancel</button>
+                            </div>
+                        </div>
+
+                        <div class="booking-card" data-status="upcoming">
+                            <div class="booking-header">
+                                <h4>Facial Treatment</h4>
+                                <span class="status-badge upcoming">Confirmed</span>
+                            </div>
+                            <div class="booking-info">
+                                <div class="info-row">
+                                    <span class="label">Date</span>
+                                    <span class="value">Dec 3, 2024</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="label">Time</span>
+                                    <span class="value">4:00 PM - 5:00 PM</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="label">Specialist</span>
+                                    <span class="value">Emma Wilson</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="label">Price</span>
+                                    <span class="value price">₹1200</span>
+                                </div>
+                            </div>
+                            <div class="booking-actions">
+                                <button class="btn btn-sm btn-outline">Reschedule</button>
+                                <button class="btn btn-sm btn-danger">Cancel</button>
+                            </div>
+                        </div>
+
+                        <div class="booking-card" data-status="completed">
+                            <div class="booking-header">
+                                <h4>Nail Art</h4>
+                                <span class="status-badge completed">Completed</span>
+                            </div>
+                            <div class="booking-info">
+                                <div class="info-row">
+                                    <span class="label">Date</span>
+                                    <span class="value">Nov 20, 2024</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="label">Duration</span>
+                                    <span class="value">45 minutes</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="label">Amount Paid</span>
+                                    <span class="value price">₹550</span>
+                                </div>
+                            </div>
+                            <div class="booking-actions">
+                                <button class="btn btn-sm btn-primary">Book Again</button>
+                                <button class="btn btn-sm btn-outline">Review</button>
+                            </div>
+                        </div>
+
+                        <div class="booking-card" data-status="completed">
+                            <div class="booking-header">
+                                <h4>Makeup Artistry</h4>
+                                <span class="status-badge completed">Completed</span>
+                            </div>
+                            <div class="booking-info">
+                                <div class="info-row">
+                                    <span class="label">Date</span>
+                                    <span class="value">Nov 15, 2024</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="label">Duration</span>
+                                    <span class="value">90 minutes</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="label">Amount Paid</span>
+                                    <span class="value price">₹1800</span>
+                                </div>
+                            </div>
+                            <div class="booking-actions">
+                                <button class="btn btn-sm btn-primary">Book Again</button>
+                                <button class="btn btn-sm btn-outline">Review</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="empty-state" id="empty-bookings" style="display: none;">
+                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.5">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+                        </svg>
+                        <p>No bookings found</p>
+                    </div>
                 </div>
             </section>
-        </div>
 
-        <!-- Notifications -->
-        <div class="page" data-page="notifications">
-            <div class="page-header">
-                <h1>Notifications</h1>
-            </div>
-            <div id="notifications"></div>
-        </div>
+            <!-- Profile Tab -->
+            <section class="tab-content" data-tab="profile">
+                <div class="profile-container">
+                    <div class="profile-header">
+                        <div class="avatar">
+                            <svg width="80" height="80" viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="40" cy="40" r="38"/><circle cx="40" cy="28" r="12"/><path d="M22 60c0-10 10-14 18-14s18 4 18 14"/>
+                            </svg>
+                        </div>
+                        <div class="profile-info">
+                            <h2>Jessica Anderson</h2>
+                            <p class="member-since">Member since November 2023</p>
+                            <div class="loyalty-badge">
+                                <span class="badge-label">Loyalty Member</span>
+                                <span class="badge-value">Gold</span>
+                            </div>
+                        </div>
+                    </div>
 
-        <!-- Bookings -->
-        <div class="page" data-page="bookings">
-            <div class="page-header">
-                <h1>My Bookings</h1>
-            </div>
-            <div class="tabs">
-                <button class="tab active" onclick="filterBookings('upcoming')">Upcoming</button>
-                <button class="tab" onclick="filterBookings('completed')">Completed</button>
-                <button class="tab" onclick="filterBookings('cancelled')">Cancelled</button>
-            </div>
-            <div id="bookings"></div>
-        </div>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+                                </svg>
+                            </div>
+                            <div class="stat-content">
+                                <p class="stat-label">Total Bookings</p>
+                                <p class="stat-value">24</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/><path d="M12 1a11 11 0 1 0 0 22 11 11 0 0 0 0-22z"/>
+                                </svg>
+                            </div>
+                            <div class="stat-content">
+                                <p class="stat-label">Total Hours</p>
+                                <p class="stat-value">48.5</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                                </svg>
+                            </div>
+                            <div class="stat-content">
+                                <p class="stat-label">Total Spent</p>
+                                <p class="stat-value">₹18,500</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M12 6v6l5 3"/>
+                                </svg>
+                            </div>
+                            <div class="stat-content">
+                                <p class="stat-label">Loyalty Points</p>
+                                <p class="stat-value">2,450</p>
+                            </div>
+                        </div>
+                    </div>
 
-        <!-- Account -->
-        <div class="page" data-page="account">
-            <div class="page-header">
-                <h1>Account</h1>
-            </div>
-            <div class="profile">
-                <div class="avatar">👤</div>
-                <h2 id="userName">Guest</h2>
-                <p id="userEmail">Not logged in</p>
-                <button id="authBtn" class="btn-primary" onclick="showAuthModal()">Login</button>
-                <button id="logoutBtn" class="btn-danger hidden" onclick="logout()">Logout</button>
-            </div>
-            <div class="stats">
-                <div class="stat">
-                    <div class="value">12</div>
-                    <div class="label">Bookings</div>
+                    <div class="profile-sections">
+                        <div class="profile-section">
+                            <h3>Contact Information</h3>
+                            <div class="info-row">
+                                <span class="label">Phone</span>
+                                <span class="value">+91 98765 43210</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="label">Email</span>
+                                <span class="value">jessica@example.com</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="label">Location</span>
+                                <span class="value">New Delhi, India</span>
+                            </div>
+                        </div>
+
+                        <div class="profile-section">
+                            <h3>Preferences</h3>
+                            <div class="preference-item">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" checked>
+                                    <span>Email Notifications</span>
+                                </label>
+                            </div>
+                            <div class="preference-item">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" checked>
+                                    <span>SMS Reminders</span>
+                                </label>
+                            </div>
+                            <div class="preference-item">
+                                <label class="checkbox-label">
+                                    <input type="checkbox">
+                                    <span>Promotional Offers</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="profile-section">
+                            <h3>Account</h3>
+                            <button class="btn btn-outline" id="edit-profile-btn">Edit Profile</button>
+                            <button class="btn btn-outline">Change Password</button>
+                            <button class="btn btn-danger">Logout</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="stat">
-                    <div class="value">850</div>
-                    <div class="label">Points</div>
-                </div>
-                <div class="stat">
-                    <div class="value">₹8.5K</div>
-                    <div class="label">Spent</div>
+            </section>
+        </main>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <button class="nav-item active" data-tab="home" aria-label="Home">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+                <span>Home</span>
+            </button>
+            <button class="nav-item" data-tab="services" aria-label="Services">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M6 9c0-1 1-2 2-2h8c1 0 2 1 2 2v8c0 1-1 2-2 2H8c-1 0-2-1-2-2V9z"/><path d="M9 5h6M9 19h6"/>
+                </svg>
+                <span>Services</span>
+            </button>
+            <button class="nav-item" data-tab="bookings" aria-label="Bookings">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+                </svg>
+                <span>Bookings</span>
+            </button>
+            <button class="nav-item" data-tab="profile" aria-label="Profile">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="8" r="4"/><path d="M6 20c0-3.5 2.5-6 6-6s6 2.5 6 6"/>
+                </svg>
+                <span>Profile</span>
+            </button>
+        </nav>
+
+        <!-- Auth Modal -->
+        <div class="modal" id="auth-modal">
+            <div class="modal-content">
+                <button class="modal-close">&times;</button>
+                <div class="auth-container">
+                    <h2>Welcome to Beauty Family</h2>
+                    <p>Sign in to your account</p>
+                    
+                    <form class="login-form" id="login-form">
+                        <div class="form-group">
+                            <input type="email" placeholder="Email Address" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" placeholder="Password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                    </form>
+
+                    <div class="divider">Or continue with</div>
+
+                    <div class="social-login">
+                        <button class="social-btn google">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12.545,10.239v3.821h5.445c-0.712,2.315-2.647,3.972-5.445,3.972c-3.332,0-6.033-2.701-6.033-6.032 s2.701-6.032,6.033-6.032c1.498,0,2.866,0.549,3.921,1.453l2.814-2.814C17.461,2.268,15.365,1.456,12.545,1.456 c-6.063,0-11,4.938-11,11s4.937,11,11,11c6.064,0,11-4.938,11-11c0-0.564-0.053-1.121-0.148-1.667h-10.852V10.239z"/>
+                            </svg>
+                            Google
+                        </button>
+                        <button class="social-btn whatsapp">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.272-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-4.782 1.176l-.335-.214-3.479-.531.539 3.419.231.36a9.9 9.9 0 00-1.51 4.823 9.996 9.996 0 0016.459-8.651 9.998 9.998 0 00-6.983-8.022zm0-2.453C6.556 2.243 0 8.799 0 16.649 0 24.499 6.556 31 14.051 31 21.546 31 28.102 24.499 28.102 16.649S21.546 2.243 14.051 2.243"/>
+                            </svg>
+                            WhatsApp
+                        </button>
+                    </div>
+
+                    <p class="auth-toggle">Don't have an account? <a href="#" id="toggle-signup">Sign Up</a></p>
                 </div>
             </div>
         </div>
-    </main>
 
-    <!-- Bottom Nav -->
-    <nav class="nav">
-        <button class="nav-btn active" data-page="home" onclick="switchPage('home')">
-            <span class="icon">🏠</span>
-            <span>Home</span>
-        </button>
-        <button class="nav-btn" data-page="notifications" onclick="switchPage('notifications')">
-            <span class="icon">🔔</span>
-            <span>Alerts</span>
-        </button>
-        <button class="nav-btn" data-page="bookings" onclick="switchPage('bookings')">
-            <span class="icon">📅</span>
-            <span>Bookings</span>
-        </button>
-        <button class="nav-btn" data-page="account" onclick="switchPage('account')">
-            <span class="icon">👤</span>
-            <span>Account</span>
-        </button>
-    </nav>
-
-    <!-- Auth Modal -->
-    <div id="authModal" class="modal hidden" onclick="closeAuthModal(event)">
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <button class="close" onclick="closeAuthModal()">✕</button>
-            <div id="authContent"></div>
+        <!-- Booking Modal -->
+        <div class="modal" id="booking-modal">
+            <div class="modal-content modal-lg">
+                <button class="modal-close">&times;</button>
+                <div class="booking-form-container">
+                    <h2>Book a Service</h2>
+                    <form class="booking-form" id="booking-form">
+                        <div class="form-group">
+                            <label>Select Service</label>
+                            <select required>
+                                <option>Hair Styling</option>
+                                <option>Facial Treatment</option>
+                                <option>Makeup Artistry</option>
+                                <option>Nail Design</option>
+                                <option>Spa & Massage</option>
+                                <option>Threading & Waxing</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Date</label>
+                            <input type="date" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Time</label>
+                            <input type="time" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Notes (Optional)</label>
+                            <textarea rows="3" placeholder="Any special requests?"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Confirm Booking</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 
-    <script src="firebase-config.js"></script>
     <script src="app.js"></script>
-    <script src="auth.js"></script>
 </body>
 </html>

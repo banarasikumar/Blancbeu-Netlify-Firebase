@@ -1,16 +1,25 @@
 {
-  "name": "workspace",
+  "name": "beauty-family-salon",
   "version": "1.0.0",
-  "main": "sw.js",
+  "description": "Premium beauty salon booking app - futuristic design, premium features, fully functional",
+  "private": true,
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "http-server -p 5000 -c-1",
+    "build": "echo 'No build required - static site'",
+    "deploy": "echo 'Ready for Netlify deployment'"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
-  "dependencies": {
-    "http-server": "^14.1.1",
-    "sharp": "^0.34.5"
+  "keywords": [
+    "beauty",
+    "salon",
+    "booking",
+    "pwa",
+    "mobile-app",
+    "premium"
+  ],
+  "author": "Beauty Family Team",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1"
   }
 }

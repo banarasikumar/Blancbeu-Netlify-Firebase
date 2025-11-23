@@ -961,6 +961,19 @@ body.light-mode .category-header {
     margin-top: 60px;
     text-align: center;
     padding: 40px 20px;
+    width: 100%;
+    position: relative;
+    z-index: 100;
+}
+
+.hero .contact-title {
+    display: block !important;
+    visibility: visible !important;
+}
+
+.hero .contact-btn {
+    display: flex !important;
+    visibility: visible !important;
 }
 
 .carousel {
@@ -1039,10 +1052,13 @@ body.light-mode .category-header {
     opacity: 0;
     transition: opacity 0.8s ease-in-out;
     pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .carousel-slide.active {
-    opacity: 1;
+    opacity: 1 !important;
     pointer-events: auto;
 }
 
@@ -1051,6 +1067,7 @@ body.light-mode .category-header {
     height: 100%;
     object-fit: cover;
     background: var(--bg-primary);
+    display: block;
 }
 
 .carousel-overlay {

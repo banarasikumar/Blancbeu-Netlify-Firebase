@@ -1181,44 +1181,26 @@ function goToPage(pageName) {
   // Hide all pages
   document.querySelectorAll('.page-view').forEach(page => {
     page.style.display = 'none';
-    page.style.visibility = 'hidden';
   });
   
   // Show selected page
   const targetPage = document.getElementById(pageName);
   if (targetPage) {
     targetPage.style.display = 'block';
-    targetPage.style.visibility = 'visible';
-    targetPage.style.width = '100%';
-    targetPage.style.overflow = 'visible';
-    targetPage.style.height = 'auto';
-    targetPage.style.maxHeight = 'none';
     window.scrollTo(0, 0);
     console.log(`✅ Navigated to ${pageName} page`);
   }
   
-  // Manage CTA and footer visibility
+  // Manage CTA and footer - ONLY on home page, hide elsewhere
   const ctaSection = document.getElementById('cta-section');
   const footer = document.getElementById('footer');
   
   if (pageName === 'home') {
-    if (ctaSection) {
-      ctaSection.style.display = 'block';
-      ctaSection.style.visibility = 'visible';
-    }
-    if (footer) {
-      footer.style.display = 'block';
-      footer.style.visibility = 'visible';
-    }
+    if (ctaSection) ctaSection.style.display = 'block';
+    if (footer) footer.style.display = 'block';
   } else {
-    if (ctaSection) {
-      ctaSection.style.display = 'none';
-      ctaSection.style.visibility = 'hidden';
-    }
-    if (footer) {
-      footer.style.display = 'none';
-      footer.style.visibility = 'hidden';
-    }
+    if (ctaSection) ctaSection.style.display = 'none';
+    if (footer) footer.style.display = 'none';
   }
 }
 

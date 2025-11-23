@@ -3,341 +3,181 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Blancbeu - Premium Beauty Salon</title>
+    <title>Blancbeu - Beauty Salon</title>
     
     <link rel="manifest" href="/manifest.json">
     <meta name="theme-color" content="#000000">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Blancbeu">
     
     <script>
       (function() {
-        try {
-          const savedTheme = localStorage.getItem('theme');
-          const currentHour = new Date().getHours();
-          let shouldBeLightMode = false;
-          
-          if (savedTheme) {
-            shouldBeLightMode = savedTheme === 'light';
-          } else {
-            shouldBeLightMode = currentHour >= 6 && currentHour < 17;
-          }
-          
-          if (shouldBeLightMode) {
-            document.documentElement.setAttribute('data-theme', 'light');
-            document.body.classList.add('light-mode');
-          }
-        } catch(e) {}
+        const saved = localStorage.getItem('theme') || (new Date().getHours() >= 6 && new Date().getHours() < 18 ? 'light' : 'dark');
+        document.documentElement.setAttribute('data-theme', saved);
       })();
     </script>
     
-    <link rel="stylesheet" href="theme-variables.css">
-    <link rel="stylesheet" href="premium-design-system.css">
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="ios-style.css">
-    <link rel="stylesheet" href="redesign.css">
 </head>
 <body>
     <!-- Header -->
     <header class="header">
-        <div class="header-content">
-            <div class="logo">
-                <img src="assets/brand_icon_optimized.webp" alt="Blancbeu" class="logo-img">
-                <div class="logo-text">
-                    <div class="logo-name">BLANCBEU</div>
-                    <div class="logo-tag">Beauty Salon</div>
-                </div>
-            </div>
-            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-                <span class="icon">🌙</span>
-            </button>
+        <img src="assets/brand_icon_optimized.webp" alt="Logo" class="logo">
+        <div class="header-text">
+            <h1>BLANCBEU</h1>
+            <p>Beauty Salon</p>
         </div>
+        <button id="themeBtn" class="theme-btn">🌙</button>
     </header>
 
     <!-- Main Content -->
-    <main class="main-content">
-        <!-- HOME TAB -->
-        <div class="tab-page active" data-page="home">
-            <!-- Hero Carousel -->
-            <section class="hero-section">
-                <div class="carousel">
-                    <div class="carousel-track" id="carouselTrack">
-                        <div class="carousel-slide active">
-                            <img src="assets/banner_carousel_images/1.webp" alt="Premium Salon">
-                        </div>
-                        <div class="carousel-slide">
-                            <img src="assets/banner_carousel_images/2.webp" alt="Beauty Services">
-                        </div>
-                        <div class="carousel-slide">
-                            <img src="assets/banner_carousel_images/3.webp" alt="Professional Team">
-                        </div>
-                        <div class="carousel-slide">
-                            <img src="assets/banner_carousel_images/4.webp" alt="Luxury Experience">
-                        </div>
-                        <div class="carousel-slide">
-                            <img src="assets/banner_carousel_images/5.webp" alt="Excellence">
-                        </div>
-                    </div>
-                    <div class="carousel-controls">
-                        <button class="carousel-btn prev" onclick="moveCarousel(-1)">◀</button>
-                        <button class="carousel-btn next" onclick="moveCarousel(1)">▶</button>
-                    </div>
-                    <div class="carousel-dots" id="carouselDots"></div>
+    <main class="main">
+        <!-- Home -->
+        <div class="page active" data-page="home">
+            <div class="carousel">
+                <div class="carousel-track" id="track">
+                    <img src="assets/banner_carousel_images/1.webp" alt="Salon 1">
+                    <img src="assets/banner_carousel_images/2.webp" alt="Salon 2">
+                    <img src="assets/banner_carousel_images/3.webp" alt="Salon 3">
+                    <img src="assets/banner_carousel_images/4.webp" alt="Salon 4">
+                    <img src="assets/banner_carousel_images/5.webp" alt="Salon 5">
                 </div>
-            </section>
+                <div class="carousel-dots" id="dots"></div>
+            </div>
 
-            <!-- Quick Actions -->
-            <section class="quick-actions">
-                <a href="tel:+919229915277" class="action-card call">
-                    <div class="action-icon">📞</div>
-                    <div class="action-text">Call</div>
-                </a>
-                <a href="https://wa.me/919229915277" target="_blank" class="action-card whatsapp">
-                    <div class="action-icon">💬</div>
-                    <div class="action-text">WhatsApp</div>
-                </a>
-                <a href="https://maps.app.goo.gl/8eYa96AHu2VT8Qpq7" target="_blank" class="action-card location">
-                    <div class="action-icon">📍</div>
-                    <div class="action-text">Location</div>
-                </a>
-                <button onclick="switchTab('bookings')" class="action-card book">
-                    <div class="action-icon">📅</div>
-                    <div class="action-text">Book</div>
-                </button>
-            </section>
+            <div class="quick-links">
+                <a href="tel:+919229915277" class="link-btn">📞 Call</a>
+                <a href="https://wa.me/919229915277" target="_blank" class="link-btn">💬 WhatsApp</a>
+                <a href="https://maps.app.goo.gl/8eYa96AHu2VT8Qpq7" target="_blank" class="link-btn">📍 Location</a>
+                <button class="link-btn" onclick="switchPage('bookings')">📅 Book</button>
+            </div>
 
-            <!-- Offers Section -->
-            <section class="content-section">
-                <div class="section-header">
-                    <h2>Special Offers</h2>
-                    <p>Limited time deals</p>
-                </div>
-                <div class="offers-container">
-                    <div class="offer-item">
-                        <div class="offer-badge hot">HOT</div>
-                        <div class="offer-content">
-                            <div class="offer-title">Haircuts</div>
-                            <div class="offer-price">₹99</div>
-                            <div class="offer-desc">All styles</div>
+            <section class="section">
+                <h2>Special Offers</h2>
+                <div class="cards">
+                    <div class="card">
+                        <div class="badge hot">HOT</div>
+                        <div class="text">
+                            <h3>Haircuts</h3>
+                            <p class="price">₹99</p>
+                            <p class="desc">All styles</p>
                         </div>
                     </div>
-                    <div class="offer-item">
-                        <div class="offer-badge special">50% OFF</div>
-                        <div class="offer-content">
-                            <div class="offer-title">Packages</div>
-                            <div class="offer-price">Limited</div>
-                            <div class="offer-desc">This season</div>
+                    <div class="card">
+                        <div class="badge special">50%</div>
+                        <div class="text">
+                            <h3>Packages</h3>
+                            <p class="price">Limited</p>
+                            <p class="desc">This season</p>
                         </div>
                     </div>
-                    <div class="offer-item">
-                        <div class="offer-badge student">STUDENT</div>
-                        <div class="offer-content">
-                            <div class="offer-title">Discount</div>
-                            <div class="offer-price">25% OFF</div>
-                            <div class="offer-desc">With valid ID</div>
+                    <div class="card">
+                        <div class="badge student">STUDENT</div>
+                        <div class="text">
+                            <h3>Discount</h3>
+                            <p class="price">25% OFF</p>
+                            <p class="desc">With valid ID</p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Services Section -->
-            <section class="content-section">
-                <div class="section-header">
-                    <h2>Our Services</h2>
-                    <p>Premium treatments</p>
-                </div>
-                <div class="services-grid" id="servicesContainer"></div>
+            <section class="section">
+                <h2>Services</h2>
+                <div class="services" id="services"></div>
             </section>
 
-            <!-- Gallery Section -->
-            <section class="content-section">
-                <div class="section-header">
-                    <h2>Gallery</h2>
-                    <p>See our work</p>
-                </div>
-                <div class="gallery-grid">
-                    <div class="gallery-item">
-                        <img src="attached_assets/stock_images/beautiful_woman_gett_9dc7243a.jpg" alt="Facial">
-                        <div class="gallery-label">Facials</div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="attached_assets/stock_images/gallery_eye_makeup.webp" alt="Makeup">
-                        <div class="gallery-label">Makeup</div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="attached_assets/stock_images/luxury_beauty_salon__046b2a84.jpg" alt="Hair">
-                        <div class="gallery-label">Hair</div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="attached_assets/stock_images/gallery_hair_styling.webp" alt="Styling">
-                        <div class="gallery-label">Styling</div>
-                    </div>
+            <section class="section">
+                <h2>Gallery</h2>
+                <div class="gallery">
+                    <img src="attached_assets/stock_images/beautiful_woman_gett_9dc7243a.jpg" alt="Facial">
+                    <img src="attached_assets/stock_images/gallery_eye_makeup.webp" alt="Makeup">
+                    <img src="attached_assets/stock_images/luxury_beauty_salon__046b2a84.jpg" alt="Hair">
+                    <img src="attached_assets/stock_images/gallery_hair_styling.webp" alt="Styling">
                 </div>
             </section>
         </div>
 
-        <!-- NOTIFICATIONS TAB -->
-        <div class="tab-page" data-page="notifications">
+        <!-- Notifications -->
+        <div class="page" data-page="notifications">
             <div class="page-header">
                 <h1>Notifications</h1>
             </div>
-            <div class="notifications-list" id="notificationsList">
-                <div class="notification-card">
-                    <div class="notif-icon">🎉</div>
-                    <div class="notif-body">
-                        <h3>Special Offer</h3>
-                        <p>Haircuts @₹99! Book now</p>
-                        <span class="notif-time">2h ago</span>
-                    </div>
-                    <button class="notif-btn" onclick="switchTab('bookings')">→</button>
-                </div>
-                <div class="notification-card">
-                    <div class="notif-icon">💝</div>
-                    <div class="notif-body">
-                        <h3>Rewards</h3>
-                        <p>50 points earned</p>
-                        <span class="notif-time">1d ago</span>
-                    </div>
-                    <button class="notif-btn">→</button>
-                </div>
-                <div class="notification-card">
-                    <div class="notif-icon">⭐</div>
-                    <div class="notif-body">
-                        <h3>Review</h3>
-                        <p>Rate your visit</p>
-                        <span class="notif-time">3d ago</span>
-                    </div>
-                    <button class="notif-btn">→</button>
-                </div>
-                <div class="notification-card">
-                    <div class="notif-icon">🎁</div>
-                    <div class="notif-body">
-                        <h3>Festive Special</h3>
-                        <p>50% off beauty packages</p>
-                        <span class="notif-time">5d ago</span>
-                    </div>
-                    <button class="notif-btn">→</button>
-                </div>
-            </div>
+            <div id="notifications"></div>
         </div>
 
-        <!-- MY BOOKINGS TAB -->
-        <div class="tab-page" data-page="bookings">
+        <!-- Bookings -->
+        <div class="page" data-page="bookings">
             <div class="page-header">
                 <h1>My Bookings</h1>
             </div>
-            <div class="booking-tabs">
-                <button class="booking-tab active" onclick="filterBookings('upcoming')">Upcoming</button>
-                <button class="booking-tab" onclick="filterBookings('completed')">Completed</button>
-                <button class="booking-tab" onclick="filterBookings('cancelled')">Cancelled</button>
+            <div class="tabs">
+                <button class="tab active" onclick="filterBookings('upcoming')">Upcoming</button>
+                <button class="tab" onclick="filterBookings('completed')">Completed</button>
+                <button class="tab" onclick="filterBookings('cancelled')">Cancelled</button>
             </div>
-            <div class="bookings-list" id="bookingsList">
-                <div class="booking-item">
-                    <div class="booking-date">
-                        <div class="date-day">28</div>
-                        <div class="date-month">Nov</div>
-                    </div>
-                    <div class="booking-info">
-                        <h3>Haircut + Styling</h3>
-                        <p class="booking-time">2:30 PM - 3:30 PM</p>
-                        <p class="booking-service">Premium Haircut</p>
-                        <p class="booking-price">₹599</p>
-                    </div>
-                </div>
-                <div class="booking-item">
-                    <div class="booking-date">
-                        <div class="date-day">02</div>
-                        <div class="date-month">Dec</div>
-                    </div>
-                    <div class="booking-info">
-                        <h3>Facial Treatment</h3>
-                        <p class="booking-time">11:00 AM - 12:00 PM</p>
-                        <p class="booking-service">Gold Facial</p>
-                        <p class="booking-price">₹2,999</p>
-                    </div>
-                </div>
-            </div>
+            <div id="bookings"></div>
         </div>
 
-        <!-- ACCOUNT TAB -->
-        <div class="tab-page" data-page="account">
+        <!-- Account -->
+        <div class="page" data-page="account">
             <div class="page-header">
                 <h1>Account</h1>
             </div>
-            <div class="profile-section">
-                <div class="profile-avatar">👤</div>
-                <h2 id="userDisplayName">Guest User</h2>
+            <div class="profile">
+                <div class="avatar">👤</div>
+                <h2 id="userName">Guest</h2>
                 <p id="userEmail">Not logged in</p>
-                <button class="btn-primary" onclick="showAuthModal()" id="loginBtn">Login / Sign Up</button>
-                <button class="btn-secondary hidden" id="logoutBtn" onclick="logout()">Logout</button>
+                <button id="authBtn" class="btn-primary" onclick="showAuthModal()">Login</button>
+                <button id="logoutBtn" class="btn-danger hidden" onclick="logout()">Logout</button>
             </div>
-
-            <div class="stats-section">
+            <div class="stats">
                 <div class="stat">
-                    <div class="stat-value">12</div>
-                    <div class="stat-label">Bookings</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-value">850</div>
-                    <div class="stat-label">Points</div>
+                    <div class="value">12</div>
+                    <div class="label">Bookings</div>
                 </div>
                 <div class="stat">
-                    <div class="stat-value">₹8.5K</div>
-                    <div class="stat-label">Spent</div>
+                    <div class="value">850</div>
+                    <div class="label">Points</div>
                 </div>
-            </div>
-
-            <div class="settings-section">
-                <div class="setting-item">
-                    <span>Notifications</span>
-                    <input type="checkbox" checked>
-                </div>
-                <div class="setting-item">
-                    <span>Reminders</span>
-                    <input type="checkbox" checked>
-                </div>
-                <div class="setting-item">
-                    <span>Offers</span>
-                    <input type="checkbox" checked>
+                <div class="stat">
+                    <div class="value">₹8.5K</div>
+                    <div class="label">Spent</div>
                 </div>
             </div>
         </div>
     </main>
 
-    <!-- Bottom Navigation -->
-    <nav class="bottom-nav">
-        <button class="nav-item active" data-page="home" onclick="switchTab('home')">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+    <!-- Bottom Nav -->
+    <nav class="nav">
+        <button class="nav-btn active" data-page="home" onclick="switchPage('home')">
+            <span class="icon">🏠</span>
             <span>Home</span>
         </button>
-        <button class="nav-item" data-page="notifications" onclick="switchTab('notifications')">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V2c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 3.36 6 5.92 6 9v5l-2 2v1h16v-1l-2-2z"/></svg>
+        <button class="nav-btn" data-page="notifications" onclick="switchPage('notifications')">
+            <span class="icon">🔔</span>
             <span>Alerts</span>
         </button>
-        <button class="nav-item" data-page="bookings" onclick="switchTab('bookings')">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/></svg>
+        <button class="nav-btn" data-page="bookings" onclick="switchPage('bookings')">
+            <span class="icon">📅</span>
             <span>Bookings</span>
         </button>
-        <button class="nav-item" data-page="account" onclick="switchTab('account')">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+        <button class="nav-btn" data-page="account" onclick="switchPage('account')">
+            <span class="icon">👤</span>
             <span>Account</span>
         </button>
     </nav>
 
     <!-- Auth Modal -->
-    <div class="modal-overlay" id="authModalOverlay" onclick="closeAuthModal()">
+    <div id="authModal" class="modal hidden" onclick="closeAuthModal(event)">
         <div class="modal-content" onclick="event.stopPropagation()">
-            <button class="modal-close" onclick="closeAuthModal()">✕</button>
-            <div class="modal-body" id="authModalBody">
-                <!-- Auth content loaded dynamically -->
-            </div>
+            <button class="close" onclick="closeAuthModal()">✕</button>
+            <div id="authContent"></div>
         </div>
     </div>
 
     <script src="firebase-config.js"></script>
-    <script src="script.js"></script>
+    <script src="app.js"></script>
     <script src="auth.js"></script>
-    <script src="ios-interactions.js"></script>
 </body>
 </html>

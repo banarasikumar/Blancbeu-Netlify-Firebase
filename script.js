@@ -300,75 +300,20 @@ window.openBooking = openBooking;
 window.showTC = showTC;
 window.closeTC = closeTC;
 
-// ==================== AUTHENTICATION UI ====================
+// ==================== AUTHENTICATION - MANAGED BY auth.js ====================
+// All authentication is now handled by auth.js module
+// This file exports functions for backward compatibility and tab navigation
 
-function openAuthModal() {
-  const modal = document.getElementById('authModal');
-  if (modal) {
-    modal.classList.add('active');
-    document.getElementById('authForm').innerHTML = `
-      <input type="email" id="authEmail" placeholder="Email address" required>
-      <input type="password" id="authPassword" placeholder="Password" required>
-      <div class="auth-form-buttons">
-        <button class="auth-btn auth-btn-primary" onclick="handleAuthAction()">Login</button>
-        <button class="auth-btn auth-btn-secondary" onclick="toggleAuthMode()">Sign Up</button>
-      </div>
-    `;
-    document.getElementById('authModalHeader').textContent = '🔐 Login';
-  }
-}
+// Export auth functions from auth.js to window for onclick handlers
+window.showAuthModal = typeof showAuthModal !== 'undefined' ? showAuthModal : function() { console.log('Auth module not loaded'); };
+window.closeAuthModal = typeof closeAuthModal !== 'undefined' ? closeAuthModal : function() { console.log('Auth module not loaded'); };
+window.setAuthMode = typeof setAuthMode !== 'undefined' ? setAuthMode : function(mode) { console.log('Auth module not loaded'); };
+window.sendPhoneOTP = typeof sendPhoneOTP !== 'undefined' ? sendPhoneOTP : function() { console.log('Auth module not loaded'); };
+window.verifyPhoneOTP = typeof verifyPhoneOTP !== 'undefined' ? verifyPhoneOTP : function() { console.log('Auth module not loaded'); };
+window.loginWithGoogle = typeof loginWithGoogle !== 'undefined' ? loginWithGoogle : function() { console.log('Auth module not loaded'); };
+window.sendWhatsAppLoginCode = typeof sendWhatsAppLoginCode !== 'undefined' ? sendWhatsAppLoginCode : function() { console.log('Auth module not loaded'); };
+window.verifyWhatsAppCode = typeof verifyWhatsAppCode !== 'undefined' ? verifyWhatsAppCode : function() { console.log('Auth module not loaded'); };
+window.logoutUser = typeof logoutUser !== 'undefined' ? logoutUser : function() { console.log('Auth module not loaded'); };
 
-function closeAuthModal() {
-  const modal = document.getElementById('authModal');
-  if (modal) modal.classList.remove('active');
-}
-
-function toggleAuthMode() {
-  const header = document.getElementById('authModalHeader');
-  const form = document.getElementById('authForm');
-  
-  if (header.textContent.includes('Login')) {
-    header.textContent = '✨ Sign Up';
-    form.innerHTML = `
-      <input type="text" id="authName" placeholder="Full name" required>
-      <input type="email" id="authEmail" placeholder="Email address" required>
-      <input type="tel" id="authPhone" placeholder="Phone number" required>
-      <input type="password" id="authPassword" placeholder="Password" required>
-      <div class="auth-form-buttons">
-        <button class="auth-btn auth-btn-primary" onclick="handleAuthAction()">Sign Up</button>
-        <button class="auth-btn auth-btn-secondary" onclick="toggleAuthMode()">Back to Login</button>
-      </div>
-    `;
-  } else {
-    openAuthModal();
-  }
-}
-
-function handleAuthAction() {
-  const email = document.getElementById('authEmail')?.value;
-  const password = document.getElementById('authPassword')?.value;
-  
-  if (!email || !password) {
-    alert('Please fill in all fields');
-    return;
-  }
-  
-  localStorage.setItem('blancbeuUser', JSON.stringify({
-    email,
-    name: document.getElementById('authName')?.value || email.split('@')[0],
-    phone: document.getElementById('authPhone')?.value || '+91 98765 43210',
-    avatar: '👩‍🦰'
-  }));
-  
-  closeAuthModal();
-  renderAccount();
-  alert('✅ Welcome to Blancbeu!');
-}
-
-// Auto-load saved user
-if (localStorage.getItem('blancbeuUser')) {
-  const user = JSON.parse(localStorage.getItem('blancbeuUser'));
-  document.querySelector('.profile-info h2').textContent = `Welcome, ${user.name}! 💄`;
-  document.querySelector('.profile-email').textContent = user.email;
-  document.querySelector('.profile-phone').textContent = user.phone;
-}
+// NOTE: openAuthModal(), closeAuthModal(), toggleAuthMode(), handleAuthAction() 
+// are now obsolete - use auth.js functions instead

@@ -411,29 +411,29 @@ if (!fullscreenEnabled()) {
 function renderApp(state) {
         const pauseBtnIcon = `#icon-${state.paused ? 'play' : 'pause'}`;
         const soundBtnIcon = `#icon-sound-${soundEnabledSelector() ? 'on' : 'off'}`;
-        appNodes.pauseBtnSVG.setAttribute('href', pauseBtnIcon);
-        appNodes.pauseBtnSVG.setAttribute('xlink:href', pauseBtnIcon);
-        appNodes.soundBtnSVG.setAttribute('href', soundBtnIcon);
-        appNodes.soundBtnSVG.setAttribute('xlink:href', soundBtnIcon);
-        appNodes.controls.classList.toggle('hide', state.menuOpen || state.config.hideControls);
-        appNodes.canvasContainer.classList.toggle('blur', state.menuOpen);
-        appNodes.menu.classList.toggle('hide', !state.menuOpen);
-        appNodes.finaleModeFormOption.style.opacity = state.config.autoLaunch ? 1 : 0.32;
+        if (appNodes.pauseBtnSVG) appNodes.pauseBtnSVG.setAttribute('href', pauseBtnIcon);
+        if (appNodes.pauseBtnSVG) appNodes.pauseBtnSVG.setAttribute('xlink:href', pauseBtnIcon);
+        if (appNodes.soundBtnSVG) appNodes.soundBtnSVG.setAttribute('href', soundBtnIcon);
+        if (appNodes.soundBtnSVG) appNodes.soundBtnSVG.setAttribute('xlink:href', soundBtnIcon);
+        if (appNodes.controls) appNodes.controls.classList.toggle('hide', state.menuOpen || state.config.hideControls);
+        if (appNodes.canvasContainer) appNodes.canvasContainer.classList.toggle('blur', state.menuOpen);
+        if (appNodes.menu) appNodes.menu.classList.toggle('hide', !state.menuOpen);
+        if (appNodes.finaleModeFormOption) appNodes.finaleModeFormOption.style.opacity = state.config.autoLaunch ? 1 : 0.32;
         
-        appNodes.quality.value = state.config.quality;
-        appNodes.shellType.value = state.config.shell;
-        appNodes.shellSize.value = state.config.size;
-        appNodes.autoLaunch.checked = state.config.autoLaunch;
-        appNodes.finaleMode.checked = state.config.finale;
-        appNodes.skyLighting.value = state.config.skyLighting;
-        appNodes.hideControls.checked = state.config.hideControls;
-        appNodes.fullscreen.checked = state.fullscreen;
-        appNodes.longExposure.checked = state.config.longExposure;
-        appNodes.scaleFactor.value = state.config.scaleFactor.toFixed(2);
+        if (appNodes.quality) appNodes.quality.value = state.config.quality;
+        if (appNodes.shellType) appNodes.shellType.value = state.config.shell;
+        if (appNodes.shellSize) appNodes.shellSize.value = state.config.size;
+        if (appNodes.autoLaunch) appNodes.autoLaunch.checked = state.config.autoLaunch;
+        if (appNodes.finaleMode) appNodes.finaleMode.checked = state.config.finale;
+        if (appNodes.skyLighting) appNodes.skyLighting.value = state.config.skyLighting;
+        if (appNodes.hideControls) appNodes.hideControls.checked = state.config.hideControls;
+        if (appNodes.fullscreen) appNodes.fullscreen.checked = state.fullscreen;
+        if (appNodes.longExposure) appNodes.longExposure.checked = state.config.longExposure;
+        if (appNodes.scaleFactor) appNodes.scaleFactor.value = state.config.scaleFactor.toFixed(2);
         
-        appNodes.menuInnerWrap.style.opacity = state.openHelpTopic ? 0.12 : 1;
-        appNodes.helpModal.classList.toggle('active', !!state.openHelpTopic);
-        if (state.openHelpTopic) {
+        if (appNodes.menuInnerWrap) appNodes.menuInnerWrap.style.opacity = state.openHelpTopic ? 0.12 : 1;
+        if (appNodes.helpModal) appNodes.helpModal.classList.toggle('active', !!state.openHelpTopic);
+        if (state.openHelpTopic && appNodes.helpModalHeader && appNodes.helpModalBody) {
                 const { header, body } = helpContent[state.openHelpTopic];
                 appNodes.helpModalHeader.textContent = header;
                 appNodes.helpModalBody.textContent = body;
@@ -492,9 +492,11 @@ if (appNodes.scaleFactor) appNodes.scaleFactor.addEventListener('input', () => {
 
 Object.keys(nodeKeyToHelpKey).forEach(nodeKey => {
         const helpKey = nodeKeyToHelpKey[nodeKey];
-        appNodes[nodeKey].addEventListener('click', () => {
-                store.setState({ openHelpTopic: helpKey });
-        });
+        if (appNodes[nodeKey]) {
+                appNodes[nodeKey].addEventListener('click', () => {
+                        store.setState({ openHelpTopic: helpKey });
+                });
+        }
 });
 
 if (appNodes.helpModalCloseBtn) appNodes.helpModalCloseBtn.addEventListener('click', () => {

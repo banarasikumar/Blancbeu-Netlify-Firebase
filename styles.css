@@ -1172,3 +1172,148 @@ select:focus-visible {
         --text-dark: #0a0a0a;
     }
 }
+
+/* Premium Rewards Section */
+.rewards-section {
+    padding: 20px 16px;
+}
+
+.reward-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.reward-card {
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-purple));
+    border-radius: 16px;
+    padding: 16px;
+    text-align: center;
+    color: var(--text-light);
+    box-shadow: 0 8px 24px rgba(212, 175, 55, 0.3);
+    transition: var(--transition);
+    cursor: pointer;
+    transform-origin: center;
+}
+
+.reward-card:hover {
+    transform: translateY(-8px) scale(1.05);
+    box-shadow: 0 12px 32px rgba(212, 175, 55, 0.5);
+}
+
+.reward-icon {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+.reward-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    opacity: 0.9;
+    margin-bottom: 4px;
+}
+
+.reward-value {
+    display: block;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+/* Premium Testimonials */
+.testimonials-section {
+    padding: 16px;
+}
+
+.testimonials {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.testimonial-card {
+    background-color: var(--bg-secondary-dark);
+    border-left: 4px solid var(--primary-color);
+    border-radius: 12px;
+    padding: 16px;
+    transition: var(--transition);
+}
+
+.testimonial-card:hover {
+    transform: translateX(4px);
+    border-left-color: var(--accent-purple);
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.2);
+}
+
+.testimonial-text {
+    font-size: 13px;
+    margin: 0 0 8px 0;
+    opacity: 0.9;
+    font-style: italic;
+}
+
+.testimonial-author {
+    font-size: 12px;
+    color: var(--primary-color);
+    font-weight: 600;
+    margin: 0;
+}
+
+/* Expert Beauticians Section */
+.featured-section {
+    padding: 20px 16px;
+}
+
+.beautician-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 16px;
+}
+
+.beautician-card {
+    background-color: var(--bg-secondary-dark);
+    border: 1px solid var(--border-color-dark);
+    border-radius: 16px;
+    padding: 16px;
+    text-align: center;
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.beautician-card:hover {
+    transform: translateY(-12px);
+    border-color: var(--primary-color);
+    box-shadow: 0 12px 32px rgba(212, 175, 55, 0.2);
+}
+
+.beautician-avatar {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 12px;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-purple));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-light);
+}
+
+.beautician-card h4 {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 8px 0 4px;
+}
+
+.specialty {
+    font-size: 12px;
+    color: var(--primary-color);
+    margin: 4px 0;
+    font-weight: 600;
+}
+
+.beautician-card .rating {
+    font-size: 11px;
+    margin: 8px 0;
+    opacity: 0.8;
+}

@@ -1222,6 +1222,10 @@ document.addEventListener('DOMContentLoaded', () => {
   if (accountBtn) {
     accountBtn.addEventListener('click', (e) => {
       e.preventDefault();
+      const header = document.getElementById('mainHeader');
+      const bottomNav = document.getElementById('bottomNav');
+      if (header) header.classList.remove('hidden');
+      if (bottomNav) bottomNav.classList.remove('hidden');
       document.getElementById('account').scrollIntoView({ behavior: 'smooth' });
     });
   }

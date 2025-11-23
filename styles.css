@@ -113,6 +113,11 @@ body.light-mode {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+.bottom-nav .nav-item.active .nav-icon {
+    filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.6)) !important;
 }
 
 .bottom-nav .nav-label {

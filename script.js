@@ -1176,6 +1176,31 @@ function closeDevModal() {
 }
 
 
+function openAccountModal() {
+  const modal = document.getElementById('accountModal');
+  if (modal) {
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    
+    // Load saved data
+    const savedName = localStorage.getItem('accountName');
+    const savedPhone = localStorage.getItem('accountPhone');
+    const savedEmail = localStorage.getItem('accountEmail');
+    
+    if (savedName) document.getElementById('accountName').value = savedName;
+    if (savedPhone) document.getElementById('accountPhone').value = savedPhone;
+    if (savedEmail) document.getElementById('accountEmail').value = savedEmail;
+  }
+}
+
+function closeAccountModal() {
+  const modal = document.getElementById('accountModal');
+  if (modal) {
+    modal.classList.remove('active');
+    document.body.style.overflow = 'auto';
+  }
+}
+
 function saveAccountChanges() {
   const name = document.getElementById('accountName').value;
   const phone = document.getElementById('accountPhone').value;
@@ -1194,6 +1219,7 @@ function logoutAccount() {
   localStorage.removeItem('accountPhone');
   localStorage.removeItem('accountEmail');
   console.log('🚪 Logged out');
+  alert('👋 Logged out successfully!');
   closeAccountModal();
 }
 
@@ -1222,11 +1248,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (accountBtn) {
     accountBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      const header = document.getElementById('mainHeader');
-      const bottomNav = document.getElementById('bottomNav');
-      if (header) header.classList.remove('hidden');
-      if (bottomNav) bottomNav.classList.remove('hidden');
-      document.getElementById('account').scrollIntoView({ behavior: 'smooth' });
+      openAccountModal();
     });
   }
 

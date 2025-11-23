@@ -230,7 +230,6 @@
                 <a href="#services">Services</a>
                 <a href="#gallery">Gallery</a>
                 <a href="#reviews">Reviews</a>
-                <a href="#account">Account</a>
                 <button id="installBtn" class="install-app-btn" style="display: none;">
                     <span class="install-icon">📲</span>
                     <span class="install-text">Install App</span>
@@ -409,72 +408,6 @@
         </div>
     </section>
 
-    <!-- Account Page Section -->
-    <section id="account" class="account-section-page">
-        <div class="container">
-            <div class="account-header">
-                <div class="profile-avatar">👤</div>
-                <h2 class="section-title">My Account</h2>
-            </div>
-
-            <div class="account-content">
-                <!-- Profile Section -->
-                <div class="account-panel">
-                    <h3 class="panel-header">📋 Profile Information</h3>
-                    <div class="info-item">
-                        <label>Name</label>
-                        <input type="text" id="accountName" placeholder="Enter your name" class="account-input">
-                    </div>
-                    <div class="info-item">
-                        <label>Phone Number</label>
-                        <input type="tel" id="accountPhone" placeholder="+91 92299 15277" class="account-input">
-                    </div>
-                    <div class="info-item">
-                        <label>Email</label>
-                        <input type="email" id="accountEmail" placeholder="Enter your email" class="account-input">
-                    </div>
-                </div>
-
-                <!-- Bookings Section -->
-                <div class="account-panel">
-                    <h3 class="panel-header">📅 Recent Bookings</h3>
-                    <div class="bookings-list">
-                        <p class="empty-state">No bookings yet. <a href="#services">Book a service now!</a></p>
-                    </div>
-                </div>
-
-                <!-- Settings Section -->
-                <div class="account-panel">
-                    <h3 class="panel-header">⚙️ Settings</h3>
-                    <div class="settings-item">
-                        <label>
-                            <input type="checkbox" id="reminders" checked>
-                            <span>Booking reminders</span>
-                        </label>
-                    </div>
-                    <div class="settings-item">
-                        <label>
-                            <input type="checkbox" id="offers" checked>
-                            <span>Special offers & discounts</span>
-                        </label>
-                    </div>
-                    <div class="settings-item">
-                        <label>
-                            <input type="checkbox" id="sms">
-                            <span>SMS notifications</span>
-                        </label>
-                    </div>
-                </div>
-
-                <!-- Actions Section -->
-                <div class="account-actions">
-                    <button class="save-btn" onclick="saveAccountChanges()">💾 Save Changes</button>
-                    <button class="logout-btn" onclick="logoutAccount()">🚪 Logout</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
@@ -510,6 +443,71 @@
             </div>
         </div>
     </footer>
+
+    <!-- Account Page Modal (Full-Screen) -->
+    <div id="accountModal" class="account-modal" onclick="event.target === this && closeAccountModal()">
+        <div class="account-modal-container">
+            <button class="account-modal-close" onclick="closeAccountModal()">✕</button>
+            
+            <div class="account-modal-header">
+                <div class="profile-avatar">👤</div>
+                <h1>My Account</h1>
+            </div>
+
+            <div class="account-modal-content">
+                <!-- Profile Section -->
+                <div class="account-card">
+                    <h2 class="card-header">📋 Profile Information</h2>
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" id="accountName" placeholder="Enter your name" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="tel" id="accountPhone" placeholder="+91 92299 15277" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="accountEmail" placeholder="Enter your email" class="form-input">
+                    </div>
+                </div>
+
+                <!-- Bookings Section -->
+                <div class="account-card">
+                    <h2 class="card-header">📅 Recent Bookings</h2>
+                    <div class="bookings-list">
+                        <p class="empty-message">No bookings yet. <a href="#services" onclick="closeAccountModal()">Book a service now!</a></p>
+                    </div>
+                </div>
+
+                <!-- Settings Section -->
+                <div class="account-card">
+                    <h2 class="card-header">⚙️ Settings</h2>
+                    <div class="settings-list">
+                        <label class="setting-item">
+                            <input type="checkbox" id="reminders" checked>
+                            <span>Booking reminders</span>
+                        </label>
+                        <label class="setting-item">
+                            <input type="checkbox" id="offers" checked>
+                            <span>Special offers & discounts</span>
+                        </label>
+                        <label class="setting-item">
+                            <input type="checkbox" id="sms">
+                            <span>SMS notifications</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="account-actions">
+                    <button class="btn-save" onclick="saveAccountChanges()">💾 Save Changes</button>
+                    <button class="btn-logout" onclick="logoutAccount()">🚪 Logout</button>
+                    <button class="btn-close" onclick="closeAccountModal()">← Back</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Under Development Modal -->
     <div id="devModal" class="dev-modal">

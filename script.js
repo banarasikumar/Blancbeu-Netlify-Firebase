@@ -1086,10 +1086,134 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+// ===== Flipkart-Style Tab Navigation =====
+class TabNavigationController {
+  constructor() {
+    this.tabNavigation = document.getElementById('tabNavigation');
+    this.tabItems = document.querySelectorAll('.tab-item');
+    this.tabIndicator = document.querySelector('.tab-indicator');
+    this.tabsContainer = document.querySelector('.tabs-container');
+    
+    this.init();
+  }
+  
+  init() {
+    if (!this.tabNavigation) return;
+    
+    // Add click listeners
+    this.tabItems.forEach(tab => {
+      tab.addEventListener('click', (e) => this.handleTabClick(e));
+    });
+    
+    // Add scroll listeners to sync with sections
+    window.addEventListener('scroll', () => this.updateActiveTab());
+    window.addEventListener('resize', () => this.updateIndicator());
+    
+    // Initial indicator position
+    this.updateIndicator();
+  }
+  
+  handleTabClick(e) {
+    const tab = e.currentTarget;
+    const sectionId = tab.dataset.section;
+    const section = document.getElementById(sectionId);
+    
+    if (section) {
+      // Update active tab
+      this.setActiveTab(tab);
+      
+      // Smooth scroll to section
+      const headerHeight = document.querySelector('header')?.offsetHeight || 0;
+      const tabNavHeight = this.tabNavigation?.offsetHeight || 0;
+      const targetScrollTop = section.offsetTop - headerHeight - tabNavHeight;
+      
+      window.scrollTo({
+        top: targetScrollTop,
+        behavior: 'smooth'
+      });
+    }
+  }
+  
+  setActiveTab(tab) {
+    // Remove active from all tabs
+    this.tabItems.forEach(t => t.classList.remove('active'));
+    
+    // Add active to clicked tab
+    tab.classList.add('active');
+    
+    // Update indicator
+    this.updateIndicator();
+    
+    // Scroll tab into view
+    this.scrollTabIntoView(tab);
+  }
+  
+  updateActiveTab() {
+    const sections = [
+      { id: 'home', tab: this.tabItems[0] },
+      { id: 'offers', tab: this.tabItems[1] },
+      { id: 'services', tab: this.tabItems[2] },
+      { id: 'gallery', tab: this.tabItems[3] },
+      { id: 'reviews', tab: this.tabItems[4] }
+    ];
+    
+    let currentSection = sections[0];
+    const headerHeight = document.querySelector('header')?.offsetHeight || 0;
+    const tabNavHeight = this.tabNavigation?.offsetHeight || 0;
+    
+    // Find which section is in view
+    for (let section of sections) {
+      const element = document.getElementById(section.id);
+      if (element) {
+        const elementTop = element.offsetTop - headerHeight - tabNavHeight;
+        if (window.scrollY >= elementTop - 100) {
+          currentSection = section;
+        }
+      }
+    }
+    
+    // Update active tab without scroll
+    this.tabItems.forEach(t => t.classList.remove('active'));
+    if (currentSection.tab) {
+      currentSection.tab.classList.add('active');
+      this.updateIndicator();
+      this.scrollTabIntoView(currentSection.tab);
+    }
+  }
+  
+  updateIndicator() {
+    const activeTab = document.querySelector('.tab-item.active');
+    
+    if (activeTab && this.tabIndicator) {
+      const tabRect = activeTab.getBoundingClientRect();
+      const containerRect = this.tabsContainer.getBoundingClientRect();
+      
+      this.tabIndicator.style.width = tabRect.width + 'px';
+      this.tabIndicator.style.left = (tabRect.left - containerRect.left + this.tabsContainer.scrollLeft) + 'px';
+    }
+  }
+  
+  scrollTabIntoView(tab) {
+    const tabRect = tab.getBoundingClientRect();
+    const containerRect = this.tabsContainer.getBoundingClientRect();
+    
+    // Check if tab is out of view
+    if (tabRect.left < containerRect.left) {
+      // Tab is to the left, scroll left
+      tab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+    } else if (tabRect.right > containerRect.right) {
+      // Tab is to the right, scroll right
+      tab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'end' });
+    }
+  }
+}
+
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
     new ThemeController();
+    new TabNavigationController();
   });
 } else {
   new ThemeController();
+  new TabNavigationController();
 }

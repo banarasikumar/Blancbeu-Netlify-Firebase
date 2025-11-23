@@ -1176,11 +1176,15 @@ function closeDevModal() {
 }
 
 function openAccountModal() {
+  console.log('🎯 openAccountModal() called');
   const modal = document.getElementById('accountModal');
   if (modal) {
     modal.style.display = 'flex';
     document.body.style.overflow = 'hidden';
     document.documentElement.style.overflow = 'hidden';
+    console.log('✅ Account Modal opened successfully');
+  } else {
+    console.error('❌ accountModal not found');
   }
 }
 

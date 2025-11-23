@@ -1225,6 +1225,9 @@ function logoutAccount() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  // INITIALIZE HOME PAGE ON LOAD
+  goToPage('home');
+  
   const notificationsBtn = document.querySelector('[data-page="notifications"]');
   const bookingsBtn = document.querySelector('[data-page="bookings"]');
   const accountBtn = document.querySelector('[data-page="account"]');

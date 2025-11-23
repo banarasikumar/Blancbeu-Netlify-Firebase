@@ -1,13 +1,35 @@
+# Node modules
 node_modules/
-dist/
-build/
-.env
-.env.local
-.DS_Store
-*.log
-.firebase/
-.firebaserc
-firebase-debug.log
-.replit
+npm-debug.log
+yarn-error.log
+
+# Dependencies
+package-lock.json
+yarn.lock
+
+# IDE
 .vscode/
 .idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build
+dist/
+build/
+
+# Environment
+.env
+.env.local
+
+# Logs
+*.log
+logs/
+
+# Cache
+.cache/
+.temp/

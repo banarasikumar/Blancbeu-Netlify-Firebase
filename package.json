@@ -1,25 +1,23 @@
 {
   "name": "beauty-family-salon",
-  "version": "1.0.0",
-  "description": "Premium beauty salon booking app - futuristic design, premium features, fully functional",
-  "private": true,
+  "version": "4.0.0",
+  "description": "Premium beauty salon PWA with 50+ features, built with vanilla JavaScript",
+  "main": "src/app.js",
   "type": "module",
   "scripts": {
-    "start": "http-server -p 5000 -c-1",
-    "build": "echo 'No build required - static site'",
-    "deploy": "echo 'Ready for Netlify deployment'"
+    "start": "http-server public -p 5000 -c-1"
   },
   "keywords": [
     "beauty",
     "salon",
     "booking",
     "pwa",
-    "mobile-app",
-    "premium"
+    "vanilla-js"
   ],
-  "author": "Beauty Family Team",
+  "author": "Beauty Family Salon",
   "license": "MIT",
-  "devDependencies": {
-    "http-server": "^14.1.1"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/beauty-family-salon"
   }
 }

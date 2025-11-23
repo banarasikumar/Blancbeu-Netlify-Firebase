@@ -48,10 +48,19 @@
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     white-space: nowrap;
     position: relative;
+    outline: none;
+    border-radius: 8px;
 }
 
 .tab-item:hover {
     color: var(--gold-primary);
+    background: rgba(212, 160, 23, 0.08);
+}
+
+.tab-item:focus {
+    outline: 2px solid var(--gold-primary);
+    outline-offset: -2px;
+    background: rgba(212, 160, 23, 0.12);
 }
 
 .tab-item.active {
@@ -92,10 +101,21 @@ html[data-theme="light"] .tab-item {
 
 html[data-theme="light"] .tab-item:hover {
     color: #d4a017;
+    background: rgba(212, 160, 23, 0.08);
+}
+
+html[data-theme="light"] .tab-item:focus {
+    outline: 2px solid #d4a017;
+    outline-offset: -2px;
+    background: rgba(212, 160, 23, 0.12);
 }
 
 html[data-theme="light"] .tab-item.active {
     color: #d4a017;
+}
+
+html[data-theme="light"] .tab-indicator {
+    box-shadow: 0 -2px 8px rgba(212, 160, 23, 0.3);
 }
 
 /* Mobile Optimization */

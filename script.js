@@ -1093,6 +1093,8 @@ class TabNavigationController {
     this.tabItems = document.querySelectorAll('.tab-item');
     this.tabIndicator = document.querySelector('.tab-indicator');
     this.tabsContainer = document.querySelector('.tabs-container');
+    this.scrollTimeout = null;
+    this.currentTabIndex = 0;
     
     this.init();
   }
@@ -1100,17 +1102,53 @@ class TabNavigationController {
   init() {
     if (!this.tabNavigation) return;
     
-    // Add click listeners
-    this.tabItems.forEach(tab => {
+    // Add click listeners and keyboard support
+    this.tabItems.forEach((tab, index) => {
       tab.addEventListener('click', (e) => this.handleTabClick(e));
+      tab.setAttribute('role', 'tab');
+      tab.setAttribute('aria-selected', index === 0 ? 'true' : 'false');
+      tab.setAttribute('tabindex', index === 0 ? '0' : '-1');
+      tab.setAttribute('aria-label', tab.querySelector('.tab-label')?.textContent || 'Tab');
+      
+      // Keyboard navigation
+      tab.addEventListener('keydown', (e) => this.handleKeyboard(e, index));
     });
     
-    // Add scroll listeners to sync with sections
-    window.addEventListener('scroll', () => this.updateActiveTab());
+    // Add scroll listeners to sync with sections (debounced)
+    window.addEventListener('scroll', () => this.debouncedUpdateActiveTab());
     window.addEventListener('resize', () => this.updateIndicator());
     
     // Initial indicator position
     this.updateIndicator();
+  }
+  
+  debouncedUpdateActiveTab() {
+    clearTimeout(this.scrollTimeout);
+    this.scrollTimeout = setTimeout(() => this.updateActiveTab(), 50);
+  }
+  
+  handleKeyboard(e, index) {
+    let newIndex = index;
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      newIndex = Math.max(0, index - 1);
+    } else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+      e.preventDefault();
+      newIndex = Math.min(this.tabItems.length - 1, index + 1);
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      newIndex = 0;
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      newIndex = this.tabItems.length - 1;
+    } else {
+      return;
+    }
+    
+    if (newIndex !== index) {
+      this.handleTabClick({ currentTarget: this.tabItems[newIndex] });
+      this.tabItems[newIndex].focus();
+    }
   }
   
   handleTabClick(e) {
@@ -1135,11 +1173,19 @@ class TabNavigationController {
   }
   
   setActiveTab(tab) {
-    // Remove active from all tabs
-    this.tabItems.forEach(t => t.classList.remove('active'));
+    // Remove active from all tabs and update ARIA attributes
+    this.tabItems.forEach((t, i) => {
+      t.classList.remove('active');
+      t.setAttribute('aria-selected', 'false');
+      t.setAttribute('tabindex', '-1');
+    });
     
     // Add active to clicked tab
     tab.classList.add('active');
+    const tabIndex = Array.from(this.tabItems).indexOf(tab);
+    tab.setAttribute('aria-selected', 'true');
+    tab.setAttribute('tabindex', '0');
+    this.currentTabIndex = tabIndex;
     
     // Update indicator
     this.updateIndicator();

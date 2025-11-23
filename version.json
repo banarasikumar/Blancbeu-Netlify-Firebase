@@ -1,6 +1,6 @@
 {
-  "version": "18.7.0",
-  "lastUpdated": "2025-11-22T16:16:00Z",
-  "timestamp": 1763828160000,
-  "changes": "Fixed Account modal - header and nav now visible and stay on top when modal opens"
+  "version": "19.0.0",
+  "lastUpdated": "2025-11-22T16:20:00Z",
+  "timestamp": 1763828400000,
+  "changes": "Flipkart-style page navigation - Account is now a full page tab like Home/Services/Gallery/Reviews - tab switching, not modal overlay"
 }

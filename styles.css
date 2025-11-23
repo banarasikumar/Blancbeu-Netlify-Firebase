@@ -5235,3 +5235,204 @@ body.light-mode .account-section-page .logout-btn {
         flex-direction: column;
     }
 }
+
+/* ===== FLIPKART-STYLE PAGE NAVIGATION ===== */
+.page-view {
+    animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Account Page Styling */
+.account-page {
+    padding: 60px 20px;
+    min-height: 100vh;
+    background: linear-gradient(135deg, rgba(10, 10, 10, 0.3), rgba(20, 20, 20, 0.3));
+}
+
+.account-page .account-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.account-page .account-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.account-page .profile-avatar {
+    font-size: 60px;
+    margin-bottom: 15px;
+}
+
+.account-page h1 {
+    font-family: 'Cinzel', serif;
+    font-size: 36px;
+    background: linear-gradient(135deg, var(--gold-24k), var(--gold-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.account-page .account-content {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.account-card {
+    background: rgba(255, 215, 0, 0.05);
+    border: 1px solid rgba(255, 215, 0, 0.15);
+    border-radius: 15px;
+    padding: 25px;
+    transition: all 0.3s ease;
+}
+
+.account-card:hover {
+    border-color: rgba(255, 215, 0, 0.3);
+    background: rgba(255, 215, 0, 0.08);
+}
+
+.account-card h2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--gold-24k);
+    margin: 0 0 20px 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 12px;
+    color: var(--text-gray);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+
+.form-input {
+    width: 100%;
+    padding: 12px 15px;
+    background: rgba(255, 215, 0, 0.08);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    border-radius: 10px;
+    color: var(--text-white);
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.form-input:focus {
+    outline: none;
+    background: rgba(255, 215, 0, 0.12);
+    border-color: var(--gold-24k);
+    box-shadow: 0 0 12px rgba(255, 215, 0, 0.2);
+}
+
+.setting-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    color: var(--text-white);
+    font-size: 14px;
+    margin-bottom: 14px;
+}
+
+.setting-item input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: var(--gold-24k);
+}
+
+.account-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 215, 0, 0.15);
+}
+
+.btn-primary, .btn-danger {
+    padding: 14px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--gold-24k), var(--gold-bright));
+    color: #000;
+    box-shadow: 0 6px 20px rgba(255, 215, 0, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
+}
+
+.btn-danger {
+    background: rgba(220, 20, 60, 0.2);
+    border: 1.5px solid rgba(220, 20, 60, 0.5);
+    color: #ff6b9d;
+}
+
+.btn-danger:hover {
+    background: rgba(220, 20, 60, 0.3);
+}
+
+/* Light Mode */
+[data-theme="light"] .account-page {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(250, 250, 250, 0.3));
+}
+
+[data-theme="light"] .account-card {
+    background: rgba(184, 134, 11, 0.08);
+    border-color: rgba(184, 134, 11, 0.15);
+}
+
+[data-theme="light"] .account-card:hover {
+    border-color: rgba(184, 134, 11, 0.3);
+}
+
+[data-theme="light"] .form-input {
+    background: rgba(184, 134, 11, 0.1);
+    border-color: rgba(184, 134, 11, 0.2);
+    color: #1a1a1a;
+}
+
+[data-theme="light"] .form-input:focus {
+    background: rgba(184, 134, 11, 0.15);
+    border-color: #b8860b;
+}
+
+[data-theme="light"] .btn-primary {
+    background: linear-gradient(135deg, #b8860b, #d4a017);
+    color: #fff;
+}
+
+@media (max-width: 600px) {
+    .account-page {
+        padding: 40px 15px;
+    }
+    
+    .account-card {
+        padding: 20px;
+    }
+}

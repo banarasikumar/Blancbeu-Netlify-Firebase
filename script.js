@@ -1176,28 +1176,17 @@ function closeDevModal() {
 }
 
 
-function openAccountModal() {
-  const modal = document.getElementById('accountModal');
-  if (modal) {
-    modal.classList.add('active');
-    document.body.style.overflow = 'hidden';
-    
-    // Load saved data
-    const savedName = localStorage.getItem('accountName');
-    const savedPhone = localStorage.getItem('accountPhone');
-    const savedEmail = localStorage.getItem('accountEmail');
-    
-    if (savedName) document.getElementById('accountName').value = savedName;
-    if (savedPhone) document.getElementById('accountPhone').value = savedPhone;
-    if (savedEmail) document.getElementById('accountEmail').value = savedEmail;
-  }
-}
-
-function closeAccountModal() {
-  const modal = document.getElementById('accountModal');
-  if (modal) {
-    modal.classList.remove('active');
-    document.body.style.overflow = 'auto';
+// FLIPKART-STYLE PAGE NAVIGATION - Show/Hide Pages
+function goToPage(pageName) {
+  document.querySelectorAll('.page-view').forEach(page => {
+    page.style.display = 'none';
+  });
+  
+  const targetPage = document.getElementById(pageName);
+  if (targetPage) {
+    targetPage.style.display = 'block';
+    window.scrollTo(0, 0);
+    console.log(`✅ Navigated to ${pageName} page`);
   }
 }
 
@@ -1210,7 +1199,6 @@ function saveAccountChanges() {
   localStorage.setItem('accountPhone', phone);
   localStorage.setItem('accountEmail', email);
   
-  console.log('✅ Account changes saved!');
   alert('✨ Changes saved successfully!');
 }
 
@@ -1218,9 +1206,8 @@ function logoutAccount() {
   localStorage.removeItem('accountName');
   localStorage.removeItem('accountPhone');
   localStorage.removeItem('accountEmail');
-  console.log('🚪 Logged out');
-  alert('👋 Logged out successfully!');
-  closeAccountModal();
+  alert('👋 Logged out!');
+  goToPage('home');
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -1248,7 +1235,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (accountBtn) {
     accountBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      openAccountModal();
+      goToPage('account');
     });
   }
 

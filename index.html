@@ -654,6 +654,60 @@
                     </div>
                 </div>
             </section>
+
+            <!-- Settings Tab -->
+            <section class="tab-content" data-tab="settings">
+                <div class="settings-container">
+                    <h2>Settings & Preferences</h2>
+                    
+                    <div class="settings-section">
+                        <h3>Notifications</h3>
+                        <div class="setting-item">
+                            <span>Appointment Reminders</span>
+                            <input type="checkbox" checked>
+                        </div>
+                        <div class="setting-item">
+                            <span>Promotional Offers</span>
+                            <input type="checkbox" checked>
+                        </div>
+                        <div class="setting-item">
+                            <span>Review Requests</span>
+                            <input type="checkbox">
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h3>Preferences</h3>
+                        <div class="setting-item">
+                            <span>Favorite Stylist</span>
+                            <select>
+                                <option>Any</option>
+                                <option>Sarah Johnson</option>
+                                <option>Emma Williams</option>
+                                <option>Priya Patel</option>
+                            </select>
+                        </div>
+                        <div class="setting-item">
+                            <span>Preferred Time</span>
+                            <select>
+                                <option>Morning (9 AM - 12 PM)</option>
+                                <option>Afternoon (12 PM - 5 PM)</option>
+                                <option>Evening (5 PM - 9 PM)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h3>About</h3>
+                        <div class="about-info">
+                            <p><strong>Beauty Family Salon</strong></p>
+                            <p>Version 3.0 - Premium</p>
+                            <p>The best salon app ever created</p>
+                            <button class="btn btn-sm btn-outline">Share App</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </main>
 
         <!-- Bottom Navigation -->
@@ -681,6 +735,12 @@
                     <circle cx="12" cy="8" r="4"/><path d="M6 20c0-3.5 2.5-6 6-6s6 2.5 6 6"/>
                 </svg>
                 <span>Profile</span>
+            </button>
+            <button class="nav-item" data-tab="settings" aria-label="Settings">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 6v6M4.22 4.22l4.24 4.24m5.08 5.08l4.24 4.24M1 12h6m6 0h6M4.22 19.78l4.24-4.24m5.08-5.08l4.24-4.24"/>
+                </svg>
+                <span>Settings</span>
             </button>
         </nav>
 

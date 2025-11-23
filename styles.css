@@ -1185,6 +1185,63 @@ select:focus-visible {
     outline-offset: 2px;
 }
 
+/* Settings Tab Styles */
+.settings-container {
+    padding: 20px 16px 100px;
+}
+
+.settings-container h2 {
+    margin: 16px 0;
+    font-size: 24px;
+}
+
+.settings-section {
+    background-color: var(--bg-secondary-dark);
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 16px;
+}
+
+.settings-section h3 {
+    font-size: 14px;
+    font-weight: 700;
+    margin: 0 0 12px;
+    color: var(--primary-color);
+}
+
+.setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border-color-dark);
+}
+
+.setting-item:last-child {
+    border-bottom: none;
+}
+
+.setting-item span {
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.setting-item input[type="checkbox"],
+.setting-item select {
+    cursor: pointer;
+    width: 40px;
+}
+
+.about-info {
+    text-align: center;
+    padding: 16px 0;
+}
+
+.about-info p {
+    margin: 8px 0;
+    font-size: 13px;
+}
+
 /* Dark mode media query for system preference */
 @media (prefers-color-scheme: light) {
     html:not(.light-theme) {

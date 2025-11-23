@@ -13,9 +13,9 @@ I want to ensure a smooth, professional development process.
 - **Design Adherence**: Maintain the premium 24k gold and black aesthetic as a primary design principle.
 
 ## System Architecture
-The Blancbeu website now uses a **true system-wide theme architecture** leveraging CSS custom properties (variables) to control all colors and styles dynamically across light and dark modes.
+The Blancbeu website uses a **true system-wide theme architecture** leveraging CSS custom properties (variables) to control all colors and styles dynamically across light and dark modes.
 
-### Theme System (NEW - Version 16.0.0+)
+### Theme System (v17.0.0+)
 - **CSS Variable-Based Architecture**: Complete theme separation using `:root` with dual theme definitions
   - Dark theme (default): 40+ CSS variables for backgrounds, text, shadows, borders, etc.
   - Light theme: Activated via `data-theme="light"` attribute on HTML element
@@ -72,16 +72,19 @@ The Blancbeu website now uses a **true system-wide theme architecture** leveragi
 
 ## File Structure
 ```
-├── index.html              (Main entry point with early theme script)
-├── styles.css              (Refactored with CSS variable references)
-├── theme-variables.css     (NEW: Complete theme definitions)
-├── script.js               (Updated ThemeController with data-theme)
-├── manifest.json           (PWA manifest)
-├── version.json            (Cache versioning - v16.0.0)
-├── sw.js                   (Service worker)
-├── fireworks.css           (Fireworks animations)
-├── assets/                 (Optimized images: banners, services, gallery)
-└── splash-*.png            (PWA splash screens)
+├── index.html              (Main entry point with early theme script, all 4 tab pages)
+├── styles.css              (Core styles with responsive design)
+├── theme-variables.css     (CSS variable definitions for light/dark themes)
+├── script.js               (ThemeController, TabManager, carousel logic)
+├── manifest.json           (PWA manifest with app metadata)
+├── version.json            (Version 17.0.0 - cache control)
+├── sw.js                   (Service worker for offline support)
+├── fireworks.css           (Diwali fireworks animations)
+├── fireworks.js            (Fireworks engine with null safety)
+├── README.md               (Project documentation)
+├── assets/                 (Optimized images: logos, banners, services, gallery)
+├── attached_assets/        (Generated stock photos for services/gallery)
+└── icon-*.{png,webp}       (PWA icons for all screen sizes 72-512px)
 ```
 
 ## Implementation Status
@@ -93,6 +96,7 @@ The Blancbeu website now uses a **true system-wide theme architecture** leveragi
 - Light/Dark theme system with automatic time-based detection and persistence
 - PWA support with install prompts and offline capabilities
 - All JavaScript errors fixed - app runs cleanly without console errors
+- Deployment configured for Replit autoscale
 
 ## Known Limitations & Future Improvements
 - Booking system backend not yet implemented (currently shows placeholder alerts)

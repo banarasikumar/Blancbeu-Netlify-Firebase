@@ -7,6 +7,28 @@ const ASSETS_TO_CACHE = [
     '/manifest.json'
 ];
 
+// Fallback for offline
+const FALLBACK_HTML = `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Beauty Family - Loading</title>
+<style>
+body { background: #0a0a0a; color: white; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; font-family: system-ui; }
+.container { text-align: center; }
+h1 { font-size: 24px; margin-bottom: 10px; }
+p { opacity: 0.7; }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Beauty Family Salon</h1>
+<p>Loading your premium salon experience...</p>
+</div>
+</body>
+</html>`;
+
 // Install event - cache essential files
 self.addEventListener('install', (event) => {
     event.waitUntil(
@@ -31,7 +53,7 @@ self.addEventListener('activate', (event) => {
     );
 });
 
-// Fetch event - network first, fallback to cache
+// Fetch event - network first, fallback to cache, with smart fallback
 self.addEventListener('fetch', (event) => {
     // Only handle GET requests
     if (event.request.method !== 'GET') {
@@ -54,9 +76,25 @@ self.addEventListener('fetch', (event) => {
                 return response;
             })
             .catch(() => {
-                // Fallback to cache
+                // Try cache first
                 return caches.match(event.request).then((response) => {
-                    return response || new Response('Offline - content not available', {
+                    if (response) {
+                        return response;
+                    }
+                    
+                    // Smart fallback for HTML pages
+                    if (event.request.mode === 'navigate') {
+                        return new Response(FALLBACK_HTML, {
+                            status: 200,
+                            statusText: 'OK',
+                            headers: new Headers({
+                                'Content-Type': 'text/html'
+                            })
+                        });
+                    }
+                    
+                    // Generic offline response
+                    return new Response('Offline - content not available', {
                         status: 503,
                         statusText: 'Service Unavailable',
                         headers: new Headers({

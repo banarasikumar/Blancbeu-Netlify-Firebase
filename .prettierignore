@@ -1,8 +1,0 @@
-node_modules/
-dist/
-build/
-*.webp
-*.jpg
-*.png
-firebase-backend/
-.firebase/

@@ -1178,15 +1178,29 @@ function closeDevModal() {
 
 // FLIPKART-STYLE PAGE NAVIGATION - Show/Hide Pages
 function goToPage(pageName) {
+  // Hide all pages
   document.querySelectorAll('.page-view').forEach(page => {
     page.style.display = 'none';
   });
   
+  // Show selected page
   const targetPage = document.getElementById(pageName);
   if (targetPage) {
     targetPage.style.display = 'block';
     window.scrollTo(0, 0);
     console.log(`✅ Navigated to ${pageName} page`);
+  }
+  
+  // Show CTA and footer ONLY on home page
+  const ctaSection = document.getElementById('cta-section');
+  const footer = document.getElementById('footer');
+  
+  if (pageName === 'home') {
+    if (ctaSection) ctaSection.style.display = 'block';
+    if (footer) footer.style.display = 'block';
+  } else {
+    if (ctaSection) ctaSection.style.display = 'none';
+    if (footer) footer.style.display = 'none';
   }
 }
 

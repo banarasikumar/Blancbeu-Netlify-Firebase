@@ -948,11 +948,12 @@ body.light-mode .category-header {
 
 .hero {
     padding-top: 120px;
-    padding-bottom: 60px;
+    padding-bottom: 40px;
     overflow-x: hidden;
     overflow-y: visible;
     width: 100%;
     display: block;
+    min-height: auto;
 }
 
 .hero .contact-buttons {
@@ -980,8 +981,8 @@ body.light-mode .category-header {
     position: relative;
     width: 100%;
     max-width: 1200px;
-    aspect-ratio: 3 / 2;
-    margin: 0 auto;
+    height: 250px;
+    margin: 20px auto;
     overflow: hidden;
     border-radius: 20px;
     background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 140, 0, 0.05) 100%);
@@ -1020,7 +1021,8 @@ body.light-mode .category-header {
 @media (max-width: 768px) {
     .carousel {
         max-width: calc(100% - 20px);
-        margin: 0 auto;
+        margin: 20px auto;
+        height: 200px;
         padding: 8px;
         border-radius: 12px;
     }
@@ -1029,7 +1031,8 @@ body.light-mode .category-header {
 @media (max-width: 480px) {
     .carousel {
         max-width: calc(100% - 10px);
-        margin: 0 auto;
+        margin: 20px auto;
+        height: 150px;
         padding: 5px;
     }
 }

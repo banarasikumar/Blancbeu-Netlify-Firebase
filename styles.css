@@ -5239,6 +5239,9 @@ body.light-mode .account-section-page .logout-btn {
 /* ===== FLIPKART-STYLE PAGE NAVIGATION ===== */
 .page-view {
     animation: fadeIn 0.3s ease-in;
+    position: relative;
+    z-index: 10;
+    width: 100%;
 }
 
 @keyframes fadeIn {
@@ -5250,7 +5253,11 @@ body.light-mode .account-section-page .logout-btn {
 .account-page {
     padding: 60px 20px;
     min-height: 100vh;
-    background: linear-gradient(135deg, rgba(10, 10, 10, 0.3), rgba(20, 20, 20, 0.3));
+    background: var(--bg-primary) !important;
+    position: relative;
+    z-index: 20;
+    width: 100%;
+    overflow-x: hidden;
 }
 
 .account-page .account-container {
@@ -5435,4 +5442,20 @@ body.light-mode .account-section-page .logout-btn {
     .account-card {
         padding: 20px;
     }
+}
+
+/* Additional section isolation */
+#home, #offers, #services, #gallery, #reviews {
+    position: relative;
+    z-index: 10;
+}
+
+#account {
+    position: relative;
+    z-index: 20;
+}
+
+#cta-section, #footer {
+    position: relative;
+    z-index: 5;
 }

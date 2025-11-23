@@ -1178,15 +1178,18 @@ function closeDevModal() {
 
 // FLIPKART-STYLE PAGE NAVIGATION - Show/Hide Pages
 function goToPage(pageName) {
-  // Hide all pages
+  // Hide all pages with proper z-index reset
   document.querySelectorAll('.page-view').forEach(page => {
     page.style.display = 'none';
+    page.style.zIndex = '10';
   });
   
-  // Show selected page
+  // Show selected page with higher z-index to prevent bleed-through
   const targetPage = document.getElementById(pageName);
   if (targetPage) {
     targetPage.style.display = 'block';
+    targetPage.style.zIndex = '20';
+    targetPage.style.position = 'relative';
     window.scrollTo(0, 0);
     console.log(`✅ Navigated to ${pageName} page`);
   }
@@ -1196,8 +1199,14 @@ function goToPage(pageName) {
   const footer = document.getElementById('footer');
   
   if (pageName === 'home') {
-    if (ctaSection) ctaSection.style.display = 'block';
-    if (footer) footer.style.display = 'block';
+    if (ctaSection) {
+      ctaSection.style.display = 'block';
+      ctaSection.style.zIndex = '5';
+    }
+    if (footer) {
+      footer.style.display = 'block';
+      footer.style.zIndex = '5';
+    }
   } else {
     if (ctaSection) ctaSection.style.display = 'none';
     if (footer) footer.style.display = 'none';

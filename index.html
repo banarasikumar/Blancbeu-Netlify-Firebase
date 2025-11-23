@@ -444,6 +444,76 @@
         </div>
     </footer>
 
+    <!-- Account Page Modal -->
+    <div id="accountModal" class="account-modal" onclick="event.target === this && closeAccountModal()">
+        <div class="account-modal-content">
+            <button class="account-close-btn" onclick="closeAccountModal()">×</button>
+            
+            <!-- Profile Header -->
+            <div class="account-header">
+                <div class="profile-avatar">👤</div>
+                <h2>My Account</h2>
+            </div>
+
+            <!-- Account Sections -->
+            <div class="account-sections">
+                <!-- Profile Section -->
+                <div class="account-section">
+                    <h3 class="section-header">📋 Profile Information</h3>
+                    <div class="info-item">
+                        <label>Name</label>
+                        <input type="text" id="accountName" placeholder="Enter your name" class="account-input">
+                    </div>
+                    <div class="info-item">
+                        <label>Phone Number</label>
+                        <input type="tel" id="accountPhone" placeholder="+91 92299 15277" class="account-input">
+                    </div>
+                    <div class="info-item">
+                        <label>Email</label>
+                        <input type="email" id="accountEmail" placeholder="Enter your email" class="account-input">
+                    </div>
+                </div>
+
+                <!-- Bookings Section -->
+                <div class="account-section">
+                    <h3 class="section-header">📅 Recent Bookings</h3>
+                    <div class="bookings-list">
+                        <p class="empty-state">No bookings yet. <a href="#services" onclick="closeAccountModal()">Book a service!</a></p>
+                    </div>
+                </div>
+
+                <!-- Settings Section -->
+                <div class="account-section">
+                    <h3 class="section-header">⚙️ Settings</h3>
+                    <div class="settings-item">
+                        <label>
+                            <input type="checkbox" id="reminders" checked>
+                            <span>Booking reminders</span>
+                        </label>
+                    </div>
+                    <div class="settings-item">
+                        <label>
+                            <input type="checkbox" id="offers" checked>
+                            <span>Special offers & discounts</span>
+                        </label>
+                    </div>
+                    <div class="settings-item">
+                        <label>
+                            <input type="checkbox" id="sms">
+                            <span>SMS notifications</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Actions Section -->
+                <div class="account-actions">
+                    <button class="save-btn" onclick="saveAccountChanges()">💾 Save Changes</button>
+                    <button class="logout-btn" onclick="logoutAccount()">🚪 Logout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Under Development Modal -->
     <div id="devModal" class="dev-modal">
         <div class="dev-modal-content">

@@ -1175,6 +1175,45 @@ function closeDevModal() {
   }
 }
 
+function openAccountModal() {
+  const modal = document.getElementById('accountModal');
+  if (modal) {
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
+  }
+}
+
+function closeAccountModal() {
+  const modal = document.getElementById('accountModal');
+  if (modal) {
+    modal.style.display = 'none';
+    document.body.style.overflow = '';
+    document.documentElement.style.overflow = '';
+  }
+}
+
+function saveAccountChanges() {
+  const name = document.getElementById('accountName').value;
+  const phone = document.getElementById('accountPhone').value;
+  const email = document.getElementById('accountEmail').value;
+  
+  localStorage.setItem('accountName', name);
+  localStorage.setItem('accountPhone', phone);
+  localStorage.setItem('accountEmail', email);
+  
+  console.log('✅ Account changes saved!');
+  alert('✨ Changes saved successfully!');
+}
+
+function logoutAccount() {
+  localStorage.removeItem('accountName');
+  localStorage.removeItem('accountPhone');
+  localStorage.removeItem('accountEmail');
+  console.log('🚪 Logged out');
+  closeAccountModal();
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const notificationsBtn = document.querySelector('[data-page="notifications"]');
   const bookingsBtn = document.querySelector('[data-page="bookings"]');
@@ -1200,7 +1239,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (accountBtn) {
     accountBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      openDevModal();
+      openAccountModal();
     });
   }
 

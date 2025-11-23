@@ -4487,7 +4487,7 @@ body.light-mode .call-btn .btn-icon {
 .account-modal {
     display: none;
     position: fixed;
-    z-index: 40;
+    z-index: 100;
     left: 0;
     top: 0;
     width: 100%;

@@ -1,0 +1,5 @@
+I want some changes in this static web app, right now the surprise me button is being displayed on top of BlancBeu Brand name, which is blocking the Visibility of Brand name, so move display it on the left bottom of the screen, and smaller stylish button and not solid background border but blurred fading background for the surprise button.
+
+And make smaller transparent type button to move left or right the banner quorasel images, and use stunning beautiful and attractive beauty models, perfect for modern beauty salon. Use 5 images at least, generate images yourself. 
+And one more thing you're right now displaying images for the services group heading in small size, display it in bigger size, and display below the services group title, so it looks more attractive.
+And the action buttons below the banner quorasel, which is for Locate, Chat and Call, those buttons are actually so big make it best size fir the smartphone screen and animated with css. Thats it. 

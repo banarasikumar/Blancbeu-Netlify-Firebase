@@ -1008,8 +1008,7 @@ class ThemeController {
       toggleSound(false);
     }
     
-    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#ffffff');
-    document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]')?.setAttribute('content', 'black');
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#fef5e7');
   }
   
   enableDarkMode() {
@@ -1027,8 +1026,7 @@ class ThemeController {
       togglePause(false);
     }
     
-    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#0a0a0a');
-    document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]')?.setAttribute('content', 'black-translucent');
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#000000');
   }
 }
 
@@ -1086,180 +1084,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// ===== Flipkart-Style Tab Navigation =====
-class TabNavigationController {
-  constructor() {
-    this.tabNavigation = document.getElementById('tabNavigation');
-    this.tabItems = document.querySelectorAll('.tab-item');
-    this.tabIndicator = document.querySelector('.tab-indicator');
-    this.tabsContainer = document.querySelector('.tabs-container');
-    this.scrollTimeout = null;
-    this.currentTabIndex = 0;
-    
-    this.init();
-  }
-  
-  init() {
-    if (!this.tabNavigation) return;
-    
-    // Add click listeners and keyboard support
-    this.tabItems.forEach((tab, index) => {
-      tab.addEventListener('click', (e) => this.handleTabClick(e));
-      tab.setAttribute('role', 'tab');
-      tab.setAttribute('aria-selected', index === 0 ? 'true' : 'false');
-      tab.setAttribute('tabindex', index === 0 ? '0' : '-1');
-      tab.setAttribute('aria-label', tab.querySelector('.tab-label')?.textContent || 'Tab');
-      
-      // Keyboard navigation
-      tab.addEventListener('keydown', (e) => this.handleKeyboard(e, index));
-    });
-    
-    // Add scroll listeners to sync with sections (debounced)
-    window.addEventListener('scroll', () => this.debouncedUpdateActiveTab());
-    window.addEventListener('resize', () => this.updateIndicator());
-    
-    // Initial indicator position
-    this.updateIndicator();
-  }
-  
-  debouncedUpdateActiveTab() {
-    clearTimeout(this.scrollTimeout);
-    this.scrollTimeout = setTimeout(() => this.updateActiveTab(), 50);
-  }
-  
-  handleKeyboard(e, index) {
-    let newIndex = index;
-    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
-      e.preventDefault();
-      newIndex = Math.max(0, index - 1);
-    } else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
-      e.preventDefault();
-      newIndex = Math.min(this.tabItems.length - 1, index + 1);
-    } else if (e.key === 'Home') {
-      e.preventDefault();
-      newIndex = 0;
-    } else if (e.key === 'End') {
-      e.preventDefault();
-      newIndex = this.tabItems.length - 1;
-    } else {
-      return;
-    }
-    
-    if (newIndex !== index) {
-      this.handleTabClick({ currentTarget: this.tabItems[newIndex] });
-      this.tabItems[newIndex].focus();
-    }
-  }
-  
-  handleTabClick(e) {
-    const tab = e.currentTarget;
-    const sectionId = tab.dataset.section;
-    const section = document.getElementById(sectionId);
-    
-    if (section) {
-      // Update active tab
-      this.setActiveTab(tab);
-      
-      // Smooth scroll to section
-      const headerHeight = document.querySelector('header')?.offsetHeight || 0;
-      const tabNavHeight = this.tabNavigation?.offsetHeight || 0;
-      const targetScrollTop = section.offsetTop - headerHeight - tabNavHeight;
-      
-      window.scrollTo({
-        top: targetScrollTop,
-        behavior: 'smooth'
-      });
-    }
-  }
-  
-  setActiveTab(tab) {
-    // Remove active from all tabs and update ARIA attributes
-    this.tabItems.forEach((t, i) => {
-      t.classList.remove('active');
-      t.setAttribute('aria-selected', 'false');
-      t.setAttribute('tabindex', '-1');
-    });
-    
-    // Add active to clicked tab
-    tab.classList.add('active');
-    const tabIndex = Array.from(this.tabItems).indexOf(tab);
-    tab.setAttribute('aria-selected', 'true');
-    tab.setAttribute('tabindex', '0');
-    this.currentTabIndex = tabIndex;
-    
-    // Update indicator
-    this.updateIndicator();
-    
-    // Scroll tab into view
-    this.scrollTabIntoView(tab);
-  }
-  
-  updateActiveTab() {
-    const sections = [
-      { id: 'home', tab: this.tabItems[0] },
-      { id: 'offers', tab: this.tabItems[1] },
-      { id: 'services', tab: this.tabItems[2] },
-      { id: 'gallery', tab: this.tabItems[3] },
-      { id: 'reviews', tab: this.tabItems[4] }
-    ];
-    
-    let currentSection = sections[0];
-    const headerHeight = document.querySelector('header')?.offsetHeight || 0;
-    const tabNavHeight = this.tabNavigation?.offsetHeight || 0;
-    
-    // Find which section is in view
-    for (let section of sections) {
-      const element = document.getElementById(section.id);
-      if (element) {
-        const elementTop = element.offsetTop - headerHeight - tabNavHeight;
-        if (window.scrollY >= elementTop - 100) {
-          currentSection = section;
-        }
-      }
-    }
-    
-    // Update active tab without scroll
-    this.tabItems.forEach(t => t.classList.remove('active'));
-    if (currentSection.tab) {
-      currentSection.tab.classList.add('active');
-      this.updateIndicator();
-      this.scrollTabIntoView(currentSection.tab);
-    }
-  }
-  
-  updateIndicator() {
-    const activeTab = document.querySelector('.tab-item.active');
-    
-    if (activeTab && this.tabIndicator) {
-      const tabRect = activeTab.getBoundingClientRect();
-      const containerRect = this.tabsContainer.getBoundingClientRect();
-      
-      this.tabIndicator.style.width = tabRect.width + 'px';
-      this.tabIndicator.style.left = (tabRect.left - containerRect.left + this.tabsContainer.scrollLeft) + 'px';
-    }
-  }
-  
-  scrollTabIntoView(tab) {
-    const tabRect = tab.getBoundingClientRect();
-    const containerRect = this.tabsContainer.getBoundingClientRect();
-    
-    // Check if tab is out of view
-    if (tabRect.left < containerRect.left) {
-      // Tab is to the left, scroll left
-      tab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
-    } else if (tabRect.right > containerRect.right) {
-      // Tab is to the right, scroll right
-      tab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'end' });
-    }
-  }
-}
-
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
     new ThemeController();
-    new TabNavigationController();
   });
 } else {
   new ThemeController();
-  new TabNavigationController();
 }

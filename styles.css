@@ -1887,3 +1887,247 @@ input:focus, select:focus, textarea:focus {
 .stylist-name { font-weight: 700; margin-bottom: 4px; }
 .stylist-specialty { font-size: 12px; opacity: 0.8; }
 .stylist-rating { color: var(--primary-color); font-size: 12px; margin-top: 4px; }
+
+/* Gamification Badges */
+.badge-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    gap: 12px;
+    padding: 16px;
+}
+
+.badge {
+    text-align: center;
+    padding: 12px;
+    background-color: var(--bg-secondary-dark);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.badge:hover {
+    transform: scale(1.05);
+    border-color: var(--primary-color);
+}
+
+.badge.unlocked {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(155, 89, 182, 0.2));
+    border-color: var(--primary-color);
+}
+
+.badge-icon { font-size: 32px; margin-bottom: 4px; }
+.badge-name { font-size: 10px; font-weight: 600; }
+
+/* Social Share Buttons */
+.social-share-group {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.share-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    background-color: var(--bg-secondary-dark);
+    border: 1px solid var(--border-color-dark);
+    border-radius: 20px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.share-btn:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--text-light);
+}
+
+/* Export Options */
+.export-menu {
+    background-color: var(--bg-secondary-dark);
+    border-radius: 12px;
+    padding: 12px;
+    border: 1px solid var(--border-color-dark);
+}
+
+.export-item {
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    margin-bottom: 4px;
+}
+
+.export-item:hover {
+    background-color: var(--bg-dark);
+    padding-left: 16px;
+}
+
+/* Performance Badge */
+.performance-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #27ae60, #2ecc71);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 16px;
+    font-size: 11px;
+    font-weight: 700;
+    margin: 8px 0;
+}
+
+/* Review Card Enhancement */
+.community-review {
+    background-color: var(--bg-secondary-dark);
+    border-left: 3px solid var(--primary-color);
+    border-radius: 8px;
+    padding: 12px;
+    margin: 8px 0;
+}
+
+.review-author { font-weight: 600; font-size: 12px; }
+.review-rating { color: var(--primary-color); font-size: 12px; margin: 4px 0; }
+.review-text { font-size: 12px; opacity: 0.9; }
+
+/* Multi-location selector */
+.location-selector {
+    background: linear-gradient(135deg, var(--bg-secondary-dark), rgba(212, 175, 55, 0.05));
+    border-radius: 12px;
+    padding: 16px;
+    margin: 16px 0;
+}
+
+.location-card {
+    background-color: var(--bg-dark);
+    border: 2px solid var(--border-color-dark);
+    border-radius: 12px;
+    padding: 12px;
+    margin: 8px 0;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.location-card:hover {
+    border-color: var(--primary-color);
+    transform: translateX(4px);
+}
+
+.location-name { font-weight: 700; font-size: 13px; }
+.location-distance { font-size: 11px; opacity: 0.7; margin-top: 4px; }
+.location-rating { color: var(--primary-color); font-size: 12px; margin-top: 4px; }
+
+/* Subscription card */
+.subscription-card {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(155, 89, 182, 0.1));
+    border: 2px solid var(--primary-color);
+    border-radius: 12px;
+    padding: 16px;
+    margin: 16px 0;
+}
+
+.subscription-header { font-weight: 700; font-size: 14px; margin-bottom: 8px; }
+.subscription-info { font-size: 12px; opacity: 0.8; margin: 4px 0; }
+.subscription-action { margin-top: 12px; }
+
+/* Insights widget */
+.insights-widget {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 12px;
+    padding: 16px;
+}
+
+.insight-item {
+    background-color: var(--bg-secondary-dark);
+    border-radius: 8px;
+    padding: 12px;
+    text-align: center;
+}
+
+.insight-value { font-weight: 700; font-size: 14px; color: var(--primary-color); }
+.insight-label { font-size: 10px; opacity: 0.7; margin-top: 4px; }
+
+/* Smart suggestions */
+.smart-suggestion {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(155, 89, 182, 0.15));
+    border-left: 4px solid var(--primary-color);
+    border-radius: 8px;
+    padding: 12px;
+    margin: 8px 0;
+}
+
+.suggestion-title { font-weight: 600; font-size: 12px; }
+.suggestion-detail { font-size: 11px; opacity: 0.8; margin-top: 4px; }
+
+/* Final polish: Notification center */
+.notification-center {
+    max-height: 300px;
+    overflow-y: auto;
+    background-color: var(--bg-secondary-dark);
+    border-radius: 12px;
+    border: 1px solid var(--border-color-dark);
+}
+
+.notification-item {
+    padding: 12px;
+    border-bottom: 1px solid var(--border-color-dark);
+    font-size: 12px;
+}
+
+.notification-item:last-child {
+    border-bottom: none;
+}
+
+.notification-priority-high { background-color: rgba(231, 76, 60, 0.05); }
+.notification-priority-medium { background-color: rgba(243, 156, 18, 0.05); }
+.notification-priority-low { background-color: rgba(39, 174, 96, 0.05); }
+
+/* Gift card display */
+.gift-card {
+    background: linear-gradient(135deg, #d4af37, #9b59b6);
+    border-radius: 12px;
+    padding: 20px;
+    color: white;
+    margin: 12px 0;
+    box-shadow: 0 8px 16px rgba(212, 175, 55, 0.3);
+}
+
+.gift-card-code { font-family: monospace; font-weight: 700; margin: 8px 0; }
+.gift-card-balance { font-size: 24px; font-weight: 700; }
+
+/* Compliance badge */
+.compliance-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #27ae60, #2ecc71);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+/* Timeline */
+.booking-timeline {
+    position: relative;
+    padding: 20px 0;
+}
+
+.timeline-item {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 12px;
+    position: relative;
+}
+
+.timeline-dot {
+    width: 12px;
+    height: 12px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    margin-top: 4px;
+    flex-shrink: 0;
+}
+
+.timeline-content { flex: 1; font-size: 12px; }

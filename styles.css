@@ -1270,7 +1270,6 @@ body.light-mode .section-subtitle {
 
 body.light-mode .offers-section {
     background: linear-gradient(135deg, #fef5e7 0%, #fdecea 50%, #f8f9f9 100%);
-    background-attachment: fixed;
 }
 
 .offers-grid {
@@ -1571,7 +1570,6 @@ body.light-mode .service-original-price {
 
 body.light-mode .gallery-section {
     background: linear-gradient(135deg, #fef5e7 0%, #fdecea 50%, #f8f9f9 100%);
-    background-attachment: fixed;
 }
 
 .gallery-grid {

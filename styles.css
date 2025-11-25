@@ -2708,7 +2708,6 @@ body {
 .app-page.active {
     display: block;
     animation: pageSlideIn 0.3s ease-out;
-    padding-bottom: 80px;
 }
 
 @keyframes pageSlideIn {
@@ -2796,6 +2795,5 @@ body {
     }
     
     .app-page {
-        padding-bottom: 70px;
     }
 }

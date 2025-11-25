@@ -1,0 +1,89 @@
+{
+  "name": "Blancbeu - Premium Beauty Salon",
+  "short_name": "Blancbeu",
+  "description": "Luxury beauty salon offering premium hair care, rejuvenating facial treatments, glamorous makeup artistry, and relaxing wellness services. Experience modern elegance and professional beauty care.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en",
+  "categories": ["beauty", "lifestyle", "health"],
+  "icons": [
+    {
+      "src": "/icon-72x72.webp",
+      "sizes": "72x72",
+      "type": "image/webp",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-96x96.webp",
+      "sizes": "96x96",
+      "type": "image/webp",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-144x144.webp",
+      "sizes": "144x144",
+      "type": "image/webp",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-192x192.webp",
+      "sizes": "192x192",
+      "type": "image/webp",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icon-512x512.webp",
+      "sizes": "512x512",
+      "type": "image/webp",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/splash-750x1334.png",
+      "sizes": "750x1334",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Blancbeu Beauty Salon"
+    }
+  ],
+  "prefer_related_applications": false,
+  "related_applications": [],
+  "shortcuts": [
+    {
+      "name": "Book Appointment",
+      "url": "/?action=book",
+      "description": "Quick booking for beauty services"
+    },
+    {
+      "name": "Call Salon",
+      "url": "tel:+919229915277",
+      "description": "Call us directly for appointments"
+    },
+    {
+      "name": "WhatsApp Chat",
+      "url": "https://wa.me/919229915277",
+      "description": "Chat with us on WhatsApp"
+    }
+  ],
+  "display_override": ["standalone", "minimal-ui"],
+  "edge_side_panel": {
+    "preferred_width": 400
+  }
+}

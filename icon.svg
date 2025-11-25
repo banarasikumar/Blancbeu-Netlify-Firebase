@@ -1,0 +1,62 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle with gradient -->
+  <circle cx="256" cy="256" r="256" fill="url(#background)"/>
+  
+  <!-- Inner circle -->
+  <circle cx="256" cy="256" r="200" fill="none" stroke="url(#ringGradient)" stroke-width="8"/>
+  
+  <!-- Hair silhouette -->
+  <path d="M150 200C150 150 200 120 256 120C312 120 362 150 362 200C362 220 350 240 340 260C330 280 325 300 320 320C310 350 280 370 256 370C232 370 202 350 192 320C187 300 182 280 172 260C162 240 150 220 150 200Z" fill="url(#hairGradient)"/>
+  
+  <!-- Hair details -->
+  <path d="M180 180C180 160 210 140 256 140C302 140 332 160 332 180C332 200 320 220 310 240C300 260 290 280 280 300C270 320 263 330 256 330C249 330 242 320 232 300C222 280 212 260 202 240C192 220 180 200 180 180Z" fill="url(#hairDetailGradient)"/>
+  
+  <!-- Sparkles -->
+  <g fill="url(#sparkleGradient)">
+    <path d="M200 150L205 160L215 155L210 145Z"/>
+    <path d="M320 170L325 180L335 175L330 165Z"/>
+    <path d="M180 280L185 290L195 285L190 275Z"/>
+    <path d="M340 300L345 310L355 305L350 295Z"/>
+    <circle cx="160" cy="220" r="3"/>
+    <circle cx="350" cy="250" r="3"/>
+    <circle cx="190" cy="320" r="2"/>
+    <circle cx="330" cy="180" r="2"/>
+  </g>
+  
+  <defs>
+    <!-- Background gradient -->
+    <radialGradient id="background" cx="0.5" cy="0.3" r="0.8">
+      <stop offset="0%" stop-color="#4A1A3D"/>
+      <stop offset="100%" stop-color="#2D1B2F"/>
+    </radialGradient>
+    
+    <!-- Ring gradient -->
+    <linearGradient id="ringGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF69B4"/>
+      <stop offset="50%" stop-color="#FF1493"/>
+      <stop offset="100%" stop-color="#FF69B4"/>
+    </linearGradient>
+    
+    <!-- Hair gradient -->
+    <linearGradient id="hairGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF69B4"/>
+      <stop offset="30%" stop-color="#FF1493"/>
+      <stop offset="70%" stop-color="#FF69B4"/>
+      <stop offset="100%" stop-color="#FF1493"/>
+    </linearGradient>
+    
+    <!-- Hair detail gradient -->
+    <linearGradient id="hairDetailGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF8FA3"/>
+      <stop offset="50%" stop-color="#FF69B4"/>
+      <stop offset="100%" stop-color="#FF8FA3"/>
+    </linearGradient>
+    
+    <!-- Sparkle gradient -->
+    <linearGradient id="sparkleGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="50%" stop-color="#FFE4E1"/>
+      <stop offset="100%" stop-color="#FFFFFF"/>
+    </linearGradient>
+  </defs>
+</svg>

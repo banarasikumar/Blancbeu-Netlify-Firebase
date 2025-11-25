@@ -1,23 +1,16 @@
 {
-  "name": "beauty-family-salon",
-  "version": "4.0.0",
-  "description": "Premium beauty salon PWA with 50+ features, built with vanilla JavaScript",
-  "main": "src/app.js",
-  "type": "module",
+  "name": "workspace",
+  "version": "1.0.0",
+  "main": "sw.js",
   "scripts": {
-    "start": "http-server public -p 5000 -c-1"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [
-    "beauty",
-    "salon",
-    "booking",
-    "pwa",
-    "vanilla-js"
-  ],
-  "author": "Beauty Family Salon",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/your-username/beauty-family-salon"
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "http-server": "^14.1.1",
+    "sharp": "^0.34.5"
   }
 }

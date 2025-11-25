@@ -4,7 +4,7 @@ expertMode = true
 
 [nix]
 channel = "stable-25_05"
-packages = ["imagemagick", "http-server"]
+packages = ["imagemagick"]
 
 [workflows]
 runButton = "Project"
@@ -27,7 +27,7 @@ outputType = "webview"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "http-server public -p 5000 -c-1"
+args = "http-server -p 5000 -c-1"
 waitForPort = 5000
 
 [[ports]]
@@ -35,8 +35,12 @@ localPort = 5000
 externalPort = 80
 
 [[ports]]
-localPort = 35487
+localPort = 34167
 externalPort = 3000
+
+[[ports]]
+localPort = 35045
+externalPort = 5173
 
 [[ports]]
 localPort = 36171
@@ -92,4 +96,4 @@ externalPort = 9000
 
 [deployment]
 deploymentTarget = "autoscale"
-run = ["http-server", "-p", "5000"]
+run = ["npx", "http-server", ".", "-p", "5000", "-a", "0.0.0.0", "--cors", "-c-1"]

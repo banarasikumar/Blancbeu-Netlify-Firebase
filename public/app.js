@@ -98,10 +98,8 @@ function scrollCarouselToIndex(index) {
     const carousel = document.querySelector('.carousel');
     if (!carousel) return;
     
-    const slide = carousel.children[index];
-    if (slide) {
-        slide.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
-    }
+    const slideWidth = carousel.offsetWidth;
+    carousel.scrollLeft = index * slideWidth;
 }
 
 function onCarouselScroll() {

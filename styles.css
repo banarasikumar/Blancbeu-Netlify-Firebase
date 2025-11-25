@@ -2697,7 +2697,8 @@ body {
 .app-shell-content {
     flex: 1;
     margin-top: 80px;
-    margin-bottom: 80px;
+    margin-bottom: 0;
+    padding-bottom: 80px;
     overflow-y: auto;
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
@@ -2789,7 +2790,8 @@ body {
     
     .app-shell-content {
         margin-top: 70px;
-        margin-bottom: 70px;
+        margin-bottom: 0;
+        padding-bottom: 70px;
     }
     
     .app-shell-bottom-nav {

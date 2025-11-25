@@ -1755,7 +1755,7 @@ body.light-mode .gallery-section {
 
 .footer {
     background: var(--deep-black);
-    padding: 20px 0 90px;
+    padding: 20px 0 20px;
     border-top: 3px solid var(--gold-24k);
 }
 
@@ -1763,7 +1763,7 @@ body.light-mode .gallery-section {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 50px;
-    margin-bottom: 50px;
+    margin-bottom: 10px;
 }
 
 .footer-section h3 {
@@ -1797,7 +1797,7 @@ body.light-mode .gallery-section {
 
 .footer-bottom {
     text-align: center;
-    padding-top: 30px;
+    padding-top: 10px;
     border-top: 1px solid rgba(255, 215, 0, 0.2);
     color: var(--text-gray);
 }
@@ -2695,7 +2695,7 @@ body {
 .app-shell-content {
     flex: 1;
     margin-top: 80px;
-    margin-bottom: 0;
+    margin-bottom: 80px;
     overflow-y: auto;
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
@@ -2787,7 +2787,7 @@ body {
     
     .app-shell-content {
         margin-top: 70px;
-        margin-bottom: 0;
+        margin-bottom: 70px;
     }
     
     .app-shell-bottom-nav {
@@ -2795,9 +2795,5 @@ body {
     }
     
     .app-page {
-    }
-    
-    .footer {
-        padding-bottom: 80px !important;
     }
 }

@@ -2703,12 +2703,12 @@ body {
 
 .app-page {
     display: none;
-    min-height: calc(100vh - 160px);
 }
 
 .app-page.active {
     display: block;
     animation: pageSlideIn 0.3s ease-out;
+    padding-bottom: 80px;
 }
 
 @keyframes pageSlideIn {
@@ -2796,6 +2796,6 @@ body {
     }
     
     .app-page {
-        min-height: calc(100vh - 140px);
+        padding-bottom: 70px;
     }
 }

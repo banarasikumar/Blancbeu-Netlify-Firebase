@@ -52,18 +52,23 @@ The Blancbeu website now uses a **true system-wide theme architecture** leveragi
 - **Music Player**: Background music with rose petal rain animation.
 - **Customer Engagement**: Customer reviews with star ratings and image gallery.
 
-## Recent Changes (v16.0.6 - ROOT CAUSE FIXED)
-- **REAL PROBLEM IDENTIFIED**: `.app-shell-content` had `padding-bottom: 80px` creating unnecessary gap
-- **ROOT CAUSE**: The scrollable content area had padding that was never needed
-  - Home page already has footer content (doesn't need padding)
-  - Empty pages (Notifications, Bookings, Account) already have inline `padding-bottom: 120px`
-  - The 80px padding on content area was creating a visible gap between footer and nav bar
-- **SOLUTION APPLIED**:
-  - Removed `padding-bottom: 80px` from `.app-shell-content` (desktop)
-  - Removed `padding-bottom: 70px` from `.app-shell-content` (mobile)
-  - Set both to `padding-bottom: 0`
-- **Result**: Footer now sits flush directly against bottom navigation bar with ZERO gap
-- **Updated**: version.json to v16.0.6, service worker cache to v11 for full cache bust
+## Recent Changes (v16.0.7 - HEADER POSITIONING PERFECTED)
+- **FIXED: Header bar positioning and overflow issues** - Logo icon, brand name, subtitle, and theme toggle now perfectly aligned
+- **IMPROVEMENTS APPLIED**:
+  - Increased header container padding and proper flex alignment
+  - Reduced brand icon from 85px to 56px for better proportions
+  - Reduced brand name font from 42px to 32px
+  - Reduced brand subtitle font from 13px to 10px
+  - Changed theme toggle from `position: absolute` to `margin-left: auto` (flex-based positioning)
+  - Added proper `height: 100%` and vertical alignment to logo content
+  - Optimized spacing: logo gap adjusted, brand-icon-wrapper uses flex alignment
+  - All margins/padding set to 0 for brand-name and subtitle for tight control
+- **Responsive scaling**:
+  - Tablet (768px): Header height 70px, icon 48px, name 24px
+  - Mobile (480px): Header height 70px, icon 44px, name 20px
+  - Theme toggle and all elements properly centered vertically
+- **Result**: Beautiful, proportional header with NO overflow, consistent across all navigation pages (Home, Notifications, Bookings, Account)
+- **Previous fix maintained**: Footer-to-nav gap still at 0px (from v16.0.6)
 
 ## Previous Changes (v16.0.2)
 - First attempt at fixing blank space issue

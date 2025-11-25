@@ -180,7 +180,8 @@
         </div>
     </div>
 
-    <header class="header" id="mainHeader">
+    <!-- APP SHELL: Fixed Header -->
+    <header class="header app-shell-header" id="mainHeader">
         <div class="container">
             <div class="logo">
                 <div class="brand-icon-wrapper">
@@ -210,7 +211,9 @@
         </div>
     </header>
 
-    <section id="home" class="hero">
+    <!-- APP SHELL: Content Area (scrollable) -->
+    <main class="app-shell-content" id="appContent">
+        <section id="home" class="hero app-page" data-page="home">
         <div class="carousel">
             <div class="carousel-track" id="carouselTrack">
                 <div class="carousel-slide active">
@@ -355,7 +358,7 @@
         </div>
     </section>
 
-    <section id="reviews" class="reviews-section">
+    <section id="reviews" class="reviews-section app-page" data-page="reviews">
         <div class="container">
             <h2 class="section-title">
                 <span class="title-decoration">⭐</span>
@@ -368,7 +371,31 @@
         </div>
     </section>
 
-    <section class="cta-section">
+    <section id="notifications" class="app-page hidden" data-page="notifications">
+        <div class="container" style="padding-top: 80px; padding-bottom: 120px; min-height: 100vh; display: flex; align-items: center; justify-content: center; flex-direction: column; text-align: center;">
+            <div style="font-size: 60px; margin-bottom: 20px;">🔔</div>
+            <h2 style="color: var(--text-primary); margin-bottom: 10px;">Notifications</h2>
+            <p style="color: var(--text-secondary);">You're all caught up! No new notifications.</p>
+        </div>
+    </section>
+
+    <section id="bookings" class="app-page hidden" data-page="bookings">
+        <div class="container" style="padding-top: 80px; padding-bottom: 120px; min-height: 100vh; display: flex; align-items: center; justify-content: center; flex-direction: column; text-align: center;">
+            <div style="font-size: 60px; margin-bottom: 20px;">📅</div>
+            <h2 style="color: var(--text-primary); margin-bottom: 10px;">My Bookings</h2>
+            <p style="color: var(--text-secondary);">No bookings yet. Book a service to get started!</p>
+        </div>
+    </section>
+
+    <section id="account" class="app-page hidden" data-page="account">
+        <div class="container" style="padding-top: 80px; padding-bottom: 120px; min-height: 100vh; display: flex; align-items: center; justify-content: center; flex-direction: column; text-align: center;">
+            <div style="font-size: 60px; margin-bottom: 20px;">👤</div>
+            <h2 style="color: var(--text-primary); margin-bottom: 10px;">Account</h2>
+            <p style="color: var(--text-secondary);">Account settings coming soon!</p>
+        </div>
+    </section>
+
+    <section class="cta-section app-page" data-page="home">
         <div class="container">
             <h2>Ready to Transform Your Look?</h2>
             <p>Book your appointment today and experience premium beauty care</p>
@@ -414,8 +441,10 @@
             </div>
         </div>
     </footer>
+    </main>
 
-    <!-- T&C Modal -->
+    <!-- APP SHELL: Fixed Bottom Navigation -->
+    <nav class="bottom-nav app-shell-bottom-nav" id="bottomNav">
     <div id="tcModal" class="tc-modal">
         <div class="tc-modal-content">
             <span class="tc-close" onclick="closeTC()">&times;</span>

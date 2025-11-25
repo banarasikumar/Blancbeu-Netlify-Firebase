@@ -877,23 +877,23 @@ body.light-mode .hearts {
 }
 
 body.light-mode .offers-section {
-    background: linear-gradient(135deg, #ffffff 0%, #fef5e7 50%, #ffffff 100%);
+    background: none !important;
 }
 
 body.light-mode .services-section {
-    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 50%, #f8f9fa 100%);
+    background: none !important;
 }
 
 body.light-mode .gallery-section {
-    background: linear-gradient(135deg, #ffffff 0%, #fdecea 50%, #ffffff 100%);
+    background: none !important;
 }
 
 body.light-mode .reviews-section {
-    background: linear-gradient(135deg, #fef5e7 0%, #ffffff 50%, #fef5e7 100%);
+    background: none !important;
 }
 
 body.light-mode .cta-section {
-    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    background: none !important;
 }
 
 body.light-mode .section-title {
@@ -1269,7 +1269,7 @@ body.light-mode .section-subtitle {
 }
 
 body.light-mode .offers-section {
-    background: linear-gradient(135deg, #fef5e7 0%, #fdecea 50%, #f8f9f9 100%);
+    background: none !important;
 }
 
 .offers-grid {
@@ -1570,7 +1570,7 @@ body.light-mode .service-original-price {
 }
 
 body.light-mode .gallery-section {
-    background: linear-gradient(135deg, #fef5e7 0%, #fdecea 50%, #f8f9f9 100%);
+    background: none !important;
 }
 
 .gallery-grid {

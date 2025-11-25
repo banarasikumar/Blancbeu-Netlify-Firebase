@@ -152,9 +152,6 @@ function switchTab(tabName) {
     }
     
     currentTab = tabName;
-    
-    // Scroll to top
-    document.querySelector('.main-content').scrollTop = 0;
 }
 
 // Bookings Management

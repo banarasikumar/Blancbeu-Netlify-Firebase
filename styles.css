@@ -1755,7 +1755,7 @@ body.light-mode .gallery-section {
 
 .footer {
     background: var(--deep-black);
-    padding: 20px 0 0;
+    padding: 20px 0 5px;
     border-top: 3px solid var(--gold-24k);
 }
 
@@ -2699,7 +2699,6 @@ body {
     overflow-y: auto;
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
-    padding-bottom: 80px;
 }
 
 .app-page {
@@ -2789,7 +2788,6 @@ body {
     .app-shell-content {
         margin-top: 70px;
         margin-bottom: 0;
-        padding-bottom: 70px;
     }
     
     .app-shell-bottom-nav {

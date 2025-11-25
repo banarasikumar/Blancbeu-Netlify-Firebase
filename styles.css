@@ -713,7 +713,7 @@ body.light-mode .footer {
     color: #2c3e50 !important;
     box-shadow: none !important;
     border-top: 3px solid rgba(212, 160, 23, 0.4) !important;
-    padding: 0 0 80px 0 !important;
+    padding: 0 !important;
 }
 
 body.light-mode .footer-section h3 {
@@ -1757,7 +1757,7 @@ body.light-mode .gallery-section {
 
 .footer {
     background: var(--deep-black);
-    padding: 0 0 80px 0;
+    padding: 0;
     margin: 0;
     border-top: 3px solid var(--gold-24k);
 }
@@ -2613,13 +2613,6 @@ body.light-mode {
         font-size: 9px;
     }
     
-    .footer {
-        padding: 0 0 70px 0 !important;
-    }
-    
-    body.light-mode .footer {
-        padding: 0 0 70px 0 !important;
-    }
 }
 
 /* Dark mode enhancements for iOS */
@@ -2710,7 +2703,7 @@ body {
     flex: 1;
     margin-top: 80px;
     margin-bottom: 0;
-    padding-bottom: 0;
+    padding-bottom: 80px;
     overflow-y: auto;
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
@@ -2803,7 +2796,7 @@ body {
     .app-shell-content {
         margin-top: 70px;
         margin-bottom: 0;
-        padding-bottom: 0;
+        padding-bottom: 70px;
     }
     
     .app-shell-bottom-nav {

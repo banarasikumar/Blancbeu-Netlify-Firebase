@@ -1033,59 +1033,6 @@ class ThemeController {
   }
 }
 
-function openDevModal() {
-  const modal = document.getElementById('devModal');
-  if (modal) {
-    modal.style.display = 'block';
-    modal.style.animation = 'fadeInBackdrop 0.3s ease-out';
-    document.body.style.overflow = 'hidden';
-  }
-}
-
-function closeDevModal() {
-  const modal = document.getElementById('devModal');
-  if (modal) {
-    modal.style.display = 'none';
-    document.body.style.overflow = 'auto';
-  }
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-  const notificationsBtn = document.querySelector('[data-page="notifications"]');
-  const bookingsBtn = document.querySelector('[data-page="bookings"]');
-  const accountBtn = document.querySelector('[data-page="account"]');
-  const devModal = document.getElementById('devModal');
-
-  if (notificationsBtn) {
-    notificationsBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      openDevModal();
-    });
-  }
-
-  if (bookingsBtn) {
-    bookingsBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      openDevModal();
-    });
-  }
-
-  if (accountBtn) {
-    accountBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      openDevModal();
-    });
-  }
-
-  if (devModal) {
-    devModal.addEventListener('click', (e) => {
-      if (e.target === devModal) {
-        closeDevModal();
-        document.body.style.overflow = 'auto';
-      }
-    });
-  }
-});
 
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {

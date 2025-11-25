@@ -1106,13 +1106,11 @@ class AppShellNavigator {
         const navItems = this.bottomNav.querySelectorAll('.nav-item');
         navItems.forEach(item => {
             item.addEventListener('click', (e) => {
-                const isExternalLink = item.tagName === 'A' && item.href.includes('wa.me');
+                const isExternalLink = item.href && item.href.includes('wa.me');
                 if (!isExternalLink) {
                     e.preventDefault();
                     const page = item.getAttribute('data-page');
-                    if (page) {
-                        this.navigateTo(page);
-                    }
+                    this.navigateTo(page);
                 }
             });
         });

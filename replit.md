@@ -13,8 +13,9 @@ I want to ensure a smooth, professional development process.
 - **Design Adherence**: Maintain the premium 24k gold and black aesthetic as a primary design principle.
 
 ## System Architecture
+The Blancbeu website now uses a **true system-wide theme architecture** leveraging CSS custom properties (variables) to control all colors and styles dynamically across light and dark modes.
 
-### Theme System (Version 16.0.0+)
+### Theme System (NEW - Version 16.0.0+)
 - **CSS Variable-Based Architecture**: Complete theme separation using `:root` with dual theme definitions
   - Dark theme (default): 40+ CSS variables for backgrounds, text, shadows, borders, etc.
   - Light theme: Activated via `data-theme="light"` attribute on HTML element
@@ -24,28 +25,17 @@ I want to ensure a smooth, professional development process.
 - **Smart Detection**: Automatic theme selection based on time of day (6 AM - 5 PM: Light, 5 PM - 6 AM: Dark) for first-time visitors
 - **Persistence**: User theme preference saved in localStorage and restored on subsequent visits
 
-### App Shell Architecture (NEW - Version 17.0.0)
-- **Native App-Like UI Pattern**: True Single Page Application (SPA) with persistent header and bottom navigation
-- **Fixed Header**: Stays visible at top with logo, theme toggle, and desktop navigation menu
-- **Scrollable Content Area**: Middle section displays different pages without reloads or scrolling header/nav
-- **Fixed Bottom Navigation**: 5 tabs (Home, Notifications, Bookings, Chat, Account) always visible at bottom
-- **Smooth Page Transitions**: 0.3s fade-in animations when switching between pages
-- **Smart Navigation Controller**: JavaScript AppShellNavigator class manages all page switching and active states
-- **Mobile-First Responsive**: Optimized spacing and touch-friendly navigation for all screen sizes
-- **Zero Page Reloads**: Content swaps in memory - no server requests for navigation
-
 ### UI/UX Decisions
 - **Theming**: Dual-theme system with dynamic CSS variables. Dark Mode is premium 24k gold on deep black, Light Mode is sophisticated warm/cream on white. Themes are user-toggleable via modern circular glassmorphism button with smooth transitions.
-- **Navigation**: iOS-style bottom navigation bar with glassmorphism effects, scroll-based visibility toggling, and theme-aware styling. Desktop top navigation for multi-section browsing.
+- **Navigation**: iOS-style bottom navigation bar with glassmorphism effects, scroll-based visibility toggling, and theme-aware styling.
 - **Animations**: In dark mode only, incorporates animations including transparent Diwali fireworks overlay, brand name shimmer, sparkling particle backgrounds, offer card glow effects, and rose petal rain. All animations disabled in light mode.
 - **Design Elements**: Uses `Cinzel` for luxury headings and `Poppins` for body text. Features glassmorphism with strong blur and shadow depth for interactive elements.
-- **Responsiveness**: Fully responsive across all devices with optimized images for various screen sizes and proper spacing adjustments.
+- **Responsiveness**: Fully responsive across all devices with optimized images for various screen sizes.
 
 ### Technical Implementations
 - **Frontend**: Vanilla HTML, CSS, JavaScript for maximum control and performance.
 - **Theme System**: CSS custom properties (`--bg-primary`, `--text-primary`, `--shadow-dark`, etc.) defined in `theme-variables.css`. Two complete theme definitions: one for `:root` (dark) and one for `:root[data-theme="light"]`.
 - **State Management**: `ThemeController` class manages theme state, synchronizes with localStorage, and updates DOM attributes.
-- **App Shell Navigation**: `AppShellNavigator` class manages page routing, active states, and smooth transitions without page reloads.
 - **CSS Architecture**: Refactored to use CSS variables throughout for colors, backgrounds, shadows, and borders. All hardcoded colors replaced with variable references.
 - **Image Optimization**: WebP format with PNG fallbacks for iOS, resized to display dimensions, lazy loading for performance.
 - **Scroll Behavior**: Unified header and bottom navigation visibility management based on scroll events.
@@ -53,10 +43,8 @@ I want to ensure a smooth, professional development process.
 
 ### Feature Specifications
 - **Light/Dark Mode**: System-wide CSS variable-based theme switching. Intelligent automatic detection based on time (IST), user-toggleable with preference persistence. All elements use theme variables—no class-based patches or mixed states.
-- **App Shell Navigation**: 5-tab bottom navigation (Home, Notifications, Bookings, Chat, Account) that switches between pages instantly without reloads. Desktop top navigation provides quick access to all sections. Active tab highlighted in 24k gold.
-- **Smooth Transitions**: 0.3s fade-in animations when pages switch for polished native app feel.
 - **Image Optimization**: 90% reduction in image weight using WebP, resizing, and lazy loading.
-- **Modern Navigation**: iOS-style bottom navigation with theme-aware styling and smooth transitions.
+- **Modern Navigation**: iOS-style bottom navigation with theme-aware styling and scroll behavior.
 - **Fireworks Overlay**: Transparent Diwali fireworks (dark mode only) at 60% speed, visual-only, audio disabled.
 - **Banner Carousel**: Auto-playing carousel with user-provided 16:9 widescreen images.
 - **Brand Identity**: "BLANCBEU" name with gold gradient, "Family Beauty Salon" subtitle, premium aesthetic.
@@ -64,16 +52,14 @@ I want to ensure a smooth, professional development process.
 - **Music Player**: Background music with rose petal rain animation.
 - **Customer Engagement**: Customer reviews with star ratings and image gallery.
 
-## Recent Changes (v17.0.0)
-- **Implemented App Shell Architecture** - True native app-like SPA with fixed header and bottom navigation
-- **Created AppShellNavigator Class** - JavaScript controller for seamless page switching without reloads
-- **Added 5-Tab Navigation System** - Home, Notifications, Bookings, Chat (WhatsApp), Account tabs fully functional
-- **Implemented Smooth Page Transitions** - 0.3s fade-in animations when switching between pages
-- **Created Content Pages** - Notifications, Bookings, and Account pages with placeholder content ready for features
-- **Fixed Layout CSS** - Header and bottom nav stay fixed while content area scrolls independently
-- **Responsive App Shell** - Proper spacing adjustments for mobile (70-80px) and desktop (80px)
-- **Active State Highlighting** - Bottom nav items highlight in 24k gold when active
-- **Theme Integration** - App Shell respects light/dark mode theme throughout
+## Recent Changes (v16.0.0)
+- **Implemented true system-wide theme architecture** using CSS custom properties
+- **Created `theme-variables.css`** with 40+ theme variables for dark and light modes
+- **Refactored `script.js` ThemeController** to use `data-theme` attribute instead of class-based toggling
+- **Updated `styles.css`** to reference CSS variables for all colors and styles
+- **Replaced hardcoded colors** with variable references (dark shadows, backgrounds, text colors)
+- **Added theme-variables.css link** to index.html for immediate theme application
+- **Bumped version to 16.0.0** for cache clearance on PWA reinstall
 
 ## External Dependencies
 - **http-server (Node.js)**: Local development server
@@ -85,12 +71,12 @@ I want to ensure a smooth, professional development process.
 
 ## File Structure
 ```
-├── index.html              (Main entry point with app shell layout)
-├── styles.css              (Refactored with CSS variables + app shell styles)
-├── theme-variables.css     (40+ theme variables for dark/light modes)
-├── script.js               (ThemeController + AppShellNavigator)
+├── index.html              (Main entry point with early theme script)
+├── styles.css              (Refactored with CSS variable references)
+├── theme-variables.css     (NEW: Complete theme definitions)
+├── script.js               (Updated ThemeController with data-theme)
 ├── manifest.json           (PWA manifest)
-├── version.json            (Cache versioning - v17.0.0)
+├── version.json            (Cache versioning - v16.0.0)
 ├── sw.js                   (Service worker)
 ├── fireworks.css           (Fireworks animations)
 ├── assets/                 (Optimized images: banners, services, gallery)
@@ -98,28 +84,5 @@ I want to ensure a smooth, professional development process.
 ```
 
 ## Known Limitations & Future Improvements
-- Notifications, Bookings, and Account pages currently show placeholder content - ready for backend integration
-- Chat tab opens WhatsApp directly - can be converted to in-app messaging later
-- Some CSS references may still use legacy gradient values - will be systematically converted to CSS variables in future updates
+- Some older CSS references may still use legacy color values (gradients with hardcoded gold values)—these will be systematically converted to variables in future updates
 - Theme switching CSS transitions are quick but could benefit from staggered animations for ultra-smooth UX
-- No authentication system yet - user profiles can be added in future versions
-
-## Testing Status
-✅ **APP SHELL FULLY VERIFIED:**
-- HTML Structure: 11/11 components correct
-- Navigation Items: 5/5 tabs functional
-- CSS Styles: 7/7 styling rules applied
-- JavaScript: 7/7 controller methods working
-- Overall: 30/30 tests passing (100%)
-
-✨ Features Confirmed Working:
-- ✓ Header stays fixed while scrolling
-- ✓ Bottom nav stays fixed
-- ✓ Content area scrolls independently
-- ✓ Pages switch smoothly with fade-in animation
-- ✓ Navigation highlights active tab in gold
-- ✓ All 5 tabs functional and responsive
-- ✓ Responsive layout for mobile and desktop
-- ✓ Theme colors applied throughout
-- ✓ PWA integration active
-- ✓ Ready for production deployment

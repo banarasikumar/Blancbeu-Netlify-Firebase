@@ -2712,7 +2712,7 @@ body {
     flex: 1;
     margin-top: 80px;
     margin-bottom: 0;
-    padding-bottom: 80px;
+    padding-bottom: 0;
     overflow-y: auto;
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
@@ -2805,7 +2805,7 @@ body {
     .app-shell-content {
         margin-top: 70px;
         margin-bottom: 0;
-        padding-bottom: 70px;
+        padding-bottom: 0;
     }
     
     .app-shell-bottom-nav {

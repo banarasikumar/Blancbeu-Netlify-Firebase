@@ -3221,7 +3221,7 @@ body {
     backdrop-filter: blur(8px);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(212, 175, 55, 0.1);
     overflow: visible;
-    padding-top: 32px;
+    padding-top: 42px;
 }
 
 .booking-card::before {
@@ -3262,17 +3262,18 @@ body {
 
 .booking-status-badge {
     position: absolute;
-    top: 8px;
-    right: 8px;
-    font-size: 9px;
+    top: 10px;
+    right: 16px;
+    font-size: 8px;
     font-weight: 800;
-    padding: 5px 10px;
-    border-radius: 6px;
+    padding: 4px 8px;
+    border-radius: 5px;
     text-transform: uppercase;
-    letter-spacing: 0.6px;
+    letter-spacing: 0.5px;
     backdrop-filter: blur(10px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     z-index: 10;
+    white-space: nowrap;
 }
 
 .upcoming-badge {
@@ -3291,8 +3292,8 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    gap: 8px;
-    padding-right: 0;
+    gap: 12px;
+    padding-right: 4px;
 }
 
 .booking-service-info {

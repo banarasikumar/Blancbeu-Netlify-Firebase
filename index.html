@@ -427,127 +427,179 @@
         <!-- NOTIFICATIONS PAGE -->
         <section id="notifications" class="app-page" data-page="notifications">
             <div class="notifications-container">
-                <!-- Header -->
+                <!-- Header with Settings -->
                 <div class="notifications-header">
-                    <h1 style="color: var(--text-primary); margin: 0; font-size: 28px;">Notifications</h1>
+                    <div class="notifications-header-content">
+                        <h1 style="color: var(--text-primary); margin: 0; font-size: 28px; font-family: 'Cinzel', serif;">Notifications</h1>
+                        <span class="unread-count" style="display: none; background: var(--gold-24k); color: var(--bg-primary); border-radius: 20px; padding: 2px 8px; font-size: 12px; font-weight: bold;">7</span>
+                    </div>
+                    <button class="notifications-settings-btn" title="Settings">⚙️</button>
                 </div>
 
-                <!-- Filter Tabs -->
+                <!-- Filter Tabs with Badge Counts -->
                 <div class="notifications-filters">
-                    <button class="filter-btn active" data-filter="all">All</button>
-                    <button class="filter-btn" data-filter="appointments">Appointments</button>
-                    <button class="filter-btn" data-filter="offers">Offers</button>
-                    <button class="filter-btn" data-filter="reviews">Reviews</button>
+                    <button class="filter-btn active" data-filter="all" data-count="7">All <span class="count-badge">7</span></button>
+                    <button class="filter-btn" data-filter="appointments" data-count="2">Appointments <span class="count-badge">2</span></button>
+                    <button class="filter-btn" data-filter="offers" data-count="3">Offers <span class="count-badge">3</span></button>
+                    <button class="filter-btn" data-filter="reviews" data-count="2">Reviews <span class="count-badge">2</span></button>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <button class="quick-action-chip" data-action="mark-all-read">Mark all as read</button>
+                    <button class="quick-action-chip" data-action="clear-all">Clear all</button>
                 </div>
 
                 <!-- Notifications List -->
                 <div class="notifications-list">
-                    <!-- Appointment Notification -->
-                    <div class="notification-card appointments" data-type="appointments">
-                        <div class="notification-badge unread"></div>
-                        <div class="notification-icon appointment-icon">📅</div>
-                        <div class="notification-content">
-                            <h3 class="notification-title">Your Booking Confirmed</h3>
-                            <p class="notification-message">Hair Spa on Nov 28, 2025 at 3:00 PM</p>
-                            <p class="notification-time">2 hours ago</p>
+                    <!-- TODAY SECTION -->
+                    <div class="notification-section">
+                        <div class="section-divider">
+                            <span class="section-label">Today</span>
                         </div>
-                        <div class="notification-actions">
-                            <button class="action-btn like-btn" title="Like">❤️</button>
-                            <button class="action-btn dismiss-btn" title="Dismiss">✕</button>
+
+                        <!-- Appointment Notification - Priority High -->
+                        <div class="notification-card appointments" data-type="appointments" data-priority="high" data-unread="true">
+                            <div class="notification-badge unread"></div>
+                            <div class="priority-indicator high"></div>
+                            <div class="notification-icon appointment-icon">📅</div>
+                            <div class="notification-content">
+                                <div class="notification-header">
+                                    <h3 class="notification-title">Your Booking Confirmed</h3>
+                                    <span class="priority-label high-label">Urgent</span>
+                                </div>
+                                <p class="notification-message">Hair Spa on Nov 28, 2025 at 3:00 PM • Service ID: #BS2025</p>
+                                <div class="notification-meta">
+                                    <span class="meta-tag">Confirmed</span>
+                                    <span class="notification-time">2 hours ago</span>
+                                </div>
+                            </div>
+                            <div class="notification-actions">
+                                <button class="action-btn view-appointment">View Details</button>
+                                <button class="action-btn dismiss-btn" title="Dismiss">✕</button>
+                            </div>
+                        </div>
+
+                        <!-- Offer Notification - Priority High -->
+                        <div class="notification-card offers" data-type="offers" data-priority="high" data-unread="true">
+                            <div class="notification-badge unread"></div>
+                            <div class="priority-indicator high"></div>
+                            <div class="notification-icon offer-icon">✨</div>
+                            <div class="notification-content">
+                                <div class="notification-header">
+                                    <h3 class="notification-title">Special Offer: 40% Off!</h3>
+                                    <span class="priority-label high-label">Hot Deal</span>
+                                </div>
+                                <p class="notification-message">Get amazing discounts on all beauty treatments this week only</p>
+                                <div class="offer-preview">
+                                    <span class="offer-amount">40% OFF</span>
+                                    <span class="offer-expiry">Expires in 2 days</span>
+                                </div>
+                                <p class="notification-time">6 hours ago</p>
+                            </div>
+                            <div class="notification-actions">
+                                <button class="action-btn view-btn">View Offer</button>
+                                <button class="action-btn dismiss-btn" title="Dismiss">✕</button>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Offer Notification -->
-                    <div class="notification-card offers" data-type="offers">
-                        <div class="notification-badge unread"></div>
-                        <div class="notification-icon offer-icon">✨</div>
-                        <div class="notification-content">
-                            <h3 class="notification-title">Special Offer: 40% Off!</h3>
-                            <p class="notification-message">Get amazing discounts on all beauty treatments this week</p>
-                            <p class="notification-time">6 hours ago</p>
+                    <!-- YESTERDAY SECTION -->
+                    <div class="notification-section">
+                        <div class="section-divider">
+                            <span class="section-label">Yesterday</span>
                         </div>
-                        <div class="notification-actions">
-                            <button class="action-btn view-btn">View</button>
-                            <button class="action-btn dismiss-btn" title="Dismiss">✕</button>
+
+                        <!-- Review Request -->
+                        <div class="notification-card reviews" data-type="reviews" data-priority="normal" data-unread="false">
+                            <div class="notification-icon review-icon">⭐</div>
+                            <div class="notification-content">
+                                <h3 class="notification-title">Share Your Experience</h3>
+                                <p class="notification-message">We'd love to hear about your recent visit! Rate your experience</p>
+                                <p class="notification-time">1 day ago</p>
+                            </div>
+                            <div class="notification-actions">
+                                <button class="action-btn review-btn">Leave Review</button>
+                                <button class="action-btn dismiss-btn" title="Dismiss">✕</button>
+                            </div>
+                        </div>
+
+                        <!-- Appointment Reminder -->
+                        <div class="notification-card appointments" data-type="appointments" data-priority="normal" data-unread="false">
+                            <div class="notification-icon reminder-icon">🔔</div>
+                            <div class="notification-content">
+                                <h3 class="notification-title">Appointment Reminder</h3>
+                                <p class="notification-message">Your Hair Coloring appointment is tomorrow at 2:00 PM</p>
+                                <p class="notification-time">1 day ago</p>
+                            </div>
+                            <div class="notification-actions">
+                                <button class="action-btn like-btn" title="Like">❤️</button>
+                                <button class="action-btn dismiss-btn" title="Dismiss">✕</button>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Review Request -->
-                    <div class="notification-card reviews" data-type="reviews">
-                        <div class="notification-icon review-icon">⭐</div>
-                        <div class="notification-content">
-                            <h3 class="notification-title">Share Your Experience</h3>
-                            <p class="notification-message">We'd love to hear about your recent visit! Rate and review your experience</p>
-                            <p class="notification-time">1 day ago</p>
+                    <!-- EARLIER SECTION -->
+                    <div class="notification-section">
+                        <div class="section-divider">
+                            <span class="section-label">Earlier</span>
                         </div>
-                        <div class="notification-actions">
-                            <button class="action-btn review-btn">Leave Review</button>
-                            <button class="action-btn dismiss-btn" title="Dismiss">✕</button>
-                        </div>
-                    </div>
 
-                    <!-- Appointment Reminder -->
-                    <div class="notification-card appointments" data-type="appointments">
-                        <div class="notification-icon reminder-icon">🔔</div>
-                        <div class="notification-content">
-                            <h3 class="notification-title">Appointment Reminder</h3>
-                            <p class="notification-message">Your Hair Coloring appointment is tomorrow at 2:00 PM</p>
-                            <p class="notification-time">1 day ago</p>
+                        <!-- Loyalty Points Notification -->
+                        <div class="notification-card offers" data-type="offers" data-priority="normal" data-unread="false">
+                            <div class="notification-icon loyalty-icon">🎁</div>
+                            <div class="notification-content">
+                                <h3 class="notification-title">You've Earned 150 Points!</h3>
+                                <p class="notification-message">Congratulations! Redeem them for exclusive rewards and discounts</p>
+                                <div class="points-preview">
+                                    <span class="points-amount">150 Points</span>
+                                </div>
+                                <p class="notification-time">2 days ago</p>
+                            </div>
+                            <div class="notification-actions">
+                                <button class="action-btn redeem-btn">Redeem</button>
+                                <button class="action-btn dismiss-btn" title="Dismiss">✕</button>
+                            </div>
                         </div>
-                        <div class="notification-actions">
-                            <button class="action-btn like-btn" title="Like">❤️</button>
-                            <button class="action-btn dismiss-btn" title="Dismiss">✕</button>
-                        </div>
-                    </div>
 
-                    <!-- Loyalty Points Notification -->
-                    <div class="notification-card offers" data-type="offers">
-                        <div class="notification-icon loyalty-icon">🎁</div>
-                        <div class="notification-content">
-                            <h3 class="notification-title">You've Earned 150 Points!</h3>
-                            <p class="notification-message">Congratulations! Redeem them for exclusive rewards</p>
-                            <p class="notification-time">2 days ago</p>
+                        <!-- New Service Alert -->
+                        <div class="notification-card offers" data-type="offers" data-priority="normal" data-unread="false">
+                            <div class="notification-icon new-service-icon">🌟</div>
+                            <div class="notification-content">
+                                <h3 class="notification-title">New Service: Bridal Makeup</h3>
+                                <p class="notification-message">Experience our premium bridal makeup service with expert artists</p>
+                                <p class="notification-time">3 days ago</p>
+                            </div>
+                            <div class="notification-actions">
+                                <button class="action-btn explore-btn">Explore</button>
+                                <button class="action-btn dismiss-btn" title="Dismiss">✕</button>
+                            </div>
                         </div>
-                        <div class="notification-actions">
-                            <button class="action-btn redeem-btn">Redeem</button>
-                            <button class="action-btn dismiss-btn" title="Dismiss">✕</button>
-                        </div>
-                    </div>
 
-                    <!-- New Service Alert -->
-                    <div class="notification-card offers" data-type="offers">
-                        <div class="notification-icon new-service-icon">🌟</div>
-                        <div class="notification-content">
-                            <h3 class="notification-title">New Service: Bridal Makeup</h3>
-                            <p class="notification-message">Experience our premium bridal makeup service with expert artists</p>
-                            <p class="notification-time">3 days ago</p>
-                        </div>
-                        <div class="notification-actions">
-                            <button class="action-btn explore-btn">Explore</button>
-                            <button class="action-btn dismiss-btn" title="Dismiss">✕</button>
-                        </div>
-                    </div>
-
-                    <!-- Review Alert -->
-                    <div class="notification-card reviews" data-type="reviews">
-                        <div class="notification-icon review-alert-icon">💬</div>
-                        <div class="notification-content">
-                            <h3 class="notification-title">New Review from Sarah M.</h3>
-                            <p class="notification-message">"Amazing experience! The staff was very professional and friendly."</p>
-                            <p class="notification-time">5 days ago</p>
-                        </div>
-                        <div class="notification-actions">
-                            <button class="action-btn like-btn" title="Like">❤️</button>
-                            <button class="action-btn dismiss-btn" title="Dismiss">✕</button>
+                        <!-- Review Alert -->
+                        <div class="notification-card reviews" data-type="reviews" data-priority="normal" data-unread="false">
+                            <div class="notification-icon review-alert-icon">💬</div>
+                            <div class="notification-content">
+                                <h3 class="notification-title">New Review from Sarah M.</h3>
+                                <p class="notification-message">"Amazing experience! The staff was very professional and friendly."</p>
+                                <div class="review-preview">
+                                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                                </div>
+                                <p class="notification-time">5 days ago</p>
+                            </div>
+                            <div class="notification-actions">
+                                <button class="action-btn like-btn" title="Like">❤️</button>
+                                <button class="action-btn dismiss-btn" title="Dismiss">✕</button>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Empty State (hidden by default) -->
-                <div class="empty-state" style="display: none; text-align: center; padding: 60px 20px;">
-                    <div style="font-size: 80px; margin-bottom: 20px;">🔔</div>
-                    <h2 style="color: var(--text-primary); margin-bottom: 10px;">No Notifications</h2>
-                    <p style="color: var(--text-secondary);">You're all caught up! Check back later for updates.</p>
+                <div class="empty-state" style="display: none; text-align: center; padding: 80px 20px;">
+                    <div style="font-size: 100px; margin-bottom: 20px; animation: float 3s ease-in-out infinite;">🔔</div>
+                    <h2 style="color: var(--text-primary); margin-bottom: 10px; font-size: 24px;">All Caught Up!</h2>
+                    <p style="color: var(--text-secondary); font-size: 14px;">You have no new notifications. Check back later for updates about your appointments and special offers.</p>
                 </div>
             </div>
         </section>

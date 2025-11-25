@@ -1176,6 +1176,8 @@ function initNotificationsController() {
     const notificationCards = document.querySelectorAll('.notification-card');
     const dismissBtns = document.querySelectorAll('.dismiss-btn');
     const actionBtns = document.querySelectorAll('.action-btn');
+    const quickActionChips = document.querySelectorAll('.quick-action-chip');
+    const settingsBtn = document.querySelector('.notifications-settings-btn');
 
     // Filter functionality
     filterBtns.forEach(btn => {
@@ -1186,21 +1188,20 @@ function initNotificationsController() {
             filterBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
 
-            // Filter notification cards
+            // Filter notification cards and sections
+            let visibleCount = 0;
             notificationCards.forEach(card => {
                 const cardType = card.getAttribute('data-type');
                 if (filter === 'all' || cardType === filter) {
                     card.style.display = 'flex';
-                    setTimeout(() => {
-                        card.style.animation = 'slideInNotification 0.4s ease-out';
-                    }, 0);
+                    visibleCount++;
                 } else {
                     card.style.display = 'none';
                 }
             });
 
-            // Check if any visible cards
             checkEmptyState();
+            console.log(`🔍 Filtered to '${filter}' - ${visibleCount} notifications visible`);
         });
     });
 
@@ -1213,6 +1214,7 @@ function initNotificationsController() {
             setTimeout(() => {
                 card.remove();
                 checkEmptyState();
+                console.log('🗑️ Notification dismissed');
             }, 300);
         });
     });
@@ -1222,21 +1224,38 @@ function initNotificationsController() {
         btn.addEventListener('click', (e) => {
             e.stopPropagation();
             if (btn.classList.contains('dismiss-btn')) return;
-            
-            // Visual feedback
             btn.style.transform = 'scale(0.95)';
-            setTimeout(() => {
-                btn.style.transform = '';
-            }, 200);
+            setTimeout(() => { btn.style.transform = ''; }, 200);
         });
     });
 
-    // Notification card click
-    notificationCards.forEach(card => {
-        card.addEventListener('click', () => {
-            console.log('Notification clicked');
+    // Quick action chips
+    quickActionChips.forEach(chip => {
+        chip.addEventListener('click', () => {
+            const action = chip.getAttribute('data-action');
+            if (action === 'mark-all-read') {
+                notificationCards.forEach(card => {
+                    card.setAttribute('data-unread', 'false');
+                    card.style.animation = 'slideInNotification 0.3s ease-out';
+                });
+                console.log('✅ All marked as read');
+            } else if (action === 'clear-all') {
+                notificationCards.forEach(card => {
+                    card.style.animation = 'slideOutNotification 0.3s ease-out forwards';
+                    setTimeout(() => card.remove(), 300);
+                });
+                setTimeout(checkEmptyState, 300);
+                console.log('🗑️ All notifications cleared');
+            }
         });
     });
+
+    // Settings button
+    if (settingsBtn) {
+        settingsBtn.addEventListener('click', () => {
+            alert('⚙️ Notification settings coming soon!');
+        });
+    }
 
     // Add animation keyframe
     if (!document.querySelector('style[data-notif-anim]')) {
@@ -1258,15 +1277,14 @@ function initNotificationsController() {
     }
 
     function checkEmptyState() {
-        const visibleCards = document.querySelectorAll('.notification-card[style*="display: flex"], .notification-card:not([style*="display: none"])');
+        const allCards = document.querySelectorAll('.notification-card');
         const emptyState = document.querySelector('.notifications-container .empty-state');
-        
-        if (visibleCards.length === 0 && emptyState) {
+        if (allCards.length === 0 && emptyState) {
             emptyState.style.display = 'block';
         } else if (emptyState) {
             emptyState.style.display = 'none';
         }
     }
 
-    console.log('✅ Notifications controller initialized');
+    console.log('✅ Notifications controller initialized with enhanced features');
 }

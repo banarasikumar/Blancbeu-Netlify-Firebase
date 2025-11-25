@@ -2859,20 +2859,65 @@ body {
 
 /* ===== NOTIFICATIONS PAGE STYLES ===== */
 .notifications-container {
-    padding: 20px 0 120px 0;
-    max-width: 600px;
+    padding: 12px 0 120px 0;
+    max-width: 650px;
     margin: 0 auto;
 }
 
 .notifications-header {
-    padding: 20px 20px 0;
+    padding: 16px 20px;
     border-bottom: 1px solid var(--border-light);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+.notifications-header-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+}
+
+.notifications-header h1 {
+    margin: 0;
+    font-size: 28px;
+}
+
+.unread-count {
+    background: var(--gold-24k);
+    color: var(--bg-primary);
+    border-radius: 20px;
+    padding: 4px 10px;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.notifications-settings-btn {
+    border: none;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    font-size: 20px;
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.notifications-settings-btn:hover {
+    background: var(--bg-tertiary, rgba(212, 175, 55, 0.1));
+    transform: rotate(20deg);
 }
 
 .notifications-filters {
     display: flex;
     gap: 8px;
-    padding: 16px 20px;
+    padding: 12px 16px;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     background: var(--bg-primary);
@@ -2883,21 +2928,34 @@ body {
 }
 
 .filter-btn {
-    padding: 8px 16px;
+    padding: 7px 14px;
     border: 1px solid var(--border-light);
     background: var(--bg-secondary);
     color: var(--text-secondary);
     border-radius: 20px;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 600;
     cursor: pointer;
     white-space: nowrap;
     transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.count-badge {
+    background: var(--bg-primary);
+    color: var(--gold-24k);
+    border-radius: 12px;
+    padding: 1px 6px;
+    font-size: 11px;
+    font-weight: 700;
 }
 
 .filter-btn:hover {
     border-color: var(--gold-24k);
     color: var(--gold-24k);
+    background: var(--bg-primary);
 }
 
 .filter-btn.active {
@@ -2905,6 +2963,63 @@ body {
     color: var(--bg-primary);
     border-color: var(--gold-24k);
     box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+}
+
+.filter-btn.active .count-badge {
+    background: rgba(0, 0, 0, 0.2);
+    color: inherit;
+}
+
+.quick-actions {
+    display: flex;
+    gap: 8px;
+    padding: 12px 20px;
+    flex-wrap: wrap;
+}
+
+.quick-action-chip {
+    padding: 6px 12px;
+    border: 1px solid var(--gold-24k);
+    background: transparent;
+    color: var(--gold-24k);
+    border-radius: 16px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.quick-action-chip:hover {
+    background: var(--gold-24k);
+    color: var(--bg-primary);
+}
+
+.notification-section {
+    margin-bottom: 20px;
+}
+
+.section-divider {
+    padding: 8px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.section-divider::before,
+.section-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border-light);
+}
+
+.section-label {
+    color: var(--text-secondary);
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .notifications-list {
@@ -2918,12 +3033,21 @@ body {
     padding: 16px;
     margin-bottom: 12px;
     background: var(--bg-secondary);
-    border: 1px solid var(--border-light);
+    border: 2px solid var(--border-light);
+    border-left: 4px solid transparent;
     border-radius: 12px;
     cursor: pointer;
     transition: all 0.3s ease;
     position: relative;
     animation: slideInNotification 0.4s ease-out;
+}
+
+.notification-card[data-priority="high"] {
+    border-left-color: var(--gold-24k);
+}
+
+.notification-card[data-unread="true"] {
+    background: linear-gradient(135deg, var(--bg-secondary) 0%, rgba(212, 175, 55, 0.05) 100%);
 }
 
 @keyframes slideInNotification {
@@ -2937,10 +3061,105 @@ body {
     }
 }
 
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+}
+
 .notification-card:hover {
-    background: var(--bg-secondary);
     border-color: var(--gold-24k);
-    box-shadow: 0 4px 12px var(--shadow-dark);
+    box-shadow: 0 8px 16px var(--shadow-dark);
+    transform: translateY(-2px);
+}
+
+.priority-indicator {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 60%;
+    border-radius: 2px;
+    display: none;
+}
+
+.priority-indicator.high {
+    display: block;
+    background: var(--gold-24k);
+    animation: glow 1.5s ease-in-out infinite;
+}
+
+@keyframes glow {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7); }
+    50% { box-shadow: 0 0 8px 2px rgba(212, 175, 55, 0.3); }
+}
+
+.notification-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.priority-label {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.high-label {
+    background: rgba(212, 175, 55, 0.2);
+    color: var(--gold-24k);
+}
+
+.notification-meta {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.meta-tag {
+    font-size: 11px;
+    background: var(--bg-primary);
+    color: var(--gold-24k);
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+.offer-preview, .points-preview, .review-preview {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-top: 8px;
+    padding: 8px 12px;
+    background: var(--bg-primary);
+    border-radius: 8px;
+}
+
+.offer-amount {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--gold-24k);
+}
+
+.offer-expiry {
+    font-size: 11px;
+    color: var(--text-secondary);
+}
+
+.points-amount {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--gold-24k);
+}
+
+.stars {
+    font-size: 14px;
 }
 
 .notification-badge {
@@ -3014,7 +3233,7 @@ body {
 }
 
 .action-btn {
-    padding: 6px 10px;
+    padding: 7px 12px;
     border: none;
     border-radius: 6px;
     font-size: 12px;
@@ -3030,6 +3249,11 @@ body {
     background: var(--gold-24k);
     color: var(--bg-primary);
     transform: scale(1.05);
+}
+
+.view-appointment {
+    background: var(--gold-24k);
+    color: var(--bg-primary);
 }
 
 .like-btn, .dismiss-btn {

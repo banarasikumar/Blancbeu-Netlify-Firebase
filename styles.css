@@ -3333,6 +3333,7 @@ body {
     background: rgba(212, 175, 55, 0.08);
     border-radius: 8px;
     border: 1px solid rgba(212, 175, 55, 0.15);
+    margin-top: 8px;
 }
 
 .booking-time {
@@ -3529,6 +3530,7 @@ body {
     .booking-time-block {
         min-width: 65px;
         padding: 4px 6px;
+        margin-top: 6px;
     }
 
     .booking-time {

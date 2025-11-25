@@ -389,8 +389,11 @@ function renderReviews() {
 function initSmoothScroll() {
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
+      const href = this.getAttribute('href');
+      if (href === '#' || href === '') return; // Skip empty anchors
+      
       e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
+      const target = document.querySelector(href);
       if (target) {
         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
@@ -1125,6 +1128,7 @@ class AppShellNavigator {
     }
     
     navigateTo(page) {
+        if (!page || page === '') page = 'home'; // Default to home if page is empty
         if (page === this.currentPage) return;
         
         // Hide current page

@@ -2612,6 +2612,14 @@ body.light-mode {
     .nav-label {
         font-size: 9px;
     }
+    
+    .footer {
+        padding: 0 0 70px 0 !important;
+    }
+    
+    body.light-mode .footer {
+        padding: 0 0 70px 0 !important;
+    }
 }
 
 /* Dark mode enhancements for iOS */

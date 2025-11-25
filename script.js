@@ -1131,18 +1131,19 @@ class AppShellNavigator {
         if (!page || page === '') page = 'home'; // Default to home if page is empty
         if (page === this.currentPage) return;
         
-        // Hide current page
-        const currentPage = this.contentArea.querySelector(`[data-page="${this.currentPage}"]`);
-        if (currentPage) {
-            currentPage.classList.remove('active');
-        }
+        // Hide ALL sections from current page
+        const currentPages = this.contentArea.querySelectorAll(`[data-page="${this.currentPage}"]`);
+        currentPages.forEach(el => el.classList.remove('active'));
         
-        // Show new page
-        const newPage = this.contentArea.querySelector(`[data-page="${page}"]`);
-        if (newPage) {
-            newPage.classList.add('active');
-            newPage.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
+        // Show ALL sections of new page
+        const newPages = this.contentArea.querySelectorAll(`[data-page="${page}"]`);
+        newPages.forEach((el, index) => {
+            el.classList.add('active');
+            if (index === 0) {
+                // Scroll to top of first element
+                el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
         
         // Update bottom nav
         const navItems = this.bottomNav.querySelectorAll('.nav-item');

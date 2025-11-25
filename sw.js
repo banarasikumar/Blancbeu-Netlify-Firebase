@@ -1,4 +1,4 @@
-const CACHE_NAME = 'blancbeu-v9-light-mode-fix';
+const CACHE_NAME = 'blancbeu-v10-gap-fix';
 const VERSION_URL = '/version.json';
 
 // Assets to cache (NO HTML FILES - they must be fresh)

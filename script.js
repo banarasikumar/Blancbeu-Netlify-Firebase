@@ -1091,3 +1091,74 @@ if (document.readyState === 'loading') {
 } else {
   new ThemeController();
 }
+
+// ===== APP SHELL NAVIGATION CONTROLLER =====
+class AppShellNavigator {
+    constructor() {
+        this.currentPage = 'home';
+        this.contentArea = document.getElementById('appContent');
+        this.bottomNav = document.getElementById('bottomNav');
+        this.init();
+    }
+    
+    init() {
+        // Setup bottom nav click handlers
+        const navItems = this.bottomNav.querySelectorAll('.nav-item');
+        navItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                const isExternalLink = item.href && item.href.includes('wa.me');
+                if (!isExternalLink) {
+                    e.preventDefault();
+                    const page = item.getAttribute('data-page');
+                    this.navigateTo(page);
+                }
+            });
+        });
+        
+        // Handle hash navigation from desktop nav
+        window.addEventListener('hashchange', () => {
+            const hash = window.location.hash.slice(1);
+            if (hash) {
+                this.navigateTo(hash);
+            }
+        });
+    }
+    
+    navigateTo(page) {
+        if (page === this.currentPage) return;
+        
+        // Hide current page
+        const currentPage = this.contentArea.querySelector(`[data-page="${this.currentPage}"]`);
+        if (currentPage) {
+            currentPage.classList.remove('active');
+        }
+        
+        // Show new page
+        const newPage = this.contentArea.querySelector(`[data-page="${page}"]`);
+        if (newPage) {
+            newPage.classList.add('active');
+            newPage.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        
+        // Update bottom nav
+        const navItems = this.bottomNav.querySelectorAll('.nav-item');
+        navItems.forEach(item => {
+            if (item.getAttribute('data-page') === page) {
+                item.classList.add('active');
+            } else {
+                item.classList.remove('active');
+            }
+        });
+        
+        this.currentPage = page;
+    }
+}
+
+// Initialize app shell after DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        window.appShell = new AppShellNavigator();
+    });
+} else {
+    window.appShell = new AppShellNavigator();
+}

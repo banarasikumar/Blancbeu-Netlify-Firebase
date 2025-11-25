@@ -2672,3 +2672,130 @@ body.light-mode .nav-label {
 }
 
 /* Smooth animations for nav appearance removed - conflicts with scroll behavior */
+
+/* ===== APP SHELL ARCHITECTURE ===== */
+/* Fixed Layout for Native App Feel */
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.app-shell-header {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 1000 !important;
+    width: 100% !important;
+    box-shadow: 0 4px 12px var(--shadow-dark) !important;
+}
+
+.app-shell-content {
+    flex: 1;
+    margin-top: 80px;
+    margin-bottom: 80px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+
+.app-page {
+    display: none;
+    min-height: calc(100vh - 160px);
+}
+
+.app-page.active {
+    display: block;
+    animation: pageSlideIn 0.3s ease-out;
+}
+
+@keyframes pageSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.app-shell-bottom-nav {
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 1000 !important;
+    width: 100% !important;
+    height: 80px !important;
+    display: flex !important;
+    justify-content: space-around !important;
+    align-items: center !important;
+    background: var(--bg-primary) !important;
+    border-top: 1px solid var(--border-light) !important;
+    box-shadow: 0 -4px 12px var(--shadow-light) !important;
+}
+
+.app-shell-bottom-nav .nav-item {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-secondary) !important;
+    text-decoration: none !important;
+    transition: all 0.3s ease !important;
+    cursor: pointer;
+    gap: 4px;
+}
+
+.app-shell-bottom-nav .nav-item:hover {
+    background: var(--bg-secondary) !important;
+}
+
+.app-shell-bottom-nav .nav-item.active {
+    color: var(--gold-24k) !important;
+    background: var(--bg-secondary) !important;
+}
+
+.app-shell-bottom-nav .nav-icon {
+    width: 24px !important;
+    height: 24px !important;
+    stroke-width: 1.5;
+}
+
+.app-shell-bottom-nav .nav-label {
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    white-space: nowrap;
+}
+
+/* Smooth scroll behavior for content area */
+@supports (scroll-behavior: smooth) {
+    .app-shell-content {
+        scroll-behavior: smooth;
+    }
+}
+
+/* Mobile optimization */
+@media (max-width: 768px) {
+    .app-shell-header {
+        height: 70px !important;
+    }
+    
+    .app-shell-content {
+        margin-top: 70px;
+        margin-bottom: 70px;
+    }
+    
+    .app-shell-bottom-nav {
+        height: 70px !important;
+    }
+    
+    .app-page {
+        min-height: calc(100vh - 140px);
+    }
+}

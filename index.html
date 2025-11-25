@@ -213,238 +213,271 @@
 
     <!-- APP SHELL: Content Area (scrollable) -->
     <main class="app-shell-content" id="appContent">
-        <section id="home" class="hero app-page" data-page="home">
-        <div class="carousel">
-            <div class="carousel-track" id="carouselTrack">
-                <div class="carousel-slide active">
-                    <img src="assets/banner_carousel_images/1.webp" alt="Premium Beauty Banner 1" loading="eager">
+        <section id="home" class="hero app-page active" data-page="home">
+            <div class="carousel">
+                <div class="carousel-track" id="carouselTrack">
+                    <div class="carousel-slide active">
+                        <img src="assets/banner_carousel_images/1.webp" alt="Premium Beauty Banner 1" loading="eager">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="assets/banner_carousel_images/2.webp" alt="Premium Beauty Banner 2" loading="lazy">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="assets/banner_carousel_images/3.webp" alt="Premium Beauty Banner 3" loading="lazy">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="assets/banner_carousel_images/4.webp" alt="Premium Beauty Banner 4" loading="lazy">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="assets/banner_carousel_images/5.webp" alt="Premium Beauty Banner 5" loading="lazy">
+                    </div>
                 </div>
-                <div class="carousel-slide">
-                    <img src="assets/banner_carousel_images/2.webp" alt="Premium Beauty Banner 2" loading="lazy">
-                </div>
-                <div class="carousel-slide">
-                    <img src="assets/banner_carousel_images/3.webp" alt="Premium Beauty Banner 3" loading="lazy">
-                </div>
-                <div class="carousel-slide">
-                    <img src="assets/banner_carousel_images/4.webp" alt="Premium Beauty Banner 4" loading="lazy">
-                </div>
-                <div class="carousel-slide">
-                    <img src="assets/banner_carousel_images/5.webp" alt="Premium Beauty Banner 5" loading="lazy">
-                </div>
+                <button class="carousel-btn prev" onclick="moveCarousel(-1)">❮</button>
+                <button class="carousel-btn next" onclick="moveCarousel(1)">❯</button>
+                <div class="carousel-dots" id="carouselDots"></div>
             </div>
-            <button class="carousel-btn prev" onclick="moveCarousel(-1)">❮</button>
-            <button class="carousel-btn next" onclick="moveCarousel(1)">❯</button>
-            <div class="carousel-dots" id="carouselDots"></div>
-        </div>
-        
-        <div class="contact-buttons">
-            <h3 class="contact-title">✨ Connect With Us ✨</h3>
-            <a href="https://maps.app.goo.gl/8eYa96AHu2VT8Qpq7" target="_blank" class="contact-btn locate-btn">
-                <span class="btn-icon">📍</span>
-                <span class="btn-text">Locate Our Salon</span>
-                <span class="btn-arrow">»</span>
-            </a>
-            <a href="https://wa.me/919229915277?text=Hi%20BlancBeu%2C%20I%20would%20like%20to%20book%20an%20appointment." target="_blank" class="contact-btn whatsapp-btn">
-                <span class="btn-icon">💬</span>
-                <span class="btn-text">Chat on WhatsApp</span>
-                <span class="btn-emoji">✨</span>
-            </a>
-            <a href="tel:+919229915277" class="contact-btn call-btn">
-                <span class="btn-icon">📞</span>
-                <span class="btn-text">Call +91 92299 15277</span>
-                <span class="btn-emoji">⚙️</span>
-            </a>
-        </div>
-    </section>
-
-    <section id="offers" class="offers-section">
-        <div class="container">
-            <h2 class="section-title">
-                <span class="title-decoration">✨</span>
-                Special Offers
-                <span class="title-decoration">✨</span>
-            </h2>
-            <p class="section-subtitle">Limited time deals just for you</p>
             
-            <div class="offers-grid">
-                <div class="offer-card glow-card">
-                    <div class="offer-badge hot">HOT DEAL</div>
-                    <div class="offer-icon">✂️</div>
-                    <h3>All Haircuts @ ₹99</h3>
-                    <p>Get any haircut style for just ₹99! Limited time offer on all cuts.</p>
-                    <div class="offer-price">
-                        <span class="old-price">₹100-600</span>
-                        <span class="new-price">₹99</span>
-                    </div>
-                    <div class="sparkle-line"></div>
-                    <button class="tc-btn" onclick="showTC()">T&C</button>
-                </div>
-
-                <div class="offer-card glow-card">
-                    <div class="offer-badge festive">FESTIVE SPECIAL</div>
-                    <div class="offer-icon">🪔</div>
-                    <h3>Festive Beauty Package</h3>
-                    <p>50% off* prices are inclusive of the offer</p>
-                    <div class="offer-price">
-                        <span class="new-price">50% OFF*</span>
-                    </div>
-                    <div class="sparkle-line"></div>
-                    <button class="tc-btn" onclick="showTC()">T&C</button>
-                </div>
-
-                <div class="offer-card glow-card">
-                    <div class="offer-badge student">STUDENT OFFER</div>
-                    <div class="offer-icon">🎓</div>
-                    <h3>College Student Discount</h3>
-                    <p>Get 25% off on all services with valid student ID</p>
-                    <div class="offer-price">
-                        <span class="new-price">25% OFF</span>
-                    </div>
-                    <div class="sparkle-line"></div>
-                    <button class="tc-btn" onclick="showTC()">T&C</button>
-                </div>
+            <div class="contact-buttons">
+                <h3 class="contact-title">✨ Connect With Us ✨</h3>
+                <a href="https://maps.app.goo.gl/8eYa96AHu2VT8Qpq7" target="_blank" class="contact-btn locate-btn">
+                    <span class="btn-icon">📍</span>
+                    <span class="btn-text">Locate Our Salon</span>
+                    <span class="btn-arrow">»</span>
+                </a>
+                <a href="https://wa.me/919229915277?text=Hi%20BlancBeu%2C%20I%20would%20like%20to%20book%20an%20appointment." target="_blank" class="contact-btn whatsapp-btn">
+                    <span class="btn-icon">💬</span>
+                    <span class="btn-text">Chat on WhatsApp</span>
+                    <span class="btn-emoji">✨</span>
+                </a>
+                <a href="tel:+919229915277" class="contact-btn call-btn">
+                    <span class="btn-icon">📞</span>
+                    <span class="btn-text">Call +91 92299 15277</span>
+                    <span class="btn-emoji">⚙️</span>
+                </a>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="services" class="services-section">
-        <div class="container">
-            <h2 class="section-title">
-                <span class="title-decoration">💎</span>
-                Our Services
-                <span class="title-decoration">💎</span>
-            </h2>
-            <p class="section-subtitle">Premium beauty treatments tailored for you</p>
-            
-            <div class="services-container" id="servicesContainer"></div>
-        </div>
-    </section>
+        <section id="offers" class="offers-section app-page" data-page="offers">
+            <div class="container">
+                <h2 class="section-title">
+                    <span class="title-decoration">✨</span>
+                    Special Offers
+                    <span class="title-decoration">✨</span>
+                </h2>
+                <p class="section-subtitle">Limited time deals just for you</p>
+                
+                <div class="offers-grid">
+                    <div class="offer-card glow-card">
+                        <div class="offer-badge hot">HOT DEAL</div>
+                        <div class="offer-icon">✂️</div>
+                        <h3>All Haircuts @ ₹99</h3>
+                        <p>Get any haircut style for just ₹99! Limited time offer on all cuts.</p>
+                        <div class="offer-price">
+                            <span class="old-price">₹100-600</span>
+                            <span class="new-price">₹99</span>
+                        </div>
+                        <div class="sparkle-line"></div>
+                        <button class="tc-btn" onclick="showTC()">T&C</button>
+                    </div>
 
-    <section id="gallery" class="gallery-section">
-        <div class="container">
-            <h2 class="section-title">
-                <span class="title-decoration">🌟</span>
-                Gallery
-                <span class="title-decoration">🌟</span>
-            </h2>
-            <p class="section-subtitle">Witness the transformation</p>
-            
-            <div class="gallery-grid">
-                <div class="gallery-item">
-                    <img src="attached_assets/stock_images/beautiful_woman_gett_9dc7243a.jpg" alt="Facial Treatment">
-                    <div class="gallery-overlay">
-                        <h3>Facial Treatments</h3>
+                    <div class="offer-card glow-card">
+                        <div class="offer-badge festive">FESTIVE SPECIAL</div>
+                        <div class="offer-icon">🪔</div>
+                        <h3>Festive Beauty Package</h3>
+                        <p>50% off* prices are inclusive of the offer</p>
+                        <div class="offer-price">
+                            <span class="new-price">50% OFF*</span>
+                        </div>
+                        <div class="sparkle-line"></div>
+                        <button class="tc-btn" onclick="showTC()">T&C</button>
                     </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="attached_assets/stock_images/gallery_eye_makeup.webp" alt="Eye Makeup Artistry">
-                    <div class="gallery-overlay">
-                        <h3>Eye Makeup Artistry</h3>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="attached_assets/stock_images/luxury_beauty_salon__046b2a84.jpg" alt="Hair Coloring">
-                    <div class="gallery-overlay">
-                        <h3>Hair Coloring</h3>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="attached_assets/stock_images/gallery_hair_styling.webp" alt="Hair Styling Transformation">
-                    <div class="gallery-overlay">
-                        <h3>Hair Styling</h3>
+
+                    <div class="offer-card glow-card">
+                        <div class="offer-badge student">STUDENT OFFER</div>
+                        <div class="offer-icon">🎓</div>
+                        <h3>College Student Discount</h3>
+                        <p>Get 25% off on all services with valid student ID</p>
+                        <div class="offer-price">
+                            <span class="new-price">25% OFF</span>
+                        </div>
+                        <div class="sparkle-line"></div>
+                        <button class="tc-btn" onclick="showTC()">T&C</button>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="reviews" class="reviews-section app-page" data-page="reviews">
-        <div class="container">
-            <h2 class="section-title">
-                <span class="title-decoration">⭐</span>
-                Customer Reviews
-                <span class="title-decoration">⭐</span>
-            </h2>
-            <p class="section-subtitle">What our clients say about us</p>
-            
-            <div class="reviews-grid" id="reviewsContainer"></div>
-        </div>
-    </section>
-
-    <section id="notifications" class="app-page hidden" data-page="notifications">
-        <div class="container" style="padding-top: 80px; padding-bottom: 120px; min-height: 100vh; display: flex; align-items: center; justify-content: center; flex-direction: column; text-align: center;">
-            <div style="font-size: 60px; margin-bottom: 20px;">🔔</div>
-            <h2 style="color: var(--text-primary); margin-bottom: 10px;">Notifications</h2>
-            <p style="color: var(--text-secondary);">You're all caught up! No new notifications.</p>
-        </div>
-    </section>
-
-    <section id="bookings" class="app-page hidden" data-page="bookings">
-        <div class="container" style="padding-top: 80px; padding-bottom: 120px; min-height: 100vh; display: flex; align-items: center; justify-content: center; flex-direction: column; text-align: center;">
-            <div style="font-size: 60px; margin-bottom: 20px;">📅</div>
-            <h2 style="color: var(--text-primary); margin-bottom: 10px;">My Bookings</h2>
-            <p style="color: var(--text-secondary);">No bookings yet. Book a service to get started!</p>
-        </div>
-    </section>
-
-    <section id="account" class="app-page hidden" data-page="account">
-        <div class="container" style="padding-top: 80px; padding-bottom: 120px; min-height: 100vh; display: flex; align-items: center; justify-content: center; flex-direction: column; text-align: center;">
-            <div style="font-size: 60px; margin-bottom: 20px;">👤</div>
-            <h2 style="color: var(--text-primary); margin-bottom: 10px;">Account</h2>
-            <p style="color: var(--text-secondary);">Account settings coming soon!</p>
-        </div>
-    </section>
-
-    <section class="cta-section app-page" data-page="home">
-        <div class="container">
-            <h2>Ready to Transform Your Look?</h2>
-            <p>Book your appointment today and experience premium beauty care</p>
-            <div class="cta-buttons">
-                <a href="tel:+919229915277" class="btn-cta primary">📞 Call Now</a>
-                <a href="https://wa.me/919229915277" class="btn-cta secondary">💬 WhatsApp</a>
+        <section id="services" class="services-section app-page" data-page="services">
+            <div class="container">
+                <h2 class="section-title">
+                    <span class="title-decoration">💎</span>
+                    Our Services
+                    <span class="title-decoration">💎</span>
+                </h2>
+                <p class="section-subtitle">Premium beauty treatments tailored for you</p>
+                
+                <div class="services-container" id="servicesContainer"></div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Blancbeu</h3>
-                    <p>Premium Beauty & Wellness Salon</p>
-                    <p>✨ Where Beauty Meets Excellence ✨</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <a href="#home">Home</a>
-                    <a href="#offers">Offers</a>
-                    <a href="#services">Services</a>
-                    <a href="#reviews">Reviews</a>
-                </div>
-                <div class="footer-section">
-                    <h4>Connect With Us</h4>
-                    <div class="social-icons">
-                        <a href="https://youtube.com/@blancbeubeautysalon?si=_Go7ZSGSFzTS-j_M" target="_blank" class="social-icon youtube" aria-label="YouTube">
-                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
-                        </a>
-                        <a href="https://www.instagram.com/blancbeu_salon_ranchi?igsh=MTRpbGV0YWt4aHFzaw==" target="_blank" class="social-icon instagram" aria-label="Instagram">
-                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-                        </a>
-                        <a href="https://www.facebook.com/p/BlancBeu-Family-Beauty-Salon-61578977241367/" target="_blank" class="social-icon facebook" aria-label="Facebook">
-                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>
-                        </a>
+        <section id="gallery" class="gallery-section app-page" data-page="gallery">
+            <div class="container">
+                <h2 class="section-title">
+                    <span class="title-decoration">🌟</span>
+                    Gallery
+                    <span class="title-decoration">🌟</span>
+                </h2>
+                <p class="section-subtitle">Witness the transformation</p>
+                
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <img src="attached_assets/stock_images/beautiful_woman_gett_9dc7243a.jpg" alt="Facial Treatment">
+                        <div class="gallery-overlay">
+                            <h3>Facial Treatments</h3>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="attached_assets/stock_images/gallery_eye_makeup.webp" alt="Eye Makeup Artistry">
+                        <div class="gallery-overlay">
+                            <h3>Eye Makeup Artistry</h3>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="attached_assets/stock_images/luxury_beauty_salon__046b2a84.jpg" alt="Hair Coloring">
+                        <div class="gallery-overlay">
+                            <h3>Hair Coloring</h3>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="attached_assets/stock_images/gallery_hair_styling.webp" alt="Hair Styling Transformation">
+                        <div class="gallery-overlay">
+                            <h3>Hair Styling</h3>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; Blancbeu 2025. All rights reserved.</p>
+        </section>
+
+        <section id="reviews" class="reviews-section app-page" data-page="reviews">
+            <div class="container">
+                <h2 class="section-title">
+                    <span class="title-decoration">⭐</span>
+                    Customer Reviews
+                    <span class="title-decoration">⭐</span>
+                </h2>
+                <p class="section-subtitle">What our clients say about us</p>
+                
+                <div class="reviews-grid" id="reviewsContainer"></div>
             </div>
-        </div>
-    </footer>
+        </section>
+
+        <section id="notifications" class="app-page" data-page="notifications">
+            <div class="container" style="padding-top: 80px; padding-bottom: 120px; min-height: 100vh; display: flex; align-items: center; justify-content: center; flex-direction: column; text-align: center;">
+                <div style="font-size: 60px; margin-bottom: 20px;">🔔</div>
+                <h2 style="color: var(--text-primary); margin-bottom: 10px;">Notifications</h2>
+                <p style="color: var(--text-secondary);">You're all caught up! No new notifications.</p>
+            </div>
+        </section>
+
+        <section id="bookings" class="app-page" data-page="bookings">
+            <div class="container" style="padding-top: 80px; padding-bottom: 120px; min-height: 100vh; display: flex; align-items: center; justify-content: center; flex-direction: column; text-align: center;">
+                <div style="font-size: 60px; margin-bottom: 20px;">📅</div>
+                <h2 style="color: var(--text-primary); margin-bottom: 10px;">My Bookings</h2>
+                <p style="color: var(--text-secondary);">No bookings yet. Book a service to get started!</p>
+            </div>
+        </section>
+
+        <section id="account" class="app-page" data-page="account">
+            <div class="container" style="padding-top: 80px; padding-bottom: 120px; min-height: 100vh; display: flex; align-items: center; justify-content: center; flex-direction: column; text-align: center;">
+                <div style="font-size: 60px; margin-bottom: 20px;">👤</div>
+                <h2 style="color: var(--text-primary); margin-bottom: 10px;">Account</h2>
+                <p style="color: var(--text-secondary);">Account settings coming soon!</p>
+            </div>
+        </section>
+
+        <section class="cta-section app-page" data-page="home">
+            <div class="container">
+                <h2>Ready to Transform Your Look?</h2>
+                <p>Book your appointment today and experience premium beauty care</p>
+                <div class="cta-buttons">
+                    <a href="tel:+919229915277" class="btn-cta primary">📞 Call Now</a>
+                    <a href="https://wa.me/919229915277" class="btn-cta secondary">💬 WhatsApp</a>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h3>Blancbeu</h3>
+                        <p>Premium Beauty & Wellness Salon</p>
+                        <p>✨ Where Beauty Meets Excellence ✨</p>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Quick Links</h4>
+                        <a href="#home">Home</a>
+                        <a href="#offers">Offers</a>
+                        <a href="#services">Services</a>
+                        <a href="#reviews">Reviews</a>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Connect With Us</h4>
+                        <div class="social-icons">
+                            <a href="https://youtube.com/@blancbeubeautysalon?si=_Go7ZSGSFzTS-j_M" target="_blank" class="social-icon youtube" aria-label="YouTube">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
+                            </a>
+                            <a href="https://www.instagram.com/blancbeu_salon_ranchi?igsh=MTRpbGV0YWt4aHFzaw==" target="_blank" class="social-icon instagram" aria-label="Instagram">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                            </a>
+                            <a href="https://www.facebook.com/p/BlancBeu-Family-Beauty-Salon-61578977241367/" target="_blank" class="social-icon facebook" aria-label="Facebook">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; Blancbeu 2025. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
     </main>
 
     <!-- APP SHELL: Fixed Bottom Navigation -->
     <nav class="bottom-nav app-shell-bottom-nav" id="bottomNav">
+        <a href="#" class="nav-item active" data-page="home">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+            </svg>
+            <span class="nav-label">Home</span>
+        </a>
+        <a href="#" class="nav-item" data-page="notifications">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/>
+            </svg>
+            <span class="nav-label">Notify</span>
+        </a>
+        <a href="#" class="nav-item" data-page="bookings">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/>
+            </svg>
+            <span class="nav-label">Bookings</span>
+        </a>
+        <a href="https://wa.me/919229915277" target="_blank" class="nav-item" data-page="chat">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/>
+            </svg>
+            <span class="nav-label">Chat</span>
+        </a>
+        <a href="#" class="nav-item" data-page="account">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+            </svg>
+            <span class="nav-label">Account</span>
+        </a>
+    </nav>
+
+    <!-- T&C Modal -->
     <div id="tcModal" class="tc-modal">
         <div class="tc-modal-content">
             <span class="tc-close" onclick="closeTC()">&times;</span>
@@ -484,39 +517,6 @@
             </div>
         </div>
     </div>
-
-    <nav class="bottom-nav" id="bottomNav">
-        <a href="#home" class="nav-item active" data-page="home">
-            <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
-            </svg>
-            <span class="nav-label">Home</span>
-        </a>
-        <a href="#notifications" class="nav-item" data-page="notifications">
-            <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/>
-            </svg>
-            <span class="nav-label">Notifications</span>
-        </a>
-        <a href="#bookings" class="nav-item" data-page="bookings">
-            <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/>
-            </svg>
-            <span class="nav-label">My Bookings</span>
-        </a>
-        <a href="https://wa.me/919229915277" class="nav-item" data-page="chat">
-            <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/>
-            </svg>
-            <span class="nav-label">Chat</span>
-        </a>
-        <a href="#account" class="nav-item" data-page="account">
-            <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
-            </svg>
-            <span class="nav-label">Account</span>
-        </a>
-    </nav>
 
     <script src="script.js"></script>
     <script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/329180/fscreen%401.0.1.js'></script>

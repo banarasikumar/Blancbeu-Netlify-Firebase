@@ -1111,10 +1111,12 @@ if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
         window.appShell = new AppShellNavigator();
         initNotificationsController();
+        initBookingsController();
     });
 } else {
     window.appShell = new AppShellNavigator();
     initNotificationsController();
+    initBookingsController();
 }
 
 // ===== NOTIFICATIONS PAGE CONTROLLER =====
@@ -1234,4 +1236,83 @@ function initNotificationsController() {
     }
 
     console.log('✅ Notifications controller initialized with enhanced features');
+}
+
+// ===== BOOKINGS PAGE CONTROLLER =====
+function initBookingsController() {
+    const bookingTabs = document.querySelectorAll('.booking-tab');
+    const bookingCards = document.querySelectorAll('.booking-card');
+    const actionBtns = document.querySelectorAll('.booking-action-btn');
+    const filterBtn = document.querySelector('.bookings-filter-btn');
+
+    // Tab filtering
+    bookingTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            const status = tab.getAttribute('data-status');
+            
+            bookingTabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+
+            let visibleCount = 0;
+            bookingCards.forEach(card => {
+                const cardStatus = card.getAttribute('data-status');
+                if (status === 'all' || cardStatus === status) {
+                    card.style.display = 'flex';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            checkEmptyBookings();
+            console.log(`📅 Filtered to '${status}' - ${visibleCount} bookings visible`);
+        });
+    });
+
+    // Action buttons with visual feedback
+    actionBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const btnText = btn.textContent;
+            
+            btn.style.transform = 'scale(0.95)';
+            setTimeout(() => { btn.style.transform = ''; }, 200);
+
+            if (btnText.includes('Cancel')) {
+                if (confirm('Are you sure you want to cancel this booking?')) {
+                    btn.closest('.booking-card').style.animation = 'slideOutNotification 0.3s ease-out forwards';
+                    setTimeout(() => {
+                        btn.closest('.booking-card').remove();
+                        checkEmptyBookings();
+                    }, 300);
+                }
+            } else if (btnText.includes('Reschedule')) {
+                alert('📅 Reschedule feature coming soon!');
+            } else if (btnText.includes('Rebook')) {
+                alert('✅ Rebook feature coming soon!');
+            } else if (btnText.includes('Details')) {
+                alert('📋 Booking details coming soon!');
+            }
+        });
+    });
+
+    // Filter button
+    if (filterBtn) {
+        filterBtn.addEventListener('click', () => {
+            alert('🔍 Advanced filters coming soon!');
+        });
+    }
+
+    function checkEmptyBookings() {
+        const visibleCards = document.querySelectorAll('.booking-card[style*="display: flex"], .booking-card:not([style*="display: none"])');
+        const emptyState = document.querySelector('.empty-state-bookings');
+        
+        if (visibleCards.length === 0 && emptyState) {
+            emptyState.style.display = 'block';
+        } else if (emptyState) {
+            emptyState.style.display = 'none';
+        }
+    }
+
+    console.log('✅ Bookings controller initialized');
 }

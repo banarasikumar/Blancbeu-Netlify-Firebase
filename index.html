@@ -605,10 +605,186 @@
         </section>
 
         <section id="bookings" class="app-page" data-page="bookings">
-            <div class="container" style="padding-top: 80px; padding-bottom: 120px; min-height: 100vh; display: flex; align-items: center; justify-content: center; flex-direction: column; text-align: center;">
-                <div style="font-size: 60px; margin-bottom: 20px;">📅</div>
-                <h2 style="color: var(--text-primary); margin-bottom: 10px;">My Bookings</h2>
-                <p style="color: var(--text-secondary);">No bookings yet. Book a service to get started!</p>
+            <div class="bookings-container">
+                <!-- Header with Filters -->
+                <div class="bookings-header">
+                    <div class="bookings-header-content">
+                        <h1 style="color: var(--text-primary); margin: 0; font-size: 28px; font-family: 'Cinzel', serif;">My Bookings</h1>
+                    </div>
+                    <button class="bookings-filter-btn" title="Filter">🔍</button>
+                </div>
+
+                <!-- Status Tabs -->
+                <div class="bookings-tabs">
+                    <button class="booking-tab active" data-status="all">All <span class="tab-count">5</span></button>
+                    <button class="booking-tab" data-status="upcoming">Upcoming <span class="tab-count">2</span></button>
+                    <button class="booking-tab" data-status="completed">Completed <span class="tab-count">3</span></button>
+                </div>
+
+                <!-- Bookings List -->
+                <div class="bookings-list">
+                    <!-- UPCOMING SECTION -->
+                    <div class="booking-section">
+                        <div class="section-divider">
+                            <span class="section-label">📅 Upcoming</span>
+                        </div>
+
+                        <!-- Booking Card 1 - Tomorrow -->
+                        <div class="booking-card upcoming-card" data-status="upcoming">
+                            <div class="booking-status-badge upcoming-badge">Confirmed</div>
+                            <div class="booking-header-row">
+                                <div class="booking-service-info">
+                                    <h3 class="booking-service-name">Hair Spa Treatment</h3>
+                                    <p class="booking-beautician">with <strong>Priya Sharma</strong></p>
+                                </div>
+                                <div class="booking-time-block">
+                                    <div class="booking-time">28 Nov</div>
+                                    <div class="booking-time-detail">3:00 PM</div>
+                                </div>
+                            </div>
+                            <div class="booking-details">
+                                <span class="detail-item">⏱️ 60 mins</span>
+                                <span class="detail-item">💰 ₹2,500</span>
+                                <span class="detail-item">#BS2025-001</span>
+                            </div>
+                            <div class="booking-location">
+                                📍 Ranchi Branch • DLF Mall, Ranchi
+                            </div>
+                            <div class="booking-actions">
+                                <button class="booking-action-btn reschedule-btn">Reschedule</button>
+                                <button class="booking-action-btn cancel-btn">Cancel</button>
+                                <button class="booking-action-btn details-btn">Details</button>
+                            </div>
+                        </div>
+
+                        <!-- Booking Card 2 - Dec 5 -->
+                        <div class="booking-card upcoming-card" data-status="upcoming">
+                            <div class="booking-status-badge upcoming-badge">Confirmed</div>
+                            <div class="booking-header-row">
+                                <div class="booking-service-info">
+                                    <h3 class="booking-service-name">Bridal Makeup</h3>
+                                    <p class="booking-beautician">with <strong>Anjali Verma</strong></p>
+                                </div>
+                                <div class="booking-time-block">
+                                    <div class="booking-time">5 Dec</div>
+                                    <div class="booking-time-detail">10:00 AM</div>
+                                </div>
+                            </div>
+                            <div class="booking-details">
+                                <span class="detail-item">⏱️ 120 mins</span>
+                                <span class="detail-item">💰 ₹5,000</span>
+                                <span class="detail-item">#BS2025-002</span>
+                            </div>
+                            <div class="booking-location">
+                                📍 Ranchi Branch • DLF Mall, Ranchi
+                            </div>
+                            <div class="booking-actions">
+                                <button class="booking-action-btn reschedule-btn">Reschedule</button>
+                                <button class="booking-action-btn cancel-btn">Cancel</button>
+                                <button class="booking-action-btn details-btn">Details</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- COMPLETED SECTION -->
+                    <div class="booking-section">
+                        <div class="section-divider">
+                            <span class="section-label">✅ Completed</span>
+                        </div>
+
+                        <!-- Booking Card 3 - Completed -->
+                        <div class="booking-card completed-card" data-status="completed">
+                            <div class="booking-status-badge completed-badge">Completed</div>
+                            <div class="booking-header-row">
+                                <div class="booking-service-info">
+                                    <h3 class="booking-service-name">Hair Cut & Style</h3>
+                                    <p class="booking-beautician">with <strong>Neha Singh</strong></p>
+                                </div>
+                                <div class="booking-time-block">
+                                    <div class="booking-time">15 Nov</div>
+                                    <div class="booking-time-detail">2:30 PM</div>
+                                </div>
+                            </div>
+                            <div class="booking-details">
+                                <span class="detail-item">⏱️ 45 mins</span>
+                                <span class="detail-item">💰 ₹800</span>
+                                <span class="detail-item">#BS2025-003</span>
+                            </div>
+                            <div class="booking-rating">
+                                <span class="stars-filled">⭐⭐⭐⭐⭐</span>
+                                <span class="rating-text">Excellent Service</span>
+                            </div>
+                            <div class="booking-actions">
+                                <button class="booking-action-btn rebook-btn">Rebook</button>
+                                <button class="booking-action-btn details-btn">Details</button>
+                            </div>
+                        </div>
+
+                        <!-- Booking Card 4 - Completed -->
+                        <div class="booking-card completed-card" data-status="completed">
+                            <div class="booking-status-badge completed-badge">Completed</div>
+                            <div class="booking-header-row">
+                                <div class="booking-service-info">
+                                    <h3 class="booking-service-name">Facial Treatment</h3>
+                                    <p class="booking-beautician">with <strong>Pooja Desai</strong></p>
+                                </div>
+                                <div class="booking-time-block">
+                                    <div class="booking-time">8 Nov</div>
+                                    <div class="booking-time-detail">5:00 PM</div>
+                                </div>
+                            </div>
+                            <div class="booking-details">
+                                <span class="detail-item">⏱️ 50 mins</span>
+                                <span class="detail-item">💰 ₹1,500</span>
+                                <span class="detail-item">#BS2025-004</span>
+                            </div>
+                            <div class="booking-rating">
+                                <span class="stars-filled">⭐⭐⭐⭐</span>
+                                <span class="rating-text">Very Good</span>
+                            </div>
+                            <div class="booking-actions">
+                                <button class="booking-action-btn rebook-btn">Rebook</button>
+                                <button class="booking-action-btn details-btn">Details</button>
+                            </div>
+                        </div>
+
+                        <!-- Booking Card 5 - Completed -->
+                        <div class="booking-card completed-card" data-status="completed">
+                            <div class="booking-status-badge completed-badge">Completed</div>
+                            <div class="booking-header-row">
+                                <div class="booking-service-info">
+                                    <h3 class="booking-service-name">Nail Art Design</h3>
+                                    <p class="booking-beautician">with <strong>Kavya Reddy</strong></p>
+                                </div>
+                                <div class="booking-time-block">
+                                    <div class="booking-time">1 Nov</div>
+                                    <div class="booking-time-detail">4:00 PM</div>
+                                </div>
+                            </div>
+                            <div class="booking-details">
+                                <span class="detail-item">⏱️ 40 mins</span>
+                                <span class="detail-item">💰 ₹600</span>
+                                <span class="detail-item">#BS2025-005</span>
+                            </div>
+                            <div class="booking-rating">
+                                <span class="stars-filled">⭐⭐⭐⭐⭐</span>
+                                <span class="rating-text">Outstanding</span>
+                            </div>
+                            <div class="booking-actions">
+                                <button class="booking-action-btn rebook-btn">Rebook</button>
+                                <button class="booking-action-btn details-btn">Details</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Empty State (hidden by default) -->
+                <div class="empty-state-bookings" style="display: none; text-align: center; padding: 100px 20px;">
+                    <div style="font-size: 120px; margin-bottom: 20px; animation: float 3s ease-in-out infinite;">📅</div>
+                    <h2 style="color: var(--text-primary); margin-bottom: 10px; font-size: 24px;">No Bookings Yet</h2>
+                    <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 20px;">Schedule your first beauty appointment and experience our premium services!</p>
+                    <button class="book-now-btn">Book an Appointment</button>
+                </div>
             </div>
         </section>
 

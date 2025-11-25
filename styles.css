@@ -1262,7 +1262,7 @@ body.light-mode .section-subtitle {
 }
 
 .offers-section {
-    padding: 100px 0;
+    padding: 40px 0;
     background: var(--bg-primary);
     overflow-x: hidden;
     width: 100%;
@@ -1436,7 +1436,7 @@ body.light-mode .new-price {
 }
 
 .services-section {
-    padding: 100px 0;
+    padding: 40px 0;
     overflow-x: hidden;
     width: 100%;
 }
@@ -1564,7 +1564,7 @@ body.light-mode .service-original-price {
 }
 
 .gallery-section {
-    padding: 100px 0;
+    padding: 40px 0;
     background: var(--bg-primary);
 }
 
@@ -1626,7 +1626,7 @@ body.light-mode .gallery-section {
 }
 
 .reviews-section {
-    padding: 100px 0;
+    padding: 40px 0;
 }
 
 .reviews-grid {
@@ -1690,7 +1690,7 @@ body.light-mode .gallery-section {
 }
 
 .cta-section {
-    padding: 120px 0;
+    padding: 50px 0;
     text-align: center;
     background: var(--bg-primary);
 }

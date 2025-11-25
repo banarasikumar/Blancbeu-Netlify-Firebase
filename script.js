@@ -1163,7 +1163,110 @@ class AppShellNavigator {
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
         window.appShell = new AppShellNavigator();
+        initNotificationsController();
     });
 } else {
     window.appShell = new AppShellNavigator();
+    initNotificationsController();
+}
+
+// ===== NOTIFICATIONS PAGE CONTROLLER =====
+function initNotificationsController() {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const notificationCards = document.querySelectorAll('.notification-card');
+    const dismissBtns = document.querySelectorAll('.dismiss-btn');
+    const actionBtns = document.querySelectorAll('.action-btn');
+
+    // Filter functionality
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const filter = btn.getAttribute('data-filter');
+            
+            // Update active filter button
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            // Filter notification cards
+            notificationCards.forEach(card => {
+                const cardType = card.getAttribute('data-type');
+                if (filter === 'all' || cardType === filter) {
+                    card.style.display = 'flex';
+                    setTimeout(() => {
+                        card.style.animation = 'slideInNotification 0.4s ease-out';
+                    }, 0);
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            // Check if any visible cards
+            checkEmptyState();
+        });
+    });
+
+    // Dismiss notification
+    dismissBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const card = btn.closest('.notification-card');
+            card.style.animation = 'slideOutNotification 0.3s ease-out forwards';
+            setTimeout(() => {
+                card.remove();
+                checkEmptyState();
+            }, 300);
+        });
+    });
+
+    // Action buttons feedback
+    actionBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (btn.classList.contains('dismiss-btn')) return;
+            
+            // Visual feedback
+            btn.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                btn.style.transform = '';
+            }, 200);
+        });
+    });
+
+    // Notification card click
+    notificationCards.forEach(card => {
+        card.addEventListener('click', () => {
+            console.log('Notification clicked');
+        });
+    });
+
+    // Add animation keyframe
+    if (!document.querySelector('style[data-notif-anim]')) {
+        const style = document.createElement('style');
+        style.setAttribute('data-notif-anim', 'true');
+        style.textContent = `
+            @keyframes slideOutNotification {
+                from {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+                to {
+                    opacity: 0;
+                    transform: translateX(100%);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+
+    function checkEmptyState() {
+        const visibleCards = document.querySelectorAll('.notification-card[style*="display: flex"], .notification-card:not([style*="display: none"])');
+        const emptyState = document.querySelector('.notifications-container .empty-state');
+        
+        if (visibleCards.length === 0 && emptyState) {
+            emptyState.style.display = 'block';
+        } else if (emptyState) {
+            emptyState.style.display = 'none';
+        }
+    }
+
+    console.log('✅ Notifications controller initialized');
 }

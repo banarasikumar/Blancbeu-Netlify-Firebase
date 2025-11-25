@@ -2856,3 +2856,240 @@ body {
         padding: 0 12px;
     }
 }
+
+/* ===== NOTIFICATIONS PAGE STYLES ===== */
+.notifications-container {
+    padding: 20px 0 120px 0;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.notifications-header {
+    padding: 20px 20px 0;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.notifications-filters {
+    display: flex;
+    gap: 8px;
+    padding: 16px 20px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    background: var(--bg-primary);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.filter-btn {
+    padding: 8px 16px;
+    border: 1px solid var(--border-light);
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+}
+
+.filter-btn:hover {
+    border-color: var(--gold-24k);
+    color: var(--gold-24k);
+}
+
+.filter-btn.active {
+    background: var(--gold-24k);
+    color: var(--bg-primary);
+    border-color: var(--gold-24k);
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+}
+
+.notifications-list {
+    padding: 12px 12px;
+}
+
+.notification-card {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 16px;
+    margin-bottom: 12px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-light);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    animation: slideInNotification 0.4s ease-out;
+}
+
+@keyframes slideInNotification {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.notification-card:hover {
+    background: var(--bg-secondary);
+    border-color: var(--gold-24k);
+    box-shadow: 0 4px 12px var(--shadow-dark);
+}
+
+.notification-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--gold-24k);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.7;
+        transform: scale(1.2);
+    }
+}
+
+.notification-badge.unread {
+    display: block;
+}
+
+.notification-icon {
+    font-size: 32px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: var(--bg-primary);
+    border-radius: 10px;
+}
+
+.notification-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.notification-title {
+    margin: 0 0 6px 0;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-primary);
+    font-family: 'Poppins', sans-serif;
+}
+
+.notification-message {
+    margin: 0 0 8px 0;
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.4;
+}
+
+.notification-time {
+    margin: 0;
+    font-size: 12px;
+    color: var(--text-tertiary, rgba(255, 255, 255, 0.5));
+}
+
+.notification-actions {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.action-btn {
+    padding: 6px 10px;
+    border: none;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    white-space: nowrap;
+}
+
+.action-btn:hover {
+    background: var(--gold-24k);
+    color: var(--bg-primary);
+    transform: scale(1.05);
+}
+
+.like-btn, .dismiss-btn {
+    padding: 6px 8px;
+    font-size: 14px;
+    background: transparent;
+}
+
+.dismiss-btn {
+    color: var(--text-secondary);
+}
+
+.dismiss-btn:hover {
+    background: rgba(212, 175, 55, 0.1);
+    color: var(--gold-24k);
+    transform: none;
+}
+
+.view-btn, .review-btn, .redeem-btn, .explore-btn {
+    background: var(--gold-24k);
+    color: var(--bg-primary);
+}
+
+.view-btn:hover, .review-btn:hover, .redeem-btn:hover, .explore-btn:hover {
+    background: var(--gold-dark, #c49a3f);
+}
+
+.empty-state {
+    text-align: center;
+    padding: 80px 20px;
+}
+
+/* Notifications responsive */
+@media (max-width: 768px) {
+    .notifications-container {
+        padding: 12px 0 120px 0;
+    }
+
+    .notification-card {
+        gap: 10px;
+        padding: 12px;
+        margin-bottom: 10px;
+    }
+
+    .notification-icon {
+        font-size: 28px;
+        width: 40px;
+        height: 40px;
+    }
+
+    .notification-title {
+        font-size: 14px;
+    }
+
+    .notification-message {
+        font-size: 12px;
+    }
+
+    .action-btn {
+        padding: 5px 8px;
+        font-size: 11px;
+    }
+}

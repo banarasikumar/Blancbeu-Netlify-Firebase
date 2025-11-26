@@ -790,10 +790,153 @@
 
         <!-- ACCOUNT PAGE -->
         <section id="account" class="app-page" data-page="account">
-            <div class="container" style="padding-top: 80px; padding-bottom: 120px; min-height: 100vh; display: flex; align-items: center; justify-content: center; flex-direction: column; text-align: center;">
-                <div style="font-size: 60px; margin-bottom: 20px;">👤</div>
-                <h2 style="color: var(--text-primary); margin-bottom: 10px;">Account</h2>
-                <p style="color: var(--text-secondary);">Account settings coming soon!</p>
+            <div class="account-container">
+                <!-- Profile Header -->
+                <div class="account-header">
+                    <div class="profile-card">
+                        <div class="profile-avatar">
+                            <div class="avatar-placeholder">👸</div>
+                        </div>
+                        <div class="profile-info">
+                            <h2 class="profile-name">Priya Sharma</h2>
+                            <p class="profile-email">priya.sharma@email.com</p>
+                            <div class="member-badge">
+                                <span class="badge-icon">⭐</span>
+                                <span class="badge-text">Gold Member</span>
+                            </div>
+                        </div>
+                        <button class="edit-profile-btn">✏️ Edit</button>
+                    </div>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="stats-section">
+                    <div class="stat-card">
+                        <div class="stat-icon">💎</div>
+                        <div class="stat-content">
+                            <div class="stat-label">Loyalty Points</div>
+                            <div class="stat-value">2,450</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">💰</div>
+                        <div class="stat-content">
+                            <div class="stat-label">Total Saved</div>
+                            <div class="stat-value">₹4,850</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">✅</div>
+                        <div class="stat-content">
+                            <div class="stat-label">Bookings</div>
+                            <div class="stat-value">24</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="quick-actions-section">
+                    <h3 class="section-title">My Account</h3>
+                    <div class="action-items">
+                        <button class="action-item">
+                            <span class="action-icon">📍</span>
+                            <div class="action-text">
+                                <span class="action-label">Addresses</span>
+                                <span class="action-desc">Manage delivery addresses</span>
+                            </div>
+                            <span class="action-arrow">›</span>
+                        </button>
+                        <button class="action-item">
+                            <span class="action-icon">💳</span>
+                            <div class="action-text">
+                                <span class="action-label">Payment Methods</span>
+                                <span class="action-desc">Save & manage cards</span>
+                            </div>
+                            <span class="action-arrow">›</span>
+                        </button>
+                        <button class="action-item">
+                            <span class="action-icon">❤️</span>
+                            <div class="action-text">
+                                <span class="action-label">Favorite Services</span>
+                                <span class="action-desc">Your preferred treatments</span>
+                            </div>
+                            <span class="action-arrow">›</span>
+                        </button>
+                        <button class="action-item">
+                            <span class="action-icon">🎁</span>
+                            <div class="action-text">
+                                <span class="action-label">Referral Code</span>
+                                <span class="action-desc">Invite friends & earn</span>
+                            </div>
+                            <span class="action-arrow">›</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Settings -->
+                <div class="settings-section">
+                    <h3 class="section-title">Settings</h3>
+                    <div class="action-items">
+                        <button class="action-item">
+                            <span class="action-icon">🔔</span>
+                            <div class="action-text">
+                                <span class="action-label">Notifications</span>
+                                <span class="action-desc">Booking & offer alerts</span>
+                            </div>
+                            <span class="action-arrow">›</span>
+                        </button>
+                        <button class="action-item">
+                            <span class="action-icon">🌐</span>
+                            <div class="action-text">
+                                <span class="action-label">Language</span>
+                                <span class="action-desc">English</span>
+                            </div>
+                            <span class="action-arrow">›</span>
+                        </button>
+                        <button class="action-item">
+                            <span class="action-icon">🔒</span>
+                            <div class="action-text">
+                                <span class="action-label">Privacy & Security</span>
+                                <span class="action-desc">Manage your data</span>
+                            </div>
+                            <span class="action-arrow">›</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Help & Support -->
+                <div class="support-section">
+                    <h3 class="section-title">Support</h3>
+                    <div class="action-items">
+                        <button class="action-item">
+                            <span class="action-icon">❓</span>
+                            <div class="action-text">
+                                <span class="action-label">Help & Support</span>
+                                <span class="action-desc">FAQ & contact us</span>
+                            </div>
+                            <span class="action-arrow">›</span>
+                        </button>
+                        <button class="action-item">
+                            <span class="action-icon">ℹ️</span>
+                            <div class="action-text">
+                                <span class="action-label">About Blancbeu</span>
+                                <span class="action-desc">Version 16.3.1</span>
+                            </div>
+                            <span class="action-arrow">›</span>
+                        </button>
+                        <button class="action-item">
+                            <span class="action-icon">📋</span>
+                            <div class="action-text">
+                                <span class="action-label">Terms & Privacy</span>
+                                <span class="action-desc">Legal information</span>
+                            </div>
+                            <span class="action-arrow">›</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Logout Button -->
+                <button class="logout-btn">Sign Out</button>
             </div>
         </section>
     </main>

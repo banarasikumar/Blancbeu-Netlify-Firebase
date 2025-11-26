@@ -1086,10 +1086,17 @@ class AppShellNavigator {
     navigateTo(page) {
         if (!page || page === '') page = 'home'; // Default to home if page is empty
         
-        const isSamePage = page === this.currentPage;
-        
-        // Save current page scroll position
         const scrollContainer = document.querySelector('.app-shell-content');
+        
+        // If same page clicked: just scroll to top (no page transition)
+        if (page === this.currentPage) {
+            if (scrollContainer) {
+                scrollContainer.scrollTop = 0;
+            }
+            return;
+        }
+        
+        // Save current page scroll position before leaving
         if (scrollContainer && this.currentPage) {
             this.pageScrollPositions[this.currentPage] = scrollContainer.scrollTop;
         }
@@ -1116,20 +1123,12 @@ class AppShellNavigator {
         
         this.currentPage = page;
         
-        // Handle scroll positioning
+        // Restore last saved scroll position or go to top
         if (scrollContainer) {
-            if (isSamePage) {
-                // Same page clicked: scroll to top
-                setTimeout(() => {
-                    scrollContainer.scrollTop = 0;
-                }, 0);
-            } else {
-                // Different page clicked: restore last position or go to top
-                const lastPosition = this.pageScrollPositions[page] || 0;
-                setTimeout(() => {
-                    scrollContainer.scrollTop = lastPosition;
-                }, 0);
-            }
+            const lastPosition = this.pageScrollPositions[page] || 0;
+            setTimeout(() => {
+                scrollContainer.scrollTop = lastPosition;
+            }, 0);
         }
     }
 }

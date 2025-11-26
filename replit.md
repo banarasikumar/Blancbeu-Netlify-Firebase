@@ -52,7 +52,19 @@ The Blancbeu website now uses a **true system-wide theme architecture** leveragi
 - **Music Player**: Background music with rose petal rain animation.
 - **Customer Engagement**: Customer reviews with star ratings and image gallery.
 
-## Recent Changes (v16.4.1 - SCROLL BEHAVIOR PERFECTED)
+## Recent Changes (v16.5.0 - SMART NAVIGATION WITH SCROLL POSITION MEMORY)
+- **IMPLEMENTED: Smart scroll behavior based on navigation context**
+  - **Same page clicked** → Instant scroll to top (no page transition flicker)
+  - **Different page clicked** → Shows page at last remembered scroll position
+  - **First visit to page** → Displays from top
+- **HOW IT WORKS**: 
+  - Scroll positions tracked in memory for each page (`pageScrollPositions` object)
+  - Current page position saved continuously as user scrolls
+  - When switching pages, position is restored automatically
+  - Early return when same button clicked prevents flickering
+- **RESULT**: Native app-like navigation matching Instagram/Flipkart behavior
+
+## Previous: v16.4.1 - SCROLL BEHAVIOR PERFECTED
 - **FIXED: Removed scrollable blank space above content** - Eliminated 80px top padding on Chat, Notifications, and Account page containers
 - **SCROLL BEHAVIOR**: Pages now stay locked at top - no whitespace appears when swiping down from top position
 - **OVERSCROLL PREVENTION**: Added `overscroll-behavior: none;` to prevent browser default overscroll effects

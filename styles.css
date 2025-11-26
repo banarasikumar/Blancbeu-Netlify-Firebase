@@ -3304,7 +3304,7 @@ body {
 /* Chat responsive */
 @media (max-width: 768px) {
     .chat-container {
-        padding: 80px 10px 120px 10px;
+        padding: 80px 10px 80px 10px;
     }
 
     .chat-header {
@@ -3346,7 +3346,7 @@ body {
 /* Notifications responsive */
 @media (max-width: 768px) {
     .notifications-container {
-        padding: 80px 10px 120px 10px;
+        padding: 80px 10px 80px 10px;
     }
 
     .notifications-header {
@@ -3885,7 +3885,7 @@ body {
 /* ===== ACCOUNT PAGE STYLES ===== */
 
 .account-container {
-    padding: 80px 12px 120px 12px;
+    padding: 80px 12px 80px 12px;
     max-width: 600px;
     margin: 0 auto;
 }
@@ -4384,7 +4384,7 @@ body {
 /* Account Page Responsive */
 @media (max-width: 768px) {
     .account-container {
-        padding: 80px 10px 120px 10px;
+        padding: 80px 10px 80px 10px;
     }
 
     .profile-card {

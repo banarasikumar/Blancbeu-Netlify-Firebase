@@ -2608,7 +2608,7 @@ body {
 
 /* ===== NOTIFICATIONS PAGE STYLES - PREMIUM POLISHED ===== */
 .notifications-container {
-    padding: 80px 12px 120px 12px;
+    padding: 80px 12px 80px 12px;
     max-width: 650px;
     margin: 0 auto;
 }
@@ -3098,7 +3098,7 @@ body {
 
 /* ===== CHAT PAGE STYLES - PREMIUM POLISHED ===== */
 .chat-container {
-    padding: 80px 12px 120px 12px;
+    padding: 80px 12px 80px 12px;
     max-width: 650px;
     margin: 0 auto;
 }

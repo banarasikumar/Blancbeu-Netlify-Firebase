@@ -1048,6 +1048,7 @@ class AppShellNavigator {
         this.currentPage = 'home';
         this.contentArea = document.getElementById('appContent');
         this.bottomNav = document.getElementById('bottomNav');
+        this.scrollContainer = document.querySelector('.app-shell-content');
         this.pageScrollPositions = {}; // Store scroll position for each page
         this.init();
     }
@@ -1075,10 +1076,10 @@ class AppShellNavigator {
         });
         
         // Save scroll position when scrolling
-        const scrollContainer = document.querySelector('.app-shell-content');
-        if (scrollContainer) {
-            scrollContainer.addEventListener('scroll', () => {
-                this.pageScrollPositions[this.currentPage] = scrollContainer.scrollTop;
+        if (this.scrollContainer) {
+            this.scrollContainer.addEventListener('scroll', () => {
+                this.pageScrollPositions[this.currentPage] = this.scrollContainer.scrollTop;
+                console.log(`📍 Saved scroll for ${this.currentPage}: ${this.scrollContainer.scrollTop}px`);
             }, { passive: true });
         }
     }
@@ -1086,19 +1087,19 @@ class AppShellNavigator {
     navigateTo(page) {
         if (!page || page === '') page = 'home'; // Default to home if page is empty
         
-        const scrollContainer = document.querySelector('.app-shell-content');
-        
         // If same page clicked: just scroll to top (no page transition)
         if (page === this.currentPage) {
-            if (scrollContainer) {
-                scrollContainer.scrollTop = 0;
+            if (this.scrollContainer) {
+                this.scrollContainer.scrollTop = 0;
+                console.log(`⬆️ Same page clicked, scrolled to top`);
             }
             return;
         }
         
-        // Save current page scroll position before leaving
-        if (scrollContainer && this.currentPage) {
-            this.pageScrollPositions[this.currentPage] = scrollContainer.scrollTop;
+        // Save current page scroll position IMMEDIATELY before any DOM changes
+        if (this.scrollContainer && this.currentPage) {
+            this.pageScrollPositions[this.currentPage] = this.scrollContainer.scrollTop;
+            console.log(`💾 Saved position for ${this.currentPage}: ${this.pageScrollPositions[this.currentPage]}px`);
         }
         
         // Hide ALL sections from current page
@@ -1124,11 +1125,13 @@ class AppShellNavigator {
         this.currentPage = page;
         
         // Restore last saved scroll position or go to top
-        if (scrollContainer) {
+        if (this.scrollContainer) {
             const lastPosition = this.pageScrollPositions[page] || 0;
-            setTimeout(() => {
-                scrollContainer.scrollTop = lastPosition;
-            }, 0);
+            // Use requestAnimationFrame for smooth restoration after paint
+            requestAnimationFrame(() => {
+                this.scrollContainer.scrollTop = lastPosition;
+                console.log(`🔄 Restored scroll for ${page}: ${lastPosition}px`);
+            });
         }
     }
 }

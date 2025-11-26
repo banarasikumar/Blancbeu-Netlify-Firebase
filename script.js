@@ -1048,8 +1048,7 @@ class AppShellNavigator {
         this.currentPage = 'home';
         this.contentArea = document.getElementById('appContent');
         this.bottomNav = document.getElementById('bottomNav');
-        this.scrollContainer = document.querySelector('.app-shell-content');
-        this.pageScrollPositions = {}; // Store scroll position for each page
+        this.pageScrollPositions = {}; // Store scroll position for each page in memory
         this.init();
     }
     
@@ -1075,13 +1074,11 @@ class AppShellNavigator {
             }
         });
         
-        // Save scroll position when scrolling
-        if (this.scrollContainer) {
-            this.scrollContainer.addEventListener('scroll', () => {
-                this.pageScrollPositions[this.currentPage] = this.scrollContainer.scrollTop;
-                console.log(`📍 Saved scroll for ${this.currentPage}: ${this.scrollContainer.scrollTop}px`);
-            }, { passive: true });
-        }
+        // Save scroll position when scrolling - use window scroll
+        window.addEventListener('scroll', () => {
+            this.pageScrollPositions[this.currentPage] = window.scrollY;
+            console.log(`📍 Page scroll saved - ${this.currentPage}: ${window.scrollY}px`);
+        }, { passive: true });
     }
     
     navigateTo(page) {
@@ -1089,18 +1086,14 @@ class AppShellNavigator {
         
         // If same page clicked: just scroll to top (no page transition)
         if (page === this.currentPage) {
-            if (this.scrollContainer) {
-                this.scrollContainer.scrollTop = 0;
-                console.log(`⬆️ Same page clicked, scrolled to top`);
-            }
+            window.scrollTo(0, 0);
+            console.log(`⬆️ Same page, scrolling to top`);
             return;
         }
         
-        // Save current page scroll position IMMEDIATELY before any DOM changes
-        if (this.scrollContainer && this.currentPage) {
-            this.pageScrollPositions[this.currentPage] = this.scrollContainer.scrollTop;
-            console.log(`💾 Saved position for ${this.currentPage}: ${this.pageScrollPositions[this.currentPage]}px`);
-        }
+        // Save current page scroll position IMMEDIATELY
+        this.pageScrollPositions[this.currentPage] = window.scrollY;
+        console.log(`💾 Saved ${this.currentPage} at: ${this.pageScrollPositions[this.currentPage]}px`);
         
         // Hide ALL sections from current page
         const currentPages = this.contentArea.querySelectorAll(`[data-page="${this.currentPage}"]`);
@@ -1108,9 +1101,7 @@ class AppShellNavigator {
         
         // Show ALL sections of new page
         const newPages = this.contentArea.querySelectorAll(`[data-page="${page}"]`);
-        newPages.forEach((el, index) => {
-            el.classList.add('active');
-        });
+        newPages.forEach(el => el.classList.add('active'));
         
         // Update bottom nav
         const navItems = this.bottomNav.querySelectorAll('.nav-item');
@@ -1124,15 +1115,12 @@ class AppShellNavigator {
         
         this.currentPage = page;
         
-        // Restore last saved scroll position or go to top
-        if (this.scrollContainer) {
-            const lastPosition = this.pageScrollPositions[page] || 0;
-            // Use requestAnimationFrame for smooth restoration after paint
-            requestAnimationFrame(() => {
-                this.scrollContainer.scrollTop = lastPosition;
-                console.log(`🔄 Restored scroll for ${page}: ${lastPosition}px`);
-            });
-        }
+        // Restore last saved scroll position for this page
+        const savedPosition = this.pageScrollPositions[page] || 0;
+        requestAnimationFrame(() => {
+            window.scrollTo(0, savedPosition);
+            console.log(`🔄 Restored ${page} to: ${savedPosition}px`);
+        });
     }
 }
 

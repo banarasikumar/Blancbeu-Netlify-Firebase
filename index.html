@@ -989,6 +989,82 @@
                 <button class="logout-btn">Sign Out</button>
             </div>
         </section>
+
+        <!-- CHAT PAGE -->
+        <section id="chat" class="app-page" data-page="chat">
+            <div class="chat-container">
+                <!-- Header -->
+                <div class="chat-header">
+                    <div class="chat-header-content">
+                        <h1>Chat with Us</h1>
+                        <p class="chat-subtitle">Connect with our beauty experts</p>
+                    </div>
+                </div>
+
+                <!-- Location Section -->
+                <div class="chat-location-section">
+                    <!-- Map Container -->
+                    <div class="map-container">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3770.766755444289!2d72.83445!3d19.04295!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c1c1c1c1c1c1%3A0x1234567890abcdef!2sBlancbeu%20Salon!5e0!3m2!1sen!2sin!4v1234567890"
+                            class="google-map"
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+
+                    <!-- Location Info Card -->
+                    <div class="location-info-card">
+                        <div class="location-icon">📍</div>
+                        <div class="location-details">
+                            <h3>Blancbeu Salon</h3>
+                            <p class="location-address">Premium Beauty & Wellness Salon</p>
+                            <div class="location-hours">
+                                <span class="hours-icon">🕐</span>
+                                <span class="hours-text">Open: 9 AM - 8 PM</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons Section -->
+                <div class="chat-actions-section">
+                    <button class="chat-action-btn open-maps-btn" onclick="openBlancbeuMaps()">
+                        <span class="btn-icon">🗺️</span>
+                        <div class="btn-content">
+                            <div class="btn-label">Open in Maps</div>
+                            <div class="btn-desc">View full directions</div>
+                        </div>
+                    </button>
+                    <button class="chat-action-btn whatsapp-btn" onclick="openWhatsAppChat()">
+                        <span class="btn-icon">💬</span>
+                        <div class="btn-content">
+                            <div class="btn-label">Chat on WhatsApp</div>
+                            <div class="btn-desc">Quick messages & support</div>
+                        </div>
+                    </button>
+                </div>
+
+                <!-- Info Cards -->
+                <div class="chat-info-section">
+                    <div class="info-card">
+                        <div class="info-icon">☎️</div>
+                        <div class="info-content">
+                            <h4>Call Us</h4>
+                            <p>+91 9229915277</p>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">⏰</div>
+                        <div class="info-content">
+                            <h4>Response Time</h4>
+                            <p>Usually within 1 hour</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <!-- APP SHELL: Fixed Bottom Navigation -->
@@ -1011,7 +1087,7 @@
             </svg>
             <span class="nav-label">Bookings</span>
         </a>
-        <a href="https://wa.me/919229915277" target="_blank" class="nav-item" data-page="chat">
+        <a href="#" class="nav-item" data-page="chat">
             <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/>
             </svg>

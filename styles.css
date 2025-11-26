@@ -3096,6 +3096,252 @@ body {
     box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
 }
 
+/* ===== CHAT PAGE STYLES - PREMIUM POLISHED ===== */
+.chat-container {
+    padding: 80px 12px 120px 12px;
+    max-width: 650px;
+    margin: 0 auto;
+}
+
+.chat-header {
+    padding: 24px 20px;
+    background: linear-gradient(180deg, rgba(212, 175, 55, 0.06) 0%, transparent 100%);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+    margin-bottom: 20px;
+    border-radius: 18px;
+}
+
+.chat-header-content h1 {
+    margin: 0 0 6px 0;
+    font-size: 32px;
+    font-family: 'Cinzel', serif;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--text-primary), rgba(212, 175, 55, 0.5));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.chat-subtitle {
+    margin: 0;
+    font-size: 14px;
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+.chat-location-section {
+    margin-bottom: 24px;
+}
+
+.map-container {
+    width: 100%;
+    height: 320px;
+    border-radius: 18px;
+    overflow: hidden;
+    margin-bottom: 16px;
+    box-shadow: 0 8px 32px rgba(212, 175, 55, 0.15);
+    border: 2px solid rgba(212, 175, 55, 0.2);
+    animation: slideInNotification 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.google-map {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.location-info-card {
+    display: flex;
+    gap: 16px;
+    padding: 18px 16px;
+    background: linear-gradient(135deg, var(--bg-secondary) 0%, rgba(212, 175, 55, 0.02) 100%);
+    border: 2px solid rgba(212, 175, 55, 0.2);
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    animation: slideInNotification 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s both;
+}
+
+.location-icon {
+    font-size: 36px;
+    flex-shrink: 0;
+}
+
+.location-details h3 {
+    margin: 0 0 4px 0;
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--text-primary);
+    font-family: 'Poppins', sans-serif;
+}
+
+.location-address {
+    margin: 0 0 8px 0;
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.location-hours {
+    display: flex;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--text-secondary);
+    font-weight: 700;
+}
+
+.chat-actions-section {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 24px;
+}
+
+.chat-action-btn {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 18px;
+    border: 2px solid rgba(212, 175, 55, 0.2);
+    background: linear-gradient(135deg, var(--bg-secondary) 0%, rgba(212, 175, 55, 0.02) 100%);
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    animation: slideInNotification 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.open-maps-btn {
+    animation-delay: 0.2s;
+}
+
+.whatsapp-btn {
+    animation-delay: 0.3s;
+}
+
+.chat-action-btn:hover {
+    border-color: rgba(212, 175, 55, 0.6);
+    background: linear-gradient(135deg, var(--bg-secondary) 0%, rgba(212, 175, 55, 0.08) 100%);
+    box-shadow: 0 12px 40px rgba(212, 175, 55, 0.2);
+    transform: translateY(-4px);
+}
+
+.btn-icon {
+    font-size: 28px;
+    flex-shrink: 0;
+}
+
+.btn-content {
+    flex: 1;
+}
+
+.btn-label {
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--text-primary);
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 2px;
+}
+
+.btn-desc {
+    font-size: 11px;
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+.chat-info-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.info-card {
+    display: flex;
+    gap: 12px;
+    padding: 16px;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.08), rgba(212, 175, 55, 0.02));
+    border: 1.5px solid rgba(212, 175, 55, 0.2);
+    border-radius: 14px;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    animation: slideInNotification 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.info-card:nth-child(1) {
+    animation-delay: 0.4s;
+}
+
+.info-card:nth-child(2) {
+    animation-delay: 0.5s;
+}
+
+.info-card:hover {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(212, 175, 55, 0.05));
+    border-color: rgba(212, 175, 55, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(212, 175, 55, 0.1);
+}
+
+.info-icon {
+    font-size: 24px;
+    flex-shrink: 0;
+}
+
+.info-card h4 {
+    margin: 0 0 4px 0;
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--text-primary);
+    font-family: 'Poppins', sans-serif;
+}
+
+.info-card p {
+    margin: 0;
+    font-size: 12px;
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+/* Chat responsive */
+@media (max-width: 768px) {
+    .chat-container {
+        padding: 80px 10px 120px 10px;
+    }
+
+    .chat-header {
+        padding: 20px 16px;
+    }
+
+    .chat-header-content h1 {
+        font-size: 26px;
+    }
+
+    .map-container {
+        height: 280px;
+        margin-bottom: 14px;
+    }
+
+    .location-info-card {
+        padding: 14px 14px;
+    }
+
+    .chat-action-btn {
+        padding: 14px 16px;
+        gap: 12px;
+    }
+
+    .btn-icon {
+        font-size: 24px;
+    }
+
+    .btn-label {
+        font-size: 14px;
+    }
+
+    .info-card {
+        padding: 14px;
+    }
+}
+
 .empty-state {
     text-align: center;
     padding: 80px 20px;

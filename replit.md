@@ -52,7 +52,14 @@ The Blancbeu website now uses a **true system-wide theme architecture** leveragi
 - **Music Player**: Background music with rose petal rain animation.
 - **Customer Engagement**: Customer reviews with star ratings and image gallery.
 
-## Recent Changes (v16.4.0 - CHAT PAGE PREMIUM POLISH & APP COMPLETION)
+## Recent Changes (v16.4.1 - SCROLL BEHAVIOR PERFECTED)
+- **FIXED: Removed scrollable blank space above content** - Eliminated 80px top padding on Chat, Notifications, and Account page containers
+- **SCROLL BEHAVIOR**: Pages now stay locked at top - no whitespace appears when swiping down from top position
+- **OVERSCROLL PREVENTION**: Added `overscroll-behavior: none;` to prevent browser default overscroll effects
+- **ALL PAGES POLISHED**: Smooth, native app-like scrolling behavior across all 5 navigation pages
+- **Result**: Premium scrolling experience matching world-class mobile apps
+
+## Previous: v16.4.0 - CHAT PAGE PREMIUM POLISH & APP COMPLETION
 - **CHAT PAGE COMPLETE**: Designed stunning Chat page with interactive Google Maps viewer showing BlancBeu Salon location
 - **INTERACTIVE GOOGLE MAPS**: Embedded responsive Google Maps iframe displaying salon location with smooth animations
 - **PREMIUM ACTION BUTTONS**: Two beautifully styled buttons:

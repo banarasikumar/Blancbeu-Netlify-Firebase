@@ -3552,44 +3552,84 @@ body {
 
 /* Profile Header */
 .account-header {
-    margin-bottom: 28px;
+    margin-bottom: 24px;
 }
 
 .profile-card {
-    background: linear-gradient(135deg, var(--bg-secondary) 0%, rgba(212, 175, 55, 0.02) 100%);
-    border: 1.5px solid rgba(212, 175, 55, 0.15);
-    border-radius: 20px;
+    background: linear-gradient(135deg, var(--bg-secondary) 0%, rgba(212, 175, 55, 0.03) 100%);
+    border: 2px solid rgba(212, 175, 55, 0.2);
+    border-radius: 24px;
     padding: 24px;
     display: flex;
     align-items: center;
     gap: 18px;
-    backdrop-filter: blur(8px);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(212, 175, 55, 0.1);
-    animation: slideInNotification 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 12px 48px rgba(212, 175, 55, 0.12), inset 0 1px 0 rgba(212, 175, 55, 0.15);
+    animation: slideInNotification 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
     transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.profile-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.4), transparent);
 }
 
 .profile-card:hover {
-    border-color: rgba(212, 175, 55, 0.5);
-    box-shadow: 0 12px 40px rgba(212, 175, 55, 0.2), inset 0 1px 0 rgba(212, 175, 55, 0.15);
-    transform: translateY(-4px);
+    border-color: rgba(212, 175, 55, 0.45);
+    box-shadow: 0 16px 56px rgba(212, 175, 55, 0.18), inset 0 1px 0 rgba(212, 175, 55, 0.2);
+    transform: translateY(-6px);
 }
 
-.profile-avatar {
+.profile-avatar-wrapper {
+    position: relative;
     flex-shrink: 0;
 }
 
+.profile-avatar {
+    position: relative;
+}
+
 .avatar-placeholder {
-    width: 80px;
-    height: 80px;
-    border-radius: 16px;
-    background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(212, 175, 55, 0.05));
-    border: 2px solid rgba(212, 175, 55, 0.3);
+    width: 90px;
+    height: 90px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.25), rgba(212, 175, 55, 0.08));
+    border: 2.5px solid rgba(212, 175, 55, 0.4);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 48px;
-    backdrop-filter: blur(8px);
+    font-size: 52px;
+    backdrop-filter: blur(10px);
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 8px 24px rgba(212, 175, 55, 0.15);
+}
+
+.profile-card:hover .avatar-placeholder {
+    transform: scale(1.08);
+    box-shadow: 0 12px 32px rgba(212, 175, 55, 0.25);
+}
+
+.tier-badge-premium {
+    position: absolute;
+    bottom: -8px;
+    right: -8px;
+    background: linear-gradient(135deg, var(--gold-24k), rgba(212, 175, 55, 0.8));
+    color: var(--bg-primary);
+    padding: 6px 14px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    box-shadow: 0 6px 16px rgba(212, 175, 55, 0.4);
+    border: 2px solid var(--bg-secondary);
 }
 
 .profile-info {
@@ -3633,26 +3673,102 @@ body {
     font-size: 12px;
 }
 
+.tier-progress-card {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.08), rgba(212, 175, 55, 0.02));
+    border: 1.5px solid rgba(212, 175, 55, 0.2);
+    border-radius: 16px;
+    padding: 16px;
+    margin-top: 16px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+    animation: slideInNotification 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.tier-progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    font-size: 12px;
+}
+
+.tier-label {
+    font-weight: 800;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background: linear-gradient(135deg, var(--gold-24k), rgba(212, 175, 55, 0.8));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.tier-next {
+    color: var(--text-secondary);
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.progress-bar {
+    height: 8px;
+    background: rgba(212, 175, 55, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    border: 1px solid rgba(212, 175, 55, 0.15);
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold-24k), rgba(212, 175, 55, 0.8));
+    border-radius: 10px;
+    transition: width 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 0 12px rgba(212, 175, 55, 0.5);
+}
+
+.tier-benefits {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.benefit-badge {
+    font-size: 9px;
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.15), rgba(76, 175, 80, 0.05));
+    color: #4caf50;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-weight: 700;
+    border: 1px solid rgba(76, 175, 80, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
 .edit-profile-btn {
     flex-shrink: 0;
     background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(212, 175, 55, 0.1));
-    border: 1px solid rgba(212, 175, 55, 0.3);
+    border: 1.5px solid rgba(212, 175, 55, 0.3);
     color: var(--text-primary);
-    padding: 8px 12px;
-    border-radius: 10px;
-    font-size: 13px;
+    padding: 10px;
+    border-radius: 12px;
+    font-size: 16px;
     font-weight: 700;
     cursor: pointer;
     transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
     white-space: nowrap;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .edit-profile-btn:hover {
     background: linear-gradient(135deg, var(--gold-24k), rgba(212, 175, 55, 0.8));
     color: var(--bg-primary);
     border-color: var(--gold-24k);
-    box-shadow: 0 6px 16px rgba(212, 175, 55, 0.3);
-    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
+    transform: translateY(-3px) scale(1.1) rotate(10deg);
 }
 
 /* Stats Section */
@@ -3664,45 +3780,155 @@ body {
 }
 
 .stat-card {
-    background: linear-gradient(135deg, rgba(212, 175, 55, 0.08), rgba(212, 175, 55, 0.02));
-    border: 1.5px solid rgba(212, 175, 55, 0.2);
-    border-radius: 14px;
-    padding: 16px 12px;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(212, 175, 55, 0.03));
+    border: 2px solid rgba(212, 175, 55, 0.25);
+    border-radius: 18px;
+    padding: 18px 14px;
     text-align: center;
-    backdrop-filter: blur(8px);
-    transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    backdrop-filter: blur(10px);
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     cursor: pointer;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.stat-card:hover::before {
+    left: 100%;
 }
 
 .stat-card:hover {
-    border-color: rgba(212, 175, 55, 0.5);
-    box-shadow: 0 8px 24px rgba(212, 175, 55, 0.2);
-    transform: translateY(-4px);
-    background: linear-gradient(135deg, rgba(212, 175, 55, 0.12), rgba(212, 175, 55, 0.05));
+    border-color: rgba(212, 175, 55, 0.6);
+    box-shadow: 0 12px 32px rgba(212, 175, 55, 0.25);
+    transform: translateY(-6px) scale(1.05);
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(212, 175, 55, 0.06));
 }
 
 .stat-icon {
-    font-size: 28px;
-    margin-bottom: 8px;
+    font-size: 32px;
+    margin-bottom: 10px;
+    display: block;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.stat-card:hover .stat-icon {
+    transform: scale(1.15) rotate(-5deg);
 }
 
 .stat-label {
-    font-size: 10px;
+    font-size: 9px;
     color: var(--text-secondary);
     text-transform: uppercase;
-    font-weight: 700;
-    letter-spacing: 0.4px;
-    margin-bottom: 4px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
 }
 
 .stat-value {
-    font-size: 18px;
-    font-weight: 800;
+    font-size: 20px;
+    font-weight: 900;
     background: linear-gradient(135deg, var(--gold-24k), rgba(212, 175, 55, 0.8));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     font-family: 'Cinzel', serif;
+    margin-bottom: 8px;
+}
+
+.stat-bar {
+    height: 4px;
+    background: rgba(212, 175, 55, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(212, 175, 55, 0.15);
+}
+
+.stat-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold-24k), rgba(212, 175, 55, 0.8));
+    border-radius: 10px;
+    transition: width 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.stat-card-1 .stat-bar-fill {
+    animation: fillBar 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.stat-card-2 .stat-bar-fill {
+    animation: fillBar 1.4s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s forwards;
+}
+
+.stat-card-3 .stat-bar-fill {
+    animation: fillBar 1.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s forwards;
+}
+
+@keyframes fillBar {
+    from {
+        width: 0 !important;
+    }
+}
+
+/* Exclusive Benefits */
+.benefits-section {
+    margin-bottom: 28px;
+    animation: slideInNotification 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s backwards;
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.benefit-card {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.12), rgba(212, 175, 55, 0.04));
+    border: 1.5px solid rgba(212, 175, 55, 0.25);
+    border-radius: 16px;
+    padding: 18px 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    backdrop-filter: blur(10px);
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+}
+
+.benefit-card:hover {
+    border-color: rgba(212, 175, 55, 0.5);
+    box-shadow: 0 12px 32px rgba(212, 175, 55, 0.2);
+    transform: translateY(-6px) scale(1.08);
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.16), rgba(212, 175, 55, 0.08));
+}
+
+.benefit-icon {
+    font-size: 28px;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.benefit-card:hover .benefit-icon {
+    transform: scale(1.2) rotate(10deg);
+}
+
+.benefit-name {
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    text-align: center;
 }
 
 /* Section Titles */
@@ -3825,31 +4051,74 @@ body {
         flex-direction: column;
         text-align: center;
         padding: 20px;
+        gap: 12px;
     }
 
     .profile-info {
         text-align: center;
     }
 
+    .avatar-placeholder {
+        width: 80px;
+        height: 80px;
+        font-size: 44px;
+    }
+
+    .tier-badge-premium {
+        font-size: 9px;
+        padding: 5px 10px;
+    }
+
     .edit-profile-btn {
-        width: 100%;
+        width: 38px;
+        height: 38px;
+    }
+
+    .tier-progress-card {
+        padding: 14px;
+        margin-top: 14px;
     }
 
     .stats-section {
         grid-template-columns: repeat(3, 1fr);
         gap: 10px;
+        margin-bottom: 24px;
     }
 
     .stat-card {
         padding: 14px 10px;
+        border-radius: 14px;
     }
 
     .stat-icon {
-        font-size: 24px;
+        font-size: 28px;
+        margin-bottom: 6px;
     }
 
     .stat-value {
-        font-size: 16px;
+        font-size: 18px;
+    }
+
+    .stat-label {
+        font-size: 8px;
+        margin-bottom: 4px;
+    }
+
+    .benefits-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .benefit-card {
+        padding: 14px;
+    }
+
+    .benefit-icon {
+        font-size: 24px;
+    }
+
+    .benefit-name {
+        font-size: 9px;
     }
 
     .action-item {

@@ -2609,7 +2609,7 @@ body {
 
 /* ===== NOTIFICATIONS PAGE STYLES - PREMIUM POLISHED ===== */
 .notifications-container {
-    padding: 80px 12px 80px 12px;
+    padding: 0px 12px 80px 12px;
     max-width: 650px;
     margin: 0 auto;
 }
@@ -3099,7 +3099,7 @@ body {
 
 /* ===== CHAT PAGE STYLES - PREMIUM POLISHED ===== */
 .chat-container {
-    padding: 80px 12px 80px 12px;
+    padding: 0px 12px 80px 12px;
     max-width: 650px;
     margin: 0 auto;
 }
@@ -3305,7 +3305,7 @@ body {
 /* Chat responsive */
 @media (max-width: 768px) {
     .chat-container {
-        padding: 80px 10px 80px 10px;
+        padding: 0px 10px 80px 10px;
     }
 
     .chat-header {
@@ -3347,7 +3347,7 @@ body {
 /* Notifications responsive */
 @media (max-width: 768px) {
     .notifications-container {
-        padding: 80px 10px 80px 10px;
+        padding: 0px 10px 80px 10px;
     }
 
     .notifications-header {
@@ -3886,7 +3886,7 @@ body {
 /* ===== ACCOUNT PAGE STYLES ===== */
 
 .account-container {
-    padding: 80px 12px 80px 12px;
+    padding: 0px 12px 80px 12px;
     max-width: 600px;
     margin: 0 auto;
 }
@@ -4385,7 +4385,7 @@ body {
 /* Account Page Responsive */
 @media (max-width: 768px) {
     .account-container {
-        padding: 80px 10px 80px 10px;
+        padding: 0px 10px 80px 10px;
     }
 
     .profile-card {

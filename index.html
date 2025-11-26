@@ -790,10 +790,171 @@
 
         <!-- ACCOUNT PAGE -->
         <section id="account" class="app-page" data-page="account">
-            <div class="container" style="padding-top: 80px; padding-bottom: 120px; min-height: 100vh; display: flex; align-items: center; justify-content: center; flex-direction: column; text-align: center;">
-                <div style="font-size: 60px; margin-bottom: 20px;">👤</div>
-                <h2 style="color: var(--text-primary); margin-bottom: 10px;">Account</h2>
-                <p style="color: var(--text-secondary);">Account settings coming soon!</p>
+            <div class="account-container">
+                <!-- Header -->
+                <div class="account-header">
+                    <h1 style="color: var(--text-primary); margin: 0; font-size: 28px; font-family: 'Cinzel', serif;">My Account</h1>
+                </div>
+
+                <!-- Profile Card -->
+                <div class="profile-card">
+                    <div class="profile-avatar">
+                        <div class="avatar-placeholder">👩‍🦱</div>
+                    </div>
+                    <div class="profile-info">
+                        <h2 class="profile-name">Sarah Anderson</h2>
+                        <p class="profile-email">sarah.anderson@email.com</p>
+                        <div class="membership-badge">
+                            <span class="badge-icon">👑</span>
+                            <span class="badge-text">GOLD MEMBER</span>
+                        </div>
+                    </div>
+                    <button class="edit-profile-btn" title="Edit Profile">✏️</button>
+                </div>
+
+                <!-- Quick Stats -->
+                <div class="quick-stats">
+                    <div class="stat-card">
+                        <div class="stat-number">12</div>
+                        <div class="stat-label">Total Bookings</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">₹2,450</div>
+                        <div class="stat-label">Points Balance</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">8</div>
+                        <div class="stat-label">Favorite Services</div>
+                    </div>
+                </div>
+
+                <!-- Account Sections -->
+                <div class="account-sections">
+                    <!-- Payment Methods -->
+                    <div class="section-card">
+                        <div class="section-header">
+                            <h3 class="section-title">💳 Payment Methods</h3>
+                            <button class="add-btn" title="Add Payment Method">+</button>
+                        </div>
+                        <div class="payment-methods">
+                            <div class="payment-item">
+                                <div class="payment-icon">💳</div>
+                                <div class="payment-details">
+                                    <p class="payment-type">VISA</p>
+                                    <p class="payment-last-four">•••• 4242</p>
+                                </div>
+                                <div class="payment-badge">DEFAULT</div>
+                            </div>
+                            <div class="payment-item">
+                                <div class="payment-icon">📱</div>
+                                <div class="payment-details">
+                                    <p class="payment-type">UPI</p>
+                                    <p class="payment-last-four">sarah***@upi</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Preferences -->
+                    <div class="section-card">
+                        <div class="section-header">
+                            <h3 class="section-title">⚙️ Preferences</h3>
+                        </div>
+                        <div class="preference-list">
+                            <div class="preference-item">
+                                <div class="preference-label">
+                                    <span class="preference-title">Notifications</span>
+                                    <span class="preference-desc">Push & Email alerts</span>
+                                </div>
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="notif-toggle" class="toggle-input" checked>
+                                    <label for="notif-toggle" class="toggle-label"></label>
+                                </div>
+                            </div>
+                            <div class="preference-item">
+                                <div class="preference-label">
+                                    <span class="preference-title">Marketing</span>
+                                    <span class="preference-desc">Special offers & deals</span>
+                                </div>
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="market-toggle" class="toggle-input" checked>
+                                    <label for="market-toggle" class="toggle-label"></label>
+                                </div>
+                            </div>
+                            <div class="preference-item">
+                                <div class="preference-label">
+                                    <span class="preference-title">Dark Mode</span>
+                                    <span class="preference-desc">Auto-based on time</span>
+                                </div>
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="dark-toggle" class="toggle-input" checked>
+                                    <label for="dark-toggle" class="toggle-label"></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Address Book -->
+                    <div class="section-card">
+                        <div class="section-header">
+                            <h3 class="section-title">📍 Saved Addresses</h3>
+                            <button class="add-btn" title="Add Address">+</button>
+                        </div>
+                        <div class="address-list">
+                            <div class="address-item">
+                                <div class="address-label">Home</div>
+                                <p class="address-text">123 Prime Street, Ranchi, Jharkhand 834001</p>
+                                <button class="edit-small-btn">Edit</button>
+                            </div>
+                            <div class="address-item">
+                                <div class="address-label">Office</div>
+                                <p class="address-text">DLF Office Complex, Sector 5, Ranchi</p>
+                                <button class="edit-small-btn">Edit</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Help & Support -->
+                    <div class="section-card">
+                        <div class="section-header">
+                            <h3 class="section-title">🆘 Help & Support</h3>
+                        </div>
+                        <div class="help-links">
+                            <button class="help-link-btn">
+                                <span>📞 Contact Us</span>
+                                <span class="arrow">›</span>
+                            </button>
+                            <button class="help-link-btn">
+                                <span>📋 FAQs</span>
+                                <span class="arrow">›</span>
+                            </button>
+                            <button class="help-link-btn">
+                                <span>📖 Terms & Conditions</span>
+                                <span class="arrow">›</span>
+                            </button>
+                            <button class="help-link-btn">
+                                <span>🔒 Privacy Policy</span>
+                                <span class="arrow">›</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Danger Zone -->
+                    <div class="section-card danger-card">
+                        <div class="section-header">
+                            <h3 class="section-title">⚠️ Account Actions</h3>
+                        </div>
+                        <div class="danger-actions">
+                            <button class="logout-btn">🚪 Logout</button>
+                            <button class="delete-btn">🗑️ Delete Account</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer Info -->
+                <div class="account-footer">
+                    <p style="font-size: 12px; color: var(--text-secondary); margin: 0;">Version 1.0.0 • Member since Nov 2024</p>
+                </div>
             </div>
         </section>
     </main>

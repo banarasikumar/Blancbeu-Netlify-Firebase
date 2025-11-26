@@ -1316,3 +1316,12 @@ function initBookingsController() {
 
     console.log('✅ Bookings controller initialized');
 }
+
+// ===== CHAT PAGE FUNCTIONS =====
+function openBlancbeuMaps() {
+    window.open('https://maps.app.goo.gl/89vy3WojYr2K29bF9', '_blank');
+}
+
+function openWhatsAppChat() {
+    window.open('https://wa.me/919229915277', '_blank');
+}

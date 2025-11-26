@@ -1048,6 +1048,7 @@ class AppShellNavigator {
         this.currentPage = 'home';
         this.contentArea = document.getElementById('appContent');
         this.bottomNav = document.getElementById('bottomNav');
+        this.pageScrollPositions = {}; // Store scroll position for each page
         this.init();
     }
     
@@ -1072,11 +1073,26 @@ class AppShellNavigator {
                 this.navigateTo(hash);
             }
         });
+        
+        // Save scroll position when scrolling
+        const scrollContainer = document.querySelector('.app-shell-content');
+        if (scrollContainer) {
+            scrollContainer.addEventListener('scroll', () => {
+                this.pageScrollPositions[this.currentPage] = scrollContainer.scrollTop;
+            }, { passive: true });
+        }
     }
     
     navigateTo(page) {
         if (!page || page === '') page = 'home'; // Default to home if page is empty
-        if (page === this.currentPage) return;
+        
+        const isSamePage = page === this.currentPage;
+        
+        // Save current page scroll position
+        const scrollContainer = document.querySelector('.app-shell-content');
+        if (scrollContainer && this.currentPage) {
+            this.pageScrollPositions[this.currentPage] = scrollContainer.scrollTop;
+        }
         
         // Hide ALL sections from current page
         const currentPages = this.contentArea.querySelectorAll(`[data-page="${this.currentPage}"]`);
@@ -1086,10 +1102,6 @@ class AppShellNavigator {
         const newPages = this.contentArea.querySelectorAll(`[data-page="${page}"]`);
         newPages.forEach((el, index) => {
             el.classList.add('active');
-            if (index === 0) {
-                // Scroll to top of first element
-                el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
         });
         
         // Update bottom nav
@@ -1103,6 +1115,22 @@ class AppShellNavigator {
         });
         
         this.currentPage = page;
+        
+        // Handle scroll positioning
+        if (scrollContainer) {
+            if (isSamePage) {
+                // Same page clicked: scroll to top
+                setTimeout(() => {
+                    scrollContainer.scrollTop = 0;
+                }, 0);
+            } else {
+                // Different page clicked: restore last position or go to top
+                const lastPosition = this.pageScrollPositions[page] || 0;
+                setTimeout(() => {
+                    scrollContainer.scrollTop = lastPosition;
+                }, 0);
+            }
+        }
     }
 }
 

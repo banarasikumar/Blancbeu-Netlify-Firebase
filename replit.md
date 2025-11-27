@@ -17,6 +17,7 @@ The Blancbeu website utilizes a true system-wide theme architecture, leveraging 
 ### UI/UX Decisions
 - **Theming**: Dual-theme system (dark default: 24k gold on deep black; light: warm/cream on white) with dynamic CSS variables and user-toggleable via a circular glassmorphism button.
 - **Navigation**: iOS-style bottom navigation bar with glassmorphism effects, scroll-based visibility toggling, and theme-aware styling.
+- **Navigation Icons**: 5 iOS-inspired SVG outline icons (Home, Notify, Bookings, Contact, Account) with gold gradient strokes (#ffd700 → #d4af37), consistent 1.5px stroke-width, rounded joins, and premium clean aesthetic. All icons use outline/stroke-based design for light, modern appearance.
 - **Animations**: Dark mode includes transparent Diwali fireworks, brand name shimmer, sparkling particle backgrounds, offer card glow, and rose petal rain. Animations are disabled in light mode.
 - **Design Elements**: `Cinzel` for headings, `Poppins` for body text, and glassmorphism with strong blur and shadow depth for interactive elements.
 - **Responsiveness**: Fully responsive design with optimized images for various screen sizes.

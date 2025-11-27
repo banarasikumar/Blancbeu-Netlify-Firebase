@@ -5630,3 +5630,41 @@ body.light-mode .about-stat:hover {
     .testimonial-nav-btn.prev { left: 10px; }
     .testimonial-nav-btn.next { right: 10px; }
 }
+
+/* ===== COMPREHENSIVE VISIBILITY FIXES ===== */
+.trust-section,
+.why-choose-section,
+.service-highlights-section,
+.offers-section,
+.gallery-section,
+.reviews-section,
+.about-section,
+.roadmap-section,
+.cta-section {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+body.light-mode .trust-card,
+body.light-mode .feature-card,
+body.light-mode .service-card,
+body.light-mode .offer-card,
+body.light-mode .gallery-item {
+    color: #333333 !important;
+}
+
+body.light-mode .section-title {
+    color: #1a1a1a !important;
+}
+
+body.light-mode .section-subtitle {
+    color: #555555 !important;
+}
+
+body.light-mode .trust-card,
+body.light-mode .why-choose-section,
+body.light-mode .service-highlights-section {
+    visibility: visible !important;
+    display: block !important;
+}

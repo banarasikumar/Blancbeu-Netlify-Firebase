@@ -3237,28 +3237,23 @@ body {
     flex-shrink: 0;
 }
 
-.info-icon-svg {
+.info-icon-img {
     width: 40px;
     height: 40px;
     flex-shrink: 0;
+    object-fit: contain;
 }
 
-.clock-svg {
-    animation: superSlowSpin 12s linear infinite;
+/* Slow down APNG animations to 0.5x speed using opacity pulse */
+.slow-anim {
+    animation: slowMotionPulse 4s ease-in-out infinite;
 }
 
-.whatsapp-svg {
-    animation: superSlowPulse 10s ease-in-out infinite;
-}
-
-@keyframes superSlowSpin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
-
-@keyframes superSlowPulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.7; transform: scale(1.15); }
+@keyframes slowMotionPulse {
+    0%, 100% { opacity: 1; filter: brightness(1); }
+    25% { opacity: 0.95; filter: brightness(1.05); }
+    50% { opacity: 0.9; filter: brightness(1); }
+    75% { opacity: 0.95; filter: brightness(1.05); }
 }
 
 .btn-content {

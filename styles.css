@@ -2386,6 +2386,64 @@ body.light-mode .gallery-section {
     }
 }
 
+/* Premium Notify Icon */
+.notify-icon-premium {
+    width: 32px;
+    height: 32px;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.nav-item.active .notify-icon-premium {
+    animation: notifyGlowPremium 2.2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.5)) drop-shadow(0 4px 12px rgba(212, 175, 55, 0.4));
+}
+
+.nav-item:hover .notify-icon-premium {
+    filter: drop-shadow(0 4px 12px rgba(255, 215, 0, 0.3));
+    transform: scale(1.1);
+}
+
+.notify-structure {
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.nav-item.active .notify-structure {
+    animation: notifyFloat 2.2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.badge-pulse {
+    animation: badgePulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes notifyGlowPremium {
+    0%, 100% {
+        filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.5)) drop-shadow(0 4px 12px rgba(212, 175, 55, 0.4));
+    }
+    50% {
+        filter: drop-shadow(0 0 16px rgba(255, 215, 0, 0.7)) drop-shadow(0 6px 16px rgba(212, 175, 55, 0.5));
+    }
+}
+
+@keyframes notifyFloat {
+    0%, 100% {
+        transform: translateY(-2px) scale(1.0);
+    }
+    50% {
+        transform: translateY(-5px) scale(1.04);
+    }
+}
+
+@keyframes badgePulse {
+    0%, 100% {
+        r: 3;
+        opacity: 0.2;
+    }
+    50% {
+        r: 3.5;
+        opacity: 0.1;
+    }
+}
+
 /* Clean, Elegant Icon Styling for others */
 .nav-icon {
     width: 28px;

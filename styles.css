@@ -4904,3 +4904,147 @@ body.light-mode .secondary-btn:hover {
         padding: 10px 20px;
     }
 }
+
+/* ===== TRUST & SOCIAL PROOF SECTION ===== */
+.trust-section {
+    padding: 60px 0;
+    background: linear-gradient(135deg, transparent 0%, rgba(212, 175, 55, 0.05) 50%, transparent 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.trust-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.trust-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin-top: 50px;
+    position: relative;
+    z-index: 2;
+}
+
+.trust-card {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(212, 175, 55, 0.05));
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    border-radius: 20px;
+    padding: 40px 30px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    cursor: default;
+    box-shadow: 0 8px 32px rgba(212, 175, 55, 0.1);
+    animation: slideInUp 0.6s ease-out forwards;
+    opacity: 0;
+}
+
+.trust-card:nth-child(1) {
+    animation-delay: 0.2s;
+}
+
+.trust-card:nth-child(2) {
+    animation-delay: 0.4s;
+}
+
+.trust-card:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+.trust-card:hover {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(212, 175, 55, 0.1));
+    border-color: rgba(212, 175, 55, 0.4);
+    transform: translateY(-8px);
+    box-shadow: 0 16px 48px rgba(212, 175, 55, 0.2);
+}
+
+.stat-number {
+    font-family: 'Cinzel', serif;
+    font-size: 56px;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--gold-24k), var(--gold-bright));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+    margin-bottom: 12px;
+    letter-spacing: 2px;
+}
+
+.stat-label {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+}
+
+.stat-description {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    letter-spacing: 0.3px;
+}
+
+body.light-mode .trust-section {
+    background: linear-gradient(135deg, transparent 0%, rgba(212, 160, 23, 0.08) 50%, transparent 100%);
+}
+
+body.light-mode .trust-card {
+    background: linear-gradient(135deg, rgba(212, 160, 23, 0.08), rgba(212, 160, 23, 0.04));
+    border-color: rgba(212, 160, 23, 0.25);
+    box-shadow: 0 8px 32px rgba(212, 160, 23, 0.12);
+}
+
+body.light-mode .trust-card:hover {
+    background: linear-gradient(135deg, rgba(212, 160, 23, 0.12), rgba(212, 160, 23, 0.08));
+    border-color: rgba(212, 160, 23, 0.5);
+    box-shadow: 0 16px 48px rgba(212, 160, 23, 0.2);
+}
+
+body.light-mode .stat-number {
+    background: linear-gradient(135deg, #D4A017, #FFD700);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+body.light-mode .stat-label {
+    color: #1a1a1a;
+}
+
+body.light-mode .stat-description {
+    color: #666666;
+}
+
+@media (max-width: 768px) {
+    .trust-section {
+        padding: 40px 0;
+    }
+    
+    .trust-grid {
+        gap: 16px;
+        margin-top: 30px;
+    }
+    
+    .trust-card {
+        padding: 30px 20px;
+    }
+    
+    .stat-number {
+        font-size: 42px;
+    }
+    
+    .stat-label {
+        font-size: 16px;
+    }
+}

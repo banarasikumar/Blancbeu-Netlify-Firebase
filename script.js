@@ -1404,3 +1404,44 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 200 + (index * 200));
     });
 });
+
+// ===== STATS COUNTER ANIMATION =====
+function animateCounters() {
+    const statNumbers = document.querySelectorAll('.stat-number');
+    
+    statNumbers.forEach(element => {
+        const targetValue = parseInt(element.getAttribute('data-value'));
+        let currentValue = 0;
+        const duration = 2000; // 2 seconds
+        const increment = targetValue / (duration / 50);
+        
+        const timer = setInterval(() => {
+            currentValue += increment;
+            if (currentValue >= targetValue) {
+                currentValue = targetValue;
+                clearInterval(timer);
+            }
+            element.textContent = Math.floor(currentValue).toLocaleString();
+        }, 50);
+    });
+}
+
+// Trigger animation when section comes into view
+function setupCounterAnimation() {
+    const trustSection = document.querySelector('.trust-section');
+    
+    if (!trustSection) return;
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateCounters();
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+    
+    observer.observe(trustSection);
+}
+
+document.addEventListener('DOMContentLoaded', setupCounterAnimation);

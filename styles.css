@@ -3204,7 +3204,7 @@ body {
     align-items: center;
     justify-content: flex-start;
     gap: 12px;
-    padding: 12px 14px;
+    padding: 12px 0px;
     flex: 1;
     border: 2px solid rgba(212, 175, 55, 0.2);
     background: linear-gradient(135deg, var(--bg-secondary) 0%, rgba(212, 175, 55, 0.02) 100%);

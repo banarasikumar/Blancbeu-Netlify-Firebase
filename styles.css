@@ -3200,11 +3200,11 @@ body {
 
 .chat-action-btn {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 14px 12px;
+    justify-content: flex-start;
+    gap: 12px;
+    padding: 12px 14px;
     flex: 1;
     border: 2px solid rgba(212, 175, 55, 0.2);
     background: linear-gradient(135deg, var(--bg-secondary) 0%, rgba(212, 175, 55, 0.02) 100%);
@@ -3232,15 +3232,30 @@ body {
 }
 
 .btn-icon {
-    font-size: 24px;
+    font-size: 26px;
     flex-shrink: 0;
+}
+
+.btn-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
 }
 
 .btn-label {
     font-size: 13px;
     font-weight: 700;
-    text-align: center;
+    text-align: left;
     color: var(--text-primary);
+    line-height: 1.2;
+}
+
+.btn-desc {
+    font-size: 11px;
+    color: var(--text-secondary);
+    text-align: left;
+    line-height: 1.2;
 }
 
 .btn-content {

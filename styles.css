@@ -3110,7 +3110,7 @@ body {
     padding: 0px 14px !important;
     background: linear-gradient(180deg, rgba(212, 175, 55, 0.06) 0%, transparent 100%);
     border-bottom: 1px solid rgba(212, 175, 55, 0.1);
-    margin-bottom: 0px !important;
+    margin-bottom: 20px !important;
     border-radius: 18px;
 }
 

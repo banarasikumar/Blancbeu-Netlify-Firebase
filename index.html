@@ -1057,70 +1057,40 @@
     <!-- APP SHELL: Fixed Bottom Navigation -->
     <nav class="bottom-nav app-shell-bottom-nav" id="bottomNav">
         <a href="#" class="nav-item active" data-page="home">
-            <svg class="nav-icon" viewBox="0 0 64 64">
-                <defs>
-                    <linearGradient id="homeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" style="stop-color:#ffd700" />
-                        <stop offset="100%" style="stop-color:#d4af37" />
-                    </linearGradient>
-                </defs>
-                <path d="M12 34L32 16L52 34V48C52 50.2 50.2 52 48 52H16C13.8 52 12 50.2 12 48V34Z" fill="url(#homeGrad)"/>
-                <rect x="28" y="38" width="8" height="12" rx="1" fill="#1a1a1a"/>
+            <svg class="nav-icon" viewBox="0 0 64 64" fill="none">
+                <path d="M10 36L32 14L54 36V50C54 52.2 52.2 54 50 54H14C11.8 54 10 52.2 10 50V36Z" fill="#ffd700"/>
+                <rect x="26" y="40" width="12" height="12" rx="1.5" fill="#1a1a1a"/>
             </svg>
             <span class="nav-label">Home</span>
         </a>
         <a href="#" class="nav-item" data-page="notifications">
-            <svg class="nav-icon" viewBox="0 0 64 64">
-                <defs>
-                    <linearGradient id="notifyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" style="stop-color:#ffd700" />
-                        <stop offset="100%" style="stop-color:#d4af37" />
-                    </linearGradient>
-                </defs>
-                <path d="M16 24C16 14 22 10 32 10C42 10 48 14 48 24C48 31 52 35 52 35H12C12 35 16 31 16 24Z" fill="url(#notifyGrad)"/>
-                <path d="M20 40H44C44 43 40 46 32 46C24 46 20 43 20 40Z" fill="url(#notifyGrad)"/>
-                <circle cx="50" cy="10" r="3.5" fill="url(#notifyGrad)"/>
+            <svg class="nav-icon" viewBox="0 0 64 64" fill="none">
+                <path d="M14 26C14 14 21 8 32 8C43 8 50 14 50 26C50 34 54 38 54 38H10C10 38 14 34 14 26Z" fill="#ffd700"/>
+                <path d="M18 42H46C46 46 42 50 32 50C22 50 18 46 18 42Z" fill="#ffd700"/>
+                <circle cx="52" cy="10" r="4" fill="#ffd700"/>
             </svg>
             <span class="nav-label">Notify</span>
         </a>
         <a href="#" class="nav-item" data-page="bookings">
-            <svg class="nav-icon" viewBox="0 0 64 64">
-                <defs>
-                    <linearGradient id="bookingsGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" style="stop-color:#ffd700" />
-                        <stop offset="100%" style="stop-color:#d4af37" />
-                    </linearGradient>
-                </defs>
-                <rect x="12" y="20" width="40" height="32" rx="3" fill="url(#bookingsGrad)"/>
-                <rect x="18" y="8" width="4" height="12" rx="2" fill="url(#bookingsGrad)"/>
-                <rect x="42" y="8" width="4" height="12" rx="2" fill="url(#bookingsGrad)"/>
-                <line x1="12" y1="30" x2="52" y2="30" stroke="#1a1a1a" stroke-width="1.5"/>
+            <svg class="nav-icon" viewBox="0 0 64 64" fill="none">
+                <rect x="10" y="20" width="44" height="34" rx="3" fill="#ffd700"/>
+                <rect x="16" y="6" width="5" height="14" rx="2.5" fill="#ffd700"/>
+                <rect x="43" y="6" width="5" height="14" rx="2.5" fill="#ffd700"/>
+                <rect x="10" y="32" width="44" height="1.5" fill="#1a1a1a"/>
             </svg>
             <span class="nav-label">Bookings</span>
         </a>
         <a href="#" class="nav-item" data-page="chat">
-            <svg class="nav-icon" viewBox="0 0 64 64">
-                <defs>
-                    <linearGradient id="contactGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" style="stop-color:#ffd700" />
-                        <stop offset="100%" style="stop-color:#d4af37" />
-                    </linearGradient>
-                </defs>
-                <path d="M10 22C10 13 16 9 28 9C40 9 46 13 46 22C46 30 50 34 50 34H6C6 34 10 30 10 22Z" fill="url(#contactGrad)"/>
-                <path d="M6 34L14 47L10 40Z" fill="url(#contactGrad)"/>
+            <svg class="nav-icon" viewBox="0 0 64 64" fill="none">
+                <path d="M8 24C8 12 16 8 30 8C44 8 52 12 52 24C52 32 56 36 56 36H4C4 36 8 32 8 24Z" fill="#ffd700"/>
+                <path d="M4 36L14 50L8 42Z" fill="#ffd700"/>
             </svg>
             <span class="nav-label">Contact</span>
         </a>
         <a href="#" class="nav-item" data-page="account">
-            <svg class="nav-icon" viewBox="0 0 64 64">
-                <defs>
-                    <linearGradient id="accountGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" style="stop-color:#ffd700" />
-                        <stop offset="100%" style="stop-color:#d4af37" />
-                    </linearGradient>
-                </defs>
-                <circle cx="32" cy="18" r="9" fill="url(#accountGrad)"/>
-                <path d="M10 44C10 36 18 32 32 32C46 32 54 36 54 44C54 50 50 54 32 54C14 54 10 50 10 44Z" fill="url(#accountGrad)"/>
+            <svg class="nav-icon" viewBox="0 0 64 64" fill="none">
+                <circle cx="32" cy="18" r="10" fill="#ffd700"/>
+                <path d="M8 45C8 35 17 30 32 30C47 30 56 35 56 45C56 51 52 55 32 55C12 55 8 51 8 45Z" fill="#ffd700"/>
             </svg>
             <span class="nav-label">Account</span>
         </a>

@@ -3232,9 +3232,10 @@ body {
 }
 
 .btn-icon {
-    width: 26px;
-    height: 26px;
+    width: 40px;
+    height: 40px;
     flex-shrink: 0;
+    object-fit: contain;
 }
 
 .info-icon-img {

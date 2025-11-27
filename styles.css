@@ -3107,16 +3107,16 @@ body {
 }
 
 .chat-header {
-    padding: 10px 14px;
+    padding: 6px 8px !important;
     background: linear-gradient(180deg, rgba(212, 175, 55, 0.06) 0%, transparent 100%);
-    border-bottom: 1px solid rgba(212, 175, 55, 0.1);
-    margin-bottom: 12px;
+    border-bottom: none !important;
+    margin-bottom: 6px !important;
     border-radius: 18px;
 }
 
 .chat-header-content h1 {
-    margin: 0 0 4px 0;
-    font-size: 26px;
+    margin: 0 0 0px 0 !important;
+    font-size: 18px !important;
     font-family: 'Cinzel', serif;
     font-weight: 800;
     background: linear-gradient(135deg, var(--text-primary), rgba(212, 175, 55, 0.5));
@@ -3127,9 +3127,10 @@ body {
 
 .chat-subtitle {
     margin: 0;
-    font-size: 12px;
+    font-size: 10px !important;
     color: var(--text-secondary);
     font-weight: 600;
+    line-height: 1.2;
 }
 
 .chat-location-section {

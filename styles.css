@@ -3237,22 +3237,28 @@ body {
     flex-shrink: 0;
 }
 
-.info-icon-img {
+.info-icon-svg {
     width: 40px;
     height: 40px;
     flex-shrink: 0;
-    object-fit: contain;
 }
 
-/* Slow down APNG animations to 0.25x speed */
+/* Ultra-slow 0.25x animation for icons */
 .slow-anim {
-    opacity: 0;
-    animation: slowMotionFade 0.4s steps(1, end) infinite;
+    animation: luxuryPulse 20s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
-@keyframes slowMotionFade {
-    0%, 25% { opacity: 0; }
-    26%, 100% { opacity: 1; }
+@keyframes luxuryPulse {
+    0%, 100% { 
+        opacity: 1;
+        transform: scale(1);
+        filter: drop-shadow(0 0 0px rgba(212, 175, 55, 0));
+    }
+    50% { 
+        opacity: 0.8;
+        transform: scale(1.1);
+        filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.4));
+    }
 }
 
 .btn-content {

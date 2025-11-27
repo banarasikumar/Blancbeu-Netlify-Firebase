@@ -1076,7 +1076,13 @@
         </a>
         <a href="#" class="nav-item" data-page="chat">
             <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
+                <!-- Chat bubble background -->
+                <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z" opacity="0.9"/>
+                <!-- Location pin inside chat -->
+                <g transform="translate(12, 11)">
+                    <circle cx="0" cy="-2" r="3" fill="white"/>
+                    <path d="M0 1 L-2 5 C-1 6 1 6 2 5 Z" fill="white"/>
+                </g>
             </svg>
             <span class="nav-label">Contact</span>
         </a>

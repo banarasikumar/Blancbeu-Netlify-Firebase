@@ -3244,16 +3244,15 @@ body {
     object-fit: contain;
 }
 
-/* Slow down APNG animations to 0.25x speed using opacity pulse */
+/* Slow down APNG animations to 0.25x speed */
 .slow-anim {
-    animation: slowMotionPulse 16s ease-in-out infinite;
+    opacity: 0;
+    animation: slowMotionFade 0.4s steps(1, end) infinite;
 }
 
-@keyframes slowMotionPulse {
-    0%, 100% { opacity: 1; filter: brightness(1); }
-    25% { opacity: 0.95; filter: brightness(1.05); }
-    50% { opacity: 0.9; filter: brightness(1); }
-    75% { opacity: 0.95; filter: brightness(1.05); }
+@keyframes slowMotionFade {
+    0%, 25% { opacity: 0; }
+    26%, 100% { opacity: 1; }
 }
 
 .btn-content {

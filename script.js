@@ -1343,3 +1343,31 @@ function openBlancbeuMaps() {
 function openWhatsAppChat() {
     window.open('https://wa.me/919229915277', '_blank');
 }
+
+// ===== Slow down APNG animations to 0.25x speed =====
+function initSlowAnimations() {
+    const slowAnimElements = document.querySelectorAll('.slow-anim');
+    slowAnimElements.forEach(elem => {
+        let frameCount = 0;
+        const frameRate = 8; // Show frame every 8 render cycles = ~0.25x speed at 60fps
+        
+        const slowDown = () => {
+            if (frameCount % frameRate !== 0) {
+                elem.style.opacity = '0';
+            } else {
+                elem.style.opacity = '1';
+            }
+            frameCount++;
+            requestAnimationFrame(slowDown);
+        };
+        
+        requestAnimationFrame(slowDown);
+    });
+}
+
+// Initialize slow animations when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSlowAnimations);
+} else {
+    initSlowAnimations();
+}

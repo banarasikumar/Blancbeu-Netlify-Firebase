@@ -1394,3 +1394,13 @@ document.addEventListener('DOMContentLoaded', function() {
     
     updateProgress();
 });
+
+// ===== HERO TEXT ANIMATION ON LOAD =====
+document.addEventListener('DOMContentLoaded', function() {
+    const heroLines = document.querySelectorAll('.hero-text-line');
+    heroLines.forEach((line, index) => {
+        setTimeout(() => {
+            line.style.opacity = '1';
+        }, 200 + (index * 200));
+    });
+});

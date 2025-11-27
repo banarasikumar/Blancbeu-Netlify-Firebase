@@ -3235,7 +3235,6 @@ body {
     width: 26px;
     height: 26px;
     flex-shrink: 0;
-    color: var(--gold-24k);
 }
 
 .btn-content {

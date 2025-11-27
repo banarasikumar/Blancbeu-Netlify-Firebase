@@ -3193,16 +3193,19 @@ body {
 
 .chat-actions-section {
     display: flex;
-    flex-direction: column;
-    gap: 14px;
+    flex-direction: row;
+    gap: 12px;
     margin-bottom: 24px;
 }
 
 .chat-action-btn {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 14px;
-    padding: 16px 18px;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 12px;
+    flex: 1;
     border: 2px solid rgba(212, 175, 55, 0.2);
     background: linear-gradient(135deg, var(--bg-secondary) 0%, rgba(212, 175, 55, 0.02) 100%);
     border-radius: 16px;
@@ -3229,8 +3232,15 @@ body {
 }
 
 .btn-icon {
-    font-size: 28px;
+    font-size: 24px;
     flex-shrink: 0;
+}
+
+.btn-label {
+    font-size: 13px;
+    font-weight: 700;
+    text-align: center;
+    color: var(--text-primary);
 }
 
 .btn-content {

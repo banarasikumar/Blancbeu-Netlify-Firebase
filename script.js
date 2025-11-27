@@ -1337,7 +1337,7 @@ function initBookingsController() {
 
 // ===== CHAT PAGE FUNCTIONS =====
 function openBlancbeuMaps() {
-    window.open('https://maps.app.goo.gl/89vy3WojYr2K29bF9', '_blank');
+    window.open('https://maps.app.goo.gl/WYxp5QuhjXEiBaXE9', '_blank');
 }
 
 function openWhatsAppChat() {

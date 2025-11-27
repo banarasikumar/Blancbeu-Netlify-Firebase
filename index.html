@@ -1057,23 +1057,124 @@
     <!-- APP SHELL: Fixed Bottom Navigation -->
     <nav class="bottom-nav app-shell-bottom-nav" id="bottomNav">
         <a href="#" class="nav-item active" data-page="home">
-            <img class="nav-icon nav-animated-icon" src="attached_assets/icons8-home_1764229129793.apng" alt="Home">
+            <svg class="nav-icon home-icon-3d" viewBox="0 0 64 64">
+                <defs>
+                    <linearGradient id="homeGrad3D" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#ffd700;stop-opacity:0.95" />
+                        <stop offset="50%" style="stop-color:#f0c000;stop-opacity:0.9" />
+                        <stop offset="100%" style="stop-color:#d4af37;stop-opacity:0.85" />
+                    </linearGradient>
+                    <filter id="shadow3D">
+                        <feDropShadow dx="0" dy="3" stdDeviation="4" flood-opacity="0.3"/>
+                    </filter>
+                </defs>
+                <!-- 3D Base shadow -->
+                <ellipse cx="32" cy="52" rx="22" ry="6" fill="#000" opacity="0.15"/>
+                <!-- Main house body with 3D depth -->
+                <path d="M16 28L32 12L48 28V44C48 48 45 52 40 52H24C19 52 16 48 16 44Z" fill="url(#homeGrad3D)" filter="url(#shadow3D)"/>
+                <!-- Right side for 3D effect -->
+                <path d="M48 28V44C48 48 45 52 40 52V44V28Z" fill="#d4af37" opacity="0.4"/>
+                <!-- Door with 3D -->
+                <rect x="26" y="32" width="12" height="16" rx="2" fill="#ffd700" opacity="0.7"/>
+                <rect x="27" y="33" width="10" height="14" rx="1.5" fill="#f0c000" opacity="0.5"/>
+                <circle cx="36" cy="40" r="1.5" fill="#d4af37"/>
+            </svg>
             <span class="nav-label">Home</span>
         </a>
         <a href="#" class="nav-item" data-page="notifications">
-            <img class="nav-icon nav-animated-icon" src="attached_assets/icons8-notification_1764229129744.apng" alt="Notify">
+            <svg class="nav-icon notify-icon-3d" viewBox="0 0 64 64">
+                <defs>
+                    <linearGradient id="notifyGrad3D" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#ffd700;stop-opacity:0.95" />
+                        <stop offset="50%" style="stop-color:#f0c000;stop-opacity:0.9" />
+                        <stop offset="100%" style="stop-color:#d4af37;stop-opacity:0.85" />
+                    </linearGradient>
+                </defs>
+                <!-- 3D Base shadow -->
+                <ellipse cx="32" cy="52" rx="22" ry="6" fill="#000" opacity="0.15"/>
+                <!-- Bell body with 3D -->
+                <path d="M16 20C16 12 22 8 32 8C42 8 48 12 48 20C48 28 52 32 52 32H12C12 32 16 28 16 20Z" fill="url(#notifyGrad3D)" filter="url(#shadow3D)"/>
+                <!-- Right side 3D -->
+                <path d="M48 20C48 28 52 32 52 32H48C48 32 48 28 48 20Z" fill="#d4af37" opacity="0.4"/>
+                <!-- Clapper with 3D -->
+                <path d="M24 36H40C40 40 37 44 32 44C27 44 24 40 24 36Z" fill="#ffd700" opacity="0.7"/>
+                <!-- Notification dot -->
+                <circle cx="48" cy="12" r="4" fill="#ffd700" opacity="0.9"/>
+                <circle cx="48" cy="12" r="2.5" fill="#f0c000" opacity="0.6"/>
+            </svg>
             <span class="nav-label">Notify</span>
         </a>
         <a href="#" class="nav-item" data-page="bookings">
-            <img class="nav-icon nav-animated-icon" src="attached_assets/icons8-calendar_1764229129690.apng" alt="Bookings">
+            <svg class="nav-icon bookings-icon-3d" viewBox="0 0 64 64">
+                <defs>
+                    <linearGradient id="bookingsGrad3D" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#ffd700;stop-opacity:0.95" />
+                        <stop offset="50%" style="stop-color:#f0c000;stop-opacity:0.9" />
+                        <stop offset="100%" style="stop-color:#d4af37;stop-opacity:0.85" />
+                    </linearGradient>
+                </defs>
+                <!-- 3D Base shadow -->
+                <ellipse cx="32" cy="52" rx="22" ry="6" fill="#000" opacity="0.15"/>
+                <!-- Calendar body with 3D -->
+                <rect x="12" y="16" width="40" height="32" rx="3" fill="url(#bookingsGrad3D)" filter="url(#shadow3D)"/>
+                <!-- Right side 3D -->
+                <rect x="48" y="16" width="4" height="32" rx="3" fill="#d4af37" opacity="0.4"/>
+                <!-- Rings -->
+                <line x1="18" y1="8" x2="18" y2="16" stroke="url(#bookingsGrad3D)" stroke-width="2" stroke-linecap="round"/>
+                <line x1="46" y1="8" x2="46" y2="16" stroke="url(#bookingsGrad3D)" stroke-width="2" stroke-linecap="round"/>
+                <!-- Divider -->
+                <line x1="12" y1="26" x2="52" y2="26" stroke="#ffd700" stroke-width="1.5" opacity="0.5"/>
+                <!-- Date grid -->
+                <circle cx="32" cy="36" r="3" fill="#ffd700" opacity="0.6"/>
+            </svg>
             <span class="nav-label">Bookings</span>
         </a>
         <a href="#" class="nav-item" data-page="chat">
-            <img class="nav-icon nav-animated-icon" src="attached_assets/icons8-chat-bubble_1764229129647.apng" alt="Contact">
+            <svg class="nav-icon contact-icon-3d" viewBox="0 0 64 64">
+                <defs>
+                    <linearGradient id="contactGrad3D" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#ffd700;stop-opacity:0.95" />
+                        <stop offset="50%" style="stop-color:#f0c000;stop-opacity:0.9" />
+                        <stop offset="100%" style="stop-color:#d4af37;stop-opacity:0.85" />
+                    </linearGradient>
+                </defs>
+                <!-- 3D Base shadow -->
+                <ellipse cx="32" cy="52" rx="22" ry="6" fill="#000" opacity="0.15"/>
+                <!-- Chat bubble with 3D -->
+                <path d="M12 20C12 12 18 8 28 8C38 8 44 12 44 20C44 28 48 32 48 32H8C8 32 12 28 12 20Z" fill="url(#contactGrad3D)" filter="url(#shadow3D)"/>
+                <!-- Right side 3D -->
+                <path d="M44 20C44 28 48 32 48 32H44C44 32 44 28 44 20Z" fill="#d4af37" opacity="0.4"/>
+                <!-- Tail with 3D -->
+                <path d="M8 32L16 44L12 40Z" fill="#ffd700" opacity="0.7"/>
+                <!-- Inner shadow for depth -->
+                <path d="M14 18C14 14 18 12 26 12C34 12 40 14 40 18C40 24 42 28 42 30H12C12 28 14 24 14 18Z" fill="#fff" opacity="0.1"/>
+            </svg>
             <span class="nav-label">Contact</span>
         </a>
         <a href="#" class="nav-item" data-page="account">
-            <img class="nav-icon nav-animated-icon" src="attached_assets/icons8-customer_1764229129563.apng" alt="Account">
+            <svg class="nav-icon account-icon-3d" viewBox="0 0 64 64">
+                <defs>
+                    <linearGradient id="accountGrad3D" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#ffd700;stop-opacity:0.95" />
+                        <stop offset="50%" style="stop-color:#f0c000;stop-opacity:0.9" />
+                        <stop offset="100%" style="stop-color:#d4af37;stop-opacity:0.85" />
+                    </linearGradient>
+                </defs>
+                <!-- 3D Base shadow -->
+                <ellipse cx="32" cy="52" rx="22" ry="6" fill="#000" opacity="0.15"/>
+                <!-- User head with 3D -->
+                <circle cx="32" cy="18" r="10" fill="url(#accountGrad3D)" filter="url(#shadow3D)"/>
+                <!-- Head highlight -->
+                <circle cx="32" cy="18" r="9" fill="#fff" opacity="0.15"/>
+                <!-- Right side head 3D -->
+                <circle cx="37" cy="18" r="3" fill="#d4af37" opacity="0.4"/>
+                <!-- Body with 3D -->
+                <path d="M10 38C10 30 18 26 32 26C46 26 54 30 54 38C54 46 50 50 32 50C14 50 10 46 10 38Z" fill="url(#accountGrad3D)" opacity="0.9"/>
+                <!-- Right side body 3D -->
+                <path d="M54 38C54 46 50 50 32 50V26C46 26 54 30 54 38Z" fill="#d4af37" opacity="0.3"/>
+                <!-- Shoulder highlight -->
+                <path d="M12 38C12 32 20 28 32 28C44 28 52 32 52 38" fill="#fff" opacity="0.08"/>
+            </svg>
             <span class="nav-label">Account</span>
         </a>
     </nav>

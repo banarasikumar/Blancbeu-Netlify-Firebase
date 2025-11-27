@@ -3244,9 +3244,9 @@ body {
     object-fit: contain;
 }
 
-/* Slow down APNG animations to 0.5x speed using opacity pulse */
+/* Slow down APNG animations to 0.25x speed using opacity pulse */
 .slow-anim {
-    animation: slowMotionPulse 4s ease-in-out infinite;
+    animation: slowMotionPulse 16s ease-in-out infinite;
 }
 
 @keyframes slowMotionPulse {

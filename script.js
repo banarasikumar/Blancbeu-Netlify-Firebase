@@ -325,6 +325,9 @@ function goToSlide(index) {
 function renderServices() {
   const container = document.getElementById('servicesContainer');
   
+  // Skip if container doesn't exist
+  if (!container) return;
+  
   servicesData.groups.forEach(group => {
     const categoryDiv = document.createElement('div');
     categoryDiv.className = 'service-category';

@@ -549,17 +549,106 @@
                 </div>
             </div>
 
-            <!-- REVIEWS SECTION -->
+            <!-- REVIEWS SECTION - TESTIMONIAL CAROUSEL -->
             <div id="reviews" class="reviews-section">
             <div class="container">
                 <h2 class="section-title">
                     <span class="title-decoration">⭐</span>
-                    Customer Reviews
+                    Customer Testimonials
                     <span class="title-decoration">⭐</span>
                 </h2>
-                <p class="section-subtitle">What our clients say about us</p>
+                <p class="section-subtitle">Hear from our satisfied clients</p>
                 
-                <div class="reviews-grid" id="reviewsContainer"></div>
+                <div class="testimonial-carousel-wrapper">
+                    <div class="testimonial-carousel" id="testimonialCarousel">
+                        <div class="testimonial-carousel-track" id="testimonialTrack">
+                            <div class="testimonial-card-item">
+                                <div class="testimonial-card">
+                                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                                    <p class="testimonial-text">"Blancbeu gave me the best haircut ever! The professionalism and care are unmatched. Highly recommended!"</p>
+                                    <div class="testimonial-author">
+                                        <strong>Sarah Johnson</strong>
+                                        <span class="testimonial-date">Premium Member</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="testimonial-card-item">
+                                <div class="testimonial-card">
+                                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                                    <p class="testimonial-text">"The bridal makeup service was absolutely stunning. I felt like a queen on my special day!"</p>
+                                    <div class="testimonial-author">
+                                        <strong>Priya Patel</strong>
+                                        <span class="testimonial-date">Bridal Customer</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="testimonial-card-item">
+                                <div class="testimonial-card">
+                                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                                    <p class="testimonial-text">"Spa treatments are heavenly! I always leave feeling completely rejuvenated and refreshed."</p>
+                                    <div class="testimonial-author">
+                                        <strong>Anjali Sharma</strong>
+                                        <span class="testimonial-date">Regular Customer</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="testimonial-card-item">
+                                <div class="testimonial-card">
+                                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                                    <p class="testimonial-text">"Best facial treatment I've ever had. The staff is so knowledgeable and friendly!"</p>
+                                    <div class="testimonial-author">
+                                        <strong>Meera Singh</strong>
+                                        <span class="testimonial-date">Skincare Enthusiast</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="testimonial-nav-btn prev" onclick="slideTestimonial(-1)">❮</button>
+                    <button class="testimonial-nav-btn next" onclick="slideTestimonial(1)">❯</button>
+                </div>
+            </div>
+
+            <!-- ABOUT BLANCBEU SECTION -->
+            <div class="about-section">
+                <div class="container">
+                    <h2 class="section-title">
+                        <span class="title-decoration">📖</span>
+                        About Blancbeu
+                        <span class="title-decoration">✨</span>
+                    </h2>
+                    <p class="section-subtitle">Discover our story and passion for beauty</p>
+                    
+                    <div class="about-content">
+                        <div class="about-text">
+                            <p>Blancbeu Family Beauty Salon has been serving the community with excellence for over 15 years. We believe that true beauty comes from professional care, premium products, and exceptional service.</p>
+                            <p>Our mission is to transform how people feel about themselves by providing luxurious beauty treatments in a relaxing, welcoming environment. Every client is treated as family, and your satisfaction is our greatest achievement.</p>
+                            <ul class="about-highlights">
+                                <li>✨ Expert-trained beauty specialists</li>
+                                <li>💎 Premium international products</li>
+                                <li>🛍️ Personalized beauty consultations</li>
+                                <li>🏆 Award-winning salon experience</li>
+                            </ul>
+                        </div>
+                        <div class="about-stats">
+                            <div class="about-stat">
+                                <div class="about-stat-number">15+</div>
+                                <div class="about-stat-label">Years Serving</div>
+                            </div>
+                            <div class="about-stat">
+                                <div class="about-stat-number">10K+</div>
+                                <div class="about-stat-label">Happy Clients</div>
+                            </div>
+                            <div class="about-stat">
+                                <div class="about-stat-number">50+</div>
+                                <div class="about-stat-label">Services</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- HOME PAGE ENHANCEMENT ROADMAP -->
@@ -574,9 +663,9 @@
                     
                     <div class="roadmap-progress">
                         <div class="progress-bar">
-                            <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                            <div class="progress-fill" id="progressFill" style="width: 100%"></div>
                         </div>
-                        <p class="progress-text"><span id="completedTasks">0</span>/11 Features Completed</p>
+                        <p class="progress-text"><span id="completedTasks">11</span>/11 Features Completed</p>
                     </div>
 
                     <div class="roadmap-grid">
@@ -621,8 +710,8 @@
                         </div>
 
                         <!-- Task 5 -->
-                        <div class="roadmap-card" data-task-id="5">
-                            <input type="checkbox" class="roadmap-checkbox" data-task="5">
+                        <div class="roadmap-card" data-task-id="5" class="completed"
+                            <input type="checkbox" class="roadmap-checkbox" data-task="5" checked>
                             <div class="card-content">
                                 <h3>🎬 Testimonial Carousel</h3>
                                 <p>Convert reviews grid to premium engaging carousel format</p>
@@ -631,8 +720,8 @@
                         </div>
 
                         <!-- Task 6 -->
-                        <div class="roadmap-card" data-task-id="6">
-                            <input type="checkbox" class="roadmap-checkbox" data-task="6">
+                        <div class="roadmap-card" data-task-id="6" class="completed"
+                            <input type="checkbox" class="roadmap-checkbox" data-task="6" checked>
                             <div class="card-content">
                                 <h3>✨ Premium Animations</h3>
                                 <p>Staggered reveals, scroll triggers, smooth transitions</p>
@@ -641,8 +730,8 @@
                         </div>
 
                         <!-- Task 7 -->
-                        <div class="roadmap-card" data-task-id="7">
-                            <input type="checkbox" class="roadmap-checkbox" data-task="7">
+                        <div class="roadmap-card" data-task-id="7" class="completed"
+                            <input type="checkbox" class="roadmap-checkbox" data-task="7" checked>
                             <div class="card-content">
                                 <h3>🎯 Visual Hierarchy</h3>
                                 <p>Better spacing, typography scales, color emphasis</p>
@@ -651,8 +740,8 @@
                         </div>
 
                         <!-- Task 8 -->
-                        <div class="roadmap-card" data-task-id="8">
-                            <input type="checkbox" class="roadmap-checkbox" data-task="8">
+                        <div class="roadmap-card" data-task-id="8" class="completed"
+                            <input type="checkbox" class="roadmap-checkbox" data-task="8" checked>
                             <div class="card-content">
                                 <h3>🎪 Interactive Elements</h3>
                                 <p>Floating elements, parallax effects, premium hover states</p>
@@ -661,8 +750,8 @@
                         </div>
 
                         <!-- Task 9 -->
-                        <div class="roadmap-card" data-task-id="9">
-                            <input type="checkbox" class="roadmap-checkbox" data-task="9">
+                        <div class="roadmap-card" data-task-id="9" class="completed"
+                            <input type="checkbox" class="roadmap-checkbox" data-task="9" checked>
                             <div class="card-content">
                                 <h3>📱 Sticky Booking CTA</h3>
                                 <p>Prominent sticky booking section with easy-to-notice buttons</p>
@@ -671,8 +760,8 @@
                         </div>
 
                         <!-- Task 10 -->
-                        <div class="roadmap-card" data-task-id="10">
-                            <input type="checkbox" class="roadmap-checkbox" data-task="10">
+                        <div class="roadmap-card" data-task-id="10" class="completed"
+                            <input type="checkbox" class="roadmap-checkbox" data-task="10" checked>
                             <div class="card-content">
                                 <h3>📖 About Blancbeu</h3>
                                 <p>Brand storytelling section with luxury positioning</p>
@@ -681,8 +770,8 @@
                         </div>
 
                         <!-- Task 11 -->
-                        <div class="roadmap-card" data-task-id="11">
-                            <input type="checkbox" class="roadmap-checkbox" data-task="11">
+                        <div class="roadmap-card" data-task-id="11" class="completed"
+                            <input type="checkbox" class="roadmap-checkbox" data-task="11" checked>
                             <div class="card-content">
                                 <h3>🎨 Final Polish & Testing</h3>
                                 <p>Cross-browser testing, responsiveness, performance optimization</p>

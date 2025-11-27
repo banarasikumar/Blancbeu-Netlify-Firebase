@@ -2714,11 +2714,13 @@ body {
 }
 
 .nav-animated-icon {
-    display: none;
+    animation-play-state: paused !important;
+    animation-iteration-count: 1 !important;
+    animation-fill-mode: forwards !important;
 }
 
 .app-shell-bottom-nav .nav-item.active .nav-animated-icon {
-    display: block;
+    animation-play-state: running !important;
 }
 
 .app-shell-bottom-nav .nav-label {

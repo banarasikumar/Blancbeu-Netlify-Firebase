@@ -891,7 +891,7 @@ class BottomNavController {
       
       if (itemPage === page) {
         item.classList.add('active');
-        // Restart APNG animation by reloading image
+        // Restart animation by reloading src
         if (icon && icon.tagName === 'IMG') {
           const src = icon.src;
           icon.src = '';

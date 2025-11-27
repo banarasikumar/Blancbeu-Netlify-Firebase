@@ -3237,10 +3237,11 @@ body {
     flex-shrink: 0;
 }
 
-.info-icon-svg {
+.info-icon-img {
     width: 40px;
     height: 40px;
     flex-shrink: 0;
+    object-fit: contain;
 }
 
 .btn-content {

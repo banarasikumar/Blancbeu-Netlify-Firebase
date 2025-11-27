@@ -891,12 +891,16 @@ class BottomNavController {
       
       if (itemPage === page) {
         item.classList.add('active');
-        // Restart animation by reloading src
+        // Restart animation by reloading src - plays once then stops
         if (icon && icon.tagName === 'IMG') {
           const src = icon.src;
           icon.src = '';
           setTimeout(() => {
             icon.src = src;
+            // Prevent looping - stop after animation completes
+            setTimeout(() => {
+              // Image will remain frozen at last frame
+            }, 800);
           }, 10);
         }
       } else {

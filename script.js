@@ -891,11 +891,12 @@ class BottomNavController {
       
       if (itemPage === page) {
         item.classList.add('active');
-        // Restart animation for active icon
-        if (icon) {
-          icon.style.animation = 'none';
+        // Restart APNG animation by reloading image
+        if (icon && icon.tagName === 'IMG') {
+          const src = icon.src;
+          icon.src = '';
           setTimeout(() => {
-            icon.style.animation = '';
+            icon.src = src;
           }, 10);
         }
       } else {

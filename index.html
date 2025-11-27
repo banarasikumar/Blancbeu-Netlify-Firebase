@@ -1063,13 +1063,14 @@
                         <stop offset="0%" style="stop-color:#ffd700;stop-opacity:1" />
                         <stop offset="100%" style="stop-color:#d4af37;stop-opacity:1" />
                     </linearGradient>
-                    <filter id="homeShadow">
-                        <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.3" flood-color="#000"/>
-                    </filter>
                 </defs>
-                <path d="M12 2L3 10V20C3 21.1 3.9 22 5 22H19C20.1 22 21 21.1 21 20V10L12 2Z" fill="url(#homeGrad)" opacity="0.95"/>
-                <rect x="9.5" y="13" width="5" height="7" rx="0.5" fill="#ffffff" opacity="0.25"/>
-                <circle cx="12" cy="16.5" r="0.6" fill="#ffffff" opacity="0.4"/>
+                <!-- Rounded square background -->
+                <rect x="2" y="2" width="20" height="20" rx="5" fill="url(#homeGrad)" opacity="0.95"/>
+                <!-- House shape inside -->
+                <path d="M12 5L7 10V17C7 17.6 7.4 18 8 18H16C16.6 18 17 17.6 17 17V10L12 5Z" fill="#ffffff" opacity="0.35"/>
+                <!-- Door -->
+                <rect x="10.5" y="12" width="3" height="5" rx="0.5" fill="#ffffff" opacity="0.45"/>
+                <circle cx="13" cy="14.5" r="0.4" fill="#ffffff" opacity="0.6"/>
             </svg>
             <span class="nav-label">Home</span>
         </a>
@@ -1081,10 +1082,12 @@
                         <stop offset="100%" style="stop-color:#d4af37;stop-opacity:1" />
                     </linearGradient>
                 </defs>
-                <!-- Bell body -->
-                <path d="M6 10C6 6.7 8.7 4 12 4C15.3 4 18 6.7 18 10C18 13 20 15 20 15H4C4 15 6 13 6 10Z" fill="url(#notifyGrad)" opacity="0.9"/>
+                <!-- Rounded square background -->
+                <rect x="2" y="2" width="20" height="20" rx="5" fill="url(#notifyGrad)" opacity="0.95"/>
+                <!-- Bell shape inside -->
+                <path d="M7 10C7 7.2 9.2 5 12 5C14.8 5 17 7.2 17 10C17 12 18.5 13.5 18.5 13.5H5.5C5.5 13.5 7 12 7 10Z" fill="#ffffff" opacity="0.35"/>
                 <!-- Bell clapper -->
-                <path d="M10 16H14C14 17.1 13.1 18 12 18C10.9 18 10 17.1 10 16Z" fill="#ffffff" opacity="0.25"/>
+                <rect x="11" y="14" width="2" height="2" rx="0.5" fill="#ffffff" opacity="0.45"/>
             </svg>
             <span class="nav-label">Notify</span>
         </a>
@@ -1096,15 +1099,17 @@
                         <stop offset="100%" style="stop-color:#d4af37;stop-opacity:1" />
                     </linearGradient>
                 </defs>
-                <!-- Calendar body -->
-                <rect x="3" y="5" width="18" height="15" rx="2" fill="url(#bookingsGrad)" opacity="0.9"/>
+                <!-- Rounded square background -->
+                <rect x="2" y="2" width="20" height="20" rx="5" fill="url(#bookingsGrad)" opacity="0.95"/>
+                <!-- Calendar inside -->
+                <rect x="5" y="6" width="14" height="11" rx="1" fill="#ffffff" opacity="0.28"/>
                 <!-- Calendar rings -->
-                <line x1="6" y1="2" x2="6" y2="5" stroke="#ffffff" stroke-width="1.5" opacity="0.4" stroke-linecap="round"/>
-                <line x1="18" y1="2" x2="18" y2="5" stroke="#ffffff" stroke-width="1.5" opacity="0.4" stroke-linecap="round"/>
-                <!-- Divider -->
-                <line x1="3" y1="10" x2="21" y2="10" stroke="#ffffff" stroke-width="0.8" opacity="0.2"/>
-                <!-- Date dot -->
-                <circle cx="12" cy="15" r="0.8" fill="#ffffff" opacity="0.3"/>
+                <line x1="7.5" y1="5" x2="7.5" y2="6" stroke="#ffffff" stroke-width="1" opacity="0.45" stroke-linecap="round"/>
+                <line x1="16.5" y1="5" x2="16.5" y2="6" stroke="#ffffff" stroke-width="1" opacity="0.45" stroke-linecap="round"/>
+                <!-- Divider line -->
+                <line x1="5" y1="8.5" x2="19" y2="8.5" stroke="#ffffff" stroke-width="0.6" opacity="0.3"/>
+                <!-- Date marker -->
+                <circle cx="12" cy="12.5" r="0.65" fill="#ffffff" opacity="0.45"/>
             </svg>
             <span class="nav-label">Bookings</span>
         </a>
@@ -1116,10 +1121,12 @@
                         <stop offset="100%" style="stop-color:#d4af37;stop-opacity:1" />
                     </linearGradient>
                 </defs>
-                <!-- Chat bubble body -->
-                <path d="M4 9C4 5.7 6.7 3 10 3C13.3 3 16 5.7 16 9C16 12 18 14 18 14H2C2 14 4 12 4 9Z" fill="url(#contactGrad)" opacity="0.9"/>
-                <!-- Message dot tail -->
-                <path d="M2 14L5 18H2Z" fill="url(#contactGrad)" opacity="0.9"/>
+                <!-- Rounded square background -->
+                <rect x="2" y="2" width="20" height="20" rx="5" fill="url(#contactGrad)" opacity="0.95"/>
+                <!-- Chat bubble inside -->
+                <path d="M6 9C6 6.8 7.8 5 10 5C12.2 5 14 6.8 14 9C14 11 15 12.5 15 12.5H5C5 12.5 6 11 6 9Z" fill="#ffffff" opacity="0.35"/>
+                <!-- Message pointer -->
+                <path d="M5 12.5L7 15H5Z" fill="#ffffff" opacity="0.35"/>
             </svg>
             <span class="nav-label">Contact</span>
         </a>
@@ -1131,10 +1138,12 @@
                         <stop offset="100%" style="stop-color:#d4af37;stop-opacity:1" />
                     </linearGradient>
                 </defs>
+                <!-- Rounded square background -->
+                <rect x="2" y="2" width="20" height="20" rx="5" fill="url(#accountGrad)" opacity="0.95"/>
                 <!-- User head -->
-                <circle cx="12" cy="7.5" r="3.5" fill="url(#accountGrad)" opacity="0.9"/>
+                <circle cx="12" cy="8" r="2.5" fill="#ffffff" opacity="0.38"/>
                 <!-- User shoulders/body -->
-                <path d="M3 19C3 15.13 7.2 12 12 12C16.8 12 21 15.13 21 19" fill="url(#accountGrad)" opacity="0.9"/>
+                <path d="M7 16C7 13.5 9.2 12 12 12C14.8 12 17 13.5 17 16" fill="#ffffff" opacity="0.35"/>
             </svg>
             <span class="nav-label">Account</span>
         </a>

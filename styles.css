@@ -2389,6 +2389,110 @@ body.light-mode .gallery-section {
     }
 }
 
+/* Premium Notify Icon */
+.notify-icon {
+    width: 32px;
+    height: 32px;
+}
+
+.nav-item.active .notify-icon {
+    animation: notifyGlow 2.2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.6)) drop-shadow(0 2px 8px rgba(212, 175, 55, 0.4));
+}
+
+.nav-item:hover .notify-icon {
+    filter: drop-shadow(0 4px 10px rgba(255, 215, 0, 0.3));
+}
+
+@keyframes notifyGlow {
+    0%, 100% {
+        filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.6)) drop-shadow(0 2px 8px rgba(212, 175, 55, 0.4));
+        transform: scale(1.2);
+    }
+    50% {
+        filter: drop-shadow(0 0 14px rgba(255, 215, 0, 0.8)) drop-shadow(0 4px 12px rgba(212, 175, 55, 0.5));
+        transform: scale(1.22);
+    }
+}
+
+/* Premium Bookings Icon */
+.bookings-icon {
+    width: 32px;
+    height: 32px;
+}
+
+.nav-item.active .bookings-icon {
+    animation: bookingsGlow 2.2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.6)) drop-shadow(0 2px 8px rgba(212, 175, 55, 0.4));
+}
+
+.nav-item:hover .bookings-icon {
+    filter: drop-shadow(0 4px 10px rgba(255, 215, 0, 0.3));
+}
+
+@keyframes bookingsGlow {
+    0%, 100% {
+        filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.6)) drop-shadow(0 2px 8px rgba(212, 175, 55, 0.4));
+        transform: scale(1.2);
+    }
+    50% {
+        filter: drop-shadow(0 0 14px rgba(255, 215, 0, 0.8)) drop-shadow(0 4px 12px rgba(212, 175, 55, 0.5));
+        transform: scale(1.22);
+    }
+}
+
+/* Premium Contact Icon */
+.contact-icon {
+    width: 32px;
+    height: 32px;
+}
+
+.nav-item.active .contact-icon {
+    animation: contactGlow 2.2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.6)) drop-shadow(0 2px 8px rgba(212, 175, 55, 0.4));
+}
+
+.nav-item:hover .contact-icon {
+    filter: drop-shadow(0 4px 10px rgba(255, 215, 0, 0.3));
+}
+
+@keyframes contactGlow {
+    0%, 100% {
+        filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.6)) drop-shadow(0 2px 8px rgba(212, 175, 55, 0.4));
+        transform: scale(1.2);
+    }
+    50% {
+        filter: drop-shadow(0 0 14px rgba(255, 215, 0, 0.8)) drop-shadow(0 4px 12px rgba(212, 175, 55, 0.5));
+        transform: scale(1.22);
+    }
+}
+
+/* Premium Account Icon */
+.account-icon {
+    width: 32px;
+    height: 32px;
+}
+
+.nav-item.active .account-icon {
+    animation: accountGlow 2.2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.6)) drop-shadow(0 2px 8px rgba(212, 175, 55, 0.4));
+}
+
+.nav-item:hover .account-icon {
+    filter: drop-shadow(0 4px 10px rgba(255, 215, 0, 0.3));
+}
+
+@keyframes accountGlow {
+    0%, 100% {
+        filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.6)) drop-shadow(0 2px 8px rgba(212, 175, 55, 0.4));
+        transform: scale(1.2);
+    }
+    50% {
+        filter: drop-shadow(0 0 14px rgba(255, 215, 0, 0.8)) drop-shadow(0 4px 12px rgba(212, 175, 55, 0.5));
+        transform: scale(1.22);
+    }
+}
+
 .nav-label {
     font-size: 11px;
     font-weight: 600;

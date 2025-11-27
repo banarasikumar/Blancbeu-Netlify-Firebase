@@ -887,8 +887,17 @@ class BottomNavController {
   setActivePage(page) {
     this.navItems.forEach(item => {
       const itemPage = item.getAttribute('data-page');
+      const icon = item.querySelector('.nav-animated-icon');
+      
       if (itemPage === page) {
         item.classList.add('active');
+        // Restart animation for active icon
+        if (icon) {
+          icon.style.animation = 'none';
+          setTimeout(() => {
+            icon.style.animation = '';
+          }, 10);
+        }
       } else {
         item.classList.remove('active');
       }

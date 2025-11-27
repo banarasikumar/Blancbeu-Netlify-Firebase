@@ -1057,92 +1057,23 @@
     <!-- APP SHELL: Fixed Bottom Navigation -->
     <nav class="bottom-nav app-shell-bottom-nav" id="bottomNav">
         <a href="#" class="nav-item active" data-page="home">
-            <svg class="nav-icon home-icon" viewBox="0 0 24 24">
-                <defs>
-                    <linearGradient id="homeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" style="stop-color:#ffd700;stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:#d4af37;stop-opacity:1" />
-                    </linearGradient>
-                </defs>
-                <!-- iOS 26 Modern Home: Main house body -->
-                <path d="M4 12L12 5L20 12V19.5C20 20.8 19.1 21.9 18 22H6C4.9 22 4 20.8 4 19.5V12Z" fill="none" stroke="url(#homeGrad)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-                <!-- Door with sophistication -->
-                <rect x="10.2" y="13.5" width="3.6" height="7" rx="0.6" fill="none" stroke="url(#homeGrad)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
-                <!-- Door handle -->
-                <circle cx="13.2" cy="16.8" r="0.35" fill="url(#homeGrad)"/>
-            </svg>
+            <img class="nav-icon nav-animated-icon" src="attached_assets/icons8-home_1764229129793.apng" alt="Home">
             <span class="nav-label">Home</span>
         </a>
         <a href="#" class="nav-item" data-page="notifications">
-            <svg class="nav-icon notify-icon" viewBox="0 0 24 24">
-                <defs>
-                    <linearGradient id="notifyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" style="stop-color:#ffd700;stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:#d4af37;stop-opacity:1" />
-                    </linearGradient>
-                </defs>
-                <!-- iOS 26 Modern Bell: Main bell body -->
-                <path d="M7 9.5C7 6.2 9.2 3.5 12 3.5C14.8 3.5 17 6.2 17 9.5C17 11.8 18.2 13.2 18.5 13.8H5.5C5.8 13.2 7 11.8 7 9.5Z" fill="none" stroke="url(#notifyGrad)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-                <!-- Bell clapper with sophistication -->
-                <path d="M10 14.8H14C14 15.8 13.1 16.5 12 16.5C10.9 16.5 10 15.8 10 14.8Z" fill="none" stroke="url(#notifyGrad)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
-                <!-- Notification dot accent -->
-                <circle cx="17.2" cy="5" r="0.4" fill="url(#notifyGrad)"/>
-            </svg>
+            <img class="nav-icon nav-animated-icon" src="attached_assets/icons8-notification_1764229129744.apng" alt="Notify">
             <span class="nav-label">Notify</span>
         </a>
         <a href="#" class="nav-item" data-page="bookings">
-            <svg class="nav-icon bookings-icon" viewBox="0 0 24 24">
-                <defs>
-                    <linearGradient id="bookingsGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" style="stop-color:#ffd700;stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:#d4af37;stop-opacity:1" />
-                    </linearGradient>
-                </defs>
-                <!-- iOS 26 Modern Calendar: Main body -->
-                <rect x="3.8" y="5.5" width="16.4" height="14" rx="1.5" fill="none" stroke="url(#bookingsGrad)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-                <!-- Calendar rings with sophistication -->
-                <line x1="6" y1="2.5" x2="6" y2="5.5" stroke="url(#bookingsGrad)" stroke-width="1.4" stroke-linecap="round"/>
-                <line x1="18" y1="2.5" x2="18" y2="5.5" stroke="url(#bookingsGrad)" stroke-width="1.4" stroke-linecap="round"/>
-                <!-- Premium divider line -->
-                <line x1="3.8" y1="9" x2="20.2" y2="9" stroke="url(#bookingsGrad)" stroke-width="1.3" stroke-linecap="round"/>
-                <!-- Date grid - vertical lines -->
-                <line x1="9.8" y1="9" x2="9.8" y2="19.5" stroke="url(#bookingsGrad)" stroke-width="0.9" opacity="0.7" stroke-linecap="round"/>
-                <line x1="15" y1="9" x2="15" y2="19.5" stroke="url(#bookingsGrad)" stroke-width="0.9" opacity="0.7" stroke-linecap="round"/>
-                <!-- Date grid - horizontal line -->
-                <line x1="3.8" y1="13.8" x2="20.2" y2="13.8" stroke="url(#bookingsGrad)" stroke-width="0.9" opacity="0.7" stroke-linecap="round"/>
-                <!-- Highlighted date square -->
-                <rect x="15.2" y="14" width="2.2" height="2.2" rx="0.3" fill="url(#bookingsGrad)" opacity="0.6"/>
-            </svg>
+            <img class="nav-icon nav-animated-icon" src="attached_assets/icons8-calendar_1764229129690.apng" alt="Bookings">
             <span class="nav-label">Bookings</span>
         </a>
         <a href="#" class="nav-item" data-page="chat">
-            <svg class="nav-icon contact-icon" viewBox="0 0 24 24">
-                <defs>
-                    <linearGradient id="contactGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" style="stop-color:#ffd700;stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:#d4af37;stop-opacity:1" />
-                    </linearGradient>
-                </defs>
-                <!-- iOS chat bubble with outline -->
-                <path d="M4 9C4 6 7 3 11 3C15 3 18 6 18 9C18 12 20 13.5 20 13.5H2C2 13.5 4 12 4 9Z" fill="none" stroke="url(#contactGrad)" stroke-width="1.5" stroke-linejoin="round"/>
-                <!-- Pointer tail -->
-                <path d="M3.5 13.5L5.5 17" stroke="url(#contactGrad)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+            <img class="nav-icon nav-animated-icon" src="attached_assets/icons8-chat-bubble_1764229129647.apng" alt="Contact">
             <span class="nav-label">Contact</span>
         </a>
         <a href="#" class="nav-item" data-page="account">
-            <svg class="nav-icon account-icon" viewBox="0 0 24 24">
-                <defs>
-                    <linearGradient id="accountGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" style="stop-color:#ffd700;stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:#d4af37;stop-opacity:1" />
-                    </linearGradient>
-                </defs>
-                <!-- iOS user profile with outline -->
-                <circle cx="12" cy="7.5" r="3.5" fill="none" stroke="url(#accountGrad)" stroke-width="1.5"/>
-                <!-- User shoulders/body -->
-                <path d="M3 20C3 16.5 7 14 12 14C17 14 21 16.5 21 20" fill="none" stroke="url(#accountGrad)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+            <img class="nav-icon nav-animated-icon" src="attached_assets/icons8-customer_1764229129563.apng" alt="Account">
             <span class="nav-label">Account</span>
         </a>
     </nav>

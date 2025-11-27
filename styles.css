@@ -2343,34 +2343,74 @@ body.light-mode .gallery-section {
     filter: drop-shadow(0 2px 4px var(--shadow-light));
 }
 
-/* Luxury Icon Styling */
-.luxury-icon {
-    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    filter: drop-shadow(0 2px 8px rgba(255, 215, 0, 0.2));
+/* Glassmorphism + Google Material You Icon Styling */
+.icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 16px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
-.nav-item.active .luxury-icon {
-    animation: luxuryGlow 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-    filter: drop-shadow(0 0 16px rgba(255, 215, 0, 0.6)) drop-shadow(0 4px 12px rgba(212, 175, 55, 0.4));
+.glass-morph {
+    background: rgba(212, 175, 55, 0.08);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(212, 175, 55, 0.15);
 }
 
-.nav-item:hover .luxury-icon {
-    filter: drop-shadow(0 4px 12px rgba(255, 215, 0, 0.4));
+.nav-item.active .glass-morph {
+    background: rgba(212, 175, 55, 0.12);
+    border: 1px solid rgba(212, 175, 55, 0.25);
+    box-shadow: 0 8px 32px rgba(212, 175, 55, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.nav-item:hover .glass-morph {
+    background: rgba(212, 175, 55, 0.1);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(212, 175, 55, 0.25);
+}
+
+.nav-item.active .glass-morph {
+    animation: glassPulse 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Material Icon Styling */
+.material-icon {
+    color: rgba(255, 255, 255, 0.7);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 26px;
+    height: 26px;
+}
+
+.nav-item.active .material-icon {
+    color: var(--gold-24k);
+    filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.4));
+}
+
+.nav-item:hover .material-icon {
+    color: rgba(255, 255, 255, 0.95);
+    transform: scale(1.08);
+}
+
+.nav-item.active .material-icon {
     transform: scale(1.12);
 }
 
-.nav-item.active .luxury-icon {
-    transform: scale(1.15) translateY(-2px);
-}
-
-@keyframes luxuryGlow {
+@keyframes glassPulse {
     0%, 100% {
-        opacity: 1;
-        filter: drop-shadow(0 0 16px rgba(255, 215, 0, 0.6)) drop-shadow(0 4px 12px rgba(212, 175, 55, 0.4));
+        box-shadow: 0 8px 32px rgba(212, 175, 55, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.12);
     }
     50% {
-        opacity: 0.9;
-        filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.8)) drop-shadow(0 6px 16px rgba(212, 175, 55, 0.5));
+        box-shadow: 0 12px 48px rgba(212, 175, 55, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.15);
     }
 }
 

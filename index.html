@@ -1124,9 +1124,17 @@
             <span class="nav-label">Contact</span>
         </a>
         <a href="#" class="nav-item" data-page="account">
-            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="8" r="4"/>
-                <path d="M4 20c0-3.3 4-5 8-5s8 1.7 8 5"/>
+            <svg class="nav-icon account-icon" viewBox="0 0 24 24">
+                <defs>
+                    <linearGradient id="accountGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#ffd700;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#d4af37;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                <!-- User head -->
+                <circle cx="12" cy="7.5" r="3.5" fill="url(#accountGrad)" opacity="0.9"/>
+                <!-- User shoulders/body -->
+                <path d="M3 19C3 15.13 7.2 12 12 12C16.8 12 21 15.13 21 19" fill="url(#accountGrad)" opacity="0.9"/>
             </svg>
             <span class="nav-label">Account</span>
         </a>

@@ -362,6 +362,9 @@ function renderServices() {
 function renderReviews() {
   const container = document.getElementById('reviewsContainer');
   
+  // Skip if container doesn't exist (reviews converted to testimonial carousel)
+  if (!container) return;
+  
   reviewsData.forEach(review => {
     const reviewCard = document.createElement('div');
     reviewCard.className = 'review-card';

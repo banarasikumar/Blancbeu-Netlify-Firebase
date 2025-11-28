@@ -498,18 +498,124 @@
                 </div>
             </div>
 
-            <!-- SERVICES SECTION -->
+            <!-- ========== TASK 1.0: SERVICE FILTER & SEARCH BAR (PSEUDOCODE) ==========
+                SECTION STRUCTURE:
+                - Sticky filter bar above services
+                - Category buttons: All, Hair, Makeup, Nails, Spa, Threading, etc.
+                - Search input field with live filtering
+                - Show "X services found" counter
+                - Smooth fade animations on filter changes
+                
+                IMPLEMENTATION:
+                1. Create filterBar div with class "service-filter-bar sticky"
+                2. Add buttons for each category (data-category attribute)
+                3. Add input field with id="serviceSearch" and real-time event listener
+                4. Show results count dynamically
+            ========================================== -->
+            
+            <!-- SERVICES SECTION WITH FILTER -->
             <div id="services" class="services-section">
             <div class="container">
-                <h2 class="section-title">
-                    <span class="title-decoration">💎</span>
-                    Our Services
-                    <span class="title-decoration">💎</span>
-                </h2>
-                <p class="section-subtitle">Premium beauty treatments tailored for you</p>
+                <!-- FILTER & SEARCH UI (Task 1.0) -->
+                <div class="service-filter-bar sticky">
+                    <div class="filter-header">
+                        <h2 class="section-title">
+                            <span class="title-decoration">💎</span>
+                            Our Services
+                            <span class="title-decoration">💎</span>
+                        </h2>
+                        <p class="section-subtitle">Premium beauty treatments tailored for you</p>
+                    </div>
+                    
+                    <!-- Category Filter Buttons (Task 1.2.1-1.2.5) -->
+                    <div class="filter-controls">
+                        <div class="filter-buttons">
+                            <button class="filter-btn active" data-category="all">All Services</button>
+                            <button class="filter-btn" data-category="hair">💇 Hair</button>
+                            <button class="filter-btn" data-category="makeup">💄 Makeup</button>
+                            <button class="filter-btn" data-category="nails">💅 Nails</button>
+                            <button class="filter-btn" data-category="spa">🧖 Spa</button>
+                            <button class="filter-btn" data-category="threading">🌸 Threading</button>
+                            <!-- TODO: Add more categories as needed -->
+                        </div>
+                        
+                        <!-- Search Input (Task 1.2.3) -->
+                        <div class="search-wrapper">
+                            <input 
+                                type="text" 
+                                id="serviceSearch" 
+                                class="service-search-input" 
+                                placeholder="Search services..."
+                                data-debounce="300"
+                            >
+                            <span class="search-icon">🔍</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Results Counter (Task 1.3.4) -->
+                    <div class="filter-results">
+                        <p id="servicesCount">Showing all services</p>
+                        <button id="clearFilters" class="clear-btn" style="display: none;">Clear All</button>
+                    </div>
+                </div>
                 
-                <div class="services-container" id="servicesContainer"></div>
+                <!-- Services Grid (Task 2.2 - Pricing Display) -->
+                <div class="services-container" id="servicesContainer">
+                    <!-- ========== TASK 2.0: REAL PRICING DISPLAY (PSEUDOCODE) ==========
+                        EACH SERVICE CARD SHOULD SHOW:
+                        - Price prominently in gold color
+                        - Duration badge with clock icon
+                        - Member price if applicable
+                        - "From ₹XXX" for variable pricing
+                        
+                        STRUCTURE:
+                        <div class="service-card">
+                            <img src="..."> OR emoji placeholder
+                            <div class="service-price-badge">₹500</div>
+                            <div class="service-duration">⏱️ 45 min</div>
+                            <h3>Service Name</h3>
+                            <p class="description">...</p>
+                            <div class="pricing-details">
+                                <span class="member-price">Member: ₹450</span>
+                            </div>
+                            <button class="book-btn">Book Now</button>
+                            <span class="info-tooltip">ℹ️ Click for details</span>
+                        </div>
+                    ========================================== -->
+                </div>
             </div>
+
+            <!-- ========== TASK 3.0: LIVE AVAILABILITY CALENDAR (PSEUDOCODE) ==========
+                POSITION: Before Gallery
+                FEATURES:
+                - Mini calendar showing next 14 days
+                - Current date highlighted
+                - Available dates in gold, unavailable in gray
+                - "X slots available" for each date
+                - Click to see time slots
+                - Show therapist names for each slot
+                
+                STRUCTURE:
+                <div class="availability-section">
+                    <h2>Choose Your Perfect Time</h2>
+                    <div class="calendar-widget">
+                        <div class="calendar-header">
+                            <button class="cal-prev">←</button>
+                            <span class="cal-month">November 2025</span>
+                            <button class="cal-next">→</button>
+                        </div>
+                        <div class="calendar-grid">
+                            <!-- 14 date cards showing availability -->
+                        </div>
+                    </div>
+                    <div class="time-slots-modal"> <!-- Hidden until date clicked -->
+                        <!-- Time slot picker for selected date -->
+                    </div>
+                </div>
+            ========================================== -->
+            
+            <!-- TASK 3.0 WILL GO HERE (Just above Gallery) -->
+            <!-- TODO: Insert Live Availability Calendar Section -->
 
             <!-- GALLERY SECTION -->
             <div id="gallery" class="gallery-section">
@@ -549,6 +655,90 @@
                 </div>
             </div>
             </div>
+            
+            <!-- ========== TASK 4.0: BEFORE & AFTER GALLERY (PSEUDOCODE) ==========
+                POSITION: After Gallery Section
+                FEATURES:
+                - Image comparison slider for each pair
+                - Before/After labels
+                - Swipe gesture support
+                - Category filter (Hair, Makeup, Nails, etc.)
+                - 6-8 before/after pairs
+                - Auto-carousel with next/prev buttons
+                
+                STRUCTURE:
+                <div class="before-after-section">
+                    <h2>Transformation Gallery</h2>
+                    <div class="filter-tabs">
+                        <button data-category="all">All</button>
+                        <button data-category="hair">Hair</button>
+                        <button data-category="makeup">Makeup</button>
+                    </div>
+                    <div class="before-after-carousel">
+                        <div class="comparison-slider">
+                            <img class="before-img">
+                            <img class="after-img">
+                            <div class="comparison-handle">DRAG</div>
+                        </div>
+                    </div>
+                </div>
+            ========================================== -->
+            <!-- TODO: Insert Before & After Gallery Section -->
+
+            <!-- ========== TASK 5.0: MEMBERSHIP TIER CARDS (PSEUDOCODE) ==========
+                POSITION: After Testimonials, before About
+                FEATURES:
+                - 3 tier cards (Gold, Platinum, Diamond)
+                - Highlight "Most Popular" tier
+                - Show benefits with icons
+                - Compare pricing & discounts
+                - "Join Now" CTA buttons
+                
+                STRUCTURE:
+                <div class="membership-section">
+                    <h2>Choose Your Tier</h2>
+                    <div class="tier-cards-grid">
+                        <div class="tier-card" data-tier="gold">
+                            <h3>Gold</h3>
+                            <div class="price">₹500/yr</div>
+                            <ul class="benefits"><li>✓ 5% Off</li>...</ul>
+                            <button>Join Gold</button>
+                        </div>
+                        <!-- Repeat for Platinum (Most Popular) and Diamond -->
+                    </div>
+                </div>
+            ========================================== -->
+            <!-- TODO: Insert Membership Tiers Section -->
+            
+            <!-- ========== TASK 6.0: STAFF SPOTLIGHT CAROUSEL (PSEUDOCODE) ==========
+                POSITION: Before Testimonials
+                FEATURES:
+                - Staff profile cards with photo
+                - Name, title, experience years
+                - Specialty services (tags)
+                - Star rating
+                - "Book with [Name]" button
+                - Auto-rotating carousel
+                
+                STRUCTURE:
+                <div class="staff-section">
+                    <h2>Meet Our Team</h2>
+                    <div class="staff-carousel">
+                        <div class="staff-card">
+                            <img class="staff-photo">
+                            <h3>Staff Name</h3>
+                            <p class="title">Hair Specialist</p>
+                            <span class="badge">12 Years Experience</span>
+                            <div class="specialties">
+                                <span class="tag">Hair Coloring</span>
+                                <span class="tag">Cutting</span>
+                            </div>
+                            <button>Book with {name}</button>
+                        </div>
+                    </div>
+                </div>
+            ========================================== -->
+            <!-- TODO: Insert Staff Spotlight Section -->
 
             <!-- REVIEWS SECTION - TESTIMONIAL CAROUSEL -->
             <div id="reviews" class="reviews-section">
@@ -614,6 +804,46 @@
             </div>
             </div>
 
+            <!-- ========== TASK 7.0-10.0: ADDITIONAL FEATURES (PSEUDOCODE) ==========
+                7.0 VIDEO TESTIMONIALS - After text testimonials
+                    <div class="video-testimonials">
+                        <h2>Video Reviews</h2>
+                        <div class="video-carousel">
+                            <div class="video-card">
+                                <img class="video-thumbnail">
+                                <span class="play-btn">▶</span>
+                            </div>
+                        </div>
+                    </div>
+                
+                8.0 FAQ SECTION - Before Footer
+                    <div class="faq-section">
+                        <h2>Frequently Asked Questions</h2>
+                        <div class="accordion">
+                            <div class="faq-item">
+                                <div class="faq-question">Q: How do I book?</div>
+                                <div class="faq-answer">A: ...</div>
+                            </div>
+                        </div>
+                    </div>
+                
+                9.0 SERVICE COMPARISON - In services section
+                    <div class="comparison-table">
+                        <table>
+                            <tr><th>Feature</th><th>Basic</th><th>Premium</th></tr>
+                        </table>
+                    </div>
+                
+                10.0 CHAT WIDGET - Floating bottom-right
+                    <div class="chat-widget">
+                        <button class="chat-bubble">💬</button>
+                        <div class="chat-window">
+                            <div class="chat-messages"></div>
+                            <input placeholder="Ask...">
+                        </div>
+                    </div>
+            ========================================== -->
+            
             <!-- ABOUT BLANCBEU SECTION -->
             <div class="about-section">
                 <div class="container">
@@ -653,6 +883,28 @@
                 </div>
             </div>
 
+            <!-- ========== TASK 8.0: FAQ SECTION PSEUDOCODE ==========
+                POSITION: Just before CTA
+                FEATURES:
+                - Expandable accordion
+                - Search to filter FAQs
+                - 20-30 questions organized by category
+                - Rich text answers with links
+                
+                STRUCTURE:
+                <div class="faq-section">
+                    <h2>FAQ</h2>
+                    <input placeholder="Search FAQ...">
+                    <div class="faq-category">
+                        <div class="faq-item">
+                            <div class="faq-q">Q: How to book?</div>
+                            <div class="faq-a">A: Click Book button or call us</div>
+                        </div>
+                    </div>
+                </div>
+            ========================================== -->
+            <!-- TODO: Insert FAQ Section -->
+            
             <!-- CTA SECTION -->
             <div class="cta-section">
                 <div class="container">
@@ -664,6 +916,33 @@
                     </div>
                 </div>
             </div>
+            
+            <!-- ========== TASK 10.0: FLOATING CHAT WIDGET (PSEUDOCODE) ==========
+                POSITION: Fixed bottom-right corner
+                FEATURES:
+                - Floating chat bubble
+                - Expandable chat window
+                - Message history
+                - Quick action buttons
+                - Minimize/close functionality
+                
+                IMPLEMENTATION:
+                - Add to body with position: fixed
+                - JavaScript to handle expand/collapse
+                - Mock bot responses with delay
+                
+                STRUCTURE:
+                <div class="chat-widget-container">
+                    <button class="chat-bubble-btn">💬 Chat</button>
+                    <div class="chat-window">
+                        <div class="chat-header">Support</div>
+                        <div class="chat-messages"></div>
+                        <input class="chat-input">
+                        <button class="send-btn">Send</button>
+                    </div>
+                </div>
+            ========================================== -->
+            <!-- TODO: Add Chat Widget to body -->
 
             <!-- FOOTER -->
             <footer class="footer">

@@ -5631,7 +5631,7 @@ body.light-mode .about-stat:hover {
     .testimonial-nav-btn.next { right: 10px; }
 }
 
-/* ===== COMPREHENSIVE VISIBILITY FIXES ===== */
+/* ===== AGGRESSIVE VISIBILITY OVERRIDE ===== */
 .trust-section,
 .why-choose-section,
 .service-highlights-section,
@@ -5646,12 +5646,32 @@ body.light-mode .about-stat:hover {
     opacity: 1 !important;
 }
 
+.trust-card,
+.feature-card,
+.service-highlight-card,
+.offer-card,
+.gallery-item,
+.roadmap-card {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.trust-card,
+.feature-card,
+.service-card-item {
+    animation: none !important;
+    opacity: 1 !important;
+}
+
 body.light-mode .trust-card,
 body.light-mode .feature-card,
 body.light-mode .service-card,
 body.light-mode .offer-card,
 body.light-mode .gallery-item {
     color: #333333 !important;
+    display: block !important;
+    opacity: 1 !important;
 }
 
 body.light-mode .section-title {
@@ -5660,11 +5680,4 @@ body.light-mode .section-title {
 
 body.light-mode .section-subtitle {
     color: #555555 !important;
-}
-
-body.light-mode .trust-card,
-body.light-mode .why-choose-section,
-body.light-mode .service-highlights-section {
-    visibility: visible !important;
-    display: block !important;
 }

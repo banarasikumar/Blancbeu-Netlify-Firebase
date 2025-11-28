@@ -1133,6 +1133,14 @@ body.light-mode .calendar-date-card:hover:not(.unavailable) {
     }
 }
 
+/* ===== FORCE ALL SECTIONS VISIBLE ===== */
+section, .app-page, [data-page], .hero, .carousel, .services-section, 
+.membership-section, .gallery-section, .staff-section, .reviews-section {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
 /* ===== CAROUSEL SLIDE VISIBILITY FIX ===== */
 .carousel-slide {
     display: none !important;
@@ -1347,4 +1355,53 @@ body.light-mode .staff-card:hover {
     .staff-card {
         flex: 0 0 280px;
     }
+}
+
+/* ===== EMERGENCY DISPLAY FIX ===== */
+.app-shell-content {
+    display: block !important;
+    width: 100% !important;
+    min-height: 100vh !important;
+}
+
+.hero {
+    display: block !important;
+    width: 100% !important;
+    height: 400px !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+.carousel {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    position: relative !important;
+}
+
+.carousel-track {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.carousel-slide img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+}
+
+.hero-overlay {
+    display: flex !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    z-index: 10 !important;
+}
+
+main section {
+    display: block !important;
 }

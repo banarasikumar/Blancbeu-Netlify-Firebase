@@ -671,17 +671,51 @@ function initScrollBehavior() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Initialize theme first (affects everything)
+  new ThemeController();
+  
+  // Initialize core app controllers
+  new BottomNavController();
+  new OfferCardAnimationController();
+  window.appShell = new AppShellNavigator();
+  initNotificationsController();
+  initBookingsController();
+  
+  // Initialize carousels and UI elements
   initCarousel();
   renderServices();
   initServiceFiltering();
   renderReviews();
   initMembership();
   initStaffCarousel();
+  initBeforeAfter();
+  
+  // Initialize utility features
   initSmoothScroll();
   initScrollBehavior();
+  initPWA();
   
-  // Auto-rotate staff carousel every 8 seconds
+  // Initialize delayed-load features
+  setTimeout(() => {
+    initCalendar();
+    setupCounterAnimation();
+  }, 300);
+  
+  // Hero text animation
+  const heroLines = document.querySelectorAll('.hero-text-line');
+  heroLines.forEach((line, index) => {
+    setTimeout(() => {
+      line.style.opacity = '1';
+    }, 200 + (index * 200));
+  });
+  
+  // Auto-rotate carousels
   setInterval(() => slideStaff(1), 8000);
+  setInterval(() => {
+    if (document.getElementById('testimonialTrack')) {
+      slideTestimonial(1);
+    }
+  }, 8000);
 });
 
 let deferredPrompt;
@@ -996,9 +1030,6 @@ class BottomNavController {
     const page = item.getAttribute('data-page');
     
     // Don't prevent default for external links (like WhatsApp)
-    if (item.getAttribute('href').startsWith('http')) {
-      return;
-    }
     
     // Smooth scroll to section
     const section = document.getElementById(page);
@@ -1034,9 +1065,6 @@ if (document.readyState === 'loading') {
     new BottomNavController();
   });
 } else {
-  new BottomNavController();
-}
-
 // Visibility-based animation for offer cards
 class OfferCardAnimationController {
   constructor() {
@@ -1133,9 +1161,6 @@ class ThemeController {
     if (this.fireworksOverlay) {
       this.fireworksOverlay.classList.remove('active');
       this.fireworksOverlay.style.display = 'none';
-    }
-    
-    if (typeof togglePause === 'function') {
       togglePause(true);
     }
     
@@ -1224,11 +1249,6 @@ class AppShellNavigator {
         }
         
         // Save current page scroll position IMMEDIATELY
-        this.pageScrollPositions[this.currentPage] = window.scrollY;
-        console.log(`💾 Saved ${this.currentPage} at: ${this.pageScrollPositions[this.currentPage]}px`);
-        
-        // Hide ALL sections from current page
-        const currentPages = this.contentArea.querySelectorAll(`[data-page="${this.currentPage}"]`);
         currentPages.forEach(el => el.classList.remove('active'));
         
         // Show ALL sections of new page
@@ -1444,16 +1464,6 @@ function initBookingsController() {
                 alert('📋 Booking details coming soon!');
             }
         });
-    });
-
-    // Filter button
-    if (filterBtn) {
-        filterBtn.addEventListener('click', () => {
-            alert('🔍 Advanced filters coming soon!');
-        });
-    }
-
-    function checkEmptyBookings() {
         const visibleCards = document.querySelectorAll('.booking-card[style*="display: flex"], .booking-card:not([style*="display: none"])');
         const emptyState = document.querySelector('.empty-state-bookings');
         
@@ -1492,7 +1502,6 @@ function animateCounters() {
     const statNumbers = document.querySelectorAll('.stat-number');
     
     statNumbers.forEach(element => {
-        const targetValue = parseInt(element.getAttribute('data-value'));
         let currentValue = 0;
         const duration = 2000; // 2 seconds
         const increment = targetValue / (duration / 50);
@@ -1517,13 +1526,6 @@ function setupCounterAnimation() {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                animateCounters();
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.5 });
-    
-    observer.observe(trustSection);
 }
 
 document.addEventListener('DOMContentLoaded', setupCounterAnimation);
@@ -1553,13 +1555,6 @@ function slideServiceCarousel(direction) {
 // Initialize service carousel on load
 document.addEventListener('DOMContentLoaded', () => {
     const carousel = document.getElementById('serviceCarouselTrack');
-    if (carousel) {
-        // Responsive carousel adjustment on resize
-        window.addEventListener('resize', () => {
-            const items = carousel.querySelectorAll('.service-card-item');
-            const itemWidth = items[0].offsetWidth + 20;
-            const containerWidth = carousel.parentElement.offsetWidth;
-            const visibleItems = Math.floor(containerWidth / itemWidth);
             const maxPosition = Math.max(0, items.length - visibleItems);
             
             if (serviceCarouselPosition > maxPosition) {
@@ -1681,11 +1676,6 @@ function initCalendar() {
         timeSlots.forEach(time => {
             const isAvailable = Math.random() > 0.3;
             const slot = document.createElement('div');
-            slot.className = isAvailable ? 'time-slot available' : 'time-slot unavailable';
-            
-            if (isAvailable) {
-                const therapist = therapists[Math.floor(Math.random() * therapists.length)];
-                slot.innerHTML = `
                     <div class="slot-time">${time}</div>
                     <div class="slot-therapist">with ${therapist}</div>
                 `;
@@ -1824,12 +1814,6 @@ const tiers = [
         price: '₹1999',
         period: '/year',
         discount: '15% OFF',
-        featured: false,
-        benefits: [
-            '✓ 15% discount on all services',
-            '✓ Birthday special - 20% extra',
-            '✓ VIP priority booking',
-            '✓ Free bridal package (₹8000 value)',
             '✓ Exclusive events & private sessions',
             '✓ Personal stylist consultation',
             '✓ Gift vouchers yearly'

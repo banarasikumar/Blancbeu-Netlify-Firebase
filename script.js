@@ -1351,56 +1351,6 @@ function openWhatsAppChat() {
 }
 
 
-// ===== ROADMAP FUNCTIONALITY =====
-document.addEventListener('DOMContentLoaded', function() {
-    const roadmapCheckboxes = document.querySelectorAll('.roadmap-checkbox');
-    const progressFill = document.getElementById('progressFill');
-    const completedTasksSpan = document.getElementById('completedTasks');
-
-    function updateProgress() {
-        const checkedCount = document.querySelectorAll('.roadmap-checkbox:checked').length;
-        const totalTasks = roadmapCheckboxes.length;
-        const percentage = (checkedCount / totalTasks) * 100;
-        
-        progressFill.style.width = percentage + '%';
-        completedTasksSpan.textContent = checkedCount;
-    }
-
-    roadmapCheckboxes.forEach(checkbox => {
-        checkbox.addEventListener('change', function() {
-            const card = this.closest('.roadmap-card');
-            if (this.checked) {
-                card.classList.add('completed');
-                this.closest('.roadmap-card').querySelector('.status-badge').textContent = 'Completed';
-            } else {
-                card.classList.remove('completed');
-                this.closest('.roadmap-card').querySelector('.status-badge').textContent = 'Pending';
-            }
-            updateProgress();
-            
-            // Save to localStorage
-            localStorage.setItem('roadmapProgress', JSON.stringify(
-                Array.from(roadmapCheckboxes).map((cb, i) => cb.checked)
-            ));
-        });
-    });
-
-    // Load from localStorage
-    const saved = localStorage.getItem('roadmapProgress');
-    if (saved) {
-        const checked = JSON.parse(saved);
-        roadmapCheckboxes.forEach((cb, i) => {
-            if (checked[i]) {
-                cb.checked = true;
-                cb.closest('.roadmap-card').classList.add('completed');
-                cb.closest('.roadmap-card').querySelector('.status-badge').textContent = 'Completed';
-            }
-        });
-    }
-    
-    updateProgress();
-});
-
 // ===== HERO TEXT ANIMATION ON LOAD =====
 document.addEventListener('DOMContentLoaded', function() {
     const heroLines = document.querySelectorAll('.hero-text-line');

@@ -1,4 +1,108 @@
 <!DOCTYPE html>
+<!--
+================================================================================
+BLANCBEU SALON - WORLD-CLASS UI IMPLEMENTATION ROADMAP
+================================================================================
+Reference: TASKS.md for full implementation details
+
+PHASE 0: VISUAL EXCELLENCE (HIGHEST PRIORITY - Week 1)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+0.1 MICRO-INTERACTIONS & ANIMATIONS
+    [ ] Magnetic button effects (cursor follow on hover)
+    [ ] Ripple effect on button clicks
+    [ ] Scale + glow on hover (1.02 scale, gold glow)
+    [ ] Scroll-triggered fade-in for all sections
+    [ ] Parallax on hero images (0.3 speed)
+    [ ] Staggered card animations
+    [ ] Confetti on booking success
+    [ ] Skeleton loading states
+
+0.2 TYPOGRAPHY SYSTEM
+    [ ] Type scale: H1:64px, H2:48px, H3:36px, H4:24px, Body:16px
+    [ ] Font pairing: Cinzel (headings) + Poppins (body)
+    [ ] Gradient text for hero headings
+    [ ] Text glow for premium CTAs
+
+0.3 COLOR SYSTEM
+    [ ] 8 gold shades (#6B4423 to #FFD700)
+    [ ] Layered blacks for depth
+    [ ] Rose gold accent (#B76E79)
+    [ ] Champagne highlights (#F7E7CE)
+
+0.4 GLASSMORPHISM & DEPTH
+    [ ] Glass effect presets (light, medium, dark)
+    [ ] 4-level shadow system (sm, md, lg, xl)
+    [ ] Gold glow shadows
+    [ ] Gradient borders
+
+0.5 MOBILE-FIRST EXPERIENCE
+    [ ] Swipe gestures for carousels
+    [ ] Pull-to-refresh with gold spinner
+    [ ] Bottom sheet modals
+    [ ] 44px minimum touch targets
+
+PHASE 1: CORE FEATURES (HIGH PRIORITY - Week 2)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1.0 SERVICE FILTERING & SEARCH
+    Location: Above services section
+    [ ] Sticky filter bar with category buttons
+    [ ] Search input with debouncing (300ms)
+    [ ] "X services found" counter
+    [ ] Smooth filter animations
+
+2.0 REAL PRICING & DURATION
+    Location: On each service card
+    [ ] Large gold price display
+    [ ] Duration badge with clock icon
+    [ ] Member discount badge
+    [ ] Detailed service modal
+
+3.0 BEFORE & AFTER GALLERY
+    Location: New section below existing gallery
+    [ ] Image comparison slider (draggable)
+    [ ] Before/After labels
+    [ ] Category filter
+    [ ] Swipe on mobile
+
+4.0 STAFF SPOTLIGHT
+    Location: New "Meet Our Team" section
+    [ ] Staff profile cards
+    [ ] Photo, name, experience, specialties
+    [ ] "Book with [Name]" button
+    [ ] Auto-rotating carousel
+
+5.0 MEMBERSHIP TIERS
+    Location: New section before footer
+    [ ] Gold, Platinum, Diamond cards
+    [ ] Benefits list with checkmarks
+    [ ] Savings calculator
+    [ ] "Join Now" CTA
+
+6.0 BRAND STORYTELLING
+    Location: After About section
+    [ ] Animated timeline
+    [ ] Founder spotlight
+    [ ] Values cards with icons
+    [ ] Awards & certifications
+
+PHASE 2: ENGAGEMENT FEATURES (Week 3)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+7.0  Live Availability Calendar
+8.0  Video Testimonials
+9.0  FAQ Accordion
+10.0 Service Comparison Tool
+11.0 Real-Time Chat Widget
+
+PHASE 3: PREMIUM FEATURES (Week 4)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+12.0 Virtual 360° Tour
+13.0 Gift Cards
+14.0 Referral Program
+15.0 Promo Banners
+16.0 Instagram Feed
+17.0 Seasonal Themes
+================================================================================
+-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -282,6 +386,28 @@
                     </a>
                 </div>
             </div>
+
+            <!-- ================================================
+                 TODO: TASK 1.0 - SERVICE FILTER BAR
+                 ================================================
+                 Insert sticky filter bar here with:
+                 - Category buttons: All | Hair | Makeup | Nails | Spa | Threading
+                 - Search input with magnifying glass icon
+                 - "X services found" counter
+                 - Clear filters button
+                 
+                 <div class="service-filter-bar">
+                     <div class="filter-categories">
+                         <button class="filter-btn active" data-category="all">All</button>
+                         <button class="filter-btn" data-category="hair">Hair</button>
+                         ...
+                     </div>
+                     <div class="filter-search">
+                         <input type="text" placeholder="Search services...">
+                     </div>
+                     <div class="filter-count">50 services</div>
+                 </div>
+            ================================================ -->
 
             <!-- TRUST & SOCIAL PROOF SECTION -->
             <div class="trust-section">
@@ -941,6 +1067,92 @@
                 </div>
             ========================================== -->
             <!-- TODO: Add Chat Widget to body -->
+
+            <!-- ========== TASK 5.0: MEMBERSHIP TIER CARDS (PSEUDOCODE) ==========
+                POSITION: Above Footer
+                FEATURES:
+                - 3 tier cards: Gold, Platinum, Diamond
+                - Price prominently displayed
+                - Benefits list with gold checkmarks
+                - "Most Popular" badge on Platinum
+                - Savings calculator (e.g., "Save ₹2000/year")
+                - "Join Now" CTA buttons
+                
+                STRUCTURE:
+                <div class="membership-section">
+                    <h2>Exclusive Membership Tiers</h2>
+                    <p class="section-subtitle">Unlock premium benefits and savings</p>
+                    <div class="tier-cards-grid">
+                        <div class="tier-card gold">
+                            <h3>Gold</h3>
+                            <div class="tier-price">₹999<span>/year</span></div>
+                            <ul class="tier-benefits">
+                                <li>✓ 5% discount on all services</li>
+                                <li>✓ Priority booking</li>
+                            </ul>
+                            <button class="tier-cta">Join Gold</button>
+                        </div>
+                        <div class="tier-card platinum popular">
+                            <span class="popular-badge">Most Popular</span>
+                            <h3>Platinum</h3>
+                            <div class="tier-price">₹1999<span>/year</span></div>
+                            <ul class="tier-benefits">
+                                <li>✓ 10% discount on all services</li>
+                                <li>✓ Free birthday treatment</li>
+                            </ul>
+                            <button class="tier-cta">Join Platinum</button>
+                        </div>
+                        <div class="tier-card diamond">
+                            <h3>Diamond</h3>
+                            <div class="tier-price">₹3999<span>/year</span></div>
+                            <ul class="tier-benefits">
+                                <li>✓ 15% discount on all services</li>
+                                <li>✓ VIP lounge access</li>
+                            </ul>
+                            <button class="tier-cta">Join Diamond</button>
+                        </div>
+                    </div>
+                </div>
+            ========================================== -->
+            <!-- TODO: Insert Membership Tiers Section Here -->
+
+            <!-- ========== TASK 6.0: STAFF SPOTLIGHT CAROUSEL (PSEUDOCODE) ==========
+                POSITION: Before Membership / After Testimonials
+                FEATURES:
+                - Staff profile cards with photo
+                - Name, title, experience years
+                - Specialty services as tags
+                - Star rating (optional)
+                - "Book with [Name]" button
+                - Auto-rotating carousel (8s)
+                
+                STRUCTURE:
+                <div class="staff-spotlight-section">
+                    <h2>Meet Our Expert Team</h2>
+                    <div class="staff-carousel">
+                        <div class="staff-card">
+                            <div class="staff-photo">
+                                <img src="staff1.jpg" alt="Priya Sharma">
+                            </div>
+                            <h3>Priya Sharma</h3>
+                            <p class="staff-title">Senior Hair Stylist</p>
+                            <div class="staff-experience">12 Years Experience</div>
+                            <div class="staff-specialties">
+                                <span class="tag">Hair Coloring</span>
+                                <span class="tag">Bridal</span>
+                            </div>
+                            <button class="book-staff-btn">Book with Priya</button>
+                        </div>
+                        <!-- More staff cards... -->
+                    </div>
+                    <div class="carousel-controls">
+                        <button class="prev">←</button>
+                        <div class="dots"></div>
+                        <button class="next">→</button>
+                    </div>
+                </div>
+            ========================================== -->
+            <!-- TODO: Insert Staff Spotlight Section Here -->
 
             <!-- FOOTER -->
             <footer class="footer">

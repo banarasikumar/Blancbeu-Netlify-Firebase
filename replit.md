@@ -83,7 +83,7 @@ Interactive **Premium UI Enhancement Roadmap** - All 11 features COMPLETE!
 
 ## Recent Changes (Session: Nov 28, 2025)
 
-### Session 7 Updates - Dark Mode Hero Text & Z-Index Layering Fix ✅
+### Session 7 Updates - Dark Mode Hero Text, Z-Index Layering & Light Mode Visibility Fix ✅
 **Problems Fixed**:
 1. Hero title "Transform Your Beauty" was invisible in dark mode
 2. Hero text was overlapping/passing through navigation bars due to excessive z-index
@@ -118,12 +118,20 @@ Interactive **Premium UI Enhancement Roadmap** - All 11 features COMPLETE!
 - **styles.css**: Removed all excessive z-index declarations (5 removals)
 - **script.js**: Removed z-index manipulation from DOMContentLoaded
 
+4. **Light Mode Text Visibility** - Fixed poor contrast:
+   - Changed to bright gold color (#FFD700) for light backgrounds
+   - Applied multi-layer shadow effect for depth and readability
+   - Clean, professional appearance without borders or strokes
+
 **Verification**:
-- ✅ Hero text is visible in both light and dark modes
+- ✅ Hero text is clearly visible in both light and dark modes
+- ✅ Dark mode: Gold text on dark background
+- ✅ Light mode: Bright gold with shadows on light background
 - ✅ Navigation bar stays on top and is not overlapped
 - ✅ Bottom navigation bar is fully accessible and visible
 - ✅ Header/logo bar remains unobstructed
 - ✅ Proper z-index layering: Navigation (1000) > Content (auto)
+- ✅ Theme toggle button stays centered and doesn't jump between modes
 
 ### Session 6 Updates - Gallery Restoration & Image Replacement
 - ✅ **Gallery Images Fully Restored** - Generated and implemented 4 brand new premium salon gallery images

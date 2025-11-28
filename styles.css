@@ -1610,23 +1610,38 @@ body.light-mode .gallery-section {
 
 .gallery-grid {
     display: grid !important;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
     visibility: visible !important;
     opacity: 1 !important;
+}
+
+@media (max-width: 768px) {
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
 }
 
 .gallery-item {
     position: relative;
     overflow: hidden;
-    border-radius: 25px;
-    aspect-ratio: 4/3;
+    border-radius: 16px;
+    aspect-ratio: 1/1;
     cursor: pointer;
-    border: 3px solid transparent;
+    border: 2px solid rgba(212, 175, 55, 0.2);
     transition: all 0.4s;
     display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(212, 175, 55, 0.05));
 }
 
 .gallery-item:hover {

@@ -840,3 +840,295 @@ body.light-mode .calendar-date-card:hover:not(.unavailable) {
         padding: 20px;
     }
 }
+
+/* ===== TASK 4.0: BEFORE & AFTER GALLERY ===== */
+.before-after-section {
+    padding: 60px 0;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.05), transparent);
+}
+
+.filter-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.filter-tab {
+    padding: 10px 20px;
+    background: rgba(212, 175, 55, 0.15);
+    border: 2px solid rgba(212, 175, 55, 0.2);
+    border-radius: 20px;
+    color: var(--text-primary);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filter-tab:hover,
+.filter-tab.active {
+    background: var(--gold-24k);
+    color: #000;
+    border-color: var(--gold-24k);
+}
+
+.comparison-carousel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.carousel-btn {
+    padding: 12px 18px;
+    background: rgba(212, 175, 55, 0.2);
+    border: 2px solid rgba(212, 175, 55, 0.3);
+    border-radius: 50%;
+    color: var(--text-primary);
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.carousel-btn:hover {
+    background: var(--gold-24k);
+    color: #000;
+}
+
+#comparisonContainer {
+    flex: 1;
+    min-height: 300px;
+}
+
+.comparison-item {
+    position: relative;
+    display: flex;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.comparison-image {
+    flex: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.comparison-image.before {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(100, 100, 100, 0.3));
+}
+
+.comparison-image.after {
+    background: linear-gradient(135deg, var(--gold-24k), var(--gold-bright));
+}
+
+.placeholder-before,
+.placeholder-after {
+    font-size: 24px;
+    text-align: center;
+}
+
+.label {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.comparison-slider-handle {
+    position: absolute;
+    width: 4px;
+    height: 100%;
+    background: #fff;
+    z-index: 10;
+    top: 0;
+}
+
+.comparison-counter {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+/* ===== TASK 5.0: MEMBERSHIP TIERS ===== */
+.membership-section {
+    padding: 60px 0;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.08), transparent);
+}
+
+.tier-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.tier-card {
+    padding: 30px 25px;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(212, 175, 55, 0.05));
+    border: 2px solid rgba(212, 175, 55, 0.2);
+    border-radius: 16px;
+    position: relative;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    backdrop-filter: blur(10px);
+}
+
+.tier-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--gold-24k);
+    box-shadow: 0 15px 40px rgba(212, 175, 55, 0.3);
+}
+
+.tier-card.featured {
+    background: linear-gradient(135deg, var(--gold-24k), var(--gold-bright));
+    color: #000;
+    border-color: var(--gold-24k);
+    transform: scale(1.05);
+}
+
+.popular-badge {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, var(--gold-24k), var(--gold-bright));
+    color: #000;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.tier-name {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: inherit;
+}
+
+.tier-card.featured .tier-name {
+    color: #000;
+}
+
+.tier-price {
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+.price {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--gold-24k);
+}
+
+.tier-card.featured .price {
+    color: #000;
+}
+
+.period {
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.tier-card.featured .period {
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.tier-discount {
+    display: inline-block;
+    padding: 6px 12px;
+    background: rgba(212, 175, 55, 0.2);
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gold-24k);
+    margin-bottom: 20px;
+}
+
+.tier-card.featured .tier-discount {
+    background: rgba(0, 0, 0, 0.2);
+    color: #000;
+}
+
+.tier-benefits {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 25px 0;
+    flex: 1;
+}
+
+.tier-benefits li {
+    padding: 8px 0;
+    font-size: 13px;
+    color: var(--text-secondary);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+}
+
+.tier-card.featured .tier-benefits li {
+    color: rgba(0, 0, 0, 0.8);
+    border-bottom-color: rgba(0, 0, 0, 0.1);
+}
+
+.tier-btn {
+    padding: 12px 24px;
+    background: rgba(212, 175, 55, 0.2);
+    border: 2px solid rgba(212, 175, 55, 0.3);
+    border-radius: 12px;
+    color: var(--text-primary);
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.tier-btn:hover {
+    background: var(--gold-24k);
+    color: #000;
+    border-color: var(--gold-24k);
+}
+
+.tier-btn.featured-btn {
+    background: rgba(0, 0, 0, 0.2);
+    border-color: #000;
+    color: #000;
+}
+
+.tier-btn.featured-btn:hover {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 768px) {
+    .tier-cards-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .tier-card.featured {
+        transform: scale(1);
+    }
+    
+    .comparison-carousel {
+        flex-direction: column;
+    }
+}

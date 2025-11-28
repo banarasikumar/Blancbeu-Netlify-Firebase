@@ -1715,3 +1715,147 @@ document.addEventListener('DOMContentLoaded', () => {
         initCalendar();
     }, 500);
 });
+
+// ===== TASK 4.0: BEFORE & AFTER GALLERY =====
+const transformations = [
+    { category: 'hair', before: '🎨 Dull Hair', after: '✨ Radiant Hair' },
+    { category: 'hair', before: '😟 Damaged Hair', after: '💇 Silky Smooth' },
+    { category: 'makeup', before: '🙂 Natural Look', after: '💄 Glam Makeup' },
+    { category: 'makeup', before: '😊 Day Look', after: '✨ Bridal Makeup' },
+    { category: 'skincare', before: '😔 Dull Skin', after: '🌟 Radiant Skin' },
+    { category: 'skincare', before: '😣 Problem Skin', after: '✨ Clear Skin' }
+];
+
+let currentComparison = 0;
+let comparisonFilter = 'all';
+
+function initBeforeAfter() {
+    const filterTabs = document.querySelectorAll('.filter-tab');
+    const container = document.getElementById('comparisonContainer');
+    
+    if (!filterTabs) return;
+    
+    filterTabs.forEach(tab => {
+        tab.onclick = (e) => {
+            filterTabs.forEach(t => t.classList.remove('active'));
+            e.target.classList.add('active');
+            comparisonFilter = e.target.dataset.category;
+            currentComparison = 0;
+            renderComparison();
+        };
+    });
+    
+    renderComparison();
+}
+
+function renderComparison() {
+    const container = document.getElementById('comparisonContainer');
+    const filtered = comparisonFilter === 'all' 
+        ? transformations 
+        : transformations.filter(t => t.category === comparisonFilter);
+    
+    if (filtered.length === 0) return;
+    
+    const item = filtered[currentComparison % filtered.length];
+    
+    container.innerHTML = `
+        <div class="comparison-item">
+            <div class="comparison-image before">
+                <div class="placeholder-before">${item.before}</div>
+                <span class="label">BEFORE</span>
+            </div>
+            <div class="comparison-slider-handle" style="left: 50%"></div>
+            <div class="comparison-image after">
+                <div class="placeholder-after">${item.after}</div>
+                <span class="label">AFTER</span>
+            </div>
+        </div>
+        <div class="comparison-counter">${currentComparison + 1} / ${filtered.length}</div>
+    `;
+}
+
+function slideBefore(direction) {
+    const filtered = comparisonFilter === 'all' 
+        ? transformations 
+        : transformations.filter(t => t.category === comparisonFilter);
+    
+    currentComparison = (currentComparison + direction + filtered.length) % filtered.length;
+    renderComparison();
+}
+
+// ===== TASK 5.0: MEMBERSHIP TIERS =====
+const tiers = [
+    {
+        name: 'Gold',
+        price: '₹499',
+        period: '/year',
+        discount: '5% OFF',
+        featured: false,
+        benefits: [
+            '✓ 5% discount on all services',
+            '✓ Birthday special - 10% extra',
+            '✓ Priority booking',
+            '✓ Free hair spa every quarter',
+            '✓ Member exclusive offers'
+        ]
+    },
+    {
+        name: 'Platinum',
+        price: '₹999',
+        period: '/year',
+        discount: '10% OFF',
+        featured: true,
+        benefits: [
+            '✓ 10% discount on all services',
+            '✓ Birthday special - 15% extra',
+            '✓ Priority booking + faster slots',
+            '✓ Free facial monthly',
+            '✓ Exclusive events & workshops',
+            '✓ Complimentary head massage'
+        ]
+    },
+    {
+        name: 'Diamond',
+        price: '₹1999',
+        period: '/year',
+        discount: '15% OFF',
+        featured: false,
+        benefits: [
+            '✓ 15% discount on all services',
+            '✓ Birthday special - 20% extra',
+            '✓ VIP priority booking',
+            '✓ Free bridal package (₹8000 value)',
+            '✓ Exclusive events & private sessions',
+            '✓ Personal stylist consultation',
+            '✓ Gift vouchers yearly'
+        ]
+    }
+];
+
+function initMembership() {
+    const grid = document.querySelector('.tier-cards-grid');
+    if (!grid) return;
+    
+    grid.innerHTML = tiers.map((tier, idx) => `
+        <div class="tier-card ${tier.featured ? 'featured' : ''}">
+            ${tier.featured ? '<div class="popular-badge">⭐ MOST POPULAR</div>' : ''}
+            <h3 class="tier-name">${tier.name}</h3>
+            <div class="tier-price">
+                <span class="price">${tier.price}</span>
+                <span class="period">${tier.period}</span>
+            </div>
+            <div class="tier-discount">${tier.discount}</div>
+            <ul class="tier-benefits">
+                ${tier.benefits.map(b => `<li>${b}</li>`).join('')}
+            </ul>
+            <button class="tier-btn ${tier.featured ? 'featured-btn' : ''}">Join ${tier.name}</button>
+        </div>
+    `).join('');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+        initBeforeAfter();
+        initMembership();
+    }, 500);
+});

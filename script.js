@@ -1059,12 +1059,6 @@ class BottomNavController {
   }
 }
 
-// Initialize bottom nav controller when DOM is ready
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () => {
-    new BottomNavController();
-  });
-} else {
 // Visibility-based animation for offer cards
 class OfferCardAnimationController {
   constructor() {
@@ -1093,14 +1087,6 @@ class OfferCardAnimationController {
 
     this.offerCards.forEach(card => observer.observe(card));
   }
-}
-
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () => {
-    new OfferCardAnimationController();
-  });
-} else {
-  new OfferCardAnimationController();
 }
 
 class ThemeController {
@@ -1191,14 +1177,6 @@ class ThemeController {
 }
 
 
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () => {
-    new ThemeController();
-  });
-} else {
-  new ThemeController();
-}
-
 // ===== APP SHELL NAVIGATION CONTROLLER =====
 class AppShellNavigator {
     constructor() {
@@ -1248,7 +1226,8 @@ class AppShellNavigator {
             return;
         }
         
-        // Save current page scroll position IMMEDIATELY
+        // Hide ALL sections from current page
+        const currentPages = this.contentArea.querySelectorAll(`[data-page="${this.currentPage}"]`);
         currentPages.forEach(el => el.classList.remove('active'));
         
         // Show ALL sections of new page
@@ -1274,19 +1253,6 @@ class AppShellNavigator {
             console.log(`🔄 Restored ${page} to: ${savedPosition}px`);
         });
     }
-}
-
-// Initialize app shell after DOM is ready
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-        window.appShell = new AppShellNavigator();
-        initNotificationsController();
-        initBookingsController();
-    });
-} else {
-    window.appShell = new AppShellNavigator();
-    initNotificationsController();
-    initBookingsController();
 }
 
 // ===== NOTIFICATIONS PAGE CONTROLLER =====
@@ -1487,14 +1453,6 @@ function openWhatsAppChat() {
 }
 
 
-// ===== HERO TEXT ANIMATION ON LOAD =====
-document.addEventListener('DOMContentLoaded', function() {
-    const heroLines = document.querySelectorAll('.hero-text-line');
-    heroLines.forEach((line, index) => {
-        setTimeout(() => {
-            line.style.opacity = '1';
-        }, 200 + (index * 200));
-    });
 });
 
 // ===== STATS COUNTER ANIMATION =====
@@ -1528,7 +1486,6 @@ function setupCounterAnimation() {
             if (entry.isIntersecting) {
 }
 
-document.addEventListener('DOMContentLoaded', setupCounterAnimation);
 
 // ===== SERVICE CAROUSEL FUNCTIONALITY =====
 let serviceCarouselPosition = 0;
@@ -1553,10 +1510,6 @@ function slideServiceCarousel(direction) {
 }
 
 // Initialize service carousel on load
-document.addEventListener('DOMContentLoaded', () => {
-    const carousel = document.getElementById('serviceCarouselTrack');
-            const maxPosition = Math.max(0, items.length - visibleItems);
-            
             if (serviceCarouselPosition > maxPosition) {
                 serviceCarouselPosition = maxPosition;
                 carousel.style.transform = `translateX(-${serviceCarouselPosition * itemWidth}px)`;
@@ -1582,11 +1535,6 @@ function slideTestimonial(direction) {
 }
 
 // Auto-advance testimonials every 8 seconds
-document.addEventListener('DOMContentLoaded', () => {
-    setInterval(() => {
-        if (document.getElementById('testimonialTrack')) {
-            slideTestimonial(1);
-        }
     }, 8000);
 });
 
@@ -1705,9 +1653,6 @@ function initCalendar() {
 }
 
 // Initialize calendar on page load
-document.addEventListener('DOMContentLoaded', () => {
-    setTimeout(() => {
-        initCalendar();
     }, 500);
 });
 
@@ -1842,9 +1787,6 @@ function initMembership() {
     `).join('');
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    setTimeout(() => {
-        initBeforeAfter();
         initMembership();
     }, 500);
 });

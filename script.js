@@ -1918,4 +1918,25 @@ function updateStaffCarousel() {
     }
 }
 
-// Staff carousel initialized in main DOMContentLoaded below
+// ===== MAIN INITIALIZATION =====
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        new BottomNavController();
+        new OfferCardAnimationController();
+        new ThemeController();
+        setupCounterAnimation();
+        initCalendar();
+        initNotificationsController();
+        initBookingsController();
+        initStaffCarousel();
+    });
+} else {
+    new BottomNavController();
+    new OfferCardAnimationController();
+    new ThemeController();
+    setupCounterAnimation();
+    initCalendar();
+    initNotificationsController();
+    initBookingsController();
+    initStaffCarousel();
+}

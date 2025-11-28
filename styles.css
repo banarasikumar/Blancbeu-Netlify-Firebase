@@ -4732,6 +4732,11 @@ body.light-mode .hero-text-line {
     opacity: 1 !important;
 }
 
+body.dark-mode .hero-text-line {
+    color: var(--gold-24k);
+    opacity: 1 !important;
+}
+
 body.light-mode .hero-tagline {
     color: #333333 !important;
     display: block !important;

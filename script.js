@@ -102,121 +102,113 @@ const servicesData = {
     {
       group: "Hair cutting",
       icon: "✂️",
-      category: "hair",
       image: "assets/service_images/professional_hair_st_3fab25e9.webp",
       services: [
-        { name: "Plain Haircut", price: 100, offerPrice: 99, duration: 30, memberDiscount: 10 },
-        { name: "U-Cut", price: 150, offerPrice: 99, duration: 30, memberDiscount: 10 },
-        { name: "V-Cut", price: 150, offerPrice: 99, duration: 30, memberDiscount: 10 },
-        { name: "Deep U-Cut", price: 200, offerPrice: 99, duration: 40, memberDiscount: 10 },
-        { name: "Deep V-Cut", price: 200, offerPrice: 99, duration: 40, memberDiscount: 10 },
-        { name: "Step Cut", price: 300, offerPrice: 99, duration: 45, memberDiscount: 10 },
-        { name: "Layer Cut", price: 500, offerPrice: 99, duration: 45, memberDiscount: 10 },
-        { name: "Butterfly Cut", price: 500, offerPrice: 99, duration: 45, memberDiscount: 10 },
-        { name: "Bob Cut", price: 400, offerPrice: 99, duration: 40, memberDiscount: 10 },
-        { name: "Baby Cut", price: 200, offerPrice: 99, duration: 30, memberDiscount: 10 },
-        { name: "Advance Haircut", price: 600, offerPrice: 99, duration: 50, memberDiscount: 10 },
-        { name: "Feather Cut", price: 450, offerPrice: 99, duration: 45, memberDiscount: 10 },
-        { name: "Pixie Cut", price: 500, offerPrice: 99, duration: 40, memberDiscount: 10 }
+        { name: "Plain Haircut", price: 100, offerPrice: 99 },
+        { name: "U-Cut", price: 150, offerPrice: 99 },
+        { name: "V-Cut", price: 150, offerPrice: 99 },
+        { name: "Deep U-Cut", price: 200, offerPrice: 99 },
+        { name: "Deep V-Cut", price: 200, offerPrice: 99 },
+        { name: "Step Cut", price: 300, offerPrice: 99 },
+        { name: "Layer Cut", price: 500, offerPrice: 99 },
+        { name: "Butterfly Cut", price: 500, offerPrice: 99 },
+        { name: "Bob Cut", price: 400, offerPrice: 99 },
+        { name: "Baby Cut", price: 200, offerPrice: 99 },
+        { name: "Advance Haircut", price: 600, offerPrice: 99 },
+        { name: "Feather Cut", price: 450, offerPrice: 99 },
+        { name: "Pixie Cut", price: 500, offerPrice: 99 }
       ]
     },
     {
       group: "Clean up",
       icon: "✨",
-      category: "skincare",
       image: "assets/service_images/beautiful_woman_gett_9dc7243a.webp",
       services: [
-        { name: "Fruit Cleanup", price: 500, offerPrice: 250, duration: 45, memberDiscount: 10 },
-        { name: "Diamond Cleanup", price: 800, offerPrice: 499, duration: 50, memberDiscount: 10 },
-        { name: "Gold Cleanup", price: 1000, offerPrice: 599, duration: 60, memberDiscount: 10 },
-        { name: "Charcoal Cleanup", price: 700, offerPrice: 399, duration: 55, memberDiscount: 10 }
+        { name: "Fruit Cleanup", price: 500, offerPrice: 250 },
+        { name: "Diamond Cleanup", price: 800, offerPrice: 499 },
+        { name: "Gold Cleanup", price: 1000, offerPrice: 599 },
+        { name: "Charcoal Cleanup", price: 700, offerPrice: 399 }
       ]
     },
     {
       group: "Facial",
       icon: "💆",
-      category: "skincare",
       image: "assets/service_images/facial_new.webp",
       services: [
-        { name: "Lotus Professional Facial", price: 1500, offerPrice: 699, duration: 50, memberDiscount: 10 },
-        { name: "03+ Facial", price: 1500, offerPrice: 699, duration: 50, memberDiscount: 10 },
-        { name: "Fruit Facial", price: 1200, offerPrice: 599, duration: 45, memberDiscount: 10 },
-        { name: "Gold Facial", price: 2000, offerPrice: 999, duration: 60, memberDiscount: 10 },
-        { name: "Diamond Facial", price: 2500, offerPrice: 1299, duration: 60, memberDiscount: 10 },
-        { name: "Anti-Aging Facial", price: 2200, offerPrice: 1199, duration: 60, memberDiscount: 10 }
+        { name: "Lotus Professional Facial", price: 1500, offerPrice: 699 },
+        { name: "03+ Facial", price: 1500, offerPrice: 699 },
+        { name: "Fruit Facial", price: 1200, offerPrice: 599 },
+        { name: "Gold Facial", price: 2000, offerPrice: 999 },
+        { name: "Diamond Facial", price: 2500, offerPrice: 1299 },
+        { name: "Anti-Aging Facial", price: 2200, offerPrice: 1199 }
       ]
     },
     {
       group: "Hairs & Treatment",
       icon: "💇",
-      category: "hair",
       image: "assets/service_images/professional_hair_st_673b25ad.webp",
       services: [
-        { name: "Keratin", price: 2500, offerPrice: 1499, duration: 90, memberDiscount: 10 },
-        { name: "Straightening/Smoothening", price: 3000, offerPrice: 1999, duration: 120, memberDiscount: 10 },
-        { name: "Botox", price: 3500, offerPrice: 2499, duration: 90, memberDiscount: 10 },
-        { name: "Rebounding", price: 3500, offerPrice: 2400, duration: 90, memberDiscount: 10 },
-        { name: "Nanoplastia", price: 7000, offerPrice: 2999, duration: 120, memberDiscount: 10 },
-        { name: "Hair Spa", price: 1500, offerPrice: 799, duration: 60, memberDiscount: 10 },
-        { name: "Protein Treatment", price: 2000, offerPrice: 1199, duration: 75, memberDiscount: 10 },
-        { name: "Anti-Dandruff Treatment", price: 1800, offerPrice: 999, duration: 60, memberDiscount: 10 }
+        { name: "Keratin", price: 2500, offerPrice: 1499 },
+        { name: "Straightening/Smoothening", price: 3000, offerPrice: 1999 },
+        { name: "Botox", price: 3500, offerPrice: 2499 },
+        { name: "Rebounding", price: 3500, offerPrice: 2400 },
+        { name: "Nanoplastia", price: 7000, offerPrice: 2999 },
+        { name: "Hair Spa", price: 1500, offerPrice: 799 },
+        { name: "Protein Treatment", price: 2000, offerPrice: 1199 },
+        { name: "Anti-Dandruff Treatment", price: 1800, offerPrice: 999 }
       ]
     },
     {
       group: "Premium services",
       icon: "👑",
-      category: "spa",
       image: "assets/service_images/premium_hair_spa_nourish.webp",
       services: [
-        { name: "Head Massage", price: 250, offerPrice: 199, duration: 30, memberDiscount: 10 },
-        { name: "Deep Nourish HairSpa", price: 1500, offerPrice: 799, duration: 60, memberDiscount: 10 },
-        { name: "Full Body Massage", price: 5000, offerPrice: 999, duration: 90, memberDiscount: 10 },
-        { name: "Blow Dry", price: 500, offerPrice: 199, duration: 25, memberDiscount: 10 },
-        { name: "Aroma Therapy", price: 3000, offerPrice: 1499, duration: 60, memberDiscount: 10 },
-        { name: "Hot Stone Massage", price: 3500, offerPrice: 1799, duration: 75, memberDiscount: 10 },
-        { name: "Thai Massage", price: 4000, offerPrice: 1999, duration: 90, memberDiscount: 10 }
+        { name: "Head Massage", price: 250, offerPrice: 199 },
+        { name: "Deep Nourish HairSpa", price: 1500, offerPrice: 799 },
+        { name: "Full Body Massage", price: 5000, offerPrice: 999 },
+        { name: "Blow Dry", price: 500, offerPrice: 199 },
+        { name: "Aroma Therapy", price: 3000, offerPrice: 1499 },
+        { name: "Hot Stone Massage", price: 3500, offerPrice: 1799 },
+        { name: "Thai Massage", price: 4000, offerPrice: 1999 }
       ]
     },
     {
       group: "Hair colour",
       icon: "🎨",
-      category: "hair",
       image: "assets/service_images/hair_colour_vibrant_pink.webp",
       services: [
-        { name: "Global Hair Colour", price: 1199, offerPrice: null, duration: 90, memberDiscount: 10 },
-        { name: "Global Highlight", price: 1299, offerPrice: null, duration: 90, memberDiscount: 10 },
-        { name: "Highlight Perstrik", price: 149, offerPrice: null, duration: 30, memberDiscount: 10 },
-        { name: "Balayage", price: 2500, offerPrice: 1999, duration: 120, memberDiscount: 10 },
-        { name: "Ombre", price: 2200, offerPrice: 1799, duration: 120, memberDiscount: 10 },
-        { name: "Root Touch-Up", price: 599, offerPrice: 399, duration: 45, memberDiscount: 10 }
+        { name: "Global Hair Colour", price: 1199, offerPrice: null },
+        { name: "Global Highlight", price: 1299, offerPrice: null },
+        { name: "Highlight Perstrik", price: 149, offerPrice: null },
+        { name: "Balayage", price: 2500, offerPrice: 1999 },
+        { name: "Ombre", price: 2200, offerPrice: 1799 },
+        { name: "Root Touch-Up", price: 599, offerPrice: 399 }
       ]
     },
     {
       group: "Makeup & Styling",
       icon: "💄",
-      category: "makeup",
       image: "assets/service_images/makeup_styling_new.webp",
       services: [
-        { name: "Party Makeup", price: 2000, offerPrice: 1499, duration: 45, memberDiscount: 10 },
-        { name: "Bridal Makeup", price: 8000, offerPrice: 5999, duration: 120, memberDiscount: 10 },
-        { name: "HD Makeup", price: 3500, offerPrice: 2499, duration: 60, memberDiscount: 10 },
-        { name: "Airbrush Makeup", price: 4000, offerPrice: 2999, duration: 60, memberDiscount: 10 },
-        { name: "Pre-Bridal Package", price: 15000, offerPrice: 9999, duration: 180, memberDiscount: 10 }
+        { name: "Party Makeup", price: 2000, offerPrice: 1499 },
+        { name: "Bridal Makeup", price: 8000, offerPrice: 5999 },
+        { name: "HD Makeup", price: 3500, offerPrice: 2499 },
+        { name: "Airbrush Makeup", price: 4000, offerPrice: 2999 },
+        { name: "Pre-Bridal Package", price: 15000, offerPrice: 9999 }
       ]
     },
     {
       group: "Nails & Beauty",
       icon: "💅",
-      category: "nails",
       image: "assets/service_images/nails_beauty_vibrant.webp",
       services: [
-        { name: "Manicure", price: 500, offerPrice: 299, duration: 35, memberDiscount: 10 },
-        { name: "Pedicure", price: 600, offerPrice: 349, duration: 40, memberDiscount: 10 },
-        { name: "Gel Nails", price: 1500, offerPrice: 999, duration: 50, memberDiscount: 10 },
-        { name: "Nail Art", price: 800, offerPrice: 499, duration: 45, memberDiscount: 10 },
-        { name: "Threading", price: 100, offerPrice: 50, duration: 20, memberDiscount: 10 },
-        { name: "Waxing Full Arms", price: 400, offerPrice: 299, duration: 30, memberDiscount: 10 },
-        { name: "Waxing Full Legs", price: 600, offerPrice: 399, duration: 40, memberDiscount: 10 }
+        { name: "Manicure", price: 500, offerPrice: 299 },
+        { name: "Pedicure", price: 600, offerPrice: 349 },
+        { name: "Gel Nails", price: 1500, offerPrice: 999 },
+        { name: "Nail Art", price: 800, offerPrice: 499 },
+        { name: "Threading", price: 100, offerPrice: 50 },
+        { name: "Waxing Full Arms", price: 400, offerPrice: 299 },
+        { name: "Waxing Full Legs", price: 600, offerPrice: 399 }
       ]
     }
   ]
@@ -330,36 +322,15 @@ function goToSlide(index) {
   startAutoPlay();
 }
 
-// ===== TASK 1.0: SERVICE FILTERING & SEARCH =====
-let currentFilters = { category: 'all', search: '' };
-
-function renderServices(filterCategory = 'all', searchQuery = '') {
+function renderServices() {
   const container = document.getElementById('servicesContainer');
+  
+  // Skip if container doesn't exist
   if (!container) return;
   
-  container.innerHTML = '';
-  let totalServicesShown = 0;
-  
-  // Filter groups based on category
-  const filteredGroups = filterCategory === 'all' 
-    ? servicesData.groups 
-    : servicesData.groups.filter(g => g.category === filterCategory);
-  
-  filteredGroups.forEach(group => {
-    // Filter services by search query
-    const filteredServices = searchQuery === ''
-      ? group.services
-      : group.services.filter(service => 
-          service.name.toLowerCase().includes(searchQuery.toLowerCase())
-        );
-    
-    if (filteredServices.length === 0) return;
-    
-    totalServicesShown += filteredServices.length;
-    
+  servicesData.groups.forEach(group => {
     const categoryDiv = document.createElement('div');
     categoryDiv.className = 'service-category';
-    categoryDiv.setAttribute('data-category', group.category);
     
     const headerHTML = `
       <div class="category-header">
@@ -370,33 +341,18 @@ function renderServices(filterCategory = 'all', searchQuery = '') {
       </div>
     `;
     
-    const servicesHTML = filteredServices.map(service => {
+    const servicesHTML = group.services.map(service => {
       const hasOffer = service.offerPrice !== null;
-      const finalPrice = service.offerPrice || service.price;
       const discount = hasOffer ? Math.round((1 - service.offerPrice / service.price) * 100) : 0;
-      const memberPrice = Math.floor(finalPrice * (1 - (service.memberDiscount || 0) / 100));
-      const duration = service.duration || 30;
       
       return `
         <div class="service-card">
-          <div class="service-header">
-            <h3 class="service-name">${service.name}</h3>
-            <div class="service-duration-badge">⏱️ ${duration}min</div>
+          <div class="service-name">${service.name}</div>
+          <div class="service-prices">
+            ${hasOffer ? `<span class="service-original-price">₹${service.price}</span>` : ''}
+            <span class="service-offer-price">₹${service.offerPrice || service.price}</span>
+            ${hasOffer && discount > 0 ? `<span class="service-discount">${discount}% OFF</span>` : ''}
           </div>
-          
-          <div class="service-price-display">
-            <div class="price-main">₹${finalPrice}</div>
-            ${hasOffer && discount > 0 ? `<span class="service-discount-badge">${discount}% OFF</span>` : ''}
-          </div>
-          
-          ${hasOffer ? `<div class="service-original-price-small">Was ₹${service.price}</div>` : ''}
-          
-          <div class="service-member-info">
-            <span class="member-price-tag">Member: ₹${memberPrice}</span>
-            <span class="member-save">Save ₹${finalPrice - memberPrice}</span>
-          </div>
-          
-          <button class="service-book-btn" onclick="alert('Booking feature - Coming soon!')">Book Now</button>
         </div>
       `;
     }).join('');
@@ -404,82 +360,6 @@ function renderServices(filterCategory = 'all', searchQuery = '') {
     categoryDiv.innerHTML = headerHTML + `<div class="services-grid">${servicesHTML}</div>`;
     container.appendChild(categoryDiv);
   });
-  
-  // Update result counter
-  updateServiceCounter(totalServicesShown);
-}
-
-function updateServiceCounter(count) {
-  const counter = document.getElementById('servicesCount');
-  if (!counter) return;
-  
-  if (count === 0) {
-    counter.textContent = '❌ No services found';
-  } else if (currentFilters.category === 'all' && currentFilters.search === '') {
-    counter.textContent = `Showing all ${count} services`;
-  } else {
-    let filterDesc = '';
-    if (currentFilters.category !== 'all') {
-      const cat = servicesData.groups.find(g => g.category === currentFilters.category);
-      filterDesc = `in ${cat.group}`;
-    }
-    if (currentFilters.search !== '') {
-      filterDesc = filterDesc ? `${filterDesc} matching "${currentFilters.search}"` : `matching "${currentFilters.search}"`;
-    }
-    counter.textContent = `Found ${count} service${count !== 1 ? 's' : ''} ${filterDesc}`;
-  }
-}
-
-function initServiceFiltering() {
-  // Category filter buttons
-  const filterButtons = document.querySelectorAll('.filter-btn');
-  filterButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      filterButtons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      
-      currentFilters.category = btn.getAttribute('data-category');
-      renderServices(currentFilters.category, currentFilters.search);
-      
-      // Show/hide clear button
-      const clearBtn = document.getElementById('clearFilters');
-      if (clearBtn) {
-        clearBtn.style.display = (currentFilters.category !== 'all' || currentFilters.search !== '') ? 'inline-block' : 'none';
-      }
-    });
-  });
-  
-  // Search input with debouncing
-  const searchInput = document.getElementById('serviceSearch');
-  if (searchInput) {
-    let searchTimeout;
-    searchInput.addEventListener('input', (e) => {
-      clearTimeout(searchTimeout);
-      searchTimeout = setTimeout(() => {
-        currentFilters.search = e.target.value.trim();
-        renderServices(currentFilters.category, currentFilters.search);
-        
-        // Show/hide clear button
-        const clearBtn = document.getElementById('clearFilters');
-        if (clearBtn) {
-          clearBtn.style.display = (currentFilters.category !== 'all' || currentFilters.search !== '') ? 'inline-block' : 'none';
-        }
-      }, 300);
-    });
-  }
-  
-  // Clear filters button
-  const clearBtn = document.getElementById('clearFilters');
-  if (clearBtn) {
-    clearBtn.addEventListener('click', () => {
-      currentFilters = { category: 'all', search: '' };
-      filterButtons.forEach(b => b.classList.remove('active'));
-      filterButtons[0].classList.add('active');
-      if (searchInput) searchInput.value = '';
-      renderServices('all', '');
-      clearBtn.style.display = 'none';
-    });
-  }
 }
 
 function renderReviews() {
@@ -671,51 +551,11 @@ function initScrollBehavior() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Initialize theme first (affects everything)
-  new ThemeController();
-  
-  // Initialize core app controllers
-  new BottomNavController();
-  new OfferCardAnimationController();
-  window.appShell = new AppShellNavigator();
-  initNotificationsController();
-  initBookingsController();
-  
-  // Initialize carousels and UI elements
   initCarousel();
   renderServices();
-  initServiceFiltering();
   renderReviews();
-  initMembership();
-  initStaffCarousel();
-  initBeforeAfter();
-  
-  // Initialize utility features
   initSmoothScroll();
   initScrollBehavior();
-  initPWA();
-  
-  // Initialize delayed-load features
-  setTimeout(() => {
-    initCalendar();
-    setupCounterAnimation();
-  }, 300);
-  
-  // Hero text animation
-  const heroLines = document.querySelectorAll('.hero-text-line');
-  heroLines.forEach((line, index) => {
-    setTimeout(() => {
-      line.style.opacity = '1';
-    }, 200 + (index * 200));
-  });
-  
-  // Auto-rotate carousels
-  setInterval(() => slideStaff(1), 8000);
-  setInterval(() => {
-    if (document.getElementById('testimonialTrack')) {
-      slideTestimonial(1);
-    }
-  }, 8000);
 });
 
 let deferredPrompt;
@@ -1030,6 +870,9 @@ class BottomNavController {
     const page = item.getAttribute('data-page');
     
     // Don't prevent default for external links (like WhatsApp)
+    if (item.getAttribute('href').startsWith('http')) {
+      return;
+    }
     
     // Smooth scroll to section
     const section = document.getElementById(page);
@@ -1057,6 +900,15 @@ class BottomNavController {
       }
     });
   }
+}
+
+// Initialize bottom nav controller when DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => {
+    new BottomNavController();
+  });
+} else {
+  new BottomNavController();
 }
 
 // Visibility-based animation for offer cards
@@ -1087,6 +939,14 @@ class OfferCardAnimationController {
 
     this.offerCards.forEach(card => observer.observe(card));
   }
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => {
+    new OfferCardAnimationController();
+  });
+} else {
+  new OfferCardAnimationController();
 }
 
 class ThemeController {
@@ -1147,6 +1007,9 @@ class ThemeController {
     if (this.fireworksOverlay) {
       this.fireworksOverlay.classList.remove('active');
       this.fireworksOverlay.style.display = 'none';
+    }
+    
+    if (typeof togglePause === 'function') {
       togglePause(true);
     }
     
@@ -1176,6 +1039,14 @@ class ThemeController {
   }
 }
 
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => {
+    new ThemeController();
+  });
+} else {
+  new ThemeController();
+}
 
 // ===== APP SHELL NAVIGATION CONTROLLER =====
 class AppShellNavigator {
@@ -1226,6 +1097,10 @@ class AppShellNavigator {
             return;
         }
         
+        // Save current page scroll position IMMEDIATELY
+        this.pageScrollPositions[this.currentPage] = window.scrollY;
+        console.log(`💾 Saved ${this.currentPage} at: ${this.pageScrollPositions[this.currentPage]}px`);
+        
         // Hide ALL sections from current page
         const currentPages = this.contentArea.querySelectorAll(`[data-page="${this.currentPage}"]`);
         currentPages.forEach(el => el.classList.remove('active'));
@@ -1253,6 +1128,19 @@ class AppShellNavigator {
             console.log(`🔄 Restored ${page} to: ${savedPosition}px`);
         });
     }
+}
+
+// Initialize app shell after DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        window.appShell = new AppShellNavigator();
+        initNotificationsController();
+        initBookingsController();
+    });
+} else {
+    window.appShell = new AppShellNavigator();
+    initNotificationsController();
+    initBookingsController();
 }
 
 // ===== NOTIFICATIONS PAGE CONTROLLER =====
@@ -1432,6 +1320,13 @@ function initBookingsController() {
         });
     });
 
+    // Filter button
+    if (filterBtn) {
+        filterBtn.addEventListener('click', () => {
+            alert('🔍 Advanced filters coming soon!');
+        });
+    }
+
     function checkEmptyBookings() {
         const visibleCards = document.querySelectorAll('.booking-card[style*="display: flex"], .booking-card:not([style*="display: none"])');
         const emptyState = document.querySelector('.empty-state-bookings');
@@ -1455,12 +1350,23 @@ function openWhatsAppChat() {
     window.open('https://wa.me/919229915277', '_blank');
 }
 
+
+// ===== HERO TEXT ANIMATION ON LOAD =====
+document.addEventListener('DOMContentLoaded', function() {
+    const heroLines = document.querySelectorAll('.hero-text-line');
+    heroLines.forEach((line, index) => {
+        setTimeout(() => {
+            line.style.opacity = '1';
+        }, 200 + (index * 200));
+    });
+});
+
 // ===== STATS COUNTER ANIMATION =====
 function animateCounters() {
     const statNumbers = document.querySelectorAll('.stat-number');
     
     statNumbers.forEach(element => {
-        const targetValue = parseInt(element.getAttribute('data-target')) || 0;
+        const targetValue = parseInt(element.getAttribute('data-value'));
         let currentValue = 0;
         const duration = 2000; // 2 seconds
         const increment = targetValue / (duration / 50);
@@ -1489,10 +1395,12 @@ function setupCounterAnimation() {
                 observer.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.5 });
     
     observer.observe(trustSection);
 }
+
+document.addEventListener('DOMContentLoaded', setupCounterAnimation);
 
 // ===== SERVICE CAROUSEL FUNCTIONALITY =====
 let serviceCarouselPosition = 0;
@@ -1516,6 +1424,26 @@ function slideServiceCarousel(direction) {
     carousel.style.transform = `translateX(-${serviceCarouselPosition * itemWidth}px)`;
 }
 
+// Initialize service carousel on load
+document.addEventListener('DOMContentLoaded', () => {
+    const carousel = document.getElementById('serviceCarouselTrack');
+    if (carousel) {
+        // Responsive carousel adjustment on resize
+        window.addEventListener('resize', () => {
+            const items = carousel.querySelectorAll('.service-card-item');
+            const itemWidth = items[0].offsetWidth + 20;
+            const containerWidth = carousel.parentElement.offsetWidth;
+            const visibleItems = Math.floor(containerWidth / itemWidth);
+            const maxPosition = Math.max(0, items.length - visibleItems);
+            
+            if (serviceCarouselPosition > maxPosition) {
+                serviceCarouselPosition = maxPosition;
+                carousel.style.transform = `translateX(-${serviceCarouselPosition * itemWidth}px)`;
+            }
+        });
+    }
+});
+
 // ===== TESTIMONIAL CAROUSEL =====
 let testimonialPosition = 0;
 
@@ -1532,387 +1460,11 @@ function slideTestimonial(direction) {
     track.style.transform = `translateX(-${testimonialPosition * 100}%)`;
 }
 
-// ===== TASK 3.0: LIVE AVAILABILITY CALENDAR =====
-const therapists = ['Priya', 'Anjali', 'Kavya', 'Neha', 'Deepa', 'Riya'];
-const timeSlots = ['09:00 AM', '10:00 AM', '11:00 AM', '12:00 PM', '02:00 PM', '03:00 PM', '04:00 PM', '05:00 PM', '06:00 PM'];
-let selectedDate = null;
-
-function initCalendar() {
-    const calendarGrid = document.getElementById('calendarGrid');
-    const calPrev = document.getElementById('calPrev');
-    const calNext = document.getElementById('calNext');
-    const calMonth = document.getElementById('calMonth');
-    const timeSlots = document.getElementById('timeSlots');
-    const closeBtn = document.getElementById('closeTimeSlots');
-    const timeSlotsGrid = document.getElementById('timeSlotsGrid');
-    
-    if (!calendarGrid) return;
-    
-    let calendarStart = 0; // Start from today
-    
-    function renderCalendar() {
-        calendarGrid.innerHTML = '';
-        const today = new Date();
-        
-        // Update month display
-        calMonth.textContent = today.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
-        
-        // Generate 14 date cards
-        for (let i = calendarStart; i < calendarStart + 14; i++) {
-            const date = new Date(today);
-            date.setDate(date.getDate() + i);
-            
-            const dateCard = document.createElement('div');
-            dateCard.className = 'calendar-date-card';
-            
-            // Randomize availability (80% available, 20% full)
-            const available = Math.random() > 0.2;
-            const slotsCount = available ? Math.floor(Math.random() * 5) + 3 : 0;
-            
-            if (!available) {
-                dateCard.classList.add('unavailable');
-            }
-            
-            const dayName = date.toLocaleDateString('en-US', { weekday: 'short' });
-            const dayNum = date.getDate();
-            const isToday = i === 0;
-            
-            if (isToday) {
-                dateCard.classList.add('today');
-            }
-            
-            dateCard.innerHTML = `
-                <div class="date-day">${dayName}</div>
-                <div class="date-num">${dayNum}</div>
-                <div class="slots-available">${slotsCount} slots</div>
-            `;
-            
-            if (available) {
-                dateCard.onclick = () => showTimeSlots(date, dayName, dayNum);
-            }
-            
-            calendarGrid.appendChild(dateCard);
+// Auto-advance testimonials every 8 seconds
+document.addEventListener('DOMContentLoaded', () => {
+    setInterval(() => {
+        if (document.getElementById('testimonialTrack')) {
+            slideTestimonial(1);
         }
-    }
-    
-    calPrev.onclick = () => {
-        calendarStart = Math.max(0, calendarStart - 7);
-        renderCalendar();
-    };
-    
-    calNext.onclick = () => {
-        if (calendarStart + 14 < 14) {
-            calendarStart += 7;
-            renderCalendar();
-        }
-    };
-    
-    function showTimeSlots(date, dayName, dayNum) {
-        selectedDate = date;
-        const monthName = date.toLocaleDateString('en-US', { month: 'short' });
-        document.getElementById('selectedDateTitle').textContent = `Selected: ${dayName}, ${dayNum} ${monthName}`;
-        
-        timeSlotsGrid.innerHTML = '';
-        
-        // Generate available time slots for selected date
-        timeSlots.forEach(time => {
-            const isAvailable = Math.random() > 0.3;
-            const slot = document.createElement('div');
-            slot.className = 'time-slot';
-            
-            if (isAvailable) {
-                const therapist = therapists[Math.floor(Math.random() * therapists.length)];
-                slot.innerHTML = `
-                    <div class="slot-time">${time}</div>
-                    <div class="slot-therapist">with ${therapist}</div>
-                `;
-                slot.onclick = () => {
-                    alert(`✅ Booking confirmed!\nTime: ${time}\nDate: ${dayName}, ${dayNum} ${monthName}\nTherapist: ${therapist}\n\nComing soon: Full booking system`);
-                };
-            } else {
-                slot.innerHTML = `
-                    <div class="slot-time">${time}</div>
-                    <div class="slot-status">FULL</div>
-                `;
-            }
-            
-            timeSlotsGrid.appendChild(slot);
-        });
-        
-        timeSlots.style.display = 'block';
-        calendarGrid.parentElement.style.display = 'none';
-    }
-    
-    closeBtn.onclick = () => {
-        timeSlots.style.display = 'none';
-    };
-}
-
-// ===== TASK 4.0: BEFORE & AFTER GALLERY =====
-const transformations = [
-    { category: 'hair', before: '🎨 Dull Hair', after: '✨ Radiant Hair' },
-    { category: 'hair', before: '😟 Damaged Hair', after: '💇 Silky Smooth' },
-    { category: 'makeup', before: '🙂 Natural Look', after: '💄 Glam Makeup' },
-    { category: 'makeup', before: '😊 Day Look', after: '✨ Bridal Makeup' },
-    { category: 'skincare', before: '😔 Dull Skin', after: '🌟 Radiant Skin' },
-    { category: 'skincare', before: '😣 Problem Skin', after: '✨ Clear Skin' }
-];
-
-let currentComparison = 0;
-let comparisonFilter = 'all';
-
-function initBeforeAfter() {
-    const filterTabs = document.querySelectorAll('.filter-tab');
-    const container = document.getElementById('comparisonContainer');
-    
-    if (!filterTabs) return;
-    
-    filterTabs.forEach(tab => {
-        tab.onclick = (e) => {
-            filterTabs.forEach(t => t.classList.remove('active'));
-            e.target.classList.add('active');
-            comparisonFilter = e.target.dataset.category;
-            currentComparison = 0;
-            renderComparison();
-        };
-    });
-    
-    renderComparison();
-}
-
-function renderComparison() {
-    const container = document.getElementById('comparisonContainer');
-    const filtered = comparisonFilter === 'all' 
-        ? transformations 
-        : transformations.filter(t => t.category === comparisonFilter);
-    
-    if (filtered.length === 0) return;
-    
-    const item = filtered[currentComparison % filtered.length];
-    
-    container.innerHTML = `
-        <div class="comparison-item">
-            <div class="comparison-image before">
-                <div class="placeholder-before">${item.before}</div>
-                <span class="label">BEFORE</span>
-            </div>
-            <div class="comparison-slider-handle" style="left: 50%"></div>
-            <div class="comparison-image after">
-                <div class="placeholder-after">${item.after}</div>
-                <span class="label">AFTER</span>
-            </div>
-        </div>
-        <div class="comparison-counter">${currentComparison + 1} / ${filtered.length}</div>
-    `;
-}
-
-function slideBefore(direction) {
-    const filtered = comparisonFilter === 'all' 
-        ? transformations 
-        : transformations.filter(t => t.category === comparisonFilter);
-    
-    currentComparison = (currentComparison + direction + filtered.length) % filtered.length;
-    renderComparison();
-}
-
-// ===== TASK 5.0: MEMBERSHIP TIERS =====
-const tiers = [
-    {
-        name: 'Gold',
-        price: '₹499',
-        period: '/year',
-        discount: '5% OFF',
-        featured: false,
-        benefits: [
-            '✓ 5% discount on all services',
-            '✓ Birthday special - 10% extra',
-            '✓ Priority booking',
-            '✓ Free hair spa every quarter',
-            '✓ Member exclusive offers'
-        ]
-    },
-    {
-        name: 'Platinum',
-        price: '₹999',
-        period: '/year',
-        discount: '10% OFF',
-        featured: true,
-        benefits: [
-            '✓ 10% discount on all services',
-            '✓ Birthday special - 15% extra',
-            '✓ Priority booking + faster slots',
-            '✓ Free facial monthly',
-            '✓ Exclusive events & workshops',
-            '✓ Complimentary head massage'
-        ]
-    },
-    {
-        name: 'Diamond',
-        price: '₹1999',
-        period: '/year',
-        discount: '15% OFF',
-        featured: true,
-        benefits: [
-            '✓ Exclusive events & private sessions',
-            '✓ Personal stylist consultation',
-            '✓ Gift vouchers yearly'
-        ]
-    }
-];
-
-function initMembership() {
-    const grid = document.querySelector('.tier-cards-grid');
-    if (!grid) return;
-    
-    grid.innerHTML = tiers.map((tier, idx) => `
-        <div class="tier-card ${tier.featured ? 'featured' : ''}">
-            ${tier.featured ? '<div class="popular-badge">⭐ MOST POPULAR</div>' : ''}
-            <h3 class="tier-name">${tier.name}</h3>
-            <div class="tier-price">
-                <span class="price">${tier.price}</span>
-                <span class="period">${tier.period}</span>
-            </div>
-            <div class="tier-discount">${tier.discount}</div>
-            <ul class="tier-benefits">
-                ${tier.benefits.map(b => `<li>${b}</li>`).join('')}
-            </ul>
-            <button class="tier-btn ${tier.featured ? 'featured-btn' : ''}">Join ${tier.name}</button>
-        </div>
-    `).join('');
-}
-
-// ===== TASK 6.0: STAFF SPOTLIGHT CAROUSEL =====
-const staffData = [
-    {
-        name: 'Priya Sharma',
-        title: 'Hair Specialist',
-        experience: '12 Years',
-        specialties: ['Hair Coloring', 'Cutting', 'Treatments'],
-        rating: 4.9,
-        reviews: 245,
-        emoji: '💇‍♀️'
-    },
-    {
-        name: 'Anjali Patel',
-        title: 'Makeup Artist',
-        experience: '10 Years',
-        specialties: ['Bridal Makeup', 'HD Makeup', 'Airbrush'],
-        rating: 4.95,
-        reviews: 312,
-        emoji: '💄'
-    },
-    {
-        name: 'Kavya Desai',
-        title: 'Skincare Expert',
-        experience: '8 Years',
-        specialties: ['Facials', 'Anti-Aging', 'Treatments'],
-        rating: 4.8,
-        reviews: 198,
-        emoji: '💆‍♀️'
-    },
-    {
-        name: 'Neha Gupta',
-        title: 'Nail Technician',
-        experience: '7 Years',
-        specialties: ['Gel Nails', 'Nail Art', 'Manicure'],
-        rating: 4.85,
-        reviews: 267,
-        emoji: '💅'
-    },
-    {
-        name: 'Deepa Singh',
-        title: 'Spa Therapist',
-        experience: '11 Years',
-        specialties: ['Massage', 'Aromatherapy', 'Body Spa'],
-        rating: 4.92,
-        reviews: 289,
-        emoji: '🧖‍♀️'
-    },
-    {
-        name: 'Riya Verma',
-        title: 'Threading Specialist',
-        experience: '6 Years',
-        specialties: ['Threading', 'Waxing', 'Beauty'],
-        rating: 4.88,
-        reviews: 224,
-        emoji: '✨'
-    }
-];
-
-let staffCarouselPosition = 0;
-
-function initStaffCarousel() {
-    const carousel = document.getElementById('staffCarousel');
-    const prevBtn = document.getElementById('staffPrev');
-    const nextBtn = document.getElementById('staffNext');
-    const dotsContainer = document.getElementById('staffDots');
-    
-    if (!carousel) return;
-    
-    // Render staff cards
-    carousel.innerHTML = staffData.map(staff => `
-        <div class="staff-card">
-            <div class="staff-avatar">${staff.emoji}</div>
-            <h3 class="staff-name">${staff.name}</h3>
-            <p class="staff-title">${staff.title}</p>
-            <span class="staff-experience">📅 ${staff.experience} Experience</span>
-            
-            <div class="staff-rating">
-                <span class="stars">★ ${staff.rating}</span>
-                <span class="reviews">(${staff.reviews})</span>
-            </div>
-            
-            <div class="staff-specialties">
-                ${staff.specialties.map(s => `<span class="specialty-tag">${s}</span>`).join('')}
-            </div>
-            
-            <button class="staff-book-btn" onclick="alert('Booking with ' + '${staff.name}' + ' - Coming soon!')">Book with ${staff.name.split(' ')[0]}</button>
-        </div>
-    `).join('');
-    
-    // Render dots
-    dotsContainer.innerHTML = staffData.map((_, idx) => 
-        `<span class="dot ${idx === 0 ? 'active' : ''}" onclick="goToStaff(${idx})"></span>`
-    ).join('');
-    
-    // Navigation
-    prevBtn.onclick = () => slideStaff(-1);
-    nextBtn.onclick = () => slideStaff(1);
-    
-    updateStaffCarousel();
-}
-
-function slideStaff(direction) {
-    const itemsPerView = window.innerWidth > 768 ? 3 : window.innerWidth > 480 ? 2 : 1;
-    const maxPosition = Math.max(0, staffData.length - itemsPerView);
-    
-    staffCarouselPosition += direction;
-    if (staffCarouselPosition < 0) staffCarouselPosition = maxPosition;
-    if (staffCarouselPosition > maxPosition) staffCarouselPosition = 0;
-    
-    updateStaffCarousel();
-}
-
-function goToStaff(index) {
-    staffCarouselPosition = index;
-    updateStaffCarousel();
-}
-
-function updateStaffCarousel() {
-    const carousel = document.getElementById('staffCarousel');
-    const dotsContainer = document.getElementById('staffDots');
-    
-    if (carousel) {
-        const cardWidth = 300;
-        const gap = 20;
-        carousel.style.transform = `translateX(-${staffCarouselPosition * (cardWidth + gap)}px)`;
-    }
-    
-    if (dotsContainer) {
-        const dots = dotsContainer.querySelectorAll('.dot');
-        dots.forEach((dot, idx) => {
-            dot.classList.toggle('active', idx === staffCarouselPosition);
-        });
-    }
-}
-
+    }, 8000);
+});

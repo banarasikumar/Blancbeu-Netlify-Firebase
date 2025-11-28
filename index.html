@@ -1041,32 +1041,458 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                 </div>
             </div>
             
+            <!-- ========== TASK 8.0: VIDEO TESTIMONIALS SECTION (PSEUDOCODE) ==========
+                POSITION: Before Chat Widget / After Reviews
+                FEATURES:
+                - Auto-playing video grid (3-6 videos)
+                - Play button overlay on hover
+                - Client name, service, rating below video
+                - Filter by service type
+                - Video modal player (auto-play full video)
+                
+                STRUCTURE:
+                <div class="video-testimonials-section">
+                    <h2>Real Client Stories</h2>
+                    <p class="section-subtitle">Watch what our happy clients have to say</p>
+                    
+                    <div class="video-filter-tabs">
+                        <button class="video-filter-btn active" data-filter="all">All</button>
+                        <button class="video-filter-btn" data-filter="hair">Hair</button>
+                        <button class="video-filter-btn" data-filter="makeup">Makeup</button>
+                        <button class="video-filter-btn" data-filter="spa">Spa</button>
+                    </div>
+                    
+                    <div class="video-grid">
+                        <div class="video-card" data-category="hair">
+                            <div class="video-thumbnail">
+                                <img src="video-thumb-1.jpg" alt="Testimonial">
+                                <button class="video-play-btn">▶️</button>
+                                <span class="video-duration">2:15</span>
+                            </div>
+                            <h4 class="video-client-name">Priya Singh</h4>
+                            <p class="video-service">Hair Transformation</p>
+                            <div class="video-rating">
+                                <span class="stars">⭐⭐⭐⭐⭐</span>
+                            </div>
+                        </div>
+                        <!-- More video cards... -->
+                    </div>
+                </div>
+            ========================================== -->
+
+            <!-- ========== TASK 9.0: FAQ ACCORDION SECTION (PSEUDOCODE) ==========
+                POSITION: Before Testimonials / After Staff
+                FEATURES:
+                - Expandable accordion items
+                - Smooth open/close animations
+                - Search FAQ functionality
+                - Icons for each category
+                
+                STRUCTURE:
+                <div class="faq-section">
+                    <h2>Frequently Asked Questions</h2>
+                    <div class="faq-search">
+                        <input type="text" placeholder="Search FAQs...">
+                    </div>
+                    
+                    <div class="faq-container">
+                        <div class="faq-item" data-category="booking">
+                            <div class="faq-question">
+                                <span class="faq-icon">📅</span>
+                                <span class="faq-text">How do I book an appointment?</span>
+                                <span class="faq-toggle">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p>You can book an appointment through our website, call us at +91 92299 15277, 
+                                   or message us on WhatsApp. We're open from 10 AM to 8 PM daily.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item" data-category="pricing">
+                            <div class="faq-question">
+                                <span class="faq-icon">💳</span>
+                                <span class="faq-text">What are your current prices?</span>
+                                <span class="faq-toggle">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Prices vary based on service. Check our Services section for detailed pricing.
+                                   Members get 5-15% discount depending on membership tier.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item" data-category="policies">
+                            <div class="faq-question">
+                                <span class="faq-icon">❌</span>
+                                <span class="faq-text">What is your cancellation policy?</span>
+                                <span class="faq-toggle">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Cancellations must be made 24 hours in advance for a full refund.
+                                   Last-minute cancellations are charged 50% of the service cost.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            ========================================== -->
+
+            <!-- ========== TASK 11.0: GIFT CARD SECTION (PSEUDOCODE) ==========
+                POSITION: New section (e.g., after membership)
+                FEATURES:
+                - Preset gift card amounts (500, 1000, 2000, 5000)
+                - Custom amount input
+                - Recipient details form
+                - Personal message
+                - Digital delivery via email
+                - Gift card code generation
+                
+                STRUCTURE:
+                <div class="gift-card-section">
+                    <h2>Share the Gift of Beauty</h2>
+                    <p class="section-subtitle">Perfect gift for your loved ones</p>
+                    
+                    <div class="gift-card-container">
+                        <div class="gift-card-preview">
+                            <div class="gift-card-design">
+                                <!-- Animated luxury card design -->
+                                <div class="card-amount">₹1000</div>
+                                <div class="card-logo">BLANCBEU</div>
+                            </div>
+                        </div>
+                        
+                        <div class="gift-card-form">
+                            <div class="amount-selector">
+                                <button class="amount-btn" data-amount="500">₹500</button>
+                                <button class="amount-btn" data-amount="1000">₹1000</button>
+                                <button class="amount-btn" data-amount="2000">₹2000</button>
+                                <button class="amount-btn" data-amount="5000">₹5000</button>
+                                <input type="number" class="custom-amount" placeholder="Custom amount">
+                            </div>
+                            
+                            <div class="recipient-info">
+                                <input type="text" placeholder="Recipient name" required>
+                                <input type="email" placeholder="Recipient email" required>
+                                <textarea placeholder="Your personal message..." rows="3"></textarea>
+                            </div>
+                            
+                            <button class="buy-gift-card-btn">Buy Gift Card</button>
+                        </div>
+                    </div>
+                </div>
+            ========================================== -->
+
+            <!-- ========== TASK 12.0: VIRTUAL 360° SALON TOUR (PSEUDOCODE) ==========
+                POSITION: After Gallery / Before Services Details
+                FEATURES:
+                - Interactive 360° panoramic view
+                - Hotspots showing different salon areas
+                - Click to navigate between rooms
+                - Info tooltips for each area
+                
+                STRUCTURE:
+                <div class="virtual-tour-section">
+                    <h2>Explore Our Salon</h2>
+                    <p class="section-subtitle">Take a virtual tour of Blancbeu</p>
+                    
+                    <div class="360-viewer">
+                        <div class="panorama-container">
+                            <!-- 360 panoramic image or three.js viewer -->
+                            <img src="salon-360.jpg" class="panorama-image" alt="Salon Tour">
+                        </div>
+                        
+                        <div class="tour-hotspots">
+                            <button class="hotspot" data-area="reception" style="top: 30%; left: 20%;">
+                                📍 Reception
+                            </button>
+                            <button class="hotspot" data-area="hair" style="top: 40%; left: 50%;">
+                                ✂️ Hair Section
+                            </button>
+                            <button class="hotspot" data-area="makeup" style="top: 50%; left: 70%;">
+                                💄 Makeup Zone
+                            </button>
+                            <button class="hotspot" data-area="spa" style="top: 60%; left: 40%;">
+                                🧖 Spa Area
+                            </button>
+                        </div>
+                        
+                        <div class="tour-info">
+                            <h4 class="tour-area-title">Reception Area</h4>
+                            <p class="tour-area-description">
+                                Warm, welcoming space with premium seating and complimentary beverages
+                            </p>
+                        </div>
+                        
+                        <div class="tour-controls">
+                            <span class="tour-hint">Drag to explore • Click hotspots for info</span>
+                        </div>
+                    </div>
+                </div>
+            ========================================== -->
+
+            <!-- ========== TASK 13.0: INSTAGRAM FEED INTEGRATION (PSEUDOCODE) ==========
+                POSITION: Before Footer
+                FEATURES:
+                - Grid of 6-9 latest Instagram posts
+                - Click to open Instagram in new tab
+                - Follow button
+                - "More on Instagram" CTA
+                
+                STRUCTURE:
+                <div class="instagram-feed-section">
+                    <h2>Follow Our Journey</h2>
+                    <p class="section-subtitle">@blancbeu_salon_ranchi</p>
+                    
+                    <div class="instagram-grid">
+                        <div class="instagram-post">
+                            <img src="ig-post-1.jpg" alt="Instagram post">
+                            <div class="instagram-overlay">
+                                <a href="https://instagram.com/p/xxx" target="_blank" class="insta-link">
+                                    ❤️ 234 | 💬 12
+                                </a>
+                            </div>
+                        </div>
+                        <!-- More posts... -->
+                    </div>
+                    
+                    <div class="instagram-cta">
+                        <a href="https://instagram.com/blancbeu_salon_ranchi" target="_blank" class="follow-btn">
+                            📸 Follow on Instagram
+                        </a>
+                    </div>
+                </div>
+            ========================================== -->
+
+            <!-- ========== TASK 14.0: REFERRAL PROGRAM SECTION (PSEUDOCODE) ==========
+                POSITION: After Membership / Before Footer
+                FEATURES:
+                - Generate unique referral code
+                - Copy to clipboard
+                - Share buttons (WhatsApp, Facebook, Email)
+                - Show referral earnings/rewards
+                - Referral history
+                
+                STRUCTURE:
+                <div class="referral-program-section">
+                    <h2>Refer Friends & Earn</h2>
+                    <p class="section-subtitle">Share the beauty love and earn rewards</p>
+                    
+                    <div class="referral-card">
+                        <div class="referral-code-box">
+                            <label>Your Referral Code</label>
+                            <div class="code-display">
+                                <span class="code-text">REF-AB12-XYZ789</span>
+                                <button class="copy-btn">📋 Copy</button>
+                            </div>
+                        </div>
+                        
+                        <div class="referral-rewards">
+                            <div class="reward-item">
+                                <span class="reward-amount">₹200</span>
+                                <span class="reward-label">You earn per referral</span>
+                            </div>
+                            <div class="reward-item">
+                                <span class="reward-amount">₹100</span>
+                                <span class="reward-label">Friend gets discount</span>
+                            </div>
+                        </div>
+                        
+                        <div class="share-buttons">
+                            <button class="share-whatsapp">💬 WhatsApp</button>
+                            <button class="share-facebook">f Facebook</button>
+                            <button class="share-email">✉️ Email</button>
+                        </div>
+                    </div>
+                    
+                    <div class="referral-history">
+                        <h4>Your Referrals</h4>
+                        <table class="referrals-table">
+                            <tr>
+                                <td>Anita Sharma</td>
+                                <td>Jun 15, 2025</td>
+                                <td>✓ Completed</td>
+                                <td>₹200</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            ========================================== -->
+
+            <!-- ========== TASK 15.0: SEASONAL PROMOTIONS BANNER (PSEUDOCODE) ==========
+                POSITION: Top of page (sticky or hero)
+                FEATURES:
+                - Eye-catching animated banner
+                - Countdown timer for expiring offers
+                - "Shop Now" CTA
+                - Can be dismissed
+                
+                STRUCTURE:
+                <div class="promo-banner">
+                    <div class="promo-content">
+                        <span class="promo-badge">🎉 Limited Time</span>
+                        <h3 class="promo-title">Summer Special: 30% Off All Services</h3>
+                        <p class="promo-subtitle">Valid till July 31st</p>
+                        
+                        <div class="countdown-timer">
+                            <div class="countdown-item">
+                                <span class="countdown-number">12</span>
+                                <span class="countdown-label">Days</span>
+                            </div>
+                            <div class="countdown-item">
+                                <span class="countdown-number">08</span>
+                                <span class="countdown-label">Hours</span>
+                            </div>
+                            <div class="countdown-item">
+                                <span class="countdown-number">45</span>
+                                <span class="countdown-label">Minutes</span>
+                            </div>
+                        </div>
+                        
+                        <button class="promo-cta">🎯 Claim Offer</button>
+                    </div>
+                    <button class="promo-close">✕</button>
+                </div>
+            ========================================== -->
+
+            <!-- ========== TASK 16.0: BEFORE & AFTER COMPARISON GALLERY (PSEUDOCODE) ==========
+                POSITION: After Gallery Section
+                FEATURES:
+                - Interactive image sliders (draggable)
+                - Multiple category tabs
+                - Before/After labels
+                - Swipe support on mobile
+                
+                STRUCTURE:
+                <div class="before-after-gallery-section">
+                    <h2>Real Transformations</h2>
+                    <p class="section-subtitle">See the amazing results from our expert stylists</p>
+                    
+                    <div class="transformation-filter">
+                        <button class="transform-filter-btn active" data-category="all">All</button>
+                        <button class="transform-filter-btn" data-category="hair">Hair</button>
+                        <button class="transform-filter-btn" data-category="makeup">Makeup</button>
+                        <button class="transform-filter-btn" data-category="nails">Nails</button>
+                    </div>
+                    
+                    <div class="before-after-carousel">
+                        <div class="before-after-slider" data-category="hair">
+                            <img class="before-img" src="before.jpg" alt="Before">
+                            <img class="after-img" src="after.jpg" alt="After">
+                            <div class="slider-handle">
+                                <span class="slider-label before">Before</span>
+                                <span class="slider-label after">After</span>
+                            </div>
+                        </div>
+                        <!-- More sliders... -->
+                    </div>
+                    
+                    <div class="carousel-nav">
+                        <button class="carousel-prev">❮</button>
+                        <div class="carousel-dots"></div>
+                        <button class="carousel-next">❯</button>
+                    </div>
+                </div>
+            ========================================== -->
+
+            <!-- ========== TASK 17.0: SERVICE COMPARISON TOOL (PSEUDOCODE) ==========
+                POSITION: Below Services
+                FEATURES:
+                - Select 2-3 services to compare
+                - Show side-by-side pricing, duration, benefits
+                - Visual comparison table
+                
+                STRUCTURE:
+                <div class="service-comparison-section">
+                    <h2>Compare Services</h2>
+                    <p class="section-subtitle">Make the best choice for your needs</p>
+                    
+                    <div class="comparison-selector">
+                        <select class="service-select" id="service1">
+                            <option>Select service...</option>
+                            <option>Hair Coloring</option>
+                            <option>Facial</option>
+                        </select>
+                        <button class="comparison-add">+ Compare</button>
+                    </div>
+                    
+                    <div class="comparison-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Feature</th>
+                                    <th>Hair Coloring</th>
+                                    <th>Facial</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Duration</td>
+                                    <td>90 mins</td>
+                                    <td>60 mins</td>
+                                </tr>
+                                <tr>
+                                    <td>Price</td>
+                                    <td>₹1500</td>
+                                    <td>₹800</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            ========================================== -->
+
             <!-- ========== TASK 10.0: FLOATING CHAT WIDGET (PSEUDOCODE) ==========
                 POSITION: Fixed bottom-right corner
                 FEATURES:
                 - Floating chat bubble
                 - Expandable chat window
                 - Message history
-                - Quick action buttons
+                - Quick action buttons (Services, Booking, Hours, Location)
                 - Minimize/close functionality
+                - Auto-response bot
                 
                 IMPLEMENTATION:
                 - Add to body with position: fixed
-                - JavaScript to handle expand/collapse
-                - Mock bot responses with delay
+                - JavaScript to handle expand/collapse with smooth animations
+                - Bot with keyword-based responses
+                - Support for typing indicator
                 
                 STRUCTURE:
-                <div class="chat-widget-container">
-                    <button class="chat-bubble-btn">💬 Chat</button>
+                <div class="chat-widget">
+                    <button class="chat-bubble" aria-label="Open chat">
+                        <span class="chat-bubble-icon">💬</span>
+                        <span class="chat-unread-badge">1</span>
+                    </button>
+                    
                     <div class="chat-window">
-                        <div class="chat-header">Support</div>
-                        <div class="chat-messages"></div>
-                        <input class="chat-input">
-                        <button class="send-btn">Send</button>
+                        <div class="chat-header">
+                            <div class="chat-header-info">
+                                <img src="brand_icon.webp" alt="Blancbeu" class="chat-avatar">
+                                <div>
+                                    <div class="chat-header-title">Blancbeu Support</div>
+                                    <div class="chat-status">Online</div>
+                                </div>
+                            </div>
+                            <button class="chat-close">✕</button>
+                        </div>
+                        
+                        <div class="chat-messages">
+                            <!-- Messages appear here -->
+                        </div>
+                        
+                        <div class="chat-quick-actions">
+                            <button class="quick-action-btn" data-action="services">View Services</button>
+                            <button class="quick-action-btn" data-action="booking">Book Now</button>
+                            <button class="quick-action-btn" data-action="hours">Our Hours</button>
+                            <button class="quick-action-btn" data-action="location">Location</button>
+                        </div>
+                        
+                        <div class="chat-input-area">
+                            <input type="text" class="chat-input" placeholder="Type a message...">
+                            <button class="chat-send">➤</button>
+                        </div>
                     </div>
                 </div>
             ========================================== -->
-            <!-- TODO: Add Chat Widget to body -->
+            <!-- TODO: Add Chat Widget to body (initialize with JavaScript) -->
 
             <!-- ========== TASK 5.0: MEMBERSHIP TIER CARDS (PSEUDOCODE) ==========
                 POSITION: Above Footer

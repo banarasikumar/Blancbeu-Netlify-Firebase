@@ -675,8 +675,13 @@ document.addEventListener('DOMContentLoaded', () => {
   renderServices();
   initServiceFiltering();
   renderReviews();
+  initMembership();
+  initStaffCarousel();
   initSmoothScroll();
   initScrollBehavior();
+  
+  // Auto-rotate staff carousel every 8 seconds
+  setInterval(() => slideStaff(1), 8000);
 });
 
 let deferredPrompt;
@@ -1995,10 +2000,4 @@ function updateStaffCarousel() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    setTimeout(() => {
-        initStaffCarousel();
-        // Auto-rotate every 8 seconds
-        setInterval(() => slideStaff(1), 8000);
-    }, 500);
-});
+// Staff carousel initialized in main DOMContentLoaded below

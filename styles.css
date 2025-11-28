@@ -4722,7 +4722,10 @@ body.light-mode .hero-text-line {
 }
 
 body.light-mode .hero-tagline {
-    color: #555555;
+    color: #333333 !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
 body.light-mode .primary-btn {
@@ -4744,6 +4747,30 @@ body.light-mode .secondary-btn {
 body.light-mode .secondary-btn:hover {
     background: rgba(212, 160, 23, 0.2);
     box-shadow: 0 12px 30px rgba(212, 160, 23, 0.4);
+}
+
+body.light-mode .hero-cta-buttons {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+body.light-mode .hero-btn {
+    display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+body.light-mode .hero-text-content {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+body.light-mode .hero-text-line {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
 @media (max-width: 768px) {

@@ -4806,21 +4806,21 @@ body.light-mode .hero-title {
     -webkit-text-fill-color: unset;
     -webkit-background-clip: unset;
     background-clip: unset;
-    color: #6B4423 !important;
+    color: #996515 !important;
     background: none !important;
     text-shadow: 
-        0 1px 3px rgba(139, 90, 43, 0.3),
-        0 2px 8px rgba(180, 130, 50, 0.2) !important;
+        0 1px 3px rgba(139, 90, 43, 0.25),
+        0 2px 8px rgba(180, 130, 50, 0.15) !important;
     font-weight: 900 !important;
 }
 
 body.light-mode .hero-text-line {
-    color: #6B4423 !important;
-    -webkit-text-fill-color: #6B4423 !important;
+    color: #996515 !important;
+    -webkit-text-fill-color: #996515 !important;
     opacity: 1 !important;
     text-shadow: 
-        0 1px 3px rgba(139, 90, 43, 0.3),
-        0 2px 8px rgba(180, 130, 50, 0.2) !important;
+        0 1px 3px rgba(139, 90, 43, 0.25),
+        0 2px 8px rgba(180, 130, 50, 0.15) !important;
     font-weight: 900 !important;
 }
 

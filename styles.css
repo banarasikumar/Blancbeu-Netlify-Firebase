@@ -4747,9 +4747,9 @@ body .hero-text-line {
 
 /* ===== LIGHT MODE - HERO TEXT SECTION ===== */
 body.light-mode .hero-text-section {
-    background: linear-gradient(180deg, rgba(250, 248, 245, 0.98) 0%, rgba(255, 252, 248, 0.98) 50%, rgba(250, 248, 245, 0.98) 100%);
-    border-top: 1px solid rgba(212, 160, 23, 0.35);
-    border-bottom: 1px solid rgba(212, 160, 23, 0.25);
+    background: linear-gradient(180deg, #1a1510 0%, #2a2015 50%, #1a1510 100%);
+    border-top: 2px solid rgba(212, 160, 23, 0.5);
+    border-bottom: 2px solid rgba(212, 160, 23, 0.4);
 }
 
 body.dark-mode .hero {
@@ -4806,20 +4806,21 @@ body.light-mode .hero-title {
     -webkit-text-fill-color: unset;
     -webkit-background-clip: unset;
     background-clip: unset;
-    color: #5C4033 !important;
+    color: #FFD54F !important;
     background: none !important;
     text-shadow: 
-        0 1px 2px rgba(255, 255, 255, 0.9),
-        0 2px 8px rgba(180, 130, 40, 0.35) !important;
+        0 2px 4px rgba(0, 0, 0, 0.5),
+        0 0 30px rgba(255, 215, 0, 0.4) !important;
     font-weight: 900 !important;
 }
 
 body.light-mode .hero-text-line {
-    color: #5C4033 !important;
+    color: #FFD54F !important;
+    -webkit-text-fill-color: #FFD54F !important;
     opacity: 1 !important;
     text-shadow: 
-        0 1px 2px rgba(255, 255, 255, 0.9),
-        0 2px 8px rgba(180, 130, 40, 0.35) !important;
+        0 2px 4px rgba(0, 0, 0, 0.5),
+        0 0 30px rgba(255, 215, 0, 0.4) !important;
     font-weight: 900 !important;
 }
 
@@ -4837,7 +4838,7 @@ body.dark-mode .hero-cta-buttons {
 }
 
 body.light-mode .hero-tagline {
-    color: #333333 !important;
+    color: #e0d8c8 !important;
     display: block !important;
     visibility: visible !important;
     opacity: 1 !important;

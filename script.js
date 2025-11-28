@@ -1452,14 +1452,12 @@ function openWhatsAppChat() {
     window.open('https://wa.me/919229915277', '_blank');
 }
 
-
-});
-
 // ===== STATS COUNTER ANIMATION =====
 function animateCounters() {
     const statNumbers = document.querySelectorAll('.stat-number');
     
     statNumbers.forEach(element => {
+        const targetValue = parseInt(element.getAttribute('data-target')) || 0;
         let currentValue = 0;
         const duration = 2000; // 2 seconds
         const increment = targetValue / (duration / 50);
@@ -1484,6 +1482,13 @@ function setupCounterAnimation() {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
+                animateCounters();
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+    
+    observer.observe(trustSection);
 }
 
 
@@ -1509,15 +1514,6 @@ function slideServiceCarousel(direction) {
     carousel.style.transform = `translateX(-${serviceCarouselPosition * itemWidth}px)`;
 }
 
-// Initialize service carousel on load
-            if (serviceCarouselPosition > maxPosition) {
-                serviceCarouselPosition = maxPosition;
-                carousel.style.transform = `translateX(-${serviceCarouselPosition * itemWidth}px)`;
-            }
-        });
-    }
-});
-
 // ===== TESTIMONIAL CAROUSEL =====
 let testimonialPosition = 0;
 
@@ -1533,10 +1529,6 @@ function slideTestimonial(direction) {
     
     track.style.transform = `translateX(-${testimonialPosition * 100}%)`;
 }
-
-// Auto-advance testimonials every 8 seconds
-    }, 8000);
-});
 
 // ===== TASK 3.0: LIVE AVAILABILITY CALENDAR =====
 const therapists = ['Priya', 'Anjali', 'Kavya', 'Neha', 'Deepa', 'Riya'];

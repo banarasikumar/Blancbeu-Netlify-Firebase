@@ -4704,8 +4704,14 @@ body {
     font-size: 16px;
 }
 
-body.light-mode .hero-overlay {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.15) 50%, transparent 100%);
+/* ===== LIGHT MODE - HERO TEXT SECTION ===== */
+body.light-mode .hero-text-section {
+    background: linear-gradient(135deg, rgba(212, 160, 23, 0.06) 0%, transparent 50%, rgba(212, 160, 23, 0.04) 100%);
+    border-top: 1px solid rgba(212, 160, 23, 0.3);
+}
+
+body.light-mode .hero-title {
+    color: #1a1a1a;
 }
 
 body.light-mode .hero-text-line {
@@ -4713,6 +4719,10 @@ body.light-mode .hero-text-line {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+}
+
+body.light-mode .hero-tagline {
+    color: #555555;
 }
 
 body.light-mode .primary-btn {

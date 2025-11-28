@@ -473,3 +473,142 @@ body.light-mode .service-card:hover {
         gap: 15px;
     }
 }
+
+/* ===== TASK 2.0: REAL PRICING DISPLAY ===== */
+.service-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.service-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+    flex: 1;
+}
+
+.service-duration-badge {
+    display: inline-block;
+    padding: 6px 12px;
+    background: rgba(212, 175, 55, 0.15);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    white-space: nowrap;
+}
+
+.service-price-display {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid rgba(212, 175, 55, 0.2);
+}
+
+.price-main {
+    font-size: 28px;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--gold-24k), var(--gold-bright));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.service-discount-badge {
+    display: inline-block;
+    padding: 6px 10px;
+    background: linear-gradient(135deg, var(--gold-24k), var(--gold-bright));
+    color: #000;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.service-original-price-small {
+    font-size: 12px;
+    color: var(--text-secondary);
+    text-decoration: line-through;
+    margin-bottom: 10px;
+}
+
+.service-member-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background: rgba(212, 175, 55, 0.08);
+    border-left: 3px solid var(--gold-24k);
+    border-radius: 8px;
+    margin-bottom: 15px;
+    font-size: 13px;
+}
+
+.member-price-tag {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.member-save {
+    color: var(--gold-24k);
+    font-weight: 700;
+}
+
+.service-book-btn {
+    width: 100%;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, var(--gold-24k), var(--gold-bright));
+    border: none;
+    border-radius: 12px;
+    color: #000;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.service-book-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
+}
+
+.service-book-btn:active {
+    transform: translateY(0);
+}
+
+body.light-mode .service-duration-badge {
+    background: rgba(212, 160, 23, 0.15);
+    border-color: rgba(212, 160, 23, 0.3);
+    color: rgba(212, 160, 23, 0.8);
+}
+
+body.light-mode .service-member-info {
+    background: rgba(212, 160, 23, 0.08);
+    border-left-color: #d4a017;
+}
+
+@media (max-width: 768px) {
+    .service-header {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .price-main {
+        font-size: 24px;
+    }
+    
+    .service-member-info {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+}

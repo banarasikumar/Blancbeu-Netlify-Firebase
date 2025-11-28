@@ -83,6 +83,29 @@ Interactive **Premium UI Enhancement Roadmap** - All 11 features COMPLETE!
 
 ## Recent Changes (Session: Nov 28, 2025)
 
+### Session 7 Updates - Task 1.0 & 2.0 Implementation ✅
+- ✅ **Task 1.0: Service Filtering & Search - COMPLETE**
+  - Added category filter buttons (All, Hair, Makeup, Nails, Spa, Threading)
+  - Real-time search with 300ms debounce
+  - Combined filter + search logic
+  - Results counter showing service count
+  - Clear filters functionality
+  - Sticky filter bar with glassmorphism
+  - Fully responsive mobile/tablet/desktop
+
+- ✅ **Task 2.0: Real Pricing Display - COMPLETE**
+  - Added duration field to all 57+ services (20-180 minutes)
+  - Added member pricing (10% discount calculation)
+  - Enhanced service card rendering with:
+    - Large gold price display (28px font)
+    - Duration badge with clock icon
+    - Discount percentage badge (when applicable)
+    - Member price with savings amount
+    - "Was ₹XXX" struck-through original price
+    - Premium "Book Now" button
+  - Responsive pricing layout for mobile/tablet
+  - Light mode support for all pricing elements
+
 ### Session 6 Updates - Gallery Restoration & Image Replacement
 - ✅ **Gallery Images Fully Restored** - Generated and implemented 4 brand new premium salon gallery images
 - ✅ **Image Generation** - Created high-quality images matching Blancbeu luxury aesthetic:

@@ -105,19 +105,19 @@ const servicesData = {
       category: "hair",
       image: "assets/service_images/professional_hair_st_3fab25e9.webp",
       services: [
-        { name: "Plain Haircut", price: 100, offerPrice: 99 },
-        { name: "U-Cut", price: 150, offerPrice: 99 },
-        { name: "V-Cut", price: 150, offerPrice: 99 },
-        { name: "Deep U-Cut", price: 200, offerPrice: 99 },
-        { name: "Deep V-Cut", price: 200, offerPrice: 99 },
-        { name: "Step Cut", price: 300, offerPrice: 99 },
-        { name: "Layer Cut", price: 500, offerPrice: 99 },
-        { name: "Butterfly Cut", price: 500, offerPrice: 99 },
-        { name: "Bob Cut", price: 400, offerPrice: 99 },
-        { name: "Baby Cut", price: 200, offerPrice: 99 },
-        { name: "Advance Haircut", price: 600, offerPrice: 99 },
-        { name: "Feather Cut", price: 450, offerPrice: 99 },
-        { name: "Pixie Cut", price: 500, offerPrice: 99 }
+        { name: "Plain Haircut", price: 100, offerPrice: 99, duration: 30, memberDiscount: 10 },
+        { name: "U-Cut", price: 150, offerPrice: 99, duration: 30, memberDiscount: 10 },
+        { name: "V-Cut", price: 150, offerPrice: 99, duration: 30, memberDiscount: 10 },
+        { name: "Deep U-Cut", price: 200, offerPrice: 99, duration: 40, memberDiscount: 10 },
+        { name: "Deep V-Cut", price: 200, offerPrice: 99, duration: 40, memberDiscount: 10 },
+        { name: "Step Cut", price: 300, offerPrice: 99, duration: 45, memberDiscount: 10 },
+        { name: "Layer Cut", price: 500, offerPrice: 99, duration: 45, memberDiscount: 10 },
+        { name: "Butterfly Cut", price: 500, offerPrice: 99, duration: 45, memberDiscount: 10 },
+        { name: "Bob Cut", price: 400, offerPrice: 99, duration: 40, memberDiscount: 10 },
+        { name: "Baby Cut", price: 200, offerPrice: 99, duration: 30, memberDiscount: 10 },
+        { name: "Advance Haircut", price: 600, offerPrice: 99, duration: 50, memberDiscount: 10 },
+        { name: "Feather Cut", price: 450, offerPrice: 99, duration: 45, memberDiscount: 10 },
+        { name: "Pixie Cut", price: 500, offerPrice: 99, duration: 40, memberDiscount: 10 }
       ]
     },
     {
@@ -126,10 +126,10 @@ const servicesData = {
       category: "skincare",
       image: "assets/service_images/beautiful_woman_gett_9dc7243a.webp",
       services: [
-        { name: "Fruit Cleanup", price: 500, offerPrice: 250 },
-        { name: "Diamond Cleanup", price: 800, offerPrice: 499 },
-        { name: "Gold Cleanup", price: 1000, offerPrice: 599 },
-        { name: "Charcoal Cleanup", price: 700, offerPrice: 399 }
+        { name: "Fruit Cleanup", price: 500, offerPrice: 250, duration: 45, memberDiscount: 10 },
+        { name: "Diamond Cleanup", price: 800, offerPrice: 499, duration: 50, memberDiscount: 10 },
+        { name: "Gold Cleanup", price: 1000, offerPrice: 599, duration: 60, memberDiscount: 10 },
+        { name: "Charcoal Cleanup", price: 700, offerPrice: 399, duration: 55, memberDiscount: 10 }
       ]
     },
     {
@@ -138,12 +138,12 @@ const servicesData = {
       category: "skincare",
       image: "assets/service_images/facial_new.webp",
       services: [
-        { name: "Lotus Professional Facial", price: 1500, offerPrice: 699 },
-        { name: "03+ Facial", price: 1500, offerPrice: 699 },
-        { name: "Fruit Facial", price: 1200, offerPrice: 599 },
-        { name: "Gold Facial", price: 2000, offerPrice: 999 },
-        { name: "Diamond Facial", price: 2500, offerPrice: 1299 },
-        { name: "Anti-Aging Facial", price: 2200, offerPrice: 1199 }
+        { name: "Lotus Professional Facial", price: 1500, offerPrice: 699, duration: 50, memberDiscount: 10 },
+        { name: "03+ Facial", price: 1500, offerPrice: 699, duration: 50, memberDiscount: 10 },
+        { name: "Fruit Facial", price: 1200, offerPrice: 599, duration: 45, memberDiscount: 10 },
+        { name: "Gold Facial", price: 2000, offerPrice: 999, duration: 60, memberDiscount: 10 },
+        { name: "Diamond Facial", price: 2500, offerPrice: 1299, duration: 60, memberDiscount: 10 },
+        { name: "Anti-Aging Facial", price: 2200, offerPrice: 1199, duration: 60, memberDiscount: 10 }
       ]
     },
     {
@@ -152,14 +152,14 @@ const servicesData = {
       category: "hair",
       image: "assets/service_images/professional_hair_st_673b25ad.webp",
       services: [
-        { name: "Keratin", price: 2500, offerPrice: 1499 },
-        { name: "Straightening/Smoothening", price: 3000, offerPrice: 1999 },
-        { name: "Botox", price: 3500, offerPrice: 2499 },
-        { name: "Rebounding", price: 3500, offerPrice: 2400 },
-        { name: "Nanoplastia", price: 7000, offerPrice: 2999 },
-        { name: "Hair Spa", price: 1500, offerPrice: 799 },
-        { name: "Protein Treatment", price: 2000, offerPrice: 1199 },
-        { name: "Anti-Dandruff Treatment", price: 1800, offerPrice: 999 }
+        { name: "Keratin", price: 2500, offerPrice: 1499, duration: 90, memberDiscount: 10 },
+        { name: "Straightening/Smoothening", price: 3000, offerPrice: 1999, duration: 120, memberDiscount: 10 },
+        { name: "Botox", price: 3500, offerPrice: 2499, duration: 90, memberDiscount: 10 },
+        { name: "Rebounding", price: 3500, offerPrice: 2400, duration: 90, memberDiscount: 10 },
+        { name: "Nanoplastia", price: 7000, offerPrice: 2999, duration: 120, memberDiscount: 10 },
+        { name: "Hair Spa", price: 1500, offerPrice: 799, duration: 60, memberDiscount: 10 },
+        { name: "Protein Treatment", price: 2000, offerPrice: 1199, duration: 75, memberDiscount: 10 },
+        { name: "Anti-Dandruff Treatment", price: 1800, offerPrice: 999, duration: 60, memberDiscount: 10 }
       ]
     },
     {
@@ -168,13 +168,13 @@ const servicesData = {
       category: "spa",
       image: "assets/service_images/premium_hair_spa_nourish.webp",
       services: [
-        { name: "Head Massage", price: 250, offerPrice: 199 },
-        { name: "Deep Nourish HairSpa", price: 1500, offerPrice: 799 },
-        { name: "Full Body Massage", price: 5000, offerPrice: 999 },
-        { name: "Blow Dry", price: 500, offerPrice: 199 },
-        { name: "Aroma Therapy", price: 3000, offerPrice: 1499 },
-        { name: "Hot Stone Massage", price: 3500, offerPrice: 1799 },
-        { name: "Thai Massage", price: 4000, offerPrice: 1999 }
+        { name: "Head Massage", price: 250, offerPrice: 199, duration: 30, memberDiscount: 10 },
+        { name: "Deep Nourish HairSpa", price: 1500, offerPrice: 799, duration: 60, memberDiscount: 10 },
+        { name: "Full Body Massage", price: 5000, offerPrice: 999, duration: 90, memberDiscount: 10 },
+        { name: "Blow Dry", price: 500, offerPrice: 199, duration: 25, memberDiscount: 10 },
+        { name: "Aroma Therapy", price: 3000, offerPrice: 1499, duration: 60, memberDiscount: 10 },
+        { name: "Hot Stone Massage", price: 3500, offerPrice: 1799, duration: 75, memberDiscount: 10 },
+        { name: "Thai Massage", price: 4000, offerPrice: 1999, duration: 90, memberDiscount: 10 }
       ]
     },
     {
@@ -183,12 +183,12 @@ const servicesData = {
       category: "hair",
       image: "assets/service_images/hair_colour_vibrant_pink.webp",
       services: [
-        { name: "Global Hair Colour", price: 1199, offerPrice: null },
-        { name: "Global Highlight", price: 1299, offerPrice: null },
-        { name: "Highlight Perstrik", price: 149, offerPrice: null },
-        { name: "Balayage", price: 2500, offerPrice: 1999 },
-        { name: "Ombre", price: 2200, offerPrice: 1799 },
-        { name: "Root Touch-Up", price: 599, offerPrice: 399 }
+        { name: "Global Hair Colour", price: 1199, offerPrice: null, duration: 90, memberDiscount: 10 },
+        { name: "Global Highlight", price: 1299, offerPrice: null, duration: 90, memberDiscount: 10 },
+        { name: "Highlight Perstrik", price: 149, offerPrice: null, duration: 30, memberDiscount: 10 },
+        { name: "Balayage", price: 2500, offerPrice: 1999, duration: 120, memberDiscount: 10 },
+        { name: "Ombre", price: 2200, offerPrice: 1799, duration: 120, memberDiscount: 10 },
+        { name: "Root Touch-Up", price: 599, offerPrice: 399, duration: 45, memberDiscount: 10 }
       ]
     },
     {
@@ -197,11 +197,11 @@ const servicesData = {
       category: "makeup",
       image: "assets/service_images/makeup_styling_new.webp",
       services: [
-        { name: "Party Makeup", price: 2000, offerPrice: 1499 },
-        { name: "Bridal Makeup", price: 8000, offerPrice: 5999 },
-        { name: "HD Makeup", price: 3500, offerPrice: 2499 },
-        { name: "Airbrush Makeup", price: 4000, offerPrice: 2999 },
-        { name: "Pre-Bridal Package", price: 15000, offerPrice: 9999 }
+        { name: "Party Makeup", price: 2000, offerPrice: 1499, duration: 45, memberDiscount: 10 },
+        { name: "Bridal Makeup", price: 8000, offerPrice: 5999, duration: 120, memberDiscount: 10 },
+        { name: "HD Makeup", price: 3500, offerPrice: 2499, duration: 60, memberDiscount: 10 },
+        { name: "Airbrush Makeup", price: 4000, offerPrice: 2999, duration: 60, memberDiscount: 10 },
+        { name: "Pre-Bridal Package", price: 15000, offerPrice: 9999, duration: 180, memberDiscount: 10 }
       ]
     },
     {
@@ -210,13 +210,13 @@ const servicesData = {
       category: "nails",
       image: "assets/service_images/nails_beauty_vibrant.webp",
       services: [
-        { name: "Manicure", price: 500, offerPrice: 299 },
-        { name: "Pedicure", price: 600, offerPrice: 349 },
-        { name: "Gel Nails", price: 1500, offerPrice: 999 },
-        { name: "Nail Art", price: 800, offerPrice: 499 },
-        { name: "Threading", price: 100, offerPrice: 50 },
-        { name: "Waxing Full Arms", price: 400, offerPrice: 299 },
-        { name: "Waxing Full Legs", price: 600, offerPrice: 399 }
+        { name: "Manicure", price: 500, offerPrice: 299, duration: 35, memberDiscount: 10 },
+        { name: "Pedicure", price: 600, offerPrice: 349, duration: 40, memberDiscount: 10 },
+        { name: "Gel Nails", price: 1500, offerPrice: 999, duration: 50, memberDiscount: 10 },
+        { name: "Nail Art", price: 800, offerPrice: 499, duration: 45, memberDiscount: 10 },
+        { name: "Threading", price: 100, offerPrice: 50, duration: 20, memberDiscount: 10 },
+        { name: "Waxing Full Arms", price: 400, offerPrice: 299, duration: 30, memberDiscount: 10 },
+        { name: "Waxing Full Legs", price: 600, offerPrice: 399, duration: 40, memberDiscount: 10 }
       ]
     }
   ]
@@ -372,16 +372,31 @@ function renderServices(filterCategory = 'all', searchQuery = '') {
     
     const servicesHTML = filteredServices.map(service => {
       const hasOffer = service.offerPrice !== null;
+      const finalPrice = service.offerPrice || service.price;
       const discount = hasOffer ? Math.round((1 - service.offerPrice / service.price) * 100) : 0;
+      const memberPrice = Math.floor(finalPrice * (1 - (service.memberDiscount || 0) / 100));
+      const duration = service.duration || 30;
       
       return `
         <div class="service-card">
-          <div class="service-name">${service.name}</div>
-          <div class="service-prices">
-            ${hasOffer ? `<span class="service-original-price">₹${service.price}</span>` : ''}
-            <span class="service-offer-price">₹${service.offerPrice || service.price}</span>
-            ${hasOffer && discount > 0 ? `<span class="service-discount">${discount}% OFF</span>` : ''}
+          <div class="service-header">
+            <h3 class="service-name">${service.name}</h3>
+            <div class="service-duration-badge">⏱️ ${duration}min</div>
           </div>
+          
+          <div class="service-price-display">
+            <div class="price-main">₹${finalPrice}</div>
+            ${hasOffer && discount > 0 ? `<span class="service-discount-badge">${discount}% OFF</span>` : ''}
+          </div>
+          
+          ${hasOffer ? `<div class="service-original-price-small">Was ₹${service.price}</div>` : ''}
+          
+          <div class="service-member-info">
+            <span class="member-price-tag">Member: ₹${memberPrice}</span>
+            <span class="member-save">Save ₹${finalPrice - memberPrice}</span>
+          </div>
+          
+          <button class="service-book-btn" onclick="alert('Booking feature - Coming soon!')">Book Now</button>
         </div>
       `;
     }).join('');

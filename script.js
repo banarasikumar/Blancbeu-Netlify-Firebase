@@ -1373,7 +1373,6 @@ document.addEventListener('DOMContentLoaded', function() {
         heroSection.style.opacity = '1';
         heroSection.style.visibility = 'visible';
         heroSection.style.display = 'block';
-        heroSection.style.zIndex = '1000000';
     }
 });
 

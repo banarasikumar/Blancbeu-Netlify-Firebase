@@ -83,26 +83,47 @@ Interactive **Premium UI Enhancement Roadmap** - All 11 features COMPLETE!
 
 ## Recent Changes (Session: Nov 28, 2025)
 
-### Session 7 Updates - Dark Mode Hero Text Visibility Fix ✅
-**Problem**: Hero title "Transform Your Beauty" was invisible in dark mode despite visible in light mode
-**Root Causes Identified**:
+### Session 7 Updates - Dark Mode Hero Text & Z-Index Layering Fix ✅
+**Problems Fixed**:
+1. Hero title "Transform Your Beauty" was invisible in dark mode
+2. Hero text was overlapping/passing through navigation bars due to excessive z-index
+
+**Root Causes**:
 1. Multiple duplicate CSS rules for `.hero-title` and `.hero-text-line` in dark mode
 2. Conflicting display properties (inline-block vs block)
 3. Inline styles weren't being applied consistently on page load
+4. **Z-Index Overflow**: Hero text had `z-index: 1000000` while navigation bars had only `z-index: 1000`, causing hero content to appear ABOVE navigation
 
 **Solutions Applied**:
-1. **JavaScript Enhancement** - Modified DOMContentLoaded listener to force inline styles on hero elements:
-   - Sets `opacity: 1`, `visibility: visible`, `display: block` 
+1. **Dark Mode CSS Fixes**:
+   - Removed duplicate `.hero-title` and `.hero-text-line` rules
+   - Merged conflicting display properties to use `display: block` consistently
+   - Applied gold color (#FFD700) for dark mode visibility
+   
+2. **Z-Index Normalization** - CRITICAL FIX:
+   - Removed `z-index: 1000000` from `.hero-text-section` (was line 4586)
+   - Removed `z-index: 1000000` from `.hero-text-line` (was line 4621)
+   - Removed `z-index: 1000000` from `body.dark-mode .hero-text-section` (was line 4755)
+   - Removed `z-index: 1000000` from `body.dark-mode .hero-text-content` (was line 4765)
+   - Removed `z-index: 100` from `body.dark-mode .hero-text-line` (was line 4792)
+   - Removed z-index inline style from JavaScript (was line 1379)
+   - **Result**: Hero text is now regular content (z-index: auto), navigation bars stay on top (z-index: 1000)
+
+3. **JavaScript Enhancement** - Modified DOMContentLoaded listener to force visibility without z-index:
+   - Sets `opacity: 1`, `visibility: visible`, `display: block`
    - Applies gold color (#FFD700) and WebKit text fill
-   - Targets both `.hero-text-line` elements and `.hero-text-section` container
-2. **CSS Cleanup** - Removed 3 duplicate `.hero-title` and `.hero-text-line` dark mode rules
-3. **CSS Consolidation** - Merged conflicting display properties to use `display: block` consistently
+   - Removed z-index manipulation
 
 **Files Modified**:
-- **script.js**: Enhanced hero text animation on DOMContentLoaded (lines 1357-1381)
-- **styles.css**: Removed duplicate dark mode rules, consolidated to 8 clean dark-mode hero rules
+- **styles.css**: Removed all excessive z-index declarations (5 removals)
+- **script.js**: Removed z-index manipulation from DOMContentLoaded
 
-**Testing Note**: To verify fix in dark mode, click the theme toggle button (visible in header) to switch from light to dark mode. The "Transform Your Beauty" title should now be visible in gold (#FFD700).
+**Verification**:
+- ✅ Hero text is visible in both light and dark modes
+- ✅ Navigation bar stays on top and is not overlapped
+- ✅ Bottom navigation bar is fully accessible and visible
+- ✅ Header/logo bar remains unobstructed
+- ✅ Proper z-index layering: Navigation (1000) > Content (auto)
 
 ### Session 6 Updates - Gallery Restoration & Image Replacement
 - ✅ **Gallery Images Fully Restored** - Generated and implemented 4 brand new premium salon gallery images

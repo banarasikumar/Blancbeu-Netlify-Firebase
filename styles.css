@@ -4583,7 +4583,6 @@ body {
     text-align: center;
     border-top: 1px solid rgba(212, 175, 55, 0.2);
     position: relative;
-    z-index: 1000000 !important;
     display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
@@ -4618,7 +4617,6 @@ body.dark-mode .hero-text-section {
     font-weight: 900;
     letter-spacing: 3px;
     visibility: visible !important;
-    z-index: 1000000 !important;
     position: relative;
 }
 
@@ -4752,7 +4750,6 @@ body.dark-mode .hero-text-section {
     display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
-    z-index: 1000000 !important;
 }
 
 body.dark-mode .hero-text-content {
@@ -4762,7 +4759,6 @@ body.dark-mode .hero-text-content {
     min-height: auto !important;
     max-height: none !important;
     height: auto !important;
-    z-index: 1000000 !important;
 }
 
 body.dark-mode .hero-title {
@@ -4789,7 +4785,6 @@ body.dark-mode .hero-text-line {
     opacity: 1 !important;
     font-size: clamp(36px, 8vw, 64px) !important;
     animation: none !important;
-    z-index: 100 !important;
 }
 
 body.light-mode .hero-title {

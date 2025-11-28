@@ -2229,8 +2229,19 @@ body.light-mode .gallery-section {
 }
 
 .pwa-splash-overlay.hidden {
-    opacity: 0;
-    pointer-events: none;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    visibility: hidden !important;
+    display: none !important;
+    z-index: -999999 !important;
+}
+
+body.dark-mode .pwa-splash-overlay.hidden {
+    opacity: 0 !important;
+    pointer-events: none !important;
+    visibility: hidden !important;
+    display: none !important;
+    z-index: -999999 !important;
 }
 
 .pwa-splash-content {
@@ -4760,13 +4771,30 @@ body.dark-mode .hero-title {
     font-size: 72px !important;
 }
 
-body.dark-mode .hero-text-line {
-    color: #FFD700 !important;
-    -webkit-text-fill-color: #FFD700 !important;
+body.dark-mode .hero-text-content {
     display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
+    min-height: auto !important;
+    max-height: none !important;
+    height: auto !important;
+    z-index: 1000000 !important;
+}
+
+body.dark-mode .hero-title {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+body.dark-mode .hero-text-line {
+    color: #FFD700 !important;
+    -webkit-text-fill-color: #FFD700 !important;
+    display: inline-block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
     font-size: clamp(36px, 8vw, 64px) !important;
+    animation: none !important;
 }
 
 body.light-mode .hero-title {

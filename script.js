@@ -1859,3 +1859,146 @@ document.addEventListener('DOMContentLoaded', () => {
         initMembership();
     }, 500);
 });
+
+// ===== TASK 6.0: STAFF SPOTLIGHT CAROUSEL =====
+const staffData = [
+    {
+        name: 'Priya Sharma',
+        title: 'Hair Specialist',
+        experience: '12 Years',
+        specialties: ['Hair Coloring', 'Cutting', 'Treatments'],
+        rating: 4.9,
+        reviews: 245,
+        emoji: '💇‍♀️'
+    },
+    {
+        name: 'Anjali Patel',
+        title: 'Makeup Artist',
+        experience: '10 Years',
+        specialties: ['Bridal Makeup', 'HD Makeup', 'Airbrush'],
+        rating: 4.95,
+        reviews: 312,
+        emoji: '💄'
+    },
+    {
+        name: 'Kavya Desai',
+        title: 'Skincare Expert',
+        experience: '8 Years',
+        specialties: ['Facials', 'Anti-Aging', 'Treatments'],
+        rating: 4.8,
+        reviews: 198,
+        emoji: '💆‍♀️'
+    },
+    {
+        name: 'Neha Gupta',
+        title: 'Nail Technician',
+        experience: '7 Years',
+        specialties: ['Gel Nails', 'Nail Art', 'Manicure'],
+        rating: 4.85,
+        reviews: 267,
+        emoji: '💅'
+    },
+    {
+        name: 'Deepa Singh',
+        title: 'Spa Therapist',
+        experience: '11 Years',
+        specialties: ['Massage', 'Aromatherapy', 'Body Spa'],
+        rating: 4.92,
+        reviews: 289,
+        emoji: '🧖‍♀️'
+    },
+    {
+        name: 'Riya Verma',
+        title: 'Threading Specialist',
+        experience: '6 Years',
+        specialties: ['Threading', 'Waxing', 'Beauty'],
+        rating: 4.88,
+        reviews: 224,
+        emoji: '✨'
+    }
+];
+
+let staffCarouselPosition = 0;
+
+function initStaffCarousel() {
+    const carousel = document.getElementById('staffCarousel');
+    const prevBtn = document.getElementById('staffPrev');
+    const nextBtn = document.getElementById('staffNext');
+    const dotsContainer = document.getElementById('staffDots');
+    
+    if (!carousel) return;
+    
+    // Render staff cards
+    carousel.innerHTML = staffData.map(staff => `
+        <div class="staff-card">
+            <div class="staff-avatar">${staff.emoji}</div>
+            <h3 class="staff-name">${staff.name}</h3>
+            <p class="staff-title">${staff.title}</p>
+            <span class="staff-experience">📅 ${staff.experience} Experience</span>
+            
+            <div class="staff-rating">
+                <span class="stars">★ ${staff.rating}</span>
+                <span class="reviews">(${staff.reviews})</span>
+            </div>
+            
+            <div class="staff-specialties">
+                ${staff.specialties.map(s => `<span class="specialty-tag">${s}</span>`).join('')}
+            </div>
+            
+            <button class="staff-book-btn" onclick="alert('Booking with ${staff.name} - Coming soon!')">Book with ${staff.name.split(' ')[0]}</button>
+        </div>
+    `).join('');
+    
+    // Render dots
+    dotsContainer.innerHTML = staffData.map((_, idx) => 
+        `<span class="dot ${idx === 0 ? 'active' : ''}" onclick="goToStaff(${idx})"></span>`
+    ).join('');
+    
+    // Navigation
+    prevBtn.onclick = () => slideStaff(-1);
+    nextBtn.onclick = () => slideStaff(1);
+    
+    updateStaffCarousel();
+}
+
+function slideStaff(direction) {
+    const itemsPerView = window.innerWidth > 768 ? 3 : window.innerWidth > 480 ? 2 : 1;
+    const maxPosition = Math.max(0, staffData.length - itemsPerView);
+    
+    staffCarouselPosition += direction;
+    if (staffCarouselPosition < 0) staffCarouselPosition = maxPosition;
+    if (staffCarouselPosition > maxPosition) staffCarouselPosition = 0;
+    
+    updateStaffCarousel();
+}
+
+function goToStaff(index) {
+    staffCarouselPosition = index;
+    updateStaffCarousel();
+}
+
+function updateStaffCarousel() {
+    const carousel = document.getElementById('staffCarousel');
+    const dotsContainer = document.getElementById('staffDots');
+    
+    if (carousel) {
+        const cardWidth = 300;
+        const gap = 20;
+        carousel.style.transform = `translateX(-${staffCarouselPosition * (cardWidth + gap)}px)`;
+    }
+    
+    if (dotsContainer) {
+        const dots = dotsContainer.querySelectorAll('.dot');
+        dots.forEach((dot, idx) => {
+            dot.classList.toggle('active', idx === staffCarouselPosition);
+        });
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+        initStaffCarousel();
+        // Auto-rotate every 8 seconds
+        setInterval(() => slideStaff(1), 8000);
+    }, 500);
+});

@@ -1132,3 +1132,196 @@ body.light-mode .calendar-date-card:hover:not(.unavailable) {
         flex-direction: column;
     }
 }
+
+/* ===== TASK 6.0: STAFF SPOTLIGHT CAROUSEL ===== */
+.staff-section {
+    padding: 60px 0;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.05), transparent);
+}
+
+.staff-carousel-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+    margin-bottom: 35px;
+}
+
+.staff-nav-btn {
+    padding: 12px 18px;
+    background: rgba(212, 175, 55, 0.2);
+    border: 2px solid rgba(212, 175, 55, 0.3);
+    border-radius: 50%;
+    color: var(--text-primary);
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.staff-nav-btn:hover {
+    background: var(--gold-24k);
+    color: #000;
+}
+
+.staff-carousel {
+    display: flex;
+    gap: 20px;
+    overflow: hidden;
+    flex: 1;
+    transition: transform 0.4s ease;
+}
+
+.staff-card {
+    flex: 0 0 300px;
+    padding: 25px;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(212, 175, 55, 0.05));
+    border: 2px solid rgba(212, 175, 55, 0.2);
+    border-radius: 16px;
+    text-align: center;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+}
+
+.staff-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--gold-24k);
+    box-shadow: 0 15px 40px rgba(212, 175, 55, 0.3);
+}
+
+.staff-avatar {
+    font-size: 60px;
+    margin-bottom: 15px;
+}
+
+.staff-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 5px 0;
+}
+
+.staff-title {
+    font-size: 14px;
+    color: var(--gold-24k);
+    font-weight: 600;
+    margin: 0 0 10px 0;
+}
+
+.staff-experience {
+    display: inline-block;
+    padding: 6px 12px;
+    background: rgba(212, 175, 55, 0.15);
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+}
+
+.staff-rating {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 12px;
+}
+
+.stars {
+    color: var(--gold-24k);
+    font-weight: 700;
+}
+
+.reviews {
+    color: var(--text-secondary);
+    font-size: 12px;
+}
+
+.staff-specialties {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: center;
+    margin-bottom: 15px;
+    flex: 1;
+}
+
+.specialty-tag {
+    display: inline-block;
+    padding: 5px 10px;
+    background: rgba(212, 175, 55, 0.2);
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.staff-book-btn {
+    padding: 12px 20px;
+    background: linear-gradient(135deg, var(--gold-24k), var(--gold-bright));
+    border: none;
+    border-radius: 12px;
+    color: #000;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.staff-book-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
+}
+
+.staff-dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(212, 175, 55, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid rgba(212, 175, 55, 0.2);
+}
+
+.dot.active {
+    background: var(--gold-24k);
+    border-color: var(--gold-24k);
+    width: 30px;
+    border-radius: 5px;
+}
+
+body.light-mode .staff-card {
+    background: linear-gradient(135deg, rgba(212, 160, 23, 0.1), rgba(212, 160, 23, 0.05));
+    border-color: rgba(212, 160, 23, 0.2);
+}
+
+body.light-mode .staff-card:hover {
+    border-color: #d4a017;
+    box-shadow: 0 15px 40px rgba(212, 160, 23, 0.25);
+}
+
+@media (max-width: 768px) {
+    .staff-card {
+        flex: 0 0 250px;
+    }
+    
+    .staff-avatar {
+        font-size: 48px;
+    }
+}
+
+@media (max-width: 480px) {
+    .staff-card {
+        flex: 0 0 280px;
+    }
+}

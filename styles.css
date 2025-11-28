@@ -4746,6 +4746,25 @@ body.dark-mode .hero-text-line {
     z-index: 100 !important;
 }
 
+body.dark-mode .hero-tagline {
+    opacity: 1 !important;
+    display: block !important;
+    visibility: visible !important;
+    color: var(--text-secondary) !important;
+}
+
+body.dark-mode .hero-cta-buttons {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+body.dark-mode .hero-text-content {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
 body.light-mode .hero-tagline {
     color: #333333 !important;
     display: block !important;

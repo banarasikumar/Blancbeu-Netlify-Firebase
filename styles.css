@@ -1133,6 +1133,29 @@ body.light-mode .calendar-date-card:hover:not(.unavailable) {
     }
 }
 
+/* ===== CAROUSEL SLIDE VISIBILITY FIX ===== */
+.carousel-slide {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.carousel-slide.active {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    position: relative;
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
 /* ===== TASK 6.0: STAFF SPOTLIGHT CAROUSEL ===== */
 .staff-section {
     padding: 60px 0;

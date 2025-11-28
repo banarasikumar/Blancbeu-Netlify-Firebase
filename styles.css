@@ -4589,7 +4589,7 @@ body {
 
 .hero-text-line {
     display: block;
-    color: var(--gold-24k);
+    color: #FFD700;
     animation: slideInUp 0.8s ease-out forwards;
     opacity: 0;
     font-weight: 900;

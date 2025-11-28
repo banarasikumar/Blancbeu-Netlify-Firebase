@@ -1596,16 +1596,24 @@ body.light-mode .service-original-price {
 .gallery-section {
     padding: 30px 0;
     background: none !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
 body.light-mode .gallery-section {
     background: none !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
 .gallery-grid {
-    display: grid;
+    display: grid !important;
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     gap: 30px;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
 .gallery-item {
@@ -1616,6 +1624,9 @@ body.light-mode .gallery-section {
     cursor: pointer;
     border: 3px solid transparent;
     transition: all 0.4s;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
 .gallery-item:hover {

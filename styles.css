@@ -4590,13 +4590,10 @@ body {
 .hero-text-line {
     display: block;
     color: var(--gold-24k);
-    background: linear-gradient(135deg, var(--gold-24k), var(--gold-bright), var(--gold-24k));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
     animation: slideInUp 0.8s ease-out forwards;
     opacity: 0;
     font-weight: 900;
+    letter-spacing: 3px;
 }
 
 .hero-text-line.line-1 {
@@ -4718,10 +4715,6 @@ body.light-mode .hero-title {
 
 body.light-mode .hero-text-line {
     color: #D4A017;
-    background: linear-gradient(135deg, #D4A017, #FFD700);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
     opacity: 1 !important;
 }
 

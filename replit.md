@@ -83,6 +83,27 @@ Interactive **Premium UI Enhancement Roadmap** - All 11 features COMPLETE!
 
 ## Recent Changes (Session: Nov 28, 2025)
 
+### Session 7 Updates - Dark Mode Hero Text Visibility Fix ✅
+**Problem**: Hero title "Transform Your Beauty" was invisible in dark mode despite visible in light mode
+**Root Causes Identified**:
+1. Multiple duplicate CSS rules for `.hero-title` and `.hero-text-line` in dark mode
+2. Conflicting display properties (inline-block vs block)
+3. Inline styles weren't being applied consistently on page load
+
+**Solutions Applied**:
+1. **JavaScript Enhancement** - Modified DOMContentLoaded listener to force inline styles on hero elements:
+   - Sets `opacity: 1`, `visibility: visible`, `display: block` 
+   - Applies gold color (#FFD700) and WebKit text fill
+   - Targets both `.hero-text-line` elements and `.hero-text-section` container
+2. **CSS Cleanup** - Removed 3 duplicate `.hero-title` and `.hero-text-line` dark mode rules
+3. **CSS Consolidation** - Merged conflicting display properties to use `display: block` consistently
+
+**Files Modified**:
+- **script.js**: Enhanced hero text animation on DOMContentLoaded (lines 1357-1381)
+- **styles.css**: Removed duplicate dark mode rules, consolidated to 8 clean dark-mode hero rules
+
+**Testing Note**: To verify fix in dark mode, click the theme toggle button (visible in header) to switch from light to dark mode. The "Transform Your Beauty" title should now be visible in gold (#FFD700).
+
 ### Session 6 Updates - Gallery Restoration & Image Replacement
 - ✅ **Gallery Images Fully Restored** - Generated and implemented 4 brand new premium salon gallery images
 - ✅ **Image Generation** - Created high-quality images matching Blancbeu luxury aesthetic:

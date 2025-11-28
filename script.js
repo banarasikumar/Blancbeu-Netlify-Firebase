@@ -1355,10 +1355,26 @@ function openWhatsAppChat() {
 document.addEventListener('DOMContentLoaded', function() {
     const heroLines = document.querySelectorAll('.hero-text-line');
     heroLines.forEach((line, index) => {
+        // Force styles immediately for better visibility
+        line.style.opacity = '1';
+        line.style.visibility = 'visible';
+        line.style.display = 'block';
+        line.style.color = '#FFD700';
+        line.style.WebkitTextFillColor = '#FFD700';
+        
         setTimeout(() => {
             line.style.opacity = '1';
         }, 200 + (index * 200));
     });
+    
+    // Also force the hero-text-section visibility
+    const heroSection = document.querySelector('.hero-text-section');
+    if (heroSection) {
+        heroSection.style.opacity = '1';
+        heroSection.style.visibility = 'visible';
+        heroSection.style.display = 'block';
+        heroSection.style.zIndex = '1000000';
+    }
 });
 
 // ===== STATS COUNTER ANIMATION =====

@@ -4755,6 +4755,16 @@ body.dark-mode .hero-text-section {
     z-index: 1000000 !important;
 }
 
+body.dark-mode .hero-text-content {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    min-height: auto !important;
+    max-height: none !important;
+    height: auto !important;
+    z-index: 1000000 !important;
+}
+
 body.dark-mode .hero-title {
     color: #FFD700 !important;
     -webkit-text-fill-color: #FFD700 !important;
@@ -4771,30 +4781,15 @@ body.dark-mode .hero-title {
     font-size: 72px !important;
 }
 
-body.dark-mode .hero-text-content {
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    min-height: auto !important;
-    max-height: none !important;
-    height: auto !important;
-    z-index: 1000000 !important;
-}
-
-body.dark-mode .hero-title {
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-}
-
 body.dark-mode .hero-text-line {
     color: #FFD700 !important;
     -webkit-text-fill-color: #FFD700 !important;
-    display: inline-block !important;
+    display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
     font-size: clamp(36px, 8vw, 64px) !important;
     animation: none !important;
+    z-index: 100 !important;
 }
 
 body.light-mode .hero-title {
@@ -4810,14 +4805,6 @@ body.light-mode .hero-text-line {
     opacity: 1 !important;
 }
 
-body.dark-mode .hero-text-line {
-    color: var(--gold-24k) !important;
-    opacity: 1 !important;
-    display: block !important;
-    visibility: visible !important;
-    z-index: 100 !important;
-}
-
 body.dark-mode .hero-tagline {
     opacity: 1 !important;
     display: block !important;
@@ -4827,12 +4814,6 @@ body.dark-mode .hero-tagline {
 
 body.dark-mode .hero-cta-buttons {
     display: flex !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-}
-
-body.dark-mode .hero-text-content {
-    display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
 }

@@ -1491,7 +1491,6 @@ function setupCounterAnimation() {
     observer.observe(trustSection);
 }
 
-
 // ===== SERVICE CAROUSEL FUNCTIONALITY =====
 let serviceCarouselPosition = 0;
 

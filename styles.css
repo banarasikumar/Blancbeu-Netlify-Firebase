@@ -4589,11 +4589,15 @@ body {
 
 .hero-text-line {
     display: block;
-    color: #FFD700;
+    color: var(--gold-24k);
     animation: slideInUp 0.8s ease-out forwards;
     opacity: 0;
     font-weight: 900;
     letter-spacing: 3px;
+}
+
+body .hero-text-line {
+    opacity: 1 !important;
 }
 
 .hero-text-line.line-1 {
@@ -4764,11 +4768,6 @@ body.light-mode .hero-text-content {
     opacity: 1 !important;
 }
 
-body.light-mode .hero-text-line {
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-}
 
 @media (max-width: 768px) {
     .hero-text-section {

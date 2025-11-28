@@ -4570,6 +4570,16 @@ body {
     padding: 60px 20px;
     text-align: center;
     border-top: 1px solid rgba(212, 175, 55, 0.2);
+    position: relative;
+    z-index: 5;
+    display: block;
+    visibility: visible;
+    opacity: 1;
+}
+
+body.dark-mode .hero-text-section {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.12) 0%, transparent 50%, rgba(212, 175, 55, 0.08) 100%);
+    border-top: 1px solid rgba(212, 175, 55, 0.3);
 }
 
 .hero-text-content {

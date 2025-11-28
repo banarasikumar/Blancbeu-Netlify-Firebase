@@ -4795,13 +4795,22 @@ body.light-mode .hero-title {
     -webkit-text-fill-color: unset;
     -webkit-background-clip: unset;
     background-clip: unset;
-    color: #1a1a1a !important;
+    color: #B8860B !important;
     background: none !important;
+    text-shadow: 
+        0 2px 4px rgba(184, 134, 11, 0.3),
+        0 4px 8px rgba(184, 134, 11, 0.2),
+        0 8px 16px rgba(0, 0, 0, 0.15) !important;
 }
 
 body.light-mode .hero-text-line {
-    color: #D4A017;
+    color: #B8860B !important;
     opacity: 1 !important;
+    text-shadow: 
+        0 2px 4px rgba(184, 134, 11, 0.3),
+        0 4px 8px rgba(184, 134, 11, 0.2),
+        0 8px 16px rgba(0, 0, 0, 0.15) !important;
+    font-weight: 900 !important;
 }
 
 body.dark-mode .hero-tagline {

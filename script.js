@@ -102,6 +102,7 @@ const servicesData = {
     {
       group: "Hair cutting",
       icon: "✂️",
+      category: "hair",
       image: "assets/service_images/professional_hair_st_3fab25e9.webp",
       services: [
         { name: "Plain Haircut", price: 100, offerPrice: 99 },
@@ -122,6 +123,7 @@ const servicesData = {
     {
       group: "Clean up",
       icon: "✨",
+      category: "skincare",
       image: "assets/service_images/beautiful_woman_gett_9dc7243a.webp",
       services: [
         { name: "Fruit Cleanup", price: 500, offerPrice: 250 },
@@ -133,6 +135,7 @@ const servicesData = {
     {
       group: "Facial",
       icon: "💆",
+      category: "skincare",
       image: "assets/service_images/facial_new.webp",
       services: [
         { name: "Lotus Professional Facial", price: 1500, offerPrice: 699 },
@@ -146,6 +149,7 @@ const servicesData = {
     {
       group: "Hairs & Treatment",
       icon: "💇",
+      category: "hair",
       image: "assets/service_images/professional_hair_st_673b25ad.webp",
       services: [
         { name: "Keratin", price: 2500, offerPrice: 1499 },
@@ -161,6 +165,7 @@ const servicesData = {
     {
       group: "Premium services",
       icon: "👑",
+      category: "spa",
       image: "assets/service_images/premium_hair_spa_nourish.webp",
       services: [
         { name: "Head Massage", price: 250, offerPrice: 199 },
@@ -175,6 +180,7 @@ const servicesData = {
     {
       group: "Hair colour",
       icon: "🎨",
+      category: "hair",
       image: "assets/service_images/hair_colour_vibrant_pink.webp",
       services: [
         { name: "Global Hair Colour", price: 1199, offerPrice: null },
@@ -188,6 +194,7 @@ const servicesData = {
     {
       group: "Makeup & Styling",
       icon: "💄",
+      category: "makeup",
       image: "assets/service_images/makeup_styling_new.webp",
       services: [
         { name: "Party Makeup", price: 2000, offerPrice: 1499 },
@@ -200,6 +207,7 @@ const servicesData = {
     {
       group: "Nails & Beauty",
       icon: "💅",
+      category: "nails",
       image: "assets/service_images/nails_beauty_vibrant.webp",
       services: [
         { name: "Manicure", price: 500, offerPrice: 299 },
@@ -322,15 +330,36 @@ function goToSlide(index) {
   startAutoPlay();
 }
 
-function renderServices() {
+// ===== TASK 1.0: SERVICE FILTERING & SEARCH =====
+let currentFilters = { category: 'all', search: '' };
+
+function renderServices(filterCategory = 'all', searchQuery = '') {
   const container = document.getElementById('servicesContainer');
-  
-  // Skip if container doesn't exist
   if (!container) return;
   
-  servicesData.groups.forEach(group => {
+  container.innerHTML = '';
+  let totalServicesShown = 0;
+  
+  // Filter groups based on category
+  const filteredGroups = filterCategory === 'all' 
+    ? servicesData.groups 
+    : servicesData.groups.filter(g => g.category === filterCategory);
+  
+  filteredGroups.forEach(group => {
+    // Filter services by search query
+    const filteredServices = searchQuery === ''
+      ? group.services
+      : group.services.filter(service => 
+          service.name.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+    
+    if (filteredServices.length === 0) return;
+    
+    totalServicesShown += filteredServices.length;
+    
     const categoryDiv = document.createElement('div');
     categoryDiv.className = 'service-category';
+    categoryDiv.setAttribute('data-category', group.category);
     
     const headerHTML = `
       <div class="category-header">
@@ -341,7 +370,7 @@ function renderServices() {
       </div>
     `;
     
-    const servicesHTML = group.services.map(service => {
+    const servicesHTML = filteredServices.map(service => {
       const hasOffer = service.offerPrice !== null;
       const discount = hasOffer ? Math.round((1 - service.offerPrice / service.price) * 100) : 0;
       
@@ -360,6 +389,82 @@ function renderServices() {
     categoryDiv.innerHTML = headerHTML + `<div class="services-grid">${servicesHTML}</div>`;
     container.appendChild(categoryDiv);
   });
+  
+  // Update result counter
+  updateServiceCounter(totalServicesShown);
+}
+
+function updateServiceCounter(count) {
+  const counter = document.getElementById('servicesCount');
+  if (!counter) return;
+  
+  if (count === 0) {
+    counter.textContent = '❌ No services found';
+  } else if (currentFilters.category === 'all' && currentFilters.search === '') {
+    counter.textContent = `Showing all ${count} services`;
+  } else {
+    let filterDesc = '';
+    if (currentFilters.category !== 'all') {
+      const cat = servicesData.groups.find(g => g.category === currentFilters.category);
+      filterDesc = `in ${cat.group}`;
+    }
+    if (currentFilters.search !== '') {
+      filterDesc = filterDesc ? `${filterDesc} matching "${currentFilters.search}"` : `matching "${currentFilters.search}"`;
+    }
+    counter.textContent = `Found ${count} service${count !== 1 ? 's' : ''} ${filterDesc}`;
+  }
+}
+
+function initServiceFiltering() {
+  // Category filter buttons
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  filterButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      
+      currentFilters.category = btn.getAttribute('data-category');
+      renderServices(currentFilters.category, currentFilters.search);
+      
+      // Show/hide clear button
+      const clearBtn = document.getElementById('clearFilters');
+      if (clearBtn) {
+        clearBtn.style.display = (currentFilters.category !== 'all' || currentFilters.search !== '') ? 'inline-block' : 'none';
+      }
+    });
+  });
+  
+  // Search input with debouncing
+  const searchInput = document.getElementById('serviceSearch');
+  if (searchInput) {
+    let searchTimeout;
+    searchInput.addEventListener('input', (e) => {
+      clearTimeout(searchTimeout);
+      searchTimeout = setTimeout(() => {
+        currentFilters.search = e.target.value.trim();
+        renderServices(currentFilters.category, currentFilters.search);
+        
+        // Show/hide clear button
+        const clearBtn = document.getElementById('clearFilters');
+        if (clearBtn) {
+          clearBtn.style.display = (currentFilters.category !== 'all' || currentFilters.search !== '') ? 'inline-block' : 'none';
+        }
+      }, 300);
+    });
+  }
+  
+  // Clear filters button
+  const clearBtn = document.getElementById('clearFilters');
+  if (clearBtn) {
+    clearBtn.addEventListener('click', () => {
+      currentFilters = { category: 'all', search: '' };
+      filterButtons.forEach(b => b.classList.remove('active'));
+      filterButtons[0].classList.add('active');
+      if (searchInput) searchInput.value = '';
+      renderServices('all', '');
+      clearBtn.style.display = 'none';
+    });
+  }
 }
 
 function renderReviews() {
@@ -553,6 +658,7 @@ function initScrollBehavior() {
 document.addEventListener('DOMContentLoaded', () => {
   initCarousel();
   renderServices();
+  initServiceFiltering();
   renderReviews();
   initSmoothScroll();
   initScrollBehavior();

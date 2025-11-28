@@ -4792,23 +4792,26 @@ body.dark-mode .hero-text-line {
 }
 
 body.light-mode .hero-title {
-    -webkit-text-fill-color: unset;
+    -webkit-text-fill-color: #1a1a1a !important;
+    -webkit-text-stroke: 1.5px #D4A017 !important;
     -webkit-background-clip: unset;
     background-clip: unset;
-    color: #4A3728 !important;
+    color: #1a1a1a !important;
     background: none !important;
     text-shadow: 
-        0 1px 2px rgba(255, 255, 255, 0.8),
-        0 2px 4px rgba(212, 160, 23, 0.4) !important;
+        0 3px 0 rgba(212, 160, 23, 0.6),
+        0 6px 10px rgba(0, 0, 0, 0.25) !important;
     font-weight: 900 !important;
 }
 
 body.light-mode .hero-text-line {
-    color: #4A3728 !important;
+    color: #1a1a1a !important;
+    -webkit-text-fill-color: #1a1a1a !important;
+    -webkit-text-stroke: 1.5px #D4A017 !important;
     opacity: 1 !important;
     text-shadow: 
-        0 1px 2px rgba(255, 255, 255, 0.8),
-        0 2px 4px rgba(212, 160, 23, 0.4) !important;
+        0 3px 0 rgba(212, 160, 23, 0.6),
+        0 6px 10px rgba(0, 0, 0, 0.25) !important;
     font-weight: 900 !important;
 }
 

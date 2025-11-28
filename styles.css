@@ -4564,68 +4564,45 @@ body {
     }
 }
 
-/* ===== HERO OVERLAY & ANIMATIONS ===== */
-.hero-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.3) 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 10;
-    backdrop-filter: none;
-}
-
-.hero-content {
+/* ===== HERO TEXT SECTION (Below Carousel) ===== */
+.hero-text-section {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.08) 0%, transparent 50%, rgba(212, 175, 55, 0.05) 100%);
+    padding: 60px 20px;
     text-align: center;
-    color: var(--text-primary);
-    animation: fadeInUp 1s ease-out;
-    max-width: 700px;
-    padding: 0 30px;
+    border-top: 1px solid rgba(212, 175, 55, 0.2);
 }
 
-.hero-text-container {
-    margin-bottom: 0px;
+.hero-text-content {
+    max-width: 700px;
+    margin: 0 auto;
+    animation: fadeInUp 0.8s ease-out;
 }
 
 .hero-title {
     font-family: 'Cinzel', serif;
-    font-size: clamp(40px, 10vw, 72px);
+    font-size: clamp(36px, 8vw, 64px);
     font-weight: 900;
-    line-height: 1;
-    margin: 0;
-    letter-spacing: 3px;
-    text-shadow: 
-        0 2px 10px rgba(0, 0, 0, 0.8),
-        0 4px 20px rgba(0, 0, 0, 0.7),
-        2px 2px 4px rgba(0, 0, 0, 0.9);
+    line-height: 1.2;
+    margin: 0 0 20px 0;
+    letter-spacing: 2px;
 }
 
 .hero-text-line {
-    display: inline;
-    color: #FFD700;
-    text-shadow: 
-        0 0 30px rgba(255, 215, 0, 0.8),
-        0 4px 12px rgba(0, 0, 0, 0.9),
-        -1px -1px 2px rgba(0, 0, 0, 0.5),
-        1px 1px 2px rgba(0, 0, 0, 0.5);
+    display: block;
+    background: linear-gradient(135deg, var(--gold-24k), var(--gold-bright), var(--gold-24k));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     animation: slideInUp 0.8s ease-out forwards;
     opacity: 0;
-    font-weight: 900;
-    letter-spacing: 2px;
-    filter: brightness(1.2);
 }
 
 .hero-text-line.line-1 {
-    animation-delay: 0.2s;
+    animation-delay: 0.1s;
 }
 
 .hero-text-line.line-2 {
-    animation-delay: 0.4s;
-    display: block;
+    animation-delay: 0.3s;
 }
 
 @keyframes slideInUp {
@@ -4651,15 +4628,13 @@ body {
 }
 
 .hero-tagline {
-    font-size: clamp(13px, 3vw, 18px);
-    color: rgba(255, 255, 255, 0.95);
-    margin: 20px 0 30px 0;
-    letter-spacing: 1px;
-    animation: fadeIn 0.8s ease-out 0.6s forwards;
+    font-size: clamp(14px, 3vw, 18px);
+    color: var(--text-secondary);
+    margin: 0 0 40px 0;
+    letter-spacing: 0.5px;
+    animation: fadeIn 0.8s ease-out 0.5s forwards;
     opacity: 0;
-    font-weight: 300;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
-    display: block;
+    font-weight: 400;
 }
 
 @keyframes fadeIn {
@@ -4673,19 +4648,19 @@ body {
 
 .hero-cta-buttons {
     display: flex;
-    gap: 12px;
+    gap: 16px;
     justify-content: center;
     flex-wrap: wrap;
-    animation: fadeIn 0.8s ease-out 0.8s forwards;
+    animation: fadeIn 0.8s ease-out 0.7s forwards;
     opacity: 0;
 }
 
 .hero-btn {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    padding: 11px 24px;
-    font-size: 12px;
+    gap: 10px;
+    padding: 14px 32px;
+    font-size: 13px;
     font-weight: 600;
     border-radius: 50px;
     text-decoration: none;
@@ -4694,7 +4669,6 @@ body {
     cursor: pointer;
     font-family: 'Poppins', sans-serif;
     letter-spacing: 0.5px;
-    text-transform: uppercase;
 }
 
 .primary-btn {
@@ -4763,39 +4737,39 @@ body.light-mode .secondary-btn:hover {
 }
 
 @media (max-width: 768px) {
+    .hero-text-section {
+        padding: 40px 20px;
+    }
+    
     .hero-cta-buttons {
-        flex-direction: row;
-        gap: 10px;
+        gap: 12px;
     }
     
     .hero-btn {
-        padding: 10px 18px;
-        font-size: 11px;
-    }
-    
-    .hero-overlay {
-        padding-bottom: 60px;
+        padding: 12px 24px;
+        font-size: 12px;
     }
 }
 
 @media (max-width: 480px) {
     .hero-title {
-        font-size: 22px;
+        font-size: 28px;
+    }
+    
+    .hero-text-section {
+        padding: 30px 15px;
+    }
+    
+    .hero-cta-buttons {
+        flex-direction: column;
+        gap: 10px;
     }
     
     .hero-btn {
-        font-size: 10px;
-        padding: 9px 16px;
-        gap: 6px;
-    }
-    
-    .btn-icon {
-        font-size: 14px;
-    }
-    
-    .hero-overlay {
-        padding-bottom: 50px;
-        align-items: center;
+        width: 100%;
+        padding: 12px 20px;
+        font-size: 12px;
+        justify-content: center;
     }
 }
 

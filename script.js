@@ -1589,3 +1589,129 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }, 8000);
 });
+
+// ===== TASK 3.0: LIVE AVAILABILITY CALENDAR =====
+const therapists = ['Priya', 'Anjali', 'Kavya', 'Neha', 'Deepa', 'Riya'];
+const timeSlots = ['09:00 AM', '10:00 AM', '11:00 AM', '12:00 PM', '02:00 PM', '03:00 PM', '04:00 PM', '05:00 PM', '06:00 PM'];
+let selectedDate = null;
+
+function initCalendar() {
+    const calendarGrid = document.getElementById('calendarGrid');
+    const calPrev = document.getElementById('calPrev');
+    const calNext = document.getElementById('calNext');
+    const calMonth = document.getElementById('calMonth');
+    const timeSlots = document.getElementById('timeSlots');
+    const closeBtn = document.getElementById('closeTimeSlots');
+    const timeSlotsGrid = document.getElementById('timeSlotsGrid');
+    
+    if (!calendarGrid) return;
+    
+    let calendarStart = 0; // Start from today
+    
+    function renderCalendar() {
+        calendarGrid.innerHTML = '';
+        const today = new Date();
+        
+        // Update month display
+        calMonth.textContent = today.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+        
+        // Generate 14 date cards
+        for (let i = calendarStart; i < calendarStart + 14; i++) {
+            const date = new Date(today);
+            date.setDate(date.getDate() + i);
+            
+            const dateCard = document.createElement('div');
+            dateCard.className = 'calendar-date-card';
+            
+            // Randomize availability (80% available, 20% full)
+            const available = Math.random() > 0.2;
+            const slotsCount = available ? Math.floor(Math.random() * 5) + 3 : 0;
+            
+            if (!available) {
+                dateCard.classList.add('unavailable');
+            }
+            
+            const dayName = date.toLocaleDateString('en-US', { weekday: 'short' });
+            const dayNum = date.getDate();
+            const isToday = i === 0;
+            
+            if (isToday) {
+                dateCard.classList.add('today');
+            }
+            
+            dateCard.innerHTML = `
+                <div class="date-day">${dayName}</div>
+                <div class="date-num">${dayNum}</div>
+                <div class="slots-available">${slotsCount} slots</div>
+            `;
+            
+            if (available) {
+                dateCard.onclick = () => showTimeSlots(date, dayName, dayNum);
+            }
+            
+            calendarGrid.appendChild(dateCard);
+        }
+    }
+    
+    calPrev.onclick = () => {
+        calendarStart = Math.max(0, calendarStart - 7);
+        renderCalendar();
+    };
+    
+    calNext.onclick = () => {
+        if (calendarStart + 14 < 14) {
+            calendarStart += 7;
+            renderCalendar();
+        }
+    };
+    
+    function showTimeSlots(date, dayName, dayNum) {
+        selectedDate = date;
+        const monthName = date.toLocaleDateString('en-US', { month: 'short' });
+        document.getElementById('selectedDateTitle').textContent = `Selected: ${dayName}, ${dayNum} ${monthName}`;
+        
+        timeSlotsGrid.innerHTML = '';
+        
+        // Generate available time slots for selected date
+        timeSlots.forEach(time => {
+            const isAvailable = Math.random() > 0.3;
+            const slot = document.createElement('div');
+            slot.className = isAvailable ? 'time-slot available' : 'time-slot unavailable';
+            
+            if (isAvailable) {
+                const therapist = therapists[Math.floor(Math.random() * therapists.length)];
+                slot.innerHTML = `
+                    <div class="slot-time">${time}</div>
+                    <div class="slot-therapist">with ${therapist}</div>
+                `;
+                slot.onclick = () => {
+                    alert(`✅ Booking confirmed!\nTime: ${time}\nDate: ${dayName}, ${dayNum} ${monthName}\nTherapist: ${therapist}\n\nComing soon: Full booking system`);
+                };
+            } else {
+                slot.innerHTML = `
+                    <div class="slot-time">${time}</div>
+                    <div class="slot-status">FULL</div>
+                `;
+            }
+            
+            timeSlotsGrid.appendChild(slot);
+        });
+        
+        timeSlots.style.display = 'block';
+        calendarGrid.parentElement.style.display = 'none';
+    }
+    
+    closeBtn.onclick = () => {
+        timeSlots.style.display = 'none';
+        calendarGrid.parentElement.style.display = 'block';
+    };
+    
+    renderCalendar();
+}
+
+// Initialize calendar on page load
+document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+        initCalendar();
+    }, 500);
+});

@@ -4729,8 +4729,21 @@ body.light-mode .hero-text-section {
     border-top: 1px solid rgba(212, 160, 23, 0.3);
 }
 
+body.dark-mode .hero-title {
+    -webkit-text-fill-color: unset;
+    -webkit-background-clip: unset;
+    background-clip: unset;
+    color: var(--gold-24k) !important;
+    background: none !important;
+    text-shadow: 0 0 40px rgba(255, 215, 0, 0.8);
+}
+
 body.light-mode .hero-title {
-    color: #1a1a1a;
+    -webkit-text-fill-color: unset;
+    -webkit-background-clip: unset;
+    background-clip: unset;
+    color: #1a1a1a !important;
+    background: none !important;
 }
 
 body.light-mode .hero-text-line {

@@ -1430,6 +1430,9 @@ function initBookingsController() {
                 alert('📋 Booking details coming soon!');
             }
         });
+    });
+
+    function checkEmptyBookings() {
         const visibleCards = document.querySelectorAll('.booking-card[style*="display: flex"], .booking-card:not([style*="display: none"])');
         const emptyState = document.querySelector('.empty-state-bookings');
         
@@ -1615,6 +1618,11 @@ function initCalendar() {
         timeSlots.forEach(time => {
             const isAvailable = Math.random() > 0.3;
             const slot = document.createElement('div');
+            slot.className = 'time-slot';
+            
+            if (isAvailable) {
+                const therapist = therapists[Math.floor(Math.random() * therapists.length)];
+                slot.innerHTML = `
                     <div class="slot-time">${time}</div>
                     <div class="slot-therapist">with ${therapist}</div>
                 `;
@@ -1637,15 +1645,8 @@ function initCalendar() {
     
     closeBtn.onclick = () => {
         timeSlots.style.display = 'none';
-        calendarGrid.parentElement.style.display = 'block';
     };
-    
-    renderCalendar();
 }
-
-// Initialize calendar on page load
-    }, 500);
-});
 
 // ===== TASK 4.0: BEFORE & AFTER GALLERY =====
 const transformations = [
@@ -1750,6 +1751,8 @@ const tiers = [
         price: '₹1999',
         period: '/year',
         discount: '15% OFF',
+        featured: true,
+        benefits: [
             '✓ Exclusive events & private sessions',
             '✓ Personal stylist consultation',
             '✓ Gift vouchers yearly'
@@ -1777,10 +1780,6 @@ function initMembership() {
         </div>
     `).join('');
 }
-
-        initMembership();
-    }, 500);
-});
 
 // ===== TASK 6.0: STAFF SPOTLIGHT CAROUSEL =====
 const staffData = [
@@ -1867,7 +1866,7 @@ function initStaffCarousel() {
                 ${staff.specialties.map(s => `<span class="specialty-tag">${s}</span>`).join('')}
             </div>
             
-            <button class="staff-book-btn" onclick="alert('Booking with ${staff.name} - Coming soon!')">Book with ${staff.name.split(' ')[0]}</button>
+            <button class="staff-book-btn" onclick="alert('Booking with ' + '${staff.name}' + ' - Coming soon!')">Book with ${staff.name.split(' ')[0]}</button>
         </div>
     `).join('');
     

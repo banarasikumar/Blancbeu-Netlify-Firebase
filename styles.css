@@ -4582,10 +4582,11 @@ body {
 
 /* ===== HERO TEXT SECTION (Below Carousel) ===== */
 .hero-text-section {
-    background: linear-gradient(135deg, rgba(212, 175, 55, 0.08) 0%, transparent 50%, rgba(212, 175, 55, 0.05) 100%);
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.85) 0%, rgba(15, 10, 5, 0.9) 50%, rgba(0, 0, 0, 0.85) 100%);
     padding: 60px 20px;
     text-align: center;
-    border-top: 1px solid rgba(212, 175, 55, 0.2);
+    border-top: 1px solid rgba(212, 175, 55, 0.3);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
     position: relative;
     display: block !important;
     visibility: visible !important;
@@ -4594,8 +4595,8 @@ body {
 }
 
 body.dark-mode .hero-text-section {
-    background: linear-gradient(135deg, rgba(212, 175, 55, 0.12) 0%, transparent 50%, rgba(212, 175, 55, 0.08) 100%);
-    border-top: 1px solid rgba(212, 175, 55, 0.3);
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.9) 0%, rgba(20, 15, 5, 0.92) 50%, rgba(0, 0, 0, 0.9) 100%);
+    border-top: 1px solid rgba(212, 175, 55, 0.35);
 }
 
 .hero-text-content {
@@ -4615,20 +4616,26 @@ body.dark-mode .hero-text-section {
 
 .hero-text-line {
     display: block !important;
-    color: var(--gold-24k) !important;
+    color: #FFC942 !important;
     animation: slideInUp 0.8s ease-out forwards !important;
     opacity: 1 !important;
     font-weight: 900;
     letter-spacing: 3px;
     visibility: visible !important;
     position: relative;
+    text-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.6),
+        0 0 20px rgba(255, 200, 60, 0.25);
 }
 
 body .hero-text-line {
     opacity: 1 !important;
     visibility: visible !important;
     display: block !important;
-    color: var(--gold-24k) !important;
+    color: #FFC942 !important;
+    text-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.6),
+        0 0 20px rgba(255, 200, 60, 0.25);
 }
 
 .hero-text-line.line-1 {
@@ -4740,8 +4747,9 @@ body .hero-text-line {
 
 /* ===== LIGHT MODE - HERO TEXT SECTION ===== */
 body.light-mode .hero-text-section {
-    background: linear-gradient(135deg, rgba(212, 160, 23, 0.06) 0%, transparent 50%, rgba(212, 160, 23, 0.04) 100%);
-    border-top: 1px solid rgba(212, 160, 23, 0.3);
+    background: linear-gradient(180deg, rgba(250, 248, 245, 0.98) 0%, rgba(255, 252, 248, 0.98) 50%, rgba(250, 248, 245, 0.98) 100%);
+    border-top: 1px solid rgba(212, 160, 23, 0.35);
+    border-bottom: 1px solid rgba(212, 160, 23, 0.25);
 }
 
 body.dark-mode .hero {
@@ -4782,33 +4790,36 @@ body.dark-mode .hero-title {
 }
 
 body.dark-mode .hero-text-line {
-    color: #FFD700 !important;
-    -webkit-text-fill-color: #FFD700 !important;
+    color: #FFC942 !important;
+    -webkit-text-fill-color: #FFC942 !important;
     display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
     font-size: clamp(36px, 8vw, 64px) !important;
     animation: none !important;
+    text-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.7),
+        0 0 25px rgba(255, 200, 60, 0.3) !important;
 }
 
 body.light-mode .hero-title {
     -webkit-text-fill-color: unset;
     -webkit-background-clip: unset;
     background-clip: unset;
-    color: #2C1810 !important;
+    color: #5C4033 !important;
     background: none !important;
     text-shadow: 
-        0 1px 2px rgba(255, 255, 255, 0.8),
-        0 3px 6px rgba(212, 160, 23, 0.5) !important;
+        0 1px 2px rgba(255, 255, 255, 0.9),
+        0 2px 8px rgba(180, 130, 40, 0.35) !important;
     font-weight: 900 !important;
 }
 
 body.light-mode .hero-text-line {
-    color: #2C1810 !important;
+    color: #5C4033 !important;
     opacity: 1 !important;
     text-shadow: 
-        0 1px 2px rgba(255, 255, 255, 0.8),
-        0 3px 6px rgba(212, 160, 23, 0.5) !important;
+        0 1px 2px rgba(255, 255, 255, 0.9),
+        0 2px 8px rgba(180, 130, 40, 0.35) !important;
     font-weight: 900 !important;
 }
 

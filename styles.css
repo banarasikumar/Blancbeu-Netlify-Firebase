@@ -4795,22 +4795,20 @@ body.light-mode .hero-title {
     -webkit-text-fill-color: unset;
     -webkit-background-clip: unset;
     background-clip: unset;
-    color: #FFD700 !important;
+    color: #2C1810 !important;
     background: none !important;
     text-shadow: 
-        0 2px 4px rgba(0, 0, 0, 0.3),
-        0 4px 8px rgba(0, 0, 0, 0.25),
-        0 -1px 0 rgba(255, 255, 255, 0.5) !important;
+        0 1px 2px rgba(255, 255, 255, 0.8),
+        0 3px 6px rgba(212, 160, 23, 0.5) !important;
     font-weight: 900 !important;
 }
 
 body.light-mode .hero-text-line {
-    color: #FFD700 !important;
+    color: #2C1810 !important;
     opacity: 1 !important;
     text-shadow: 
-        0 2px 4px rgba(0, 0, 0, 0.3),
-        0 4px 8px rgba(0, 0, 0, 0.25),
-        0 -1px 0 rgba(255, 255, 255, 0.5) !important;
+        0 1px 2px rgba(255, 255, 255, 0.8),
+        0 3px 6px rgba(212, 160, 23, 0.5) !important;
     font-weight: 900 !important;
 }
 

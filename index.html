@@ -780,89 +780,295 @@ PHASE 3: PREMIUM FEATURES (Week 4)
             </div>
             </div>
             
-            <!-- ========== TASK 4.0: BEFORE & AFTER GALLERY (PSEUDOCODE) ==========
-                POSITION: After Gallery Section
-                FEATURES:
-                - Image comparison slider for each pair
-                - Before/After labels
-                - Swipe gesture support
-                - Category filter (Hair, Makeup, Nails, etc.)
-                - 6-8 before/after pairs
-                - Auto-carousel with next/prev buttons
-                
-                STRUCTURE:
-                <div class="before-after-section">
-                    <h2>Transformation Gallery</h2>
-                    <div class="filter-tabs">
-                        <button data-category="all">All</button>
-                        <button data-category="hair">Hair</button>
-                        <button data-category="makeup">Makeup</button>
+            <!-- BEFORE & AFTER TRANSFORMATION GALLERY -->
+            <div class="before-after-section" id="transformations">
+                <div class="container">
+                    <h2 class="section-title">
+                        <span class="title-decoration">✨</span>
+                        Transformation Gallery
+                        <span class="title-decoration">✨</span>
+                    </h2>
+                    <p class="section-subtitle">Witness the magic of our expert stylists</p>
+                    
+                    <div class="ba-filter-tabs">
+                        <button class="ba-filter-btn active" data-category="all">All</button>
+                        <button class="ba-filter-btn" data-category="hair">Hair</button>
+                        <button class="ba-filter-btn" data-category="makeup">Makeup</button>
+                        <button class="ba-filter-btn" data-category="nails">Nails</button>
                     </div>
-                    <div class="before-after-carousel">
-                        <div class="comparison-slider">
-                            <img class="before-img">
-                            <img class="after-img">
-                            <div class="comparison-handle">DRAG</div>
+                    
+                    <div class="ba-carousel-wrapper">
+                        <div class="ba-carousel" id="baCarousel">
+                            <div class="ba-slide active" data-category="hair">
+                                <div class="comparison-slider" data-position="50">
+                                    <img src="attached_assets/stock_images/professional_salon_h_6df2461f.jpg" alt="After transformation" class="after-img">
+                                    <img src="attached_assets/stock_images/professional_salon_h_e7285f29.jpg" alt="Before transformation" class="before-img">
+                                    <div class="slider-handle">
+                                        <span class="handle-icon">↔</span>
+                                    </div>
+                                    <span class="ba-label before-label">Before</span>
+                                    <span class="ba-label after-label">After</span>
+                                </div>
+                                <div class="ba-info">
+                                    <h4>Hair Color Transformation</h4>
+                                    <p>Beautiful balayage highlights by our expert colorists</p>
+                                </div>
+                            </div>
+                            
+                            <div class="ba-slide" data-category="hair">
+                                <div class="comparison-slider" data-position="50">
+                                    <img src="attached_assets/stock_images/professional_salon_h_c01af8ec.jpg" alt="After transformation" class="after-img">
+                                    <img src="attached_assets/stock_images/professional_salon_h_cb9f59f7.jpg" alt="Before transformation" class="before-img">
+                                    <div class="slider-handle">
+                                        <span class="handle-icon">↔</span>
+                                    </div>
+                                    <span class="ba-label before-label">Before</span>
+                                    <span class="ba-label after-label">After</span>
+                                </div>
+                                <div class="ba-info">
+                                    <h4>Haircut & Styling</h4>
+                                    <p>Modern layered cut with professional styling</p>
+                                </div>
+                            </div>
+                            
+                            <div class="ba-slide" data-category="makeup">
+                                <div class="comparison-slider" data-position="50">
+                                    <img src="attached_assets/stock_images/gallery_makeup.webp" alt="After makeup" class="after-img">
+                                    <img src="attached_assets/stock_images/gallery_facial.webp" alt="Before makeup" class="before-img">
+                                    <div class="slider-handle">
+                                        <span class="handle-icon">↔</span>
+                                    </div>
+                                    <span class="ba-label before-label">Before</span>
+                                    <span class="ba-label after-label">After</span>
+                                </div>
+                                <div class="ba-info">
+                                    <h4>Bridal Glam Makeup</h4>
+                                    <p>Stunning bridal look for your special day</p>
+                                </div>
+                            </div>
+                            
+                            <div class="ba-slide" data-category="nails">
+                                <div class="comparison-slider" data-position="50">
+                                    <img src="attached_assets/stock_images/gallery_spa.webp" alt="After nails" class="after-img">
+                                    <img src="attached_assets/stock_images/gallery_hair.webp" alt="Before nails" class="before-img">
+                                    <div class="slider-handle">
+                                        <span class="handle-icon">↔</span>
+                                    </div>
+                                    <span class="ba-label before-label">Before</span>
+                                    <span class="ba-label after-label">After</span>
+                                </div>
+                                <div class="ba-info">
+                                    <h4>Nail Art & Extensions</h4>
+                                    <p>Premium gel extensions with artistic designs</p>
+                                </div>
+                            </div>
                         </div>
+                        
+                        <button class="ba-nav-btn prev" onclick="slideBA(-1)">❮</button>
+                        <button class="ba-nav-btn next" onclick="slideBA(1)">❯</button>
+                        
+                        <div class="ba-dots" id="baDots"></div>
                     </div>
                 </div>
-            ========================================== -->
-            <!-- TODO: Insert Before & After Gallery Section -->
+            </div>
 
-            <!-- ========== TASK 5.0: MEMBERSHIP TIER CARDS (PSEUDOCODE) ==========
-                POSITION: After Testimonials, before About
-                FEATURES:
-                - 3 tier cards (Gold, Platinum, Diamond)
-                - Highlight "Most Popular" tier
-                - Show benefits with icons
-                - Compare pricing & discounts
-                - "Join Now" CTA buttons
-                
-                STRUCTURE:
-                <div class="membership-section">
-                    <h2>Choose Your Tier</h2>
+            <!-- MEMBERSHIP TIERS SECTION -->
+            <div class="membership-section" id="membership">
+                <div class="container">
+                    <h2 class="section-title">
+                        <span class="title-decoration">👑</span>
+                        VIP Membership Tiers
+                        <span class="title-decoration">👑</span>
+                    </h2>
+                    <p class="section-subtitle">Unlock exclusive benefits and savings</p>
+                    
                     <div class="tier-cards-grid">
                         <div class="tier-card" data-tier="gold">
-                            <h3>Gold</h3>
-                            <div class="price">₹500/yr</div>
-                            <ul class="benefits"><li>✓ 5% Off</li>...</ul>
-                            <button>Join Gold</button>
-                        </div>
-                        <!-- Repeat for Platinum (Most Popular) and Diamond -->
-                    </div>
-                </div>
-            ========================================== -->
-            <!-- TODO: Insert Membership Tiers Section -->
-            
-            <!-- ========== TASK 6.0: STAFF SPOTLIGHT CAROUSEL (PSEUDOCODE) ==========
-                POSITION: Before Testimonials
-                FEATURES:
-                - Staff profile cards with photo
-                - Name, title, experience years
-                - Specialty services (tags)
-                - Star rating
-                - "Book with [Name]" button
-                - Auto-rotating carousel
-                
-                STRUCTURE:
-                <div class="staff-section">
-                    <h2>Meet Our Team</h2>
-                    <div class="staff-carousel">
-                        <div class="staff-card">
-                            <img class="staff-photo">
-                            <h3>Staff Name</h3>
-                            <p class="title">Hair Specialist</p>
-                            <span class="badge">12 Years Experience</span>
-                            <div class="specialties">
-                                <span class="tag">Hair Coloring</span>
-                                <span class="tag">Cutting</span>
+                            <div class="tier-icon">🥇</div>
+                            <h3 class="tier-name">Gold</h3>
+                            <div class="tier-price">
+                                <span class="price-amount">₹999</span>
+                                <span class="price-period">/year</span>
                             </div>
-                            <button>Book with {name}</button>
+                            <ul class="tier-benefits">
+                                <li><span class="benefit-check">✓</span> 5% off all services</li>
+                                <li><span class="benefit-check">✓</span> Priority booking</li>
+                                <li><span class="benefit-check">✓</span> Birthday special discount</li>
+                                <li><span class="benefit-check">✓</span> Free consultation</li>
+                                <li class="benefit-disabled"><span class="benefit-x">✗</span> Complimentary products</li>
+                                <li class="benefit-disabled"><span class="benefit-x">✗</span> VIP lounge access</li>
+                            </ul>
+                            <div class="tier-savings">Save ₹500+ yearly</div>
+                            <a href="https://wa.me/919229915277?text=Hi%20BlancBeu%2C%20I%20want%20to%20join%20the%20Gold%20Membership" target="_blank" class="tier-cta">Join Gold</a>
+                        </div>
+                        
+                        <div class="tier-card featured" data-tier="platinum">
+                            <div class="tier-badge">Most Popular</div>
+                            <div class="tier-icon">💎</div>
+                            <h3 class="tier-name">Platinum</h3>
+                            <div class="tier-price">
+                                <span class="price-amount">₹2,499</span>
+                                <span class="price-period">/year</span>
+                            </div>
+                            <ul class="tier-benefits">
+                                <li><span class="benefit-check">✓</span> 15% off all services</li>
+                                <li><span class="benefit-check">✓</span> Priority booking</li>
+                                <li><span class="benefit-check">✓</span> Birthday special discount</li>
+                                <li><span class="benefit-check">✓</span> Free consultation</li>
+                                <li><span class="benefit-check">✓</span> Complimentary products</li>
+                                <li class="benefit-disabled"><span class="benefit-x">✗</span> VIP lounge access</li>
+                            </ul>
+                            <div class="tier-savings">Save ₹3,000+ yearly</div>
+                            <a href="https://wa.me/919229915277?text=Hi%20BlancBeu%2C%20I%20want%20to%20join%20the%20Platinum%20Membership" target="_blank" class="tier-cta">Join Platinum</a>
+                        </div>
+                        
+                        <div class="tier-card" data-tier="diamond">
+                            <div class="tier-icon">👸</div>
+                            <h3 class="tier-name">Diamond</h3>
+                            <div class="tier-price">
+                                <span class="price-amount">₹4,999</span>
+                                <span class="price-period">/year</span>
+                            </div>
+                            <ul class="tier-benefits">
+                                <li><span class="benefit-check">✓</span> 25% off all services</li>
+                                <li><span class="benefit-check">✓</span> Priority booking</li>
+                                <li><span class="benefit-check">✓</span> Birthday special discount</li>
+                                <li><span class="benefit-check">✓</span> Free consultation</li>
+                                <li><span class="benefit-check">✓</span> Complimentary products</li>
+                                <li><span class="benefit-check">✓</span> VIP lounge access</li>
+                            </ul>
+                            <div class="tier-savings">Save ₹8,000+ yearly</div>
+                            <a href="https://wa.me/919229915277?text=Hi%20BlancBeu%2C%20I%20want%20to%20join%20the%20Diamond%20Membership" target="_blank" class="tier-cta">Join Diamond</a>
+                        </div>
+                    </div>
+                    
+                    <div class="savings-calculator">
+                        <h3 class="calculator-title">Calculate Your Savings</h3>
+                        <p class="calculator-subtitle">See how much you can save with our membership plans</p>
+                        <div class="calculator-input-group">
+                            <label for="monthlySpend">Your monthly salon spending:</label>
+                            <div class="input-wrapper">
+                                <span class="currency-symbol">₹</span>
+                                <input type="range" id="monthlySpendSlider" min="500" max="10000" step="500" value="3000">
+                                <span class="spend-value" id="spendValue">₹3,000</span>
+                            </div>
+                        </div>
+                        <div class="savings-results" id="savingsResults">
+                            <div class="savings-result-card" data-tier="gold">
+                                <span class="result-tier">Gold</span>
+                                <span class="result-savings" id="goldSavings">₹801/yr</span>
+                            </div>
+                            <div class="savings-result-card featured" data-tier="platinum">
+                                <span class="result-tier">Platinum</span>
+                                <span class="result-savings" id="platinumSavings">₹2,901/yr</span>
+                            </div>
+                            <div class="savings-result-card" data-tier="diamond">
+                                <span class="result-tier">Diamond</span>
+                                <span class="result-savings" id="diamondSavings">₹4,001/yr</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-            ========================================== -->
-            <!-- TODO: Insert Staff Spotlight Section -->
+            </div>
+            
+            <!-- STAFF SPOTLIGHT SECTION -->
+            <div class="staff-section" id="team">
+                <div class="container">
+                    <h2 class="section-title">
+                        <span class="title-decoration">💇</span>
+                        Meet Our Expert Team
+                        <span class="title-decoration">💇</span>
+                    </h2>
+                    <p class="section-subtitle">Passionate professionals dedicated to your beauty</p>
+                    
+                    <div class="staff-carousel-wrapper">
+                        <div class="staff-carousel" id="staffCarousel">
+                            <div class="staff-card">
+                                <div class="staff-photo-wrapper">
+                                    <img src="attached_assets/stock_images/professional_beauty__59c2cb84.jpg" alt="Priya Sharma" class="staff-photo">
+                                    <div class="staff-rating">⭐ 4.9</div>
+                                </div>
+                                <div class="staff-info">
+                                    <h3 class="staff-name">Priya Sharma</h3>
+                                    <p class="staff-title">Senior Hair Stylist</p>
+                                    <div class="staff-experience">
+                                        <span class="exp-badge">12+ Years Experience</span>
+                                    </div>
+                                    <div class="staff-specialties">
+                                        <span class="specialty-tag">Hair Coloring</span>
+                                        <span class="specialty-tag">Balayage</span>
+                                        <span class="specialty-tag">Bridal Hair</span>
+                                    </div>
+                                    <a href="https://wa.me/919229915277?text=Hi%2C%20I%20want%20to%20book%20with%20Priya%20Sharma" target="_blank" class="book-staff-btn">Book with Priya</a>
+                                </div>
+                            </div>
+                            
+                            <div class="staff-card">
+                                <div class="staff-photo-wrapper">
+                                    <img src="attached_assets/stock_images/professional_beauty__30f1cabb.jpg" alt="Meera Patel" class="staff-photo">
+                                    <div class="staff-rating">⭐ 4.8</div>
+                                </div>
+                                <div class="staff-info">
+                                    <h3 class="staff-name">Meera Patel</h3>
+                                    <p class="staff-title">Makeup Artist</p>
+                                    <div class="staff-experience">
+                                        <span class="exp-badge">8+ Years Experience</span>
+                                    </div>
+                                    <div class="staff-specialties">
+                                        <span class="specialty-tag">Bridal Makeup</span>
+                                        <span class="specialty-tag">HD Makeup</span>
+                                        <span class="specialty-tag">Party Looks</span>
+                                    </div>
+                                    <a href="https://wa.me/919229915277?text=Hi%2C%20I%20want%20to%20book%20with%20Meera%20Patel" target="_blank" class="book-staff-btn">Book with Meera</a>
+                                </div>
+                            </div>
+                            
+                            <div class="staff-card">
+                                <div class="staff-photo-wrapper">
+                                    <img src="attached_assets/stock_images/professional_beauty__4b0e7940.jpg" alt="Anjali Singh" class="staff-photo">
+                                    <div class="staff-rating">⭐ 4.9</div>
+                                </div>
+                                <div class="staff-info">
+                                    <h3 class="staff-name">Anjali Singh</h3>
+                                    <p class="staff-title">Skin Care Specialist</p>
+                                    <div class="staff-experience">
+                                        <span class="exp-badge">10+ Years Experience</span>
+                                    </div>
+                                    <div class="staff-specialties">
+                                        <span class="specialty-tag">Facials</span>
+                                        <span class="specialty-tag">Skin Treatments</span>
+                                        <span class="specialty-tag">Anti-Aging</span>
+                                    </div>
+                                    <a href="https://wa.me/919229915277?text=Hi%2C%20I%20want%20to%20book%20with%20Anjali%20Singh" target="_blank" class="book-staff-btn">Book with Anjali</a>
+                                </div>
+                            </div>
+                            
+                            <div class="staff-card">
+                                <div class="staff-photo-wrapper">
+                                    <img src="attached_assets/stock_images/professional_beauty__bd79d0cb.jpg" alt="Riya Gupta" class="staff-photo">
+                                    <div class="staff-rating">⭐ 4.7</div>
+                                </div>
+                                <div class="staff-info">
+                                    <h3 class="staff-name">Riya Gupta</h3>
+                                    <p class="staff-title">Nail Art Expert</p>
+                                    <div class="staff-experience">
+                                        <span class="exp-badge">6+ Years Experience</span>
+                                    </div>
+                                    <div class="staff-specialties">
+                                        <span class="specialty-tag">Gel Nails</span>
+                                        <span class="specialty-tag">Nail Art</span>
+                                        <span class="specialty-tag">Extensions</span>
+                                    </div>
+                                    <a href="https://wa.me/919229915277?text=Hi%2C%20I%20want%20to%20book%20with%20Riya%20Gupta" target="_blank" class="book-staff-btn">Book with Riya</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="staff-nav-btn prev" onclick="slideStaff(-1)">❮</button>
+                        <button class="staff-nav-btn next" onclick="slideStaff(1)">❯</button>
+                    </div>
+                </div>
+            </div>
 
             <!-- REVIEWS SECTION - TESTIMONIAL CAROUSEL -->
             <div id="reviews" class="reviews-section">

@@ -3049,3 +3049,227 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }, 8000);
 });
+
+// ===== BEFORE & AFTER GALLERY =====
+let baCurrentSlide = 0;
+let baFilteredSlides = [];
+
+function initBeforeAfterGallery() {
+    const slides = document.querySelectorAll('.ba-slide');
+    const dotsContainer = document.getElementById('baDots');
+    const filterBtns = document.querySelectorAll('.ba-filter-btn');
+    
+    if (!slides.length || !dotsContainer) return;
+    
+    baFilteredSlides = Array.from(slides);
+    
+    // Create dots
+    slides.forEach((_, index) => {
+        const dot = document.createElement('div');
+        dot.className = `ba-dot ${index === 0 ? 'active' : ''}`;
+        dot.onclick = () => goToBASlide(index);
+        dotsContainer.appendChild(dot);
+    });
+    
+    // Filter buttons
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const category = btn.dataset.category;
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            filterBASlides(category);
+        });
+    });
+    
+    // Initialize comparison sliders
+    initComparisonSliders();
+    
+    // Auto-advance every 6 seconds
+    setInterval(() => slideBA(1), 6000);
+}
+
+function filterBASlides(category) {
+    const slides = document.querySelectorAll('.ba-slide');
+    const dotsContainer = document.getElementById('baDots');
+    
+    baCurrentSlide = 0;
+    baFilteredSlides = [];
+    
+    slides.forEach(slide => {
+        if (category === 'all' || slide.dataset.category === category) {
+            baFilteredSlides.push(slide);
+        }
+        slide.classList.remove('active');
+    });
+    
+    if (baFilteredSlides.length > 0) {
+        baFilteredSlides[0].classList.add('active');
+    }
+    
+    // Update dots
+    dotsContainer.innerHTML = '';
+    baFilteredSlides.forEach((_, index) => {
+        const dot = document.createElement('div');
+        dot.className = `ba-dot ${index === 0 ? 'active' : ''}`;
+        dot.onclick = () => goToBASlide(index);
+        dotsContainer.appendChild(dot);
+    });
+}
+
+function slideBA(direction) {
+    if (baFilteredSlides.length === 0) {
+        baFilteredSlides = Array.from(document.querySelectorAll('.ba-slide'));
+    }
+    
+    baFilteredSlides[baCurrentSlide].classList.remove('active');
+    baCurrentSlide += direction;
+    
+    if (baCurrentSlide < 0) baCurrentSlide = baFilteredSlides.length - 1;
+    if (baCurrentSlide >= baFilteredSlides.length) baCurrentSlide = 0;
+    
+    baFilteredSlides[baCurrentSlide].classList.add('active');
+    updateBADots();
+}
+
+function goToBASlide(index) {
+    baFilteredSlides[baCurrentSlide].classList.remove('active');
+    baCurrentSlide = index;
+    baFilteredSlides[baCurrentSlide].classList.add('active');
+    updateBADots();
+}
+
+function updateBADots() {
+    const dots = document.querySelectorAll('.ba-dot');
+    dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === baCurrentSlide);
+    });
+}
+
+function initComparisonSliders() {
+    const sliders = document.querySelectorAll('.comparison-slider');
+    
+    sliders.forEach(slider => {
+        const handle = slider.querySelector('.slider-handle');
+        const beforeImg = slider.querySelector('.before-img');
+        let isDragging = false;
+        
+        function updateSlider(e) {
+            if (!isDragging) return;
+            
+            const rect = slider.getBoundingClientRect();
+            let x = (e.clientX || e.touches[0].clientX) - rect.left;
+            let percentage = (x / rect.width) * 100;
+            
+            percentage = Math.max(5, Math.min(95, percentage));
+            
+            beforeImg.style.clipPath = `inset(0 ${100 - percentage}% 0 0)`;
+            handle.style.left = `${percentage}%`;
+        }
+        
+        function startDrag(e) {
+            isDragging = true;
+            e.preventDefault();
+        }
+        
+        function endDrag() {
+            isDragging = false;
+        }
+        
+        // Mouse events
+        handle.addEventListener('mousedown', startDrag);
+        slider.addEventListener('mousedown', startDrag);
+        document.addEventListener('mousemove', updateSlider);
+        document.addEventListener('mouseup', endDrag);
+        
+        // Touch events
+        handle.addEventListener('touchstart', startDrag);
+        slider.addEventListener('touchstart', startDrag);
+        document.addEventListener('touchmove', updateSlider);
+        document.addEventListener('touchend', endDrag);
+    });
+}
+
+document.addEventListener('DOMContentLoaded', initBeforeAfterGallery);
+
+// ===== STAFF CAROUSEL =====
+let staffPosition = 0;
+
+function slideStaff(direction) {
+    const carousel = document.getElementById('staffCarousel');
+    if (!carousel) return;
+    
+    const cards = carousel.querySelectorAll('.staff-card');
+    if (cards.length === 0) return;
+    
+    const cardWidth = cards[0].offsetWidth + 30; // 30px gap
+    const containerWidth = carousel.parentElement.offsetWidth - 120; // minus padding
+    const visibleCards = Math.floor(containerWidth / cardWidth);
+    const maxPosition = Math.max(0, cards.length - visibleCards);
+    
+    staffPosition += direction;
+    if (staffPosition < 0) staffPosition = 0;
+    if (staffPosition > maxPosition) staffPosition = maxPosition;
+    
+    carousel.style.transform = `translateX(-${staffPosition * cardWidth}px)`;
+}
+
+// Auto-advance staff carousel every 5 seconds
+document.addEventListener('DOMContentLoaded', () => {
+    setInterval(() => {
+        const carousel = document.getElementById('staffCarousel');
+        if (carousel) {
+            const cards = carousel.querySelectorAll('.staff-card');
+            const containerWidth = carousel.parentElement.offsetWidth - 120;
+            const cardWidth = cards[0]?.offsetWidth + 30 || 310;
+            const visibleCards = Math.floor(containerWidth / cardWidth);
+            const maxPosition = Math.max(0, cards.length - visibleCards);
+            
+            staffPosition++;
+            if (staffPosition > maxPosition) staffPosition = 0;
+            carousel.style.transform = `translateX(-${staffPosition * cardWidth}px)`;
+        }
+    }, 5000);
+});
+
+// ===== SAVINGS CALCULATOR =====
+function initSavingsCalculator() {
+    const slider = document.getElementById('monthlySpendSlider');
+    const spendValue = document.getElementById('spendValue');
+    const goldSavings = document.getElementById('goldSavings');
+    const platinumSavings = document.getElementById('platinumSavings');
+    const diamondSavings = document.getElementById('diamondSavings');
+    
+    if (!slider) return;
+    
+    const membershipCosts = { gold: 999, platinum: 2499, diamond: 4999 };
+    const discountRates = { gold: 0.05, platinum: 0.15, diamond: 0.25 };
+    
+    function calculateSavings(monthlySpend) {
+        const yearlySpend = monthlySpend * 12;
+        
+        const goldYearlySavings = (yearlySpend * discountRates.gold) - membershipCosts.gold;
+        const platinumYearlySavings = (yearlySpend * discountRates.platinum) - membershipCosts.platinum;
+        const diamondYearlySavings = (yearlySpend * discountRates.diamond) - membershipCosts.diamond;
+        
+        return {
+            gold: Math.max(0, Math.round(goldYearlySavings)),
+            platinum: Math.max(0, Math.round(platinumYearlySavings)),
+            diamond: Math.max(0, Math.round(diamondYearlySavings))
+        };
+    }
+    
+    function updateDisplay() {
+        const monthlySpend = parseInt(slider.value);
+        spendValue.textContent = `₹${monthlySpend.toLocaleString('en-IN')}`;
+        
+        const savings = calculateSavings(monthlySpend);
+        goldSavings.textContent = `₹${savings.gold.toLocaleString('en-IN')}/yr`;
+        platinumSavings.textContent = `₹${savings.platinum.toLocaleString('en-IN')}/yr`;
+        diamondSavings.textContent = `₹${savings.diamond.toLocaleString('en-IN')}/yr`;
+    }
+    
+    slider.addEventListener('input', updateDisplay);
+    updateDisplay();
+}
+
+document.addEventListener('DOMContentLoaded', initSavingsCalculator);

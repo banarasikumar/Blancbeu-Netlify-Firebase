@@ -3273,3 +3273,216 @@ function initSavingsCalculator() {
 }
 
 document.addEventListener('DOMContentLoaded', initSavingsCalculator);
+
+// ================================================================================
+// PHASE 0: PREMIUM MICRO-INTERACTIONS - ACTUAL IMPLEMENTATIONS
+// ================================================================================
+
+// ===== RIPPLE EFFECT ON BUTTONS =====
+function createRipple(e) {
+    const button = e.currentTarget;
+    const existingRipple = button.querySelector('.ripple');
+    if (existingRipple) existingRipple.remove();
+    
+    const ripple = document.createElement('span');
+    ripple.className = 'ripple';
+    
+    const rect = button.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height);
+    const x = e.clientX - rect.left - size / 2;
+    const y = e.clientY - rect.top - size / 2;
+    
+    ripple.style.cssText = `
+        position: absolute;
+        width: ${size}px;
+        height: ${size}px;
+        left: ${x}px;
+        top: ${y}px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(255,215,0,0.5) 0%, transparent 70%);
+        transform: scale(0);
+        animation: rippleExpand 0.6s ease-out forwards;
+        pointer-events: none;
+    `;
+    
+    button.appendChild(ripple);
+    ripple.addEventListener('animationend', () => ripple.remove());
+}
+
+// ===== MAGNETIC BUTTON EFFECT =====
+class MagneticButton {
+    constructor(element, strength = 0.3) {
+        this.element = element;
+        this.strength = strength;
+        this.bounds = null;
+        this.position = { x: 0, y: 0 };
+        this.target = { x: 0, y: 0 };
+        this.animating = false;
+        
+        this.element.addEventListener('mouseenter', () => this.onEnter());
+        this.element.addEventListener('mousemove', (e) => this.onMove(e));
+        this.element.addEventListener('mouseleave', () => this.onLeave());
+    }
+    
+    onEnter() {
+        this.bounds = this.element.getBoundingClientRect();
+        if (!this.animating) {
+            this.animating = true;
+            this.animate();
+        }
+    }
+    
+    onMove(e) {
+        if (!this.element || !this.element.isConnected) return;
+        this.bounds = this.element.getBoundingClientRect();
+        const centerX = this.bounds.left + this.bounds.width / 2;
+        const centerY = this.bounds.top + this.bounds.height / 2;
+        this.target.x = (e.clientX - centerX) * this.strength;
+        this.target.y = (e.clientY - centerY) * this.strength;
+    }
+    
+    onLeave() {
+        this.target = { x: 0, y: 0 };
+    }
+    
+    animate() {
+        this.position.x += (this.target.x - this.position.x) * 0.15;
+        this.position.y += (this.target.y - this.position.y) * 0.15;
+        
+        this.element.style.transform = `translate(${this.position.x}px, ${this.position.y}px)`;
+        
+        if (Math.abs(this.target.x - this.position.x) > 0.01 || 
+            Math.abs(this.target.y - this.position.y) > 0.01 ||
+            Math.abs(this.position.x) > 0.01 || 
+            Math.abs(this.position.y) > 0.01) {
+            requestAnimationFrame(() => this.animate());
+        } else {
+            this.animating = false;
+            this.element.style.transform = '';
+        }
+    }
+}
+
+// ===== SCROLL REVEAL ANIMATION =====
+class ScrollReveal {
+    constructor(options = {}) {
+        this.threshold = options.threshold || 0.15;
+        this.staggerDelay = options.staggerDelay || 80;
+        this.init();
+    }
+    
+    init() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    const siblings = entry.target.parentElement?.querySelectorAll('.scroll-reveal') || [];
+                    const siblingIndex = Array.from(siblings).indexOf(entry.target);
+                    
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, siblingIndex * this.staggerDelay);
+                    
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: this.threshold, rootMargin: '0px 0px -50px 0px' });
+        
+        document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
+    }
+}
+
+// ===== FAQ ACCORDION =====
+function initFaqAccordion() {
+    const faqItems = document.querySelectorAll('.faq-item');
+    
+    faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        if (!question) return;
+        
+        question.addEventListener('click', () => {
+            const isActive = item.classList.contains('active');
+            
+            // Close all others
+            faqItems.forEach(other => other.classList.remove('active'));
+            
+            // Toggle current
+            if (!isActive) {
+                item.classList.add('active');
+            }
+        });
+    });
+}
+
+// ===== INITIALIZE ALL MICRO-INTERACTIONS =====
+function initMicroInteractions() {
+    // Ripple effect on buttons
+    document.querySelectorAll('.hero-btn, .contact-btn, .book-service-btn, .book-staff-btn, .tier-cta-btn, .btn-premium, .ripple-btn').forEach(btn => {
+        btn.style.position = 'relative';
+        btn.style.overflow = 'hidden';
+        btn.addEventListener('click', createRipple);
+    });
+    
+    // Magnetic buttons (desktop only)
+    if (window.matchMedia('(hover: hover)').matches) {
+        document.querySelectorAll('.hero-btn, .magnetic-btn').forEach(btn => {
+            new MagneticButton(btn, 0.25);
+        });
+    }
+    
+    // Scroll reveal
+    new ScrollReveal({ threshold: 0.12, staggerDelay: 100 });
+    
+    // FAQ accordion
+    initFaqAccordion();
+    
+    console.log('✨ Premium micro-interactions initialized');
+}
+
+// ===== ADD SCROLL-REVEAL CLASSES TO SECTIONS =====
+function addScrollRevealClasses() {
+    // Trust cards
+    document.querySelectorAll('.trust-card').forEach(card => {
+        card.classList.add('scroll-reveal', 'fade-up');
+    });
+    
+    // Feature cards
+    document.querySelectorAll('.feature-card').forEach(card => {
+        card.classList.add('scroll-reveal', 'zoom-in');
+    });
+    
+    // Service cards
+    document.querySelectorAll('.service-card-item').forEach(card => {
+        card.classList.add('scroll-reveal', 'fade-up');
+    });
+    
+    // Gallery items
+    document.querySelectorAll('.gallery-item').forEach(item => {
+        item.classList.add('scroll-reveal', 'zoom-in');
+    });
+    
+    // Testimonial cards
+    document.querySelectorAll('.testimonial-card-item').forEach(card => {
+        card.classList.add('scroll-reveal', 'fade-up');
+    });
+    
+    // Staff cards
+    document.querySelectorAll('.staff-card').forEach(card => {
+        card.classList.add('scroll-reveal', 'fade-up');
+    });
+    
+    // Tier cards
+    document.querySelectorAll('.tier-card').forEach(card => {
+        card.classList.add('scroll-reveal', 'zoom-in');
+    });
+    
+    // Section titles
+    document.querySelectorAll('.section-title').forEach(title => {
+        title.classList.add('scroll-reveal', 'fade-up');
+    });
+}
+
+// Initialize on DOM ready
+document.addEventListener('DOMContentLoaded', () => {
+    addScrollRevealClasses();
+    initMicroInteractions();
+});

@@ -1815,15 +1815,81 @@ function goToSlide(index) {
   startAutoPlay();
 }
 
+let filteredServices = [];
+let currentFilter = 'all';
+let searchQuery = '';
+
+function initServiceFiltering() {
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const searchInput = document.getElementById('serviceSearch');
+  const clearBtn = document.getElementById('clearFilters');
+  
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentFilter = btn.dataset.category;
+      applyFilters();
+    });
+  });
+  
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      searchQuery = e.target.value.toLowerCase();
+      applyFilters();
+    });
+  }
+  
+  if (clearBtn) {
+    clearBtn.addEventListener('click', () => {
+      searchQuery = '';
+      currentFilter = 'all';
+      filterBtns.forEach(b => b.classList.remove('active'));
+      filterBtns[0].classList.add('active');
+      if (searchInput) searchInput.value = '';
+      applyFilters();
+    });
+  }
+}
+
+function applyFilters() {
+  let matched = 0;
+  const allServices = document.querySelectorAll('.service-card');
+  
+  servicesData.groups.forEach(group => {
+    const categoryDiv = document.querySelector(`[data-category="${group.group}"]`);
+    if (!categoryDiv) return;
+    
+    let groupMatched = 0;
+    group.services.forEach(service => {
+      const matches = 
+        (currentFilter === 'all' || group.group.toLowerCase().includes(currentFilter)) &&
+        (searchQuery === '' || service.name.toLowerCase().includes(searchQuery));
+      
+      if (matches) groupMatched++;
+    });
+    
+    matched += groupMatched;
+    if (categoryDiv) {
+      categoryDiv.style.opacity = groupMatched > 0 ? '1' : '0.3';
+    }
+  });
+  
+  const countEl = document.getElementById('servicesCount');
+  const clearBtn = document.getElementById('clearFilters');
+  if (countEl) countEl.textContent = `Found ${matched} services`;
+  if (clearBtn && (searchQuery || currentFilter !== 'all')) clearBtn.style.display = 'block';
+  else if (clearBtn) clearBtn.style.display = 'none';
+}
+
 function renderServices() {
   const container = document.getElementById('servicesContainer');
-  
-  // Skip if container doesn't exist
   if (!container) return;
   
   servicesData.groups.forEach(group => {
     const categoryDiv = document.createElement('div');
     categoryDiv.className = 'service-category';
+    categoryDiv.dataset.category = group.group;
     
     const headerHTML = `
       <div class="category-header">
@@ -1840,12 +1906,16 @@ function renderServices() {
       
       return `
         <div class="service-card">
-          <div class="service-name">${service.name}</div>
+          <div class="service-header">
+            <div class="service-name">${service.name}</div>
+            <div class="service-duration">⏱️ 30-60 min</div>
+          </div>
           <div class="service-prices">
             ${hasOffer ? `<span class="service-original-price">₹${service.price}</span>` : ''}
             <span class="service-offer-price">₹${service.offerPrice || service.price}</span>
             ${hasOffer && discount > 0 ? `<span class="service-discount">${discount}% OFF</span>` : ''}
           </div>
+          <button class="book-service-btn" onclick="alert('Booking coming soon!')">Book Now</button>
         </div>
       `;
     }).join('');
@@ -1853,6 +1923,8 @@ function renderServices() {
     categoryDiv.innerHTML = headerHTML + `<div class="services-grid">${servicesHTML}</div>`;
     container.appendChild(categoryDiv);
   });
+  
+  initServiceFiltering();
 }
 
 function renderReviews() {
@@ -2047,6 +2119,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCarousel();
   renderServices();
   renderReviews();
+  initServiceFiltering();
   initSmoothScroll();
   initScrollBehavior();
 });

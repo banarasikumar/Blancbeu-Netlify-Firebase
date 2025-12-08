@@ -387,27 +387,38 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                 </div>
             </div>
 
-            <!-- ================================================
-                 TODO: TASK 1.0 - SERVICE FILTER BAR
-                 ================================================
-                 Insert sticky filter bar here with:
-                 - Category buttons: All | Hair | Makeup | Nails | Spa | Threading
-                 - Search input with magnifying glass icon
-                 - "X services found" counter
-                 - Clear filters button
-                 
-                 <div class="service-filter-bar">
-                     <div class="filter-categories">
-                         <button class="filter-btn active" data-category="all">All</button>
-                         <button class="filter-btn" data-category="hair">Hair</button>
-                         ...
-                     </div>
-                     <div class="filter-search">
-                         <input type="text" placeholder="Search services...">
-                     </div>
-                     <div class="filter-count">50 services</div>
-                 </div>
-            ================================================ -->
+            <div class="service-filter-bar" id="serviceFilterBar">
+                <div class="filter-categories">
+                    <button class="filter-btn active" data-category="all">
+                        <span class="filter-icon">✨</span>
+                        <span>All Services</span>
+                    </button>
+                    <button class="filter-btn" data-category="hair">
+                        <span class="filter-icon">💇</span>
+                        <span>Hair</span>
+                    </button>
+                    <button class="filter-btn" data-category="makeup">
+                        <span class="filter-icon">💄</span>
+                        <span>Makeup</span>
+                    </button>
+                    <button class="filter-btn" data-category="nails">
+                        <span class="filter-icon">💅</span>
+                        <span>Nails</span>
+                    </button>
+                    <button class="filter-btn" data-category="spa">
+                        <span class="filter-icon">💆</span>
+                        <span>Spa</span>
+                    </button>
+                    <button class="filter-btn" data-category="threading">
+                        <span class="filter-icon">✂️</span>
+                        <span>Threading</span>
+                    </button>
+                </div>
+                <div class="filter-search">
+                    <input type="text" id="serviceSearch" placeholder="Search services..." autocomplete="off">
+                </div>
+                <div class="filter-count" id="filterCount">50+ services available</div>
+            </div>
 
             <!-- TRUST & SOCIAL PROOF SECTION -->
             <div class="trust-section">
@@ -420,19 +431,19 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                     <p class="section-subtitle">Trusted by thousands for premium beauty care</p>
                     
                     <div class="trust-grid">
-                        <div class="trust-card">
+                        <div class="trust-card premium-hover glass-card scroll-reveal">
                             <div class="stat-number" data-value="15">0</div>
                             <div class="stat-label">Years of Excellence</div>
                             <div class="stat-description">Serving the community with premium beauty treatments</div>
                         </div>
                         
-                        <div class="trust-card">
+                        <div class="trust-card premium-hover glass-card scroll-reveal">
                             <div class="stat-number" data-value="10000">0</div>
                             <div class="stat-label">Happy Clients</div>
                             <div class="stat-description">Thousands of satisfied customers every year</div>
                         </div>
                         
-                        <div class="trust-card">
+                        <div class="trust-card premium-hover glass-card scroll-reveal">
                             <div class="stat-number" data-value="50">0</div>
                             <div class="stat-label">Services Offered</div>
                             <div class="stat-description">Comprehensive beauty and wellness solutions</div>
@@ -452,37 +463,37 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                     <p class="section-subtitle">Experience premium beauty services with excellence</p>
                     
                     <div class="features-grid">
-                        <div class="feature-card">
+                        <div class="feature-card premium-hover card-lift scroll-reveal">
                             <div class="feature-icon">👑</div>
                             <h3>Premium Quality</h3>
                             <p>Using luxury products and expert techniques for best results</p>
                         </div>
                         
-                        <div class="feature-card">
+                        <div class="feature-card premium-hover card-lift scroll-reveal">
                             <div class="feature-icon">⏰</div>
                             <h3>Expert Professionals</h3>
                             <p>Certified and experienced beauty specialists on staff</p>
                         </div>
                         
-                        <div class="feature-card">
+                        <div class="feature-card premium-hover card-lift scroll-reveal">
                             <div class="feature-icon">✨</div>
                             <h3>Personalized Care</h3>
                             <p>Customized treatments tailored to your unique needs</p>
                         </div>
                         
-                        <div class="feature-card">
+                        <div class="feature-card premium-hover card-lift scroll-reveal">
                             <div class="feature-icon">💆</div>
                             <h3>Relaxing Ambiance</h3>
                             <p>Luxurious salon environment designed for your comfort</p>
                         </div>
                         
-                        <div class="feature-card">
+                        <div class="feature-card premium-hover card-lift scroll-reveal">
                             <div class="feature-icon">💰</div>
                             <h3>Best Value</h3>
                             <p>Premium services at competitive prices with special offers</p>
                         </div>
                         
-                        <div class="feature-card">
+                        <div class="feature-card premium-hover card-lift scroll-reveal">
                             <div class="feature-icon">🎯</div>
                             <h3>100% Satisfaction</h3>
                             <p>Your happiness is our guarantee and commitment</p>
@@ -1784,7 +1795,91 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                     </div>
                 </div>
             ========================================== -->
-            <!-- TODO: Insert Staff Spotlight Section Here -->
+            <!-- FAQ SECTION -->
+            <section class="faq-section" id="faq">
+                <div class="container">
+                    <h2 class="section-title">
+                        <span class="title-decoration">❓</span>
+                        Frequently Asked Questions
+                        <span class="title-decoration">💬</span>
+                    </h2>
+                    <p class="section-subtitle">Everything you need to know about our services</p>
+                    
+                    <div class="faq-container">
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>What are your salon hours?</h3>
+                                <span class="faq-icon">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                <div class="faq-answer-content">
+                                    We are open from 10:00 AM to 8:00 PM, Monday through Sunday. We recommend booking an appointment in advance to ensure your preferred time slot is available.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>How do I book an appointment?</h3>
+                                <span class="faq-icon">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                <div class="faq-answer-content">
+                                    You can book an appointment by calling us at +91 92299 15277, messaging us on WhatsApp, or visiting our salon directly. We also accept walk-ins based on availability.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>What products do you use?</h3>
+                                <span class="faq-icon">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                <div class="faq-answer-content">
+                                    We use only premium, professional-grade products from trusted international and Indian brands. Our products are carefully selected for quality, safety, and effectiveness.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>Do you offer bridal packages?</h3>
+                                <span class="faq-icon">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                <div class="faq-answer-content">
+                                    Yes! We offer comprehensive bridal packages that include pre-bridal treatments, makeup, hair styling, and more. Contact us for a personalized consultation and package details.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>What is your cancellation policy?</h3>
+                                <span class="faq-icon">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                <div class="faq-answer-content">
+                                    We request at least 2 hours notice for cancellations. This helps us accommodate other clients and maintain our service quality. For bridal appointments, please provide 24 hours notice.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>Do you offer services for men?</h3>
+                                <span class="faq-icon">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                <div class="faq-answer-content">
+                                    Absolutely! Blancbeu is a family salon that caters to men, women, and children. We offer a full range of grooming services for men including haircuts, beard styling, facials, and more.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
             <!-- FOOTER -->
             <footer class="footer">

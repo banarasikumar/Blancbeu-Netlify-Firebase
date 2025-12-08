@@ -3479,6 +3479,11 @@ function addScrollRevealClasses() {
         card.classList.add('scroll-reveal', 'zoom-in');
     });
     
+    // FAQ items
+    document.querySelectorAll('.faq-item').forEach(item => {
+        item.classList.add('scroll-reveal', 'fade-up');
+    });
+    
     // Section titles
     document.querySelectorAll('.section-title').forEach(title => {
         title.classList.add('scroll-reveal', 'fade-up');

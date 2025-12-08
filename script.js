@@ -3375,8 +3375,12 @@ class ScrollReveal {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
-                    const siblings = entry.target.parentElement?.querySelectorAll('.scroll-reveal') || [];
-                    const siblingIndex = Array.from(siblings).indexOf(entry.target);
+                    let siblingIndex = 0;
+                    const parent = entry.target.parentElement;
+                    if (parent) {
+                        const siblings = parent.querySelectorAll('.scroll-reveal');
+                        siblingIndex = Math.max(0, Array.from(siblings).indexOf(entry.target));
+                    }
                     
                     setTimeout(() => {
                         entry.target.classList.add('visible');

@@ -3602,7 +3602,9 @@ function initFloatingChatWidget() {
     const chatHTML = `
         <div class="floating-chat-widget" id="floatingChatWidget">
             <button class="chat-fab" id="chatFab" aria-label="Open chat">
-                <span class="fab-icon">💬</span>
+                <svg class="fab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
                 <span class="fab-pulse"></span>
             </button>
             
@@ -3665,8 +3667,10 @@ function initFloatingChatWidget() {
         }
         
         .fab-icon {
-            font-size: 26px;
+            width: 28px;
+            height: 28px;
             z-index: 1;
+            color: white;
         }
         
         .fab-pulse {

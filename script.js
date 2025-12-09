@@ -3602,9 +3602,7 @@ function initFloatingChatWidget() {
     const chatHTML = `
         <div class="floating-chat-widget" id="floatingChatWidget">
             <button class="chat-fab" id="chatFab" aria-label="Open chat">
-                <svg class="fab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-                </svg>
+                <img src="assets/ai_assistant_icon.png" alt="AI Assistant" class="fab-icon-img">
                 <span class="fab-pulse"></span>
             </button>
             
@@ -3671,6 +3669,15 @@ function initFloatingChatWidget() {
             height: 28px;
             z-index: 1;
             color: white;
+        }
+        
+        .fab-icon-img {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            object-fit: cover;
+            z-index: 1;
+            border: 2px solid white;
         }
         
         .fab-pulse {

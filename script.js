@@ -3494,4 +3494,553 @@ function addScrollRevealClasses() {
 document.addEventListener('DOMContentLoaded', () => {
     addScrollRevealClasses();
     initMicroInteractions();
+    initServiceFilter();
+    initFloatingChatWidget();
 });
+
+// ================================================================================
+// SERVICE FILTERING & SEARCH SYSTEM
+// ================================================================================
+function initServiceFilter() {
+    const filterBar = document.getElementById('serviceFilterBar');
+    if (!filterBar) return;
+    
+    const filterBtns = filterBar.querySelectorAll('.filter-btn');
+    const searchInput = document.getElementById('serviceSearch');
+    const filterCount = document.getElementById('filterCount');
+    const servicesSection = document.getElementById('services');
+    
+    if (!servicesSection) return;
+    
+    const serviceCards = servicesSection.querySelectorAll('.service-card-item');
+    let activeCategory = 'all';
+    let searchQuery = '';
+    let debounceTimer = null;
+    let filterVersion = 0;
+    const cardTimers = new Map();
+    
+    // Category filter click handlers
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            activeCategory = btn.dataset.category;
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            applyFilters();
+        });
+    });
+    
+    // Search with debouncing
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(() => {
+                searchQuery = e.target.value.toLowerCase().trim();
+                applyFilters();
+            }, 300);
+        });
+    }
+    
+    function applyFilters() {
+        filterVersion++;
+        const currentVersion = filterVersion;
+        let visibleCount = 0;
+        
+        cardTimers.forEach(timer => clearTimeout(timer));
+        cardTimers.clear();
+        
+        serviceCards.forEach((card, index) => {
+            const cardCategory = card.dataset.category || 'all';
+            const cardText = card.textContent.toLowerCase();
+            
+            const matchesCategory = activeCategory === 'all' || cardCategory === activeCategory;
+            const matchesSearch = searchQuery === '' || cardText.includes(searchQuery);
+            
+            const isVisible = matchesCategory && matchesSearch;
+            
+            if (isVisible) {
+                visibleCount++;
+                card.style.display = '';
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                const showTimer = setTimeout(() => {
+                    if (filterVersion === currentVersion) {
+                        card.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }
+                }, index * 50);
+                cardTimers.set(card, showTimer);
+            } else {
+                card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                card.style.opacity = '0';
+                card.style.transform = 'scale(0.9)';
+                const hideTimer = setTimeout(() => {
+                    if (filterVersion === currentVersion) {
+                        card.style.display = 'none';
+                    }
+                }, 300);
+                cardTimers.set(card, hideTimer);
+            }
+        });
+        
+        if (filterCount) {
+            filterCount.textContent = `${visibleCount} service${visibleCount !== 1 ? 's' : ''} found`;
+        }
+    }
+    
+    console.log('✅ Service filter initialized');
+}
+
+// ================================================================================
+// FLOATING CHAT WIDGET
+// ================================================================================
+function initFloatingChatWidget() {
+    // Create chat widget HTML
+    const chatHTML = `
+        <div class="floating-chat-widget" id="floatingChatWidget">
+            <button class="chat-fab" id="chatFab" aria-label="Open chat">
+                <span class="fab-icon">💬</span>
+                <span class="fab-pulse"></span>
+            </button>
+            
+            <div class="chat-window-float" id="chatWindowFloat">
+                <div class="chat-header-float">
+                    <div class="chat-header-info-float">
+                        <img src="assets/brand_icon_optimized.webp" alt="Blancbeu" class="chat-avatar-float">
+                        <div>
+                            <div class="chat-title-float">Blancbeu Support</div>
+                            <div class="chat-status-float"><span class="status-dot"></span>Online now</div>
+                        </div>
+                    </div>
+                    <button class="chat-close-float" id="chatCloseFloat">✕</button>
+                </div>
+                
+                <div class="chat-messages-float" id="chatMessagesFloat"></div>
+                
+                <div class="chat-quick-float" id="chatQuickFloat">
+                    <button class="quick-btn-float" data-action="services">View Services</button>
+                    <button class="quick-btn-float" data-action="booking">Book Now</button>
+                    <button class="quick-btn-float" data-action="hours">Hours</button>
+                    <button class="quick-btn-float" data-action="location">Location</button>
+                </div>
+                
+                <div class="chat-input-float">
+                    <input type="text" id="chatInputFloat" placeholder="Type a message...">
+                    <button id="chatSendFloat">➤</button>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // Add CSS for floating chat
+    const chatCSS = `
+        .floating-chat-widget {
+            position: fixed;
+            bottom: 100px;
+            right: 24px;
+            z-index: 9998;
+        }
+        
+        .chat-fab {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--gold-600), var(--gold-500));
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 8px 30px rgba(255, 215, 0, 0.4);
+            transition: all 0.3s ease;
+        }
+        
+        .chat-fab:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 40px rgba(255, 215, 0, 0.5);
+        }
+        
+        .fab-icon {
+            font-size: 26px;
+            z-index: 1;
+        }
+        
+        .fab-pulse {
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            background: rgba(255, 215, 0, 0.3);
+            animation: fabPulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes fabPulse {
+            0%, 100% { transform: scale(1); opacity: 0.4; }
+            50% { transform: scale(1.2); opacity: 0; }
+        }
+        
+        .chat-window-float {
+            position: absolute;
+            bottom: 75px;
+            right: 0;
+            width: 360px;
+            max-height: 500px;
+            background: var(--bg-secondary, #0a0a0a);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+            display: none;
+            flex-direction: column;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+        
+        .chat-window-float.open {
+            display: flex;
+            animation: chatSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        @keyframes chatSlideUp {
+            from { opacity: 0; transform: translateY(20px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        
+        .chat-header-float {
+            background: linear-gradient(135deg, var(--gold-600), var(--gold-500));
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .chat-header-info-float {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .chat-avatar-float {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid rgba(0,0,0,0.2);
+        }
+        
+        .chat-title-float {
+            font-family: 'Cinzel', serif;
+            font-size: 15px;
+            font-weight: 600;
+            color: #000;
+        }
+        
+        .chat-status-float {
+            font-size: 12px;
+            color: rgba(0,0,0,0.7);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #22c55e;
+            border-radius: 50%;
+            animation: statusBlink 2s ease-in-out infinite;
+        }
+        
+        @keyframes statusBlink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .chat-close-float {
+            background: rgba(0,0,0,0.2);
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            color: #000;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .chat-close-float:hover {
+            background: rgba(0,0,0,0.3);
+        }
+        
+        .chat-messages-float {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            min-height: 200px;
+            max-height: 280px;
+        }
+        
+        .chat-msg {
+            max-width: 85%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            font-size: 14px;
+            line-height: 1.5;
+            animation: msgFadeIn 0.3s ease;
+        }
+        
+        @keyframes msgFadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .chat-msg.bot {
+            align-self: flex-start;
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            color: var(--text-primary, #fff);
+            border-bottom-left-radius: 4px;
+        }
+        
+        .chat-msg.user {
+            align-self: flex-end;
+            background: linear-gradient(135deg, var(--gold-600), var(--gold-500));
+            color: #000;
+            border-bottom-right-radius: 4px;
+        }
+        
+        .chat-quick-float {
+            padding: 12px 20px;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            border-top: 1px solid rgba(255, 215, 0, 0.1);
+        }
+        
+        .quick-btn-float {
+            padding: 8px 14px;
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 20px;
+            color: var(--gold-400, #FFC942);
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .quick-btn-float:hover {
+            background: rgba(255, 215, 0, 0.2);
+            border-color: var(--gold-500);
+        }
+        
+        .chat-input-float {
+            padding: 16px 20px;
+            display: flex;
+            gap: 12px;
+            border-top: 1px solid rgba(255, 215, 0, 0.1);
+        }
+        
+        .chat-input-float input {
+            flex: 1;
+            padding: 12px 16px;
+            border-radius: 25px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-primary, #fff);
+            font-size: 14px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        
+        .chat-input-float input:focus {
+            border-color: var(--gold-500);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+        }
+        
+        .chat-input-float button {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--gold-600), var(--gold-500));
+            border: none;
+            color: #000;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .chat-input-float button:hover {
+            transform: scale(1.1);
+        }
+        
+        @media (max-width: 480px) {
+            .floating-chat-widget {
+                right: 16px;
+                bottom: 90px;
+            }
+            
+            .chat-window-float {
+                width: calc(100vw - 32px);
+                right: -8px;
+            }
+        }
+        
+        /* Light mode */
+        body.light-mode .chat-window-float {
+            background: #fff;
+            border-color: rgba(212, 160, 23, 0.3);
+        }
+        
+        body.light-mode .chat-msg.bot {
+            background: rgba(212, 160, 23, 0.1);
+            border-color: rgba(212, 160, 23, 0.2);
+            color: #333;
+        }
+        
+        body.light-mode .chat-input-float input {
+            background: rgba(0,0,0,0.03);
+            color: #333;
+        }
+    `;
+    
+    // Add styles to head
+    const styleEl = document.createElement('style');
+    styleEl.textContent = chatCSS;
+    document.head.appendChild(styleEl);
+    
+    // Add chat widget to body
+    document.body.insertAdjacentHTML('beforeend', chatHTML);
+    
+    // Chat functionality
+    const chatWidget = document.getElementById('floatingChatWidget');
+    const chatFab = document.getElementById('chatFab');
+    const chatWindow = document.getElementById('chatWindowFloat');
+    const chatClose = document.getElementById('chatCloseFloat');
+    const chatMessages = document.getElementById('chatMessagesFloat');
+    const chatInput = document.getElementById('chatInputFloat');
+    const chatSend = document.getElementById('chatSendFloat');
+    const quickBtns = document.querySelectorAll('.quick-btn-float');
+    
+    let isOpen = false;
+    
+    const botResponses = {
+        greeting: "Hello! Welcome to Blancbeu Beauty Salon. 💄✨ How can I help you today?",
+        services: "We offer Hair Styling, Makeup, Facials, Manicures, Pedicures, Spa treatments and more! 💇‍♀️ Browse our services above or ask about a specific treatment.",
+        booking: "I'd love to help you book! 📅 You can call us at +91 92299 15277 or message on WhatsApp. We're open 10AM-8PM Mon-Sat.",
+        hours: "🕐 Our hours are:\n• Mon-Sat: 10:00 AM - 8:00 PM\n• Sunday: 11:00 AM - 7:00 PM\nWe recommend booking in advance!",
+        location: "📍 Find us on Google Maps! We're conveniently located in Ranchi. Click the Contact tab below to get directions.",
+        default: "Thanks for your message! 💌 Our team will respond shortly. You can also call us at +91 92299 15277 for immediate assistance."
+    };
+    
+    function addMessage(text, type) {
+        const msg = document.createElement('div');
+        msg.className = `chat-msg ${type}`;
+        msg.textContent = text;
+        chatMessages.appendChild(msg);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+    
+    function processMessage(text) {
+        const lowerText = text.toLowerCase();
+        let response = botResponses.default;
+        
+        if (lowerText.match(/service|offer|treatment|hair|makeup|facial|nail|spa/)) {
+            response = botResponses.services;
+        } else if (lowerText.match(/book|appointment|reserve|schedule/)) {
+            response = botResponses.booking;
+        } else if (lowerText.match(/hour|open|close|time|when/)) {
+            response = botResponses.hours;
+        } else if (lowerText.match(/where|location|address|direction|map/)) {
+            response = botResponses.location;
+        } else if (lowerText.match(/hi|hello|hey|good/)) {
+            response = botResponses.greeting;
+        }
+        
+        setTimeout(() => addMessage(response, 'bot'), 500 + Math.random() * 500);
+    }
+    
+    // Event listeners
+    chatFab.addEventListener('click', () => {
+        isOpen = !isOpen;
+        chatWindow.classList.toggle('open', isOpen);
+        if (isOpen && chatMessages.children.length === 0) {
+            setTimeout(() => addMessage(botResponses.greeting, 'bot'), 500);
+        }
+    });
+    
+    chatClose.addEventListener('click', () => {
+        isOpen = false;
+        chatWindow.classList.remove('open');
+    });
+    
+    chatSend.addEventListener('click', () => {
+        const text = chatInput.value.trim();
+        if (text) {
+            addMessage(text, 'user');
+            chatInput.value = '';
+            processMessage(text);
+        }
+    });
+    
+    chatInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            chatSend.click();
+        }
+    });
+    
+    quickBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const action = btn.dataset.action;
+            addMessage(btn.textContent, 'user');
+            addMessage(botResponses[action] || botResponses.default, 'bot');
+        });
+    });
+    
+    console.log('💬 Chat widget initialized');
+}
+
+// ================================================================================
+// CONFETTI CELEBRATION
+// ================================================================================
+function triggerConfetti() {
+    const colors = ['#FFD700', '#FFB6C1', '#FFFFFF', '#F7E7CE', '#B76E79'];
+    const container = document.createElement('div');
+    container.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:99999;overflow:hidden;';
+    document.body.appendChild(container);
+    
+    for (let i = 0; i < 80; i++) {
+        const particle = document.createElement('div');
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        const size = 6 + Math.random() * 8;
+        const left = Math.random() * 100;
+        const delay = Math.random() * 0.5;
+        
+        particle.style.cssText = `
+            position:absolute;
+            left:${left}%;
+            top:-20px;
+            width:${size}px;
+            height:${size}px;
+            background:${color};
+            border-radius:${Math.random() > 0.5 ? '50%' : '2px'};
+            animation:confettiFall ${2 + Math.random()}s ease-out ${delay}s forwards;
+        `;
+        container.appendChild(particle);
+    }
+    
+    setTimeout(() => container.remove(), 4000);
+}
+
+// Add confetti keyframes
+const confettiStyle = document.createElement('style');
+confettiStyle.textContent = `
+    @keyframes confettiFall {
+        0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+        100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+    }
+`;
+document.head.appendChild(confettiStyle);
+
+// Export for booking success
+window.triggerConfetti = triggerConfetti;

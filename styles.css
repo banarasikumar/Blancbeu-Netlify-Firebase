@@ -4990,14 +4990,6 @@ body.light-mode .hero-text-content {
     box-shadow: 0 16px 48px rgba(212, 175, 55, 0.2);
 }
 
-.stat-number-wrapper {
-    display: inline-flex;
-    align-items: center;
-    gap: 0px;
-    line-height: 1;
-    margin-bottom: 12px;
-}
-
 .stat-number {
     font-family: 'Cinzel', serif;
     font-size: 56px;
@@ -5007,38 +4999,8 @@ body.light-mode .hero-text-content {
     -webkit-text-fill-color: transparent;
     background-clip: text;
     line-height: 1;
+    margin-bottom: 12px;
     letter-spacing: 2px;
-    margin: 0;
-}
-
-.stat-plus {
-    font-family: 'Cinzel', serif;
-    font-size: 48px;
-    font-weight: 700;
-    background: linear-gradient(135deg, var(--gold-24k), var(--gold-bright));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    line-height: 1;
-    letter-spacing: 2px;
-    margin: 0;
-    padding: 0;
-    animation: plusFadeIn 0.4s ease-out forwards;
-}
-
-.stat-plus.hidden {
-    display: none;
-}
-
-@keyframes plusFadeIn {
-    from {
-        opacity: 0;
-        transform: scale(0.5);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
 }
 
 .stat-label {
@@ -5079,13 +5041,6 @@ body.light-mode .stat-number {
     background-clip: text;
 }
 
-body.light-mode .stat-plus {
-    background: linear-gradient(135deg, #D4A017, #FFD700);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
 body.light-mode .stat-label {
     color: #1a1a1a;
 }
@@ -5110,10 +5065,6 @@ body.light-mode .stat-description {
     
     .stat-number {
         font-size: 42px;
-    }
-    
-    .stat-plus {
-        font-size: 36px;
     }
     
     .stat-label {

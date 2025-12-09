@@ -2947,7 +2947,9 @@ function animateCounters() {
     const statNumbers = document.querySelectorAll('.stat-number');
     
     statNumbers.forEach(element => {
-        const targetValue = parseInt(element.getAttribute('data-value'));
+        const dataValue = element.getAttribute('data-value');
+        const hasPlus = dataValue.includes('+');
+        const targetValue = parseInt(dataValue);
         let currentValue = 0;
         const duration = 2000; // 2 seconds
         const increment = targetValue / (duration / 50);
@@ -2958,7 +2960,8 @@ function animateCounters() {
                 currentValue = targetValue;
                 clearInterval(timer);
             }
-            element.textContent = Math.floor(currentValue).toLocaleString();
+            const displayValue = Math.floor(currentValue).toLocaleString();
+            element.textContent = hasPlus ? displayValue + '+' : displayValue;
         }, 50);
     });
 }

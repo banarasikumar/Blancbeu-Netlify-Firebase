@@ -2949,8 +2949,9 @@ function animateCounters() {
     statNumbers.forEach(element => {
         const targetValue = parseInt(element.getAttribute('data-value'));
         let currentValue = 0;
-        const duration = 2000; // 2 seconds
-        const increment = targetValue / (duration / 50);
+        const duration = 800; // 0.8 seconds - faster
+        const interval = 16; // ~60fps - smooth
+        const increment = targetValue / (duration / interval);
         
         const timer = setInterval(() => {
             currentValue += increment;
@@ -2962,7 +2963,7 @@ function animateCounters() {
             } else {
                 element.textContent = Math.floor(currentValue).toLocaleString();
             }
-        }, 50);
+        }, interval);
     });
 }
 

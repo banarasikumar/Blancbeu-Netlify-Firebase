@@ -2957,8 +2957,11 @@ function animateCounters() {
             if (currentValue >= targetValue) {
                 currentValue = targetValue;
                 clearInterval(timer);
+                // Add "+" sign after animation completes
+                element.textContent = Math.floor(currentValue).toLocaleString() + '+';
+            } else {
+                element.textContent = Math.floor(currentValue).toLocaleString();
             }
-            element.textContent = Math.floor(currentValue).toLocaleString();
         }, 50);
     });
 }

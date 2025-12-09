@@ -1066,7 +1066,24 @@ class ChatWidget {
         this.container.className = 'chat-widget';
         this.container.innerHTML = `
             <button class="chat-bubble" aria-label="Open chat">
-                <span class="chat-bubble-icon">💬</span>
+                <svg class="chat-bubble-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <filter id="chatGlow" x="-50%" y="-50%" width="200%" height="200%">
+                            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                            <feMerge>
+                                <feMergeNode in="coloredBlur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                    </defs>
+                    <!-- Chat bubble background -->
+                    <path d="M 20 15 L 80 15 Q 85 15 85 20 L 85 65 Q 85 70 80 70 L 30 70 L 15 85 L 25 70 L 20 70 Q 15 70 15 65 L 15 20 Q 15 15 20 15 Z" 
+                          fill="#FFD700" filter="url(#chatGlow)" class="chat-bubble-path"/>
+                    <!-- Message dots -->
+                    <circle cx="30" cy="42" r="3" fill="#000000" opacity="0.7"/>
+                    <circle cx="50" cy="42" r="3" fill="#000000" opacity="0.7"/>
+                    <circle cx="70" cy="42" r="3" fill="#000000" opacity="0.7"/>
+                </svg>
                 <span class="chat-unread-badge" style="display: none;">1</span>
             </button>
             

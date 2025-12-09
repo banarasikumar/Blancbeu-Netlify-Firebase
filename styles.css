@@ -2427,6 +2427,34 @@ body.dark-mode .pwa-splash-overlay.hidden {
     }
 }
 
+/* Animated SVG Chat Bubble Icon */
+.chat-widget .chat-bubble-icon {
+    width: 56px;
+    height: 56px;
+    filter: drop-shadow(0 4px 12px rgba(255, 215, 0, 0.3));
+    transition: all 0.3s ease;
+}
+
+.chat-widget .chat-bubble-icon:hover {
+    filter: drop-shadow(0 4px 16px rgba(255, 215, 0, 0.5));
+    transform: scale(1.08);
+}
+
+.chat-widget .chat-bubble-icon.active {
+    animation: floatingChatPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes floatingChatPulse {
+    0%, 100% {
+        filter: drop-shadow(0 4px 12px rgba(255, 215, 0, 0.3));
+        transform: scale(1);
+    }
+    50% {
+        filter: drop-shadow(0 4px 24px rgba(255, 215, 0, 0.6));
+        transform: scale(1.05);
+    }
+}
+
 .nav-label {
     font-size: 11px;
     font-weight: 600;

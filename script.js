@@ -3672,12 +3672,13 @@ function initFloatingChatWidget() {
         }
         
         .fab-icon-img {
-            width: 52px;
-            height: 52px;
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
             object-fit: cover;
             z-index: 1;
-            border: 2px solid white;
+            border: 2px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 0 8px rgba(255, 215, 0, 0.3);
         }
         
         .fab-pulse {

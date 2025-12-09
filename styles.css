@@ -5263,7 +5263,7 @@ body.light-mode .feature-card p {
     background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(212, 175, 55, 0.08));
     border: 1px solid rgba(212, 175, 55, 0.3);
     border-radius: 24px;
-    padding: 40px 30px;
+    padding: 20px 15px;
     text-align: center;
     backdrop-filter: blur(15px);
     transition: all 0.3s ease;
@@ -5282,37 +5282,37 @@ body.light-mode .feature-card p {
 }
 
 .service-image-placeholder {
-    font-size: 64px;
+    font-size: 48px;
     line-height: 1;
-    margin-bottom: 20px;
+    margin-bottom: 12px;
     display: block;
     filter: drop-shadow(0 4px 12px rgba(212, 175, 55, 0.3));
 }
 
 .service-highlight-card h3 {
-    font-size: 22px;
+    font-size: 18px;
     font-weight: 700;
     color: var(--text-primary);
-    margin-bottom: 12px;
+    margin-bottom: 8px;
     letter-spacing: 0.5px;
 }
 
 .service-desc {
-    font-size: 14px;
+    font-size: 13px;
     color: var(--text-secondary);
-    margin-bottom: 16px;
-    line-height: 1.5;
+    margin-bottom: 10px;
+    line-height: 1.4;
 }
 
 .service-price {
     font-family: 'Cinzel', serif;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 700;
     background: linear-gradient(135deg, var(--gold-24k), var(--gold-bright));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    margin-bottom: 16px;
+    margin-bottom: 10px;
 }
 
 .service-btn {

@@ -2947,28 +2947,19 @@ function animateCounters() {
     const statNumbers = document.querySelectorAll('.stat-number');
     
     statNumbers.forEach(element => {
-        const dataValue = element.getAttribute('data-value');
-        const hasPlus = dataValue.includes('+');
-        const targetValue = parseInt(dataValue);
+        const targetValue = parseInt(element.getAttribute('data-value'));
         let currentValue = 0;
         const duration = 2000; // 2 seconds
-        const startTime = Date.now();
+        const increment = targetValue / (duration / 50);
         
-        function animate() {
-            const elapsed = Date.now() - startTime;
-            const progress = Math.min(elapsed / duration, 1);
-            
-            currentValue = Math.floor(targetValue * progress);
-            
-            const displayValue = currentValue.toLocaleString();
-            element.textContent = hasPlus ? displayValue + '+' : displayValue;
-            
-            if (progress < 1) {
-                requestAnimationFrame(animate);
+        const timer = setInterval(() => {
+            currentValue += increment;
+            if (currentValue >= targetValue) {
+                currentValue = targetValue;
+                clearInterval(timer);
             }
-        }
-        
-        requestAnimationFrame(animate);
+            element.textContent = Math.floor(currentValue).toLocaleString();
+        }, 50);
     });
 }
 

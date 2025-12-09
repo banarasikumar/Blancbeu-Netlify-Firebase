@@ -1430,10 +1430,11 @@ body.light-mode .offer-card p {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 20px;
+    gap: 12px;
     flex-wrap: wrap;
     z-index: 2;
     position: relative;
+    padding: 8px 0;
 }
 
 .old-price {
@@ -1443,13 +1444,11 @@ body.light-mode .offer-card p {
 }
 
 .new-price {
-    font-size: 42px;
+    font-size: 36px;
     font-weight: 800;
-    background: linear-gradient(135deg, var(--gold-24k), var(--gold-light));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-shadow: 0 0 30px var(--gold-24k);
+    color: #22c55e;
+    text-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
+    padding: 8px 0;
 }
 
 body.light-mode .old-price {
@@ -1458,12 +1457,9 @@ body.light-mode .old-price {
 }
 
 body.light-mode .new-price {
-    background: linear-gradient(135deg, #8B6914, #B8860B);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-shadow: none;
-    font-weight: 900;
+    color: #16a34a;
+    text-shadow: 0 0 15px rgba(22, 163, 74, 0.2);
+    font-weight: 800;
 }
 
 .sparkle-line {
@@ -5306,13 +5302,12 @@ body.light-mode .feature-card p {
 
 .service-price {
     font-family: 'Cinzel', serif;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 700;
-    background: linear-gradient(135deg, var(--gold-24k), var(--gold-bright));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-bottom: 16px;
+    color: var(--gold-24k);
+    margin-bottom: 8px;
+    padding: 4px 0;
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
 }
 
 .service-btn {

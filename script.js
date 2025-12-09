@@ -2957,6 +2957,11 @@ function animateCounters() {
             if (currentValue >= targetValue) {
                 currentValue = targetValue;
                 clearInterval(timer);
+                // Show the + sign after animation finishes
+                const plusSign = element.parentElement.querySelector('.stat-plus');
+                if (plusSign) {
+                    plusSign.classList.remove('hidden');
+                }
             }
             element.textContent = Math.floor(currentValue).toLocaleString();
         }, 50);

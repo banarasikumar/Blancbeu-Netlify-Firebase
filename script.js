@@ -2952,17 +2952,23 @@ function animateCounters() {
         const targetValue = parseInt(dataValue);
         let currentValue = 0;
         const duration = 2000; // 2 seconds
-        const increment = targetValue / (duration / 50);
+        const startTime = Date.now();
         
-        const timer = setInterval(() => {
-            currentValue += increment;
-            if (currentValue >= targetValue) {
-                currentValue = targetValue;
-                clearInterval(timer);
-            }
-            const displayValue = Math.floor(currentValue).toLocaleString();
+        function animate() {
+            const elapsed = Date.now() - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            
+            currentValue = Math.floor(targetValue * progress);
+            
+            const displayValue = currentValue.toLocaleString();
             element.textContent = hasPlus ? displayValue + '+' : displayValue;
-        }, 50);
+            
+            if (progress < 1) {
+                requestAnimationFrame(animate);
+            }
+        }
+        
+        requestAnimationFrame(animate);
     });
 }
 

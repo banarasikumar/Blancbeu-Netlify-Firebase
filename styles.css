@@ -5683,19 +5683,20 @@ body.light-mode .about-stat:hover {
 
 .service-name {
     font-family: 'Cinzel', serif;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--gold-400);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--gold-300);
     line-height: 1.2;
 }
 
 .service-duration {
-    font-size: 10px;
-    color: var(--text-secondary);
-    background: rgba(255, 215, 0, 0.1);
-    padding: 2px 6px;
+    font-size: 12px;
+    color: var(--gold-300);
+    background: rgba(255, 215, 0, 0.15);
+    padding: 3px 8px;
     border-radius: 10px;
     white-space: nowrap;
+    font-weight: 500;
 }
 
 .service-prices {
@@ -5706,38 +5707,39 @@ body.light-mode .about-stat:hover {
 }
 
 .service-offer-price {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 700;
-    color: var(--gold-500);
+    color: var(--gold-400);
     font-family: 'Cinzel', serif;
 }
 
 .service-original-price {
-    font-size: 12px;
+    font-size: 13px;
     color: var(--text-secondary);
     text-decoration: line-through;
+    font-weight: 500;
 }
 
 .service-discount {
-    font-size: 11px;
-    background: linear-gradient(135deg, #ff6b6b, #ff8787);
+    font-size: 12px;
+    background: linear-gradient(135deg, #10b981, #059669);
     color: white;
-    padding: 2px 6px;
+    padding: 3px 8px;
     border-radius: 10px;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .book-service-btn {
     background: linear-gradient(135deg, var(--gold-600) 0%, var(--gold-500) 100%);
     color: var(--bg-primary);
     border: none;
-    padding: 6px 12px;
+    padding: 7px 14px;
     border-radius: 8px;
-    font-size: 11px;
-    font-weight: 600;
+    font-size: 12px;
+    font-weight: 700;
     cursor: pointer;
     transition: all 0.3s ease;
-    letter-spacing: 0.3px;
+    letter-spacing: 0.5px;
 }
 
 .book-service-btn:hover {

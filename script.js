@@ -3655,13 +3655,13 @@ function initFloatingChatWidget() {
             align-items: center;
             justify-content: center;
             position: relative;
-            box-shadow: 0 4px 12px rgba(255, 215, 0, 0.15);
+            box-shadow: 0 8px 30px rgba(255, 215, 0, 0.4);
             transition: all 0.3s ease;
         }
         
         .chat-fab:hover {
             transform: scale(1.1);
-            box-shadow: 0 6px 16px rgba(255, 215, 0, 0.2);
+            box-shadow: 0 12px 40px rgba(255, 215, 0, 0.5);
         }
         
         .fab-icon {
@@ -3678,12 +3678,12 @@ function initFloatingChatWidget() {
             object-fit: cover;
             z-index: 1;
             border: 2px solid rgba(255, 255, 255, 0.9);
-            box-shadow: 0 0 4px rgba(255, 215, 0, 0.15);
+            box-shadow: 0 0 8px rgba(255, 215, 0, 0.3);
         }
         
         .fab-pulse {
             position: absolute;
-            inset: -1px;
+            inset: -4px;
             border-radius: 50%;
             background: rgba(255, 215, 0, 0.3);
             animation: fabPulse 2s ease-in-out infinite;

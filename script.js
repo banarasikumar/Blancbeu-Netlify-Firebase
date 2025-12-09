@@ -3683,7 +3683,7 @@ function initFloatingChatWidget() {
         
         .fab-pulse {
             position: absolute;
-            inset: -4px;
+            inset: -2px;
             border-radius: 50%;
             background: rgba(255, 215, 0, 0.3);
             animation: fabPulse 2s ease-in-out infinite;

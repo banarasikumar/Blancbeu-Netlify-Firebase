@@ -104,57 +104,72 @@ PHASE 3: PREMIUM FEATURES (Week 4)
 ================================================================================
 -->
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blancbeu - Premium Beauty & Wellness Salon</title>
-    
+
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
     <link rel="manifest" href="/manifest.json">
     <meta name="theme-color" content="#000000" id="metaThemeColor">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" id="appleStatusBar">
     <meta name="apple-mobile-web-app-title" content="Blancbeu">
-    
+
     <!-- Critical: Apply theme IMMEDIATELY before page renders using data-theme attribute -->
     <script>
-      (function() {
-        try {
-          const savedTheme = localStorage.getItem('theme');
-          const currentHour = new Date().getHours();
-          let shouldBeLightMode = false;
-          
-          if (savedTheme) {
-            shouldBeLightMode = savedTheme === 'light';
-          } else {
-            shouldBeLightMode = currentHour >= 6 && currentHour < 17;
-          }
-          
-          if (shouldBeLightMode) {
-            document.documentElement.setAttribute('data-theme', 'light');
-            document.body.classList.add('light-mode');
-          }
-          // Dark mode is default (no attribute needed)
-        } catch(e) {
-          // Fail silently if localStorage is not available
-        }
-      })();
+        (function () {
+            try {
+                const savedTheme = localStorage.getItem('theme');
+                const currentHour = new Date().getHours();
+                let shouldBeLightMode = false;
+
+                if (savedTheme) {
+                    shouldBeLightMode = savedTheme === 'light';
+                } else {
+                    shouldBeLightMode = currentHour >= 6 && currentHour < 17;
+                }
+
+                if (shouldBeLightMode) {
+                    document.documentElement.setAttribute('data-theme', 'light');
+                    document.body.classList.add('light-mode');
+                }
+                // Dark mode is default (no attribute needed)
+            } catch (e) {
+                // Fail silently if localStorage is not available
+            }
+        })();
     </script>
-    <link rel="stylesheet" href="theme-variables.css">
+    <script>
+        var time = new Date().getTime();
+        document.write('<link rel="stylesheet" href="theme-variables.css?v=' + time + '">');
+    </script>
     <link rel="apple-touch-icon" href="/icon-192x192.png">
-    <link rel="apple-touch-startup-image" href="/splash-750x1334.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)">
-    <link rel="apple-touch-startup-image" href="/splash-1170x2532.png" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3)">
+    <link rel="apple-touch-startup-image" href="/splash-750x1334.png"
+        media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)">
+    <link rel="apple-touch-startup-image" href="/splash-1170x2532.png"
+        media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3)">
     <link rel="icon" type="image/webp" href="/icon-192x192.webp">
     <link rel="icon" type="image/png" href="/icon-192x192.png">
     <link rel="shortcut icon" href="/icon-192x192.webp">
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Poppins:wght@300;400;500;600;700&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="styles.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Poppins:wght@300;400;500;600;700&family=Cinzel:wght@400;600;700&display=swap"
+        rel="stylesheet">
+
+    <script>
+        document.write('<link rel="stylesheet" href="styles.css?v=' + time + '">');
+    </script>
     <link rel="stylesheet" href="fireworks.css">
     <link href="https://fonts.googleapis.com/css?family=Russo+One" rel="stylesheet">
 </head>
+
 <body>
     <!-- PWA Splash Screen -->
     <div id="pwaSplash" class="pwa-splash-overlay hidden">
@@ -176,22 +191,26 @@ PHASE 3: PREMIUM FEATURES (Week 4)
         <div style="height: 0; width: 0; position: absolute; visibility: hidden;">
             <svg xmlns="http://www.w3.org/2000/svg">
                 <symbol id="icon-play" viewBox="0 0 24 24">
-                    <path d="M8 5v14l11-7z"/>
+                    <path d="M8 5v14l11-7z" />
                 </symbol>
                 <symbol id="icon-pause" viewBox="0 0 24 24">
-                    <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                    <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
                 </symbol>
                 <symbol id="icon-close" viewBox="0 0 24 24">
-                    <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                    <path
+                        d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
                 </symbol>
                 <symbol id="icon-settings" viewBox="0 0 24 24">
-                    <path d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"/>
+                    <path
+                        d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z" />
                 </symbol>
                 <symbol id="icon-sound-on" viewBox="0 0 24 24">
-                    <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+                    <path
+                        d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" />
                 </symbol>
                 <symbol id="icon-sound-off" viewBox="0 0 24 24">
-                    <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
+                    <path
+                        d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z" />
                 </symbol>
             </svg>
         </div>
@@ -209,19 +228,27 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                 </div>
                 <div class="controls">
                     <div class="btn pause-btn">
-                        <svg fill="white" width="24" height="24"><use href="#icon-pause" xlink:href="#icon-pause"></use></svg>
+                        <svg fill="white" width="24" height="24">
+                            <use href="#icon-pause" xlink:href="#icon-pause"></use>
+                        </svg>
                     </div>
                     <div class="btn sound-btn">
-                        <svg fill="white" width="24" height="24"><use href="#icon-sound-off" xlink:href="#icon-sound-off"></use></svg>
+                        <svg fill="white" width="24" height="24">
+                            <use href="#icon-sound-off" xlink:href="#icon-sound-off"></use>
+                        </svg>
                     </div>
                     <div class="btn settings-btn">
-                        <svg fill="white" width="24" height="24"><use href="#icon-settings" xlink:href="#icon-settings"></use></svg>
+                        <svg fill="white" width="24" height="24">
+                            <use href="#icon-settings" xlink:href="#icon-settings"></use>
+                        </svg>
                     </div>
                 </div>
                 <div class="menu hide">
                     <div class="menu__inner-wrap">
                         <div class="btn btn--bright close-menu-btn">
-                            <svg fill="white" width="24" height="24"><use href="#icon-close" xlink:href="#icon-close"></use></svg>
+                            <svg fill="white" width="24" height="24">
+                                <use href="#icon-close" xlink:href="#icon-close"></use>
+                            </svg>
                         </div>
                         <div class="menu__header">Settings</div>
                         <div class="menu__subheader">For more info, click any label.</div>
@@ -324,27 +351,32 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                 <div class="carousel">
                     <div class="carousel-track" id="carouselTrack">
                         <div class="carousel-slide active">
-                            <img src="assets/banner_carousel_images/1.webp" alt="Premium Beauty Banner 1" loading="eager">
+                            <img src="assets/banner_carousel_images/1.webp" alt="Premium Beauty Banner 1"
+                                loading="eager">
                         </div>
                         <div class="carousel-slide">
-                            <img src="assets/banner_carousel_images/2.webp" alt="Premium Beauty Banner 2" loading="lazy">
+                            <img src="assets/banner_carousel_images/2.webp" alt="Premium Beauty Banner 2"
+                                loading="lazy">
                         </div>
                         <div class="carousel-slide">
-                            <img src="assets/banner_carousel_images/3.webp" alt="Premium Beauty Banner 3" loading="lazy">
+                            <img src="assets/banner_carousel_images/3.webp" alt="Premium Beauty Banner 3"
+                                loading="lazy">
                         </div>
                         <div class="carousel-slide">
-                            <img src="assets/banner_carousel_images/4.webp" alt="Premium Beauty Banner 4" loading="lazy">
+                            <img src="assets/banner_carousel_images/4.webp" alt="Premium Beauty Banner 4"
+                                loading="lazy">
                         </div>
                         <div class="carousel-slide">
-                            <img src="assets/banner_carousel_images/5.webp" alt="Premium Beauty Banner 5" loading="lazy">
+                            <img src="assets/banner_carousel_images/5.webp" alt="Premium Beauty Banner 5"
+                                loading="lazy">
                         </div>
                     </div>
-                    
+
                     <button class="carousel-btn prev" onclick="moveCarousel(-1)">❮</button>
                     <button class="carousel-btn next" onclick="moveCarousel(1)">❯</button>
                     <div class="carousel-dots" id="carouselDots"></div>
                 </div>
-                
+
                 <!-- HERO TEXT SECTION - Below Carousel -->
                 <div class="hero-text-section">
                     <div class="hero-text-content">
@@ -353,116 +385,27 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                             <span class="hero-text-line line-2">Your Beauty</span>
                         </h1>
                         <p class="hero-tagline">Discover luxury beauty treatments at Blancbeu Family Salon</p>
-                        
+
                         <div class="hero-cta-buttons">
                             <a href="tel:+919229915277" class="hero-btn primary-btn">
                                 <span class="btn-label">Book Now</span>
-                                <span class="btn-icon">📞</span>
                             </a>
+                            <button class="hero-btn secondary-btn"
+                                onclick="document.querySelector('.bottom-nav .nav-item[data-page=\'chat\']').click()">
+                                <span class="btn-label">Call 📞 • Chat 💬 • Locate 📍</span>
+                            </button>
                         </div>
                     </div>
                 </div>
-                
-                <div class="contact-buttons">
-                    <a href="https://maps.app.goo.gl/8eYa96AHu2VT8Qpq7" target="_blank" class="contact-btn locate-btn">
-                        <span class="btn-icon">📍</span>
-                        <span class="btn-text">Locate Our Salon</span>
-                        <span class="btn-arrow">»</span>
-                    </a>
-                    <a href="https://wa.me/919229915277?text=Hi%20BlancBeu%2C%20I%20would%20like%20to%20book%20an%20appointment." target="_blank" class="contact-btn whatsapp-btn">
-                        <span class="btn-icon">💬</span>
-                        <span class="btn-text">Chat on WhatsApp</span>
-                        <span class="btn-emoji">✨</span>
-                    </a>
-                    <a href="tel:+919229915277" class="contact-btn call-btn">
-                        <span class="btn-icon">📞</span>
-                        <span class="btn-text">Call +91 92299 15277</span>
-                        <span class="btn-emoji">⚙️</span>
-                    </a>
-                </div>
+
+
             </div>
 
             <!-- TRUST & SOCIAL PROOF SECTION -->
-            <div class="trust-section">
-                <div class="container">
-                    <h2 class="section-title">
-                        <span class="title-decoration">✨</span>
-                        Why Trust Blancbeu
-                        <span class="title-decoration">✨</span>
-                    </h2>
-                    <p class="section-subtitle">Trusted by thousands for premium beauty care</p>
-                    
-                    <div class="trust-grid">
-                        <div class="trust-card premium-hover glass-card scroll-reveal">
-                            <div class="stat-number" data-value="6">0</div>
-                            <div class="stat-label">Months of Excellence</div>
-                            <div class="stat-description">Serving the community with premium beauty treatments</div>
-                        </div>
-                        
-                        <div class="trust-card premium-hover glass-card scroll-reveal">
-                            <div class="stat-number" data-value="1000">0</div>
-                            <div class="stat-label">Happy Clients</div>
-                            <div class="stat-description">Thousands of satisfied customers every year</div>
-                        </div>
-                        
-                        <div class="trust-card premium-hover glass-card scroll-reveal">
-                            <div class="stat-number" data-value="50">0</div>
-                            <div class="stat-label">Services Offered</div>
-                            <div class="stat-description">Comprehensive beauty and wellness solutions</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
 
             <!-- WHY CHOOSE US SECTION -->
-            <div class="why-choose-section">
-                <div class="container">
-                    <h2 class="section-title">
-                        <span class="title-decoration">💎</span>
-                        Why Choose Blancbeu
-                        <span class="title-decoration">✨</span>
-                    </h2>
-                    <p class="section-subtitle">Experience premium beauty services with excellence</p>
-                    
-                    <div class="features-grid">
-                        <div class="feature-card premium-hover card-lift scroll-reveal">
-                            <div class="feature-icon">👑</div>
-                            <h3>Premium Quality</h3>
-                            <p>Using luxury products and expert techniques for best results</p>
-                        </div>
-                        
-                        <div class="feature-card premium-hover card-lift scroll-reveal">
-                            <div class="feature-icon">⏰</div>
-                            <h3>Expert Professionals</h3>
-                            <p>Certified and experienced beauty specialists on staff</p>
-                        </div>
-                        
-                        <div class="feature-card premium-hover card-lift scroll-reveal">
-                            <div class="feature-icon">✨</div>
-                            <h3>Personalized Care</h3>
-                            <p>Customized treatments tailored to your unique needs</p>
-                        </div>
-                        
-                        <div class="feature-card premium-hover card-lift scroll-reveal">
-                            <div class="feature-icon">💆</div>
-                            <h3>Relaxing Ambiance</h3>
-                            <p>Luxurious salon environment designed for your comfort</p>
-                        </div>
-                        
-                        <div class="feature-card premium-hover card-lift scroll-reveal">
-                            <div class="feature-icon">💰</div>
-                            <h3>Best Value</h3>
-                            <p>Premium services at competitive prices with special offers</p>
-                        </div>
-                        
-                        <div class="feature-card premium-hover card-lift scroll-reveal">
-                            <div class="feature-icon">🎯</div>
-                            <h3>100% Satisfaction</h3>
-                            <p>Your happiness is our guarantee and commitment</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
 
             <!-- SERVICE HIGHLIGHTS CAROUSEL SECTION -->
             <div class="service-highlights-section">
@@ -473,72 +416,138 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                         <span class="title-decoration">✨</span>
                     </h2>
                     <p class="section-subtitle">Explore our most popular premium treatments</p>
-                    
+
                     <div class="service-carousel-wrapper">
                         <div class="service-carousel" id="serviceCarousel">
                             <div class="service-carousel-track" id="serviceCarouselTrack">
                                 <div class="service-card-item">
                                     <div class="service-highlight-card">
-                                        <div class="service-image-placeholder">💇</div>
-                                        <h3>Premium Haircut & Style</h3>
-                                        <p class="service-desc">Expert cutting and styling techniques</p>
-                                        <div class="service-price">Starting from ₹200</div>
-                                        <button class="service-btn" onclick="alert('Booking feature - Coming soon!')">Book Now</button>
+                                        <div class="service-img-container">
+                                            <img src="assets/featured_services/haircut.png" alt="Premium Haircut"
+                                                class="service-highlight-img">
+                                        </div>
+                                        <div class="service-content">
+                                            <div>
+                                                <h3>Premium Haircut & Style</h3>
+                                                <p class="service-desc">Expert cutting and styling techniques</p>
+                                            </div>
+                                            <div>
+                                                <div class="service-price">Starting from ₹200</div>
+                                                <button class="service-btn"
+                                                    onclick="document.querySelector('.bottom-nav .nav-item[data-page=\'chat\']').click()">Book
+                                                    Now</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
                                 <div class="service-card-item">
                                     <div class="service-highlight-card">
-                                        <div class="service-image-placeholder">💅</div>
-                                        <h3>Nail Art & Care</h3>
-                                        <p class="service-desc">Creative designs and nail treatments</p>
-                                        <div class="service-price">Starting from ₹150</div>
-                                        <button class="service-btn" onclick="alert('Booking feature - Coming soon!')">Book Now</button>
+                                        <div class="service-img-container">
+                                            <img src="assets/featured_services/nails.png" alt="Nail Art"
+                                                class="service-highlight-img">
+                                        </div>
+                                        <div class="service-content">
+                                            <div>
+                                                <h3>Nail Art & Care</h3>
+                                                <p class="service-desc">Creative designs and nail treatments</p>
+                                            </div>
+                                            <div>
+                                                <div class="service-price">Starting from ₹150</div>
+                                                <button class="service-btn"
+                                                    onclick="document.querySelector('.bottom-nav .nav-item[data-page=\'chat\']').click()">Book
+                                                    Now</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
                                 <div class="service-card-item">
                                     <div class="service-highlight-card">
-                                        <div class="service-image-placeholder">💆</div>
-                                        <h3>Facial & Skincare</h3>
-                                        <p class="service-desc">Rejuvenating facials with premium products</p>
-                                        <div class="service-price">Starting from ₹500</div>
-                                        <button class="service-btn" onclick="alert('Booking feature - Coming soon!')">Book Now</button>
+                                        <div class="service-img-container">
+                                            <img src="assets/featured_services/facial.png" alt="Facial & Skincare"
+                                                class="service-highlight-img">
+                                        </div>
+                                        <div class="service-content">
+                                            <div>
+                                                <h3>Facial & Skincare</h3>
+                                                <p class="service-desc">Rejuvenating facials with premium products</p>
+                                            </div>
+                                            <div>
+                                                <div class="service-price">Starting from ₹500</div>
+                                                <button class="service-btn"
+                                                    onclick="document.querySelector('.bottom-nav .nav-item[data-page=\'chat\']').click()">Book
+                                                    Now</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
                                 <div class="service-card-item">
                                     <div class="service-highlight-card">
-                                        <div class="service-image-placeholder">💄</div>
-                                        <h3>Makeup & Bridal</h3>
-                                        <p class="service-desc">Professional makeup for all occasions</p>
-                                        <div class="service-price">Starting from ₹400</div>
-                                        <button class="service-btn" onclick="alert('Booking feature - Coming soon!')">Book Now</button>
+                                        <div class="service-img-container">
+                                            <img src="assets/featured_services/makeup.png" alt="Makeup & Bridal"
+                                                class="service-highlight-img">
+                                        </div>
+                                        <div class="service-content">
+                                            <div>
+                                                <h3>Makeup & Bridal</h3>
+                                                <p class="service-desc">Professional makeup for all occasions</p>
+                                            </div>
+                                            <div>
+                                                <div class="service-price">Starting from ₹400</div>
+                                                <button class="service-btn"
+                                                    onclick="document.querySelector('.bottom-nav .nav-item[data-page=\'chat\']').click()">Book
+                                                    Now</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
                                 <div class="service-card-item">
                                     <div class="service-highlight-card">
-                                        <div class="service-image-placeholder">🧖</div>
-                                        <h3>Spa & Massage</h3>
-                                        <p class="service-desc">Luxurious relaxation treatments</p>
-                                        <div class="service-price">Starting from ₹600</div>
-                                        <button class="service-btn" onclick="alert('Booking feature - Coming soon!')">Book Now</button>
+                                        <div class="service-img-container">
+                                            <img src="assets/featured_services/spa.png" alt="Spa & Massage"
+                                                class="service-highlight-img">
+                                        </div>
+                                        <div class="service-content">
+                                            <div>
+                                                <h3>Spa & Massage</h3>
+                                                <p class="service-desc">Luxurious relaxation treatments</p>
+                                            </div>
+                                            <div>
+                                                <div class="service-price">Starting from ₹600</div>
+                                                <button class="service-btn"
+                                                    onclick="document.querySelector('.bottom-nav .nav-item[data-page=\'chat\']').click()">Book
+                                                    Now</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
                                 <div class="service-card-item">
                                     <div class="service-highlight-card">
-                                        <div class="service-image-placeholder">🌸</div>
-                                        <h3>Threading & Waxing</h3>
-                                        <p class="service-desc">Gentle hair removal solutions</p>
-                                        <div class="service-price">Starting from ₹80</div>
-                                        <button class="service-btn" onclick="alert('Booking feature - Coming soon!')">Book Now</button>
+                                        <div class="service-img-container">
+                                            <img src="assets/featured_services/threading.png" alt="Threading & Waxing"
+                                                class="service-highlight-img">
+                                        </div>
+                                        <div class="service-content">
+                                            <div>
+                                                <h3>Threading & Waxing</h3>
+                                                <p class="service-desc">Gentle hair removal solutions</p>
+                                            </div>
+                                            <div>
+                                                <div class="service-price">Starting from ₹80</div>
+                                                <button class="service-btn"
+                                                    onclick="document.querySelector('.bottom-nav .nav-item[data-page=\'chat\']').click()">Book
+                                                    Now</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
+
                         <button class="carousel-nav-btn prev" onclick="slideServiceCarousel(-1)">❮</button>
                         <button class="carousel-nav-btn next" onclick="slideServiceCarousel(1)">❯</button>
                     </div>
@@ -547,639 +556,610 @@ PHASE 3: PREMIUM FEATURES (Week 4)
 
             <!-- OFFERS SECTION -->
             <div id="offers" class="offers-section">
-            <div class="container">
-                <h2 class="section-title">
-                    <span class="title-decoration">✨</span>
-                    Special Offers
-                    <span class="title-decoration">✨</span>
-                </h2>
-                <p class="section-subtitle">Limited time deals just for you</p>
-                
-                <div class="offers-grid">
-                    <div class="offer-card glow-card">
-                        <div class="offer-badge hot">HOT DEAL</div>
-                        <div class="offer-icon">✂️</div>
-                        <h3>All Haircuts @ ₹99</h3>
-                        <p>Get any haircut style for just ₹99! Limited time offer on all cuts.</p>
-                        <div class="offer-price">
-                            <span class="old-price">₹100-600</span>
-                            <span class="new-price">₹99</span>
-                        </div>
-                        <div class="sparkle-line"></div>
-                        <button class="tc-btn" onclick="showTC()">T&C</button>
-                    </div>
-
-                    <div class="offer-card glow-card">
-                        <div class="offer-badge festive">FESTIVE SPECIAL</div>
-                        <div class="offer-icon">🪔</div>
-                        <h3>Festive Beauty Package</h3>
-                        <p>50% off* prices are inclusive of the offer</p>
-                        <div class="offer-price">
-                            <span class="new-price">50% OFF*</span>
-                        </div>
-                        <div class="sparkle-line"></div>
-                        <button class="tc-btn" onclick="showTC()">T&C</button>
-                    </div>
-
-                    <div class="offer-card glow-card">
-                        <div class="offer-badge student">STUDENT OFFER</div>
-                        <div class="offer-icon">🎓</div>
-                        <h3>College Student Discount</h3>
-                        <p>Get 25% off on all services with valid student ID</p>
-                        <div class="offer-price">
-                            <span class="new-price">25% OFF</span>
-                        </div>
-                        <div class="sparkle-line"></div>
-                        <button class="tc-btn" onclick="showTC()">T&C</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- SERVICES SECTION WITH FILTER -->
-            <div id="services" class="services-section">
-            <div class="container">
-                <h2 class="section-title">
-                    <span class="title-decoration">💎</span>
-                    Our Services
-                    <span class="title-decoration">💎</span>
-                </h2>
-                <p class="section-subtitle">Premium beauty treatments tailored for you</p>
-                
-                <!-- Services Grid (Task 2.2 - Pricing Display) -->
-                <div class="services-container" id="servicesContainer">
-                </div>
-            </div>
-
-
-            <!-- GALLERY SECTION -->
-            <div id="gallery" class="gallery-section">
-            <div class="container">
-                <h2 class="section-title">
-                    <span class="title-decoration">🌟</span>
-                    Gallery
-                    <span class="title-decoration">🌟</span>
-                </h2>
-                <p class="section-subtitle">Witness the transformation</p>
-                
-                <div class="gallery-grid">
-                    <div class="gallery-item">
-                        <img src="attached_assets/stock_images/gallery_facial.webp" alt="Facial Treatments">
-                        <div class="gallery-overlay">
-                            <h3>Facial Treatments</h3>
-                        </div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="attached_assets/stock_images/gallery_makeup.webp" alt="Makeup Styling">
-                        <div class="gallery-overlay">
-                            <h3>Makeup Styling</h3>
-                        </div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="attached_assets/stock_images/gallery_hair.webp" alt="Hair Coloring">
-                        <div class="gallery-overlay">
-                            <h3>Hair Coloring</h3>
-                        </div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="attached_assets/stock_images/gallery_spa.webp" alt="Spa & Nourish">
-                        <div class="gallery-overlay">
-                            <h3>Spa & Nourish</h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </div>
-            
-            <!-- BEFORE & AFTER TRANSFORMATION GALLERY -->
-            <div class="before-after-section" id="transformations">
                 <div class="container">
                     <h2 class="section-title">
                         <span class="title-decoration">✨</span>
-                        Transformation Gallery
+                        Special Offers
                         <span class="title-decoration">✨</span>
                     </h2>
-                    <p class="section-subtitle">Witness the magic of our expert stylists</p>
-                    
-                    <div class="ba-filter-tabs">
-                        <button class="ba-filter-btn active" data-category="all">All</button>
-                        <button class="ba-filter-btn" data-category="hair">Hair</button>
-                        <button class="ba-filter-btn" data-category="makeup">Makeup</button>
-                        <button class="ba-filter-btn" data-category="nails">Nails</button>
-                    </div>
-                    
-                    <div class="ba-carousel-wrapper">
-                        <div class="ba-carousel" id="baCarousel">
-                            <div class="ba-slide active" data-category="hair">
-                                <div class="comparison-slider" data-position="50">
-                                    <img src="attached_assets/stock_images/professional_salon_h_6df2461f.jpg" alt="After transformation" class="after-img">
-                                    <img src="attached_assets/stock_images/professional_salon_h_e7285f29.jpg" alt="Before transformation" class="before-img">
-                                    <div class="slider-handle">
-                                        <span class="handle-icon">↔</span>
-                                    </div>
-                                    <span class="ba-label before-label">Before</span>
-                                    <span class="ba-label after-label">After</span>
-                                </div>
-                                <div class="ba-info">
-                                    <h4>Hair Color Transformation</h4>
-                                    <p>Beautiful balayage highlights by our expert colorists</p>
-                                </div>
-                            </div>
-                            
-                            <div class="ba-slide" data-category="hair">
-                                <div class="comparison-slider" data-position="50">
-                                    <img src="attached_assets/stock_images/professional_salon_h_c01af8ec.jpg" alt="After transformation" class="after-img">
-                                    <img src="attached_assets/stock_images/professional_salon_h_cb9f59f7.jpg" alt="Before transformation" class="before-img">
-                                    <div class="slider-handle">
-                                        <span class="handle-icon">↔</span>
-                                    </div>
-                                    <span class="ba-label before-label">Before</span>
-                                    <span class="ba-label after-label">After</span>
-                                </div>
-                                <div class="ba-info">
-                                    <h4>Haircut & Styling</h4>
-                                    <p>Modern layered cut with professional styling</p>
-                                </div>
-                            </div>
-                            
-                            <div class="ba-slide" data-category="makeup">
-                                <div class="comparison-slider" data-position="50">
-                                    <img src="attached_assets/stock_images/gallery_makeup.webp" alt="After makeup" class="after-img">
-                                    <img src="attached_assets/stock_images/gallery_facial.webp" alt="Before makeup" class="before-img">
-                                    <div class="slider-handle">
-                                        <span class="handle-icon">↔</span>
-                                    </div>
-                                    <span class="ba-label before-label">Before</span>
-                                    <span class="ba-label after-label">After</span>
-                                </div>
-                                <div class="ba-info">
-                                    <h4>Bridal Glam Makeup</h4>
-                                    <p>Stunning bridal look for your special day</p>
-                                </div>
-                            </div>
-                            
-                            <div class="ba-slide" data-category="nails">
-                                <div class="comparison-slider" data-position="50">
-                                    <img src="attached_assets/stock_images/gallery_spa.webp" alt="After nails" class="after-img">
-                                    <img src="attached_assets/stock_images/gallery_hair.webp" alt="Before nails" class="before-img">
-                                    <div class="slider-handle">
-                                        <span class="handle-icon">↔</span>
-                                    </div>
-                                    <span class="ba-label before-label">Before</span>
-                                    <span class="ba-label after-label">After</span>
-                                </div>
-                                <div class="ba-info">
-                                    <h4>Nail Art & Extensions</h4>
-                                    <p>Premium gel extensions with artistic designs</p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <button class="ba-nav-btn prev" onclick="slideBA(-1)">❮</button>
-                        <button class="ba-nav-btn next" onclick="slideBA(1)">❯</button>
-                        
-                        <div class="ba-dots" id="baDots"></div>
-                    </div>
-                </div>
-            </div>
+                    <p class="section-subtitle">Limited time deals just for you</p>
 
-            <!-- MEMBERSHIP TIERS SECTION -->
-            <div class="membership-section" id="membership">
-                <div class="container">
-                    <h2 class="section-title">
-                        <span class="title-decoration">👑</span>
-                        VIP Membership Tiers
-                        <span class="title-decoration">👑</span>
-                    </h2>
-                    <p class="section-subtitle">Unlock exclusive benefits and savings</p>
-                    
-                    <div class="tier-cards-grid">
-                        <div class="tier-card" data-tier="gold">
-                            <div class="tier-icon">🥇</div>
-                            <h3 class="tier-name">Gold</h3>
-                            <div class="tier-price">
-                                <span class="price-amount">₹999</span>
-                                <span class="price-period">/year</span>
+                    <div class="offers-grid">
+                        <div class="offer-card glow-card">
+                            <div class="offer-badge hot">HOT DEAL</div>
+                            <div class="offer-icon">✂️</div>
+                            <h3>All Haircuts @ ₹99</h3>
+                            <p>Get any haircut style for just ₹99! Limited time offer on all cuts.</p>
+                            <div class="offer-price">
+                                <span class="old-price">₹100-600</span>
+                                <span class="new-price">₹99</span>
                             </div>
-                            <ul class="tier-benefits">
-                                <li><span class="benefit-check">✓</span> 5% off all services</li>
-                                <li><span class="benefit-check">✓</span> Priority booking</li>
-                                <li><span class="benefit-check">✓</span> Birthday special discount</li>
-                                <li><span class="benefit-check">✓</span> Free consultation</li>
-                                <li class="benefit-disabled"><span class="benefit-x">✗</span> Complimentary products</li>
-                                <li class="benefit-disabled"><span class="benefit-x">✗</span> VIP lounge access</li>
-                            </ul>
-                            <div class="tier-savings">Save ₹500+ yearly</div>
-                            <a href="https://wa.me/919229915277?text=Hi%20BlancBeu%2C%20I%20want%20to%20join%20the%20Gold%20Membership" target="_blank" class="tier-cta">Join Gold</a>
+                            <div class="sparkle-line"></div>
+                            <button class="tc-btn" onclick="showTC()">T&C</button>
                         </div>
-                        
-                        <div class="tier-card featured" data-tier="platinum">
-                            <div class="tier-badge">Most Popular</div>
-                            <div class="tier-icon">💎</div>
-                            <h3 class="tier-name">Platinum</h3>
-                            <div class="tier-price">
-                                <span class="price-amount">₹2,499</span>
-                                <span class="price-period">/year</span>
+
+                        <div class="offer-card glow-card">
+                            <div class="offer-badge festive">FESTIVE SPECIAL</div>
+                            <div class="offer-icon">🪔</div>
+                            <h3>Festive Beauty Package</h3>
+                            <p>50% off* prices are inclusive of the offer</p>
+                            <div class="offer-price">
+                                <span class="new-price">50% OFF*</span>
                             </div>
-                            <ul class="tier-benefits">
-                                <li><span class="benefit-check">✓</span> 15% off all services</li>
-                                <li><span class="benefit-check">✓</span> Priority booking</li>
-                                <li><span class="benefit-check">✓</span> Birthday special discount</li>
-                                <li><span class="benefit-check">✓</span> Free consultation</li>
-                                <li><span class="benefit-check">✓</span> Complimentary products</li>
-                                <li class="benefit-disabled"><span class="benefit-x">✗</span> VIP lounge access</li>
-                            </ul>
-                            <div class="tier-savings">Save ₹3,000+ yearly</div>
-                            <a href="https://wa.me/919229915277?text=Hi%20BlancBeu%2C%20I%20want%20to%20join%20the%20Platinum%20Membership" target="_blank" class="tier-cta">Join Platinum</a>
+                            <div class="sparkle-line"></div>
+                            <button class="tc-btn" onclick="showTC()">T&C</button>
                         </div>
-                        
-                        <div class="tier-card" data-tier="diamond">
-                            <div class="tier-icon">👸</div>
-                            <h3 class="tier-name">Diamond</h3>
-                            <div class="tier-price">
-                                <span class="price-amount">₹4,999</span>
-                                <span class="price-period">/year</span>
+
+                        <div class="offer-card glow-card">
+                            <div class="offer-badge student">STUDENT OFFER</div>
+                            <div class="offer-icon">🎓</div>
+                            <h3>College Student Discount</h3>
+                            <p>Get 25% off on all services with valid student ID</p>
+                            <div class="offer-price">
+                                <span class="new-price">25% OFF</span>
                             </div>
-                            <ul class="tier-benefits">
-                                <li><span class="benefit-check">✓</span> 25% off all services</li>
-                                <li><span class="benefit-check">✓</span> Priority booking</li>
-                                <li><span class="benefit-check">✓</span> Birthday special discount</li>
-                                <li><span class="benefit-check">✓</span> Free consultation</li>
-                                <li><span class="benefit-check">✓</span> Complimentary products</li>
-                                <li><span class="benefit-check">✓</span> VIP lounge access</li>
-                            </ul>
-                            <div class="tier-savings">Save ₹8,000+ yearly</div>
-                            <a href="https://wa.me/919229915277?text=Hi%20BlancBeu%2C%20I%20want%20to%20join%20the%20Diamond%20Membership" target="_blank" class="tier-cta">Join Diamond</a>
-                        </div>
-                    </div>
-                    
-                    <div class="savings-calculator">
-                        <h3 class="calculator-title">Calculate Your Savings</h3>
-                        <p class="calculator-subtitle">See how much you can save with our membership plans</p>
-                        <div class="calculator-input-group">
-                            <label for="monthlySpend">Your monthly salon spending:</label>
-                            <div class="input-wrapper">
-                                <span class="currency-symbol">₹</span>
-                                <input type="range" id="monthlySpendSlider" min="500" max="10000" step="500" value="3000">
-                                <span class="spend-value" id="spendValue">₹3,000</span>
-                            </div>
-                        </div>
-                        <div class="savings-results" id="savingsResults">
-                            <div class="savings-result-card" data-tier="gold">
-                                <span class="result-tier">Gold</span>
-                                <span class="result-savings" id="goldSavings">₹801/yr</span>
-                            </div>
-                            <div class="savings-result-card featured" data-tier="platinum">
-                                <span class="result-tier">Platinum</span>
-                                <span class="result-savings" id="platinumSavings">₹2,901/yr</span>
-                            </div>
-                            <div class="savings-result-card" data-tier="diamond">
-                                <span class="result-tier">Diamond</span>
-                                <span class="result-savings" id="diamondSavings">₹4,001/yr</span>
-                            </div>
+                            <div class="sparkle-line"></div>
+                            <button class="tc-btn" onclick="showTC()">T&C</button>
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            <!-- STAFF SPOTLIGHT SECTION -->
-            <div class="staff-section" id="team">
-                <div class="container">
-                    <h2 class="section-title">
-                        <span class="title-decoration">💇</span>
-                        Meet Our Expert Team
-                        <span class="title-decoration">💇</span>
-                    </h2>
-                    <p class="section-subtitle">Passionate professionals dedicated to your beauty</p>
-                    
-                    <div class="staff-carousel-wrapper">
-                        <div class="staff-carousel" id="staffCarousel">
-                            <div class="staff-card">
-                                <div class="staff-photo-wrapper">
-                                    <img src="attached_assets/stock_images/professional_beauty__59c2cb84.jpg" alt="Priya Sharma" class="staff-photo">
-                                    <div class="staff-rating">⭐ 4.9</div>
-                                </div>
-                                <div class="staff-info">
-                                    <h3 class="staff-name">Priya Sharma</h3>
-                                    <p class="staff-title">Senior Hair Stylist</p>
-                                    <div class="staff-experience">
-                                        <span class="exp-badge">12+ Years Experience</span>
-                                    </div>
-                                    <div class="staff-specialties">
-                                        <span class="specialty-tag">Hair Coloring</span>
-                                        <span class="specialty-tag">Balayage</span>
-                                        <span class="specialty-tag">Bridal Hair</span>
-                                    </div>
-                                    <a href="https://wa.me/919229915277?text=Hi%2C%20I%20want%20to%20book%20with%20Priya%20Sharma" target="_blank" class="book-staff-btn">Book with Priya</a>
-                                </div>
-                            </div>
-                            
-                            <div class="staff-card">
-                                <div class="staff-photo-wrapper">
-                                    <img src="attached_assets/stock_images/professional_beauty__30f1cabb.jpg" alt="Meera Patel" class="staff-photo">
-                                    <div class="staff-rating">⭐ 4.8</div>
-                                </div>
-                                <div class="staff-info">
-                                    <h3 class="staff-name">Meera Patel</h3>
-                                    <p class="staff-title">Makeup Artist</p>
-                                    <div class="staff-experience">
-                                        <span class="exp-badge">8+ Years Experience</span>
-                                    </div>
-                                    <div class="staff-specialties">
-                                        <span class="specialty-tag">Bridal Makeup</span>
-                                        <span class="specialty-tag">HD Makeup</span>
-                                        <span class="specialty-tag">Party Looks</span>
-                                    </div>
-                                    <a href="https://wa.me/919229915277?text=Hi%2C%20I%20want%20to%20book%20with%20Meera%20Patel" target="_blank" class="book-staff-btn">Book with Meera</a>
-                                </div>
-                            </div>
-                            
-                            <div class="staff-card">
-                                <div class="staff-photo-wrapper">
-                                    <img src="attached_assets/stock_images/professional_beauty__4b0e7940.jpg" alt="Anjali Singh" class="staff-photo">
-                                    <div class="staff-rating">⭐ 4.9</div>
-                                </div>
-                                <div class="staff-info">
-                                    <h3 class="staff-name">Anjali Singh</h3>
-                                    <p class="staff-title">Skin Care Specialist</p>
-                                    <div class="staff-experience">
-                                        <span class="exp-badge">10+ Years Experience</span>
-                                    </div>
-                                    <div class="staff-specialties">
-                                        <span class="specialty-tag">Facials</span>
-                                        <span class="specialty-tag">Skin Treatments</span>
-                                        <span class="specialty-tag">Anti-Aging</span>
-                                    </div>
-                                    <a href="https://wa.me/919229915277?text=Hi%2C%20I%20want%20to%20book%20with%20Anjali%20Singh" target="_blank" class="book-staff-btn">Book with Anjali</a>
-                                </div>
-                            </div>
-                            
-                            <div class="staff-card">
-                                <div class="staff-photo-wrapper">
-                                    <img src="attached_assets/stock_images/professional_beauty__bd79d0cb.jpg" alt="Riya Gupta" class="staff-photo">
-                                    <div class="staff-rating">⭐ 4.7</div>
-                                </div>
-                                <div class="staff-info">
-                                    <h3 class="staff-name">Riya Gupta</h3>
-                                    <p class="staff-title">Nail Art Expert</p>
-                                    <div class="staff-experience">
-                                        <span class="exp-badge">6+ Years Experience</span>
-                                    </div>
-                                    <div class="staff-specialties">
-                                        <span class="specialty-tag">Gel Nails</span>
-                                        <span class="specialty-tag">Nail Art</span>
-                                        <span class="specialty-tag">Extensions</span>
-                                    </div>
-                                    <a href="https://wa.me/919229915277?text=Hi%2C%20I%20want%20to%20book%20with%20Riya%20Gupta" target="_blank" class="book-staff-btn">Book with Riya</a>
-                                </div>
-                            </div>
+
+                <!-- SERVICES SECTION WITH FILTER -->
+                <div id="services" class="services-section">
+                    <div class="container">
+                        <h2 class="section-title">
+                            <span class="title-decoration">💎</span>
+                            Our Services
+                            <span class="title-decoration">💎</span>
+                        </h2>
+                        <p class="section-subtitle">Premium beauty treatments tailored for you</p>
+
+                        <!-- Services Grid (Task 2.2 - Pricing Display) -->
+                        <div class="services-container" id="servicesContainer">
                         </div>
-                        
-                        <button class="staff-nav-btn prev" onclick="slideStaff(-1)">❮</button>
-                        <button class="staff-nav-btn next" onclick="slideStaff(1)">❯</button>
                     </div>
-                </div>
-            </div>
 
-            <!-- REVIEWS SECTION - TESTIMONIAL CAROUSEL -->
-            <div id="reviews" class="reviews-section">
-            <div class="container">
-                <h2 class="section-title">
-                    <span class="title-decoration">⭐</span>
-                    Customer Testimonials
-                    <span class="title-decoration">⭐</span>
-                </h2>
-                <p class="section-subtitle">Hear from our satisfied clients</p>
-                
-                <div class="testimonial-carousel-wrapper">
-                    <div class="testimonial-carousel" id="testimonialCarousel">
-                        <div class="testimonial-carousel-track" id="testimonialTrack">
-                            <div class="testimonial-card-item">
-                                <div class="testimonial-card">
-                                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
-                                    <p class="testimonial-text">"Blancbeu gave me the best haircut ever! The professionalism and care are unmatched. Highly recommended!"</p>
-                                    <div class="testimonial-author">
-                                        <strong>Sarah Johnson</strong>
-                                        <span class="testimonial-date">Premium Member</span>
+
+                    <!-- GALLERY SECTION -->
+                    <div id="gallery" class="gallery-section">
+                        <div class="container">
+                            <h2 class="section-title">
+                                <span class="title-decoration">🌟</span>
+                                Gallery
+                                <span class="title-decoration">🌟</span>
+                            </h2>
+                            <p class="section-subtitle">Witness the transformation</p>
+
+                            <div class="gallery-grid">
+                                <div class="gallery-item">
+                                    <img src="attached_assets/stock_images/gallery_facial.webp" alt="Facial Treatments">
+                                    <div class="gallery-overlay">
+                                        <h3>Facial Treatments</h3>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="testimonial-card-item">
-                                <div class="testimonial-card">
-                                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
-                                    <p class="testimonial-text">"The bridal makeup service was absolutely stunning. I felt like a queen on my special day!"</p>
-                                    <div class="testimonial-author">
-                                        <strong>Priya Patel</strong>
-                                        <span class="testimonial-date">Bridal Customer</span>
+                                <div class="gallery-item">
+                                    <img src="attached_assets/stock_images/gallery_makeup.webp" alt="Makeup Styling">
+                                    <div class="gallery-overlay">
+                                        <h3>Makeup Styling</h3>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="testimonial-card-item">
-                                <div class="testimonial-card">
-                                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
-                                    <p class="testimonial-text">"Spa treatments are heavenly! I always leave feeling completely rejuvenated and refreshed."</p>
-                                    <div class="testimonial-author">
-                                        <strong>Anjali Sharma</strong>
-                                        <span class="testimonial-date">Regular Customer</span>
+                                <div class="gallery-item">
+                                    <img src="attached_assets/stock_images/gallery_hair.webp" alt="Hair Coloring">
+                                    <div class="gallery-overlay">
+                                        <h3>Hair Coloring</h3>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="testimonial-card-item">
-                                <div class="testimonial-card">
-                                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
-                                    <p class="testimonial-text">"Best facial treatment I've ever had. The staff is so knowledgeable and friendly!"</p>
-                                    <div class="testimonial-author">
-                                        <strong>Meera Singh</strong>
-                                        <span class="testimonial-date">Skincare Enthusiast</span>
+                                <div class="gallery-item">
+                                    <img src="attached_assets/stock_images/gallery_spa.webp" alt="Spa & Nourish">
+                                    <div class="gallery-overlay">
+                                        <h3>Spa & Nourish</h3>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <button class="testimonial-nav-btn prev" onclick="slideTestimonial(-1)">❮</button>
-                    <button class="testimonial-nav-btn next" onclick="slideTestimonial(1)">❯</button>
-                </div>
-            </div>
-            </div>
 
-            
-            <!-- ABOUT BLANCBEU SECTION -->
-            <div class="about-section">
-                <div class="container">
-                    <h2 class="section-title">
-                        <span class="title-decoration">📖</span>
-                        About Blancbeu
-                        <span class="title-decoration">✨</span>
-                    </h2>
-                    <p class="section-subtitle">Discover our story and passion for beauty</p>
-                    
-                    <div class="about-content">
-                        <div class="about-text">
-                            <p>Blancbeu Family Beauty Salon has been serving the community with excellence for over 15 years. We believe that true beauty comes from professional care, premium products, and exceptional service.</p>
-                            <p>Our mission is to transform how people feel about themselves by providing luxurious beauty treatments in a relaxing, welcoming environment. Every client is treated as family, and your satisfaction is our greatest achievement.</p>
-                            <ul class="about-highlights">
-                                <li>✨ Expert-trained beauty specialists</li>
-                                <li>💎 Premium international products</li>
-                                <li>🛍️ Personalized beauty consultations</li>
-                                <li>🏆 Award-winning salon experience</li>
-                            </ul>
-                        </div>
-                        <div class="about-stats">
-                            <div class="about-stat">
-                                <div class="about-stat-number">15+</div>
-                                <div class="about-stat-label">Years Serving</div>
+                    <!-- BEFORE & AFTER TRANSFORMATION GALLERY -->
+                    <div class="before-after-section" id="transformations">
+                        <div class="container">
+                            <h2 class="section-title">
+                                <span class="title-decoration">✨</span>
+                                Transformation Gallery
+                                <span class="title-decoration">✨</span>
+                            </h2>
+                            <p class="section-subtitle">Witness the magic of our expert stylists</p>
+
+                            <div class="ba-filter-tabs">
+                                <button class="ba-filter-btn active" data-category="all">All</button>
+                                <button class="ba-filter-btn" data-category="hair">Hair</button>
+                                <button class="ba-filter-btn" data-category="makeup">Makeup</button>
+                                <button class="ba-filter-btn" data-category="nails">Nails</button>
                             </div>
-                            <div class="about-stat">
-                                <div class="about-stat-number">10K+</div>
-                                <div class="about-stat-label">Happy Clients</div>
-                            </div>
-                            <div class="about-stat">
-                                <div class="about-stat-number">50+</div>
-                                <div class="about-stat-label">Services</div>
+
+                            <div class="ba-carousel-wrapper">
+                                <div class="ba-carousel" id="baCarousel">
+                                    <div class="ba-slide active" data-category="hair">
+                                        <div class="comparison-slider" data-position="50">
+                                            <img src="attached_assets/stock_images/professional_salon_h_6df2461f.jpg"
+                                                alt="After transformation" class="after-img">
+                                            <img src="attached_assets/stock_images/professional_salon_h_e7285f29.jpg"
+                                                alt="Before transformation" class="before-img">
+                                            <div class="slider-handle">
+                                                <span class="handle-icon">↔</span>
+                                            </div>
+                                            <span class="ba-label before-label">Before</span>
+                                            <span class="ba-label after-label">After</span>
+                                        </div>
+                                        <div class="ba-info">
+                                            <h4>Hair Color Transformation</h4>
+                                            <p>Beautiful balayage highlights by our expert colorists</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="ba-slide" data-category="hair">
+                                        <div class="comparison-slider" data-position="50">
+                                            <img src="attached_assets/stock_images/professional_salon_h_c01af8ec.jpg"
+                                                alt="After transformation" class="after-img">
+                                            <img src="attached_assets/stock_images/professional_salon_h_cb9f59f7.jpg"
+                                                alt="Before transformation" class="before-img">
+                                            <div class="slider-handle">
+                                                <span class="handle-icon">↔</span>
+                                            </div>
+                                            <span class="ba-label before-label">Before</span>
+                                            <span class="ba-label after-label">After</span>
+                                        </div>
+                                        <div class="ba-info">
+                                            <h4>Haircut & Styling</h4>
+                                            <p>Modern layered cut with professional styling</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="ba-slide" data-category="makeup">
+                                        <div class="comparison-slider" data-position="50">
+                                            <img src="attached_assets/stock_images/gallery_makeup.webp"
+                                                alt="After makeup" class="after-img">
+                                            <img src="attached_assets/stock_images/gallery_facial.webp"
+                                                alt="Before makeup" class="before-img">
+                                            <div class="slider-handle">
+                                                <span class="handle-icon">↔</span>
+                                            </div>
+                                            <span class="ba-label before-label">Before</span>
+                                            <span class="ba-label after-label">After</span>
+                                        </div>
+                                        <div class="ba-info">
+                                            <h4>Bridal Glam Makeup</h4>
+                                            <p>Stunning bridal look for your special day</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="ba-slide" data-category="nails">
+                                        <div class="comparison-slider" data-position="50">
+                                            <img src="attached_assets/stock_images/gallery_spa.webp" alt="After nails"
+                                                class="after-img">
+                                            <img src="attached_assets/stock_images/gallery_hair.webp" alt="Before nails"
+                                                class="before-img">
+                                            <div class="slider-handle">
+                                                <span class="handle-icon">↔</span>
+                                            </div>
+                                            <span class="ba-label before-label">Before</span>
+                                            <span class="ba-label after-label">After</span>
+                                        </div>
+                                        <div class="ba-info">
+                                            <h4>Nail Art & Extensions</h4>
+                                            <p>Premium gel extensions with artistic designs</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button class="ba-nav-btn prev" onclick="slideBA(-1)">❮</button>
+                                <button class="ba-nav-btn next" onclick="slideBA(1)">❯</button>
+
+                                <div class="ba-dots" id="baDots"></div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <!-- CTA SECTION -->
-            <div class="cta-section">
-                <div class="container">
-                    <h2>Ready to Transform Your Look?</h2>
-                    <p>Book your appointment today and experience premium beauty care</p>
-                    <div class="cta-buttons">
-                        <a href="tel:+919229915277" class="btn-cta primary">📞 Call Now</a>
-                        <a href="https://wa.me/919229915277" class="btn-cta secondary">💬 WhatsApp</a>
-                    </div>
-                </div>
-            </div>
-            
 
 
-            <!-- FAQ SECTION -->
-            <section class="faq-section" id="faq">
-                <div class="container">
-                    <h2 class="section-title">
-                        <span class="title-decoration">❓</span>
-                        Frequently Asked Questions
-                        <span class="title-decoration">💬</span>
-                    </h2>
-                    <p class="section-subtitle">Everything you need to know about our services</p>
-                    
-                    <div class="faq-container">
-                        <div class="faq-item">
-                            <div class="faq-question">
-                                <h3>What are your salon hours?</h3>
-                                <span class="faq-icon">+</span>
-                            </div>
-                            <div class="faq-answer">
-                                <div class="faq-answer-content">
-                                    We are open from 10:00 AM to 8:00 PM, Monday through Sunday. We recommend booking an appointment in advance to ensure your preferred time slot is available.
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="faq-item">
-                            <div class="faq-question">
-                                <h3>How do I book an appointment?</h3>
-                                <span class="faq-icon">+</span>
-                            </div>
-                            <div class="faq-answer">
-                                <div class="faq-answer-content">
-                                    You can book an appointment by calling us at +91 92299 15277, messaging us on WhatsApp, or visiting our salon directly. We also accept walk-ins based on availability.
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="faq-item">
-                            <div class="faq-question">
-                                <h3>What products do you use?</h3>
-                                <span class="faq-icon">+</span>
-                            </div>
-                            <div class="faq-answer">
-                                <div class="faq-answer-content">
-                                    We use only premium, professional-grade products from trusted international and Indian brands. Our products are carefully selected for quality, safety, and effectiveness.
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="faq-item">
-                            <div class="faq-question">
-                                <h3>Do you offer bridal packages?</h3>
-                                <span class="faq-icon">+</span>
-                            </div>
-                            <div class="faq-answer">
-                                <div class="faq-answer-content">
-                                    Yes! We offer comprehensive bridal packages that include pre-bridal treatments, makeup, hair styling, and more. Contact us for a personalized consultation and package details.
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="faq-item">
-                            <div class="faq-question">
-                                <h3>What is your cancellation policy?</h3>
-                                <span class="faq-icon">+</span>
-                            </div>
-                            <div class="faq-answer">
-                                <div class="faq-answer-content">
-                                    We request at least 2 hours notice for cancellations. This helps us accommodate other clients and maintain our service quality. For bridal appointments, please provide 24 hours notice.
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="faq-item">
-                            <div class="faq-question">
-                                <h3>Do you offer services for men?</h3>
-                                <span class="faq-icon">+</span>
-                            </div>
-                            <div class="faq-answer">
-                                <div class="faq-answer-content">
-                                    Absolutely! Blancbeu is a family salon that caters to men, women, and children. We offer a full range of grooming services for men including haircuts, beard styling, facials, and more.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
 
-            <!-- FOOTER -->
-            <footer class="footer">
-                <div class="container">
-                    <div class="footer-content">
-                        <div class="footer-section">
-                            <h3>Blancbeu</h3>
-                            <p>Premium Beauty & Wellness Salon</p>
-                            <p>✨ Where Beauty Meets Excellence ✨</p>
-                        </div>
-                        <div class="footer-section">
-                            <h4>Quick Links</h4>
-                            <a href="#home">Home</a>
-                            <a href="#offers">Offers</a>
-                            <a href="#services">Services</a>
-                            <a href="#reviews">Reviews</a>
-                        </div>
-                        <div class="footer-section">
-                            <h4>Connect With Us</h4>
-                            <div class="social-icons">
-                                <a href="https://youtube.com/@blancbeubeautysalon?si=_Go7ZSGSFzTS-j_M" target="_blank" class="social-icon youtube" aria-label="YouTube">
-                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
-                                </a>
-                                <a href="https://www.instagram.com/blancbeu_salon_ranchi?igsh=MTRpbGV0YWt4aHFzaw==" target="_blank" class="social-icon instagram" aria-label="Instagram">
-                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-                                </a>
-                                <a href="https://www.facebook.com/p/BlancBeu-Family-Beauty-Salon-61578977241367/" target="_blank" class="social-icon facebook" aria-label="Facebook">
-                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>
-                                </a>
+                    <!-- STAFF SPOTLIGHT SECTION -->
+                    <div class="staff-section" id="team">
+                        <div class="container">
+                            <h2 class="section-title">
+                                <span class="title-decoration">💇</span>
+                                Meet Our Expert Team
+                                <span class="title-decoration">💇</span>
+                            </h2>
+                            <p class="section-subtitle">Passionate professionals dedicated to your beauty</p>
+
+                            <div class="staff-carousel-wrapper">
+                                <div class="staff-carousel" id="staffCarousel">
+                                    <div class="staff-card">
+                                        <div class="staff-photo-wrapper">
+                                            <img src="attached_assets/stock_images/professional_beauty__59c2cb84.jpg"
+                                                alt="Priya Sharma" class="staff-photo">
+                                            <div class="staff-rating">⭐ 4.9</div>
+                                        </div>
+                                        <div class="staff-info">
+                                            <h3 class="staff-name">Priya Sharma</h3>
+                                            <p class="staff-title">Senior Hair Stylist</p>
+                                            <div class="staff-experience">
+                                                <span class="exp-badge">12+ Years Experience</span>
+                                            </div>
+                                            <div class="staff-specialties">
+                                                <span class="specialty-tag">Hair Coloring</span>
+                                                <span class="specialty-tag">Balayage</span>
+                                                <span class="specialty-tag">Bridal Hair</span>
+                                            </div>
+                                            <a href="https://wa.me/919229915277?text=Hi%2C%20I%20want%20to%20book%20with%20Priya%20Sharma"
+                                                target="_blank" class="book-staff-btn">Book with Priya</a>
+                                        </div>
+                                    </div>
+
+                                    <div class="staff-card">
+                                        <div class="staff-photo-wrapper">
+                                            <img src="attached_assets/stock_images/professional_beauty__30f1cabb.jpg"
+                                                alt="Meera Patel" class="staff-photo">
+                                            <div class="staff-rating">⭐ 4.8</div>
+                                        </div>
+                                        <div class="staff-info">
+                                            <h3 class="staff-name">Meera Patel</h3>
+                                            <p class="staff-title">Makeup Artist</p>
+                                            <div class="staff-experience">
+                                                <span class="exp-badge">8+ Years Experience</span>
+                                            </div>
+                                            <div class="staff-specialties">
+                                                <span class="specialty-tag">Bridal Makeup</span>
+                                                <span class="specialty-tag">HD Makeup</span>
+                                                <span class="specialty-tag">Party Looks</span>
+                                            </div>
+                                            <a href="https://wa.me/919229915277?text=Hi%2C%20I%20want%20to%20book%20with%20Meera%20Patel"
+                                                target="_blank" class="book-staff-btn">Book with Meera</a>
+                                        </div>
+                                    </div>
+
+                                    <div class="staff-card">
+                                        <div class="staff-photo-wrapper">
+                                            <img src="attached_assets/stock_images/professional_beauty__4b0e7940.jpg"
+                                                alt="Anjali Singh" class="staff-photo">
+                                            <div class="staff-rating">⭐ 4.9</div>
+                                        </div>
+                                        <div class="staff-info">
+                                            <h3 class="staff-name">Anjali Singh</h3>
+                                            <p class="staff-title">Skin Care Specialist</p>
+                                            <div class="staff-experience">
+                                                <span class="exp-badge">10+ Years Experience</span>
+                                            </div>
+                                            <div class="staff-specialties">
+                                                <span class="specialty-tag">Facials</span>
+                                                <span class="specialty-tag">Skin Treatments</span>
+                                                <span class="specialty-tag">Anti-Aging</span>
+                                            </div>
+                                            <a href="https://wa.me/919229915277?text=Hi%2C%20I%20want%20to%20book%20with%20Anjali%20Singh"
+                                                target="_blank" class="book-staff-btn">Book with Anjali</a>
+                                        </div>
+                                    </div>
+
+                                    <div class="staff-card">
+                                        <div class="staff-photo-wrapper">
+                                            <img src="attached_assets/stock_images/professional_beauty__bd79d0cb.jpg"
+                                                alt="Riya Gupta" class="staff-photo">
+                                            <div class="staff-rating">⭐ 4.7</div>
+                                        </div>
+                                        <div class="staff-info">
+                                            <h3 class="staff-name">Riya Gupta</h3>
+                                            <p class="staff-title">Nail Art Expert</p>
+                                            <div class="staff-experience">
+                                                <span class="exp-badge">6+ Years Experience</span>
+                                            </div>
+                                            <div class="staff-specialties">
+                                                <span class="specialty-tag">Gel Nails</span>
+                                                <span class="specialty-tag">Nail Art</span>
+                                                <span class="specialty-tag">Extensions</span>
+                                            </div>
+                                            <a href="https://wa.me/919229915277?text=Hi%2C%20I%20want%20to%20book%20with%20Riya%20Gupta"
+                                                target="_blank" class="book-staff-btn">Book with Riya</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button class="staff-nav-btn prev" onclick="slideStaff(-1)">❮</button>
+                                <button class="staff-nav-btn next" onclick="slideStaff(1)">❯</button>
                             </div>
                         </div>
                     </div>
-                    <div class="footer-bottom">
-                        <p>&copy; Blancbeu 2025. All rights reserved.</p>
+
+                    <!-- REVIEWS SECTION - TESTIMONIAL CAROUSEL -->
+                    <div id="reviews" class="reviews-section">
+                        <div class="container">
+                            <h2 class="section-title">
+                                <span class="title-decoration">⭐</span>
+                                Customer Testimonials
+                                <span class="title-decoration">⭐</span>
+                            </h2>
+                            <p class="section-subtitle">Hear from our satisfied clients</p>
+
+                            <div class="testimonial-carousel-wrapper">
+                                <div class="testimonial-carousel" id="testimonialCarousel">
+                                    <div class="testimonial-carousel-track" id="testimonialTrack">
+                                        <div class="testimonial-card-item">
+                                            <div class="testimonial-card">
+                                                <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                                                <p class="testimonial-text">"Blancbeu gave me the best haircut ever! The
+                                                    professionalism and care are unmatched. Highly recommended!"</p>
+                                                <div class="testimonial-author">
+                                                    <strong>Sarah Johnson</strong>
+                                                    <span class="testimonial-date">Premium Member</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="testimonial-card-item">
+                                            <div class="testimonial-card">
+                                                <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                                                <p class="testimonial-text">"The bridal makeup service was absolutely
+                                                    stunning. I felt like a queen on my special day!"</p>
+                                                <div class="testimonial-author">
+                                                    <strong>Priya Patel</strong>
+                                                    <span class="testimonial-date">Bridal Customer</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="testimonial-card-item">
+                                            <div class="testimonial-card">
+                                                <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                                                <p class="testimonial-text">"Spa treatments are heavenly! I always leave
+                                                    feeling completely rejuvenated and refreshed."</p>
+                                                <div class="testimonial-author">
+                                                    <strong>Anjali Sharma</strong>
+                                                    <span class="testimonial-date">Regular Customer</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="testimonial-card-item">
+                                            <div class="testimonial-card">
+                                                <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                                                <p class="testimonial-text">"Best facial treatment I've ever had. The
+                                                    staff is so knowledgeable and friendly!"</p>
+                                                <div class="testimonial-author">
+                                                    <strong>Meera Singh</strong>
+                                                    <span class="testimonial-date">Skincare Enthusiast</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="testimonial-nav-btn prev" onclick="slideTestimonial(-1)">❮</button>
+                                <button class="testimonial-nav-btn next" onclick="slideTestimonial(1)">❯</button>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </footer>
+
+
+                    <!-- ABOUT BLANCBEU SECTION -->
+                    <div class="about-section">
+                        <div class="container">
+                            <h2 class="section-title">
+                                <span class="title-decoration">📖</span>
+                                About Blancbeu
+                                <span class="title-decoration">✨</span>
+                            </h2>
+                            <p class="section-subtitle">Discover our story and passion for beauty</p>
+
+                            <div class="about-content">
+                                <div class="about-text">
+                                    <p>Blancbeu Family Beauty Salon has been serving the community with excellence for
+                                        over 15 years. We believe that true beauty comes from professional care, premium
+                                        products, and exceptional service.</p>
+                                    <p>Our mission is to transform how people feel about themselves by providing
+                                        luxurious beauty treatments in a relaxing, welcoming environment. Every client
+                                        is treated as family, and your satisfaction is our greatest achievement.</p>
+                                    <ul class="about-highlights">
+                                        <li>✨ Expert-trained beauty specialists</li>
+                                        <li>💎 Premium international products</li>
+                                        <li>🛍️ Personalized beauty consultations</li>
+                                        <li>🏆 Award-winning salon experience</li>
+                                    </ul>
+                                </div>
+                                <!-- Moved Why Trust Blancbeu Section -->
+                                <div class="trust-section">
+                                    <div class="container">
+                                        <h2 class="section-title">
+                                            <span class="title-decoration">✨</span>
+                                            Why Trust Blancbeu
+                                            <span class="title-decoration">✨</span>
+                                        </h2>
+                                        <p class="section-subtitle">Trusted by thousands for premium beauty care</p>
+
+                                        <div class="trust-grid">
+                                            <div class="trust-card premium-hover glass-card scroll-reveal">
+                                                <div class="stat-number" data-value="6">0</div>
+                                                <div class="stat-label">Months of Excellence</div>
+                                                <div class="stat-description">Serving the community with premium beauty
+                                                    treatments</div>
+                                            </div>
+
+                                            <div class="trust-card premium-hover glass-card scroll-reveal">
+                                                <div class="stat-number" data-value="1000">0</div>
+                                                <div class="stat-label">Happy Clients</div>
+                                                <div class="stat-description">Thousands of satisfied customers every
+                                                    year</div>
+                                            </div>
+
+                                            <div class="trust-card premium-hover glass-card scroll-reveal">
+                                                <div class="stat-number" data-value="50">0</div>
+                                                <div class="stat-label">Services Offered</div>
+                                                <div class="stat-description">Comprehensive beauty and wellness
+                                                    solutions</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CTA SECTION -->
+                    <div class="cta-section">
+                        <div class="container">
+                            <h2>Ready to Transform Your Look?</h2>
+                            <p>Book your appointment today and experience premium beauty care</p>
+                            <div class="cta-buttons">
+                                <a href="tel:+919229915277" class="btn-cta primary">📞 Call Now</a>
+                                <a href="https://wa.me/919229915277" class="btn-cta secondary">💬 WhatsApp</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <!-- FAQ SECTION -->
+                    <section class="faq-section" id="faq">
+                        <div class="container">
+                            <h2 class="section-title">
+                                <span class="title-decoration">❓</span>
+                                Frequently Asked Questions
+                                <span class="title-decoration">💬</span>
+                            </h2>
+                            <p class="section-subtitle">Everything you need to know about our services</p>
+
+                            <div class="faq-container">
+                                <div class="faq-item">
+                                    <div class="faq-question">
+                                        <h3>What are your salon hours?</h3>
+                                        <span class="faq-icon">+</span>
+                                    </div>
+                                    <div class="faq-answer">
+                                        <div class="faq-answer-content">
+                                            We are open from 10:00 AM to 8:00 PM, Monday through Sunday. We recommend
+                                            booking an appointment in advance to ensure your preferred time slot is
+                                            available.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="faq-item">
+                                    <div class="faq-question">
+                                        <h3>How do I book an appointment?</h3>
+                                        <span class="faq-icon">+</span>
+                                    </div>
+                                    <div class="faq-answer">
+                                        <div class="faq-answer-content">
+                                            You can book an appointment by calling us at +91 92299 15277, messaging us
+                                            on WhatsApp, or visiting our salon directly. We also accept walk-ins based
+                                            on availability.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="faq-item">
+                                    <div class="faq-question">
+                                        <h3>What products do you use?</h3>
+                                        <span class="faq-icon">+</span>
+                                    </div>
+                                    <div class="faq-answer">
+                                        <div class="faq-answer-content">
+                                            We use only premium, professional-grade products from trusted international
+                                            and Indian brands. Our products are carefully selected for quality, safety,
+                                            and effectiveness.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="faq-item">
+                                    <div class="faq-question">
+                                        <h3>Do you offer bridal packages?</h3>
+                                        <span class="faq-icon">+</span>
+                                    </div>
+                                    <div class="faq-answer">
+                                        <div class="faq-answer-content">
+                                            Yes! We offer comprehensive bridal packages that include pre-bridal
+                                            treatments, makeup, hair styling, and more. Contact us for a personalized
+                                            consultation and package details.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="faq-item">
+                                    <div class="faq-question">
+                                        <h3>What is your cancellation policy?</h3>
+                                        <span class="faq-icon">+</span>
+                                    </div>
+                                    <div class="faq-answer">
+                                        <div class="faq-answer-content">
+                                            We request at least 2 hours notice for cancellations. This helps us
+                                            accommodate other clients and maintain our service quality. For bridal
+                                            appointments, please provide 24 hours notice.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="faq-item">
+                                    <div class="faq-question">
+                                        <h3>Do you offer services for men?</h3>
+                                        <span class="faq-icon">+</span>
+                                    </div>
+                                    <div class="faq-answer">
+                                        <div class="faq-answer-content">
+                                            Absolutely! Blancbeu is a family salon that caters to men, women, and
+                                            children. We offer a full range of grooming services for men including
+                                            haircuts, beard styling, facials, and more.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- FOOTER -->
+                    <footer class="footer">
+                        <div class="container">
+                            <div class="footer-content">
+                                <div class="footer-section">
+                                    <h3>Blancbeu</h3>
+                                    <p>Premium Beauty & Wellness Salon</p>
+                                    <p>✨ Where Beauty Meets Excellence ✨</p>
+                                </div>
+                                <div class="footer-section">
+                                    <h4>Quick Links</h4>
+                                    <a href="#home">Home</a>
+                                    <a href="#offers">Offers</a>
+                                    <a href="#services">Services</a>
+                                    <a href="#reviews">Reviews</a>
+                                </div>
+                                <div class="footer-section">
+                                    <h4>Connect With Us</h4>
+                                    <div class="social-icons">
+                                        <a href="https://youtube.com/@blancbeubeautysalon?si=_Go7ZSGSFzTS-j_M"
+                                            target="_blank" class="social-icon youtube" aria-label="YouTube">
+                                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                                <path
+                                                    d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z" />
+                                            </svg>
+                                        </a>
+                                        <a href="https://www.instagram.com/blancbeu_salon_ranchi?igsh=MTRpbGV0YWt4aHFzaw=="
+                                            target="_blank" class="social-icon instagram" aria-label="Instagram">
+                                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                                <path
+                                                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                                            </svg>
+                                        </a>
+                                        <a href="https://www.facebook.com/p/BlancBeu-Family-Beauty-Salon-61578977241367/"
+                                            target="_blank" class="social-icon facebook" aria-label="Facebook">
+                                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                                <path
+                                                    d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z" />
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="footer-bottom">
+                                <p>&copy; Blancbeu 2025. All rights reserved.</p>
+                            </div>
+                        </div>
+                    </footer>
         </section>
 
         <!-- NOTIFICATIONS PAGE -->
@@ -1188,18 +1168,25 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                 <!-- Header with Settings -->
                 <div class="notifications-header">
                     <div class="notifications-header-content">
-                        <h1 style="color: var(--text-primary); margin: 0; font-size: 28px; font-family: 'Cinzel', serif;">Notifications</h1>
-                        <span class="unread-count" style="display: none; background: var(--gold-24k); color: var(--bg-primary); border-radius: 20px; padding: 2px 8px; font-size: 12px; font-weight: bold;">7</span>
+                        <h1
+                            style="color: var(--text-primary); margin: 0; font-size: 28px; font-family: 'Cinzel', serif;">
+                            Notifications</h1>
+                        <span class="unread-count"
+                            style="display: none; background: var(--gold-24k); color: var(--bg-primary); border-radius: 20px; padding: 2px 8px; font-size: 12px; font-weight: bold;">7</span>
                     </div>
                     <button class="notifications-settings-btn" title="Settings">⚙️</button>
                 </div>
 
                 <!-- Filter Tabs with Badge Counts -->
                 <div class="notifications-filters">
-                    <button class="filter-btn active" data-filter="all" data-count="7">All <span class="count-badge">7</span></button>
-                    <button class="filter-btn" data-filter="appointments" data-count="2">Appointments <span class="count-badge">2</span></button>
-                    <button class="filter-btn" data-filter="offers" data-count="3">Offers <span class="count-badge">3</span></button>
-                    <button class="filter-btn" data-filter="reviews" data-count="2">Reviews <span class="count-badge">2</span></button>
+                    <button class="filter-btn active" data-filter="all" data-count="7">All <span
+                            class="count-badge">7</span></button>
+                    <button class="filter-btn" data-filter="appointments" data-count="2">Appointments <span
+                            class="count-badge">2</span></button>
+                    <button class="filter-btn" data-filter="offers" data-count="3">Offers <span
+                            class="count-badge">3</span></button>
+                    <button class="filter-btn" data-filter="reviews" data-count="2">Reviews <span
+                            class="count-badge">2</span></button>
                 </div>
 
                 <!-- Quick Actions -->
@@ -1217,7 +1204,8 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                         </div>
 
                         <!-- Appointment Notification - Priority High -->
-                        <div class="notification-card appointments" data-type="appointments" data-priority="high" data-unread="true">
+                        <div class="notification-card appointments" data-type="appointments" data-priority="high"
+                            data-unread="true">
                             <div class="notification-badge unread"></div>
                             <div class="priority-indicator high"></div>
                             <div class="notification-icon appointment-icon">📅</div>
@@ -1226,7 +1214,8 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                                     <h3 class="notification-title">Your Booking Confirmed</h3>
                                     <span class="priority-label high-label">Urgent</span>
                                 </div>
-                                <p class="notification-message">Hair Spa on Nov 28, 2025 at 3:00 PM • Service ID: #BS2025</p>
+                                <p class="notification-message">Hair Spa on Nov 28, 2025 at 3:00 PM • Service ID:
+                                    #BS2025</p>
                                 <div class="notification-meta">
                                     <span class="meta-tag">Confirmed</span>
                                     <span class="notification-time">2 hours ago</span>
@@ -1239,7 +1228,8 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                         </div>
 
                         <!-- Offer Notification - Priority High -->
-                        <div class="notification-card offers" data-type="offers" data-priority="high" data-unread="true">
+                        <div class="notification-card offers" data-type="offers" data-priority="high"
+                            data-unread="true">
                             <div class="notification-badge unread"></div>
                             <div class="priority-indicator high"></div>
                             <div class="notification-icon offer-icon">✨</div>
@@ -1248,7 +1238,8 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                                     <h3 class="notification-title">Special Offer: 40% Off!</h3>
                                     <span class="priority-label high-label">Hot Deal</span>
                                 </div>
-                                <p class="notification-message">Get amazing discounts on all beauty treatments this week only</p>
+                                <p class="notification-message">Get amazing discounts on all beauty treatments this week
+                                    only</p>
                                 <div class="offer-preview">
                                     <span class="offer-amount">40% OFF</span>
                                     <span class="offer-expiry">Expires in 2 days</span>
@@ -1269,11 +1260,13 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                         </div>
 
                         <!-- Review Request -->
-                        <div class="notification-card reviews" data-type="reviews" data-priority="normal" data-unread="false">
+                        <div class="notification-card reviews" data-type="reviews" data-priority="normal"
+                            data-unread="false">
                             <div class="notification-icon review-icon">⭐</div>
                             <div class="notification-content">
                                 <h3 class="notification-title">Share Your Experience</h3>
-                                <p class="notification-message">We'd love to hear about your recent visit! Rate your experience</p>
+                                <p class="notification-message">We'd love to hear about your recent visit! Rate your
+                                    experience</p>
                                 <p class="notification-time">1 day ago</p>
                             </div>
                             <div class="notification-actions">
@@ -1283,11 +1276,13 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                         </div>
 
                         <!-- Appointment Reminder -->
-                        <div class="notification-card appointments" data-type="appointments" data-priority="normal" data-unread="false">
+                        <div class="notification-card appointments" data-type="appointments" data-priority="normal"
+                            data-unread="false">
                             <div class="notification-icon reminder-icon">🔔</div>
                             <div class="notification-content">
                                 <h3 class="notification-title">Appointment Reminder</h3>
-                                <p class="notification-message">Your Hair Coloring appointment is tomorrow at 2:00 PM</p>
+                                <p class="notification-message">Your Hair Coloring appointment is tomorrow at 2:00 PM
+                                </p>
                                 <p class="notification-time">1 day ago</p>
                             </div>
                             <div class="notification-actions">
@@ -1304,11 +1299,13 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                         </div>
 
                         <!-- Loyalty Points Notification -->
-                        <div class="notification-card offers" data-type="offers" data-priority="normal" data-unread="false">
+                        <div class="notification-card offers" data-type="offers" data-priority="normal"
+                            data-unread="false">
                             <div class="notification-icon loyalty-icon">🎁</div>
                             <div class="notification-content">
                                 <h3 class="notification-title">You've Earned 150 Points!</h3>
-                                <p class="notification-message">Congratulations! Redeem them for exclusive rewards and discounts</p>
+                                <p class="notification-message">Congratulations! Redeem them for exclusive rewards and
+                                    discounts</p>
                                 <div class="points-preview">
                                     <span class="points-amount">150 Points</span>
                                 </div>
@@ -1321,11 +1318,13 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                         </div>
 
                         <!-- New Service Alert -->
-                        <div class="notification-card offers" data-type="offers" data-priority="normal" data-unread="false">
+                        <div class="notification-card offers" data-type="offers" data-priority="normal"
+                            data-unread="false">
                             <div class="notification-icon new-service-icon">🌟</div>
                             <div class="notification-content">
                                 <h3 class="notification-title">New Service: Bridal Makeup</h3>
-                                <p class="notification-message">Experience our premium bridal makeup service with expert artists</p>
+                                <p class="notification-message">Experience our premium bridal makeup service with expert
+                                    artists</p>
                                 <p class="notification-time">3 days ago</p>
                             </div>
                             <div class="notification-actions">
@@ -1335,11 +1334,13 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                         </div>
 
                         <!-- Review Alert -->
-                        <div class="notification-card reviews" data-type="reviews" data-priority="normal" data-unread="false">
+                        <div class="notification-card reviews" data-type="reviews" data-priority="normal"
+                            data-unread="false">
                             <div class="notification-icon review-alert-icon">💬</div>
                             <div class="notification-content">
                                 <h3 class="notification-title">New Review from Sarah M.</h3>
-                                <p class="notification-message">"Amazing experience! The staff was very professional and friendly."</p>
+                                <p class="notification-message">"Amazing experience! The staff was very professional and
+                                    friendly."</p>
                                 <div class="review-preview">
                                     <span class="stars">⭐⭐⭐⭐⭐</span>
                                 </div>
@@ -1355,9 +1356,11 @@ PHASE 3: PREMIUM FEATURES (Week 4)
 
                 <!-- Empty State (hidden by default) -->
                 <div class="empty-state" style="display: none; text-align: center; padding: 80px 20px;">
-                    <div style="font-size: 100px; margin-bottom: 20px; animation: float 3s ease-in-out infinite;">🔔</div>
+                    <div style="font-size: 100px; margin-bottom: 20px; animation: float 3s ease-in-out infinite;">🔔
+                    </div>
                     <h2 style="color: var(--text-primary); margin-bottom: 10px; font-size: 24px;">All Caught Up!</h2>
-                    <p style="color: var(--text-secondary); font-size: 14px;">You have no new notifications. Check back later for updates about your appointments and special offers.</p>
+                    <p style="color: var(--text-secondary); font-size: 14px;">You have no new notifications. Check back
+                        later for updates about your appointments and special offers.</p>
                 </div>
             </div>
         </section>
@@ -1367,7 +1370,9 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                 <!-- Header with Filters -->
                 <div class="bookings-header">
                     <div class="bookings-header-content">
-                        <h1 style="color: var(--text-primary); margin: 0; font-size: 28px; font-family: 'Cinzel', serif;">My Bookings</h1>
+                        <h1
+                            style="color: var(--text-primary); margin: 0; font-size: 28px; font-family: 'Cinzel', serif;">
+                            My Bookings</h1>
                     </div>
                     <button class="bookings-filter-btn" title="Filter">🔍</button>
                 </div>
@@ -1375,8 +1380,10 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                 <!-- Status Tabs -->
                 <div class="bookings-tabs">
                     <button class="booking-tab active" data-status="all">All <span class="tab-count">5</span></button>
-                    <button class="booking-tab" data-status="upcoming">Upcoming <span class="tab-count">2</span></button>
-                    <button class="booking-tab" data-status="completed">Completed <span class="tab-count">3</span></button>
+                    <button class="booking-tab" data-status="upcoming">Upcoming <span
+                            class="tab-count">2</span></button>
+                    <button class="booking-tab" data-status="completed">Completed <span
+                            class="tab-count">3</span></button>
                 </div>
 
                 <!-- Bookings List -->
@@ -1538,9 +1545,11 @@ PHASE 3: PREMIUM FEATURES (Week 4)
 
                 <!-- Empty State (hidden by default) -->
                 <div class="empty-state-bookings" style="display: none; text-align: center; padding: 100px 20px;">
-                    <div style="font-size: 120px; margin-bottom: 20px; animation: float 3s ease-in-out infinite;">📅</div>
+                    <div style="font-size: 120px; margin-bottom: 20px; animation: float 3s ease-in-out infinite;">📅
+                    </div>
                     <h2 style="color: var(--text-primary); margin-bottom: 10px; font-size: 24px;">No Bookings Yet</h2>
-                    <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 20px;">Schedule your first beauty appointment and experience our premium services!</p>
+                    <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 20px;">Schedule your first
+                        beauty appointment and experience our premium services!</p>
                     <button class="book-now-btn">Book an Appointment</button>
                 </div>
             </div>
@@ -1568,7 +1577,7 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                         </div>
                         <button class="edit-profile-btn">✏️</button>
                     </div>
-                    
+
                     <!-- Tier Progress -->
                     <div class="tier-progress-card">
                         <div class="tier-progress-header">
@@ -1732,7 +1741,7 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                             </div>
                             <span class="action-arrow">›</span>
                         </button>
-                        <button class="action-item">
+                        <button class="action-item" onclick="showTC()">
                             <span class="action-icon">📋</span>
                             <div class="action-text">
                                 <span class="action-label">Terms & Privacy</span>
@@ -1763,11 +1772,9 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                 <div class="chat-location-section">
                     <!-- Map Container -->
                     <div class="map-container">
-                        <iframe 
+                        <iframe
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3773.0166255555!2d72.83445!3d19.04295!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f4e1c240639433%3A0x3dda633cf2333290!2sBlancBeu%20Family%20Beauty%20Salon!5e0!3m2!1sen!2sin!4v1700000000000"
-                            class="google-map"
-                            allowfullscreen="" 
-                            loading="lazy" 
+                            class="google-map" allowfullscreen="" loading="lazy"
                             referrerpolicy="no-referrer-when-downgrade">
                         </iframe>
                     </div>
@@ -1776,14 +1783,16 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                 <!-- Action Buttons Section -->
                 <div class="chat-actions-section">
                     <button class="chat-action-btn open-maps-btn" onclick="openBlancbeuMaps()">
-                        <img class="btn-icon" src="attached_assets/maps_icons/icons8-google-maps-48.svg" alt="Google Maps">
+                        <img class="btn-icon" src="attached_assets/maps_icons/icons8-google-maps-48.svg"
+                            alt="Google Maps">
                         <div class="btn-content">
                             <div class="btn-label">Open in Maps</div>
                             <div class="btn-desc">View full directions</div>
                         </div>
                     </button>
                     <button class="chat-action-btn whatsapp-btn" onclick="openWhatsAppChat()">
-                        <img class="btn-icon slow-anim" src="attached_assets/new_icons/icons8-whatsapp.apng" alt="WhatsApp">
+                        <img class="btn-icon slow-anim" src="attached_assets/new_icons/icons8-whatsapp.apng"
+                            alt="WhatsApp">
                         <div class="btn-content">
                             <div class="btn-label">Chat on WhatsApp</div>
                             <div class="btn-desc">Quick messages & support</div>
@@ -1794,14 +1803,16 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                 <!-- Info Cards -->
                 <div class="chat-info-section">
                     <div class="info-card">
-                        <img class="info-icon-img slow-anim" src="attached_assets/new_icons/icons8-phone.apng" alt="Call Us">
+                        <img class="info-icon-img slow-anim" src="attached_assets/new_icons/icons8-phone.apng"
+                            alt="Call Us">
                         <div class="info-content">
                             <h4>Call Us</h4>
                             <p>+91 9229915277</p>
                         </div>
                     </div>
                     <div class="info-card">
-                        <img class="info-icon-img slow-anim" src="attached_assets/new_icons/icons8-clock.svg" alt="Response Time">
+                        <img class="info-icon-img slow-anim" src="attached_assets/new_icons/icons8-clock.svg"
+                            alt="Response Time">
                         <div class="info-content">
                             <h4>Response Time</h4>
                             <p>1-10 mins</p>
@@ -1816,31 +1827,35 @@ PHASE 3: PREMIUM FEATURES (Week 4)
     <nav class="bottom-nav app-shell-bottom-nav" id="bottomNav">
         <a href="#" class="nav-item active" data-page="home">
             <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2L2 10v10c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V10l-10-8zm0 4l6 5v9h-3v-5h-6v5H6v-9l6-5z"/>
+                <path d="M12 2L2 10v10c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V10l-10-8zm0 4l6 5v9h-3v-5h-6v5H6v-9l6-5z" />
             </svg>
             <span class="nav-label">Home</span>
         </a>
         <a href="#" class="nav-item" data-page="notifications">
             <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/>
+                <path
+                    d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z" />
             </svg>
             <span class="nav-label">Notify</span>
         </a>
         <a href="#" class="nav-item" data-page="bookings">
             <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M19 3H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zm-6-7h-2v2h2v-2zm0 4h-2v2h2v-2zm4-4h-2v2h2v-2zm0 4h-2v2h2v-2zm4-4h-2v2h2v-2zm0 4h-2v2h2v-2z"/>
+                <path
+                    d="M19 3H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zm-6-7h-2v2h2v-2zm0 4h-2v2h2v-2zm4-4h-2v2h2v-2zm0 4h-2v2h2v-2zm4-4h-2v2h2v-2zm0 4h-2v2h2v-2z" />
             </svg>
             <span class="nav-label">Booking</span>
         </a>
         <a href="#" class="nav-item" data-page="chat">
             <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
+                <path
+                    d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z" />
             </svg>
             <span class="nav-label">Contact</span>
         </a>
         <a href="#" class="nav-item" data-page="account">
             <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+                <path
+                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" />
             </svg>
             <span class="nav-label">Account</span>
         </a>
@@ -1868,7 +1883,9 @@ PHASE 3: PREMIUM FEATURES (Week 4)
         </div>
     </div>
 
-    <script src="script.js?v=2"></script>
+    <script>
+        document.write('<script src="script.js?v=' + time + '"><\/script>');
+    </script>
     <script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/329180/fscreen%401.0.1.js'></script>
     <script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/329180/Stage%400.1.4.js'></script>
     <script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/329180/MyMath.js'></script>
@@ -1885,4 +1902,5 @@ PHASE 3: PREMIUM FEATURES (Week 4)
         });
     </script>
 </body>
+
 </html>

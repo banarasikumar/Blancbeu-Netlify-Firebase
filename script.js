@@ -1495,324 +1495,324 @@ document.addEventListener('DOMContentLoaded', () => {
 let lastKnownVersion = null;
 
 async function initUpdateChecker() {
-  try {
-    // Get stored version from localStorage
-    const storedVersion = localStorage.getItem('blancbeu_version');
-    const storedTimestamp = localStorage.getItem('blancbeu_timestamp');
-    
-    // Fetch latest version from server (always from network)
-    const versionResponse = await fetch('/version.json?t=' + Date.now(), {
-      cache: 'no-store',
-      headers: { 'Cache-Control': 'no-cache, no-store, must-revalidate' }
-    });
-    
-    if (versionResponse.ok) {
-      const serverVersion = await versionResponse.json();
-      const serverTimestamp = serverVersion.timestamp;
-      
-      lastKnownVersion = serverVersion;
-      
-      // Check if this is first load or if server has newer version
-      const isFirstLoad = !storedVersion || !storedTimestamp;
-      const hasNewerVersion = serverTimestamp > parseInt(storedTimestamp || 0);
-      
-      if (isFirstLoad) {
-        console.log('🎉 First time load - caching version', serverVersion.version);
-        localStorage.setItem('blancbeu_version', serverVersion.version);
-        localStorage.setItem('blancbeu_timestamp', serverTimestamp);
-      } else if (hasNewerVersion) {
-        console.warn('🔄 Newer version detected! Clearing cache and reloading...');
-        console.log('Old version:', storedVersion, '| New version:', serverVersion.version);
-        
-        // Clear all cache and cookies
-        await clearAllCacheAndCookies();
-        
-        // Update stored version
-        localStorage.setItem('blancbeu_version', serverVersion.version);
-        localStorage.setItem('blancbeu_timestamp', serverTimestamp);
-        
-        // Notify service worker to clear cache
-        if (navigator.serviceWorker && navigator.serviceWorker.controller) {
-          navigator.serviceWorker.controller.postMessage({
-            type: 'CLEAR_CACHE'
-          });
+    try {
+        // Get stored version from localStorage
+        const storedVersion = localStorage.getItem('blancbeu_version');
+        const storedTimestamp = localStorage.getItem('blancbeu_timestamp');
+
+        // Fetch latest version from server (always from network)
+        const versionResponse = await fetch('/version.json?t=' + Date.now(), {
+            cache: 'no-store',
+            headers: { 'Cache-Control': 'no-cache, no-store, must-revalidate' }
+        });
+
+        if (versionResponse.ok) {
+            const serverVersion = await versionResponse.json();
+            const serverTimestamp = serverVersion.timestamp;
+
+            lastKnownVersion = serverVersion;
+
+            // Check if this is first load or if server has newer version
+            const isFirstLoad = !storedVersion || !storedTimestamp;
+            const hasNewerVersion = serverTimestamp > parseInt(storedTimestamp || 0);
+
+            if (isFirstLoad) {
+                console.log('🎉 First time load - caching version', serverVersion.version);
+                localStorage.setItem('blancbeu_version', serverVersion.version);
+                localStorage.setItem('blancbeu_timestamp', serverTimestamp);
+            } else if (hasNewerVersion) {
+                console.warn('🔄 Newer version detected! Clearing cache and reloading...');
+                console.log('Old version:', storedVersion, '| New version:', serverVersion.version);
+
+                // Clear all cache and cookies
+                await clearAllCacheAndCookies();
+
+                // Update stored version
+                localStorage.setItem('blancbeu_version', serverVersion.version);
+                localStorage.setItem('blancbeu_timestamp', serverTimestamp);
+
+                // Notify service worker to clear cache
+                if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+                    navigator.serviceWorker.controller.postMessage({
+                        type: 'CLEAR_CACHE'
+                    });
+                }
+
+                // Force reload with fresh content
+                window.location.reload(true);
+            } else {
+                console.log('✅ Cache is fresh - version', storedVersion);
+                localStorage.setItem('blancbeu_version', serverVersion.version);
+            }
         }
-        
-        // Force reload with fresh content
-        window.location.reload(true);
-      } else {
-        console.log('✅ Cache is fresh - version', storedVersion);
-        localStorage.setItem('blancbeu_version', serverVersion.version);
-      }
+    } catch (error) {
+        console.log('ℹ️ Could not check for updates:', error.message);
+        // Continue app loading even if version check fails
     }
-  } catch (error) {
-    console.log('ℹ️ Could not check for updates:', error.message);
-    // Continue app loading even if version check fails
-  }
 }
 
 async function clearAllCacheAndCookies() {
-  try {
-    // Clear all cookies
-    document.cookie.split(";").forEach((c) => {
-      document.cookie = c
-        .replace(/^ +/, "")
-        .replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
-    });
-    
-    // Clear localStorage (except version info and theme preference which we need to preserve)
-    const versionData = {
-      version: localStorage.getItem('blancbeu_version'),
-      timestamp: localStorage.getItem('blancbeu_timestamp'),
-      theme: localStorage.getItem('theme')
-    };
-    localStorage.clear();
-    localStorage.setItem('blancbeu_version', versionData.version);
-    localStorage.setItem('blancbeu_timestamp', versionData.timestamp);
-    if (versionData.theme) {
-      localStorage.setItem('theme', versionData.theme);
+    try {
+        // Clear all cookies
+        document.cookie.split(";").forEach((c) => {
+            document.cookie = c
+                .replace(/^ +/, "")
+                .replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+        });
+
+        // Clear localStorage (except version info and theme preference which we need to preserve)
+        const versionData = {
+            version: localStorage.getItem('blancbeu_version'),
+            timestamp: localStorage.getItem('blancbeu_timestamp'),
+            theme: localStorage.getItem('theme')
+        };
+        localStorage.clear();
+        localStorage.setItem('blancbeu_version', versionData.version);
+        localStorage.setItem('blancbeu_timestamp', versionData.timestamp);
+        if (versionData.theme) {
+            localStorage.setItem('theme', versionData.theme);
+        }
+
+        // Clear sessionStorage
+        sessionStorage.clear();
+
+        // Clear all caches (for service worker)
+        if ('caches' in window) {
+            const cacheNames = await caches.keys();
+            await Promise.all(
+                cacheNames.map(cacheName => caches.delete(cacheName))
+            );
+        }
+
+        console.log('✨ All cache and cookies cleared!');
+    } catch (error) {
+        console.error('Error clearing cache:', error);
     }
-    
-    // Clear sessionStorage
-    sessionStorage.clear();
-    
-    // Clear all caches (for service worker)
-    if ('caches' in window) {
-      const cacheNames = await caches.keys();
-      await Promise.all(
-        cacheNames.map(cacheName => caches.delete(cacheName))
-      );
-    }
-    
-    console.log('✨ All cache and cookies cleared!');
-  } catch (error) {
-    console.error('Error clearing cache:', error);
-  }
 }
 
 const servicesData = {
-  groups: [
-    {
-      group: "Hair cutting",
-      icon: "✂️",
-      image: "assets/service_images/professional_hair_st_3fab25e9.webp",
-      services: [
-        { name: "Plain Haircut", price: 100, offerPrice: 99 },
-        { name: "U-Cut", price: 150, offerPrice: 99 },
-        { name: "V-Cut", price: 150, offerPrice: 99 },
-        { name: "Deep U-Cut", price: 200, offerPrice: 99 },
-        { name: "Deep V-Cut", price: 200, offerPrice: 99 },
-        { name: "Step Cut", price: 300, offerPrice: 99 },
-        { name: "Layer Cut", price: 500, offerPrice: 99 },
-        { name: "Butterfly Cut", price: 500, offerPrice: 99 },
-        { name: "Bob Cut", price: 400, offerPrice: 99 },
-        { name: "Baby Cut", price: 200, offerPrice: 99 },
-        { name: "Advance Haircut", price: 600, offerPrice: 99 },
-        { name: "Feather Cut", price: 450, offerPrice: 99 },
-        { name: "Pixie Cut", price: 500, offerPrice: 99 }
-      ]
-    },
-    {
-      group: "Clean up",
-      icon: "✨",
-      image: "assets/service_images/beautiful_woman_gett_9dc7243a.webp",
-      services: [
-        { name: "Fruit Cleanup", price: 500, offerPrice: 250 },
-        { name: "Diamond Cleanup", price: 800, offerPrice: 499 },
-        { name: "Gold Cleanup", price: 1000, offerPrice: 599 },
-        { name: "Charcoal Cleanup", price: 700, offerPrice: 399 }
-      ]
-    },
-    {
-      group: "Facial",
-      icon: "💆",
-      image: "assets/service_images/facial_new.webp",
-      services: [
-        { name: "Lotus Professional Facial", price: 1500, offerPrice: 699 },
-        { name: "03+ Facial", price: 1500, offerPrice: 699 },
-        { name: "Fruit Facial", price: 1200, offerPrice: 599 },
-        { name: "Gold Facial", price: 2000, offerPrice: 999 },
-        { name: "Diamond Facial", price: 2500, offerPrice: 1299 },
-        { name: "Anti-Aging Facial", price: 2200, offerPrice: 1199 }
-      ]
-    },
-    {
-      group: "Hairs & Treatment",
-      icon: "💇",
-      image: "assets/service_images/professional_hair_st_673b25ad.webp",
-      services: [
-        { name: "Keratin", price: 2500, offerPrice: 1499 },
-        { name: "Straightening/Smoothening", price: 3000, offerPrice: 1999 },
-        { name: "Botox", price: 3500, offerPrice: 2499 },
-        { name: "Rebounding", price: 3500, offerPrice: 2400 },
-        { name: "Nanoplastia", price: 7000, offerPrice: 2999 },
-        { name: "Hair Spa", price: 1500, offerPrice: 799 },
-        { name: "Protein Treatment", price: 2000, offerPrice: 1199 },
-        { name: "Anti-Dandruff Treatment", price: 1800, offerPrice: 999 }
-      ]
-    },
-    {
-      group: "Premium services",
-      icon: "👑",
-      image: "assets/service_images/premium_hair_spa_nourish.webp",
-      services: [
-        { name: "Head Massage", price: 250, offerPrice: 199 },
-        { name: "Deep Nourish HairSpa", price: 1500, offerPrice: 799 },
-        { name: "Full Body Massage", price: 5000, offerPrice: 999 },
-        { name: "Blow Dry", price: 500, offerPrice: 199 },
-        { name: "Aroma Therapy", price: 3000, offerPrice: 1499 },
-        { name: "Hot Stone Massage", price: 3500, offerPrice: 1799 },
-        { name: "Thai Massage", price: 4000, offerPrice: 1999 }
-      ]
-    },
-    {
-      group: "Hair colour",
-      icon: "🎨",
-      image: "assets/service_images/hair_colour_vibrant_pink.webp",
-      services: [
-        { name: "Global Hair Colour", price: 1199, offerPrice: null },
-        { name: "Global Highlight", price: 1299, offerPrice: null },
-        { name: "Highlight Perstrik", price: 149, offerPrice: null },
-        { name: "Balayage", price: 2500, offerPrice: 1999 },
-        { name: "Ombre", price: 2200, offerPrice: 1799 },
-        { name: "Root Touch-Up", price: 599, offerPrice: 399 }
-      ]
-    },
-    {
-      group: "Makeup & Styling",
-      icon: "💄",
-      image: "assets/service_images/makeup_styling_new.webp",
-      services: [
-        { name: "Party Makeup", price: 2000, offerPrice: 1499 },
-        { name: "Bridal Makeup", price: 8000, offerPrice: 5999 },
-        { name: "HD Makeup", price: 3500, offerPrice: 2499 },
-        { name: "Airbrush Makeup", price: 4000, offerPrice: 2999 },
-        { name: "Pre-Bridal Package", price: 15000, offerPrice: 9999 }
-      ]
-    },
-    {
-      group: "Nails & Beauty",
-      icon: "💅",
-      image: "assets/service_images/nails_beauty_vibrant.webp",
-      services: [
-        { name: "Manicure", price: 500, offerPrice: 299 },
-        { name: "Pedicure", price: 600, offerPrice: 349 },
-        { name: "Gel Nails", price: 1500, offerPrice: 999 },
-        { name: "Nail Art", price: 800, offerPrice: 499 },
-        { name: "Threading", price: 100, offerPrice: 50 },
-        { name: "Waxing Full Arms", price: 400, offerPrice: 299 },
-        { name: "Waxing Full Legs", price: 600, offerPrice: 399 }
-      ]
-    }
-  ]
+    groups: [
+        {
+            group: "Hair cutting",
+            icon: "✂️",
+            image: "assets/service_images/professional_hair_st_3fab25e9.webp",
+            services: [
+                { name: "Plain Haircut", price: 100, offerPrice: 99 },
+                { name: "U-Cut", price: 150, offerPrice: 99 },
+                { name: "V-Cut", price: 150, offerPrice: 99 },
+                { name: "Deep U-Cut", price: 200, offerPrice: 99 },
+                { name: "Deep V-Cut", price: 200, offerPrice: 99 },
+                { name: "Step Cut", price: 300, offerPrice: 99 },
+                { name: "Layer Cut", price: 500, offerPrice: 99 },
+                { name: "Butterfly Cut", price: 500, offerPrice: 99 },
+                { name: "Bob Cut", price: 400, offerPrice: 99 },
+                { name: "Baby Cut", price: 200, offerPrice: 99 },
+                { name: "Advance Haircut", price: 600, offerPrice: 99 },
+                { name: "Feather Cut", price: 450, offerPrice: 99 },
+                { name: "Pixie Cut", price: 500, offerPrice: 99 }
+            ]
+        },
+        {
+            group: "Clean up",
+            icon: "✨",
+            image: "assets/service_images/beautiful_woman_gett_9dc7243a.webp",
+            services: [
+                { name: "Fruit Cleanup", price: 500, offerPrice: 250 },
+                { name: "Diamond Cleanup", price: 800, offerPrice: 499 },
+                { name: "Gold Cleanup", price: 1000, offerPrice: 599 },
+                { name: "Charcoal Cleanup", price: 700, offerPrice: 399 }
+            ]
+        },
+        {
+            group: "Facial",
+            icon: "💆",
+            image: "assets/service_images/facial_new.webp",
+            services: [
+                { name: "Lotus Professional Facial", price: 1500, offerPrice: 699 },
+                { name: "03+ Facial", price: 1500, offerPrice: 699 },
+                { name: "Fruit Facial", price: 1200, offerPrice: 599 },
+                { name: "Gold Facial", price: 2000, offerPrice: 999 },
+                { name: "Diamond Facial", price: 2500, offerPrice: 1299 },
+                { name: "Anti-Aging Facial", price: 2200, offerPrice: 1199 }
+            ]
+        },
+        {
+            group: "Hairs & Treatment",
+            icon: "💇",
+            image: "assets/service_images/professional_hair_st_673b25ad.webp",
+            services: [
+                { name: "Keratin", price: 2500, offerPrice: 1499 },
+                { name: "Straightening/Smoothening", price: 3000, offerPrice: 1999 },
+                { name: "Botox", price: 3500, offerPrice: 2499 },
+                { name: "Rebounding", price: 3500, offerPrice: 2400 },
+                { name: "Nanoplastia", price: 7000, offerPrice: 2999 },
+                { name: "Hair Spa", price: 1500, offerPrice: 799 },
+                { name: "Protein Treatment", price: 2000, offerPrice: 1199 },
+                { name: "Anti-Dandruff Treatment", price: 1800, offerPrice: 999 }
+            ]
+        },
+        {
+            group: "Premium services",
+            icon: "👑",
+            image: "assets/service_images/premium_hair_spa_nourish.webp",
+            services: [
+                { name: "Head Massage", price: 250, offerPrice: 199 },
+                { name: "Deep Nourish HairSpa", price: 1500, offerPrice: 799 },
+                { name: "Full Body Massage", price: 5000, offerPrice: 999 },
+                { name: "Blow Dry", price: 500, offerPrice: 199 },
+                { name: "Aroma Therapy", price: 3000, offerPrice: 1499 },
+                { name: "Hot Stone Massage", price: 3500, offerPrice: 1799 },
+                { name: "Thai Massage", price: 4000, offerPrice: 1999 }
+            ]
+        },
+        {
+            group: "Hair colour",
+            icon: "🎨",
+            image: "assets/service_images/hair_colour_vibrant_pink.webp",
+            services: [
+                { name: "Global Hair Colour", price: 1199, offerPrice: null },
+                { name: "Global Highlight", price: 1299, offerPrice: null },
+                { name: "Highlight Perstrik", price: 149, offerPrice: null },
+                { name: "Balayage", price: 2500, offerPrice: 1999 },
+                { name: "Ombre", price: 2200, offerPrice: 1799 },
+                { name: "Root Touch-Up", price: 599, offerPrice: 399 }
+            ]
+        },
+        {
+            group: "Makeup & Styling",
+            icon: "💄",
+            image: "assets/service_images/makeup_styling_new.webp",
+            services: [
+                { name: "Party Makeup", price: 2000, offerPrice: 1499 },
+                { name: "Bridal Makeup", price: 8000, offerPrice: 5999 },
+                { name: "HD Makeup", price: 3500, offerPrice: 2499 },
+                { name: "Airbrush Makeup", price: 4000, offerPrice: 2999 },
+                { name: "Pre-Bridal Package", price: 15000, offerPrice: 9999 }
+            ]
+        },
+        {
+            group: "Nails & Beauty",
+            icon: "💅",
+            image: "assets/service_images/nails_beauty_vibrant.webp",
+            services: [
+                { name: "Manicure", price: 500, offerPrice: 299 },
+                { name: "Pedicure", price: 600, offerPrice: 349 },
+                { name: "Gel Nails", price: 1500, offerPrice: 999 },
+                { name: "Nail Art", price: 800, offerPrice: 499 },
+                { name: "Threading", price: 100, offerPrice: 50 },
+                { name: "Waxing Full Arms", price: 400, offerPrice: 299 },
+                { name: "Waxing Full Legs", price: 600, offerPrice: 399 }
+            ]
+        }
+    ]
 };
 
 const reviewsData = [
-  {
-    reviewer_name: "Nikita Kumari",
-    reviewer_details: "1 review",
-    rating_hearts: 5,
-    review_date: "a month ago",
-    review_text: "I recently visited BlancBeu Family beauty salon for a haircut and highlights, and I'm very impressed with the overall experience. The salon is beautiful and well-maintained!"
-  },
-  {
-    reviewer_name: "Parwati Lohar",
-    reviewer_details: "2 reviews",
-    rating_hearts: 5,
-    review_date: "9 month ago",
-    review_text: "It was my first time visiting this salon, and I was nervous - but they made me feel so comfortable! The beautician listened to me patiently and suggested the perfect style."
-  },
-  {
-    reviewer_name: "Rajendra Kumar Lohra",
-    reviewer_details: "2 reviews",
-    rating_hearts: 5,
-    review_date: "a month ago",
-    review_text: "My wife loves this place. She got her haircut and facial done that was awesome all service is wow! I've never been so happy with them. I'd highly recommend!"
-  },
-  {
-    reviewer_name: "Ujala Oraon",
-    reviewer_details: "4 reviews",
-    rating_hearts: 5,
-    review_date: "5 days ago",
-    review_text: "Best service... I done my cleanup.. Thank you blanc beu"
-  },
-  {
-    reviewer_name: "Fehran Saifi",
-    reviewer_details: "1 review",
-    rating_hearts: 5,
-    review_date: "a month ago",
-    review_text: "Highly recommended, all services are premium and result was very good in behaviour.. maine waha global highlight karwaya 😍😍😍❤️"
-  },
-  {
-    reviewer_name: "Aditi Singh",
-    reviewer_details: "5 reviews",
-    rating_hearts: 5,
-    review_date: "2 months ago",
-    review_text: "Such a great place! I was glad to have your pampering sessions, recently visited there, felt so comfortable..."
-  }
+    {
+        reviewer_name: "Nikita Kumari",
+        reviewer_details: "1 review",
+        rating_hearts: 5,
+        review_date: "a month ago",
+        review_text: "I recently visited BlancBeu Family beauty salon for a haircut and highlights, and I'm very impressed with the overall experience. The salon is beautiful and well-maintained!"
+    },
+    {
+        reviewer_name: "Parwati Lohar",
+        reviewer_details: "2 reviews",
+        rating_hearts: 5,
+        review_date: "9 month ago",
+        review_text: "It was my first time visiting this salon, and I was nervous - but they made me feel so comfortable! The beautician listened to me patiently and suggested the perfect style."
+    },
+    {
+        reviewer_name: "Rajendra Kumar Lohra",
+        reviewer_details: "2 reviews",
+        rating_hearts: 5,
+        review_date: "a month ago",
+        review_text: "My wife loves this place. She got her haircut and facial done that was awesome all service is wow! I've never been so happy with them. I'd highly recommend!"
+    },
+    {
+        reviewer_name: "Ujala Oraon",
+        reviewer_details: "4 reviews",
+        rating_hearts: 5,
+        review_date: "5 days ago",
+        review_text: "Best service... I done my cleanup.. Thank you blanc beu"
+    },
+    {
+        reviewer_name: "Fehran Saifi",
+        reviewer_details: "1 review",
+        rating_hearts: 5,
+        review_date: "a month ago",
+        review_text: "Highly recommended, all services are premium and result was very good in behaviour.. maine waha global highlight karwaya 😍😍😍❤️"
+    },
+    {
+        reviewer_name: "Aditi Singh",
+        reviewer_details: "5 reviews",
+        rating_hearts: 5,
+        review_date: "2 months ago",
+        review_text: "Such a great place! I was glad to have your pampering sessions, recently visited there, felt so comfortable..."
+    }
 ];
 
 let currentSlide = 0;
 let carouselInterval;
 
 function initCarousel() {
-  const dots = document.getElementById('carouselDots');
-  const slides = document.querySelectorAll('.carousel-slide');
-  
-  console.log(`🎠 Carousel initialized with ${slides.length} slides`);
-  
-  slides.forEach((_, index) => {
-    const dot = document.createElement('div');
-    dot.className = 'dot';
-    if (index === 0) dot.classList.add('active');
-    dot.onclick = () => goToSlide(index);
-    dots.appendChild(dot);
-  });
-  
-  startAutoPlay();
+    const dots = document.getElementById('carouselDots');
+    const slides = document.querySelectorAll('.carousel-slide');
+
+    console.log(`🎠 Carousel initialized with ${slides.length} slides`);
+
+    slides.forEach((_, index) => {
+        const dot = document.createElement('div');
+        dot.className = 'dot';
+        if (index === 0) dot.classList.add('active');
+        dot.onclick = () => goToSlide(index);
+        dots.appendChild(dot);
+    });
+
+    startAutoPlay();
 }
 
 function startAutoPlay() {
-  console.log('▶️ Starting carousel auto-play');
-  carouselInterval = setInterval(() => {
-    moveCarousel(1);
-  }, 5000);
+    console.log('▶️ Starting carousel auto-play');
+    carouselInterval = setInterval(() => {
+        moveCarousel(1);
+    }, 5000);
 }
 
 function moveCarousel(direction) {
-  const slides = document.querySelectorAll('.carousel-slide');
-  const dots = document.querySelectorAll('.dot');
-  
-  console.log(`🔄 Moving carousel: current=${currentSlide}, direction=${direction}`);
-  
-  slides[currentSlide].classList.remove('active');
-  dots[currentSlide].classList.remove('active');
-  
-  currentSlide = (currentSlide + direction + slides.length) % slides.length;
-  
-  console.log(`✅ New slide: ${currentSlide}`);
-  
-  slides[currentSlide].classList.add('active');
-  dots[currentSlide].classList.add('active');
-  
-  clearInterval(carouselInterval);
-  startAutoPlay();
+    const slides = document.querySelectorAll('.carousel-slide');
+    const dots = document.querySelectorAll('.dot');
+
+    console.log(`🔄 Moving carousel: current=${currentSlide}, direction=${direction}`);
+
+    slides[currentSlide].classList.remove('active');
+    dots[currentSlide].classList.remove('active');
+
+    currentSlide = (currentSlide + direction + slides.length) % slides.length;
+
+    console.log(`✅ New slide: ${currentSlide}`);
+
+    slides[currentSlide].classList.add('active');
+    dots[currentSlide].classList.add('active');
+
+    clearInterval(carouselInterval);
+    startAutoPlay();
 }
 
 function goToSlide(index) {
-  const slides = document.querySelectorAll('.carousel-slide');
-  const dots = document.querySelectorAll('.dot');
-  
-  slides[currentSlide].classList.remove('active');
-  dots[currentSlide].classList.remove('active');
-  
-  currentSlide = index;
-  
-  slides[currentSlide].classList.add('active');
-  dots[currentSlide].classList.add('active');
-  
-  clearInterval(carouselInterval);
-  startAutoPlay();
+    const slides = document.querySelectorAll('.carousel-slide');
+    const dots = document.querySelectorAll('.dot');
+
+    slides[currentSlide].classList.remove('active');
+    dots[currentSlide].classList.remove('active');
+
+    currentSlide = index;
+
+    slides[currentSlide].classList.add('active');
+    dots[currentSlide].classList.add('active');
+
+    clearInterval(carouselInterval);
+    startAutoPlay();
 }
 
 let filteredServices = [];
@@ -1820,78 +1820,78 @@ let currentFilter = 'all';
 let searchQuery = '';
 
 function initServiceFiltering() {
-  const filterBtns = document.querySelectorAll('.filter-btn');
-  const searchInput = document.getElementById('serviceSearch');
-  const clearBtn = document.getElementById('clearFilters');
-  
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      filterBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      currentFilter = btn.dataset.category;
-      applyFilters();
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const searchInput = document.getElementById('serviceSearch');
+    const clearBtn = document.getElementById('clearFilters');
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentFilter = btn.dataset.category;
+            applyFilters();
+        });
     });
-  });
-  
-  if (searchInput) {
-    searchInput.addEventListener('input', (e) => {
-      searchQuery = e.target.value.toLowerCase();
-      applyFilters();
-    });
-  }
-  
-  if (clearBtn) {
-    clearBtn.addEventListener('click', () => {
-      searchQuery = '';
-      currentFilter = 'all';
-      filterBtns.forEach(b => b.classList.remove('active'));
-      filterBtns[0].classList.add('active');
-      if (searchInput) searchInput.value = '';
-      applyFilters();
-    });
-  }
+
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            searchQuery = e.target.value.toLowerCase();
+            applyFilters();
+        });
+    }
+
+    if (clearBtn) {
+        clearBtn.addEventListener('click', () => {
+            searchQuery = '';
+            currentFilter = 'all';
+            filterBtns.forEach(b => b.classList.remove('active'));
+            filterBtns[0].classList.add('active');
+            if (searchInput) searchInput.value = '';
+            applyFilters();
+        });
+    }
 }
 
 function applyFilters() {
-  let matched = 0;
-  const allServices = document.querySelectorAll('.service-card');
-  
-  servicesData.groups.forEach(group => {
-    const categoryDiv = document.querySelector(`[data-category="${group.group}"]`);
-    if (!categoryDiv) return;
-    
-    let groupMatched = 0;
-    group.services.forEach(service => {
-      const matches = 
-        (currentFilter === 'all' || group.group.toLowerCase().includes(currentFilter)) &&
-        (searchQuery === '' || service.name.toLowerCase().includes(searchQuery));
-      
-      if (matches) groupMatched++;
+    let matched = 0;
+    const allServices = document.querySelectorAll('.service-card');
+
+    servicesData.groups.forEach(group => {
+        const categoryDiv = document.querySelector(`[data-category="${group.group}"]`);
+        if (!categoryDiv) return;
+
+        let groupMatched = 0;
+        group.services.forEach(service => {
+            const matches =
+                (currentFilter === 'all' || group.group.toLowerCase().includes(currentFilter)) &&
+                (searchQuery === '' || service.name.toLowerCase().includes(searchQuery));
+
+            if (matches) groupMatched++;
+        });
+
+        matched += groupMatched;
+        if (categoryDiv) {
+            categoryDiv.style.opacity = groupMatched > 0 ? '1' : '0.3';
+        }
     });
-    
-    matched += groupMatched;
-    if (categoryDiv) {
-      categoryDiv.style.opacity = groupMatched > 0 ? '1' : '0.3';
-    }
-  });
-  
-  const countEl = document.getElementById('servicesCount');
-  const clearBtn = document.getElementById('clearFilters');
-  if (countEl) countEl.textContent = `Found ${matched} services`;
-  if (clearBtn && (searchQuery || currentFilter !== 'all')) clearBtn.style.display = 'block';
-  else if (clearBtn) clearBtn.style.display = 'none';
+
+    const countEl = document.getElementById('servicesCount');
+    const clearBtn = document.getElementById('clearFilters');
+    if (countEl) countEl.textContent = `Found ${matched} services`;
+    if (clearBtn && (searchQuery || currentFilter !== 'all')) clearBtn.style.display = 'block';
+    else if (clearBtn) clearBtn.style.display = 'none';
 }
 
 function renderServices() {
-  const container = document.getElementById('servicesContainer');
-  if (!container) return;
-  
-  servicesData.groups.forEach(group => {
-    const categoryDiv = document.createElement('div');
-    categoryDiv.className = 'service-category';
-    categoryDiv.dataset.category = group.group;
-    
-    const headerHTML = `
+    const container = document.getElementById('servicesContainer');
+    if (!container) return;
+
+    servicesData.groups.forEach(group => {
+        const categoryDiv = document.createElement('div');
+        categoryDiv.className = 'service-category';
+        categoryDiv.dataset.category = group.group;
+
+        const headerHTML = `
       <div class="category-header">
         <div class="category-info">
           <h3 class="category-title">${group.icon} ${group.group}</h3>
@@ -1899,47 +1899,49 @@ function renderServices() {
         <img src="${group.image}" alt="${group.group}" class="category-image" loading="lazy" decoding="async">
       </div>
     `;
-    
-    const servicesHTML = group.services.map(service => {
-      const hasOffer = service.offerPrice !== null;
-      const discount = hasOffer ? Math.round((1 - service.offerPrice / service.price) * 100) : 0;
-      
-      return `
+
+        const servicesHTML = group.services.map(service => {
+            const hasOffer = service.offerPrice !== null;
+            const discount = hasOffer ? Math.round((1 - service.offerPrice / service.price) * 100) : 0;
+
+            return `
         <div class="service-card">
           <div class="service-header">
             <div class="service-name">${service.name}</div>
             <div class="service-duration">⏱️ 30-60 min</div>
           </div>
-          <div class="service-prices">
-            ${hasOffer ? `<span class="service-original-price">₹${service.price}</span>` : ''}
-            <span class="service-offer-price">₹${service.offerPrice || service.price}</span>
-            ${hasOffer && discount > 0 ? `<span class="service-discount">${discount}% OFF</span>` : ''}
+          <div class="service-footer">
+            <div class="service-prices">
+              ${hasOffer ? `<span class="service-original-price">₹${service.price}</span>` : ''}
+              <span class="service-price-main">₹${service.offerPrice || service.price}</span>
+              ${hasOffer && discount > 0 ? `<span class="service-discount">${discount}% OFF</span>` : ''}
+            </div>
+            <button class="book-service-btn" onclick="document.querySelector('.bottom-nav .nav-item[data-page=\\'chat\\']').click()">Book</button>
           </div>
-          <button class="book-service-btn" onclick="alert('Booking coming soon!')">Book Now</button>
         </div>
       `;
-    }).join('');
-    
-    categoryDiv.innerHTML = headerHTML + `<div class="services-grid">${servicesHTML}</div>`;
-    container.appendChild(categoryDiv);
-  });
-  
-  initServiceFiltering();
+        }).join('');
+
+        categoryDiv.innerHTML = headerHTML + `<div class="services-grid">${servicesHTML}</div>`;
+        container.appendChild(categoryDiv);
+    });
+
+    initServiceFiltering();
 }
 
 function renderReviews() {
-  const container = document.getElementById('reviewsContainer');
-  
-  // Skip if container doesn't exist (reviews converted to testimonial carousel)
-  if (!container) return;
-  
-  reviewsData.forEach(review => {
-    const reviewCard = document.createElement('div');
-    reviewCard.className = 'review-card';
-    
-    const stars = '★'.repeat(review.rating_hearts || 5);
-    
-    reviewCard.innerHTML = `
+    const container = document.getElementById('reviewsContainer');
+
+    // Skip if container doesn't exist (reviews converted to testimonial carousel)
+    if (!container) return;
+
+    reviewsData.forEach(review => {
+        const reviewCard = document.createElement('div');
+        reviewCard.className = 'review-card';
+
+        const stars = '★'.repeat(review.rating_hearts || 5);
+
+        reviewCard.innerHTML = `
       <div class="review-header">
         <div class="reviewer-info">
           <h4>${review.reviewer_name}</h4>
@@ -1952,666 +1954,690 @@ function renderReviews() {
       <p class="review-text">${review.review_text}</p>
       <p class="review-date">${review.review_date}</p>
     `;
-    
-    container.appendChild(reviewCard);
-  });
+
+        container.appendChild(reviewCard);
+    });
 }
 
 function initSmoothScroll() {
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      const href = this.getAttribute('href');
-      if (href === '#' || href === '') return; // Skip empty anchors
-      
-      e.preventDefault();
-      const target = document.querySelector(href);
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const href = this.getAttribute('href');
+            if (href === '#' || href === '') return; // Skip empty anchors
+
+            e.preventDefault();
+            const target = document.querySelector(href);
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
     });
-  });
 }
 
 function showTC() {
-  const modal = document.getElementById('tcModal');
-  modal.style.display = 'block';
-  document.body.style.overflow = 'hidden';
+    const modal = document.getElementById('tcModal');
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
 }
 
 function closeTC() {
-  const modal = document.getElementById('tcModal');
-  modal.style.display = 'none';
-  document.body.style.overflow = 'auto';
-}
-
-window.onclick = function(event) {
-  const modal = document.getElementById('tcModal');
-  if (event.target === modal) {
+    const modal = document.getElementById('tcModal');
     modal.style.display = 'none';
     document.body.style.overflow = 'auto';
-  }
+}
+
+window.onclick = function (event) {
+    const modal = document.getElementById('tcModal');
+    if (event.target === modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
 }
 
 class ScrollBehaviorManager {
-  constructor() {
-    this.lastScroll = 0;
-    this.scrollThreshold = 5;
-    this.header = null;
-    this.bottomNav = null;
-    this.fireworksResumeTimer = null;
-    this.isScrolling = false;
-    this.fireworksWerePausedByScroll = false;
-    this.ticking = false; // For requestAnimationFrame throttling
-  }
-
-  init() {
-    this.header = document.getElementById('mainHeader');
-    this.bottomNav = document.getElementById('bottomNav');
-    
-    if (!this.header) {
-      console.warn('❌ Header element not found - navbar auto-hide disabled');
-    }
-    
-    if (!this.bottomNav) {
-      console.warn('❌ Bottom nav element not found - bottom nav auto-hide disabled');
-    }
-    window.addEventListener('scroll', this.onScroll.bind(this), { passive: true });
-  }
-
-  onScroll() {
-    // Use requestAnimationFrame for smooth, throttled scroll handling
-    if (!this.ticking) {
-      window.requestAnimationFrame(() => {
-        this.handleScroll();
-        this.ticking = false;
-      });
-      this.ticking = true;
-    }
-  }
-
-  handleScroll() {
-    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-    
-    this.updateNavbarVisibility(currentScroll);
-    
-    this.handleFireworksScroll();
-    
-    this.lastScroll = currentScroll;
-  }
-
-  updateNavbarVisibility(currentScroll) {
-    if (currentScroll <= 0) {
-      if (this.header) this.header.classList.remove('hidden');
-      if (this.bottomNav) this.bottomNav.classList.remove('hidden');
-      return;
-    }
-
-    const windowHeight = window.innerHeight;
-    const documentHeight = document.documentElement.scrollHeight;
-    const isAtBottom = (currentScroll + windowHeight) >= (documentHeight - 50);
-    
-    if (isAtBottom) {
-      if (this.bottomNav) this.bottomNav.classList.remove('hidden');
-    }
-
-    const scrollDiff = currentScroll - this.lastScroll;
-    
-    if (Math.abs(scrollDiff) < this.scrollThreshold) {
-      return;
-    }
-
-    if (scrollDiff > 0 && currentScroll > 100) {
-      // Scrolling down - hide both header and bottom nav together
-      if (this.header) {
-        this.header.classList.add('hidden');
-      }
-      if (this.bottomNav && !isAtBottom) {
-        this.bottomNav.classList.add('hidden');
-      }
-    } else if (scrollDiff < 0) {
-      // Scrolling up - show both header and bottom nav together
-      if (this.header) {
-        this.header.classList.remove('hidden');
-      }
-      if (this.bottomNav) {
-        this.bottomNav.classList.remove('hidden');
-      }
-    }
-  }
-
-  handleFireworksScroll() {
-    if (typeof togglePause !== 'function' || typeof store === 'undefined') {
-      return;
-    }
-
-    if (!this.isScrolling) {
-      this.isScrolling = true;
-      
-      const wasAlreadyPaused = store.state && store.state.paused;
-      
-      if (!wasAlreadyPaused) {
-        this.fireworksWerePausedByScroll = true;
-        togglePause(true);
-      } else {
+    constructor() {
+        this.lastScroll = 0;
+        this.scrollThreshold = 5;
+        this.header = null;
+        this.bottomNav = null;
+        this.fireworksResumeTimer = null;
+        this.isScrolling = false;
         this.fireworksWerePausedByScroll = false;
-      }
+        this.ticking = false; // For requestAnimationFrame throttling
     }
 
-    clearTimeout(this.fireworksResumeTimer);
-    
-    // Resume fireworks after 0.5 seconds of no scrolling
-    this.fireworksResumeTimer = setTimeout(() => {
-      this.isScrolling = false;
-      if (this.fireworksWerePausedByScroll) {
-        togglePause(false);
-        this.fireworksWerePausedByScroll = false;
-      }
-    }, 500);
-  }
+    init() {
+        this.header = document.getElementById('mainHeader');
+        this.bottomNav = document.getElementById('bottomNav');
+
+        if (!this.header) {
+            console.warn('❌ Header element not found - navbar auto-hide disabled');
+        }
+
+        if (!this.bottomNav) {
+            console.warn('❌ Bottom nav element not found - bottom nav auto-hide disabled');
+        }
+        window.addEventListener('scroll', this.onScroll.bind(this), { passive: true });
+    }
+
+    onScroll() {
+        // Use requestAnimationFrame for smooth, throttled scroll handling
+        if (!this.ticking) {
+            window.requestAnimationFrame(() => {
+                this.handleScroll();
+                this.ticking = false;
+            });
+            this.ticking = true;
+        }
+    }
+
+    handleScroll() {
+        const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+        this.updateNavbarVisibility(currentScroll);
+
+        this.handleFireworksScroll();
+
+        this.lastScroll = currentScroll;
+    }
+
+    updateNavbarVisibility(currentScroll) {
+        if (currentScroll <= 0) {
+            if (this.header) this.header.classList.remove('hidden');
+            if (this.bottomNav) this.bottomNav.classList.remove('hidden');
+            return;
+        }
+
+        const windowHeight = window.innerHeight;
+        const documentHeight = document.documentElement.scrollHeight;
+        const isAtBottom = (currentScroll + windowHeight) >= (documentHeight - 50);
+
+        if (isAtBottom) {
+            if (this.bottomNav) this.bottomNav.classList.remove('hidden');
+        }
+
+        const scrollDiff = currentScroll - this.lastScroll;
+
+        if (Math.abs(scrollDiff) < this.scrollThreshold) {
+            return;
+        }
+
+        if (scrollDiff > 0 && currentScroll > 100) {
+            // Scrolling down - hide both header and bottom nav together
+            if (this.header) {
+                this.header.classList.add('hidden');
+            }
+            if (this.bottomNav && !isAtBottom) {
+                this.bottomNav.classList.add('hidden');
+            }
+        } else if (scrollDiff < 0) {
+            // Scrolling up - show both header and bottom nav together
+            if (this.header) {
+                this.header.classList.remove('hidden');
+            }
+            if (this.bottomNav) {
+                this.bottomNav.classList.remove('hidden');
+            }
+        }
+    }
+
+    handleFireworksScroll() {
+        if (typeof togglePause !== 'function' || typeof store === 'undefined') {
+            return;
+        }
+
+        if (!this.isScrolling) {
+            this.isScrolling = true;
+
+            const wasAlreadyPaused = store.state && store.state.paused;
+
+            if (!wasAlreadyPaused) {
+                this.fireworksWerePausedByScroll = true;
+                togglePause(true);
+            } else {
+                this.fireworksWerePausedByScroll = false;
+            }
+        }
+
+        clearTimeout(this.fireworksResumeTimer);
+
+        // Resume fireworks after 0.5 seconds of no scrolling
+        this.fireworksResumeTimer = setTimeout(() => {
+            this.isScrolling = false;
+            if (this.fireworksWerePausedByScroll) {
+                togglePause(false);
+                this.fireworksWerePausedByScroll = false;
+            }
+        }, 500);
+    }
 }
 
 function initScrollBehavior() {
-  const scrollManager = new ScrollBehaviorManager();
-  scrollManager.init();
+    const scrollManager = new ScrollBehaviorManager();
+    scrollManager.init();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  initCarousel();
-  renderServices();
-  renderReviews();
-  initServiceFiltering();
-  initSmoothScroll();
-  initScrollBehavior();
+    initCarousel();
+    renderServices();
+    renderReviews();
+    initServiceFiltering();
+    initSmoothScroll();
+    initScrollBehavior();
 });
 
 let deferredPrompt;
 let installButton;
 
 function updateInstallButtonVisibility() {
-  const navInstallBtn = document.getElementById('installBtn');
-  const isStandalone = window.matchMedia('(display-mode: standalone)').matches || 
-                       window.navigator.standalone === true ||
-                       document.referrer.includes('android-app://') ||
-                       sessionStorage.getItem('isStandalone') === 'true' ||
-                       sessionStorage.getItem('appInstalled') === 'true';
-  
-  if (navInstallBtn) {
-    if (isStandalone || !deferredPrompt) {
-      navInstallBtn.style.display = 'none';
-      console.log('🔒 Install button hidden - app is installed or cannot be installed');
-    } else {
-      navInstallBtn.style.display = 'flex';
-      console.log('📲 Install button visible - app can be installed');
+    const navInstallBtn = document.getElementById('installBtn');
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches ||
+        window.navigator.standalone === true ||
+        document.referrer.includes('android-app://') ||
+        sessionStorage.getItem('isStandalone') === 'true' ||
+        sessionStorage.getItem('appInstalled') === 'true';
+
+    if (navInstallBtn) {
+        if (isStandalone || !deferredPrompt) {
+            navInstallBtn.style.display = 'none';
+            console.log('🔒 Install button hidden - app is installed or cannot be installed');
+        } else {
+            navInstallBtn.style.display = 'flex';
+            console.log('📲 Install button visible - app can be installed');
+        }
     }
-  }
 }
 
 function initPWA() {
-  const navInstallBtn = document.getElementById('installBtn');
-  
-  // Initial check - hide button if already installed
-  updateInstallButtonVisibility();
-  
-  // Monitor display mode changes
-  const displayModeQuery = window.matchMedia('(display-mode: standalone)');
-  displayModeQuery.addListener(() => updateInstallButtonVisibility());
-  
-  window.addEventListener('beforeinstallprompt', (e) => {
-    console.log('📲 PWA Install prompt available');
-    e.preventDefault();
-    deferredPrompt = e;
-    
-    // Show nav install button only if not standalone
-    if (!checkIfStandalone() && navInstallBtn) {
-      navInstallBtn.style.display = 'flex';
-      console.log('✅ Showing install button - prompt is available');
-    }
-    showInstallPromotion();
-  });
+    const navInstallBtn = document.getElementById('installBtn');
 
-  window.addEventListener('appinstalled', () => {
-    console.log('✅ PWA was installed successfully');
-    sessionStorage.setItem('appInstalled', 'true');
-    sessionStorage.setItem('isStandalone', 'true');
-    deferredPrompt = null;
-    
-    // Hide install button
+    // Initial check - hide button if already installed
     updateInstallButtonVisibility();
-    hideInstallPromotion();
-  });
-  
-  // Nav button click handler
-  if (navInstallBtn) {
-    navInstallBtn.addEventListener('click', async () => {
-      if (deferredPrompt) {
-        try {
-          await deferredPrompt.prompt();
-          const { outcome } = await deferredPrompt.userChoice;
-          console.log(`User response: ${outcome}`);
-          if (outcome === 'accepted') {
-            sessionStorage.setItem('appInstalled', 'true');
-            sessionStorage.setItem('isStandalone', 'true');
-          }
-          deferredPrompt = null;
-          updateInstallButtonVisibility();
-        } catch (error) {
-          console.error('Install error:', error);
-        }
-      }
-    });
-  }
 
-  const isStandalone = checkIfStandalone();
-  
-  if (!isStandalone && !deferredPrompt) {
-    setTimeout(() => {
-      showBrowserSpecificInstallPrompt();
-    }, 5000);
-  }
+    // Monitor display mode changes
+    const displayModeQuery = window.matchMedia('(display-mode: standalone)');
+    displayModeQuery.addListener(() => updateInstallButtonVisibility());
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+        console.log('📲 PWA Install prompt available');
+        e.preventDefault();
+        deferredPrompt = e;
+
+        // Show nav install button only if not standalone
+        if (!checkIfStandalone() && navInstallBtn) {
+            navInstallBtn.style.display = 'flex';
+            console.log('✅ Showing install button - prompt is available');
+        }
+        showInstallPromotion();
+    });
+
+    window.addEventListener('appinstalled', () => {
+        console.log('✅ PWA was installed successfully');
+        sessionStorage.setItem('appInstalled', 'true');
+        sessionStorage.setItem('isStandalone', 'true');
+        deferredPrompt = null;
+
+        // Hide install button
+        updateInstallButtonVisibility();
+        hideInstallPromotion();
+    });
+
+    // Nav button click handler
+    if (navInstallBtn) {
+        navInstallBtn.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                try {
+                    await deferredPrompt.prompt();
+                    const { outcome } = await deferredPrompt.userChoice;
+                    console.log(`User response: ${outcome}`);
+                    if (outcome === 'accepted') {
+                        sessionStorage.setItem('appInstalled', 'true');
+                        sessionStorage.setItem('isStandalone', 'true');
+                    }
+                    deferredPrompt = null;
+                    updateInstallButtonVisibility();
+                } catch (error) {
+                    console.error('Install error:', error);
+                }
+            }
+        });
+    }
+
+    const isStandalone = checkIfStandalone();
+
+    if (!isStandalone && !deferredPrompt) {
+        setTimeout(() => {
+            showBrowserSpecificInstallPrompt();
+        }, 5000);
+    }
 }
 
 function showInstallPromotion() {
-  const isStandalone = checkIfStandalone();
-  if (isStandalone || sessionStorage.getItem('installPromptDismissed') === 'true') {
-    return;
-  }
-
-  if (!installButton) {
-    installButton = document.createElement('button');
-    installButton.className = 'install-app-button';
-    installButton.innerHTML = `
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
-      </svg>
-      <span>Install App</span>
-    `;
-    installButton.onclick = async () => {
-      if (deferredPrompt) {
-        deferredPrompt.prompt();
-        const { outcome } = await deferredPrompt.userChoice;
-        console.log(`User response to install prompt: ${outcome}`);
-        if (outcome === 'accepted') {
-          sessionStorage.setItem('appInstalled', 'true');
-        } else {
-          sessionStorage.setItem('installPromptDismissed', 'true');
-        }
-        deferredPrompt = null;
-        hideInstallPromotion();
-      } else {
-        showBrowserSpecificInstructions();
-      }
-    };
-    document.body.appendChild(installButton);
-  }
-  
-  setTimeout(() => {
-    if (installButton) {
-      installButton.classList.add('show');
+    const isStandalone = checkIfStandalone();
+    if (isStandalone || sessionStorage.getItem('installPromptDismissed') === 'true') {
+        return;
     }
-  }, 3000);
+
+    if (!installButton) {
+        installButton = document.createElement('div');
+        installButton.className = 'install-banner';
+        installButton.innerHTML = `
+            <div class="install-area-1-model">
+                <img src="assets/install_model_new.png" alt="Install App" class="install-model-img">
+            </div>
+            <div class="install-content-wrapper">
+                <div class="install-row-top">
+                    <div class="install-area-2-button">
+                        <button id="pwaInstallBtn" class="pwa-install-btn">Install App</button>
+                    </div>
+                    <div class="install-area-4-close">
+                        <button id="pwaCloseBtn" class="pwa-close-btn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="install-area-3-text">
+                    Install the app for better experience.
+                </div>
+            </div>
+        `;
+
+        document.body.appendChild(installButton);
+
+        // Add event listeners after appending to DOM
+        const installBtn = document.getElementById('pwaInstallBtn');
+        const closeBtn = document.getElementById('pwaCloseBtn');
+
+        if (installBtn) {
+            installBtn.onclick = async () => {
+                if (deferredPrompt) {
+                    deferredPrompt.prompt();
+                    const { outcome } = await deferredPrompt.userChoice;
+                    console.log(`User response to install prompt: ${outcome}`);
+                    if (outcome === 'accepted') {
+                        sessionStorage.setItem('appInstalled', 'true');
+                    } else {
+                        sessionStorage.setItem('installPromptDismissed', 'true');
+                    }
+                    deferredPrompt = null;
+                    hideInstallPromotion();
+                } else {
+                    showBrowserSpecificInstructions();
+                }
+            };
+        }
+
+        if (closeBtn) {
+            closeBtn.onclick = () => {
+                hideInstallPromotion();
+                sessionStorage.setItem('installPromptDismissed', 'true');
+            };
+        }
+    }
+
+    setTimeout(() => {
+        if (installButton) {
+            installButton.classList.add('show');
+        }
+    }, 3000);
 }
 
 function showBrowserSpecificInstallPrompt() {
-  const isStandalone = checkIfStandalone();
-  if (isStandalone || sessionStorage.getItem('installPromptDismissed') === 'true') {
-    return;
-  }
+    const isStandalone = checkIfStandalone();
+    if (isStandalone || sessionStorage.getItem('installPromptDismissed') === 'true') {
+        return;
+    }
 
-  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-  const isFirefox = /Firefox/.test(navigator.userAgent);
-  const isSafari = /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
-  
-  if (isIOS || isSafari || isFirefox) {
-    showInstallPromotion();
-  }
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    const isFirefox = /Firefox/.test(navigator.userAgent);
+    const isSafari = /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
+
+    if (isIOS || isSafari || isFirefox) {
+        showInstallPromotion();
+    }
 }
 
 function showBrowserSpecificInstructions() {
-  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-  const isFirefox = /Firefox/.test(navigator.userAgent);
-  const isSafari = /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
-  
-  let message = '';
-  
-  if (isIOS || isSafari) {
-    message = 'To install this app:\n\n1. Tap the Share button (box with arrow)\n2. Scroll down and tap "Add to Home Screen"\n3. Tap "Add" in the top right corner';
-  } else if (isFirefox) {
-    message = 'To install this app:\n\n1. Tap the menu button (three dots)\n2. Tap "Install"\n3. Follow the prompts to add to home screen';
-  } else {
-    message = 'To install this app:\n\nPlease use your browser\'s menu to add this website to your home screen.';
-  }
-  
-  alert(message);
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    const isFirefox = /Firefox/.test(navigator.userAgent);
+    const isSafari = /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
+
+    let message = '';
+
+    if (isIOS || isSafari) {
+        message = 'To install this app:\n\n1. Tap the Share button (box with arrow)\n2. Scroll down and tap "Add to Home Screen"\n3. Tap "Add" in the top right corner';
+    } else if (isFirefox) {
+        message = 'To install this app:\n\n1. Tap the menu button (three dots)\n2. Tap "Install"\n3. Follow the prompts to add to home screen';
+    } else {
+        message = 'To install this app:\n\nPlease use your browser\'s menu to add this website to your home screen.';
+    }
+
+    alert(message);
 }
 
 function hideInstallPromotion() {
-  if (installButton) {
-    installButton.classList.remove('show');
-    setTimeout(() => {
-      if (installButton && installButton.parentNode) {
-        installButton.parentNode.removeChild(installButton);
-        installButton = null;
-      }
-    }, 300);
-  }
+    if (installButton) {
+        installButton.classList.remove('show');
+        setTimeout(() => {
+            if (installButton && installButton.parentNode) {
+                installButton.parentNode.removeChild(installButton);
+                installButton = null;
+            }
+        }, 300);
+    }
 }
 
 function checkIfStandalone() {
-  const isStandalone = window.matchMedia('(display-mode: standalone)').matches || 
-                       window.navigator.standalone === true ||
-                       document.referrer.includes('android-app://');
-  
-  if (isStandalone) {
-    console.log('🎉 App is running in standalone (installed) mode');
-    sessionStorage.setItem('appInstalled', 'true');
-    sessionStorage.setItem('isStandalone', 'true');
-    showSplashScreen();
-    updateInstallButtonVisibility();
-  }
-  
-  return isStandalone;
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches ||
+        window.navigator.standalone === true ||
+        document.referrer.includes('android-app://');
+
+    if (isStandalone) {
+        console.log('🎉 App is running in standalone (installed) mode');
+        sessionStorage.setItem('appInstalled', 'true');
+        sessionStorage.setItem('isStandalone', 'true');
+        showSplashScreen();
+        updateInstallButtonVisibility();
+    }
+
+    return isStandalone;
 }
 
 function showSplashScreen() {
-  const splash = document.getElementById('pwaSplash');
-  if (splash) {
-    splash.classList.remove('hidden');
-    
-    setTimeout(() => {
-      hideSplashScreen();
-    }, 2500);
-  }
+    const splash = document.getElementById('pwaSplash');
+    if (splash) {
+        splash.classList.remove('hidden');
+
+        setTimeout(() => {
+            hideSplashScreen();
+        }, 2500);
+    }
 }
 
 function hideSplashScreen() {
-  const splash = document.getElementById('pwaSplash');
-  if (splash) {
-    splash.classList.add('hidden');
-  }
+    const splash = document.getElementById('pwaSplash');
+    if (splash) {
+        splash.classList.add('hidden');
+    }
 }
 
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js')
-      .then(registration => console.log('✨ PWA Service Worker registered:', registration))
-      .catch(error => console.log('PWA Service Worker registration failed:', error));
-    
+// Service Worker removed to ensure fresh reloads
+window.addEventListener('load', () => {
     initPWA();
-  });
-}
+});
 
 // ========================================
 // iOS-Style Bottom Navigation Controller
 // ========================================
 
 class BottomNavController {
-  constructor() {
-    this.bottomNav = document.getElementById('bottomNav');
-    this.navItems = document.querySelectorAll('.nav-item');
-    this.ticking = false;
-    this.sections = [];
-    
-    this.init();
-  }
-  
-  init() {
-    if (!this.bottomNav) {
-      console.log('❌ Bottom nav element not found');
-      return;
-    }
-    
-    console.log('✅ Bottom nav controller initialized (scrollspy only)');
-    
-    // Initialize sections for scrollspy
-    this.initSections();
-    
-    // Set up scroll listener for scrollspy ONLY (not for hide/show)
-    window.addEventListener('scroll', this.handleScroll.bind(this), { passive: true });
-    
-    // Handle hash changes
-    window.addEventListener('hashchange', this.handleHashChange.bind(this));
-    
-    // Handle nav item clicks
-    this.navItems.forEach(item => {
-      item.addEventListener('click', this.handleNavClick.bind(this));
-    });
-    
-    // Initial active state
-    this.updateActiveState();
-  }
-  
-  initSections() {
-    const sectionIds = ['home', 'offers', 'services', 'gallery', 'reviews'];
-    this.sections = sectionIds
-      .map(id => document.getElementById(id))
-      .filter(section => section !== null)
-      .map(section => ({
-        id: section.id,
-        element: section,
-        offsetTop: section.offsetTop,
-        offsetBottom: section.offsetTop + section.offsetHeight
-      }));
-  }
-  
-  handleScroll() {
-    if (!this.ticking) {
-      window.requestAnimationFrame(() => {
-        this.updateActiveState();
+    constructor() {
+        this.bottomNav = document.getElementById('bottomNav');
+        this.navItems = document.querySelectorAll('.nav-item');
         this.ticking = false;
-      });
-      this.ticking = true;
+        this.sections = [];
+
+        this.init();
     }
-  }
-  
-  updateActiveState() {
-    const scrollPosition = window.scrollY + window.innerHeight / 3;
-    
-    // Find current section
-    let currentSection = this.sections[0]?.id || 'home';
-    
-    for (const section of this.sections) {
-      if (scrollPosition >= section.offsetTop) {
-        currentSection = section.id;
-      }
+
+    init() {
+        if (!this.bottomNav) {
+            console.log('❌ Bottom nav element not found');
+            return;
+        }
+
+        console.log('✅ Bottom nav controller initialized (scrollspy only)');
+
+        // Initialize sections for scrollspy
+        this.initSections();
+
+        // Set up scroll listener for scrollspy ONLY (not for hide/show)
+        window.addEventListener('scroll', this.handleScroll.bind(this), { passive: true });
+
+        // Handle hash changes
+        window.addEventListener('hashchange', this.handleHashChange.bind(this));
+
+        // Handle nav item clicks
+        this.navItems.forEach(item => {
+            item.addEventListener('click', this.handleNavClick.bind(this));
+        });
+
+        // Initial active state
+        this.updateActiveState();
     }
-    
-    // Update active nav item
-    this.navItems.forEach(item => {
-      const page = item.getAttribute('data-page');
-      if (page === currentSection) {
-        item.classList.add('active');
-      } else {
-        item.classList.remove('active');
-      }
-    });
-  }
-  
-  handleHashChange() {
-    const hash = window.location.hash.slice(1);
-    this.setActivePage(hash || 'home');
-  }
-  
-  handleNavClick(event) {
-    const item = event.currentTarget;
-    const page = item.getAttribute('data-page');
-    
-    // Don't prevent default for external links (like WhatsApp)
-    if (item.getAttribute('href').startsWith('http')) {
-      return;
+
+    initSections() {
+        const sectionIds = ['home', 'offers', 'services', 'gallery', 'reviews'];
+        this.sections = sectionIds
+            .map(id => document.getElementById(id))
+            .filter(section => section !== null)
+            .map(section => ({
+                id: section.id,
+                element: section,
+                offsetTop: section.offsetTop,
+                offsetBottom: section.offsetTop + section.offsetHeight
+            }));
     }
-    
-    // Smooth scroll to section
-    const section = document.getElementById(page);
-    if (section) {
-      event.preventDefault();
-      const offsetTop = section.offsetTop - 80;
-      window.scrollTo({
-        top: offsetTop,
-        behavior: 'smooth'
-      });
-      
-      // Update URL hash without jumping
-      history.pushState(null, '', `#${page}`);
-      this.setActivePage(page);
+
+    handleScroll() {
+        if (!this.ticking) {
+            window.requestAnimationFrame(() => {
+                this.updateActiveState();
+                this.ticking = false;
+            });
+            this.ticking = true;
+        }
     }
-  }
-  
-  setActivePage(page) {
-    this.navItems.forEach(item => {
-      const itemPage = item.getAttribute('data-page');
-      if (itemPage === page) {
-        item.classList.add('active');
-      } else {
-        item.classList.remove('active');
-      }
-    });
-  }
+
+    updateActiveState() {
+        const scrollPosition = window.scrollY + window.innerHeight / 3;
+
+        // Find current section
+        let currentSection = this.sections[0]?.id || 'home';
+
+        for (const section of this.sections) {
+            if (scrollPosition >= section.offsetTop) {
+                currentSection = section.id;
+            }
+        }
+
+        // Update active nav item
+        this.navItems.forEach(item => {
+            const page = item.getAttribute('data-page');
+            if (page === currentSection) {
+                item.classList.add('active');
+            } else {
+                item.classList.remove('active');
+            }
+        });
+    }
+
+    handleHashChange() {
+        const hash = window.location.hash.slice(1);
+        this.setActivePage(hash || 'home');
+    }
+
+    handleNavClick(event) {
+        const item = event.currentTarget;
+        const page = item.getAttribute('data-page');
+
+        // Don't prevent default for external links (like WhatsApp)
+        if (item.getAttribute('href').startsWith('http')) {
+            return;
+        }
+
+        // Smooth scroll to section
+        const section = document.getElementById(page);
+        if (section) {
+            event.preventDefault();
+            const offsetTop = section.offsetTop - 80;
+            window.scrollTo({
+                top: offsetTop,
+                behavior: 'smooth'
+            });
+
+            // Update URL hash without jumping
+            history.pushState(null, '', `#${page}`);
+            this.setActivePage(page);
+        }
+    }
+
+    setActivePage(page) {
+        this.navItems.forEach(item => {
+            const itemPage = item.getAttribute('data-page');
+            if (itemPage === page) {
+                item.classList.add('active');
+            } else {
+                item.classList.remove('active');
+            }
+        });
+    }
 }
 
 // Initialize bottom nav controller when DOM is ready
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () => {
-    new BottomNavController();
-  });
+    document.addEventListener('DOMContentLoaded', () => {
+        new BottomNavController();
+    });
 } else {
-  new BottomNavController();
+    new BottomNavController();
 }
 
 // Visibility-based animation for offer cards
 class OfferCardAnimationController {
-  constructor() {
-    this.offerCards = document.querySelectorAll('.offer-card');
-    this.init();
-  }
+    constructor() {
+        this.offerCards = document.querySelectorAll('.offer-card');
+        this.init();
+    }
 
-  init() {
-    if (!this.offerCards.length) return;
+    init() {
+        if (!this.offerCards.length) return;
 
-    const observerOptions = {
-      root: null,
-      rootMargin: '0px 0px -100px 0px',
-      threshold: 0.1
-    };
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px 0px -100px 0px',
+            threshold: 0.1
+        };
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('animate');
-        } else {
-          entry.target.classList.remove('animate');
-        }
-      });
-    }, observerOptions);
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                } else {
+                    entry.target.classList.remove('animate');
+                }
+            });
+        }, observerOptions);
 
-    this.offerCards.forEach(card => observer.observe(card));
-  }
+        this.offerCards.forEach(card => observer.observe(card));
+    }
 }
 
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () => {
-    new OfferCardAnimationController();
-  });
+    document.addEventListener('DOMContentLoaded', () => {
+        new OfferCardAnimationController();
+    });
 } else {
-  new OfferCardAnimationController();
+    new OfferCardAnimationController();
 }
 
 class ThemeController {
-  constructor() {
-    this.themeToggleBtn = document.getElementById('themeToggle');
-    this.fireworksOverlay = document.getElementById('fireworksOverlay');
-    this.html = document.documentElement;
-    this.body = document.body;
-    
-    this.init();
-  }
-  
-  init() {
-    const savedTheme = localStorage.getItem('theme');
-    
-    if (savedTheme) {
-      if (savedTheme === 'dark') {
-        this.enableDarkMode();
-      } else {
-        this.enableLightMode();
-      }
-    } else {
-      this.detectTimeOfDay();
+    constructor() {
+        this.themeToggleBtn = document.getElementById('themeToggle');
+        this.fireworksOverlay = document.getElementById('fireworksOverlay');
+        this.html = document.documentElement;
+        this.body = document.body;
+
+        this.init();
     }
-    
-    if (this.themeToggleBtn) {
-      this.themeToggleBtn.addEventListener('click', () => this.toggleTheme());
+
+    init() {
+        const savedTheme = localStorage.getItem('theme');
+
+        if (savedTheme) {
+            if (savedTheme === 'dark') {
+                this.enableDarkMode();
+            } else {
+                this.enableLightMode();
+            }
+        } else {
+            this.detectTimeOfDay();
+        }
+
+        if (this.themeToggleBtn) {
+            this.themeToggleBtn.addEventListener('click', () => this.toggleTheme());
+        }
     }
-  }
-  
-  detectTimeOfDay() {
-    const currentHour = new Date().getHours();
-    
-    if (currentHour >= 6 && currentHour < 17) {
-      this.enableLightMode();
-    } else {
-      this.enableDarkMode();
+
+    detectTimeOfDay() {
+        const currentHour = new Date().getHours();
+
+        if (currentHour >= 6 && currentHour < 17) {
+            this.enableLightMode();
+        } else {
+            this.enableDarkMode();
+        }
     }
-  }
-  
-  toggleTheme() {
-    const currentTheme = this.html.getAttribute('data-theme');
-    if (currentTheme === 'light') {
-      this.enableDarkMode();
-      localStorage.setItem('theme', 'dark');
-    } else {
-      this.enableLightMode();
-      localStorage.setItem('theme', 'light');
+
+    toggleTheme() {
+        const currentTheme = this.html.getAttribute('data-theme');
+        if (currentTheme === 'light') {
+            this.enableDarkMode();
+            localStorage.setItem('theme', 'dark');
+        } else {
+            this.enableLightMode();
+            localStorage.setItem('theme', 'light');
+        }
     }
-  }
-  
-  enableLightMode() {
-    // Set data-theme attribute to trigger CSS variable changes
-    this.html.setAttribute('data-theme', 'light');
-    // Keep light-mode class for legacy animations
-    this.body.classList.add('light-mode');
-    
-    if (this.fireworksOverlay) {
-      this.fireworksOverlay.classList.remove('active');
-      this.fireworksOverlay.style.display = 'none';
+
+    enableLightMode() {
+        // Set data-theme attribute to trigger CSS variable changes
+        this.html.setAttribute('data-theme', 'light');
+        // Keep light-mode class for legacy animations
+        this.body.classList.add('light-mode');
+
+        if (this.fireworksOverlay) {
+            this.fireworksOverlay.classList.remove('active');
+            this.fireworksOverlay.style.display = 'none';
+        }
+
+        if (typeof togglePause === 'function') {
+            togglePause(true);
+        }
+
+        if (typeof toggleSound === 'function') {
+            toggleSound(false);
+        }
+
+        document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#fef5e7');
     }
-    
-    if (typeof togglePause === 'function') {
-      togglePause(true);
+
+    enableDarkMode() {
+        // Set data-theme attribute to trigger CSS variable changes
+        this.html.removeAttribute('data-theme');
+        // Remove light-mode class
+        this.body.classList.remove('light-mode');
+
+        if (this.fireworksOverlay) {
+            this.fireworksOverlay.classList.add('active');
+            this.fireworksOverlay.style.display = '';
+        }
+
+        if (typeof togglePause === 'function') {
+            togglePause(false);
+        }
+
+        document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#000000');
     }
-    
-    if (typeof toggleSound === 'function') {
-      toggleSound(false);
-    }
-    
-    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#fef5e7');
-  }
-  
-  enableDarkMode() {
-    // Set data-theme attribute to trigger CSS variable changes
-    this.html.removeAttribute('data-theme');
-    // Remove light-mode class
-    this.body.classList.remove('light-mode');
-    
-    if (this.fireworksOverlay) {
-      this.fireworksOverlay.classList.add('active');
-      this.fireworksOverlay.style.display = '';
-    }
-    
-    if (typeof togglePause === 'function') {
-      togglePause(false);
-    }
-    
-    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#000000');
-  }
 }
 
 
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () => {
-    new ThemeController();
-  });
+    document.addEventListener('DOMContentLoaded', () => {
+        new ThemeController();
+    });
 } else {
-  new ThemeController();
+    new ThemeController();
 }
 
 // ===== APP SHELL NAVIGATION CONTROLLER =====
@@ -2623,7 +2649,7 @@ class AppShellNavigator {
         this.pageScrollPositions = {}; // Store scroll position for each page in memory
         this.init();
     }
-    
+
     init() {
         // Setup bottom nav click handlers
         const navItems = this.bottomNav.querySelectorAll('.nav-item');
@@ -2637,7 +2663,7 @@ class AppShellNavigator {
                 }
             });
         });
-        
+
         // Handle hash navigation from desktop nav
         window.addEventListener('hashchange', () => {
             const hash = window.location.hash.slice(1);
@@ -2645,36 +2671,36 @@ class AppShellNavigator {
                 this.navigateTo(hash);
             }
         });
-        
+
         // Save scroll position when scrolling - use window scroll
         window.addEventListener('scroll', () => {
             this.pageScrollPositions[this.currentPage] = window.scrollY;
             console.log(`📍 Page scroll saved - ${this.currentPage}: ${window.scrollY}px`);
         }, { passive: true });
     }
-    
+
     navigateTo(page) {
         if (!page || page === '') page = 'home'; // Default to home if page is empty
-        
+
         // If same page clicked: just scroll to top (no page transition)
         if (page === this.currentPage) {
             window.scrollTo(0, 0);
             console.log(`⬆️ Same page, scrolling to top`);
             return;
         }
-        
+
         // Save current page scroll position IMMEDIATELY
         this.pageScrollPositions[this.currentPage] = window.scrollY;
         console.log(`💾 Saved ${this.currentPage} at: ${this.pageScrollPositions[this.currentPage]}px`);
-        
+
         // Hide ALL sections from current page
         const currentPages = this.contentArea.querySelectorAll(`[data-page="${this.currentPage}"]`);
         currentPages.forEach(el => el.classList.remove('active'));
-        
+
         // Show ALL sections of new page
         const newPages = this.contentArea.querySelectorAll(`[data-page="${page}"]`);
         newPages.forEach(el => el.classList.add('active'));
-        
+
         // Update bottom nav
         const navItems = this.bottomNav.querySelectorAll('.nav-item');
         navItems.forEach(item => {
@@ -2684,9 +2710,9 @@ class AppShellNavigator {
                 item.classList.remove('active');
             }
         });
-        
+
         this.currentPage = page;
-        
+
         // Restore last saved scroll position for this page
         const savedPosition = this.pageScrollPositions[page] || 0;
         requestAnimationFrame(() => {
@@ -2722,7 +2748,7 @@ function initNotificationsController() {
     filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             const filter = btn.getAttribute('data-filter');
-            
+
             // Update active filter button
             filterBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
@@ -2839,7 +2865,7 @@ function initBookingsController() {
     bookingTabs.forEach(tab => {
         tab.addEventListener('click', () => {
             const status = tab.getAttribute('data-status');
-            
+
             bookingTabs.forEach(t => t.classList.remove('active'));
             tab.classList.add('active');
 
@@ -2864,7 +2890,7 @@ function initBookingsController() {
         btn.addEventListener('click', (e) => {
             e.stopPropagation();
             const btnText = btn.textContent;
-            
+
             btn.style.transform = 'scale(0.95)';
             setTimeout(() => { btn.style.transform = ''; }, 200);
 
@@ -2896,7 +2922,7 @@ function initBookingsController() {
     function checkEmptyBookings() {
         const visibleCards = document.querySelectorAll('.booking-card[style*="display: flex"], .booking-card:not([style*="display: none"])');
         const emptyState = document.querySelector('.empty-state-bookings');
-        
+
         if (visibleCards.length === 0 && emptyState) {
             emptyState.style.display = 'block';
         } else if (emptyState) {
@@ -2918,7 +2944,7 @@ function openWhatsAppChat() {
 
 
 // ===== HERO TEXT ANIMATION ON LOAD =====
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const heroLines = document.querySelectorAll('.hero-text-line');
     heroLines.forEach((line, index) => {
         // Force styles immediately for better visibility
@@ -2927,12 +2953,12 @@ document.addEventListener('DOMContentLoaded', function() {
         line.style.display = 'block';
         line.style.color = '#FFD700';
         line.style.WebkitTextFillColor = '#FFD700';
-        
+
         setTimeout(() => {
             line.style.opacity = '1';
         }, 200 + (index * 200));
     });
-    
+
     // Also force the hero-text-section visibility
     const heroSection = document.querySelector('.hero-text-section');
     if (heroSection) {
@@ -2945,13 +2971,13 @@ document.addEventListener('DOMContentLoaded', function() {
 // ===== STATS COUNTER ANIMATION =====
 function animateCounters() {
     const statNumbers = document.querySelectorAll('.stat-number');
-    
+
     statNumbers.forEach(element => {
         const targetValue = parseInt(element.getAttribute('data-value'));
         let currentValue = 0;
         const duration = 2000; // 2 seconds
         const increment = targetValue / (duration / 50);
-        
+
         const timer = setInterval(() => {
             currentValue += increment;
             if (currentValue >= targetValue) {
@@ -2969,9 +2995,9 @@ function animateCounters() {
 // Trigger animation when section comes into view
 function setupCounterAnimation() {
     const trustSection = document.querySelector('.trust-section');
-    
+
     if (!trustSection) return;
-    
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -2980,7 +3006,7 @@ function setupCounterAnimation() {
             }
         });
     }, { threshold: 0.5 });
-    
+
     observer.observe(trustSection);
 }
 
@@ -2992,19 +3018,19 @@ let serviceCarouselPosition = 0;
 function slideServiceCarousel(direction) {
     const carousel = document.getElementById('serviceCarouselTrack');
     if (!carousel) return;
-    
+
     const items = carousel.querySelectorAll('.service-card-item');
     if (items.length === 0) return;
-    
+
     const itemWidth = items[0].offsetWidth + 20; // 20px gap
     const containerWidth = carousel.parentElement.offsetWidth;
     const visibleItems = Math.floor(containerWidth / itemWidth);
     const maxPosition = Math.max(0, items.length - visibleItems);
-    
+
     serviceCarouselPosition += direction;
     if (serviceCarouselPosition < 0) serviceCarouselPosition = 0;
     if (serviceCarouselPosition > maxPosition) serviceCarouselPosition = maxPosition;
-    
+
     carousel.style.transform = `translateX(-${serviceCarouselPosition * itemWidth}px)`;
 }
 
@@ -3019,7 +3045,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const containerWidth = carousel.parentElement.offsetWidth;
             const visibleItems = Math.floor(containerWidth / itemWidth);
             const maxPosition = Math.max(0, items.length - visibleItems);
-            
+
             if (serviceCarouselPosition > maxPosition) {
                 serviceCarouselPosition = maxPosition;
                 carousel.style.transform = `translateX(-${serviceCarouselPosition * itemWidth}px)`;
@@ -3034,13 +3060,13 @@ let testimonialPosition = 0;
 function slideTestimonial(direction) {
     const track = document.getElementById('testimonialTrack');
     if (!track) return;
-    
+
     const items = track.querySelectorAll('.testimonial-card-item');
     testimonialPosition += direction;
-    
+
     if (testimonialPosition < 0) testimonialPosition = items.length - 1;
     if (testimonialPosition >= items.length) testimonialPosition = 0;
-    
+
     track.style.transform = `translateX(-${testimonialPosition * 100}%)`;
 }
 
@@ -3056,16 +3082,17 @@ document.addEventListener('DOMContentLoaded', () => {
 // ===== BEFORE & AFTER GALLERY =====
 let baCurrentSlide = 0;
 let baFilteredSlides = [];
+let baAutoPlayInterval = null;
 
 function initBeforeAfterGallery() {
     const slides = document.querySelectorAll('.ba-slide');
     const dotsContainer = document.getElementById('baDots');
     const filterBtns = document.querySelectorAll('.ba-filter-btn');
-    
+
     if (!slides.length || !dotsContainer) return;
-    
+
     baFilteredSlides = Array.from(slides);
-    
+
     // Create dots
     slides.forEach((_, index) => {
         const dot = document.createElement('div');
@@ -3073,7 +3100,7 @@ function initBeforeAfterGallery() {
         dot.onclick = () => goToBASlide(index);
         dotsContainer.appendChild(dot);
     });
-    
+
     // Filter buttons
     filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
@@ -3083,32 +3110,32 @@ function initBeforeAfterGallery() {
             filterBASlides(category);
         });
     });
-    
+
     // Initialize comparison sliders
     initComparisonSliders();
-    
+
     // Auto-advance every 6 seconds
-    setInterval(() => slideBA(1), 6000);
+    baAutoPlayInterval = setInterval(() => slideBA(1), 6000);
 }
 
 function filterBASlides(category) {
     const slides = document.querySelectorAll('.ba-slide');
     const dotsContainer = document.getElementById('baDots');
-    
+
     baCurrentSlide = 0;
     baFilteredSlides = [];
-    
+
     slides.forEach(slide => {
         if (category === 'all' || slide.dataset.category === category) {
             baFilteredSlides.push(slide);
         }
         slide.classList.remove('active');
     });
-    
+
     if (baFilteredSlides.length > 0) {
         baFilteredSlides[0].classList.add('active');
     }
-    
+
     // Update dots
     dotsContainer.innerHTML = '';
     baFilteredSlides.forEach((_, index) => {
@@ -3123,13 +3150,13 @@ function slideBA(direction) {
     if (baFilteredSlides.length === 0) {
         baFilteredSlides = Array.from(document.querySelectorAll('.ba-slide'));
     }
-    
+
     baFilteredSlides[baCurrentSlide].classList.remove('active');
     baCurrentSlide += direction;
-    
+
     if (baCurrentSlide < 0) baCurrentSlide = baFilteredSlides.length - 1;
     if (baCurrentSlide >= baFilteredSlides.length) baCurrentSlide = 0;
-    
+
     baFilteredSlides[baCurrentSlide].classList.add('active');
     updateBADots();
 }
@@ -3150,44 +3177,137 @@ function updateBADots() {
 
 function initComparisonSliders() {
     const sliders = document.querySelectorAll('.comparison-slider');
-    
+
     sliders.forEach(slider => {
         const handle = slider.querySelector('.slider-handle');
         const beforeImg = slider.querySelector('.before-img');
+        const beforeLabel = slider.querySelector('.before-label');
+        const afterLabel = slider.querySelector('.after-label');
         let isDragging = false;
-        
+
+        // Touch tracking variables
+        let startX = 0;
+        let startY = 0;
+        let isGestureLocked = false;
+        let isHorizontalSwipe = false;
+
         function updateSlider(e) {
-            if (!isDragging) return;
-            
+            // For touch events, handle gesture direction logic
+            if (e.type === 'touchmove') {
+                if (!isDragging) return;
+
+                if (!isGestureLocked) {
+                    const currentX = e.touches[0].clientX;
+                    const currentY = e.touches[0].clientY;
+                    const diffX = Math.abs(currentX - startX);
+                    const diffY = Math.abs(currentY - startY);
+
+                    // Lock gesture if movement is significant (> 5px)
+                    if (diffX > 5 || diffY > 5) {
+                        isGestureLocked = true;
+                        // If horizontal movement is greater, it's a swipe -> PREVENT SCROLL
+                        if (diffX > diffY) {
+                            isHorizontalSwipe = true;
+                        } else {
+                            // Vertical movement -> ALLOW SCROLL (cancel drag)
+                            isHorizontalSwipe = false;
+                            isDragging = false;
+                            return;
+                        }
+                    } else {
+                        // Not moved enough yet to decide
+                        return;
+                    }
+                }
+
+                // If established as vertical scroll, do nothing (let browser scroll)
+                if (!isHorizontalSwipe) {
+                    isDragging = false;
+                    return;
+                }
+
+                // If established as horizontal swipe, update slider and prevent scrolling
+                if (e.cancelable) e.preventDefault();
+            } else {
+                // Mouse events (always drag)
+                if (!isDragging) return;
+                e.preventDefault(); // Prevent text selection
+            }
+
             const rect = slider.getBoundingClientRect();
             let x = (e.clientX || e.touches[0].clientX) - rect.left;
             let percentage = (x / rect.width) * 100;
-            
-            percentage = Math.max(5, Math.min(95, percentage));
-            
+
+            percentage = Math.max(0, Math.min(100, percentage));
+
             beforeImg.style.clipPath = `inset(0 ${100 - percentage}% 0 0)`;
             handle.style.left = `${percentage}%`;
+
+            // Dynamic Label Hiding - Pixel Perfect
+            const handleX = (percentage / 100) * rect.width;
+
+            if (beforeLabel) {
+                const labelLeft = beforeLabel.offsetLeft;
+                const labelWidth = beforeLabel.offsetWidth;
+
+                // Calculate how much of the label is to the right of the handle
+                // visibleWidth = handleX - labelLeft
+                // hiddenWidth (Right side) = labelWidth - visibleWidth
+
+                let clipRightP = ((labelWidth - (handleX - labelLeft)) / labelWidth) * 100;
+                clipRightP = Math.max(0, Math.min(100, clipRightP));
+
+                beforeLabel.style.clipPath = `inset(0 ${clipRightP}% 0 0)`;
+            }
+
+            if (afterLabel) {
+                const labelLeft = afterLabel.offsetLeft;
+                const labelWidth = afterLabel.offsetWidth;
+
+                // Calculate how much of the label is to the left of the handle
+                // hiddenWidth (Left side) = handleX - labelLeft
+
+                let clipLeftP = ((handleX - labelLeft) / labelWidth) * 100;
+                clipLeftP = Math.max(0, Math.min(100, clipLeftP));
+
+                afterLabel.style.clipPath = `inset(0 0 0 ${clipLeftP}%)`;
+            }
         }
-        
+
         function startDrag(e) {
             isDragging = true;
-            e.preventDefault();
+
+            // Stop auto-play immediately on interaction
+            if (baAutoPlayInterval) {
+                clearInterval(baAutoPlayInterval);
+                baAutoPlayInterval = null;
+            }
+
+            if (e.type === 'touchstart') {
+                startX = e.touches[0].clientX;
+                startY = e.touches[0].clientY;
+                isGestureLocked = false;
+                isHorizontalSwipe = false;
+            } else {
+                e.preventDefault();
+            }
         }
-        
+
         function endDrag() {
             isDragging = false;
+            isGestureLocked = false;
         }
-        
+
         // Mouse events
         handle.addEventListener('mousedown', startDrag);
         slider.addEventListener('mousedown', startDrag);
         document.addEventListener('mousemove', updateSlider);
         document.addEventListener('mouseup', endDrag);
-        
-        // Touch events
-        handle.addEventListener('touchstart', startDrag);
-        slider.addEventListener('touchstart', startDrag);
-        document.addEventListener('touchmove', updateSlider);
+
+        // Touch events - Improved options for better performance
+        handle.addEventListener('touchstart', startDrag, { passive: false });
+        slider.addEventListener('touchstart', startDrag, { passive: false });
+        document.addEventListener('touchmove', updateSlider, { passive: false });
         document.addEventListener('touchend', endDrag);
     });
 }
@@ -3200,19 +3320,19 @@ let staffPosition = 0;
 function slideStaff(direction) {
     const carousel = document.getElementById('staffCarousel');
     if (!carousel) return;
-    
+
     const cards = carousel.querySelectorAll('.staff-card');
     if (cards.length === 0) return;
-    
+
     const cardWidth = cards[0].offsetWidth + 30; // 30px gap
     const containerWidth = carousel.parentElement.offsetWidth - 120; // minus padding
     const visibleCards = Math.floor(containerWidth / cardWidth);
     const maxPosition = Math.max(0, cards.length - visibleCards);
-    
+
     staffPosition += direction;
     if (staffPosition < 0) staffPosition = 0;
     if (staffPosition > maxPosition) staffPosition = maxPosition;
-    
+
     carousel.style.transform = `translateX(-${staffPosition * cardWidth}px)`;
 }
 
@@ -3226,7 +3346,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const cardWidth = cards[0]?.offsetWidth + 30 || 310;
             const visibleCards = Math.floor(containerWidth / cardWidth);
             const maxPosition = Math.max(0, cards.length - visibleCards);
-            
+
             staffPosition++;
             if (staffPosition > maxPosition) staffPosition = 0;
             carousel.style.transform = `translateX(-${staffPosition * cardWidth}px)`;
@@ -3241,36 +3361,36 @@ function initSavingsCalculator() {
     const goldSavings = document.getElementById('goldSavings');
     const platinumSavings = document.getElementById('platinumSavings');
     const diamondSavings = document.getElementById('diamondSavings');
-    
+
     if (!slider) return;
-    
+
     const membershipCosts = { gold: 999, platinum: 2499, diamond: 4999 };
     const discountRates = { gold: 0.05, platinum: 0.15, diamond: 0.25 };
-    
+
     function calculateSavings(monthlySpend) {
         const yearlySpend = monthlySpend * 12;
-        
+
         const goldYearlySavings = (yearlySpend * discountRates.gold) - membershipCosts.gold;
         const platinumYearlySavings = (yearlySpend * discountRates.platinum) - membershipCosts.platinum;
         const diamondYearlySavings = (yearlySpend * discountRates.diamond) - membershipCosts.diamond;
-        
+
         return {
             gold: Math.max(0, Math.round(goldYearlySavings)),
             platinum: Math.max(0, Math.round(platinumYearlySavings)),
             diamond: Math.max(0, Math.round(diamondYearlySavings))
         };
     }
-    
+
     function updateDisplay() {
         const monthlySpend = parseInt(slider.value);
         spendValue.textContent = `₹${monthlySpend.toLocaleString('en-IN')}`;
-        
+
         const savings = calculateSavings(monthlySpend);
         goldSavings.textContent = `₹${savings.gold.toLocaleString('en-IN')}/yr`;
         platinumSavings.textContent = `₹${savings.platinum.toLocaleString('en-IN')}/yr`;
         diamondSavings.textContent = `₹${savings.diamond.toLocaleString('en-IN')}/yr`;
     }
-    
+
     slider.addEventListener('input', updateDisplay);
     updateDisplay();
 }
@@ -3286,15 +3406,15 @@ function createRipple(e) {
     const button = e.currentTarget;
     const existingRipple = button.querySelector('.ripple');
     if (existingRipple) existingRipple.remove();
-    
+
     const ripple = document.createElement('span');
     ripple.className = 'ripple';
-    
+
     const rect = button.getBoundingClientRect();
     const size = Math.max(rect.width, rect.height);
     const x = e.clientX - rect.left - size / 2;
     const y = e.clientY - rect.top - size / 2;
-    
+
     ripple.style.cssText = `
         position: absolute;
         width: ${size}px;
@@ -3307,7 +3427,7 @@ function createRipple(e) {
         animation: rippleExpand 0.6s ease-out forwards;
         pointer-events: none;
     `;
-    
+
     button.appendChild(ripple);
     ripple.addEventListener('animationend', () => ripple.remove());
 }
@@ -3321,12 +3441,12 @@ class MagneticButton {
         this.position = { x: 0, y: 0 };
         this.target = { x: 0, y: 0 };
         this.animating = false;
-        
+
         this.element.addEventListener('mouseenter', () => this.onEnter());
         this.element.addEventListener('mousemove', (e) => this.onMove(e));
         this.element.addEventListener('mouseleave', () => this.onLeave());
     }
-    
+
     onEnter() {
         this.bounds = this.element.getBoundingClientRect();
         if (!this.animating) {
@@ -3334,7 +3454,7 @@ class MagneticButton {
             this.animate();
         }
     }
-    
+
     onMove(e) {
         if (!this.element || !this.element.isConnected) return;
         this.bounds = this.element.getBoundingClientRect();
@@ -3343,20 +3463,20 @@ class MagneticButton {
         this.target.x = (e.clientX - centerX) * this.strength;
         this.target.y = (e.clientY - centerY) * this.strength;
     }
-    
+
     onLeave() {
         this.target = { x: 0, y: 0 };
     }
-    
+
     animate() {
         this.position.x += (this.target.x - this.position.x) * 0.15;
         this.position.y += (this.target.y - this.position.y) * 0.15;
-        
+
         this.element.style.transform = `translate(${this.position.x}px, ${this.position.y}px)`;
-        
-        if (Math.abs(this.target.x - this.position.x) > 0.01 || 
+
+        if (Math.abs(this.target.x - this.position.x) > 0.01 ||
             Math.abs(this.target.y - this.position.y) > 0.01 ||
-            Math.abs(this.position.x) > 0.01 || 
+            Math.abs(this.position.x) > 0.01 ||
             Math.abs(this.position.y) > 0.01) {
             requestAnimationFrame(() => this.animate());
         } else {
@@ -3373,7 +3493,7 @@ class ScrollReveal {
         this.staggerDelay = options.staggerDelay || 80;
         this.init();
     }
-    
+
     init() {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
@@ -3384,16 +3504,16 @@ class ScrollReveal {
                         const siblings = parent.querySelectorAll('.scroll-reveal');
                         siblingIndex = Math.max(0, Array.from(siblings).indexOf(entry.target));
                     }
-                    
+
                     setTimeout(() => {
                         entry.target.classList.add('visible');
                     }, siblingIndex * this.staggerDelay);
-                    
+
                     observer.unobserve(entry.target);
                 }
             });
         }, { threshold: this.threshold, rootMargin: '0px 0px -50px 0px' });
-        
+
         document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
     }
 }
@@ -3401,17 +3521,17 @@ class ScrollReveal {
 // ===== FAQ ACCORDION =====
 function initFaqAccordion() {
     const faqItems = document.querySelectorAll('.faq-item');
-    
+
     faqItems.forEach(item => {
         const question = item.querySelector('.faq-question');
         if (!question) return;
-        
+
         question.addEventListener('click', () => {
             const isActive = item.classList.contains('active');
-            
+
             // Close all others
             faqItems.forEach(other => other.classList.remove('active'));
-            
+
             // Toggle current
             if (!isActive) {
                 item.classList.add('active');
@@ -3428,20 +3548,20 @@ function initMicroInteractions() {
         btn.style.overflow = 'hidden';
         btn.addEventListener('click', createRipple);
     });
-    
+
     // Magnetic buttons (desktop only)
     if (window.matchMedia('(hover: hover)').matches) {
         document.querySelectorAll('.hero-btn, .magnetic-btn').forEach(btn => {
             new MagneticButton(btn, 0.25);
         });
     }
-    
+
     // Scroll reveal
     new ScrollReveal({ threshold: 0.12, staggerDelay: 100 });
-    
+
     // FAQ accordion
     initFaqAccordion();
-    
+
     console.log('✨ Premium micro-interactions initialized');
 }
 
@@ -3451,42 +3571,42 @@ function addScrollRevealClasses() {
     document.querySelectorAll('.trust-card').forEach(card => {
         card.classList.add('scroll-reveal', 'fade-up');
     });
-    
+
     // Feature cards
     document.querySelectorAll('.feature-card').forEach(card => {
         card.classList.add('scroll-reveal', 'zoom-in');
     });
-    
+
     // Service cards
     document.querySelectorAll('.service-card-item').forEach(card => {
         card.classList.add('scroll-reveal', 'fade-up');
     });
-    
+
     // Gallery items
     document.querySelectorAll('.gallery-item').forEach(item => {
         item.classList.add('scroll-reveal', 'zoom-in');
     });
-    
+
     // Testimonial cards
     document.querySelectorAll('.testimonial-card-item').forEach(card => {
         card.classList.add('scroll-reveal', 'fade-up');
     });
-    
+
     // Staff cards
     document.querySelectorAll('.staff-card').forEach(card => {
         card.classList.add('scroll-reveal', 'fade-up');
     });
-    
+
     // Tier cards
     document.querySelectorAll('.tier-card').forEach(card => {
         card.classList.add('scroll-reveal', 'zoom-in');
     });
-    
+
     // FAQ items
     document.querySelectorAll('.faq-item').forEach(item => {
         item.classList.add('scroll-reveal', 'fade-up');
     });
-    
+
     // Section titles
     document.querySelectorAll('.section-title').forEach(title => {
         title.classList.add('scroll-reveal', 'fade-up');
@@ -3507,21 +3627,21 @@ document.addEventListener('DOMContentLoaded', () => {
 function initServiceFilter() {
     const filterBar = document.getElementById('serviceFilterBar');
     if (!filterBar) return;
-    
+
     const filterBtns = filterBar.querySelectorAll('.filter-btn');
     const searchInput = document.getElementById('serviceSearch');
     const filterCount = document.getElementById('filterCount');
     const servicesSection = document.getElementById('services');
-    
+
     if (!servicesSection) return;
-    
+
     const serviceCards = servicesSection.querySelectorAll('.service-card-item');
     let activeCategory = 'all';
     let searchQuery = '';
     let debounceTimer = null;
     let filterVersion = 0;
     const cardTimers = new Map();
-    
+
     // Category filter click handlers
     filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
@@ -3531,7 +3651,7 @@ function initServiceFilter() {
             applyFilters();
         });
     });
-    
+
     // Search with debouncing
     if (searchInput) {
         searchInput.addEventListener('input', (e) => {
@@ -3542,24 +3662,24 @@ function initServiceFilter() {
             }, 300);
         });
     }
-    
+
     function applyFilters() {
         filterVersion++;
         const currentVersion = filterVersion;
         let visibleCount = 0;
-        
+
         cardTimers.forEach(timer => clearTimeout(timer));
         cardTimers.clear();
-        
+
         serviceCards.forEach((card, index) => {
             const cardCategory = card.dataset.category || 'all';
             const cardText = card.textContent.toLowerCase();
-            
+
             const matchesCategory = activeCategory === 'all' || cardCategory === activeCategory;
             const matchesSearch = searchQuery === '' || cardText.includes(searchQuery);
-            
+
             const isVisible = matchesCategory && matchesSearch;
-            
+
             if (isVisible) {
                 visibleCount++;
                 card.style.display = '';
@@ -3585,12 +3705,12 @@ function initServiceFilter() {
                 cardTimers.set(card, hideTimer);
             }
         });
-        
+
         if (filterCount) {
             filterCount.textContent = `${visibleCount} service${visibleCount !== 1 ? 's' : ''} found`;
         }
     }
-    
+
     console.log('✅ Service filter initialized');
 }
 
@@ -3634,7 +3754,7 @@ function initFloatingChatWidget() {
             </div>
         </div>
     `;
-    
+
     // Add CSS for floating chat
     const chatCSS = `
         .floating-chat-widget {
@@ -3918,15 +4038,15 @@ function initFloatingChatWidget() {
             color: #333;
         }
     `;
-    
+
     // Add styles to head
     const styleEl = document.createElement('style');
     styleEl.textContent = chatCSS;
     document.head.appendChild(styleEl);
-    
+
     // Add chat widget to body
     document.body.insertAdjacentHTML('beforeend', chatHTML);
-    
+
     // Chat functionality
     const chatWidget = document.getElementById('floatingChatWidget');
     const chatFab = document.getElementById('chatFab');
@@ -3936,9 +4056,9 @@ function initFloatingChatWidget() {
     const chatInput = document.getElementById('chatInputFloat');
     const chatSend = document.getElementById('chatSendFloat');
     const quickBtns = document.querySelectorAll('.quick-btn-float');
-    
+
     let isOpen = false;
-    
+
     const botResponses = {
         greeting: "Hello! Welcome to Blancbeu Beauty Salon. 💄✨ How can I help you today?",
         services: "We offer Hair Styling, Makeup, Facials, Manicures, Pedicures, Spa treatments and more! 💇‍♀️ Browse our services above or ask about a specific treatment.",
@@ -3947,7 +4067,7 @@ function initFloatingChatWidget() {
         location: "📍 Find us on Google Maps! We're conveniently located in Ranchi. Click the Contact tab below to get directions.",
         default: "Thanks for your message! 💌 Our team will respond shortly. You can also call us at +91 92299 15277 for immediate assistance."
     };
-    
+
     function addMessage(text, type) {
         const msg = document.createElement('div');
         msg.className = `chat-msg ${type}`;
@@ -3955,11 +4075,11 @@ function initFloatingChatWidget() {
         chatMessages.appendChild(msg);
         chatMessages.scrollTop = chatMessages.scrollHeight;
     }
-    
+
     function processMessage(text) {
         const lowerText = text.toLowerCase();
         let response = botResponses.default;
-        
+
         if (lowerText.match(/service|offer|treatment|hair|makeup|facial|nail|spa/)) {
             response = botResponses.services;
         } else if (lowerText.match(/book|appointment|reserve|schedule/)) {
@@ -3971,10 +4091,10 @@ function initFloatingChatWidget() {
         } else if (lowerText.match(/hi|hello|hey|good/)) {
             response = botResponses.greeting;
         }
-        
+
         setTimeout(() => addMessage(response, 'bot'), 500 + Math.random() * 500);
     }
-    
+
     // Event listeners
     chatFab.addEventListener('click', () => {
         isOpen = !isOpen;
@@ -3983,12 +4103,12 @@ function initFloatingChatWidget() {
             setTimeout(() => addMessage(botResponses.greeting, 'bot'), 500);
         }
     });
-    
+
     chatClose.addEventListener('click', () => {
         isOpen = false;
         chatWindow.classList.remove('open');
     });
-    
+
     chatSend.addEventListener('click', () => {
         const text = chatInput.value.trim();
         if (text) {
@@ -3997,13 +4117,13 @@ function initFloatingChatWidget() {
             processMessage(text);
         }
     });
-    
+
     chatInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
             chatSend.click();
         }
     });
-    
+
     quickBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             const action = btn.dataset.action;
@@ -4011,7 +4131,7 @@ function initFloatingChatWidget() {
             addMessage(botResponses[action] || botResponses.default, 'bot');
         });
     });
-    
+
     console.log('💬 Chat widget initialized');
 }
 
@@ -4023,14 +4143,14 @@ function triggerConfetti() {
     const container = document.createElement('div');
     container.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:99999;overflow:hidden;';
     document.body.appendChild(container);
-    
+
     for (let i = 0; i < 80; i++) {
         const particle = document.createElement('div');
         const color = colors[Math.floor(Math.random() * colors.length)];
         const size = 6 + Math.random() * 8;
         const left = Math.random() * 100;
         const delay = Math.random() * 0.5;
-        
+
         particle.style.cssText = `
             position:absolute;
             left:${left}%;
@@ -4043,7 +4163,7 @@ function triggerConfetti() {
         `;
         container.appendChild(particle);
     }
-    
+
     setTimeout(() => container.remove(), 4000);
 }
 

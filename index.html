@@ -144,14 +144,14 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                 if (savedTheme) {
                     shouldBeLightMode = savedTheme === 'light';
                 } else {
-                    shouldBeLightMode = currentHour >= 6 && currentHour < 17;
+                    shouldBeLightMode = true; // Default to light mode
                 }
 
                 if (shouldBeLightMode) {
                     document.documentElement.setAttribute('data-theme', 'light');
                     document.body.classList.add('light-mode');
                 }
-                // Dark mode is default (no attribute needed)
+                // Dark mode is fallback (no attribute needed)
             } catch (e) {
                 // Fail silently if localStorage is not available
             }

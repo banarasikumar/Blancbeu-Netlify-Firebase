@@ -2544,7 +2544,6 @@ if (document.readyState === 'loading') {
 class ThemeController {
     constructor() {
         this.themeToggleBtn = document.getElementById('themeToggle');
-        this.fireworksOverlay = document.getElementById('fireworksOverlay');
         this.html = document.documentElement;
         this.body = document.body;
 
@@ -2587,19 +2586,6 @@ class ThemeController {
         // Keep light-mode class for legacy animations
         this.body.classList.add('light-mode');
 
-        if (this.fireworksOverlay) {
-            this.fireworksOverlay.classList.remove('active');
-            this.fireworksOverlay.style.display = 'none';
-        }
-
-        if (typeof togglePause === 'function') {
-            togglePause(true);
-        }
-
-        if (typeof toggleSound === 'function') {
-            toggleSound(false);
-        }
-
         document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#fef5e7');
     }
 
@@ -2608,15 +2594,6 @@ class ThemeController {
         this.html.removeAttribute('data-theme');
         // Remove light-mode class
         this.body.classList.remove('light-mode');
-
-        if (this.fireworksOverlay) {
-            this.fireworksOverlay.classList.add('active');
-            this.fireworksOverlay.style.display = '';
-        }
-
-        if (typeof togglePause === 'function') {
-            togglePause(false);
-        }
 
         document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#000000');
     }

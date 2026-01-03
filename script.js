@@ -2561,21 +2561,12 @@ class ThemeController {
                 this.enableLightMode();
             }
         } else {
-            this.detectTimeOfDay();
+            // Default to light mode for new users
+            this.enableLightMode();
         }
 
         if (this.themeToggleBtn) {
             this.themeToggleBtn.addEventListener('click', () => this.toggleTheme());
-        }
-    }
-
-    detectTimeOfDay() {
-        const currentHour = new Date().getHours();
-
-        if (currentHour >= 6 && currentHour < 17) {
-            this.enableLightMode();
-        } else {
-            this.enableDarkMode();
         }
     }
 

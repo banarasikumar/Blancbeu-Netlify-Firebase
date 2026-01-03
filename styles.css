@@ -8641,3 +8641,11 @@ body.light-mode .pwa-close-btn:hover {
         font-size: 11px;
     }
 }
+/* Notify Button Active State */
+#notifyBtn.active {
+    color: var(--gold-24k) !important;
+}
+
+#notifyBtn.active svg {
+    filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.6));
+}

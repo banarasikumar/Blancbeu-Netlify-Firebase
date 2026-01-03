@@ -2785,7 +2785,8 @@ body {
 
 .app-shell-content {
     flex: 1;
-    margin-top: 80px;
+    margin-top: 0;
+    padding-top: 80px;
     margin-bottom: 0;
     padding-bottom: 0;
     overflow-y: auto;
@@ -2882,7 +2883,8 @@ body {
     }
 
     .app-shell-content {
-        margin-top: 70px;
+        margin-top: 0;
+        padding-top: 70px;
         margin-bottom: 0;
         padding-bottom: 0;
     }
@@ -8641,6 +8643,7 @@ body.light-mode .pwa-close-btn:hover {
         font-size: 11px;
     }
 }
+
 /* Notify Button Active State */
 #notifyBtn.active {
     color: var(--gold-24k) !important;

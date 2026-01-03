@@ -2042,42 +2042,16 @@ class ScrollBehaviorManager {
     }
 
     updateNavbarVisibility(currentScroll) {
-        if (currentScroll <= 0) {
-            if (this.header) this.header.classList.remove('hidden');
-            if (this.bottomNav) this.bottomNav.classList.remove('hidden');
-            return;
-        }
+        // NOTE: Header visibility is now handled by nav_fix.js (YouTube-style)
+        // This method only handles bottom nav at-bottom detection
 
         const windowHeight = window.innerHeight;
         const documentHeight = document.documentElement.scrollHeight;
         const isAtBottom = (currentScroll + windowHeight) >= (documentHeight - 50);
 
+        // Always show bottom nav when at bottom of page
         if (isAtBottom) {
             if (this.bottomNav) this.bottomNav.classList.remove('hidden');
-        }
-
-        const scrollDiff = currentScroll - this.lastScroll;
-
-        if (Math.abs(scrollDiff) < this.scrollThreshold) {
-            return;
-        }
-
-        if (scrollDiff > 0 && currentScroll > 100) {
-            // Scrolling down - hide both header and bottom nav together
-            if (this.header) {
-                this.header.classList.add('hidden');
-            }
-            if (this.bottomNav && !isAtBottom) {
-                this.bottomNav.classList.add('hidden');
-            }
-        } else if (scrollDiff < 0) {
-            // Scrolling up - show both header and bottom nav together
-            if (this.header) {
-                this.header.classList.remove('hidden');
-            }
-            if (this.bottomNav) {
-                this.bottomNav.classList.remove('hidden');
-            }
         }
     }
 
@@ -2691,14 +2665,15 @@ class AppShellNavigator {
 }
 
 // Initialize app shell after DOM is ready
+// NOTE: AppShellNavigator is DISABLED - nav_fix.js now handles navigation and scroll memory
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
-        window.appShell = new AppShellNavigator();
+        // window.appShell = new AppShellNavigator(); // Disabled: nav_fix.js handles this
         initNotificationsController();
         initBookingsController();
     });
 } else {
-    window.appShell = new AppShellNavigator();
+    // window.appShell = new AppShellNavigator(); // Disabled: nav_fix.js handles this
     initNotificationsController();
     initBookingsController();
 }

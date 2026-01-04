@@ -1815,119 +1815,7 @@ function goToSlide(index) {
     startAutoPlay();
 }
 
-let filteredServices = [];
-let currentFilter = 'all';
-let searchQuery = '';
 
-function initServiceFiltering() {
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const searchInput = document.getElementById('serviceSearch');
-    const clearBtn = document.getElementById('clearFilters');
-
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            filterBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            currentFilter = btn.dataset.category;
-            applyFilters();
-        });
-    });
-
-    if (searchInput) {
-        searchInput.addEventListener('input', (e) => {
-            searchQuery = e.target.value.toLowerCase();
-            applyFilters();
-        });
-    }
-
-    if (clearBtn) {
-        clearBtn.addEventListener('click', () => {
-            searchQuery = '';
-            currentFilter = 'all';
-            filterBtns.forEach(b => b.classList.remove('active'));
-            filterBtns[0].classList.add('active');
-            if (searchInput) searchInput.value = '';
-            applyFilters();
-        });
-    }
-}
-
-function applyFilters() {
-    let matched = 0;
-    const allServices = document.querySelectorAll('.service-card');
-
-    servicesData.groups.forEach(group => {
-        const categoryDiv = document.querySelector(`[data-category="${group.group}"]`);
-        if (!categoryDiv) return;
-
-        let groupMatched = 0;
-        group.services.forEach(service => {
-            const matches =
-                (currentFilter === 'all' || group.group.toLowerCase().includes(currentFilter)) &&
-                (searchQuery === '' || service.name.toLowerCase().includes(searchQuery));
-
-            if (matches) groupMatched++;
-        });
-
-        matched += groupMatched;
-        if (categoryDiv) {
-            categoryDiv.style.opacity = groupMatched > 0 ? '1' : '0.3';
-        }
-    });
-
-    const countEl = document.getElementById('servicesCount');
-    const clearBtn = document.getElementById('clearFilters');
-    if (countEl) countEl.textContent = `Found ${matched} services`;
-    if (clearBtn && (searchQuery || currentFilter !== 'all')) clearBtn.style.display = 'block';
-    else if (clearBtn) clearBtn.style.display = 'none';
-}
-
-function renderServices() {
-    const container = document.getElementById('servicesContainer');
-    if (!container) return;
-
-    servicesData.groups.forEach(group => {
-        const categoryDiv = document.createElement('div');
-        categoryDiv.className = 'service-category';
-        categoryDiv.dataset.category = group.group;
-
-        const headerHTML = `
-      <div class="category-header">
-        <div class="category-info">
-          <h3 class="category-title">${group.icon} ${group.group}</h3>
-        </div>
-        <img src="${group.image}" alt="${group.group}" class="category-image" loading="lazy" decoding="async">
-      </div>
-    `;
-
-        const servicesHTML = group.services.map(service => {
-            const hasOffer = service.offerPrice !== null;
-            const discount = hasOffer ? Math.round((1 - service.offerPrice / service.price) * 100) : 0;
-
-            return `
-        <div class="service-card">
-          <div class="service-header">
-            <div class="service-name">${service.name}</div>
-            <div class="service-duration">⏱️ 30-60 min</div>
-          </div>
-          <div class="service-footer">
-            <div class="service-prices">
-              ${hasOffer ? `<span class="service-original-price">₹${service.price}</span>` : ''}
-              <span class="service-price-main">₹${service.offerPrice || service.price}</span>
-              ${hasOffer && discount > 0 ? `<span class="service-discount">${discount}% OFF</span>` : ''}
-            </div>
-            <button class="book-service-btn" onclick="document.querySelector('.bottom-nav .nav-item[data-page=\\'chat\\']').click()">Book</button>
-          </div>
-        </div>
-      `;
-        }).join('');
-
-        categoryDiv.innerHTML = headerHTML + `<div class="services-grid">${servicesHTML}</div>`;
-        container.appendChild(categoryDiv);
-    });
-
-    initServiceFiltering();
-}
 
 function renderReviews() {
     const container = document.getElementById('reviewsContainer');
@@ -3268,7 +3156,7 @@ function slideStaff(direction) {
     if (cards.length === 0) return;
 
     const cardWidth = cards[0].offsetWidth + 30; // 30px gap
-    const containerWidth = carousel.parentElement.offsetWidth - 120; // minus padding
+    const containerWidth = carousel.parentElement.offsetWidth; // utilizing full width
     const visibleCards = Math.floor(containerWidth / cardWidth);
     const maxPosition = Math.max(0, cards.length - visibleCards);
 
@@ -3285,7 +3173,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const carousel = document.getElementById('staffCarousel');
         if (carousel) {
             const cards = carousel.querySelectorAll('.staff-card');
-            const containerWidth = carousel.parentElement.offsetWidth - 120;
+            const containerWidth = carousel.parentElement.offsetWidth;
             const cardWidth = cards[0]?.offsetWidth + 30 || 310;
             const visibleCards = Math.floor(containerWidth / cardWidth);
             const maxPosition = Math.max(0, cards.length - visibleCards);
@@ -4129,21 +4017,66 @@ window.triggerConfetti = triggerConfetti;
 
 let servicesPageCurrentCategory = 'all';
 let servicesPageSearchQuery = '';
+let servicesPageHasInteracted = false;
 
 function initServicesPage() {
     const searchInput = document.getElementById('servicesPageSearch');
     const clearSearchBtn = document.getElementById('clearServicesSearch');
-    const categoryTabs = document.querySelectorAll('#servicesCategoryTabs .category-tab');
+    const categoryCardsContainer = document.getElementById('servicesCategoryCards');
+    const categoryCards = document.querySelectorAll('.category-image-card');
 
     // Render services initially
     renderServicesPage();
 
-    // Category tab click handlers
-    categoryTabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-            categoryTabs.forEach(t => t.classList.remove('active'));
-            tab.classList.add('active');
-            servicesPageCurrentCategory = tab.dataset.category;
+    // Category Card Click Handlers
+    categoryCards.forEach(card => {
+        card.addEventListener('click', (e) => {
+            const category = card.dataset.category;
+
+            // Check current state
+            const isModeActive = categoryCardsContainer.classList.contains('category-active-mode');
+            const isAlreadyActive = card.classList.contains('active');
+
+            // TOGGLE / CLOSE LOGIC
+            // If we are in Banner Mode AND clicking the currently active card (including 'all'), Close/Reset.
+            if (isModeActive && isAlreadyActive) {
+                servicesPageCurrentCategory = 'all';
+                servicesPageHasInteracted = false; // Reset interaction (hide list)
+
+                // Exit Active Mode (return to grid)
+                categoryCardsContainer.classList.remove('category-active-mode');
+
+                // Reset active highlighting to defaults (or keep 'all' highlighted if that's default behavior)
+                categoryCards.forEach(c => c.classList.remove('active'));
+
+                // Highlight 'All' as the default state in grid
+                const allCard = document.querySelector('.category-image-card[data-category="all"]');
+                if (allCard) allCard.classList.add('active');
+
+                renderServicesPage();
+                return;
+            }
+
+            // ACTIVATION LOGIC (Switching to Banner or Switching Category)
+            servicesPageHasInteracted = true;
+            servicesPageCurrentCategory = category;
+
+            // Enter Active Mode (Banner View) - applies for ALL categories including 'all'
+            categoryCardsContainer.classList.add('category-active-mode');
+
+            // Update Active Card Classes
+            categoryCards.forEach(c => c.classList.remove('active'));
+            card.classList.add('active');
+
+            // SCROLL TO TOP (Smooth)
+            setTimeout(() => {
+                const searchBar = document.querySelector('.services-search-wrapper');
+                if (searchBar) {
+                    searchBar.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }, 100);
+
+            // Re-render grid
             renderServicesPage();
         });
     });
@@ -4167,7 +4100,7 @@ function initServicesPage() {
         });
     }
 
-    console.log('💎 Services Page initialized');
+    console.log('💎 Services Page initialized (Interactive Cards)');
 }
 
 function renderServicesPage() {
@@ -4202,6 +4135,39 @@ function renderServicesPage() {
         );
     }
 
+    // VISUAL FILTERING OF CATEGORY CARDS (New Requirement)
+    // Only in 'all' mode: Filter the Image Cards to show only relevant categories based on search
+    const categoryCards = document.querySelectorAll('.category-image-card');
+    if (servicesPageCurrentCategory === 'all') {
+        if (servicesPageSearchQuery) {
+            const matchingCategories = new Set(allServices.map(s => s.category));
+            categoryCards.forEach(card => {
+                const cardCat = card.dataset.category;
+                if (cardCat === 'all') {
+                    card.style.display = 'none'; // Hide 'All' during search
+                } else if (matchingCategories.has(cardCat)) {
+                    card.style.display = ''; // Show match
+                } else {
+                    card.style.display = 'none'; // Hide non-match
+                }
+            });
+        } else {
+            // Show all if no search
+            categoryCards.forEach(card => card.style.display = '');
+        }
+    } else {
+        // Reset in other modes (handled by CSS classes usually, but safe to clear)
+        categoryCards.forEach(card => card.style.display = '');
+    }
+
+    // DEFAULT EMPTY STATE: 
+    // If category is 'all' AND no search query AND no interaction, show NOTHING
+    if (servicesPageCurrentCategory === 'all' && !servicesPageSearchQuery && !servicesPageHasInteracted) {
+        grid.innerHTML = ''; // Clear grid
+        if (countElement) countElement.textContent = ''; // Clear count
+        return;
+    }
+
     // Update count
     if (countElement) {
         if (servicesPageSearchQuery) {
@@ -4231,12 +4197,16 @@ function renderServicesPage() {
         const discount = hasOffer ? Math.round((1 - service.offerPrice / service.price) * 100) : 0;
         const displayPrice = service.offerPrice || service.price;
 
+        // Duration logic (Default to 30-60 min if data missing)
+        const duration = service.duration || '30-60 min';
+
         // Create WhatsApp message for booking
         const bookingMessage = encodeURIComponent(`Hi! I'd like to book "${service.name}" from ${service.category}. Please let me know the available slots.`);
         const whatsappLink = `https://wa.me/919229915277?text=${bookingMessage}`;
 
         return `
             <div class="service-page-card">
+                <div class="service-duration-badge">⏱️ ${duration}</div>
                 <div class="service-page-card-info">
                     <div class="service-page-card-category">
                         <span>${service.icon}</span>
@@ -4291,3 +4261,169 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+// ==========================================
+// NEW: Services Page Category Image Cards Logic
+// ==========================================
+
+// Global function for category card clicks (referenced in HTML)
+// Global function for category card clicks (referenced in HTML or other scripts)
+window.filterByCategory = function (category) {
+    const card = document.querySelector(`.category-image-card[data-category="${category}"]`);
+    if (card) {
+        card.click();
+    }
+};
+
+
+/* ==========================================================================
+   MY BOOKINGS REDESIGN - TAB LOGIC
+   ========================================================================== */
+function initModernBookingsTabs() {
+    const tabs = document.querySelectorAll('.booking-pill-tab');
+    const groups = document.querySelectorAll('.booking-group');
+
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            const status = tab.dataset.status;
+
+            // Update active tab state
+            tabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+
+            // Show relevant booking group
+            groups.forEach(group => {
+                group.classList.add('hidden');
+                group.style.display = 'none'; // Ensure display none is applied
+            });
+
+            const targetGroup = document.getElementById(`${status}-bookings`);
+            if (targetGroup) {
+                targetGroup.classList.remove('hidden');
+                targetGroup.style.display = 'block'; // Ensure display block is applied
+
+                // Add fade-in animation
+                targetGroup.style.opacity = '0';
+                targetGroup.style.transform = 'translateY(10px)';
+                targetGroup.style.transition = 'all 0.4s ease';
+
+                requestAnimationFrame(() => {
+                    targetGroup.style.opacity = '1';
+                    targetGroup.style.transform = 'translateY(0)';
+                });
+            } else {
+                // If no group found (e.g. cancelled), maybe show empty state or specific message
+                // For now, if "cancelled" has no group, do nothing or show safe fallback
+            }
+        });
+    });
+}
+
+// Initialize when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    initModernBookingsTabs();
+});/* =========================================
+   GALLERY LIGHTBOX LOGIC
+   ========================================= */
+
+let currentLightboxIndex = 0;
+const galleryImages = document.querySelectorAll('.gallery-grid .gallery-item img');
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightboxImg');
+
+// Open Lightbox
+function openLightbox(index) {
+    if (!lightbox || !lightboxImg) return;
+
+    currentLightboxIndex = index;
+    updateLightboxImage();
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden'; // Prevent scrolling
+}
+
+// Close Lightbox
+function closeLightbox() {
+    if (!lightbox) return;
+
+    lightbox.classList.remove('active');
+    document.body.style.overflow = ''; // Restore scrolling
+}
+
+// Update Image Source
+function updateLightboxImage() {
+    if (!lightboxImg || galleryImages.length === 0) return;
+
+    const imageSrc = galleryImages[currentLightboxIndex].src;
+    // Optional: Fade out effect before changing
+    lightboxImg.style.opacity = '0';
+
+    setTimeout(() => {
+        lightboxImg.src = imageSrc;
+        lightboxImg.onload = () => {
+            lightboxImg.style.opacity = '1';
+        };
+    }, 200);
+}
+
+// Next Image
+function nextImage() {
+    currentLightboxIndex = (currentLightboxIndex + 1) % galleryImages.length;
+    updateLightboxImage();
+}
+
+// Previous Image
+function prevImage() {
+    currentLightboxIndex = (currentLightboxIndex - 1 + galleryImages.length) % galleryImages.length;
+    updateLightboxImage();
+}
+
+// Event Listeners for Gallery Items
+galleryImages.forEach((img, index) => {
+    img.closest('.gallery-item').addEventListener('click', () => {
+        openLightbox(index);
+    });
+});
+
+// Close on clicking outside image
+lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox || e.target.classList.contains('lightbox-content-wrapper')) {
+        closeLightbox();
+    }
+});
+
+// Keyboard Navigation
+document.addEventListener('keydown', (e) => {
+    if (!lightbox.classList.contains('active')) return;
+
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowRight') nextImage();
+    if (e.key === 'ArrowLeft') prevImage();
+});
+
+// Swipe Logic for Mobile
+let touchStartX = 0;
+let touchEndX = 0;
+
+lightbox.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+}, { passive: true });
+
+lightbox.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+}, { passive: true });
+
+function handleSwipe() {
+    const threshold = 50; // Minimum distance for swipe
+    const swipeDistance = touchEndX - touchStartX;
+
+    if (Math.abs(swipeDistance) > threshold) {
+        if (swipeDistance < 0) {
+            // Swiped Left -> Next
+            nextImage();
+        } else {
+            // Swiped Right -> Prev
+            prevImage();
+        }
+    }
+}

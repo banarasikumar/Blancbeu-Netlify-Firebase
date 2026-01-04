@@ -179,6 +179,235 @@ PHASE 3: PREMIUM FEATURES (Week 4)
         document.write('<link rel="stylesheet" href="styles.css?v=' + time + '">');
     </script>
 
+    <style>
+        /* FIX: Full Width Transformation Gallery on Mobile */
+        @media (max-width: 768px) {
+            .before-after-section .container {
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+
+            .ba-carousel-wrapper {
+                width: 100%;
+                overflow: visible;
+            }
+
+            .ba-carousel {
+                width: 100%;
+                padding: 0;
+            }
+
+            .comparison-slider {
+                width: 100% !important;
+                margin: 0 auto;
+                border-radius: 0;
+                /* Optional: Remove radius for full edge-to-edge look */
+            }
+
+            .comparison-slider img {
+                width: 100%;
+                height: auto;
+                object-fit: cover;
+            }
+        }
+
+        /* INJECTED: REFINED TEAM SECTION & BUTTON */
+        .staff-card {
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(212, 160, 23, 0.2);
+            border-radius: 20px;
+            padding: 25px 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: visible;
+            margin-bottom: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .staff-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(212, 160, 23, 0.15);
+            border-color: rgba(212, 160, 23, 0.4);
+        }
+
+        .staff-photo-wrapper {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            border: 3px solid var(--gold-primary);
+            padding: 4px;
+            margin: 0 auto 20px;
+            position: relative;
+            background: #fff;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .staff-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            display: block;
+        }
+
+        .staff-rating {
+            position: absolute;
+            bottom: -5px;
+            right: -5px;
+            background: #fff;
+            padding: 6px 12px;
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            font-weight: 700;
+            font-size: 13px;
+            color: #333;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            z-index: 2;
+        }
+
+        .staff-info {
+            width: 100%;
+        }
+
+        .staff-name {
+            font-family: 'Cinzel', serif;
+            font-size: 22px;
+            color: var(--gold-dark);
+            margin-bottom: 6px;
+            font-weight: 700;
+        }
+
+        .staff-title {
+            font-size: 14px;
+            color: #666;
+            font-weight: 500;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .staff-experience {
+            margin-bottom: 12px;
+        }
+
+        .exp-badge {
+            background: rgba(212, 160, 23, 0.1);
+            color: #b8860b;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .staff-specialties {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+
+        .specialty-tag {
+            background: #f8f9fa;
+            color: #555;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 11px;
+            border: 1px solid #eee;
+            transition: all 0.2s;
+        }
+
+        .staff-card:hover .specialty-tag {
+            background: rgba(212, 160, 23, 0.05);
+            border-color: rgba(212, 160, 23, 0.2);
+            color: #b8860b;
+        }
+
+        .book-staff-btn {
+            background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+            color: #fff;
+            border: none;
+            padding: 12px 0;
+            border-radius: 30px;
+            font-weight: 600;
+            width: 100%;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+            box-shadow: 0 4px 15px rgba(212, 160, 23, 0.3);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .book-staff-btn:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(212, 160, 23, 0.5);
+            background: linear-gradient(135deg, var(--gold-bright), var(--gold-primary));
+        }
+
+        /* View All Menu Button Fix */
+        .view-all-services-btn {
+            background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+            color: #fff !important;
+            border: none;
+            border-radius: 30px;
+            padding: 14px 40px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(212, 160, 23, 0.4);
+            animation: btnPulse 2s infinite;
+        }
+
+        .view-all-services-btn:hover {
+            color: #000 !important;
+        }
+
+        /* Dark Mode */
+        body:not(.light-mode) .staff-card {
+            background: rgba(30, 30, 30, 0.6);
+            backdrop-filter: blur(10px);
+            border-color: rgba(255, 215, 0, 0.15);
+        }
+
+        body:not(.light-mode) .staff-name {
+            color: var(--gold-bright);
+        }
+
+        body:not(.light-mode) .staff-title {
+            color: #ccc;
+        }
+
+        body:not(.light-mode) .specialty-tag {
+            background: rgba(255, 255, 255, 0.05);
+            color: #ddd;
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        body:not(.light-mode) .staff-rating {
+            background: #2a2a2a;
+            color: #eee;
+            border-color: #444;
+        }
+    </style>
+
     <link href="https://fonts.googleapis.com/css?family=Russo+One" rel="stylesheet">
 </head>
 
@@ -284,10 +513,10 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                         <p class="hero-tagline">Discover luxury beauty treatments at Blancbeu Family Salon</p>
 
                         <div class="hero-cta-buttons">
-                            <a href="https://wa.me/919229915277?text=Hello%20Blancbeu%2C%20I%20would%20like%20to%20book%20an%20appointment"
-                                class="hero-btn primary-btn" target="_blank">
+                            <button class="hero-btn primary-btn"
+                                onclick="document.querySelector('.bottom-nav .nav-item[data-page=\'services\']').click()">
                                 <span class="btn-label">Book Now</span>
-                            </a>
+                            </button>
                             <button class="hero-btn secondary-btn"
                                 onclick="document.querySelector('.bottom-nav .nav-item[data-page=\'chat\']').click()">
                                 <span class="btn-label">Call 📞 • Chat 💬 • Locate 📍</span>
@@ -449,6 +678,12 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                         <button class="carousel-nav-btn prev" onclick="slideServiceCarousel(-1)">❮</button>
                         <button class="carousel-nav-btn next" onclick="slideServiceCarousel(1)">❯</button>
                     </div>
+
+                    <div class="view-all-services-container">
+                        <button class="view-all-services-btn"
+                            onclick="document.querySelector('.bottom-nav .nav-item[data-page=\'services\']').click()">View
+                            All Menu</button>
+                    </div>
                 </div>
             </div>
 
@@ -502,562 +737,549 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                     </div>
                 </div>
 
-                <!-- SERVICES SECTION WITH FILTER -->
-                <div id="services" class="services-section">
+
+
+
+                <!-- GALLERY SECTION -->
+                <div id="gallery" class="gallery-section">
                     <div class="container">
                         <h2 class="section-title">
-                            <span class="title-decoration">💎</span>
-                            Our Services
-                            <span class="title-decoration">💎</span>
+                            <span class="title-decoration">🌟</span>
+                            Gallery
+                            <span class="title-decoration">🌟</span>
                         </h2>
-                        <p class="section-subtitle">Premium beauty treatments tailored for you</p>
+                        <p class="section-subtitle">Witness the transformation</p>
 
-                        <!-- Services Grid (Task 2.2 - Pricing Display) -->
-                        <div class="services-container" id="servicesContainer">
-                        </div>
-                    </div>
-
-
-                    <!-- GALLERY SECTION -->
-                    <div id="gallery" class="gallery-section">
-                        <div class="container">
-                            <h2 class="section-title">
-                                <span class="title-decoration">🌟</span>
-                                Gallery
-                                <span class="title-decoration">🌟</span>
-                            </h2>
-                            <p class="section-subtitle">Witness the transformation</p>
-
-                            <div class="gallery-grid">
-                                <div class="gallery-item">
-                                    <img src="attached_assets/stock_images/gallery_facial.webp" alt="Facial Treatments">
-                                    <div class="gallery-overlay">
-                                        <h3>Facial Treatments</h3>
-                                    </div>
+                        <div class="gallery-grid">
+                            <div class="gallery-item">
+                                <img src="attached_assets/stock_images/gallery_facial.webp" alt="Facial Treatments">
+                                <div class="gallery-overlay">
+                                    <h3>Facial Treatments</h3>
                                 </div>
-                                <div class="gallery-item">
-                                    <img src="attached_assets/stock_images/gallery_makeup.webp" alt="Makeup Styling">
-                                    <div class="gallery-overlay">
-                                        <h3>Makeup Styling</h3>
-                                    </div>
+                            </div>
+                            <div class="gallery-item">
+                                <img src="attached_assets/stock_images/gallery_makeup.webp" alt="Makeup Styling">
+                                <div class="gallery-overlay">
+                                    <h3>Makeup Styling</h3>
                                 </div>
-                                <div class="gallery-item">
-                                    <img src="attached_assets/stock_images/gallery_hair.webp" alt="Hair Coloring">
-                                    <div class="gallery-overlay">
-                                        <h3>Hair Coloring</h3>
-                                    </div>
+                            </div>
+                            <div class="gallery-item">
+                                <img src="attached_assets/stock_images/gallery_hair.webp" alt="Hair Coloring">
+                                <div class="gallery-overlay">
+                                    <h3>Hair Coloring</h3>
                                 </div>
-                                <div class="gallery-item">
-                                    <img src="attached_assets/stock_images/gallery_spa.webp" alt="Spa & Nourish">
-                                    <div class="gallery-overlay">
-                                        <h3>Spa & Nourish</h3>
-                                    </div>
+                            </div>
+                            <div class="gallery-item">
+                                <img src="attached_assets/stock_images/gallery_spa.webp" alt="Spa & Nourish">
+                                <div class="gallery-overlay">
+                                    <h3>Spa & Nourish</h3>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <!-- BEFORE & AFTER TRANSFORMATION GALLERY -->
-                    <div class="before-after-section" id="transformations">
-                        <div class="container">
-                            <h2 class="section-title">
-                                <span class="title-decoration">✨</span>
-                                Transformation Gallery
-                                <span class="title-decoration">✨</span>
-                            </h2>
-                            <p class="section-subtitle">Witness the magic of our expert stylists</p>
+                <!-- BEFORE & AFTER TRANSFORMATION GALLERY -->
+                <div class="before-after-section" id="transformations">
+                    <div class="container">
+                        <h2 class="section-title">
+                            <span class="title-decoration">✨</span>
+                            Transformation Gallery
+                            <span class="title-decoration">✨</span>
+                        </h2>
+                        <p class="section-subtitle">Witness the magic of our expert stylists</p>
 
-                            <div class="ba-filter-tabs">
-                                <button class="ba-filter-btn active" data-category="all">All</button>
-                                <button class="ba-filter-btn" data-category="hair">Hair</button>
-                                <button class="ba-filter-btn" data-category="makeup">Makeup</button>
-                                <button class="ba-filter-btn" data-category="nails">Nails</button>
-                            </div>
+                        <div class="ba-filter-tabs">
+                            <button class="ba-filter-btn active" data-category="all">All</button>
+                            <button class="ba-filter-btn" data-category="hair">Hair</button>
+                            <button class="ba-filter-btn" data-category="makeup">Makeup</button>
+                            <button class="ba-filter-btn" data-category="nails">Nails</button>
+                        </div>
 
-                            <div class="ba-carousel-wrapper">
-                                <div class="ba-carousel" id="baCarousel">
-                                    <div class="ba-slide active" data-category="hair">
-                                        <div class="comparison-slider" data-position="50">
-                                            <img src="attached_assets/stock_images/professional_salon_h_6df2461f.jpg"
-                                                alt="After transformation" class="after-img">
-                                            <img src="attached_assets/stock_images/professional_salon_h_e7285f29.jpg"
-                                                alt="Before transformation" class="before-img">
-                                            <div class="slider-handle">
-                                                <span class="handle-icon">↔</span>
-                                            </div>
-                                            <span class="ba-label before-label">Before</span>
-                                            <span class="ba-label after-label">After</span>
+                        <div class="ba-carousel-wrapper">
+                            <div class="ba-carousel" id="baCarousel">
+                                <div class="ba-slide active" data-category="hair">
+                                    <div class="comparison-slider" data-position="50">
+                                        <img src="attached_assets/stock_images/professional_salon_h_6df2461f.jpg"
+                                            alt="After transformation" class="after-img">
+                                        <img src="attached_assets/stock_images/professional_salon_h_e7285f29.jpg"
+                                            alt="Before transformation" class="before-img">
+                                        <div class="slider-handle">
+                                            <span class="handle-icon">↔</span>
                                         </div>
-                                        <div class="ba-info">
-                                            <h4>Hair Color Transformation</h4>
-                                            <p>Beautiful balayage highlights by our expert colorists</p>
-                                        </div>
+                                        <span class="ba-label before-label">Before</span>
+                                        <span class="ba-label after-label">After</span>
                                     </div>
-
-                                    <div class="ba-slide" data-category="hair">
-                                        <div class="comparison-slider" data-position="50">
-                                            <img src="attached_assets/stock_images/professional_salon_h_c01af8ec.jpg"
-                                                alt="After transformation" class="after-img">
-                                            <img src="attached_assets/stock_images/professional_salon_h_cb9f59f7.jpg"
-                                                alt="Before transformation" class="before-img">
-                                            <div class="slider-handle">
-                                                <span class="handle-icon">↔</span>
-                                            </div>
-                                            <span class="ba-label before-label">Before</span>
-                                            <span class="ba-label after-label">After</span>
-                                        </div>
-                                        <div class="ba-info">
-                                            <h4>Haircut & Styling</h4>
-                                            <p>Modern layered cut with professional styling</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="ba-slide" data-category="makeup">
-                                        <div class="comparison-slider" data-position="50">
-                                            <img src="attached_assets/stock_images/gallery_makeup.webp"
-                                                alt="After makeup" class="after-img">
-                                            <img src="attached_assets/stock_images/gallery_facial.webp"
-                                                alt="Before makeup" class="before-img">
-                                            <div class="slider-handle">
-                                                <span class="handle-icon">↔</span>
-                                            </div>
-                                            <span class="ba-label before-label">Before</span>
-                                            <span class="ba-label after-label">After</span>
-                                        </div>
-                                        <div class="ba-info">
-                                            <h4>Bridal Glam Makeup</h4>
-                                            <p>Stunning bridal look for your special day</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="ba-slide" data-category="nails">
-                                        <div class="comparison-slider" data-position="50">
-                                            <img src="attached_assets/stock_images/gallery_spa.webp" alt="After nails"
-                                                class="after-img">
-                                            <img src="attached_assets/stock_images/gallery_hair.webp" alt="Before nails"
-                                                class="before-img">
-                                            <div class="slider-handle">
-                                                <span class="handle-icon">↔</span>
-                                            </div>
-                                            <span class="ba-label before-label">Before</span>
-                                            <span class="ba-label after-label">After</span>
-                                        </div>
-                                        <div class="ba-info">
-                                            <h4>Nail Art & Extensions</h4>
-                                            <p>Premium gel extensions with artistic designs</p>
-                                        </div>
+                                    <div class="ba-info">
+                                        <h4>Hair Color Transformation</h4>
+                                        <p>Beautiful balayage highlights by our expert colorists</p>
                                     </div>
                                 </div>
 
-                                <button class="ba-nav-btn prev" onclick="slideBA(-1)">❮</button>
-                                <button class="ba-nav-btn next" onclick="slideBA(1)">❯</button>
+                                <div class="ba-slide" data-category="hair">
+                                    <div class="comparison-slider" data-position="50">
+                                        <img src="attached_assets/stock_images/professional_salon_h_c01af8ec.jpg"
+                                            alt="After transformation" class="after-img">
+                                        <img src="attached_assets/stock_images/professional_salon_h_cb9f59f7.jpg"
+                                            alt="Before transformation" class="before-img">
+                                        <div class="slider-handle">
+                                            <span class="handle-icon">↔</span>
+                                        </div>
+                                        <span class="ba-label before-label">Before</span>
+                                        <span class="ba-label after-label">After</span>
+                                    </div>
+                                    <div class="ba-info">
+                                        <h4>Haircut & Styling</h4>
+                                        <p>Modern layered cut with professional styling</p>
+                                    </div>
+                                </div>
 
-                                <div class="ba-dots" id="baDots"></div>
+                                <div class="ba-slide" data-category="makeup">
+                                    <div class="comparison-slider" data-position="50">
+                                        <img src="attached_assets/stock_images/gallery_makeup.webp" alt="After makeup"
+                                            class="after-img">
+                                        <img src="attached_assets/stock_images/gallery_facial.webp" alt="Before makeup"
+                                            class="before-img">
+                                        <div class="slider-handle">
+                                            <span class="handle-icon">↔</span>
+                                        </div>
+                                        <span class="ba-label before-label">Before</span>
+                                        <span class="ba-label after-label">After</span>
+                                    </div>
+                                    <div class="ba-info">
+                                        <h4>Bridal Glam Makeup</h4>
+                                        <p>Stunning bridal look for your special day</p>
+                                    </div>
+                                </div>
+
+                                <div class="ba-slide" data-category="nails">
+                                    <div class="comparison-slider" data-position="50">
+                                        <img src="attached_assets/stock_images/gallery_spa.webp" alt="After nails"
+                                            class="after-img">
+                                        <img src="attached_assets/stock_images/gallery_hair.webp" alt="Before nails"
+                                            class="before-img">
+                                        <div class="slider-handle">
+                                            <span class="handle-icon">↔</span>
+                                        </div>
+                                        <span class="ba-label before-label">Before</span>
+                                        <span class="ba-label after-label">After</span>
+                                    </div>
+                                    <div class="ba-info">
+                                        <h4>Nail Art & Extensions</h4>
+                                        <p>Premium gel extensions with artistic designs</p>
+                                    </div>
+                                </div>
                             </div>
+
+                            <button class="ba-nav-btn prev" onclick="slideBA(-1)">❮</button>
+                            <button class="ba-nav-btn next" onclick="slideBA(1)">❯</button>
+
+                            <div class="ba-dots" id="baDots"></div>
                         </div>
                     </div>
+                </div>
 
 
 
-                    <!-- STAFF SPOTLIGHT SECTION -->
-                    <div class="staff-section" id="team">
-                        <div class="container">
-                            <h2 class="section-title">
-                                <span class="title-decoration">💇</span>
-                                Meet Our Expert Team
-                                <span class="title-decoration">💇</span>
-                            </h2>
-                            <p class="section-subtitle">Passionate professionals dedicated to your beauty</p>
+                <!-- STAFF SPOTLIGHT SECTION -->
+                <div class="staff-section" id="team">
+                    <div class="container">
+                        <h2 class="section-title">
+                            <span class="title-decoration">💇</span>
+                            Meet Our Expert Team
+                            <span class="title-decoration">💇</span>
+                        </h2>
+                        <p class="section-subtitle">Passionate professionals dedicated to your beauty</p>
 
-                            <div class="staff-carousel-wrapper">
-                                <div class="staff-carousel" id="staffCarousel">
-                                    <div class="staff-card">
-                                        <div class="staff-photo-wrapper">
-                                            <img src="attached_assets/stock_images/professional_beauty__59c2cb84.jpg"
-                                                alt="Priya Sharma" class="staff-photo">
-                                            <div class="staff-rating">⭐ 4.9</div>
-                                        </div>
-                                        <div class="staff-info">
-                                            <h3 class="staff-name">Priya Sharma</h3>
-                                            <p class="staff-title">Senior Hair Stylist</p>
-                                            <div class="staff-experience">
-                                                <span class="exp-badge">12+ Years Experience</span>
-                                            </div>
-                                            <div class="staff-specialties">
-                                                <span class="specialty-tag">Hair Coloring</span>
-                                                <span class="specialty-tag">Balayage</span>
-                                                <span class="specialty-tag">Bridal Hair</span>
-                                            </div>
-                                            <a href="https://wa.me/919229915277?text=Hi%2C%20I%20want%20to%20book%20with%20Priya%20Sharma"
-                                                target="_blank" class="book-staff-btn">Book with Priya</a>
-                                        </div>
+                        <div class="staff-carousel-wrapper">
+                            <div class="staff-carousel" id="staffCarousel">
+                                <div class="staff-card">
+                                    <div class="staff-photo-wrapper">
+                                        <img src="attached_assets/stock_images/professional_beauty__59c2cb84.jpg"
+                                            alt="Priya Sharma" class="staff-photo">
+                                        <div class="staff-rating">⭐ 4.9</div>
                                     </div>
-
-                                    <div class="staff-card">
-                                        <div class="staff-photo-wrapper">
-                                            <img src="attached_assets/stock_images/professional_beauty__30f1cabb.jpg"
-                                                alt="Meera Patel" class="staff-photo">
-                                            <div class="staff-rating">⭐ 4.8</div>
+                                    <div class="staff-info">
+                                        <h3 class="staff-name">Priya Sharma</h3>
+                                        <p class="staff-title">Senior Hair Stylist</p>
+                                        <div class="staff-experience">
+                                            <span class="exp-badge">12+ Years Experience</span>
                                         </div>
-                                        <div class="staff-info">
-                                            <h3 class="staff-name">Meera Patel</h3>
-                                            <p class="staff-title">Makeup Artist</p>
-                                            <div class="staff-experience">
-                                                <span class="exp-badge">8+ Years Experience</span>
-                                            </div>
-                                            <div class="staff-specialties">
-                                                <span class="specialty-tag">Bridal Makeup</span>
-                                                <span class="specialty-tag">HD Makeup</span>
-                                                <span class="specialty-tag">Party Looks</span>
-                                            </div>
-                                            <a href="https://wa.me/919229915277?text=Hi%2C%20I%20want%20to%20book%20with%20Meera%20Patel"
-                                                target="_blank" class="book-staff-btn">Book with Meera</a>
+                                        <div class="staff-specialties">
+                                            <span class="specialty-tag">Hair Coloring</span>
+                                            <span class="specialty-tag">Balayage</span>
+                                            <span class="specialty-tag">Bridal Hair</span>
                                         </div>
-                                    </div>
-
-                                    <div class="staff-card">
-                                        <div class="staff-photo-wrapper">
-                                            <img src="attached_assets/stock_images/professional_beauty__4b0e7940.jpg"
-                                                alt="Anjali Singh" class="staff-photo">
-                                            <div class="staff-rating">⭐ 4.9</div>
-                                        </div>
-                                        <div class="staff-info">
-                                            <h3 class="staff-name">Anjali Singh</h3>
-                                            <p class="staff-title">Skin Care Specialist</p>
-                                            <div class="staff-experience">
-                                                <span class="exp-badge">10+ Years Experience</span>
-                                            </div>
-                                            <div class="staff-specialties">
-                                                <span class="specialty-tag">Facials</span>
-                                                <span class="specialty-tag">Skin Treatments</span>
-                                                <span class="specialty-tag">Anti-Aging</span>
-                                            </div>
-                                            <a href="https://wa.me/919229915277?text=Hi%2C%20I%20want%20to%20book%20with%20Anjali%20Singh"
-                                                target="_blank" class="book-staff-btn">Book with Anjali</a>
-                                        </div>
-                                    </div>
-
-                                    <div class="staff-card">
-                                        <div class="staff-photo-wrapper">
-                                            <img src="attached_assets/stock_images/professional_beauty__bd79d0cb.jpg"
-                                                alt="Riya Gupta" class="staff-photo">
-                                            <div class="staff-rating">⭐ 4.7</div>
-                                        </div>
-                                        <div class="staff-info">
-                                            <h3 class="staff-name">Riya Gupta</h3>
-                                            <p class="staff-title">Nail Art Expert</p>
-                                            <div class="staff-experience">
-                                                <span class="exp-badge">6+ Years Experience</span>
-                                            </div>
-                                            <div class="staff-specialties">
-                                                <span class="specialty-tag">Gel Nails</span>
-                                                <span class="specialty-tag">Nail Art</span>
-                                                <span class="specialty-tag">Extensions</span>
-                                            </div>
-                                            <a href="https://wa.me/919229915277?text=Hi%2C%20I%20want%20to%20book%20with%20Riya%20Gupta"
-                                                target="_blank" class="book-staff-btn">Book with Riya</a>
-                                        </div>
+                                        <a href="https://wa.me/919229915277?text=Hi%2C%20I%20want%20to%20book%20with%20Priya%20Sharma"
+                                            target="_blank" class="book-staff-btn">Book with Priya</a>
                                     </div>
                                 </div>
 
-                                <button class="staff-nav-btn prev" onclick="slideStaff(-1)">❮</button>
-                                <button class="staff-nav-btn next" onclick="slideStaff(1)">❯</button>
+                                <div class="staff-card">
+                                    <div class="staff-photo-wrapper">
+                                        <img src="attached_assets/stock_images/professional_beauty__30f1cabb.jpg"
+                                            alt="Meera Patel" class="staff-photo">
+                                        <div class="staff-rating">⭐ 4.8</div>
+                                    </div>
+                                    <div class="staff-info">
+                                        <h3 class="staff-name">Meera Patel</h3>
+                                        <p class="staff-title">Makeup Artist</p>
+                                        <div class="staff-experience">
+                                            <span class="exp-badge">8+ Years Experience</span>
+                                        </div>
+                                        <div class="staff-specialties">
+                                            <span class="specialty-tag">Bridal Makeup</span>
+                                            <span class="specialty-tag">HD Makeup</span>
+                                            <span class="specialty-tag">Party Looks</span>
+                                        </div>
+                                        <a href="https://wa.me/919229915277?text=Hi%2C%20I%20want%20to%20book%20with%20Meera%20Patel"
+                                            target="_blank" class="book-staff-btn">Book with Meera</a>
+                                    </div>
+                                </div>
+
+                                <div class="staff-card">
+                                    <div class="staff-photo-wrapper">
+                                        <img src="attached_assets/stock_images/professional_beauty__4b0e7940.jpg"
+                                            alt="Anjali Singh" class="staff-photo">
+                                        <div class="staff-rating">⭐ 4.9</div>
+                                    </div>
+                                    <div class="staff-info">
+                                        <h3 class="staff-name">Anjali Singh</h3>
+                                        <p class="staff-title">Skin Care Specialist</p>
+                                        <div class="staff-experience">
+                                            <span class="exp-badge">10+ Years Experience</span>
+                                        </div>
+                                        <div class="staff-specialties">
+                                            <span class="specialty-tag">Facials</span>
+                                            <span class="specialty-tag">Skin Treatments</span>
+                                            <span class="specialty-tag">Anti-Aging</span>
+                                        </div>
+                                        <a href="https://wa.me/919229915277?text=Hi%2C%20I%20want%20to%20book%20with%20Anjali%20Singh"
+                                            target="_blank" class="book-staff-btn">Book with Anjali</a>
+                                    </div>
+                                </div>
+
+                                <div class="staff-card">
+                                    <div class="staff-photo-wrapper">
+                                        <img src="attached_assets/stock_images/professional_beauty__bd79d0cb.jpg"
+                                            alt="Riya Gupta" class="staff-photo">
+                                        <div class="staff-rating">⭐ 4.7</div>
+                                    </div>
+                                    <div class="staff-info">
+                                        <h3 class="staff-name">Riya Gupta</h3>
+                                        <p class="staff-title">Nail Art Expert</p>
+                                        <div class="staff-experience">
+                                            <span class="exp-badge">6+ Years Experience</span>
+                                        </div>
+                                        <div class="staff-specialties">
+                                            <span class="specialty-tag">Gel Nails</span>
+                                            <span class="specialty-tag">Nail Art</span>
+                                            <span class="specialty-tag">Extensions</span>
+                                        </div>
+                                        <a href="https://wa.me/919229915277?text=Hi%2C%20I%20want%20to%20book%20with%20Riya%20Gupta"
+                                            target="_blank" class="book-staff-btn">Book with Riya</a>
+                                    </div>
+                                </div>
                             </div>
+
+                            <button class="staff-nav-btn prev" onclick="slideStaff(-1)">❮</button>
+                            <button class="staff-nav-btn next" onclick="slideStaff(1)">❯</button>
                         </div>
                     </div>
+                </div>
 
-                    <!-- REVIEWS SECTION - TESTIMONIAL CAROUSEL -->
-                    <div id="reviews" class="reviews-section">
-                        <div class="container">
-                            <h2 class="section-title">
-                                <span class="title-decoration">⭐</span>
-                                Customer Testimonials
-                                <span class="title-decoration">⭐</span>
-                            </h2>
-                            <p class="section-subtitle">Hear from our satisfied clients</p>
+                <!-- REVIEWS SECTION - TESTIMONIAL CAROUSEL -->
+                <div id="reviews" class="reviews-section">
+                    <div class="container">
+                        <h2 class="section-title">
+                            <span class="title-decoration">⭐</span>
+                            Customer Testimonials
+                            <span class="title-decoration">⭐</span>
+                        </h2>
+                        <p class="section-subtitle">Hear from our satisfied clients</p>
 
-                            <div class="testimonial-carousel-wrapper">
-                                <div class="testimonial-carousel" id="testimonialCarousel">
-                                    <div class="testimonial-carousel-track" id="testimonialTrack">
-                                        <div class="testimonial-card-item">
-                                            <div class="testimonial-card">
-                                                <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
-                                                <p class="testimonial-text">"Blancbeu gave me the best haircut ever! The
-                                                    professionalism and care are unmatched. Highly recommended!"</p>
-                                                <div class="testimonial-author">
-                                                    <strong>Sarah Johnson</strong>
-                                                    <span class="testimonial-date">Premium Member</span>
-                                                </div>
+                        <div class="testimonial-carousel-wrapper">
+                            <div class="testimonial-carousel" id="testimonialCarousel">
+                                <div class="testimonial-carousel-track" id="testimonialTrack">
+                                    <div class="testimonial-card-item">
+                                        <div class="testimonial-card">
+                                            <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                                            <p class="testimonial-text">"Blancbeu gave me the best haircut ever! The
+                                                professionalism and care are unmatched. Highly recommended!"</p>
+                                            <div class="testimonial-author">
+                                                <strong>Sarah Johnson</strong>
+                                                <span class="testimonial-date">Premium Member</span>
                                             </div>
                                         </div>
+                                    </div>
 
-                                        <div class="testimonial-card-item">
-                                            <div class="testimonial-card">
-                                                <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
-                                                <p class="testimonial-text">"The bridal makeup service was absolutely
-                                                    stunning. I felt like a queen on my special day!"</p>
-                                                <div class="testimonial-author">
-                                                    <strong>Priya Patel</strong>
-                                                    <span class="testimonial-date">Bridal Customer</span>
-                                                </div>
+                                    <div class="testimonial-card-item">
+                                        <div class="testimonial-card">
+                                            <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                                            <p class="testimonial-text">"The bridal makeup service was absolutely
+                                                stunning. I felt like a queen on my special day!"</p>
+                                            <div class="testimonial-author">
+                                                <strong>Priya Patel</strong>
+                                                <span class="testimonial-date">Bridal Customer</span>
                                             </div>
                                         </div>
+                                    </div>
 
-                                        <div class="testimonial-card-item">
-                                            <div class="testimonial-card">
-                                                <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
-                                                <p class="testimonial-text">"Spa treatments are heavenly! I always leave
-                                                    feeling completely rejuvenated and refreshed."</p>
-                                                <div class="testimonial-author">
-                                                    <strong>Anjali Sharma</strong>
-                                                    <span class="testimonial-date">Regular Customer</span>
-                                                </div>
+                                    <div class="testimonial-card-item">
+                                        <div class="testimonial-card">
+                                            <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                                            <p class="testimonial-text">"Spa treatments are heavenly! I always leave
+                                                feeling completely rejuvenated and refreshed."</p>
+                                            <div class="testimonial-author">
+                                                <strong>Anjali Sharma</strong>
+                                                <span class="testimonial-date">Regular Customer</span>
                                             </div>
                                         </div>
+                                    </div>
 
-                                        <div class="testimonial-card-item">
-                                            <div class="testimonial-card">
-                                                <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
-                                                <p class="testimonial-text">"Best facial treatment I've ever had. The
-                                                    staff is so knowledgeable and friendly!"</p>
-                                                <div class="testimonial-author">
-                                                    <strong>Meera Singh</strong>
-                                                    <span class="testimonial-date">Skincare Enthusiast</span>
-                                                </div>
+                                    <div class="testimonial-card-item">
+                                        <div class="testimonial-card">
+                                            <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                                            <p class="testimonial-text">"Best facial treatment I've ever had. The
+                                                staff is so knowledgeable and friendly!"</p>
+                                            <div class="testimonial-author">
+                                                <strong>Meera Singh</strong>
+                                                <span class="testimonial-date">Skincare Enthusiast</span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <button class="testimonial-nav-btn prev" onclick="slideTestimonial(-1)">❮</button>
-                                <button class="testimonial-nav-btn next" onclick="slideTestimonial(1)">❯</button>
                             </div>
+                            <button class="testimonial-nav-btn prev" onclick="slideTestimonial(-1)">❮</button>
+                            <button class="testimonial-nav-btn next" onclick="slideTestimonial(1)">❯</button>
                         </div>
                     </div>
+                </div>
 
 
-                    <!-- ABOUT BLANCBEU SECTION -->
-                    <div class="about-section">
-                        <div class="container">
-                            <h2 class="section-title">
-                                <span class="title-decoration">📖</span>
-                                About Blancbeu
-                                <span class="title-decoration">✨</span>
-                            </h2>
-                            <p class="section-subtitle">Discover our story and passion for beauty</p>
+                <!-- ABOUT BLANCBEU SECTION -->
+                <div class="about-section">
+                    <div class="container">
+                        <h2 class="section-title">
+                            <span class="title-decoration">📖</span>
+                            About Blancbeu
+                            <span class="title-decoration">✨</span>
+                        </h2>
+                        <p class="section-subtitle">Discover our story and passion for beauty</p>
 
-                            <div class="about-content">
-                                <div class="about-text">
-                                    <p>Blancbeu Family Beauty Salon has been serving the community with excellence for
-                                        over 15 years. We believe that true beauty comes from professional care, premium
-                                        products, and exceptional service.</p>
-                                    <p>Our mission is to transform how people feel about themselves by providing
-                                        luxurious beauty treatments in a relaxing, welcoming environment. Every client
-                                        is treated as family, and your satisfaction is our greatest achievement.</p>
-                                    <ul class="about-highlights">
-                                        <li>✨ Expert-trained beauty specialists</li>
-                                        <li>💎 Premium international products</li>
-                                        <li>🛍️ Personalized beauty consultations</li>
-                                        <li>🏆 Award-winning salon experience</li>
-                                    </ul>
-                                </div>
-                                <!-- Moved Why Trust Blancbeu Section -->
-                                <div class="trust-section">
-                                    <div class="container">
-                                        <h2 class="section-title">
-                                            <span class="title-decoration">✨</span>
-                                            Why Trust Blancbeu
-                                            <span class="title-decoration">✨</span>
-                                        </h2>
-                                        <p class="section-subtitle">Trusted by thousands for premium beauty care</p>
+                        <div class="about-content">
+                            <div class="about-text">
+                                <p>Blancbeu Family Beauty Salon has been serving the community with excellence for
+                                    over 15 years. We believe that true beauty comes from professional care, premium
+                                    products, and exceptional service.</p>
+                                <p>Our mission is to transform how people feel about themselves by providing
+                                    luxurious beauty treatments in a relaxing, welcoming environment. Every client
+                                    is treated as family, and your satisfaction is our greatest achievement.</p>
+                                <ul class="about-highlights">
+                                    <li>✨ Expert-trained beauty specialists</li>
+                                    <li>💎 Premium international products</li>
+                                    <li>🛍️ Personalized beauty consultations</li>
+                                    <li>🏆 Award-winning salon experience</li>
+                                </ul>
+                            </div>
+                            <!-- Moved Why Trust Blancbeu Section -->
+                            <div class="trust-section">
+                                <div class="container">
+                                    <h2 class="section-title">
+                                        <span class="title-decoration">✨</span>
+                                        Why Trust Blancbeu
+                                        <span class="title-decoration">✨</span>
+                                    </h2>
+                                    <p class="section-subtitle">Trusted by thousands for premium beauty care</p>
 
-                                        <div class="trust-grid">
-                                            <div class="trust-card premium-hover glass-card scroll-reveal">
-                                                <div class="stat-number" data-value="6">0</div>
-                                                <div class="stat-label">Months of Excellence</div>
-                                                <div class="stat-description">Serving the community with premium beauty
-                                                    treatments</div>
-                                            </div>
+                                    <div class="trust-grid">
+                                        <div class="trust-card premium-hover glass-card scroll-reveal">
+                                            <div class="stat-number" data-value="6">0</div>
+                                            <div class="stat-label">Months of Excellence</div>
+                                            <div class="stat-description">Serving the community with premium beauty
+                                                treatments</div>
+                                        </div>
 
-                                            <div class="trust-card premium-hover glass-card scroll-reveal">
-                                                <div class="stat-number" data-value="1000">0</div>
-                                                <div class="stat-label">Happy Clients</div>
-                                                <div class="stat-description">Thousands of satisfied customers every
-                                                    year</div>
-                                            </div>
+                                        <div class="trust-card premium-hover glass-card scroll-reveal">
+                                            <div class="stat-number" data-value="1000">0</div>
+                                            <div class="stat-label">Happy Clients</div>
+                                            <div class="stat-description">Thousands of satisfied customers every
+                                                year</div>
+                                        </div>
 
-                                            <div class="trust-card premium-hover glass-card scroll-reveal">
-                                                <div class="stat-number" data-value="50">0</div>
-                                                <div class="stat-label">Services Offered</div>
-                                                <div class="stat-description">Comprehensive beauty and wellness
-                                                    solutions</div>
-                                            </div>
+                                        <div class="trust-card premium-hover glass-card scroll-reveal">
+                                            <div class="stat-number" data-value="50">0</div>
+                                            <div class="stat-label">Services Offered</div>
+                                            <div class="stat-description">Comprehensive beauty and wellness
+                                                solutions</div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <!-- CTA SECTION -->
-                    <div class="cta-section">
-                        <div class="container">
-                            <h2>Ready to Transform Your Look?</h2>
-                            <p>Book your appointment today and experience premium beauty care</p>
-                            <div class="cta-buttons">
-                                <a href="tel:+919229915277" class="btn-cta primary">📞 Call Now</a>
-                                <a href="https://wa.me/919229915277" class="btn-cta secondary">💬 WhatsApp</a>
+                <!-- CTA SECTION -->
+                <div class="cta-section">
+                    <div class="container">
+                        <h2>Ready to Transform Your Look?</h2>
+                        <p>Book your appointment today and experience premium beauty care</p>
+                        <div class="cta-buttons">
+                            <a href="tel:+919229915277" class="btn-cta primary">📞 Call Now</a>
+                            <a href="https://wa.me/919229915277" class="btn-cta secondary">💬 WhatsApp</a>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <!-- FAQ SECTION -->
+                <section class="faq-section" id="faq">
+                    <div class="container">
+                        <h2 class="section-title">
+                            <span class="title-decoration">❓</span>
+                            Frequently Asked Questions
+                            <span class="title-decoration">💬</span>
+                        </h2>
+                        <p class="section-subtitle">Everything you need to know about our services</p>
+
+                        <div class="faq-container">
+                            <div class="faq-item">
+                                <div class="faq-question">
+                                    <h3>What are your salon hours?</h3>
+                                    <span class="faq-icon">+</span>
+                                </div>
+                                <div class="faq-answer">
+                                    <div class="faq-answer-content">
+                                        We are open from 10:00 AM to 8:00 PM, Monday through Sunday. We recommend
+                                        booking an appointment in advance to ensure your preferred time slot is
+                                        available.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="faq-item">
+                                <div class="faq-question">
+                                    <h3>How do I book an appointment?</h3>
+                                    <span class="faq-icon">+</span>
+                                </div>
+                                <div class="faq-answer">
+                                    <div class="faq-answer-content">
+                                        You can book an appointment by calling us at +91 92299 15277, messaging us
+                                        on WhatsApp, or visiting our salon directly. We also accept walk-ins based
+                                        on availability.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="faq-item">
+                                <div class="faq-question">
+                                    <h3>What products do you use?</h3>
+                                    <span class="faq-icon">+</span>
+                                </div>
+                                <div class="faq-answer">
+                                    <div class="faq-answer-content">
+                                        We use only premium, professional-grade products from trusted international
+                                        and Indian brands. Our products are carefully selected for quality, safety,
+                                        and effectiveness.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="faq-item">
+                                <div class="faq-question">
+                                    <h3>Do you offer bridal packages?</h3>
+                                    <span class="faq-icon">+</span>
+                                </div>
+                                <div class="faq-answer">
+                                    <div class="faq-answer-content">
+                                        Yes! We offer comprehensive bridal packages that include pre-bridal
+                                        treatments, makeup, hair styling, and more. Contact us for a personalized
+                                        consultation and package details.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="faq-item">
+                                <div class="faq-question">
+                                    <h3>What is your cancellation policy?</h3>
+                                    <span class="faq-icon">+</span>
+                                </div>
+                                <div class="faq-answer">
+                                    <div class="faq-answer-content">
+                                        We request at least 2 hours notice for cancellations. This helps us
+                                        accommodate other clients and maintain our service quality. For bridal
+                                        appointments, please provide 24 hours notice.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="faq-item">
+                                <div class="faq-question">
+                                    <h3>Do you offer services for men?</h3>
+                                    <span class="faq-icon">+</span>
+                                </div>
+                                <div class="faq-answer">
+                                    <div class="faq-answer-content">
+                                        Absolutely! Blancbeu is a family salon that caters to men, women, and
+                                        children. We offer a full range of grooming services for men including
+                                        haircuts, beard styling, facials, and more.
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
+                </section>
 
-
-
-                    <!-- FAQ SECTION -->
-                    <section class="faq-section" id="faq">
-                        <div class="container">
-                            <h2 class="section-title">
-                                <span class="title-decoration">❓</span>
-                                Frequently Asked Questions
-                                <span class="title-decoration">💬</span>
-                            </h2>
-                            <p class="section-subtitle">Everything you need to know about our services</p>
-
-                            <div class="faq-container">
-                                <div class="faq-item">
-                                    <div class="faq-question">
-                                        <h3>What are your salon hours?</h3>
-                                        <span class="faq-icon">+</span>
-                                    </div>
-                                    <div class="faq-answer">
-                                        <div class="faq-answer-content">
-                                            We are open from 10:00 AM to 8:00 PM, Monday through Sunday. We recommend
-                                            booking an appointment in advance to ensure your preferred time slot is
-                                            available.
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="faq-item">
-                                    <div class="faq-question">
-                                        <h3>How do I book an appointment?</h3>
-                                        <span class="faq-icon">+</span>
-                                    </div>
-                                    <div class="faq-answer">
-                                        <div class="faq-answer-content">
-                                            You can book an appointment by calling us at +91 92299 15277, messaging us
-                                            on WhatsApp, or visiting our salon directly. We also accept walk-ins based
-                                            on availability.
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="faq-item">
-                                    <div class="faq-question">
-                                        <h3>What products do you use?</h3>
-                                        <span class="faq-icon">+</span>
-                                    </div>
-                                    <div class="faq-answer">
-                                        <div class="faq-answer-content">
-                                            We use only premium, professional-grade products from trusted international
-                                            and Indian brands. Our products are carefully selected for quality, safety,
-                                            and effectiveness.
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="faq-item">
-                                    <div class="faq-question">
-                                        <h3>Do you offer bridal packages?</h3>
-                                        <span class="faq-icon">+</span>
-                                    </div>
-                                    <div class="faq-answer">
-                                        <div class="faq-answer-content">
-                                            Yes! We offer comprehensive bridal packages that include pre-bridal
-                                            treatments, makeup, hair styling, and more. Contact us for a personalized
-                                            consultation and package details.
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="faq-item">
-                                    <div class="faq-question">
-                                        <h3>What is your cancellation policy?</h3>
-                                        <span class="faq-icon">+</span>
-                                    </div>
-                                    <div class="faq-answer">
-                                        <div class="faq-answer-content">
-                                            We request at least 2 hours notice for cancellations. This helps us
-                                            accommodate other clients and maintain our service quality. For bridal
-                                            appointments, please provide 24 hours notice.
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="faq-item">
-                                    <div class="faq-question">
-                                        <h3>Do you offer services for men?</h3>
-                                        <span class="faq-icon">+</span>
-                                    </div>
-                                    <div class="faq-answer">
-                                        <div class="faq-answer-content">
-                                            Absolutely! Blancbeu is a family salon that caters to men, women, and
-                                            children. We offer a full range of grooming services for men including
-                                            haircuts, beard styling, facials, and more.
-                                        </div>
-                                    </div>
+                <!-- FOOTER -->
+                <footer class="footer">
+                    <div class="container">
+                        <div class="footer-content">
+                            <div class="footer-section">
+                                <h3>Blancbeu</h3>
+                                <p>Premium Beauty & Wellness Salon</p>
+                                <p>✨ Where Beauty Meets Excellence ✨</p>
+                            </div>
+                            <div class="footer-section">
+                                <h4>Quick Links</h4>
+                                <a href="#home">Home</a>
+                                <a href="#offers">Offers</a>
+                                <a href="#services">Services</a>
+                                <a href="#reviews">Reviews</a>
+                            </div>
+                            <div class="footer-section">
+                                <h4>Connect With Us</h4>
+                                <div class="social-icons">
+                                    <a href="https://youtube.com/@blancbeubeautysalon?si=_Go7ZSGSFzTS-j_M"
+                                        target="_blank" class="social-icon youtube" aria-label="YouTube">
+                                        <svg viewBox="0 0 24 24" fill="currentColor">
+                                            <path
+                                                d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z" />
+                                        </svg>
+                                    </a>
+                                    <a href="https://www.instagram.com/blancbeu_salon_ranchi?igsh=MTRpbGV0YWt4aHFzaw=="
+                                        target="_blank" class="social-icon instagram" aria-label="Instagram">
+                                        <svg viewBox="0 0 24 24" fill="currentColor">
+                                            <path
+                                                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                                        </svg>
+                                    </a>
+                                    <a href="https://www.facebook.com/p/BlancBeu-Family-Beauty-Salon-61578977241367/"
+                                        target="_blank" class="social-icon facebook" aria-label="Facebook">
+                                        <svg viewBox="0 0 24 24" fill="currentColor">
+                                            <path
+                                                d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z" />
+                                        </svg>
+                                    </a>
                                 </div>
                             </div>
                         </div>
-                    </section>
-
-                    <!-- FOOTER -->
-                    <footer class="footer">
-                        <div class="container">
-                            <div class="footer-content">
-                                <div class="footer-section">
-                                    <h3>Blancbeu</h3>
-                                    <p>Premium Beauty & Wellness Salon</p>
-                                    <p>✨ Where Beauty Meets Excellence ✨</p>
-                                </div>
-                                <div class="footer-section">
-                                    <h4>Quick Links</h4>
-                                    <a href="#home">Home</a>
-                                    <a href="#offers">Offers</a>
-                                    <a href="#services">Services</a>
-                                    <a href="#reviews">Reviews</a>
-                                </div>
-                                <div class="footer-section">
-                                    <h4>Connect With Us</h4>
-                                    <div class="social-icons">
-                                        <a href="https://youtube.com/@blancbeubeautysalon?si=_Go7ZSGSFzTS-j_M"
-                                            target="_blank" class="social-icon youtube" aria-label="YouTube">
-                                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                                <path
-                                                    d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z" />
-                                            </svg>
-                                        </a>
-                                        <a href="https://www.instagram.com/blancbeu_salon_ranchi?igsh=MTRpbGV0YWt4aHFzaw=="
-                                            target="_blank" class="social-icon instagram" aria-label="Instagram">
-                                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                                <path
-                                                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-                                            </svg>
-                                        </a>
-                                        <a href="https://www.facebook.com/p/BlancBeu-Family-Beauty-Salon-61578977241367/"
-                                            target="_blank" class="social-icon facebook" aria-label="Facebook">
-                                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                                <path
-                                                    d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z" />
-                                            </svg>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="footer-bottom">
-                                <p>&copy; Blancbeu 2025. All rights reserved.</p>
-                            </div>
+                        <div class="footer-bottom">
+                            <p>&copy; Blancbeu 2025. All rights reserved.</p>
                         </div>
-                    </footer>
+                    </div>
+                </footer>
         </section>
 
         <!-- SERVICES PAGE - Dedicated services browsing experience -->
@@ -1065,12 +1287,7 @@ PHASE 3: PREMIUM FEATURES (Week 4)
             <div class="services-page-container">
                 <!-- Services Header -->
                 <div class="services-page-header">
-                    <h1 class="services-page-title">
-                        <span class="title-decoration">💎</span>
-                        Our Premium Services
-                        <span class="title-decoration">✨</span>
-                    </h1>
-                    <p class="services-page-subtitle">Discover luxury beauty treatments tailored for you</p>
+                    <h1 class="services-page-title">Our Premium Services</h1>
                 </div>
 
                 <!-- Search Bar -->
@@ -1083,47 +1300,70 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                     </div>
                 </div>
 
-                <!-- Category Tabs - Horizontal Scrollable -->
-                <div class="services-category-tabs-wrapper">
-                    <div class="services-category-tabs" id="servicesCategoryTabs">
-                        <button class="category-tab active" data-category="all">
-                            <span class="tab-icon">✨</span>
-                            <span class="tab-label">All</span>
-                        </button>
-                        <button class="category-tab" data-category="Hair cutting">
-                            <span class="tab-icon">✂️</span>
-                            <span class="tab-label">Hair Cut</span>
-                        </button>
-                        <button class="category-tab" data-category="Clean up">
-                            <span class="tab-icon">✨</span>
-                            <span class="tab-label">Clean up</span>
-                        </button>
-                        <button class="category-tab" data-category="Facial">
-                            <span class="tab-icon">💆</span>
-                            <span class="tab-label">Facial</span>
-                        </button>
-                        <button class="category-tab" data-category="Hairs & Treatment">
-                            <span class="tab-icon">💇</span>
-                            <span class="tab-label">Treatment</span>
-                        </button>
-                        <button class="category-tab" data-category="Premium services">
-                            <span class="tab-icon">👑</span>
-                            <span class="tab-label">Premium</span>
-                        </button>
-                        <button class="category-tab" data-category="Hair colour">
-                            <span class="tab-icon">🎨</span>
-                            <span class="tab-label">Colour</span>
-                        </button>
-                        <button class="category-tab" data-category="Makeup & Styling">
-                            <span class="tab-icon">💄</span>
-                            <span class="tab-label">Makeup</span>
-                        </button>
-                        <button class="category-tab" data-category="Nails & Beauty">
-                            <span class="tab-icon">💅</span>
-                            <span class="tab-label">Nails</span>
-                        </button>
+                <p class="services-page-subtitle" style="text-align: center; margin: 15px 0; color: var(--text-gray);">
+                    Filter Services By Category</p>
+
+                <!-- Category Image Cards - Visual Navigation -->
+                <div class="services-category-cards" id="servicesCategoryCards">
+                    <div class="category-image-card active" data-category="all">
+                        <!-- Use a generic beauty collage or general salon image for 'All' -->
+                        <img src="assets/all_services_indian_young.png" alt="All Services" loading="lazy">
+                        <div class="category-card-overlay">
+                            <h3>All Services</h3>
+                        </div>
+                    </div>
+                    <div class="category-image-card" data-category="Hair cutting">
+                        <img src="assets/featured_services/haircut.png" alt="Hair Cutting" loading="lazy">
+                        <div class="category-card-overlay">
+                            <h3>Hair Cutting</h3>
+                        </div>
+                    </div>
+                    <div class="category-image-card" data-category="Facial">
+                        <img src="assets/featured_services/facial.png" alt="Facial" loading="lazy">
+                        <div class="category-card-overlay">
+                            <h3>Facial</h3>
+                        </div>
+                    </div>
+                    <div class="category-image-card" data-category="Makeup & Styling">
+                        <img src="assets/featured_services/makeup.png" alt="Makeup & Styling" loading="lazy">
+                        <div class="category-card-overlay">
+                            <h3>Makeup</h3>
+                        </div>
+                    </div>
+                    <div class="category-image-card" data-category="Nails & Beauty">
+                        <img src="assets/featured_services/nails.png" alt="Nails & Beauty" loading="lazy">
+                        <div class="category-card-overlay">
+                            <h3>Nails</h3>
+                        </div>
+                    </div>
+                    <div class="category-image-card" data-category="Premium services">
+                        <img src="assets/featured_services/premium.png" alt="Premium Services" loading="lazy">
+                        <div class="category-card-overlay">
+                            <span class="popular-badge">VIP</span>
+                            <h3>Premium</h3>
+                        </div>
+                    </div>
+                    <div class="category-image-card" data-category="Hairs & Treatment">
+                        <img src="assets/featured_services/treatment.png" alt="Hair Treatment" loading="lazy">
+                        <div class="category-card-overlay">
+                            <h3>Treatment</h3>
+                        </div>
+                    </div>
+                    <div class="category-image-card" data-category="Clean up">
+                        <img src="assets/featured_services/cleanup.png" alt="Clean Up" loading="lazy">
+                        <div class="category-card-overlay">
+                            <h3>Clean Up</h3>
+                        </div>
+                    </div>
+                    <div class="category-image-card" data-category="Hair colour">
+                        <img src="assets/featured_services/spa.png" alt="Hair Colour" loading="lazy">
+                        <div class="category-card-overlay">
+                            <h3>Hair Colour</h3>
+                        </div>
                     </div>
                 </div>
+
+
 
                 <!-- Services Count -->
                 <div class="services-count-bar">
@@ -1728,7 +1968,7 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                             <span class="action-icon">ℹ️</span>
                             <div class="action-text">
                                 <span class="action-label">About Blancbeu</span>
-                                <span class="action-desc">Version 16.3.1</span>
+                                <span class="action-desc">Version 16.3.2</span>
                             </div>
                             <span class="action-arrow">›</span>
                         </button>
@@ -1872,6 +2112,16 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                 </ol>
             </div>
         </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox">
+        <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+        <div class="lightbox-nav prev" onclick="prevImage()">&#10094;</div>
+        <div class="lightbox-content-wrapper">
+            <img id="lightboxImg" class="lightbox-img" src="" alt="Gallery Preview">
+        </div>
+        <div class="lightbox-nav next" onclick="nextImage()">&#10095;</div>
     </div>
 
     <script>

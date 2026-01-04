@@ -4122,3 +4122,172 @@ document.head.appendChild(confettiStyle);
 
 // Export for booking success
 window.triggerConfetti = triggerConfetti;
+
+// ================================================================================
+// SERVICES PAGE - Dedicated Services Tab Functionality
+// ================================================================================
+
+let servicesPageCurrentCategory = 'all';
+let servicesPageSearchQuery = '';
+
+function initServicesPage() {
+    const searchInput = document.getElementById('servicesPageSearch');
+    const clearSearchBtn = document.getElementById('clearServicesSearch');
+    const categoryTabs = document.querySelectorAll('#servicesCategoryTabs .category-tab');
+
+    // Render services initially
+    renderServicesPage();
+
+    // Category tab click handlers
+    categoryTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            categoryTabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            servicesPageCurrentCategory = tab.dataset.category;
+            renderServicesPage();
+        });
+    });
+
+    // Search input handler
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            servicesPageSearchQuery = e.target.value.toLowerCase();
+            clearSearchBtn.style.display = servicesPageSearchQuery ? 'flex' : 'none';
+            renderServicesPage();
+        });
+    }
+
+    // Clear search button
+    if (clearSearchBtn) {
+        clearSearchBtn.addEventListener('click', () => {
+            searchInput.value = '';
+            servicesPageSearchQuery = '';
+            clearSearchBtn.style.display = 'none';
+            renderServicesPage();
+        });
+    }
+
+    console.log('💎 Services Page initialized');
+}
+
+function renderServicesPage() {
+    const grid = document.getElementById('servicesPageGrid');
+    const countElement = document.getElementById('servicesPageCount');
+
+    if (!grid) return;
+
+    let allServices = [];
+
+    // Collect all services with category info
+    servicesData.groups.forEach(group => {
+        group.services.forEach(service => {
+            allServices.push({
+                ...service,
+                category: group.group,
+                icon: group.icon
+            });
+        });
+    });
+
+    // Filter by category
+    if (servicesPageCurrentCategory !== 'all') {
+        allServices = allServices.filter(s => s.category === servicesPageCurrentCategory);
+    }
+
+    // Filter by search query
+    if (servicesPageSearchQuery) {
+        allServices = allServices.filter(s =>
+            s.name.toLowerCase().includes(servicesPageSearchQuery) ||
+            s.category.toLowerCase().includes(servicesPageSearchQuery)
+        );
+    }
+
+    // Update count
+    if (countElement) {
+        if (servicesPageSearchQuery) {
+            countElement.textContent = `Found ${allServices.length} service${allServices.length !== 1 ? 's' : ''} for "${servicesPageSearchQuery}"`;
+        } else if (servicesPageCurrentCategory !== 'all') {
+            countElement.textContent = `Showing ${allServices.length} ${servicesPageCurrentCategory} service${allServices.length !== 1 ? 's' : ''}`;
+        } else {
+            countElement.textContent = `Showing all ${allServices.length} services`;
+        }
+    }
+
+    // Render empty state
+    if (allServices.length === 0) {
+        grid.innerHTML = `
+            <div class="services-empty-state" style="grid-column: 1 / -1;">
+                <div class="services-empty-icon">🔍</div>
+                <h3 class="services-empty-title">No services found</h3>
+                <p class="services-empty-text">Try a different search term or category</p>
+            </div>
+        `;
+        return;
+    }
+
+    // Render service cards
+    grid.innerHTML = allServices.map(service => {
+        const hasOffer = service.offerPrice !== null;
+        const discount = hasOffer ? Math.round((1 - service.offerPrice / service.price) * 100) : 0;
+        const displayPrice = service.offerPrice || service.price;
+
+        // Create WhatsApp message for booking
+        const bookingMessage = encodeURIComponent(`Hi! I'd like to book "${service.name}" from ${service.category}. Please let me know the available slots.`);
+        const whatsappLink = `https://wa.me/919229915277?text=${bookingMessage}`;
+
+        return `
+            <div class="service-page-card">
+                <div class="service-page-card-info">
+                    <div class="service-page-card-category">
+                        <span>${service.icon}</span>
+                        <span>${service.category}</span>
+                    </div>
+                    <div class="service-page-card-name">${service.name}</div>
+                    <div class="service-page-card-prices">
+                        ${hasOffer ? `<span class="service-page-original-price">₹${service.price}</span>` : ''}
+                        <span class="service-page-offer-price">₹${displayPrice}</span>
+                        ${hasOffer && discount > 0 ? `<span class="service-page-discount-badge">${discount}% OFF</span>` : ''}
+                    </div>
+                </div>
+                <a href="${whatsappLink}" target="_blank" class="service-page-book-btn">Book</a>
+            </div>
+        `;
+    }).join('');
+}
+
+// Initialize Services Page when navigating to it
+function onServicesPageVisible() {
+    // Check if already initialized
+    const grid = document.getElementById('servicesPageGrid');
+    if (grid && !grid.dataset.initialized) {
+        initServicesPage();
+        grid.dataset.initialized = 'true';
+    }
+}
+
+// Hook into page navigation
+document.addEventListener('DOMContentLoaded', () => {
+    // Initialize on page load if services page is active
+    const servicesPage = document.querySelector('[data-page="services"]');
+    if (servicesPage && servicesPage.classList.contains('active')) {
+        onServicesPageVisible();
+    }
+
+    // Listen for navigation changes
+    const bottomNavItems = document.querySelectorAll('.bottom-nav .nav-item');
+    bottomNavItems.forEach(item => {
+        item.addEventListener('click', () => {
+            if (item.dataset.page === 'services') {
+                setTimeout(onServicesPageVisible, 100);
+            }
+        });
+    });
+
+    // Also handle header nav clicks
+    const headerNavLinks = document.querySelectorAll('.nav a[href="#services"]');
+    headerNavLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            setTimeout(onServicesPageVisible, 100);
+        });
+    });
+});

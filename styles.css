@@ -8652,3 +8652,495 @@ body.light-mode .pwa-close-btn:hover {
 #notifyBtn.active svg {
     filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.6));
 }
+
+/* ==========================================================================
+   SERVICES PAGE - Premium Dedicated Services Browsing Experience
+   ========================================================================== */
+
+.services-page-container {
+    padding: 20px 15px;
+    padding-bottom: 100px;
+    max-width: 1200px;
+    margin: 0 auto;
+    min-height: 100vh;
+}
+
+/* Services Page Header */
+.services-page-header {
+    text-align: center;
+    margin-bottom: 25px;
+    padding: 20px 0;
+}
+
+.services-page-title {
+    font-family: 'Cinzel', serif;
+    font-size: 32px;
+    margin-bottom: 10px;
+    background: linear-gradient(135deg, var(--gold-24k), var(--gold-light), var(--gold-24k));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 3s ease-in-out infinite;
+}
+
+.services-page-subtitle {
+    color: var(--text-gray);
+    font-size: 16px;
+    margin: 0;
+}
+
+body.light-mode .services-page-subtitle {
+    color: #666666;
+}
+
+/* Search Bar */
+.services-search-wrapper {
+    padding: 0 5px;
+    margin-bottom: 20px;
+}
+
+.services-search-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255, 215, 0, 0.08);
+    border: 2px solid rgba(255, 215, 0, 0.2);
+    border-radius: 50px;
+    padding: 12px 20px;
+    transition: all 0.3s ease;
+}
+
+.services-search-bar:focus-within {
+    border-color: var(--gold-24k);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+}
+
+.search-icon {
+    font-size: 18px;
+    opacity: 0.8;
+}
+
+.services-search-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text-white);
+    font-size: 16px;
+    font-family: inherit;
+}
+
+.services-search-input::placeholder {
+    color: var(--text-gray);
+    opacity: 0.7;
+}
+
+body.light-mode .services-search-input {
+    color: #1a1a1a;
+}
+
+body.light-mode .services-search-bar {
+    background: rgba(212, 160, 23, 0.08);
+    border-color: rgba(212, 160, 23, 0.25);
+}
+
+.clear-search-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    font-size: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-gray);
+    transition: all 0.2s;
+}
+
+.clear-search-btn:hover {
+    background: rgba(255, 0, 0, 0.3);
+    color: white;
+}
+
+/* Category Tabs - Horizontal Scrollable */
+.services-category-tabs-wrapper {
+    margin-bottom: 15px;
+    overflow: hidden;
+}
+
+.services-category-tabs {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding: 10px 5px;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.services-category-tabs::-webkit-scrollbar {
+    display: none;
+}
+
+.category-tab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    padding: 12px 18px;
+    background: rgba(255, 215, 0, 0.08);
+    border: 2px solid rgba(255, 215, 0, 0.15);
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    flex-shrink: 0;
+    min-width: 80px;
+}
+
+.category-tab:hover {
+    background: rgba(255, 215, 0, 0.15);
+    border-color: rgba(255, 215, 0, 0.3);
+    transform: translateY(-2px);
+}
+
+.category-tab.active {
+    background: linear-gradient(135deg, var(--gold-24k), var(--gold-bright));
+    border-color: var(--gold-24k);
+    box-shadow: 0 5px 20px rgba(255, 215, 0, 0.4);
+}
+
+.tab-icon {
+    font-size: 22px;
+}
+
+.tab-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-gray);
+    transition: color 0.3s;
+}
+
+.category-tab.active .tab-label {
+    color: #1a0f00;
+}
+
+body.light-mode .category-tab {
+    background: rgba(212, 160, 23, 0.08);
+    border-color: rgba(212, 160, 23, 0.2);
+}
+
+body.light-mode .tab-label {
+    color: #666666;
+}
+
+body.light-mode .category-tab.active {
+    background: linear-gradient(135deg, #D4A017, #B8860B);
+}
+
+body.light-mode .category-tab.active .tab-label {
+    color: white;
+}
+
+/* Services Count Bar */
+.services-count-bar {
+    padding: 10px 15px;
+    margin-bottom: 15px;
+}
+
+.services-count-text {
+    font-size: 14px;
+    color: var(--text-gray);
+    font-weight: 500;
+}
+
+body.light-mode .services-count-text {
+    color: #666666;
+}
+
+/* Services Grid */
+.services-page-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 15px;
+    padding: 0 5px;
+}
+
+@media (max-width: 768px) {
+    .services-page-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Service Page Card */
+.service-page-card {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.08), rgba(255, 215, 0, 0.03));
+    border: 2px solid rgba(255, 215, 0, 0.15);
+    border-radius: 16px;
+    padding: 16px 18px;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.service-page-card:hover {
+    background: rgba(255, 215, 0, 0.12);
+    border-color: var(--gold-24k);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(255, 215, 0, 0.25);
+}
+
+.service-page-card-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.service-page-card-category {
+    font-size: 11px;
+    color: var(--gold-24k);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.service-page-card-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-white);
+    margin-bottom: 6px;
+    line-height: 1.3;
+}
+
+body.light-mode .service-page-card-name {
+    color: #1a1a1a;
+}
+
+.service-page-card-prices {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.service-page-original-price {
+    text-decoration: line-through;
+    color: #888;
+    font-size: 13px;
+}
+
+.service-page-offer-price {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--gold-24k);
+}
+
+.service-page-discount-badge {
+    background: linear-gradient(135deg, #047857, #065F46);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.service-page-book-btn {
+    background: linear-gradient(135deg, var(--gold-24k), var(--gold-bright));
+    color: #1a0f00;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 20px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.service-page-book-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 20px rgba(255, 215, 0, 0.5);
+}
+
+.service-page-book-btn:active {
+    transform: scale(0.98);
+}
+
+body.light-mode .service-page-card {
+    background: linear-gradient(135deg, rgba(212, 160, 23, 0.08), rgba(212, 160, 23, 0.03));
+    border-color: rgba(212, 160, 23, 0.2);
+}
+
+body.light-mode .service-page-book-btn {
+    background: linear-gradient(135deg, #D4A017, #B8860B);
+    color: white;
+}
+
+/* Category Group Header in Grid */
+.services-category-group {
+    margin-bottom: 30px;
+}
+
+.services-category-group-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 15px;
+    padding: 0 5px;
+}
+
+.category-group-icon {
+    font-size: 28px;
+}
+
+.category-group-title {
+    font-family: 'Cinzel', serif;
+    font-size: 22px;
+    background: linear-gradient(135deg, var(--gold-24k), var(--gold-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0;
+}
+
+.category-group-count {
+    font-size: 12px;
+    color: var(--text-gray);
+    background: rgba(255, 215, 0, 0.1);
+    padding: 4px 10px;
+    border-radius: 12px;
+}
+
+/* Quick Book CTA */
+.services-quick-book-cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    background: linear-gradient(135deg, rgba(37, 211, 102, 0.15), rgba(37, 211, 102, 0.08));
+    border: 2px solid rgba(37, 211, 102, 0.3);
+    border-radius: 20px;
+    padding: 20px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.quick-book-content {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.quick-book-icon {
+    font-size: 36px;
+}
+
+.quick-book-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.quick-book-text strong {
+    font-size: 15px;
+    color: var(--text-white);
+}
+
+.quick-book-text span {
+    font-size: 13px;
+    color: var(--text-gray);
+}
+
+body.light-mode .quick-book-text strong {
+    color: #1a1a1a;
+}
+
+.quick-book-btn {
+    background: linear-gradient(135deg, #25D366, #20BA5C);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
+}
+
+.quick-book-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(37, 211, 102, 0.6);
+}
+
+/* Empty State */
+.services-empty-state {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.services-empty-icon {
+    font-size: 80px;
+    margin-bottom: 20px;
+    animation: float 3s ease-in-out infinite;
+}
+
+.services-empty-title {
+    font-size: 20px;
+    color: var(--text-white);
+    margin-bottom: 10px;
+}
+
+.services-empty-text {
+    font-size: 14px;
+    color: var(--text-gray);
+}
+
+body.light-mode .services-empty-title {
+    color: #1a1a1a;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .services-page-title {
+        font-size: 26px;
+    }
+
+    .services-page-header {
+        padding: 15px 0;
+    }
+
+    .services-quick-book-cta {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .quick-book-content {
+        flex-direction: column;
+    }
+
+    .category-tab {
+        padding: 10px 14px;
+        min-width: 70px;
+    }
+
+    .tab-icon {
+        font-size: 20px;
+    }
+
+    .tab-label {
+        font-size: 11px;
+    }
+}

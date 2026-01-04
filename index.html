@@ -1060,7 +1060,100 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                     </footer>
         </section>
 
+        <!-- SERVICES PAGE - Dedicated services browsing experience -->
+        <section id="services" class="app-page" data-page="services">
+            <div class="services-page-container">
+                <!-- Services Header -->
+                <div class="services-page-header">
+                    <h1 class="services-page-title">
+                        <span class="title-decoration">💎</span>
+                        Our Premium Services
+                        <span class="title-decoration">✨</span>
+                    </h1>
+                    <p class="services-page-subtitle">Discover luxury beauty treatments tailored for you</p>
+                </div>
+
+                <!-- Search Bar -->
+                <div class="services-search-wrapper">
+                    <div class="services-search-bar">
+                        <span class="search-icon">🔍</span>
+                        <input type="text" id="servicesPageSearch" placeholder="Search services..."
+                            class="services-search-input">
+                        <button id="clearServicesSearch" class="clear-search-btn" style="display: none;">✕</button>
+                    </div>
+                </div>
+
+                <!-- Category Tabs - Horizontal Scrollable -->
+                <div class="services-category-tabs-wrapper">
+                    <div class="services-category-tabs" id="servicesCategoryTabs">
+                        <button class="category-tab active" data-category="all">
+                            <span class="tab-icon">✨</span>
+                            <span class="tab-label">All</span>
+                        </button>
+                        <button class="category-tab" data-category="Hair cutting">
+                            <span class="tab-icon">✂️</span>
+                            <span class="tab-label">Hair Cut</span>
+                        </button>
+                        <button class="category-tab" data-category="Clean up">
+                            <span class="tab-icon">✨</span>
+                            <span class="tab-label">Clean up</span>
+                        </button>
+                        <button class="category-tab" data-category="Facial">
+                            <span class="tab-icon">💆</span>
+                            <span class="tab-label">Facial</span>
+                        </button>
+                        <button class="category-tab" data-category="Hairs & Treatment">
+                            <span class="tab-icon">💇</span>
+                            <span class="tab-label">Treatment</span>
+                        </button>
+                        <button class="category-tab" data-category="Premium services">
+                            <span class="tab-icon">👑</span>
+                            <span class="tab-label">Premium</span>
+                        </button>
+                        <button class="category-tab" data-category="Hair colour">
+                            <span class="tab-icon">🎨</span>
+                            <span class="tab-label">Colour</span>
+                        </button>
+                        <button class="category-tab" data-category="Makeup & Styling">
+                            <span class="tab-icon">💄</span>
+                            <span class="tab-label">Makeup</span>
+                        </button>
+                        <button class="category-tab" data-category="Nails & Beauty">
+                            <span class="tab-icon">💅</span>
+                            <span class="tab-label">Nails</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Services Count -->
+                <div class="services-count-bar">
+                    <span id="servicesPageCount" class="services-count-text">Showing all services</span>
+                </div>
+
+                <!-- Services Grid Container -->
+                <div class="services-page-grid" id="servicesPageGrid">
+                    <!-- Services will be dynamically rendered here -->
+                </div>
+
+                <!-- Quick Book CTA -->
+                <div class="services-quick-book-cta">
+                    <div class="quick-book-content">
+                        <span class="quick-book-icon">📱</span>
+                        <div class="quick-book-text">
+                            <strong>Can't find what you're looking for?</strong>
+                            <span>Contact us for custom services</span>
+                        </div>
+                    </div>
+                    <a href="https://wa.me/919229915277?text=Hi%2C%20I%20need%20help%20with%20a%20service"
+                        target="_blank" class="quick-book-btn">
+                        💬 Chat with us
+                    </a>
+                </div>
+            </div>
+        </section>
+
         <!-- NOTIFICATIONS PAGE -->
+
         <section id="notifications" class="app-page" data-page="notifications">
             <div class="notifications-container">
                 <!-- Header with Settings -->
@@ -1741,7 +1834,7 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                 <path
                     d="M19 3H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zm-6-7h-2v2h2v-2zm0 4h-2v2h2v-2zm4-4h-2v2h2v-2zm0 4h-2v2h2v-2zm4-4h-2v2h2v-2zm0 4h-2v2h2v-2z" />
             </svg>
-            <span class="nav-label">Booking</span>
+            <span class="nav-label">My Bookings</span>
         </a>
         <a href="#" class="nav-item" data-page="chat">
             <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">

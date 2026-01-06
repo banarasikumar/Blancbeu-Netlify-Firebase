@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to BlancBeu - Family Beauty Salon</title>
+    <!-- Google Fonts for Premium Feel -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Poppins:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Immersive Effects -->
+    <div class="sparkles"></div>
+    <div class="rose-petals" id="rosePetals"></div>
+
+    <div class="container">
+        <h1 class="brand-title">BLANCBEU</h1>
+        <h2 class="brand-subtitle">Family Beauty Salon</h2>
+
+        <div class="content-wrapper">
+            <p class="tagline">Transform Your Beauty</p>
+
+            <div class="offers-group">
+                <p class="offer-highlight gold">🔥 Special Ad Offer: Haircuts @ ₹99 🔥</p>
+                <p class="offer-highlight student">🎓 College Students: Flat 25% OFF 🎓</p>
+            </div>
+
+            <div class="services-ticker">
+                <span>Hair</span> • <span>Skin</span> • <span>Makeup</span> • <span>Spa</span> • <span>Nails</span>
+            </div>
+        </div>
+
+        <a href="/" class="cta-button" id="exploreBtn">Explore Salon</a>
+
+        <div class="loader-bar">
+            <div class="loader-progress"></div>
+        </div>
+    </div>
+
+    <script>
+        // Redirect function
+        const redirectToHome = () => {
+            // Using window.location.origin to ensure it goes to the root of the current domain
+            window.location.href = window.location.origin;
+        };
+
+        // Auto redirect after 5 seconds
+        const autoRedirectTimer = setTimeout(redirectToHome, 5000);
+
+        // Manual click handling
+        document.getElementById('exploreBtn').addEventListener('click', (e) => {
+            e.preventDefault(); // Prevent default anchor behavior to handle cleanly
+            clearTimeout(autoRedirectTimer); // Clear timer just in case
+            redirectToHome();
+        });
+
+        // --- ROSE PETAL GENERATOR ---
+        const createPetals = () => {
+            const container = document.getElementById('rosePetals');
+            const petalCount = 15; // Number of petals
+            const fallingChars = ['🌸', '🌹', '✨', '🍂']; // Petals and sparkle chars
+
+            for (let i = 0; i < petalCount; i++) {
+                const petal = document.createElement('div');
+                petal.classList.add('petal');
+
+                // Random char
+                petal.innerText = fallingChars[Math.floor(Math.random() * fallingChars.length)];
+
+                // Random position and animation
+                petal.style.left = Math.random() * 100 + 'vw';
+                petal.style.animationDuration = (Math.random() * 5 + 5) + 's'; // 5-10s
+                petal.style.animationDelay = Math.random() * 5 + 's';
+                petal.style.fontSize = (Math.random() * 20 + 10) + 'px'; // 10-30px size
+
+                container.appendChild(petal);
+            }
+        };
+
+        // Initialize particles
+        createPetals();
+    </script>
+</body>
+
+</html>

@@ -537,12 +537,21 @@ PHASE 3: PREMIUM FEATURES (Week 4)
             <!-- SERVICE HIGHLIGHTS CAROUSEL SECTION -->
             <div class="service-highlights-section">
                 <div class="container">
-                    <h2 class="section-title">
-                        <span class="title-decoration">⭐</span>
-                        Featured Services
-                        <span class="title-decoration">✨</span>
-                    </h2>
-                    <p class="section-subtitle">Explore our most popular premium treatments</p>
+                    <div class="section-header-text" style="margin-bottom: 20px; text-align: center;">
+                        <h2 class="section-title">
+                            <span class="title-decoration">⭐</span>
+                            Featured Services
+                        </h2>
+                        <p class="section-subtitle">Popular premium treatments</p>
+                    </div>
+
+                    <div class="view-all-btn-container" style="text-align: right; margin-bottom: 30px;">
+                        <button class="view-all-services-btn"
+                            onclick="document.querySelector('.bottom-nav .nav-item[data-page=\'services\']').click()"
+                            style="padding: 10px 30px; font-size: 15px;">
+                            View All Menu
+                        </button>
+                    </div>
 
                     <div class="service-carousel-wrapper">
                         <div class="service-carousel" id="serviceCarousel">
@@ -568,26 +577,7 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                                     </div>
                                 </div>
 
-                                <div class="service-card-item">
-                                    <div class="service-highlight-card">
-                                        <div class="service-img-container">
-                                            <img src="assets/featured_services/nails.png" alt="Nail Art"
-                                                class="service-highlight-img">
-                                        </div>
-                                        <div class="service-content">
-                                            <div>
-                                                <h3>Nail Art & Care</h3>
-                                                <p class="service-desc">Creative designs and nail treatments</p>
-                                            </div>
-                                            <div>
-                                                <div class="service-price">Starting from ₹150</div>
-                                                <button class="service-btn"
-                                                    onclick="document.querySelector('.bottom-nav .nav-item[data-page=\'chat\']').click()">Book
-                                                    Now</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+
 
                                 <div class="service-card-item">
                                     <div class="service-highlight-card">
@@ -631,26 +621,7 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                                     </div>
                                 </div>
 
-                                <div class="service-card-item">
-                                    <div class="service-highlight-card">
-                                        <div class="service-img-container">
-                                            <img src="assets/featured_services/spa.png" alt="Spa & Massage"
-                                                class="service-highlight-img">
-                                        </div>
-                                        <div class="service-content">
-                                            <div>
-                                                <h3>Spa & Massage</h3>
-                                                <p class="service-desc">Luxurious relaxation treatments</p>
-                                            </div>
-                                            <div>
-                                                <div class="service-price">Starting from ₹600</div>
-                                                <button class="service-btn"
-                                                    onclick="document.querySelector('.bottom-nav .nav-item[data-page=\'chat\']').click()">Book
-                                                    Now</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+
 
                                 <div class="service-card-item">
                                     <div class="service-highlight-card">
@@ -674,15 +645,6 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                                 </div>
                             </div>
                         </div>
-
-                        <button class="carousel-nav-btn prev" onclick="slideServiceCarousel(-1)">❮</button>
-                        <button class="carousel-nav-btn next" onclick="slideServiceCarousel(1)">❯</button>
-                    </div>
-
-                    <div class="view-all-services-container">
-                        <button class="view-all-services-btn"
-                            onclick="document.querySelector('.bottom-nav .nav-item[data-page=\'services\']').click()">View
-                            All Menu</button>
                     </div>
                 </div>
             </div>
@@ -1990,64 +1952,60 @@ PHASE 3: PREMIUM FEATURES (Week 4)
 
         <!-- CHAT PAGE -->
         <section id="chat" class="app-page" data-page="chat">
-            <div class="chat-container">
-                <!-- Header -->
-                <div class="chat-header">
-                    <div class="chat-header-content">
-                        <h1>Connect with Us</h1>
-                        <p class="chat-subtitle">Locate us or Connect with our beauty experts</p>
+            <div class="chat-container immersive-chat">
+                <!-- Chat Header -->
+                <div class="chat-header premium-glass">
+                    <div class="chat-bot-info">
+                        <div class="bot-avatar-wrapper">
+                            <img src="assets/brand_icon_optimized.webp" alt="AI Assistant" class="bot-avatar">
+                            <span class="status-dot"></span>
+                        </div>
+                        <div class="bot-details">
+                            <h3>BlancBeu Assistant</h3>
+                            <span class="bot-status">Always here to help ✨</span>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Location Section -->
-                <div class="chat-location-section">
-                    <!-- Map Container -->
-                    <div class="map-container">
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3773.0166255555!2d72.83445!3d19.04295!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f4e1c240639433%3A0x3dda633cf2333290!2sBlancBeu%20Family%20Beauty%20Salon!5e0!3m2!1sen!2sin!4v1700000000000"
-                            class="google-map" allowfullscreen="" loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade">
-                        </iframe>
+                <!-- Chat Messages Area -->
+                <div class="chat-messages" id="chatMessages">
+                    <div class="message-time">Today</div>
+                    <div class="message bot-message">
+                        <div class="message-content">
+                            Hello! 👋 Welcome to BlancBeu Family Salon. I'm your personal AI assistant.
+                        </div>
+                    </div>
+                    <div class="message bot-message">
+                        <div class="message-content">
+                            I can help you browse services, book appointments, or answer any questions! Try asking:
+                        </div>
+                        <div class="chat-suggestion-chips">
+                            <button class="chip" onclick="handleQuickAction('Book Haircut')">Book Haircut ✂️</button>
+                            <button class="chip" onclick="handleQuickAction('Show Offers')">Running Offers 🎉</button>
+                            <button class="chip" onclick="handleQuickAction('View Price List')">Price List 💰</button>
+                            <button class="chip" onclick="handleQuickAction('Where are you located?')">Location
+                                📍</button>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Action Buttons Section -->
-                <div class="chat-actions-section">
-                    <button class="chat-action-btn open-maps-btn" onclick="openBlancbeuMaps()">
-                        <img class="btn-icon" src="attached_assets/maps_icons/icons8-google-maps-48.svg"
-                            alt="Google Maps">
-                        <div class="btn-content">
-                            <div class="btn-label">Open in Maps</div>
-                            <div class="btn-desc">View full directions</div>
-                        </div>
-                    </button>
-                    <button class="chat-action-btn whatsapp-btn" onclick="openWhatsAppChat()">
-                        <img class="btn-icon slow-anim" src="attached_assets/new_icons/icons8-whatsapp.apng"
-                            alt="WhatsApp">
-                        <div class="btn-content">
-                            <div class="btn-label">Chat on WhatsApp</div>
-                            <div class="btn-desc">Quick messages & support</div>
-                        </div>
-                    </button>
-                </div>
-
-                <!-- Info Cards -->
-                <div class="chat-info-section">
-                    <div class="info-card">
-                        <img class="info-icon-img slow-anim" src="attached_assets/new_icons/icons8-phone.apng"
-                            alt="Call Us">
-                        <div class="info-content">
-                            <h4>Call Us</h4>
-                            <p>+91 9229915277</p>
-                        </div>
-                    </div>
-                    <div class="info-card">
-                        <img class="info-icon-img slow-anim" src="attached_assets/new_icons/icons8-clock.svg"
-                            alt="Response Time">
-                        <div class="info-content">
-                            <h4>Response Time</h4>
-                            <p>1-10 mins</p>
-                        </div>
+                <!-- Chat Input Area -->
+                <div class="chat-input-wrapper premium-glass">
+                    <div class="chat-input-container">
+                        <button id="voiceInputBtn" class="chat-btn voice-btn ripple-btn">
+                            <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+                                <path
+                                    d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z" />
+                                <path
+                                    d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z" />
+                            </svg>
+                        </button>
+                        <input type="text" id="chatInput" placeholder="Type or speak..." autocomplete="off">
+                        <button id="sendMessageBtn" class="chat-btn send-btn ripple-btn">
+                            <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+                                <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
+                            </svg>
+                        </button>
                     </div>
                 </div>
             </div>

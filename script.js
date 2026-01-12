@@ -4427,3 +4427,254 @@ function handleSwipe() {
         }
     }
 }
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   10.0 IMMERSIVE AI CHAT ASSISTANT
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+class ImmersiveChatAssistant {
+    constructor() {
+        this.messagesContainer = document.getElementById('chatMessages');
+        this.input = document.getElementById('chatInput');
+        this.sendBtn = document.getElementById('sendMessageBtn');
+        this.voiceBtn = document.getElementById('voiceInputBtn');
+        this.isListening = false;
+
+        // Define Intents & Responses
+        this.knowledgeBase = [
+            {
+                keywords: /book|appointment|schedule|reserve/i,
+                response: "I can fast-track your booking! Which service are you interested in?",
+                actions: [
+                    { label: "Book Haircut ✂️", action: "booking" },
+                    { label: "Book Facial 🧖‍♀️", action: "booking" },
+                    { label: "General Booking 📅", action: "booking" }
+                ]
+            },
+            {
+                keywords: /price|cost|how much|rate/i,
+                response: "Our pricing is very competitive! Haircuts start at ₹200 and Facials from ₹500. Would you like to see the full menu?",
+                actions: [
+                    { label: "View Full Price List 📋", action: "services" }
+                ]
+            },
+            {
+                keywords: /offer|discount|deal|promo/i,
+                response: "We have some amazing offers running currently! You can get up to 20% off on combos.",
+                actions: [
+                    { label: "View Offers 🎉", action: "home" }
+                ]
+            },
+            {
+                keywords: /location|address|where|map/i,
+                response: "We are located in Ranchi at the heart of the city. You can view our exact location on the map.",
+                actions: [
+                    { label: "Open in Maps 📍", action: "maps" }
+                ]
+            },
+            {
+                keywords: /cancellation|cancel|refund/i,
+                response: "You can cancel or reschedule appointments from the 'My Bookings' section anytime before 2 hours of the slot.",
+                actions: [
+                    { label: "Manage Bookings 🎫", action: "bookings" }
+                ]
+            },
+            {
+                keywords: /hair|cut|style/i,
+                response: "Our hair experts are the best in town! From styling to treatments, we do it all.",
+                actions: [
+                    { label: "Explore Hair Services 💇", action: "services" }
+                ]
+            },
+            {
+                keywords: /facial|skin|glow/i,
+                response: "Get that radiant glow with our premium facials using top-tier products.",
+                actions: [
+                    { label: "Explore Facials ✨", action: "services" }
+                ]
+            }
+        ];
+
+        this.init();
+    }
+
+    init() {
+        if (!this.messagesContainer) return; // Guard clause
+
+        // Event Listeners
+        this.sendBtn.addEventListener('click', () => this.handleSend());
+        this.input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') this.handleSend();
+        });
+
+        // specific global function for quick actions from HTML
+        window.handleQuickAction = (action) => this.processAction(action);
+
+        // Voice Input
+        if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            this.recognition = new SpeechRecognition();
+            this.recognition.continuous = false;
+            this.recognition.lang = 'en-US';
+
+            this.recognition.onstart = () => {
+                this.isListening = true;
+                this.voiceBtn.classList.add('listening');
+                this.input.placeholder = "Listening...";
+            };
+
+            this.recognition.onend = () => {
+                this.isListening = false;
+                this.voiceBtn.classList.remove('listening');
+                this.input.placeholder = "Type or speak...";
+            };
+
+            this.recognition.onresult = (event) => {
+                const transcript = event.results[0][0].transcript;
+                this.input.value = transcript;
+                setTimeout(() => this.handleSend(), 500);
+            };
+
+            this.voiceBtn.addEventListener('click', () => {
+                if (this.isListening) this.recognition.stop();
+                else this.recognition.start();
+            });
+        } else {
+            this.voiceBtn.style.display = 'none'; // Hide if not supported
+        }
+
+        console.log("Immersive Chat Assistant Initialized ✨");
+    }
+
+    handleSend() {
+        const text = this.input.value.trim();
+        if (!text) return;
+
+        // User Message
+        this.addMessage(text, 'user');
+        this.input.value = '';
+
+        // Simulate AI "Thinking"
+        this.showTypingIndicator();
+
+        setTimeout(() => {
+            this.removeTypingIndicator();
+            this.generateResponse(text);
+        }, 800 + Math.random() * 500); // Random delay 0.8s - 1.3s
+    }
+
+    addMessage(text, sender, actions = []) {
+        const msgDiv = document.createElement('div');
+        msgDiv.className = `message ${sender}-message`;
+
+        let actionsHtml = '';
+        if (actions && actions.length > 0) {
+            actionsHtml = `<div class="chat-suggestion-chips">
+                ${actions.map(act => `<button class="chip" onclick="handleQuickAction('${act.action}')">${act.label}</button>`).join('')}
+            </div>`;
+        }
+
+        msgDiv.innerHTML = `
+            <div class="message-content">
+                ${text}
+            </div>
+            ${actionsHtml}
+        `;
+
+        this.messagesContainer.appendChild(msgDiv);
+        this.scrollToBottom();
+    }
+
+    scrollToBottom() {
+        this.messagesContainer.scrollTop = this.messagesContainer.scrollHeight;
+    }
+
+    showTypingIndicator() {
+        const typingDiv = document.createElement('div');
+        typingDiv.id = 'typingIndicator';
+        typingDiv.className = 'message bot-message';
+        typingDiv.innerHTML = `<div class="message-content">Thinking... 🤔</div>`;
+        this.messagesContainer.appendChild(typingDiv);
+        this.scrollToBottom();
+    }
+
+    removeTypingIndicator() {
+        const typingDiv = document.getElementById('typingIndicator');
+        if (typingDiv) typingDiv.remove();
+    }
+
+    generateResponse(userInput) {
+        let match = null;
+
+        // Find matching intent
+        for (const item of this.knowledgeBase) {
+            if (item.keywords.test(userInput)) {
+                match = item;
+                break;
+            }
+        }
+
+        if (match) {
+            this.addMessage(match.response, 'bot', match.actions);
+        } else {
+            // Default Fallback
+            this.addMessage("I can definitely help with that! Could you select one of the options below or verify what you're looking for?", 'bot', [
+                { label: "Book Appointment", action: "booking" },
+                { label: "See Prices", action: "services" },
+                { label: "Talk to Human", action: "whatsapp" }
+            ]);
+        }
+    }
+
+    processAction(actionType) {
+        // Map simplified action strings to actual UI triggers
+        console.log("Processing Action:", actionType);
+
+        // First, check for direct string matches from the HTML onclicks (e.g. 'View Price List')
+        // But our system mostly passes simple codes like 'booking', 'services'
+
+        // Handle common variations
+        const act = actionType.toLowerCase();
+
+        if (act.includes('book') || act === 'booking') {
+            document.querySelector('.bottom-nav .nav-item[data-page="bookings"]').click();
+        } else if (act.includes('service') || act === 'services') {
+            document.querySelector('.bottom-nav .nav-item[data-page="services"]').click();
+        } else if (act.includes('home') || act === 'offers') {
+            document.querySelector('.bottom-nav .nav-item[data-page="home"]').click();
+        } else if (act === 'maps' || act.includes('location')) {
+            window.open('https://maps.google.com/?q=BlancBeu+Family+Beauty+Salon', '_blank');
+        } else if (act === 'whatsapp') {
+            window.open('https://wa.me/919229915277', '_blank');
+        } else {
+            // Fallback: try to match keywords in the string
+            if (act.includes('hair') || act.includes('cut')) document.querySelector('.bottom-nav .nav-item[data-page="services"]').click();
+        }
+    }
+}
+
+// Initialize on Load
+document.addEventListener('DOMContentLoaded', () => {
+    // Determine if we are on the chat page or if we switch to it
+    const obs = new MutationObserver(() => {
+        const chatSection = document.getElementById('chat');
+        if (chatSection.classList.contains('active')) {
+            // Hide floating widget if visible
+            const floatingWidget = document.querySelector('.chat-widget');
+            if (floatingWidget) floatingWidget.style.display = 'none';
+        } else {
+            // Show floating widget otherwise
+            const floatingWidget = document.querySelector('.chat-widget');
+            if (floatingWidget) floatingWidget.style.display = 'block';
+        }
+    });
+
+    // Watch for class changes on app-pages
+    const pages = document.querySelectorAll('.app-page');
+    pages.forEach(page => {
+        obs.observe(page, { attributes: true, attributeFilter: ['class'] });
+    });
+
+    // Start instance
+    window.immersiveChat = new ImmersiveChatAssistant();
+});

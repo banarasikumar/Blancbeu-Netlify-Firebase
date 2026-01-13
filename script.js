@@ -4028,7 +4028,138 @@ function initServicesPage() {
     // Render services initially
     renderServicesPage();
 
-    // Category Card Click Handlers
+    // ---------------------------------------------------------
+    //  SHARED LOGIC: Function to Reset/Close Category View
+    // ---------------------------------------------------------
+    const resetServicesView = () => {
+        servicesPageCurrentCategory = 'all';
+        servicesPageHasInteracted = false;
+
+        const subtitle = document.querySelector('.services-page-subtitle');
+        if (subtitle && subtitle.dataset.originalText) {
+            subtitle.textContent = subtitle.dataset.originalText;
+            subtitle.classList.remove('has-back-btn');
+        }
+
+        categoryCardsContainer.classList.remove('category-active-mode');
+        categoryCards.forEach(c => c.classList.remove('active'));
+
+        const allCard = document.querySelector('.category-image-card[data-category="all"]');
+        if (allCard) allCard.classList.add('active');
+
+        renderServicesPage();
+
+        // Optional: Animate grid entrance
+        const grid = document.getElementById('servicesPageGrid');
+        if (grid) {
+            grid.classList.add('animate-fade-in');
+            setTimeout(() => grid.classList.remove('animate-fade-in'), 400);
+        }
+    };
+
+
+
+    // ---------------------------------------------------------
+    //  SWIPE GESTURE SUPPORT (Swipe Right to Go Back)
+    // ---------------------------------------------------------
+    // ---------------------------------------------------------
+    //  SWIPE GESTURE SUPPORT (Swipe Right to Go Back)
+    // ---------------------------------------------------------
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const servicesGridContainer = document.querySelector('.services-page-container') || document.body;
+
+    // Create Swipe Indicator Element dynamically if not exists
+    let swipeIndicator = document.getElementById('swipeBackIndicator');
+    if (!swipeIndicator) {
+        swipeIndicator = document.createElement('div');
+        swipeIndicator.id = 'swipeBackIndicator';
+        swipeIndicator.innerHTML = `
+            <div class="swipe-arrow-circle">
+                <svg viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+            </div>`;
+        document.body.appendChild(swipeIndicator);
+    }
+
+    servicesGridContainer.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].clientX;
+    }, { passive: true });
+
+    servicesGridContainer.addEventListener('touchmove', (e) => {
+
+
+        const currentX = e.changedTouches[0].clientX;
+        const diff = currentX - touchStartX;
+
+        // Show indicator if swiping right
+        if (diff > 15) {
+            swipeIndicator.classList.add('visible');
+            // Move it with finger (capped at 60px)
+            const moveX = Math.min(diff, 80);
+            swipeIndicator.style.transform = `translateY(-50%) translateX(${moveX}px)`;
+        } else {
+            swipeIndicator.classList.remove('visible');
+            swipeIndicator.style.transform = `translateY(-50%) translateX(0)`;
+        }
+    }, { passive: true });
+
+    servicesGridContainer.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].clientX;
+
+        // Hide indicator
+        swipeIndicator.classList.remove('visible');
+        swipeIndicator.style.transform = `translateY(-50%) translateX(0)`;
+
+        handleSwipeBack();
+    }, { passive: true });
+
+    function handleSwipeBack() {
+        // Only active if we are deep in a category (not 'all')
+
+
+        const swipeDistance = touchEndX - touchStartX;
+        const threshold = 60; // Threshold
+
+        // Swipe RIGHT (Positive distance) -> Go Back
+        if (swipeDistance > threshold) {
+            triggerBackAnimation();
+        }
+    }
+
+    // ANIMATED BACK ACTION
+    const triggerBackAnimation = () => {
+
+        // Elements to animate
+        const elementsToAnimate = [
+            document.getElementById('servicesPageGrid'),
+            document.getElementById('servicesCategoryCards'),
+            document.querySelector('.services-count-bar'),
+            document.querySelector('.services-page-subtitle')
+        ];
+
+        // Add class to all existing elements
+        elementsToAnimate.forEach(el => {
+            if (el) {
+                el.classList.remove('animate-slide-out-right');
+                void el.offsetWidth; // Force repaint
+                el.classList.add('animate-slide-out-right');
+            }
+        });
+
+        // Wait for animation to finish then reset
+        setTimeout(() => {
+            elementsToAnimate.forEach(el => {
+                if (el) el.classList.remove('animate-slide-out-right');
+            });
+            resetServicesView();
+        }, 250);
+    };
+
+
+
+    // ---------------------------------------------------------
+    //  CATEGORY CARD CLICK HANDLERS
+    // ---------------------------------------------------------
     categoryCards.forEach(card => {
         card.addEventListener('click', (e) => {
             const category = card.dataset.category;
@@ -4043,27 +4174,9 @@ function initServicesPage() {
             const isModeActive = categoryCardsContainer.classList.contains('category-active-mode');
             const isAlreadyActive = card.classList.contains('active');
 
-            // CLOSE / RESET FUNCTION
-            const resetServicesView = () => {
-                servicesPageCurrentCategory = 'all';
-                servicesPageHasInteracted = false;
-
-                // Restore Subtitle
-                subtitle.textContent = subtitle.dataset.originalText;
-                subtitle.classList.remove('has-back-btn');
-
-                categoryCardsContainer.classList.remove('category-active-mode');
-                categoryCards.forEach(c => c.classList.remove('active'));
-
-                const allCard = document.querySelector('.category-image-card[data-category="all"]');
-                if (allCard) allCard.classList.add('active');
-
-                renderServicesPage();
-            };
-
             // IF CLICKING ACTIVE CARD -> CLOSE (Toggle behavior)
             if (isModeActive && isAlreadyActive) {
-                resetServicesView();
+                triggerBackAnimation();
                 return;
             }
 
@@ -4096,7 +4209,7 @@ function initServicesPage() {
             // Re-attach click listener to new back button
             subtitle.querySelector('.services-back-btn').addEventListener('click', (e) => {
                 e.stopPropagation(); // Prevent bubbling
-                resetServicesView();
+                triggerBackAnimation();
             });
 
             // SCROLL TO TOP
@@ -4201,11 +4314,12 @@ function renderServicesPage() {
     // Update count
     if (countElement) {
         if (servicesPageSearchQuery) {
-            countElement.textContent = `Found ${allServices.length} service${allServices.length !== 1 ? 's' : ''} for "${servicesPageSearchQuery}"`;
+            countElement.innerHTML = `Found <strong>${allServices.length}</strong> service${allServices.length !== 1 ? 's' : ''} for "${servicesPageSearchQuery}"`;
         } else if (servicesPageCurrentCategory !== 'all') {
-            countElement.textContent = `Showing ${allServices.length} ${servicesPageCurrentCategory} service${allServices.length !== 1 ? 's' : ''}`;
+            const displayCatName = servicesPageCurrentCategory.charAt(0).toUpperCase() + servicesPageCurrentCategory.slice(1);
+            countElement.innerHTML = `Showing <strong>${allServices.length}</strong> ${displayCatName} service${allServices.length !== 1 ? 's' : ''}`;
         } else {
-            countElement.textContent = `Showing all ${allServices.length} services`;
+            countElement.innerHTML = `Showing all <strong>${allServices.length}</strong> services`;
         }
     }
 

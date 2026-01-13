@@ -9213,20 +9213,26 @@ body.light-mode .services-quick-book-cta {
     text-align: center;
     justify-content: center;
     transition: all 0.3s ease;
-    height: 50px;
-    /* Fixed height for stability */
 }
+
+.services-page-container {
+    overflow-x: hidden;
+    position: relative;
+    padding-bottom: 20px;
+}
+
+
 
 /* While active - Premium Header Bar */
 .services-page-subtitle.has-back-btn {
     justify-content: flex-start;
-    padding: 0 10px;
-    /* Minimal padding */
+    padding: 10px 15px;
     background: transparent;
-    /* Cleaner look */
     border: none;
     backdrop-filter: none;
     box-shadow: none;
+    gap: 15px;
+    /* Better spacing between button and title */
 }
 
 /* Subtle, Classy Back Button */
@@ -9234,32 +9240,38 @@ body.light-mode .services-quick-book-cta {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
-    background: rgba(255, 255, 255, 0.05);
-    /* Very subtle in dark mode */
+    width: 44px;
+    /* Larger touch target */
+    height: 44px;
+    background: rgba(255, 255, 255, 0.03);
+    /* Ultra subtle glass */
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     border-radius: 50%;
     cursor: pointer;
     color: var(--gold-24k);
+
+    /* Premium Border */
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 1px solid rgba(212, 160, 23, 0.2);
-    /* Very light border */
     flex-shrink: 0;
 }
 
 .services-back-btn svg {
-    width: 22px;
-    /* Slightly larger icon */
-    height: 22px;
+    width: 20px;
+    /* Slightly smaller icon to not touch border */
+    height: 20px;
     fill: currentColor;
     transition: transform 0.3s ease;
 }
 
 .services-back-btn:hover {
-    background: rgba(212, 160, 23, 0.1);
-    /* Subtle glow on hover */
+    background: rgba(212, 175, 55, 0.15);
     border-color: var(--gold-24k);
-    transform: translateX(-2px);
+    transform: translateX(-2px) scale(1.05);
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
 }
 
 .services-back-btn:hover svg {
@@ -9355,9 +9367,98 @@ body.light-mode .services-category-title {
     display: none !important;
 }
 
+/* Services Count Bar */
+.services-count-bar {
+    padding: 10px 20px;
+    margin-bottom: 15px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.services-count-text {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    color: var(--text-gray);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+/* Highlight the number if we want */
+.services-count-text strong {
+    color: var(--gold-24k);
+    font-weight: 700;
+}
+
 /* Reset grid padding */
 .services-page-grid {
     padding-bottom: 0 !important;
+}
+
+/* --------------------------------------------------------------------------
+   SWIPE ANIMATIONS
+--------------------------------------------------------------------------- */
+@keyframes slideOutRight {
+    0% {
+        transform: translate3d(0, 0, 0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate3d(100%, 0, 0);
+        opacity: 0;
+    }
+}
+
+.animate-slide-out-right {
+    animation: slideOutRight 0.3s cubic-bezier(0.4, 0.0, 0.2, 1) forwards !important;
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    position: relative;
+    z-index: 999;
+}
+
+@keyframes slideInLeft {
+    0% {
+        transform: translateX(-30px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.animate-slide-out-right {
+    animation: slideOutRight 0.3s cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
+}
+
+.animate-slide-in-left {
+    animation: slideInLeft 0.4s cubic-bezier(0.0, 0.0, 0.2, 1) forwards;
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.4s ease-out forwards;
 }
 
 .quick-book-content {
@@ -10160,4 +10261,69 @@ body.light-mode .chip:hover {
     background: rgba(212, 175, 55, 0.1);
     color: var(--gold-dark);
     border-color: var(--gold-primary);
+}
+
+/* --------------------------------------------------------------------------
+   SWIPE BACK INDICATOR (Native-like)
+--------------------------------------------------------------------------- */
+#swipeBackIndicator {
+    position: fixed;
+    top: 50%;
+    left: -70px;
+    transform: translateY(-50%) scale(1);
+    z-index: 10000;
+    pointer-events: none;
+    transition: transform 0.05s linear, opacity 0.2s ease;
+    opacity: 0;
+    visibility: hidden;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4));
+}
+
+#swipeBackIndicator.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.swipe-arrow-circle {
+    width: 60px;
+    height: 60px;
+    /* Premium Warm Dark Glass */
+    background: rgba(28, 24, 18, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 50%;
+
+    /* Gold Border & Glow */
+    border: 1px solid rgba(212, 175, 55, 0.6);
+    box-shadow:
+        0 0 20px rgba(212, 175, 55, 0.15),
+        inset 0 0 10px rgba(212, 175, 55, 0.1);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ACTIVATION RIPPLE EFFECT */
+#swipeBackIndicator.active .swipe-arrow-circle {
+    background: rgba(212, 175, 55, 0.95);
+    /* Solid Gold Flash */
+    box-shadow: 0 0 35px rgba(212, 175, 55, 0.6);
+    border-color: #fff;
+    transform: scale(1.05);
+}
+
+#swipeBackIndicator.active .swipe-arrow-circle svg {
+    fill: #fff;
+    /* Icon turns white */
+    transform: scale(1.15);
+}
+
+.swipe-arrow-circle svg {
+    width: 28px;
+    height: 28px;
+    fill: var(--gold-24k);
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+    transition: all 0.2s ease;
 }

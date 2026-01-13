@@ -4062,44 +4062,76 @@ function initServicesPage() {
     // ---------------------------------------------------------
     //  SWIPE GESTURE SUPPORT (Swipe Right to Go Back)
     // ---------------------------------------------------------
-    // ---------------------------------------------------------
-    //  SWIPE GESTURE SUPPORT (Swipe Right to Go Back)
-    // ---------------------------------------------------------
+
     let touchStartX = 0;
+    let touchStartY = 0;
     let touchEndX = 0;
+    let isScrolling = undefined; // Flag to lock behavior
+
     const servicesGridContainer = document.querySelector('.services-page-container') || document.body;
 
-    // Create Swipe Indicator Element dynamically if not exists
-    let swipeIndicator = document.getElementById('swipeBackIndicator');
-    if (!swipeIndicator) {
-        swipeIndicator = document.createElement('div');
-        swipeIndicator.id = 'swipeBackIndicator';
-        swipeIndicator.innerHTML = `
-            <div class="swipe-arrow-circle">
-                <svg viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
-            </div>`;
-        document.body.appendChild(swipeIndicator);
-    }
+    // Create Swipe Indicator Element dynamically (Singleton)
+    const existingIndicators = document.querySelectorAll('#swipeBackIndicator');
+    existingIndicators.forEach(el => el.remove());
+
+    let swipeIndicator = document.createElement('div');
+    swipeIndicator.id = 'swipeBackIndicator';
+    swipeIndicator.innerHTML = `
+        <div class="swipe-arrow-circle">
+            <svg viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </div>`;
+    document.body.appendChild(swipeIndicator);
 
     servicesGridContainer.addEventListener('touchstart', (e) => {
         touchStartX = e.changedTouches[0].clientX;
+        touchStartY = e.changedTouches[0].clientY;
+        isScrolling = undefined; // Reset state
     }, { passive: true });
 
     servicesGridContainer.addEventListener('touchmove', (e) => {
-
+        // ONLY allow swipe if a category is actually open (Active Mode)
+        const categoryContainer = document.getElementById('servicesCategoryCards');
+        if (!categoryContainer || !categoryContainer.classList.contains('category-active-mode')) return;
 
         const currentX = e.changedTouches[0].clientX;
-        const diff = currentX - touchStartX;
+        const currentY = e.changedTouches[0].clientY;
 
-        // Show indicator if swiping right
-        if (diff > 15) {
+        const diffX = currentX - touchStartX;
+        const diffY = currentY - touchStartY;
+
+        // Smart Direction Detection
+        if (typeof isScrolling === 'undefined') {
+            // If vertical movement is dominant, lock as "scrolling" -> Ignore Swipe
+            isScrolling = Math.abs(diffY) > Math.abs(diffX);
+        }
+
+        if (isScrolling) {
+            return; // It's a vertically scroll, do nothing
+        }
+
+        // Only handle Swipe Right (Horizontal Dominant)
+        if (diffX > 15) {
             swipeIndicator.classList.add('visible');
-            // Move it with finger (capped at 60px)
-            const moveX = Math.min(diff, 80);
-            swipeIndicator.style.transform = `translateY(-50%) translateX(${moveX}px)`;
+
+            // Dynamic Scale (1.0 -> 1.3)
+            const pullProgress = Math.min(diffX / 120, 1);
+            const scale = 1 + (pullProgress * 0.3);
+
+            // Move with finger (capped at 80px)
+            const moveX = Math.min(diffX, 80);
+
+            swipeIndicator.style.transform = `translateY(-50%) translateX(${moveX}px) scale(${scale})`;
+
+            // Active State (Ripple)
+            if (diffX > 60) {
+                swipeIndicator.classList.add('active');
+            } else {
+                swipeIndicator.classList.remove('active');
+            }
         } else {
             swipeIndicator.classList.remove('visible');
-            swipeIndicator.style.transform = `translateY(-50%) translateX(0)`;
+            swipeIndicator.classList.remove('active');
+            swipeIndicator.style.transform = `translateY(-50%) translateX(0) scale(1)`;
         }
     }, { passive: true });
 
@@ -4108,14 +4140,19 @@ function initServicesPage() {
 
         // Hide indicator
         swipeIndicator.classList.remove('visible');
-        swipeIndicator.style.transform = `translateY(-50%) translateX(0)`;
+        swipeIndicator.classList.remove('active');
+        swipeIndicator.style.transform = `translateY(-50%) translateX(0) scale(1)`;
 
-        handleSwipeBack();
+        // Only trigger back if NOT scrolling and threshold met
+        if (!isScrolling) {
+            handleSwipeBack();
+        }
     }, { passive: true });
 
     function handleSwipeBack() {
-        // Only active if we are deep in a category (not 'all')
-
+        // Check active mode again for safety
+        const categoryContainer = document.getElementById('servicesCategoryCards');
+        if (!categoryContainer || !categoryContainer.classList.contains('category-active-mode')) return;
 
         const swipeDistance = touchEndX - touchStartX;
         const threshold = 60; // Threshold
@@ -4212,13 +4249,35 @@ function initServicesPage() {
                 triggerBackAnimation();
             });
 
-            // SCROLL TO TOP
-            setTimeout(() => {
+            // SCROLL TO TOP (Double-Tap Strategy for Reliability)
+            // SCROLL TO TOP & HIDE HEADER
+            const performScroll = () => {
                 const searchBar = document.querySelector('.services-search-wrapper');
-                if (searchBar) {
-                    searchBar.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                const appContent = document.getElementById('appContent');
+                const header = document.getElementById('mainHeader');
+
+                if (searchBar && appContent) {
+                    // FORCE HIDE HEADER
+                    if (header) {
+                        header.classList.add('hidden');
+                        header.classList.add('force-hidden');
+                    }
+
+                    // Calculate position relative to container
+                    // Target Scroll = Current Scroll + Element Position Relative to Viewport - Offset (10px)
+                    const offset = 10;
+                    const rect = searchBar.getBoundingClientRect();
+                    const targetScroll = appContent.scrollTop + rect.top - offset;
+
+                    appContent.scrollTo({ top: targetScroll, behavior: 'smooth' });
                 }
-            }, 100);
+            };
+
+            // Attempt 1: Immediate (for fast devices)
+            setTimeout(performScroll, 10);
+
+            // Attempt 2: Delayed (to account for layout shifts/image loads)
+            setTimeout(performScroll, 350);
 
             renderServicesPage();
         });

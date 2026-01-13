@@ -130,9 +130,11 @@ IMPORTANT: This app uses #appContent as the scrollable container, NOT window.
         // Prevent negative scroll
         if (currentScrollY < 0) return;
 
-        // Always show header when near top
+        // Always show header when near top (UNLESS FORCED HIDDEN)
         if (currentScrollY <= CONFIG.HEADER_SHOW_ZONE) {
-            showHeader();
+            if (!header.classList.contains('force-hidden')) {
+                showHeader();
+            }
             lastScrollY = currentScrollY;
             return;
         }
@@ -149,6 +151,7 @@ IMPORTANT: This app uses #appContent as the scrollable container, NOT window.
             hideHeader();
         } else {
             // ↑ SCROLLING UP → Show header immediately
+            header.classList.remove('force-hidden'); // Unlock forced state
             showHeader();
         }
 

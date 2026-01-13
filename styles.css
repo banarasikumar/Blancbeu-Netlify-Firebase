@@ -10285,8 +10285,8 @@ body.light-mode .chip:hover {
 }
 
 .swipe-arrow-circle {
-    width: 60px;
-    height: 60px;
+    width: 45px;
+    height: 45px;
     /* Premium Warm Dark Glass */
     background: rgba(28, 24, 18, 0.92);
     backdrop-filter: blur(12px);
@@ -10307,9 +10307,9 @@ body.light-mode .chip:hover {
 
 /* ACTIVATION RIPPLE EFFECT */
 #swipeBackIndicator.active .swipe-arrow-circle {
-    background: rgba(212, 175, 55, 0.95);
-    /* Solid Gold Flash */
-    box-shadow: 0 0 35px rgba(212, 175, 55, 0.6);
+    background: rgba(212, 175, 55, 0.85);
+    /* Solid Gold Flash - Dimmed */
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
     border-color: #fff;
     transform: scale(1.05);
 }
@@ -10321,9 +10321,12 @@ body.light-mode .chip:hover {
 }
 
 .swipe-arrow-circle svg {
-    width: 28px;
-    height: 28px;
+    width: 20px;
+    height: 20px;
     fill: var(--gold-24k);
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
     transition: all 0.2s ease;
 }
+
+. s e r v i c e s - s e a r c h - w r a p p e r       s c r o l l - m a r g i n - t o p :   1 0 0 p x ;
+       

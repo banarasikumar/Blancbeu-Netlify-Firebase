@@ -1,6 +1,6 @@
 {
   "name": "workspace",
-  "version": "1.0.20",
+  "version": "1.0.21",
   "main": "sw.js",
   "scripts": {
     "start": "http-server . -c-1",

@@ -9186,11 +9186,16 @@ body.light-mode .service-page-book-btn:hover {
     border-radius: 20px;
     padding: 25px;
     margin-top: 80px;
-    margin-bottom: 80px;
+    margin-bottom: 10px;
     flex-wrap: wrap;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Global Scroll Container - Safe Area for Bottom Nav */
+#appContent {
+    padding-bottom: 90px !important;
 }
 
 /* Light Mode Overrides */

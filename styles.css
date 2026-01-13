@@ -9346,48 +9346,99 @@ body.light-mode .services-empty-title {
 }
 
 .view-all-services-btn {
-    /* Gradient Border Logic */
-    background: linear-gradient(#fff, #fff) padding-box,
-        linear-gradient(45deg, #FF0000, #FF7300, #FFFB00, #48FF00, #00FFD5, #002BFF, #7A00FF, #FF00C8, #FF0000) border-box;
-    color: #333;
-    /* Dark text for contrast against white bg */
-    border: 3px solid transparent;
-    /* Transparent border area for gradient */
-    border-radius: 30px;
+    position: relative;
+    background: transparent;
+    border: none;
     padding: 14px 40px;
     font-size: 16px;
     font-weight: 700;
     cursor: pointer;
-    transition: all 0.3s ease;
     text-transform: uppercase;
     letter-spacing: 2px;
     display: inline-flex;
     align-items: center;
     gap: 12px;
     text-decoration: none;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    background-size: 200% auto;
-    animation: rainbowBorder 3s linear infinite;
+    /* Create the colorful border effect using a pseudo-element behind */
+    z-index: 1;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-@keyframes rainbowBorder {
+/* The Animated Gradient Border Layer */
+.view-all-services-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: conic-gradient(from 0deg,
+            #D4AF37,
+            /* Gold */
+            #FF00C8,
+            /* Magenta */
+            #00FFD5,
+            /* Cyan */
+            #7A00FF,
+            /* Purple */
+            #D4AF37
+            /* Back to Gold */
+        );
+    z-index: -2;
+    transform: translate(-50%, -50%);
+    animation: rotateBorder 4s linear infinite;
+    border-radius: 0;
+    /* No radius needed for the big spinning sheet */
+}
+
+/* The Inner Background Layer to hide the center of the gradient */
+.view-all-services-btn::after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    right: 3px;
+    bottom: 3px;
+    background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+    /* Premium Gold Button */
+    border-radius: 28px;
+    z-index: -1;
+}
+
+@keyframes rotateBorder {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
     to {
-        background-position: 200% center;
+        transform: translate(-50%, -50%) rotate(360deg);
     }
 }
 
-@keyframes btnPulse {
-    0% {
-        box-shadow: 0 0 0 0 rgba(212, 160, 23, 0.7);
-    }
+/* Hover Effects */
+.view-all-services-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
+    /* Gold Glow */
+}
 
-    70% {
-        box-shadow: 0 0 0 10px rgba(212, 160, 23, 0);
-    }
+/* Ensure text is on top */
+.view-all-services-btn span {
+    position: relative;
+    z-index: 2;
+}
 
-    100% {
-        box-shadow: 0 0 0 0 rgba(212, 160, 23, 0);
-    }
+box-shadow: 0 0 0 0 rgba(212, 160, 23, 0.7);
+}
+
+70% {
+    box-shadow: 0 0 0 10px rgba(212, 160, 23, 0);
+}
+
+100% {
+    box-shadow: 0 0 0 0 rgba(212, 160, 23, 0);
+}
 }
 
 .view-all-services-btn::after {

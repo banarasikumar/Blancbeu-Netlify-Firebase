@@ -4032,43 +4032,74 @@ function initServicesPage() {
     categoryCards.forEach(card => {
         card.addEventListener('click', (e) => {
             const category = card.dataset.category;
+            const subtitle = document.querySelector('.services-page-subtitle');
+
+            // Store original text
+            if (!subtitle.dataset.originalText) {
+                subtitle.dataset.originalText = subtitle.textContent;
+            }
 
             // Check current state
             const isModeActive = categoryCardsContainer.classList.contains('category-active-mode');
             const isAlreadyActive = card.classList.contains('active');
 
-            // TOGGLE / CLOSE LOGIC
-            // If we are in Banner Mode AND clicking the currently active card (including 'all'), Close/Reset.
-            if (isModeActive && isAlreadyActive) {
+            // CLOSE / RESET FUNCTION
+            const resetServicesView = () => {
                 servicesPageCurrentCategory = 'all';
-                servicesPageHasInteracted = false; // Reset interaction (hide list)
+                servicesPageHasInteracted = false;
 
-                // Exit Active Mode (return to grid)
+                // Restore Subtitle
+                subtitle.textContent = subtitle.dataset.originalText;
+                subtitle.classList.remove('has-back-btn');
+
                 categoryCardsContainer.classList.remove('category-active-mode');
-
-                // Reset active highlighting to defaults (or keep 'all' highlighted if that's default behavior)
                 categoryCards.forEach(c => c.classList.remove('active'));
 
-                // Highlight 'All' as the default state in grid
                 const allCard = document.querySelector('.category-image-card[data-category="all"]');
                 if (allCard) allCard.classList.add('active');
 
                 renderServicesPage();
+            };
+
+            // IF CLICKING ACTIVE CARD -> CLOSE (Toggle behavior)
+            if (isModeActive && isAlreadyActive) {
+                resetServicesView();
                 return;
             }
 
-            // ACTIVATION LOGIC (Switching to Banner or Switching Category)
+            // ACTIVATION LOGIC
             servicesPageHasInteracted = true;
             servicesPageCurrentCategory = category;
 
-            // Enter Active Mode (Banner View) - applies for ALL categories including 'all'
+            // Enter Active Mode
             categoryCardsContainer.classList.add('category-active-mode');
 
             // Update Active Card Classes
             categoryCards.forEach(c => c.classList.remove('active'));
             card.classList.add('active');
 
-            // SCROLL TO TOP (Smooth)
+            // UPDATE SUBTITLE WITH BACK BUTTON - PREMIUM VERSION
+            // Extract clean name (remove emojis or extra spaces if any, though dataset seems clean)
+            // Or use the H3 text from the card
+            const categoryName = card.querySelector('h3') ? card.querySelector('h3').textContent : category;
+
+            subtitle.innerHTML = `
+                <div class="services-back-btn">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" />
+                    </svg>
+                </div>
+                <div class="services-category-title">${categoryName}</div>
+            `;
+            subtitle.classList.add('has-back-btn');
+
+            // Re-attach click listener to new back button
+            subtitle.querySelector('.services-back-btn').addEventListener('click', (e) => {
+                e.stopPropagation(); // Prevent bubbling
+                resetServicesView();
+            });
+
+            // SCROLL TO TOP
             setTimeout(() => {
                 const searchBar = document.querySelector('.services-search-wrapper');
                 if (searchBar) {
@@ -4076,7 +4107,6 @@ function initServicesPage() {
                 }
             }, 100);
 
-            // Re-render grid
             renderServicesPage();
         });
     });

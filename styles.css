@@ -9200,8 +9200,159 @@ body.light-mode .services-quick-book-cta {
     box-shadow: 0 10px 30px rgba(212, 160, 23, 0.15);
 }
 
-.services-page-container {
-    padding-bottom: 10px !important;
+/* Subtitle Container - Full Width & Premium */
+.services-page-subtitle {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 20px;
+    /* Increased gap */
+    margin: 25px 0;
+    /* More breathing room */
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    height: 50px;
+    /* Fixed height for stability */
+}
+
+/* While active - Premium Header Bar */
+.services-page-subtitle.has-back-btn {
+    justify-content: flex-start;
+    padding: 0 10px;
+    /* Minimal padding */
+    background: transparent;
+    /* Cleaner look */
+    border: none;
+    backdrop-filter: none;
+    box-shadow: none;
+}
+
+/* Subtle, Classy Back Button */
+.services-back-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.05);
+    /* Very subtle in dark mode */
+    border-radius: 50%;
+    cursor: pointer;
+    color: var(--gold-24k);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(212, 160, 23, 0.2);
+    /* Very light border */
+    flex-shrink: 0;
+}
+
+.services-back-btn svg {
+    width: 22px;
+    /* Slightly larger icon */
+    height: 22px;
+    fill: currentColor;
+    transition: transform 0.3s ease;
+}
+
+.services-back-btn:hover {
+    background: rgba(212, 160, 23, 0.1);
+    /* Subtle glow on hover */
+    border-color: var(--gold-24k);
+    transform: translateX(-2px);
+}
+
+.services-back-btn:hover svg {
+    transform: translateX(-2px);
+}
+
+/* Ultra-Premium Category Title */
+.services-category-title {
+    font-family: 'Cinzel', serif;
+    font-size: 26px;
+    /* Larger */
+    font-weight: 800;
+    /* Bolder */
+    color: var(--gold-24k);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    line-height: 1;
+    position: relative;
+    top: 2px;
+    /* Visual optical alignment */
+
+    /* Luxury Gold Gradient Text */
+    background: linear-gradient(135deg,
+            #BF953F,
+            #FCF6BA,
+            #B38728,
+            #FBF5B7,
+            #AA771C);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    background-size: 200% auto;
+    animation: goldShimmer 6s linear infinite;
+
+    /* Subtle text shadow for depth */
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+@keyframes goldShimmer {
+    to {
+        background-position: 200% center;
+    }
+}
+
+/* Light Mode Overrides */
+body.light-mode .services-page-subtitle.has-back-btn {
+    background: rgba(255, 255, 255, 0.6);
+    border-color: rgba(212, 160, 23, 0.3);
+    box-shadow: 0 4px 20px rgba(212, 160, 23, 0.05);
+}
+
+/* Light Mode Back Button - Clean & Minimal */
+body.light-mode .services-back-btn {
+    background: rgba(0, 0, 0, 0.02);
+    /* Almost invisible bg */
+    border-color: rgba(0, 0, 0, 0.08);
+    /* Very faint border */
+    color: #333;
+    /* Dark arrow */
+    box-shadow: none;
+    /* No shadow */
+}
+
+body.light-mode .services-back-btn:hover {
+    background: rgba(212, 160, 23, 0.15);
+    border-color: #D4A017;
+    color: #D4A017;
+}
+
+/* Light Mode Title Adjustment */
+body.light-mode .services-category-title {
+    /* Slightly darker gold gradient for white background contrast */
+    background: linear-gradient(135deg,
+            #8a6e2f,
+            #d4af37,
+            #8a6e2f);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.1));
+}
+
+/* Hide Overlay Text when Active */
+.category-active-mode .category-image-card.active .category-card-overlay {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+/* Remove any existing Close/X button on active card */
+.category-active-mode .category-image-card.active::after,
+.category-active-mode .category-image-card.active::before {
+    content: none !important;
+    display: none !important;
 }
 
 /* Reset grid padding */

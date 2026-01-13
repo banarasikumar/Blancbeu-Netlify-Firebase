@@ -9193,11 +9193,6 @@ body.light-mode .service-page-book-btn:hover {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
-/* Global Scroll Container - Safe Area for Bottom Nav */
-#appContent {
-    padding-bottom: 90px !important;
-}
-
 /* Light Mode Overrides */
 body.light-mode .services-quick-book-cta {
     background: rgba(255, 255, 255, 0.6);
@@ -9206,7 +9201,7 @@ body.light-mode .services-quick-book-cta {
 }
 
 .services-page-container {
-    padding-bottom: 0px;
+    padding-bottom: 10px !important;
 }
 
 /* Reset grid padding */

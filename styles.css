@@ -9175,27 +9175,38 @@ body.light-mode .service-page-book-btn:hover {
     border-radius: 12px;
 }
 
-/* Quick Book CTA */
+/* Quick Book CTA - Premium Static Bottom */
 .services-quick-book-cta {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 15px;
-    justify-content: space-between;
-    gap: 15px;
-    background: linear-gradient(135deg, rgba(37, 211, 102, 0.15), rgba(37, 211, 102, 0.08));
-    border: 2px solid rgba(37, 211, 102, 0.3);
+    background: rgba(20, 20, 20, 0.6);
+    border: 1px solid rgba(212, 175, 55, 0.3);
     border-radius: 20px;
-    padding: 20px;
-    margin-top: 20px;
-    margin-bottom: 0px;
-    /* Ensure no huge bottom margin */
+    padding: 25px;
+    margin-top: 80px;
+    margin-bottom: 80px;
     flex-wrap: wrap;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Light Mode Overrides */
+body.light-mode .services-quick-book-cta {
+    background: rgba(255, 255, 255, 0.6);
+    border-color: rgba(212, 175, 55, 0.3);
+    box-shadow: 0 10px 30px rgba(212, 160, 23, 0.15);
 }
 
 .services-page-container {
     padding-bottom: 0px;
-    /* Limit container padding */
+}
+
+/* Reset grid padding */
+.services-page-grid {
+    padding-bottom: 0 !important;
 }
 
 .quick-book-content {
@@ -9349,6 +9360,7 @@ body.light-mode .services-empty-title {
     position: relative;
     background: transparent;
     border: none;
+    border-radius: 30px;
     padding: 14px 40px;
     font-size: 16px;
     font-weight: 700;
@@ -9386,10 +9398,12 @@ body.light-mode .services-empty-title {
             /* Back to Gold */
         );
     z-index: -2;
+    z-index: -2;
+    -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
-    animation: rotateBorder 4s linear infinite;
+    animation: premiumBorderAnim 8s linear infinite;
+    -webkit-animation: premiumBorderAnim 8s linear infinite;
     border-radius: 0;
-    /* No radius needed for the big spinning sheet */
 }
 
 /* The Inner Background Layer to hide the center of the gradient */
@@ -9401,18 +9415,23 @@ body.light-mode .services-empty-title {
     right: 3px;
     bottom: 3px;
     background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
-    /* Premium Gold Button */
     border-radius: 28px;
     z-index: -1;
 }
 
-@keyframes rotateBorder {
-    from {
+@keyframes premiumBorderAnim {
+    0% {
+        -webkit-transform: translate(-50%, -50%) rotate(0deg);
         transform: translate(-50%, -50%) rotate(0deg);
+        -webkit-filter: hue-rotate(0deg);
+        filter: hue-rotate(0deg);
     }
 
-    to {
+    100% {
+        -webkit-transform: translate(-50%, -50%) rotate(360deg);
         transform: translate(-50%, -50%) rotate(360deg);
+        -webkit-filter: hue-rotate(360deg);
+        filter: hue-rotate(360deg);
     }
 }
 

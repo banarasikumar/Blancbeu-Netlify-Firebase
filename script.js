@@ -4460,7 +4460,7 @@ function renderServicesPage() {
                         ${hasOffer && discount > 0 ? `<span class="service-page-discount-badge">${discount}% OFF</span>` : ''}
                     </div>
                 </div>
-                <a href="${whatsappLink}" target="_blank" class="service-page-book-btn">Book</a>
+                <button class="service-page-book-btn service-btn" type="button">Book Now</button>
             </div>
         `;
     }).join('');

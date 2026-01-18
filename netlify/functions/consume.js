@@ -97,11 +97,12 @@ exports.handler = async (event, context) => {
         // Given "No UI" rule, I will return JSON response.
 
         return {
-            statusCode: 200,
-            body: JSON.stringify({ token: customToken }),
+            statusCode: 302,
             headers: {
-                "Content-Type": "application/json"
-            }
+                "Location": `https://blancbeu.in/?login_token=${customToken}`,
+                "Cache-Control": "no-cache"
+            },
+            body: "" // Empty body for redirect
         };
 
     } catch (error) {

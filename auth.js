@@ -3,8 +3,7 @@ import {
     signInWithPopup,
     GoogleAuthProvider,
     signOut,
-    onAuthStateChanged,
-    signInWithCustomToken
+    onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 
@@ -99,29 +98,6 @@ function updateUIForLogin(user) {
 function updateUIForLogout(user) {
     // Reset UI if needed
 }
-
-// --- Check for Magic Link Token on Load ---
-document.addEventListener('DOMContentLoaded', async () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const loginToken = urlParams.get('login_token');
-
-    if (loginToken) {
-        console.log("Found login token, attempting sign-in...");
-        try {
-            const result = await signInWithCustomToken(auth, loginToken);
-            console.log("Magic link sign-in successful:", result.user);
-
-            // Clear the token from URL without refresh to prevent reuse attempts
-            const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
-            window.history.replaceState({ path: newUrl }, "", newUrl);
-
-            alert("Successfully logged in via WhatsApp!");
-        } catch (error) {
-            console.error("Magic Link Login Error:", error);
-            alert("Login link failed or expired. Please try again.");
-        }
-    }
-});
 
 
 // Export helpful functions

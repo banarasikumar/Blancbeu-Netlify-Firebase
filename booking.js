@@ -43,6 +43,14 @@ if (closeBookingModalBtn) {
 
 // Handle "Book Now" buttons globally
 // We use event delegation or attach to specific classes
+// Restore Booking Modal State
+document.addEventListener('open-booking-modal', () => {
+    console.log("State restored: Opening booking modal");
+    if (bookingModal) {
+        bookingModal.style.display = 'block';
+    }
+});
+
 document.addEventListener('click', (e) => {
     // Check if clicked element is a Book Now button (or close to it)
     if (e.target.closest('.service-btn') || e.target.closest('.hero-btn.primary-btn') || e.target.closest('.service-page-book-btn')) { // Adjust selectors as needed

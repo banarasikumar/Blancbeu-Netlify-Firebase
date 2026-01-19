@@ -2030,7 +2030,9 @@ function initPWA() {
             navInstallBtn.style.display = 'flex';
             console.log('✅ Showing install button - prompt is available');
         }
-        showInstallPromotion();
+        setTimeout(() => {
+            showInstallPromotion();
+        }, 30000);
     });
 
     window.addEventListener('appinstalled', () => {
@@ -2070,77 +2072,80 @@ function initPWA() {
     if (!isStandalone && !deferredPrompt) {
         setTimeout(() => {
             showBrowserSpecificInstallPrompt();
-        }, 5000);
+        }, 30000);
     }
 }
 
+// Robust Install Promotion
 function showInstallPromotion() {
     const isStandalone = checkIfStandalone();
     if (isStandalone || sessionStorage.getItem('installPromptDismissed') === 'true') {
         return;
     }
 
-    if (!installButton) {
-        installButton = document.createElement('div');
-        installButton.className = 'install-banner';
-        installButton.innerHTML = `
-            <div class="install-area-1-model">
-                <img src="assets/install_model_new.png" alt="Install App" class="install-model-img">
-            </div>
-            <div class="install-content-wrapper">
-                <div class="install-row-top">
-                    <div class="install-area-2-button">
-                        <button id="pwaInstallBtn" class="pwa-install-btn">Install App</button>
-                    </div>
-                    <div class="install-area-4-close">
-                        <button id="pwaCloseBtn" class="pwa-close-btn">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-                        </button>
-                    </div>
+    // Prevent duplicates
+    if (document.querySelector('.install-banner')) return;
+
+    installButton = document.createElement('div');
+    installButton.className = 'install-banner';
+    installButton.innerHTML = `
+        <div class="install-area-1-model">
+            <img src="assets/install_model_new.png" alt="Install App" class="install-model-img">
+        </div>
+        <div class="install-content-wrapper">
+            <div class="install-row-top">
+                <div class="install-area-2-button">
+                    <button id="pwaInstallBtn" class="pwa-install-btn">Install App</button>
                 </div>
-                <div class="install-area-3-text">
-                    Install the app for better experience.
+                <div class="install-area-4-close">
+                    <button id="pwaCloseBtn" class="pwa-close-btn" aria-label="Close">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+                    </button>
                 </div>
             </div>
-        `;
+            <div class="install-area-3-text">
+                Install the app for better experience.
+            </div>
+        </div>
+    `;
 
-        document.body.appendChild(installButton);
+    document.body.appendChild(installButton);
 
-        // Add event listeners after appending to DOM
-        const installBtn = document.getElementById('pwaInstallBtn');
-        const closeBtn = document.getElementById('pwaCloseBtn');
+    // Add event listeners (Robust)
+    const installBtn = installButton.querySelector('#pwaInstallBtn');
+    const closeBtn = installButton.querySelector('#pwaCloseBtn');
 
-        if (installBtn) {
-            installBtn.onclick = async () => {
-                if (deferredPrompt) {
-                    deferredPrompt.prompt();
-                    const { outcome } = await deferredPrompt.userChoice;
-                    console.log(`User response to install prompt: ${outcome}`);
-                    if (outcome === 'accepted') {
-                        sessionStorage.setItem('appInstalled', 'true');
-                    } else {
-                        sessionStorage.setItem('installPromptDismissed', 'true');
-                    }
-                    deferredPrompt = null;
-                    hideInstallPromotion();
+    if (installBtn) {
+        installBtn.onclick = async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                if (outcome === 'accepted') {
+                    sessionStorage.setItem('appInstalled', 'true');
                 } else {
-                    showBrowserSpecificInstructions();
+                    sessionStorage.setItem('installPromptDismissed', 'true');
                 }
-            };
-        }
-
-        if (closeBtn) {
-            closeBtn.onclick = () => {
+                deferredPrompt = null;
                 hideInstallPromotion();
-                sessionStorage.setItem('installPromptDismissed', 'true');
-            };
-        }
+            } else {
+                showBrowserSpecificInstructions();
+            }
+        };
+    }
+
+    if (closeBtn) {
+        const closeHandler = (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            hideInstallPromotion();
+            sessionStorage.setItem('installPromptDismissed', 'true');
+        };
+        closeBtn.addEventListener('click', closeHandler);
+        closeBtn.addEventListener('touchend', closeHandler); // Mobile fix
     }
 
     setTimeout(() => {
-        if (installButton) {
-            installButton.classList.add('show');
-        }
+        if (installButton) installButton.classList.add('show');
     }, 3000);
 }
 
@@ -2178,15 +2183,14 @@ function showBrowserSpecificInstructions() {
 }
 
 function hideInstallPromotion() {
-    if (installButton) {
-        installButton.classList.remove('show');
+    const banner = document.querySelector('.install-banner');
+    if (banner) {
+        banner.classList.remove('show');
         setTimeout(() => {
-            if (installButton && installButton.parentNode) {
-                installButton.parentNode.removeChild(installButton);
-                installButton = null;
-            }
+            banner.remove();
         }, 300);
     }
+    installButton = null;
 }
 
 function checkIfStandalone() {
@@ -2357,13 +2361,13 @@ class BottomNavController {
 }
 
 // Initialize bottom nav controller when DOM is ready
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-        new BottomNavController();
-    });
-} else {
-    new BottomNavController();
-}
+// if (document.readyState === 'loading') {
+//     document.addEventListener('DOMContentLoaded', () => {
+//         new BottomNavController();
+//     });
+// } else {
+//     new BottomNavController();
+// }
 
 // Visibility-based animation for offer cards
 class OfferCardAnimationController {
@@ -3142,6 +3146,14 @@ function initComparisonSliders() {
         document.addEventListener('touchend', endDrag);
     });
 }
+
+/* LightboxGallery class removed (Replaced by GalleryController) */
+
+// Initialize Lightbox on load
+// Initialize Gallery Controller (Replaces LightboxGallery)
+document.addEventListener('DOMContentLoaded', () => {
+    new GalleryController();
+});
 
 document.addEventListener('DOMContentLoaded', initBeforeAfterGallery);
 
@@ -4563,111 +4575,7 @@ function initModernBookingsTabs() {
 // Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
     initModernBookingsTabs();
-});/* =========================================
-   GALLERY LIGHTBOX LOGIC
-   ========================================= */
-
-let currentLightboxIndex = 0;
-const galleryImages = document.querySelectorAll('.gallery-grid .gallery-item img');
-const lightbox = document.getElementById('lightbox');
-const lightboxImg = document.getElementById('lightboxImg');
-
-// Open Lightbox
-function openLightbox(index) {
-    if (!lightbox || !lightboxImg) return;
-
-    currentLightboxIndex = index;
-    updateLightboxImage();
-    lightbox.classList.add('active');
-    document.body.style.overflow = 'hidden'; // Prevent scrolling
-}
-
-// Close Lightbox
-function closeLightbox() {
-    if (!lightbox) return;
-
-    lightbox.classList.remove('active');
-    document.body.style.overflow = ''; // Restore scrolling
-}
-
-// Update Image Source
-function updateLightboxImage() {
-    if (!lightboxImg || galleryImages.length === 0) return;
-
-    const imageSrc = galleryImages[currentLightboxIndex].src;
-    // Optional: Fade out effect before changing
-    lightboxImg.style.opacity = '0';
-
-    setTimeout(() => {
-        lightboxImg.src = imageSrc;
-        lightboxImg.onload = () => {
-            lightboxImg.style.opacity = '1';
-        };
-    }, 200);
-}
-
-// Next Image
-function nextImage() {
-    currentLightboxIndex = (currentLightboxIndex + 1) % galleryImages.length;
-    updateLightboxImage();
-}
-
-// Previous Image
-function prevImage() {
-    currentLightboxIndex = (currentLightboxIndex - 1 + galleryImages.length) % galleryImages.length;
-    updateLightboxImage();
-}
-
-// Event Listeners for Gallery Items
-galleryImages.forEach((img, index) => {
-    img.closest('.gallery-item').addEventListener('click', () => {
-        openLightbox(index);
-    });
-});
-
-// Close on clicking outside image
-lightbox.addEventListener('click', (e) => {
-    if (e.target === lightbox || e.target.classList.contains('lightbox-content-wrapper')) {
-        closeLightbox();
-    }
-});
-
-// Keyboard Navigation
-document.addEventListener('keydown', (e) => {
-    if (!lightbox.classList.contains('active')) return;
-
-    if (e.key === 'Escape') closeLightbox();
-    if (e.key === 'ArrowRight') nextImage();
-    if (e.key === 'ArrowLeft') prevImage();
-});
-
-// Swipe Logic for Mobile
-let touchStartX = 0;
-let touchEndX = 0;
-
-lightbox.addEventListener('touchstart', (e) => {
-    touchStartX = e.changedTouches[0].screenX;
-}, { passive: true });
-
-lightbox.addEventListener('touchend', (e) => {
-    touchEndX = e.changedTouches[0].screenX;
-    handleSwipe();
-}, { passive: true });
-
-function handleSwipe() {
-    const threshold = 50; // Minimum distance for swipe
-    const swipeDistance = touchEndX - touchStartX;
-
-    if (Math.abs(swipeDistance) > threshold) {
-        if (swipeDistance < 0) {
-            // Swiped Left -> Next
-            nextImage();
-        } else {
-            // Swiped Right -> Prev
-            prevImage();
-        }
-    }
-}
+});/* LEGACY LIGHTBOX LOGIC REMOVED */
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    10.0 IMMERSIVE AI CHAT ASSISTANT
@@ -4919,3 +4827,331 @@ document.addEventListener('DOMContentLoaded', () => {
     // Start instance
     window.immersiveChat = new ImmersiveChatAssistant();
 });
+
+// Gallery & Lightbox Controller
+class GalleryController {
+    constructor() {
+        // Main Gallery Elements
+        this.galleryGrid = document.querySelector('#gallery .gallery-grid');
+        this.galleryItems = document.querySelectorAll('.gallery-item');
+        this.scrollLeftBtn = document.querySelector('.gallery-scroll-left');
+        this.scrollRightBtn = document.querySelector('.gallery-scroll-right');
+
+        // Lightbox Elements (created dynamically)
+        this.lightbox = null;
+        this.track = null;
+
+        this.init();
+    }
+
+    init() {
+        this.initGalleryScroll();
+        if (this.galleryItems.length > 0) {
+            this.initLightbox();
+        }
+    }
+
+    // =========================================
+    // 1. MAIN GALLERY SCROLL LOGIC
+    // =========================================
+    initGalleryScroll() {
+        if (!this.galleryGrid || !this.scrollLeftBtn || !this.scrollRightBtn) return;
+
+        const scrollAmount = 300; // Approx item width + gap
+
+        this.scrollLeftBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            this.galleryGrid.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        });
+
+        this.scrollRightBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            this.galleryGrid.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        });
+    }
+
+    // =========================================
+    // 2. ELASTIC LIGHTBOX LOGIC
+    // =========================================
+    initLightbox() {
+        this.createLightboxDOM();
+        this.attachLightboxListeners();
+    }
+
+    createLightboxDOM() {
+        // Remove existing if any (cleanup old implementation artifacts)
+        const old = document.getElementById('lightboxModal');
+        if (old) old.remove();
+
+        const modal = document.createElement('div');
+        modal.className = 'lightbox-modal';
+        modal.id = 'lightboxModal';
+
+        // Build slides from existing gallery items
+        let slidesHTML = '';
+        this.galleryItems.forEach((item, index) => {
+            const img = item.querySelector('img');
+            const title = item.querySelector('h3')?.textContent || '';
+
+            // Use data-src for Lazy Loading
+            slidesHTML += `
+                <div class="lightbox-slide" data-index="${index}">
+                    <img data-src="${img.src}" class="lightbox-image" alt="${img.alt}" draggable="false" loading="lazy">
+                    <div class="lightbox-caption-container">
+                        <span class="lightbox-caption">${title}</span>
+                    </div>
+                </div>
+            `;
+        });
+
+        modal.innerHTML = `
+            <div class="lightbox-track-container">
+                ${slidesHTML}
+            </div>
+            
+            <div class="lightbox-controls">
+                <button class="lightbox-btn lightbox-close" aria-label="Close">✕</button>
+                <div class="lightbox-gradient-left"></div>
+                <div class="lightbox-gradient-right"></div>
+            </div>
+        `;
+
+        document.body.appendChild(modal);
+        this.lightbox = modal;
+        this.track = modal.querySelector('.lightbox-track-container');
+    }
+
+    attachLightboxListeners() {
+        // Open
+        this.galleryItems.forEach((item, index) => {
+            item.addEventListener('click', (e) => {
+                e.stopImmediatePropagation(); // Try to stop old listeners if any
+                this.open(index);
+            });
+        });
+
+        // Close
+        const closeBtn = this.lightbox.querySelector('.lightbox-close');
+        closeBtn.addEventListener('click', () => this.close());
+
+        // Background click to close
+        this.lightbox.addEventListener('click', (e) => {
+            if (e.target === this.lightbox || e.target.classList.contains('lightbox-track-container')) {
+                this.close();
+            }
+        });
+
+        // INTERSECTION OBSERVER - LAZY LOAD + ZOOM RESET + FOCUS EFFECT
+        const observerOptions = {
+            root: this.track,
+            threshold: 0.6 // 60% visibility to exact center focus
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const slide = entry.target;
+                const img = slide.querySelector('img');
+
+                if (entry.isIntersecting) {
+                    // 1. Lazy Load
+                    if (img.dataset.src) {
+                        img.src = img.dataset.src;
+                        img.removeAttribute('data-src');
+                        img.onload = () => img.classList.add('loaded');
+                    } else if (!img.classList.contains('loaded')) {
+                        // In case it was already swapped but class logic missed
+                        img.classList.add('loaded');
+                    }
+
+                    // 2. Add Focus Effect
+                    slide.classList.add('is-selected');
+
+                } else {
+                    // 3. Remove Focus Effect
+                    slide.classList.remove('is-selected');
+
+                    // 4. Zoom Reset Logic
+                    if (img && img.style.transform && img.style.transform !== 'scale(1)') {
+                        // Reset zoom when sliding away
+                        img.style.transform = 'scale(1)';
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observe all slides
+        this.track.querySelectorAll('.lightbox-slide').forEach(slide => {
+            observer.observe(slide);
+        });
+
+        // ZOOM & GESTURE LOGIC
+        let lastTap = 0;
+        let initialPinchDistance = 0;
+        let currentScale = 1;
+        let isPinching = false;
+        let startX = 0, startY = 0;
+        let imageStartX = 0, imageStartY = 0;
+
+        // Delegate touch events to the track container for images
+        this.track.addEventListener('touchstart', (e) => {
+            if (e.touches.length === 2) {
+                isPinching = true;
+                initialPinchDistance = this.getDistance(e.touches);
+                e.preventDefault(); // Prevent default zoom
+            } else if (e.touches.length === 1) {
+                const now = new Date().getTime();
+                const timeDiff = now - lastTap;
+
+                // Double Tap Detection
+                if (timeDiff < 300 && timeDiff > 0) {
+                    this.handleDoubleTap(e);
+                }
+                lastTap = now;
+
+                // For panning (if zoomed)
+                if (currentScale > 1) {
+                    startX = e.touches[0].clientX;
+                    startY = e.touches[0].clientY;
+                    const target = e.target.closest('.lightbox-slide')?.querySelector('img');
+                    // Initialize current translate if not set logic would go here
+                }
+            }
+        }, { passive: false });
+
+        this.track.addEventListener('touchmove', (e) => {
+            if (isPinching && e.touches.length === 2) {
+                e.preventDefault();
+                const dist = this.getDistance(e.touches);
+                const scaleChange = dist / initialPinchDistance;
+                let newScale = currentScale * scaleChange;
+
+                // Limit zoom levels
+                newScale = Math.min(Math.max(1, newScale), 4); // Max 4x zoom
+
+                const target = e.target.closest('.lightbox-slide')?.querySelector('img');
+                if (target) {
+                    target.style.transform = `scale(${newScale})`;
+                    // Update currentScale only on end to avoid exponential growth during move
+                    // But for smooth visual feedback we apply it directly.
+                    // To do it properly we need to track base scale.
+                }
+            }
+        }, { passive: false });
+
+        this.track.addEventListener('touchend', (e) => {
+            if (isPinching && e.touches.length < 2) {
+                isPinching = false;
+                const target = e.target.closest('.lightbox-slide')?.querySelector('img');
+                if (target) {
+                    // Save the final scale from the transform
+                    const transform = target.style.transform;
+                    const match = transform.match(/scale\((.*?)\)/);
+                    if (match) {
+                        currentScale = parseFloat(match[1]);
+                        if (currentScale < 1) {
+                            currentScale = 1;
+                            target.style.transform = 'scale(1)';
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    getDistance(touches) {
+        return Math.hypot(
+            touches[0].clientX - touches[1].clientX,
+            touches[0].clientY - touches[1].clientY
+        );
+    }
+
+    handleDoubleTap(e) {
+        const target = e.target.closest('.lightbox-slide')?.querySelector('img');
+        if (!target) return;
+
+        // Reset or Zoom
+        if (target.style.transform && target.style.transform !== 'scale(1)' && target.style.transform !== '') {
+            target.style.transform = 'scale(1)';
+            // Reset state
+        } else {
+            target.style.transform = 'scale(1.5)';
+        }
+    }
+
+    open(index) {
+        this.lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+
+        const targetSlide = this.track.children[index];
+        if (targetSlide) {
+            // Instant scroll to index
+            targetSlide.scrollIntoView({ behavior: 'auto', block: 'center', inline: 'center' });
+        }
+    }
+
+    close() {
+        this.lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+}
+
+// Gallery Peek Animation
+function initGalleryPeek() {
+    const galleryContainer = document.querySelector('.gallery-scroll-container');
+    if (!galleryContainer) return;
+
+    const performPeek = (count) => {
+        if (count <= 0) return;
+
+        // Smooth scroll right (slide left effect) - Much wider peek (250px)
+        galleryContainer.scrollBy({ left: 250, behavior: 'smooth' });
+
+        // Wait 1.5s (as requested: "1.5 sec is enough")
+        setTimeout(() => {
+            // Scroll back
+            galleryContainer.scrollBy({ left: -250, behavior: 'smooth' });
+
+            // Wait before next peek if needed
+            setTimeout(() => {
+                performPeek(count - 1); // Recursive call for second time
+            }, 1200);
+        }, 1500); // 1.5s hold time
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                if (!galleryContainer.dataset.peeked) {
+                    galleryContainer.dataset.peeked = "true";
+
+                    // Initial delay
+                    setTimeout(() => {
+                        performPeek(2); // "Twice"
+                    }, 800);
+                }
+            }
+        });
+    }, { threshold: 0.6 });
+
+    observer.observe(galleryContainer);
+}
+
+// Ensure this runs after DOM load
+// =========================================
+// PREMIUM APP LOADER LOGIC
+// =========================================
+window.addEventListener('load', () => {
+    const loader = document.getElementById('app-loader');
+    if (loader) {
+        // Minimum display time to ensure brand visibility (1.2s minimum)
+        setTimeout(() => {
+            loader.classList.add('fade-out');
+
+            // Remove from DOM after transition
+            setTimeout(() => {
+                loader.remove();
+            }, 800); // Match CSS transition duration
+        }, 1200);
+    }
+});
+

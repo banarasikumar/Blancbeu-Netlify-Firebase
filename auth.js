@@ -27,7 +27,7 @@ if (closeAuthModalBtn) {
 if (whatsappBtn) {
     whatsappBtn.addEventListener('click', () => {
         const phoneNumber = "919229915277";
-        const message = "Hi BlancBeu, please help me log in.";
+        const message = "*Hi BlancBeu, please help me log in.*\n\n_Send this message without editing_";
         const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
         // Open WhatsApp

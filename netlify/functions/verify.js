@@ -35,16 +35,10 @@ exports.handler = async (event, context) => {
 
     try {
         const body = JSON.parse(event.body);
-        const { whatsapp_number, message, timestamp } = body;
+        const { whatsapp_number, timestamp } = body;
 
-        // 1. Validate Message Exactly
-        const EXPECTED_MESSAGE = "Hi BlancBeu, please help me log in.";
-        if (!message || message.trim() !== EXPECTED_MESSAGE) {
-            return {
-                statusCode: 400,
-                body: JSON.stringify({ error: "Invalid message content." }),
-            };
-        }
+        // Message validation removed as per new requirement
+        // const EXPECTED_MESSAGE = "Hi BlancBeu, please help me log in.";
 
         if (!whatsapp_number) {
             return {

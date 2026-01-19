@@ -1,4 +1,5 @@
 const admin = require("firebase-admin");
+// Netlify Rebuild Trigger: 2026-01-19T16:10:00
 
 // Initialize Firebase Admin (Singleton pattern)
 if (admin.apps.length === 0) {

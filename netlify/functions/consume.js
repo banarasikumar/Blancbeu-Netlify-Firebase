@@ -96,12 +96,16 @@ exports.handler = async (event, context) => {
         // OR, if I can infer the referral or origin, I might redirect.
         // Given "No UI" rule, I will return JSON response.
 
+        // 5. Redirect to App with Token
+        const redirectUrl = `/?token=${customToken}`;
+
         return {
-            statusCode: 200,
-            body: JSON.stringify({ token: customToken }),
+            statusCode: 302,
             headers: {
-                "Content-Type": "application/json"
-            }
+                "Location": redirectUrl,
+                "Cache-Control": "no-cache"
+            },
+            body: ""
         };
 
     } catch (error) {

@@ -51,7 +51,7 @@ document.addEventListener('click', (e) => {
         const user = auth.currentUser;
         if (!user) {
             alert("Please login to book an appointment.");
-            openLoginModal();
+            openLoginModal('openBookingModal');
         } else {
             // Optional: Pre-select service if clicked from a specific card
             // For now, just open the modal
@@ -71,7 +71,7 @@ if (bookingForm) {
         if (!user) {
             alert("You must be logged in.");
             bookingModal.style.display = 'none';
-            openLoginModal();
+            openLoginModal('openBookingModal');
             return;
         }
 

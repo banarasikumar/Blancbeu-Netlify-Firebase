@@ -119,6 +119,9 @@ async function checkMagicLink() {
 
             if (authModal) authModal.style.display = 'none';
 
+            // Restore previous state (e.g. open booking modal)
+            restoreLoginState();
+
         } catch (error) {
             console.error("Magic link login error:", error);
             alert("Login failed. The link may have expired or verified already.");
@@ -126,11 +129,60 @@ async function checkMagicLink() {
     }
 }
 
+// --- State Persistence ---
+function saveLoginState(action = null) {
+    const state = {
+        path: window.location.pathname,
+        action: action,
+        timestamp: Date.now()
+    };
+    localStorage.setItem('login_redirect_state', JSON.stringify(state));
+    console.log("Saved login state:", state);
+}
+
+function restoreLoginState() {
+    const stateJson = localStorage.getItem('login_redirect_state');
+    if (!stateJson) return;
+
+    try {
+        const state = JSON.parse(stateJson);
+        const fiveMinutes = 5 * 60 * 1000;
+
+        // Expire old state
+        if (Date.now() - state.timestamp > fiveMinutes) {
+            localStorage.removeItem('login_redirect_state');
+            return;
+        }
+
+        console.log("Restoring login state:", state);
+
+        // Handle Actions
+        if (state.action === 'openBookingModal') {
+            // Wait a bit for DOM to be ready if needed, implies we function effectively
+            // But we are in module scope, dispatching event is safer
+            setTimeout(() => {
+                const event = new CustomEvent('open-booking-modal');
+                document.dispatchEvent(event);
+            }, 500);
+        }
+
+        // Cleanup
+        localStorage.removeItem('login_redirect_state');
+
+    } catch (e) {
+        console.error("Error restoring login state:", e);
+    }
+}
+
+
 // Check on load
 document.addEventListener('DOMContentLoaded', checkMagicLink);
 
 
 // Export helpful functions
-export function openLoginModal() {
+export function openLoginModal(pendingAction = null) {
+    if (pendingAction) {
+        saveLoginState(pendingAction);
+    }
     authModal.style.display = 'block';
 }

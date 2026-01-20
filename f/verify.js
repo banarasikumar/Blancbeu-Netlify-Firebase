@@ -97,7 +97,7 @@ exports.handler = async (event, context) => {
         const protocol = event.headers["x-forwarded-proto"] || "https";
 
         // The "consume" function endpoint
-        const magicLink = `${protocol}://${host}/.netlify/functions/consume?token=${token}`;
+        const magicLink = `${protocol}://${host}/f/consume?token=${token}`;
 
         return {
             statusCode: 200,

@@ -11073,6 +11073,62 @@ body.light-mode .form-group textarea:focus {
     text-decoration: underline;
 }
 
+/* --- MOBILE FULL SCREEN AUTH --- */
+@media (max-width: 768px) {
+
+    .auth-modal-wrapper,
+    .profile-modal-wrapper {
+        padding: 0 !important;
+        align-items: flex-end;
+        /* Slide up feel or just cover */
+        background: #000 !important;
+        /* Solid background for full immersion */
+    }
+
+    .auth-glass-card {
+        width: 100% !important;
+        height: 100% !important;
+        max-width: none !important;
+        border-radius: 0 !important;
+        border: none !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        padding: 40px 25px !important;
+        background: linear-gradient(to bottom, #1a1a1a, #000) !important;
+        box-shadow: none !important;
+        margin: 0 !important;
+    }
+
+    .auth-header {
+        margin-top: auto;
+        margin-bottom: 20px;
+    }
+
+    .auth-options {
+        margin-bottom: auto;
+        width: 100%;
+    }
+
+    /* Make buttons larger on mobile */
+    .whatsapp-premium {
+        padding: 18px 25px;
+    }
+
+    .social-btn {
+        padding: 16px;
+    }
+
+    /* Adjust close button position */
+    .close-modal {
+        top: 25px !important;
+        right: 25px !important;
+        font-size: 32px !important;
+        color: rgba(255, 255, 255, 0.7) !important;
+        opacity: 1 !important;
+    }
+}
+
 /* --- COMPLETE PROFILE FORM STYLES --- */
 .premium-input {
     position: relative;
@@ -11747,4 +11803,79 @@ body.light-mode .premium-input label {
 .pwa-close-btn:hover {
     background: rgba(255, 0, 0, 0.5);
     color: white;
+}
+
+/* --- FORCE MOBILE FULL SCREEN AUTH (Aggressive Override) --- */
+@media screen and (max-width: 768px) {
+
+    /* Reset Wrapper */
+    div.auth-modal-wrapper,
+    div.profile-modal-wrapper {
+        display: flex !important;
+        align-items: flex-end !important;
+        /* Start slightly lower or just cover */
+        justify-content: center !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        background: #000 !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        z-index: 99999 !important;
+    }
+
+    /* Force Card Expansion */
+    div.auth-glass-card {
+        width: 100% !important;
+        height: 100% !important;
+        max-width: none !important;
+        max-height: none !important;
+        border-radius: 0 !important;
+        margin: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
+        background: radial-gradient(circle at top right, #2a2a2a, #000) !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        padding: 20px !important;
+    }
+
+    /* Adjust content spacing */
+    .auth-header {
+        margin-top: auto !important;
+        margin-bottom: 30px !important;
+    }
+
+    .auth-options {
+        margin-bottom: auto !important;
+        width: 100% !important;
+    }
+
+    /* Make text/inputs larger/readable */
+    .auth-header h2 {
+        font-size: 28px !important;
+    }
+
+    /* Ensure close button is visible & accessible */
+    span.close-modal {
+        position: absolute !important;
+        top: 20px !important;
+        right: 20px !important;
+        z-index: 100000 !important;
+        color: white !important;
+        font-size: 40px !important;
+        background: rgba(255, 255, 255, 0.1);
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 1;
+        padding-bottom: 5px;
+        /* Visual center adjustment */
+    }
 }

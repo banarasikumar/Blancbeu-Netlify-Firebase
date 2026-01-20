@@ -10872,127 +10872,396 @@ body.light-mode .form-group textarea:focus {
 }
 
 
-/* --- New Auth UI Styles --- */
-.auth-wrapper {
+/* --- Premium Auth UI Styles --- */
+.auth-modal-wrapper,
+.profile-modal-wrapper {
+    backdrop-filter: blur(15px);
+    background: rgba(0, 0, 0, 0.85);
+    /* Darker overlay for focus */
+}
+
+/* Glass Card */
+.auth-glass-card {
+    background: rgba(20, 20, 20, 0.6) !important;
+    /* Dark glass */
+    backdrop-filter: blur(25px) saturate(180%);
+    -webkit-backdrop-filter: blur(25px) saturate(180%);
+    border: 1px solid rgba(255, 215, 0, 0.15);
+    /* Gold Hint */
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+    border-radius: 24px !important;
+    padding: 40px 30px !important;
+    max-width: 420px !important;
+    width: 90% !important;
     text-align: center;
+    position: relative;
+    overflow: hidden;
+    color: #fff;
+}
+
+/* Auth Header */
+.auth-header .auth-logo img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    border: 2px solid var(--gold-primary);
+    padding: 5px;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
 }
 
 .auth-header h2 {
-    color: var(--gold-dark);
     font-family: 'Cinzel', serif;
-    margin-bottom: 10px;
-    font-size: 24px;
+    font-size: 26px;
+    margin-bottom: 8px;
+    background: linear-gradient(135deg, #fff, var(--gold-primary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 0.5px;
 }
 
 .auth-header p {
-    color: var(--text-secondary);
+    color: rgba(255, 255, 255, 0.6);
     font-size: 14px;
-    margin-bottom: 30px;
+    margin-bottom: 35px;
 }
 
-.auth-options {
+/* WhatsApp Premium Button */
+.whatsapp-premium {
+    background: linear-gradient(135deg, #25D366, #128C7E);
+    border: none;
+    border-radius: 16px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.25);
+    position: relative;
+    overflow: hidden;
+}
+
+.whatsapp-premium:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px rgba(37, 211, 102, 0.35);
+}
+
+.whatsapp-premium .btn-icon-wrapper img {
+    width: 32px;
+    height: 32px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.whatsapp-premium .btn-text-wrapper {
     display: flex;
     flex-direction: column;
-    gap: 15px;
-}
-
-.auth-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    width: 100%;
-    padding: 14px;
-    border-radius: 12px;
-    border: none;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    position: relative;
-    font-family: 'Poppins', sans-serif;
-}
-
-.auth-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.auth-icon {
-    width: 24px;
-    height: 24px;
-    object-fit: contain;
-}
-
-/* WhatsApp Button */
-.auth-btn.whatsapp {
-    background: #25D366;
+    align-items: flex-start;
+    flex: 1;
+    margin-left: 15px;
     color: white;
-    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
 }
 
-.auth-btn.whatsapp:hover {
-    background: #128C7E;
-    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+.whatsapp-premium .btn-title {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.2;
 }
 
-.auth-badge {
-    position: absolute;
-    top: -10px;
-    right: 10px;
-    background: var(--gold-primary);
-    color: black;
-    font-size: 10px;
-    padding: 2px 8px;
-    border-radius: 10px;
-    font-weight: bold;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+.whatsapp-premium .btn-subtitle {
+    font-size: 11px;
+    opacity: 0.9;
+    font-weight: 400;
 }
 
-/* Google Button */
-.auth-btn.google {
-    background: white;
-    color: #3c4043;
-    border: 1px solid #dadce0;
+.whatsapp-premium .btn-arrow {
+    color: white;
+    font-size: 18px;
+    opacity: 0.8;
+    transition: transform 0.3s;
 }
 
-.auth-btn.google:hover {
-    background: #f8f9fa;
-    border-color: #d2e3fc;
+.whatsapp-premium:hover .btn-arrow {
+    transform: translateX(4px);
+    opacity: 1;
 }
 
-.auth-divider {
+/* Divider */
+.auth-divider-premium {
     display: flex;
     align-items: center;
-    color: var(--text-secondary);
+    margin: 25px 0;
     font-size: 12px;
-    margin: 10px 0;
+    color: rgba(255, 255, 255, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-.auth-divider::before,
-.auth-divider::after {
+.auth-divider-premium::before,
+.auth-divider-premium::after {
     content: '';
     flex: 1;
     height: 1px;
-    background: rgba(0, 0, 0, 0.1);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
 }
 
-.auth-divider span {
-    padding: 0 10px;
+.auth-divider-premium span {
+    padding: 0 15px;
 }
 
-.auth-helper-text {
-    margin-top: 20px;
-    font-size: 12px;
-    color: var(--text-secondary);
-    opacity: 0.8;
+/* Social Row */
+.social-auth-row {
+    display: flex;
+    gap: 15px;
 }
 
-/* Light Mode Overrides */
-body.light-mode .auth-btn.google {
-    background: white;
-    border: 1px solid #ccc;
+.social-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+    /* Glassy button */
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.social-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Google & Apple Specifics */
+.social-btn.google-glass svg {
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.1));
+}
+
+.social-btn.apple-glass {
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.social-btn.apple-glass:hover {
+    background: #000;
+    border-color: #555;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* Footer Links */
+.auth-footer-text {
+    margin-top: 30px;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.4);
+    line-height: 1.5;
+}
+
+.auth-footer-text a {
+    color: var(--gold-primary);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.auth-footer-text a:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+/* --- COMPLETE PROFILE FORM STYLES --- */
+.premium-input {
+    position: relative;
+    text-align: left;
+    margin-bottom: 25px;
+}
+
+.premium-input label {
+    display: block;
+    font-size: 13px;
+    color: var(--gold-primary);
+    margin-bottom: 8px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-left: 4px;
+}
+
+.premium-input input[type="text"],
+.premium-input input[type="date"] {
+    width: 100%;
+    padding: 14px 16px;
+    padding-right: 40px;
+    /* Space for icon */
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    color: #fff;
+    font-size: 15px;
+    transition: all 0.3s;
+    font-family: 'Poppins', sans-serif;
+}
+
+.premium-input input::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.premium-input input:focus {
+    border-color: var(--gold-primary);
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.1);
+}
+
+.premium-input .input-icon {
+    position: absolute;
+    right: 15px;
+    top: 42px;
+    /* Adjust based on label height */
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.input-subtitle {
+    display: block;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.4);
+    margin-top: 5px;
+    margin-left: 4px;
+}
+
+/* Gender Selector */
+.gender-selector {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+.gender-option {
+    flex: 1;
+    position: relative;
+    cursor: pointer;
+}
+
+.gender-option input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.gender-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+/* Checked State */
+.gender-option input:checked+.gender-box {
+    background: rgba(212, 175, 55, 0.15);
+    border-color: var(--gold-primary);
+    color: var(--gold-primary);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.gender-option:hover .gender-box {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Submit Button */
+.submit-premium {
+    background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+    color: #000;
+    border: none;
+    border-radius: 30px;
+    padding: 16px;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    width: 100%;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 5px 20px rgba(212, 160, 23, 0.3);
+}
+
+.submit-premium:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(212, 160, 23, 0.5);
+}
+
+/* Light Mode Overrides for Auth */
+body.light-mode .auth-glass-card {
+    background: rgba(255, 255, 255, 0.85) !important;
+    border-color: rgba(0, 0, 0, 0.05);
+    /* Subtle border */
+    color: #000;
+}
+
+body.light-mode .auth-header h2 {
+    background: none;
+    background-clip: unset;
+    -webkit-text-fill-color: initial;
+    color: #000;
+}
+
+body.light-mode .auth-header p,
+body.light-mode .auth-footer-text,
+body.light-mode .auth-divider-premium,
+body.light-mode .input-subtitle {
+    color: rgba(0, 0, 0, 0.5);
+}
+
+body.light-mode .auth-divider-premium::before,
+body.light-mode .auth-divider-premium::after {
+    background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.1), transparent);
+}
+
+body.light-mode .social-btn {
+    background: #fff;
+    border: 1px solid #eee;
     color: #333;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+body.light-mode .social-btn:hover {
+    background: #f8f9fa;
+    border-color: #ddd;
+}
+
+body.light-mode .premium-input input {
+    background: #f8f9fa;
+    color: #333;
+    border-color: #ddd;
+}
+
+body.light-mode .premium-input input:focus {
+    background: #fff;
+}
+
+body.light-mode .gender-box {
+    background: #f8f9fa;
+    color: #555;
+    border-color: #ddd;
+}
+
+body.light-mode .gender-option input:checked+.gender-box {
+    background: rgba(212, 160, 23, 0.1);
+    color: var(--gold-dark);
+}
+
+body.light-mode .premium-input label {
+    color: var(--gold-dark);
 }
 
 /* ==========================================================================
@@ -11432,16 +11701,16 @@ body.light-mode .auth-btn.google {
 
 
 
-.gallery-scroll-btn {
-    display: none !important;
-    /* Touch only on mobile */
-}
+    .gallery-scroll-btn {
+        display: none !important;
+        /* Touch only on mobile */
+    }
 
-.lightbox-image {
-    max-width: 100%;
-    /* Edge to edge on mobile */
-    border-radius: 0;
-}
+    .lightbox-image {
+        max-width: 100%;
+        /* Edge to edge on mobile */
+        border-radius: 0;
+    }
 }
 
 /* PWA Install Banner & Close Button Fixes */

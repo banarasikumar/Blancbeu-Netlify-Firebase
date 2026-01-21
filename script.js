@@ -1991,178 +1991,180 @@ document.addEventListener('DOMContentLoaded', () => {
 let deferredPrompt;
 let installButton;
 
-function updateInstallButtonVisibility() {
-    const navInstallBtn = document.getElementById('installBtn');
-    const isStandalone = window.matchMedia('(display-mode: standalone)').matches ||
-        window.navigator.standalone === true ||
-        document.referrer.includes('android-app://') ||
-        sessionStorage.getItem('isStandalone') === 'true' ||
-        sessionStorage.getItem('appInstalled') === 'true';
+// function updateInstallButtonVisibility() {
+//     const navInstallBtn = document.getElementById('installBtn');
+//     const isStandalone = window.matchMedia('(display-mode: standalone)').matches ||
+//         window.navigator.standalone === true ||
+//         document.referrer.includes('android-app://') ||
+//         sessionStorage.getItem('isStandalone') === 'true' ||
+//         sessionStorage.getItem('appInstalled') === 'true';
 
-    if (navInstallBtn) {
-        if (isStandalone || !deferredPrompt) {
-            navInstallBtn.style.display = 'none';
-            console.log('🔒 Install button hidden - app is installed or cannot be installed');
-        } else {
-            navInstallBtn.style.display = 'flex';
-            console.log('📲 Install button visible - app can be installed');
-        }
-    }
-}
+//     if (navInstallBtn) {
+//         if (isStandalone || !deferredPrompt) {
+//             navInstallBtn.style.display = 'none';
+//             console.log('🔒 Install button hidden - app is installed or cannot be installed');
+//         } else {
+//             navInstallBtn.style.display = 'flex';
+//             console.log('📲 Install button visible - app can be installed');
+//         }
+//     }
+// }
 
-function initPWA() {
-    const navInstallBtn = document.getElementById('installBtn');
+// function initPWA() {
+//     // return; // PWA Logic Disabled
+//     const navInstallBtn = document.getElementById('installBtn');
 
-    // Initial check - hide button if already installed
-    updateInstallButtonVisibility();
+//     // Initial check - hide button if already installed
+//     updateInstallButtonVisibility();
 
-    // Monitor display mode changes
-    const displayModeQuery = window.matchMedia('(display-mode: standalone)');
-    displayModeQuery.addListener(() => updateInstallButtonVisibility());
+//     // Monitor display mode changes
+//     const displayModeQuery = window.matchMedia('(display-mode: standalone)');
+//     displayModeQuery.addListener(() => updateInstallButtonVisibility());
 
-    window.addEventListener('beforeinstallprompt', (e) => {
-        console.log('📲 PWA Install prompt available');
-        e.preventDefault();
-        deferredPrompt = e;
+//     window.addEventListener('beforeinstallprompt', (e) => {
+//         console.log('📲 PWA Install prompt available');
+//         e.preventDefault();
+//         deferredPrompt = e;
 
-        // Show nav install button only if not standalone
-        if (!checkIfStandalone() && navInstallBtn) {
-            navInstallBtn.style.display = 'flex';
-            console.log('✅ Showing install button - prompt is available');
-        }
-        setTimeout(() => {
-            showInstallPromotion();
-        }, 30000);
-    });
+//         // Show nav install button only if not standalone
+//         if (!checkIfStandalone() && navInstallBtn) {
+//             navInstallBtn.style.display = 'flex';
+//             console.log('✅ Showing install button - prompt is available');
+//         }
+//         // setTimeout(() => {
+//         //     showInstallPromotion();
+//         // }, 30000);
+//     });
 
-    window.addEventListener('appinstalled', () => {
-        console.log('✅ PWA was installed successfully');
-        sessionStorage.setItem('appInstalled', 'true');
-        sessionStorage.setItem('isStandalone', 'true');
-        deferredPrompt = null;
+//     window.addEventListener('appinstalled', () => {
+//         console.log('✅ PWA was installed successfully');
+//         sessionStorage.setItem('appInstalled', 'true');
+//         sessionStorage.setItem('isStandalone', 'true');
+//         deferredPrompt = null;
 
-        // Hide install button
-        updateInstallButtonVisibility();
-        hideInstallPromotion();
-    });
+//         // Hide install button
+//         updateInstallButtonVisibility();
+//         hideInstallPromotion();
+//     });
 
-    // Nav button click handler
-    if (navInstallBtn) {
-        navInstallBtn.addEventListener('click', async () => {
-            if (deferredPrompt) {
-                try {
-                    await deferredPrompt.prompt();
-                    const { outcome } = await deferredPrompt.userChoice;
-                    console.log(`User response: ${outcome}`);
-                    if (outcome === 'accepted') {
-                        sessionStorage.setItem('appInstalled', 'true');
-                        sessionStorage.setItem('isStandalone', 'true');
-                    }
-                    deferredPrompt = null;
-                    updateInstallButtonVisibility();
-                } catch (error) {
-                    console.error('Install error:', error);
-                }
-            }
-        });
-    }
+//     // Nav button click handler
+//     if (navInstallBtn) {
+//         navInstallBtn.addEventListener('click', async () => {
+//             if (deferredPrompt) {
+//                 try {
+//                     await deferredPrompt.prompt();
+//                     const { outcome } = await deferredPrompt.userChoice;
+//                     console.log(`User response: ${outcome}`);
+//                     if (outcome === 'accepted') {
+//                         sessionStorage.setItem('appInstalled', 'true');
+//                         sessionStorage.setItem('isStandalone', 'true');
+//                     }
+//                     deferredPrompt = null;
+//                     updateInstallButtonVisibility();
+//                 } catch (error) {
+//                     console.error('Install error:', error);
+//                 }
+//             }
+//         });
+//     }
 
-    const isStandalone = checkIfStandalone();
+//     const isStandalone = checkIfStandalone();
 
-    if (!isStandalone && !deferredPrompt) {
-        setTimeout(() => {
-            showBrowserSpecificInstallPrompt();
-        }, 30000);
-    }
-}
+//     if (!isStandalone && !deferredPrompt) {
+//         // setTimeout(() => {
+//         //     showBrowserSpecificInstallPrompt();
+//         // }, 30000);
+//     }
+// }
 
 // Robust Install Promotion
-function showInstallPromotion() {
-    const isStandalone = checkIfStandalone();
-    if (isStandalone || sessionStorage.getItem('installPromptDismissed') === 'true') {
-        return;
-    }
+// function showInstallPromotion() {
+//     // return; // Install Promotion Disabled
+//     const isStandalone = checkIfStandalone();
+//     if (isStandalone || sessionStorage.getItem('installPromptDismissed') === 'true') {
+//         return;
+//     }
 
-    // Prevent duplicates
-    if (document.querySelector('.install-banner')) return;
+//     // Prevent duplicates
+//     if (document.querySelector('.install-banner')) return;
 
-    installButton = document.createElement('div');
-    installButton.className = 'install-banner';
-    installButton.innerHTML = `
-        <div class="install-area-1-model">
-            <img src="assets/install_model_new.png" alt="Install App" class="install-model-img">
-        </div>
-        <div class="install-content-wrapper">
-            <div class="install-row-top">
-                <div class="install-area-2-button">
-                    <button id="pwaInstallBtn" class="pwa-install-btn">Install App</button>
-                </div>
-                <div class="install-area-4-close">
-                    <button id="pwaCloseBtn" class="pwa-close-btn" aria-label="Close">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-                    </button>
-                </div>
-            </div>
-            <div class="install-area-3-text">
-                Install the app for better experience.
-            </div>
-        </div>
-    `;
+//     installButton = document.createElement('div');
+//     installButton.className = 'install-banner';
+//     installButton.innerHTML = `
+//         <div class="install-area-1-model">
+//             <img src="assets/install_model_new.png" alt="Install App" class="install-model-img">
+//         </div>
+//         <div class="install-content-wrapper">
+//             <div class="install-row-top">
+//                 <div class="install-area-2-button">
+//                     <button id="pwaInstallBtn" class="pwa-install-btn">Install App</button>
+//                 </div>
+//                 <div class="install-area-4-close">
+//                     <button id="pwaCloseBtn" class="pwa-close-btn" aria-label="Close">
+//                         <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+//                     </button>
+//                 </div>
+//             </div>
+//             <div class="install-area-3-text">
+//                 Install the app for better experience.
+//             </div>
+//         </div>
+//     `;
 
-    document.body.appendChild(installButton);
+//     document.body.appendChild(installButton);
 
-    // Add event listeners (Robust)
-    const installBtn = installButton.querySelector('#pwaInstallBtn');
-    const closeBtn = installButton.querySelector('#pwaCloseBtn');
+//     // Add event listeners (Robust)
+//     const installBtn = installButton.querySelector('#pwaInstallBtn');
+//     const closeBtn = installButton.querySelector('#pwaCloseBtn');
 
-    if (installBtn) {
-        installBtn.onclick = async () => {
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                const { outcome } = await deferredPrompt.userChoice;
-                if (outcome === 'accepted') {
-                    sessionStorage.setItem('appInstalled', 'true');
-                } else {
-                    sessionStorage.setItem('installPromptDismissed', 'true');
-                }
-                deferredPrompt = null;
-                hideInstallPromotion();
-            } else {
-                showBrowserSpecificInstructions();
-            }
-        };
-    }
+//     if (installBtn) {
+//         installBtn.onclick = async () => {
+//             if (deferredPrompt) {
+//                 deferredPrompt.prompt();
+//                 const { outcome } = await deferredPrompt.userChoice;
+//                 if (outcome === 'accepted') {
+//                     sessionStorage.setItem('appInstalled', 'true');
+//                 } else {
+//                     sessionStorage.setItem('installPromptDismissed', 'true');
+//                 }
+//                 deferredPrompt = null;
+//                 hideInstallPromotion();
+//             } else {
+//                 showBrowserSpecificInstructions();
+//             }
+//         };
+//     }
 
-    if (closeBtn) {
-        const closeHandler = (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            hideInstallPromotion();
-            sessionStorage.setItem('installPromptDismissed', 'true');
-        };
-        closeBtn.addEventListener('click', closeHandler);
-        closeBtn.addEventListener('touchend', closeHandler); // Mobile fix
-    }
+//     if (closeBtn) {
+//         const closeHandler = (e) => {
+//             e.preventDefault();
+//             e.stopPropagation();
+//             hideInstallPromotion();
+//             sessionStorage.setItem('installPromptDismissed', 'true');
+//         };
+//         closeBtn.addEventListener('click', closeHandler);
+//         closeBtn.addEventListener('touchend', closeHandler); // Mobile fix
+//     }
 
-    setTimeout(() => {
-        if (installButton) installButton.classList.add('show');
-    }, 3000);
-}
+//     setTimeout(() => {
+//         if (installButton) installButton.classList.add('show');
+//     }, 3000);
+// }
 
-function showBrowserSpecificInstallPrompt() {
-    const isStandalone = checkIfStandalone();
-    if (isStandalone || sessionStorage.getItem('installPromptDismissed') === 'true') {
-        return;
-    }
+// function showBrowserSpecificInstallPrompt() {
+//     const isStandalone = checkIfStandalone();
+//     if (isStandalone || sessionStorage.getItem('installPromptDismissed') === 'true') {
+//         return;
+//     }
 
-    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-    const isFirefox = /Firefox/.test(navigator.userAgent);
-    const isSafari = /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
+//     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+//     const isFirefox = /Firefox/.test(navigator.userAgent);
+//     const isSafari = /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
 
-    if (isIOS || isSafari || isFirefox) {
-        showInstallPromotion();
-    }
-}
+//     if (isIOS || isSafari || isFirefox) {
+//         showInstallPromotion();
+//     }
+// }
 
 function showBrowserSpecificInstructions() {
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
@@ -2229,7 +2231,7 @@ function hideSplashScreen() {
 
 // Service Worker removed to ensure fresh reloads
 window.addEventListener('load', () => {
-    initPWA();
+    // initPWA();
 });
 
 // ========================================
@@ -2407,32 +2409,35 @@ if (document.readyState === 'loading') {
     new OfferCardAnimationController();
 }
 
+// ==========================================
+// THEME CONTROLLER (SINGLETON)
+// ==========================================
 class ThemeController {
     constructor() {
-        this.themeToggleBtn = document.getElementById('themeToggle');
         this.html = document.documentElement;
         this.body = document.body;
-
         this.init();
     }
 
     init() {
+        // Load saved theme
         const savedTheme = localStorage.getItem('theme');
-
-        if (savedTheme) {
-            if (savedTheme === 'dark') {
-                this.enableDarkMode();
-            } else {
-                this.enableLightMode();
-            }
+        if (savedTheme === 'dark') {
+            this.enableDarkMode();
         } else {
-            // Default to light mode for new users
-            this.enableLightMode();
+            this.enableLightMode(); // Default
         }
 
-        if (this.themeToggleBtn) {
-            this.themeToggleBtn.addEventListener('click', () => this.toggleTheme());
-        }
+        // Delegate click event to document to handle button even if DOM changes
+        document.addEventListener('click', (e) => {
+            const toggleBtn = e.target.closest('#themeToggle');
+            if (toggleBtn) {
+                e.preventDefault();
+                this.toggleTheme();
+            }
+        });
+
+        console.log('✅ ThemeController Initialized');
     }
 
     toggleTheme() {
@@ -2447,23 +2452,26 @@ class ThemeController {
     }
 
     enableLightMode() {
-        // Set data-theme attribute to trigger CSS variable changes
         this.html.setAttribute('data-theme', 'light');
-        // Keep light-mode class for legacy animations
         this.body.classList.add('light-mode');
-
+        // Update meta theme color
         document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#fef5e7');
     }
 
     enableDarkMode() {
-        // Set data-theme attribute to trigger CSS variable changes
         this.html.removeAttribute('data-theme');
-        // Remove light-mode class
         this.body.classList.remove('light-mode');
-
+        // Update meta theme color
         document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#000000');
     }
 }
+
+// Initialize immediately (safe due to delegation)
+new ThemeController();
+
+
+
+
 
 
 if (document.readyState === 'loading') {

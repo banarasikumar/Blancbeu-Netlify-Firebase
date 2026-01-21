@@ -172,7 +172,7 @@ PHASE 3: PREMIUM FEATURES (Week 4)
         rel="stylesheet">
 
     <link rel="stylesheet" href="theme-variables.css">
-    <link rel="stylesheet" href="styles.css?v=1.4.0">
+    <link rel="stylesheet" href="styles.css?v=2.26">
 
     <style>
         /* FIX: Full Width Transformation Gallery on Mobile */
@@ -405,6 +405,39 @@ PHASE 3: PREMIUM FEATURES (Week 4)
     </style>
 
     <link href="https://fonts.googleapis.com/css?family=Russo+One" rel="stylesheet">
+    <!-- HEADER ENFORCER SCRIPT -->
+    <script>
+        (function () {
+            // Force Header Visibility when Auth Modal is open
+            setInterval(() => {
+                const authModal = document.getElementById('authModal');
+                const isAuthVisible = authModal && (window.getComputedStyle(authModal).display !== 'none');
+
+                if (isAuthVisible) {
+                    const header = document.querySelector('.header');
+                    if (header) {
+                        // AGGRESSIVE VISIBILITY ENFORCEMENT
+                        if (header.classList.contains('hidden')) header.classList.remove('hidden');
+
+                        header.style.setProperty('display', 'flex', 'important');
+                        header.style.setProperty('visibility', 'visible', 'important');
+                        header.style.setProperty('opacity', '1', 'important');
+                        header.style.setProperty('z-index', '2147483647', 'important');
+                        header.style.setProperty('top', '0', 'important');
+
+                        // Force app-shell-header too
+                        const shellHeader = document.querySelector('.app-shell-header');
+                        if (shellHeader) {
+                            shellHeader.style.setProperty('z-index', '2147483647', 'important');
+                            shellHeader.style.setProperty('display', 'flex', 'important');
+                            shellHeader.style.setProperty('visibility', 'visible', 'important');
+                            shellHeader.style.setProperty('opacity', '1', 'important');
+                        }
+                    }
+                }
+            }, 100); // Fast check (100ms)
+        })();
+    </script>
 </head>
 
 <body>
@@ -1662,7 +1695,8 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                     </div>
 
                     <!-- Tier Progress -->
-                    <div class="tier-progress-card">
+                    <!-- Tier Progress (Member Only) -->
+                    <div id="tierSection" class="tier-progress-card">
                         <div class="tier-progress-header">
                             <span class="tier-label">Gold Tier</span>
                             <span class="tier-next">4,550 / 5,000 points to Platinum</span>
@@ -1675,169 +1709,168 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                             <span class="benefit-badge">✓ Free Shipping</span>
                         </div>
                     </div>
-                </div>
 
-                <!-- Stats Cards -->
-                <div class="stats-section">
-                    <div class="stat-card stat-card-1">
-                        <div class="stat-icon">💎</div>
-                        <div class="stat-content">
-                            <div class="stat-label">Loyalty Points</div>
-                            <div class="stat-value">2,450</div>
-                            <div class="stat-bar">
-                                <div class="stat-bar-fill" style="width: 75%"></div>
+                    <!-- Stats Cards (Member Only) -->
+                    <div id="statsSection" class="stats-section">
+                        <div class="stat-card stat-card-1">
+                            <div class="stat-icon">💎</div>
+                            <div class="stat-content">
+                                <div class="stat-label">Loyalty Points</div>
+                                <div class="stat-value">2,450</div>
+                                <div class="stat-bar">
+                                    <div class="stat-bar-fill" style="width: 75%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="stat-card stat-card-2">
+                            <div class="stat-icon">💰</div>
+                            <div class="stat-content">
+                                <div class="stat-label">Total Saved</div>
+                                <div class="stat-value">₹4,850</div>
+                                <div class="stat-bar">
+                                    <div class="stat-bar-fill" style="width: 65%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="stat-card stat-card-3">
+                            <div class="stat-icon">✅</div>
+                            <div class="stat-content">
+                                <div class="stat-label">Bookings</div>
+                                <div class="stat-value">24</div>
+                                <div class="stat-bar">
+                                    <div class="stat-bar-fill" style="width: 80%"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="stat-card stat-card-2">
-                        <div class="stat-icon">💰</div>
-                        <div class="stat-content">
-                            <div class="stat-label">Total Saved</div>
-                            <div class="stat-value">₹4,850</div>
-                            <div class="stat-bar">
-                                <div class="stat-bar-fill" style="width: 65%"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="stat-card stat-card-3">
-                        <div class="stat-icon">✅</div>
-                        <div class="stat-content">
-                            <div class="stat-label">Bookings</div>
-                            <div class="stat-value">24</div>
-                            <div class="stat-bar">
-                                <div class="stat-bar-fill" style="width: 80%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- Exclusive Benefits -->
-                <div class="benefits-section">
-                    <h3 class="section-title">Exclusive Perks</h3>
-                    <div class="benefits-grid">
-                        <div class="benefit-card">
-                            <span class="benefit-icon">🎉</span>
-                            <span class="benefit-name">Birthday Gift</span>
-                        </div>
-                        <div class="benefit-card">
-                            <span class="benefit-icon">🚀</span>
-                            <span class="benefit-name">Early Access</span>
-                        </div>
-                        <div class="benefit-card">
-                            <span class="benefit-icon">👑</span>
-                            <span class="benefit-name">VIP Support</span>
-                        </div>
-                        <div class="benefit-card">
-                            <span class="benefit-icon">🎁</span>
-                            <span class="benefit-name">Rewards</span>
+                    <!-- Exclusive Benefits (Member Only) -->
+                    <div id="benefitsSection" class="benefits-section">
+                        <h3 class="section-title">Exclusive Perks</h3>
+                        <div class="benefits-grid">
+                            <div class="benefit-card">
+                                <span class="benefit-icon">🎉</span>
+                                <span class="benefit-name">Birthday Gift</span>
+                            </div>
+                            <div class="benefit-card">
+                                <span class="benefit-icon">🚀</span>
+                                <span class="benefit-name">Early Access</span>
+                            </div>
+                            <div class="benefit-card">
+                                <span class="benefit-icon">👑</span>
+                                <span class="benefit-name">VIP Support</span>
+                            </div>
+                            <div class="benefit-card">
+                                <span class="benefit-icon">🎁</span>
+                                <span class="benefit-name">Rewards</span>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Quick Actions -->
-                <div class="quick-actions-section">
-                    <h3 class="section-title">My Account</h3>
-                    <div class="action-items">
-                        <button class="action-item">
-                            <span class="action-icon">📍</span>
-                            <div class="action-text">
-                                <span class="action-label">Addresses</span>
-                                <span class="action-desc">Manage delivery addresses</span>
-                            </div>
-                            <span class="action-arrow">›</span>
-                        </button>
-                        <button class="action-item">
-                            <span class="action-icon">💳</span>
-                            <div class="action-text">
-                                <span class="action-label">Payment Methods</span>
-                                <span class="action-desc">Save & manage cards</span>
-                            </div>
-                            <span class="action-arrow">›</span>
-                        </button>
-                        <button class="action-item">
-                            <span class="action-icon">❤️</span>
-                            <div class="action-text">
-                                <span class="action-label">Favorite Services</span>
-                                <span class="action-desc">Your preferred treatments</span>
-                            </div>
-                            <span class="action-arrow">›</span>
-                        </button>
-                        <button class="action-item">
-                            <span class="action-icon">🎁</span>
-                            <div class="action-text">
-                                <span class="action-label">Referral Code</span>
-                                <span class="action-desc">Invite friends & earn</span>
-                            </div>
-                            <span class="action-arrow">›</span>
-                        </button>
+                    <!-- Quick Actions -->
+                    <div id="quickActionsSection" class="quick-actions-section">
+                        <h3 class="section-title">My Account</h3>
+                        <div class="action-items">
+                            <button class="action-item">
+                                <span class="action-icon">📍</span>
+                                <div class="action-text">
+                                    <span class="action-label">Addresses</span>
+                                    <span class="action-desc">Manage delivery addresses</span>
+                                </div>
+                                <span class="action-arrow">›</span>
+                            </button>
+                            <button class="action-item">
+                                <span class="action-icon">💳</span>
+                                <div class="action-text">
+                                    <span class="action-label">Payment Methods</span>
+                                    <span class="action-desc">Save & manage cards</span>
+                                </div>
+                                <span class="action-arrow">›</span>
+                            </button>
+                            <button class="action-item">
+                                <span class="action-icon">❤️</span>
+                                <div class="action-text">
+                                    <span class="action-label">Favorite Services</span>
+                                    <span class="action-desc">Your preferred treatments</span>
+                                </div>
+                                <span class="action-arrow">›</span>
+                            </button>
+                            <button class="action-item">
+                                <span class="action-icon">🎁</span>
+                                <div class="action-text">
+                                    <span class="action-label">Referral Code</span>
+                                    <span class="action-desc">Invite friends & earn</span>
+                                </div>
+                                <span class="action-arrow">›</span>
+                            </button>
+                        </div>
                     </div>
-                </div>
 
-                <!-- Settings -->
-                <div class="settings-section">
-                    <h3 class="section-title">Settings</h3>
-                    <div class="action-items">
-                        <button class="action-item">
-                            <span class="action-icon">🔔</span>
-                            <div class="action-text">
-                                <span class="action-label">Notifications</span>
-                                <span class="action-desc">Booking & offer alerts</span>
-                            </div>
-                            <span class="action-arrow">›</span>
-                        </button>
-                        <button class="action-item">
-                            <span class="action-icon">🌐</span>
-                            <div class="action-text">
-                                <span class="action-label">Language</span>
-                                <span class="action-desc">English</span>
-                            </div>
-                            <span class="action-arrow">›</span>
-                        </button>
-                        <button class="action-item">
-                            <span class="action-icon">🔒</span>
-                            <div class="action-text">
-                                <span class="action-label">Privacy & Security</span>
-                                <span class="action-desc">Manage your data</span>
-                            </div>
-                            <span class="action-arrow">›</span>
-                        </button>
+                    <!-- Settings -->
+                    <div class="settings-section">
+                        <h3 class="section-title">Settings</h3>
+                        <div class="action-items">
+                            <button class="action-item">
+                                <span class="action-icon">🔔</span>
+                                <div class="action-text">
+                                    <span class="action-label">Notifications</span>
+                                    <span class="action-desc">Booking & offer alerts</span>
+                                </div>
+                                <span class="action-arrow">›</span>
+                            </button>
+                            <button class="action-item">
+                                <span class="action-icon">🌐</span>
+                                <div class="action-text">
+                                    <span class="action-label">Language</span>
+                                    <span class="action-desc">English</span>
+                                </div>
+                                <span class="action-arrow">›</span>
+                            </button>
+                            <button class="action-item">
+                                <span class="action-icon">🔒</span>
+                                <div class="action-text">
+                                    <span class="action-label">Privacy & Security</span>
+                                    <span class="action-desc">Manage your data</span>
+                                </div>
+                                <span class="action-arrow">›</span>
+                            </button>
+                        </div>
                     </div>
-                </div>
 
-                <!-- Help & Support -->
-                <div class="support-section">
-                    <h3 class="section-title">Support</h3>
-                    <div class="action-items">
-                        <button class="action-item">
-                            <span class="action-icon">❓</span>
-                            <div class="action-text">
-                                <span class="action-label">Help & Support</span>
-                                <span class="action-desc">FAQ & contact us</span>
-                            </div>
-                            <span class="action-arrow">›</span>
-                        </button>
-                        <button class="action-item">
-                            <span class="action-icon">ℹ️</span>
-                            <div class="action-text">
-                                <span class="action-label">About Blancbeu</span>
-                                <span class="action-desc">Version 16.3.3</span>
-                            </div>
-                            <span class="action-arrow">›</span>
-                        </button>
-                        <button class="action-item" onclick="showTC()">
-                            <span class="action-icon">📋</span>
-                            <div class="action-text">
-                                <span class="action-label">Terms & Privacy</span>
-                                <span class="action-desc">Legal information</span>
-                            </div>
-                            <span class="action-arrow">›</span>
-                        </button>
+                    <!-- Help & Support -->
+                    <div class="support-section">
+                        <h3 class="section-title">Support</h3>
+                        <div class="action-items">
+                            <button class="action-item">
+                                <span class="action-icon">❓</span>
+                                <div class="action-text">
+                                    <span class="action-label">Help & Support</span>
+                                    <span class="action-desc">FAQ & contact us</span>
+                                </div>
+                                <span class="action-arrow">›</span>
+                            </button>
+                            <button class="action-item">
+                                <span class="action-icon">ℹ️</span>
+                                <div class="action-text">
+                                    <span class="action-label">About Blancbeu</span>
+                                    <span class="action-desc">Version 16.3.3</span>
+                                </div>
+                                <span class="action-arrow">›</span>
+                            </button>
+                            <button class="action-item" onclick="showTC()">
+                                <span class="action-icon">📋</span>
+                                <div class="action-text">
+                                    <span class="action-label">Terms & Privacy</span>
+                                    <span class="action-desc">Legal information</span>
+                                </div>
+                                <span class="action-arrow">›</span>
+                            </button>
+                        </div>
                     </div>
-                </div>
 
-                <!-- Logout Button -->
-                <button class="logout-btn">Sign Out</button>
-            </div>
+                    <!-- Logout Button -->
+                    <button class="logout-btn">Sign Out</button>
+                </div>
         </section>
 
         <!-- CHAT PAGE -->
@@ -1976,7 +2009,7 @@ PHASE 3: PREMIUM FEATURES (Week 4)
         <div class="lightbox-nav next" onclick="nextImage()">&#10095;</div>
     </div>
 
-    <script type="module" src="script.js?v=1.4.0"></script>
+
     <script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/329180/fscreen%401.0.1.js'></script>
     <script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/329180/Stage%400.1.4.js'></script>
     <script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/329180/MyMath.js'></script>
@@ -1986,185 +2019,193 @@ PHASE 3: PREMIUM FEATURES (Week 4)
     <script type="module" src="booking.js"></script>
     <script type="module" src="my-bookings.js"></script>
 
-    <!-- Auth Modal -->
-    <div id="authModal" class="modal" style="display: none;">
-        <div class="modal-content">
-            <span class="close-modal" id="closeAuthModal">&times;</span>
-            <div id="authForms" class="auth-wrapper">
-                <div class="auth-header">
-                    <h2>Welcome to Blancbeu</h2>
-                    <p>Login or Sign up to manage your bookings</p>
+    <!-- Premium Full-Screen Auth Modal -->
+    <div id="authModal" class="auth-overlay" style="display: none;">
+        <div class="auth-modal-container">
+            <!-- Close Button -->
+            <!-- Premium Close Button (Top-Right) -->
+            <button class="auth-close-btn-premium" id="closeAuthModal" aria-label="Close" onclick="closeAuthModal()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <path d="M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+            </button>
+
+            <!-- Login View (default) -->
+            <div id="authLoginView" class="auth-view">
+                <!-- Brand Header -->
+                <div class="auth-brand">
+                    <div class="auth-brand-icon">
+                        <img src="icon-512x512.png" alt="Blancbeu" class="auth-logo">
+                    </div>
+                    <h1 class="auth-title">Welcome to Blancbeu</h1>
+                    <p class="auth-subtitle">Sign in to book appointments & manage your beauty journey</p>
                 </div>
 
-                <div class="auth-options">
-                    <!-- Enhanced Auth Modal -->
-                    <div id="authModal" class="modal auth-modal-wrapper" style="display: none;">
-                        <div class="modal-content auth-glass-card">
-                            <span class="close-modal" id="closeAuthModal">&times;</span>
+                <!-- Login Buttons -->
+                <div class="auth-buttons">
+                    <!-- WhatsApp Login - Recommended -->
+                    <button id="whatsappLoginBtn" class="auth-btn auth-btn-whatsapp">
+                        <div class="auth-btn-icon">
+                            <img src="attached_assets/new_icons/icons8-whatsapp.apng" alt="WhatsApp">
+                        </div>
+                        <div class="auth-btn-content">
+                            <span class="auth-btn-text">Continue with WhatsApp</span>
+                            <span class="auth-btn-subtext">Quick & secure login</span>
+                        </div>
+                        <span class="auth-btn-badge">Recommended</span>
+                    </button>
 
-                            <div class="auth-header">
-                                <div class="auth-logo">
-                                    <img src="assets/brand_icon_optimized.webp" alt="BlancBeu">
-                                </div>
-                                <h2>Welcome Back</h2>
-                                <p>Sign in to your premium beauty experience</p>
-                            </div>
+                    <!-- Divider -->
+                    <div class="auth-divider">
+                        <span>or continue with</span>
+                    </div>
 
-                            <div class="auth-options">
-                                <!-- WhatsApp -->
-                                <button id="whatsappLoginBtn" class="auth-btn whatsapp-premium">
-                                    <div class="btn-icon-wrapper">
-                                        <img src="attached_assets/new_icons/icons8-whatsapp.apng" alt="WhatsApp">
-                                    </div>
-                                    <div class="btn-text-wrapper">
-                                        <span class="btn-title">Continue with WhatsApp</span>
-                                        <span class="btn-subtitle">Recommended for instant access</span>
-                                    </div>
-                                    <div class="btn-arrow">➔</div>
-                                </button>
+                    <!-- Google Login -->
+                    <button id="googleLoginBtn" class="auth-btn auth-btn-google">
+                        <div class="auth-btn-icon">
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path fill="#4285F4"
+                                    d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                                <path fill="#34A853"
+                                    d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                                <path fill="#FBBC05"
+                                    d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                                <path fill="#EA4335"
+                                    d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+                            </svg>
+                        </div>
+                        <span class="auth-btn-text">Continue with Google</span>
+                    </button>
+                </div>
 
-                                <div class="auth-divider-premium">
-                                    <span>or continue with</span>
-                                </div>
+                <!-- Terms -->
+                <p class="auth-terms">
+                    By continuing, you agree to our <a href="#" onclick="showTC(); return false;">Terms of Service</a> &
+                    <a href="#" onclick="showTC(); return false;">Privacy Policy</a>
+                </p>
+            </div>
 
-                                <div class="social-auth-row">
-                                    <!-- Google -->
-                                    <button id="googleLoginBtn" class="social-btn google-glass">
-                                        <svg viewBox="0 0 24 24" width="24" height="24"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <g transform="matrix(1, 0, 0, 1, 27.009001, -39.238998)">
-                                                <path fill="#4285F4"
-                                                    d="M -3.264 51.509 C -3.264 50.719 -3.334 49.969 -3.454 49.239 L -14.754 49.239 L -14.754 53.749 L -8.284 53.749 C -8.574 55.229 -9.424 56.479 -10.684 57.329 L -10.684 60.329 L -6.824 60.329 C -4.564 58.239 -3.264 55.159 -3.264 51.509 Z" />
-                                                <path fill="#34A853"
-                                                    d="M -14.754 63.239 C -11.514 63.239 -8.804 62.159 -6.824 60.329 L -10.684 57.329 C -11.764 58.049 -13.134 58.489 -14.754 58.489 C -17.884 58.489 -20.534 56.379 -21.484 53.529 L -25.464 53.529 L -25.464 56.619 C -23.494 60.539 -19.444 63.239 -14.754 63.239 Z" />
-                                                <path fill="#FBBC05"
-                                                    d="M -21.484 53.529 C -21.734 52.809 -21.864 52.039 -21.864 51.239 C -21.864 50.439 -21.734 49.669 -21.484 48.949 L -21.484 45.859 L -25.464 45.859 C -26.284 47.479 -26.754 49.299 -26.754 51.239 C -26.754 53.179 -26.284 54.999 -25.464 56.619 L -21.484 53.529 Z" />
-                                                <path fill="#EA4335"
-                                                    d="M -14.754 43.989 C -12.984 43.989 -11.424 44.599 -10.174 45.799 L -6.904 42.529 C -8.964 40.619 -11.634 39.489 -14.754 39.489 C -19.444 39.489 -23.494 42.189 -25.464 46.109 L -21.484 48.949 C -20.534 46.099 -17.884 43.989 -14.754 43.989 Z" />
-                                            </g>
-                                        </svg>
-                                        <span>Google</span>
-                                    </button>
+            <!-- Profile Form View (shown for new WhatsApp users) -->
+            <div id="authProfileView" class="auth-view" style="display: none;">
+                <div class="auth-brand">
+                    <div class="auth-brand-icon-large">
+                        ✨
+                    </div>
+                    <h2 class="auth-title-large">Almost There!</h2>
+                    <p class="auth-subtitle">Complete your profile to unlock personalized rewards & birthday treats.</p>
+                    <div class="auth-divider-gold"></div>
+                </div>
 
-                                    <!-- Apple (Placeholder for design consistency) -->
-                                    <button id="appleLoginBtn" class="social-btn apple-glass">
-                                        <svg viewBox="0 0 384 512" width="20" height="20" fill="currentColor">
-                                            <path
-                                                d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3-20.7-88.5-20.7-15 0-49.4 19.7-76.4 19.7-31.9 0-66.6-25-83.6-55.5-30.8 54-20 162.7 34 240.2 26 37.8 56.9 79.1 84.7 78.3 22.8-.7 32-15 76.5-15 44 0 54.7 15.6 77 14.8 30.6-1.1 57.7-27.1 76-54.8-59.5-24.9-65.5-88-65-117.7zM249.2 52.8c18.5-22.3 32.2-51 28.5-86.3-28.5 2.1-60.5 19.4-80 42.4-16.4 18.9-32.3 52.4-28.1 82.5 32 2.6 62.4-17.6 79.6-38.6z" />
-                                        </svg>
-                                        <span>Apple</span>
-                                    </button>
-                                </div>
-                            </div>
-
-                            <p class="auth-footer-text">
-                                By continuing, you agree to our <a href="#">Terms</a> & <a href="#">Privacy Policy</a>
-                            </p>
+                <form id="authProfileForm" class="auth-profile-form">
+                    <!-- Name Field -->
+                    <div class="auth-form-group">
+                        <label for="profileName" class="auth-label-premium">Your Name</label>
+                        <div class="auth-input-wrapper-premium">
+                            <span class="auth-input-icon">👤</span>
+                            <input type="text" id="profileName" name="name" class="auth-input-premium"
+                                style="padding-left: 50px !important;" placeholder="Enter your full name" required
+                                autocomplete="name">
                         </div>
                     </div>
 
-                    <!-- Complete Profile Modal (Uninterruptible) -->
-                    <div id="completeProfileModal" class="modal profile-modal-wrapper" style="display: none;">
-                        <div class="modal-content auth-glass-card">
-                            <!-- No Close Button -->
-                            <div class="auth-header">
-                                <h2>Complete Your Profile</h2>
-                                <p>Help us personalize your experience</p>
-                            </div>
-
-                            <form id="completeProfileForm">
-                                <div class="form-group premium-input">
-                                    <label for="profileName">Full Name</label>
-                                    <input type="text" id="profileName" placeholder="e.g. Anjali Sharma" required>
-                                    <span class="input-icon">👤</span>
-                                </div>
-
-                                <div class="form-group premium-input">
-                                    <label>Gender</label>
-                                    <div class="gender-selector">
-                                        <label class="gender-option">
-                                            <input type="radio" name="gender" value="Female" required checked>
-                                            <span class="gender-box">👩 Female</span>
-                                        </label>
-                                        <label class="gender-option">
-                                            <input type="radio" name="gender" value="Male">
-                                            <span class="gender-box">👨 Male</span>
-                                        </label>
-                                        <label class="gender-option">
-                                            <input type="radio" name="gender" value="Other">
-                                            <span class="gender-box">🌈 Other</span>
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <div class="form-group premium-input">
-                                    <label for="profileDob">Date of Birth</label>
-                                    <input type="date" id="profileDob" required>
-                                    <span class="input-subtitle">Get special offers on your birthday! 🎂</span>
-                                </div>
-
-                                <button type="submit" class="auth-btn submit-premium">
-                                    <span>Complete & Continue</span>
-                                    <span class="btn-arrow">➔</span>
-                                </button>
-                            </form>
-                            <!-- Logout option just in case -->
-                            <div class="switch-auth">
-                                <span id="cancelProfileAuth"
-                                    style="font-size: 12px; color: var(--text-secondary);">Cancel & Log Out</span>
-                            </div>
+                    <!-- Gender Field -->
+                    <div class="auth-form-group">
+                        <label class="auth-label-premium">Gender</label>
+                        <div class="auth-gender-options-premium">
+                            <label class="auth-gender-option-premium">
+                                <input type="radio" name="gender" value="female" required checked>
+                                <span class="auth-gender-chip-premium">
+                                    <span class="gender-emoji">👩</span> Female
+                                </span>
+                            </label>
+                            <label class="auth-gender-option-premium">
+                                <input type="radio" name="gender" value="male">
+                                <span class="auth-gender-chip-premium">
+                                    <span class="gender-emoji">👨</span> Male
+                                </span>
+                            </label>
+                            <label class="auth-gender-option-premium">
+                                <input type="radio" name="gender" value="other">
+                                <span class="auth-gender-chip-premium">
+                                    <span class="gender-emoji">🌈</span> Other
+                                </span>
+                            </label>
                         </div>
                     </div>
 
-                    <!-- Booking Modal -->
-                    <div id="bookingModal" class="modal" style="display: none;">
-                        <div class="modal-content">
-                            <span class="close-modal" id="closeBookingModal">&times;</span>
-                            <h2>Book Appointment</h2>
-                            <form id="bookingForm">
-                                <div class="form-group">
-                                    <label for="bookingService">Service</label>
-                                    <select id="bookingService" required>
-                                        <option value="">Select a Service</option>
-                                        <!-- Options will be populated dynamically -->
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="bookingDate">Date</label>
-                                    <input type="date" id="bookingDate" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="bookingTime">Time</label>
-                                    <select id="bookingTime" required>
-                                        <option value="">Select Time</option>
-                                        <option value="10:00">10:00 AM</option>
-                                        <option value="11:00">11:00 AM</option>
-                                        <option value="12:00">12:00 PM</option>
-                                        <option value="13:00">01:00 PM</option>
-                                        <option value="14:00">02:00 PM</option>
-                                        <option value="15:00">03:00 PM</option>
-                                        <option value="16:00">04:00 PM</option>
-                                        <option value="17:00">05:00 PM</option>
-                                        <option value="18:00">06:00 PM</option>
-                                        <option value="19:00">07:00 PM</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="bookingNotes">Notes (Optional)</label>
-                                    <textarea id="bookingNotes" rows="3"></textarea>
-                                </div>
-                                <button type="submit" class="submit-btn">Confirm Booking</button>
-                            </form>
+                    <!-- Date of Birth Field -->
+                    <div class="auth-form-group">
+                        <label for="profileDob" class="auth-label-premium">Birthday (for gifts!) 🎂</label>
+                        <div class="auth-input-wrapper-premium">
+                            <input type="date" id="profileDob" name="dob" class="auth-input-premium date-input"
+                                required>
                         </div>
                     </div>
 
-                    <script type="module" src="script.js"></script>
-                    <script type="module" src="firebase-config.js"></script>
-                    <script type="module" src="auth.js"></script>
-                    <script type="module" src="booking.js"></script>
-                    <script type="module" src="my-bookings.js"></script>
-                    <script type="module" src="account.js"></script>
-                    <script type="module" src="nav_fix.js"></script>
+                    <!-- Submit Button -->
+                    <button type="submit" class="auth-submit-btn-premium">
+                        <span>Save & Continue</span>
+                        <span class="btn-arrow">→</span>
+                    </button>
+                </form>
+
+                <button id="skipProfileBtn" class="auth-skip-link">I'll do this later</button>
+            </div>
+        </div>
+
+        <!-- Booking Modal -->
+        <div id="bookingModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close-modal" id="closeBookingModal">&times;</span>
+                <h2>Book Appointment</h2>
+                <form id="bookingForm">
+                    <div class="form-group">
+                        <label for="bookingService">Service</label>
+                        <select id="bookingService" required>
+                            <option value="">Select a Service</option>
+                            <!-- Options will be populated dynamically -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="bookingDate">Date</label>
+                        <input type="date" id="bookingDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="bookingTime">Time</label>
+                        <select id="bookingTime" required>
+                            <option value="">Select Time</option>
+                            <option value="10:00">10:00 AM</option>
+                            <option value="11:00">11:00 AM</option>
+                            <option value="12:00">12:00 PM</option>
+                            <option value="13:00">01:00 PM</option>
+                            <option value="14:00">02:00 PM</option>
+                            <option value="15:00">03:00 PM</option>
+                            <option value="16:00">04:00 PM</option>
+                            <option value="17:00">05:00 PM</option>
+                            <option value="18:00">06:00 PM</option>
+                            <option value="19:00">07:00 PM</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="bookingNotes">Notes (Optional)</label>
+                        <textarea id="bookingNotes" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Confirm Booking</button>
+                </form>
+            </div>
+        </div>
+
+        <script type="module" src="script.js"></script>
+        <script type="module" src="firebase-config.js"></script>
+        <script type="module" src="auth.js"></script>
+        <script type="module" src="booking.js"></script>
+        <script type="module" src="my-bookings.js"></script>
+        <script type="module" src="account.js"></script>
+        <script type="module" src="nav_fix.js"></script>
+
 </body>
 
 </html>

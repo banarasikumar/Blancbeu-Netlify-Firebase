@@ -81,24 +81,24 @@ exports.handler = async (event, context) => {
         // 3. Mark used
         await doc.ref.update({ used: true });
 
-        // 4. Create Custom Auth Token
+        // 4. Check if user is newly created (check for profile completion)
+        let isNewUser = false;
+        try {
+            const userDoc = await db.collection("users").doc(docData.uid).get();
+            if (!userDoc.exists || !userDoc.data()?.profileCompleted) {
+                isNewUser = true;
+            }
+        } catch (e) {
+            // If we can't check, assume new user to be safe
+            isNewUser = true;
+            console.log("Could not check user profile, assuming new user");
+        }
+
+        // 5. Create Custom Auth Token
         const customToken = await admin.auth().createCustomToken(docData.uid);
 
-        // 5. Return Success
-        // If it's a GET (browser click), we might want to redirect to the app with the token
-        // The instructions say "Return auth token / success response".
-        // And "User clicks link -> Netlify Function -> Firebase Auth session created".
-        // Ideally, we redirect to the frontend app with the custom token so the frontend calls signInWithCustomToken.
-        // Example: https://myapp.com/finish-login?token=XYZ
-
-        // However, the instructions don't explicitly ask for redirection logic, but "Return auth token".
-        // If we just return JSON to a browser GET navigation, the user sees JSON.
-        // But sticking to "Return auth token", I will return JSON.
-        // OR, if I can infer the referral or origin, I might redirect.
-        // Given "No UI" rule, I will return JSON response.
-
-        // 5. Redirect to App with Token
-        const redirectUrl = `/?token=${customToken}`;
+        // 6. Redirect to App with Token and new user flag
+        const redirectUrl = `/?token=${customToken}${isNewUser ? '&isNewUser=true' : ''}`;
 
         return {
             statusCode: 302,

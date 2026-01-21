@@ -130,6 +130,15 @@ IMPORTANT: This app uses #appContent as the scrollable container, NOT window.
     function handleScroll() {
         if (isTabSwitching || !contentArea) return;
 
+        // Check if auth modal is open - if so, DO NOT HIDE HEADER
+        const authModal = document.getElementById('authModal');
+        if (authModal && window.getComputedStyle(authModal).display !== 'none') {
+            if (header && header.classList.contains('hidden')) {
+                header.classList.remove('hidden');
+            }
+            return;
+        }
+
         const currentScrollY = contentArea.scrollTop;
 
         // Prevent negative scroll

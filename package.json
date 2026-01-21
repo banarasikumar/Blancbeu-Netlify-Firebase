@@ -1,6 +1,6 @@
 {
   "name": "workspace",
-  "version": "1.0.22",
+  "version": "1.0.24",
   "main": "sw.js",
   "scripts": {
     "start": "vite",

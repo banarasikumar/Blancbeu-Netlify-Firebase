@@ -1,100 +1,215 @@
-import { db, auth } from './firebase-config.js';
-import { collection, query, where, getCountFromServer, getDoc, doc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+/*
+================================================================================
+ACCOUNT PAGE CONTROLLER
+================================================================================
+Handles User Profile, Edit Mode, Statistics, and Authentication State for the Account Tab.
+*/
 
-function getGreeting() {
-    const hour = new Date().getHours();
-    if (hour < 12) return "Good Morning";
-    if (hour < 18) return "Good Afternoon";
-    return "Good Evening";
-}
+class AccountController {
+    constructor() {
+        this.auth = null; // Will be initialized from window.auth (Firebase)
+        this.db = null;   // Will be initialized from window.db (Firestore)
+        this.currentUser = null;
 
-async function loadAccountData(user) {
-    const accountSection = document.getElementById('account');
-    if (!accountSection) return;
+        // UI Elements
+        this.profileNameEl = document.querySelector('.profile-name');
+        this.profileEmailEl = document.querySelector('.profile-email');
+        this.profileAvatarEl = document.querySelector('.profile-avatar');
+        this.editBtn = document.querySelector('.edit-profile-btn');
+        this.logoutBtn = document.querySelector('.logout-btn');
+        this.statsValues = document.querySelectorAll('.stat-value');
 
-    // 1. Update Profile Card
-    const profileName = document.querySelector('.profile-name');
-    const profileEmail = document.querySelector('.profile-email');
-    const profileAvatar = document.querySelector('.profile-avatar');
-
-    if (profileName) profileName.textContent = user.displayName || "Valued Customer";
-    if (profileEmail) profileEmail.textContent = user.email || "No email linked";
-
-    if (profileAvatar && user.photoURL) {
-        profileAvatar.innerHTML = `<img src="${user.photoURL}" alt="User" style="width:100%; height:100%; border-radius:50%; object-fit:cover;">`;
+        this.init();
     }
 
-    // 2. Load Stats (real bookings count)
-    // Loyalty points and reviews are mocked for now as we don't have those collections yet.
-    try {
-        const bookingsColl = collection(db, "bookings");
-        const q = query(bookingsColl, where("userId", "==", user.uid));
-        const snapshot = await getCountFromServer(q);
-        const count = snapshot.data().count;
+    async init() {
+        // 1. IMPROMEDIATE DEFAULT: Force Guest View to prevent flash of member content
+        this.showGuestState();
 
-        const statValues = document.querySelectorAll('.stat-value');
-        if (statValues.length >= 2) {
-            statValues[1].textContent = count; // Accessing by index based on HTML structure: 0=Points, 1=Bookings, 2=Reviews
-        }
-    } catch (error) {
-        console.error("Error loading account stats:", error);
+        // 2. Wait for Firebase to load globally (from auth.js / firebase-config.js)
+        this.waitForFirebase();
     }
-}
 
-function initAccountPage() {
-    const logoutBtn = document.querySelector('.logout-btn');
-    if (logoutBtn) {
-        // Remove old listeners to avoid duplicates if re-init
-        const newBtn = logoutBtn.cloneNode(true);
-        logoutBtn.parentNode.replaceChild(newBtn, logoutBtn);
+    waitForFirebase() {
+        const checkInterval = setInterval(() => {
+            if (window.firebase && window.auth) {
+                clearInterval(checkInterval);
+                this.auth = window.auth;
+                this.db = window.db;
+                this.setupAuthListener();
+                console.log('✅ AccountController: Firebase connected');
+            }
+        }, 500);
+    }
 
-        newBtn.addEventListener('click', () => {
-            if (confirm("Are you sure you want to sign out?")) {
-                signOut(auth).then(() => {
-                    alert("Signed out successfully");
-                    window.location.hash = "#home"; // Redirect to home
-                    // window.location.reload(); // Optional, but usually safer
-                }).catch((error) => {
-                    console.error("Sign Out Error", error);
-                });
+    setupAuthListener() {
+        if (!this.auth) return;
+
+        this.auth.onAuthStateChanged(user => {
+            if (user) {
+                this.currentUser = user;
+                this.renderUserProfile(user);
+                this.fetchUserStats(user);
+                this.enableInteractions();
+            } else {
+                // User logged out - potentially redirect or show login prompt
+                console.log('👤 Account: No user logged in');
+                this.showGuestState();
             }
         });
     }
-}
 
-// Auth Listener
-onAuthStateChanged(auth, (user) => {
-    const accountSection = document.getElementById('account');
-    if (!accountSection) return;
+    renderUserProfile(user) {
+        if (!user) return;
 
-    if (user) {
-        // User is logged in
-        // We assume the HTML structure exists (from index.html) and we just fill it.
-        // If it was hidden/login-wall-ed, we'd reveal it here.
-        loadAccountData(user);
-    } else {
-        // User is logged out
-        // Replace content with login prompt or redirect
-        // For this app, let's just show a simple login state in the profile card
-        const profileName = document.querySelector('.profile-name');
-        const profileEmail = document.querySelector('.profile-email');
-        const profileAvatar = document.querySelector('.profile-avatar');
+        // Name
+        const name = user.displayName || 'Valued Member';
+        if (this.profileNameEl) this.profileNameEl.textContent = name;
 
-        if (profileName) profileName.textContent = "Guest User";
-        if (profileEmail) profileEmail.textContent = "Please sign in";
-        if (profileAvatar) profileAvatar.innerHTML = '<div class="avatar-placeholder">👤</div>';
+        // Email
+        const email = user.email || 'No email provided';
+        if (this.profileEmailEl) this.profileEmailEl.textContent = email;
 
-        const statValues = document.querySelectorAll('.stat-value');
-        statValues.forEach(el => el.textContent = "-");
-
-        // Make the edit button trigger login
-        const editBtn = document.querySelector('.edit-profile-btn');
-        if (editBtn) {
-            editBtn.onclick = () => document.dispatchEvent(new Event('open-login-modal'));
+        // Avatar
+        if (user.photoURL && this.profileAvatarEl) {
+            this.profileAvatarEl.innerHTML = `<img src="${user.photoURL}" alt="Profile" style="width:100%; height:100%; object-fit:cover; border-radius:50%;">`;
+        } else {
+            // Default placeholder
+            if (this.profileAvatarEl) {
+                this.profileAvatarEl.innerHTML = `<div class="avatar-placeholder">${name.charAt(0).toUpperCase()}</div>`;
+            }
         }
     }
-});
 
-// Run once on load
-document.addEventListener('DOMContentLoaded', initAccountPage);
+    showGuestState() {
+        // 1. Update Profile Card
+        if (this.profileNameEl) this.profileNameEl.textContent = 'Guest User';
+        if (this.profileEmailEl) this.profileEmailEl.textContent = 'Sign in to access exclusive perks';
+        if (this.profileAvatarEl) this.profileAvatarEl.innerHTML = '<div class="avatar-placeholder" style="background:#ddd; color:#666;">?</div>';
+
+        // 2. Hide Member-Only Sections
+        this.toggleMemberSections(false);
+
+        // 3. Hide Edit Button
+        if (this.editBtn) this.editBtn.style.display = 'none';
+
+        // 4. Update Main Action Button (Sign In)
+        if (this.logoutBtn) {
+            this.logoutBtn.textContent = 'Sign In / Sign Up';
+            this.logoutBtn.classList.add('signin-mode'); // Optional styling hook
+            this.logoutBtn.onclick = () => {
+                document.dispatchEvent(new CustomEvent('open-login-modal'));
+            };
+        }
+    }
+
+    enableInteractions() {
+        // 1. Show Member Sections
+        this.toggleMemberSections(true);
+
+        // 2. Show Edit Profile
+        if (this.editBtn) {
+            this.editBtn.style.display = 'flex';
+            this.editBtn.onclick = () => this.toggleEditMode();
+        }
+
+        // 3. Update Main Action Button (Sign Out)
+        if (this.logoutBtn) {
+            this.logoutBtn.textContent = 'Sign Out';
+            this.logoutBtn.classList.remove('signin-mode');
+            this.logoutBtn.onclick = () => this.handleLogout();
+        }
+    }
+
+    toggleMemberSections(isMember) {
+        const sections = [
+            'tierSection',
+            'statsSection',
+            'benefitsSection',
+            'quickActionsSection'
+        ];
+
+        const displayValue = isMember ? 'block' : 'none';
+        const displayGrid = isMember ? 'grid' : 'none'; // Stats/Benefits use grid
+
+        sections.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) {
+                // Special handling for grid sections if needed, or just use CSS toggle class
+                // Simple display toggle:
+                if (id === 'statsSection' && isMember) el.style.display = 'grid';
+                else if (id === 'benefitsSection' && isMember) el.style.display = 'block'; // Benefits usually block with inner grid
+                else el.style.display = displayValue;
+            }
+        });
+    }
+
+    async handleLogout() {
+        try {
+            await this.auth.signOut();
+            window.location.reload(); // Refresh to reset state
+        } catch (error) {
+            console.error('Logout error:', error);
+            alert('Failed to sign out. Please try again.');
+        }
+    }
+
+    toggleEditMode() {
+        // Simple prompt based editing for now (can upgrade to modal later)
+        const newName = prompt("Enter your new display name:", this.currentUser.displayName);
+        if (newName && newName.trim() !== "") {
+            this.updateProfileName(newName);
+        }
+    }
+
+    async updateProfileName(newName) {
+        try {
+            await this.currentUser.updateProfile({
+                displayName: newName
+            });
+            // Update UI immediately
+            if (this.profileNameEl) this.profileNameEl.textContent = newName;
+
+            // Re-render avatar if using initial
+            if (!this.currentUser.photoURL) {
+                this.profileAvatarEl.innerHTML = `<div class="avatar-placeholder">${newName.charAt(0).toUpperCase()}</div>`;
+            }
+
+            console.log('✅ Profile updated');
+        } catch (error) {
+            console.error('Error updating profile:', error);
+            alert('Could not update profile. ' + error.message);
+        }
+    }
+
+    async fetchUserStats(user) {
+        // 1. Loyalty Points (Mock logic or Firestore field)
+        // 2. Total Saved (Mock)
+        // 3. Bookings Count (Real Firestore Count)
+
+        try {
+            // Mock static stats for now
+            // Future: await this.db.collection('users').doc(user.uid).get()...
+
+            // Example: Fetch real booking count
+            if (this.db) {
+                const bookingsRef = this.db.collection('bookings').where('userId', '==', user.uid);
+                const snapshot = await bookingsRef.get();
+                const count = snapshot.size;
+
+                // Update Bookings Stat Card (assuming index 2 is bookings)
+                if (this.statsValues[2]) this.statsValues[2].textContent = count;
+            }
+
+        } catch (e) {
+            console.warn('Could not fetch specific stats:', e);
+        }
+    }
+}
+
+// Initialize when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => new AccountController());
+} else {
+    new AccountController();
+}

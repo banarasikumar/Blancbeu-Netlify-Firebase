@@ -21,6 +21,7 @@ if (admin.apps.length === 0) {
             // admin.initializeApp(); // Fallback to default google auth (e.g. metadata server)
         }
     } else {
+        console.warn("⚠️ FIREBASE_SERVICE_ACCOUNT is missing. Backend auth operations (custom token creation) will FAIL.");
         admin.initializeApp();
     }
 }

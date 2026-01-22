@@ -118,56 +118,62 @@ IMPORTANT: This app uses #appContent as the scrollable container, NOT window.
     function showHeader() {
         if (header) {
             header.classList.remove('hidden');
+            document.body.classList.remove('header-hidden');
         }
     }
 
     function hideHeader() {
         if (header) {
             header.classList.add('hidden');
+            document.body.classList.add('header-hidden');
         }
     }
 
-    function handleScroll() {
-        if (isTabSwitching || !contentArea) return;
+    // ==========================================
+    // PHYSICAL SCROLL HEADER LOGIC
+    // ==========================================
+    let currentTranslateY = 0;
+    const HEADER_HEIGHT = 80;
 
-        // Check if auth modal is open - if so, DO NOT HIDE HEADER
+    function handleScroll() {
+        if (isTabSwitching || !contentArea || !header) return;
+
+        // Check if auth modal is open - if so, ensure header is visible
         const authModal = document.getElementById('authModal');
         if (authModal && window.getComputedStyle(authModal).display !== 'none') {
-            if (header && header.classList.contains('hidden')) {
-                header.classList.remove('hidden');
-            }
+            header.style.transform = 'translateY(0)';
+            currentTranslateY = 0;
             return;
         }
 
         const currentScrollY = contentArea.scrollTop;
 
-        // Prevent negative scroll
+        // Prevent negative scroll handling (overscroll bounce)
         if (currentScrollY < 0) return;
 
-        // Always show header when near top (UNLESS FORCED HIDDEN)
-        if (currentScrollY <= CONFIG.HEADER_SHOW_ZONE) {
-            if (!header.classList.contains('force-hidden')) {
-                showHeader();
-            }
-            lastScrollY = currentScrollY;
-            return;
-        }
+        // Calculate how much we scrolled since last frame
+        const delta = currentScrollY - lastScrollY;
 
-        const scrollDelta = currentScrollY - lastScrollY;
+        // Update the translation based on scroll direction
+        // Scrolling DOWN (delta > 0) -> Move header UP (negative translate)
+        // Scrolling UP (delta < 0)   -> Move header DOWN (positive translate)
+        currentTranslateY -= delta;
 
-        // Only act if scroll delta exceeds threshold
-        if (Math.abs(scrollDelta) < CONFIG.SCROLL_THRESHOLD) {
-            return;
-        }
+        // Clamp the translation:
+        // 1. Cannot go lower than 0 (fully visible) - stops it from floating down
+        // 2. Cannot go higher than -HEADER_HEIGHT (fully hidden)
+        if (currentTranslateY > 0) currentTranslateY = 0;
+        if (currentTranslateY < -HEADER_HEIGHT) currentTranslateY = -HEADER_HEIGHT;
 
-        if (scrollDelta > 0) {
-            // ↓ SCROLLING DOWN → Hide header
-            hideHeader();
-        } else {
-            // ↑ SCROLLING UP → Show header immediately
-            header.classList.remove('force-hidden'); // Unlock forced state
-            showHeader();
-        }
+        // Apply physical transformation
+        header.style.transform = `translateY(${currentTranslateY}px)`;
+
+        // SYNC STICKY CONTROLS
+        // The sticky top should be: Header Height - |scrolled away amount|
+        // If header is fully visible (translateY=0), sticky top = 80px
+        // If header is fully hidden (translateY=-80), sticky top = 0px
+        const stickyTop = HEADER_HEIGHT + currentTranslateY;
+        document.documentElement.style.setProperty('--sticky-top', `${stickyTop}px`);
 
         lastScrollY = currentScrollY;
     }
@@ -257,7 +263,18 @@ IMPORTANT: This app uses #appContent as the scrollable container, NOT window.
                 const savedPosition = getScrollPosition(targetTabId);
                 contentArea.scrollTop = savedPosition;
 
-                showHeader();
+                // FORCE RESET HEADER TO TOP ON TAB SWITCH
+                // We don't want to inherit the hidden state from the previous tab
+                header.style.transform = 'translateY(0px)';
+                currentTranslateY = 0;
+                document.documentElement.style.setProperty('--sticky-top', '80px');
+
+                // If the restored position is deep, the header might need to be hidden?
+                // User requirement: "when any tab page it on the topmost ... then it should be displyed"
+                // Actually, user said: "it does not even need to check the scroll position... 
+                // it shoud be displed above the page on top of the page by default."
+                // So resetting to 0 is correct.
+
                 lastScrollY = savedPosition;
 
                 setTimeout(() => {

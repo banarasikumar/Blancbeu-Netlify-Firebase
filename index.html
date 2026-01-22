@@ -172,7 +172,7 @@ PHASE 3: PREMIUM FEATURES (Week 4)
         rel="stylesheet">
 
     <link rel="stylesheet" href="theme-variables.css">
-    <link rel="stylesheet" href="styles.css?v=2.26">
+    <link rel="stylesheet" href="styles.css?v=2.34">
 
     <style>
         /* FIX: Full Width Transformation Gallery on Mobile */
@@ -1443,21 +1443,25 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                 </div>
 
                 <!-- Filter Tabs with Badge Counts -->
-                <div class="notifications-filters">
-                    <button class="filter-btn active" data-filter="all" data-count="7">All <span
-                            class="count-badge">7</span></button>
-                    <button class="filter-btn" data-filter="appointments" data-count="2">Appointments <span
-                            class="count-badge">2</span></button>
-                    <button class="filter-btn" data-filter="offers" data-count="3">Offers <span
-                            class="count-badge">3</span></button>
-                    <button class="filter-btn" data-filter="reviews" data-count="2">Reviews <span
-                            class="count-badge">2</span></button>
-                </div>
+                <!-- Sticky Wrapper for Filters and Quick Actions -->
+                <div class="sticky-controls">
+                    <!-- Filter Tabs with Badge Counts -->
+                    <div class="notifications-filters">
+                        <button class="filter-btn active" data-filter="all" data-count="7">All <span
+                                class="count-badge">7</span></button>
+                        <button class="filter-btn" data-filter="appointments" data-count="2">Appointments <span
+                                class="count-badge">2</span></button>
+                        <button class="filter-btn" data-filter="offers" data-count="3">Offers <span
+                                class="count-badge">3</span></button>
+                        <button class="filter-btn" data-filter="reviews" data-count="2">Reviews <span
+                                class="count-badge">2</span></button>
+                    </div>
 
-                <!-- Quick Actions -->
-                <div class="quick-actions">
-                    <button class="quick-action-chip" data-action="mark-all-read">Mark all as read</button>
-                    <button class="quick-action-chip" data-action="clear-all">Clear all</button>
+                    <!-- Quick Actions -->
+                    <div class="quick-actions">
+                        <button class="quick-action-chip" data-action="mark-all-read">Mark all as read</button>
+                        <button class="quick-action-chip" data-action="clear-all">Clear all</button>
+                    </div>
                 </div>
 
                 <!-- Notifications List -->

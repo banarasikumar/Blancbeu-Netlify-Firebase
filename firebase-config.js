@@ -36,10 +36,13 @@ try {
     console.log("Firebase initialized successfully");
 } catch (error) {
     console.error("Firebase Initialization Error:", error);
-    // Visual alert only in production to help debugging
-    if (import.meta.env.PROD) {
-        alert("Critical Error: Firebase configuration is missing. The login buttons will not work.\n\nCheck console for details.");
-    }
+    // Visual alert to ensure the user knows why auth is broken
+    alert(`Critical Error: Firebase configuration is missing or invalid.\n\n${error.message}\n\nCheck console for details.`);
 }
 
 export { auth, db };
+
+// Expose to window for AccountController
+window.auth = auth;
+window.db = db;
+window.firebase = { auth: auth }; // Mock structure for AccountController check

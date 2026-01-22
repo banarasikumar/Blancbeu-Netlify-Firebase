@@ -31,13 +31,17 @@ class AccountController {
     }
 
     waitForFirebase() {
+        let attempts = 0;
         const checkInterval = setInterval(() => {
+            attempts++;
             if (window.firebase && window.auth) {
                 clearInterval(checkInterval);
                 this.auth = window.auth;
                 this.db = window.db;
                 this.setupAuthListener();
                 console.log('✅ AccountController: Firebase connected');
+            } else if (attempts > 20) {
+                console.warn("AccountController: Waiting for Firebase...", { hasWindowAuth: !!window.auth });
             }
         }, 500);
     }
@@ -145,12 +149,17 @@ class AccountController {
     }
 
     async handleLogout() {
-        try {
-            await this.auth.signOut();
-            window.location.reload(); // Refresh to reset state
-        } catch (error) {
-            console.error('Logout error:', error);
-            alert('Failed to sign out. Please try again.');
+        if (window.logout) {
+            window.logout(); // Use global logout with beautiful toast
+        } else {
+            // Fallback
+            try {
+                await this.auth.signOut();
+                window.location.reload();
+            } catch (error) {
+                console.error('Logout error:', error);
+                alert('Failed to sign out. Please try again.');
+            }
         }
     }
 

@@ -147,7 +147,7 @@ body.light-mode {
     z-index: 2147483647 !important;
     backdrop-filter: blur(15px);
     box-shadow: var(--header-shadow);
-    transition: transform 0.3s ease-in-out, background 0.3s ease, box-shadow 0.3s ease;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
     border-bottom: var(--header-border);
     height: 80px;
     display: flex;
@@ -3065,7 +3065,8 @@ body {
 
 .app-page {
     display: none;
-    padding-top: 20px;
+    padding-top: 100px;
+    /* 80px Header + 20px Spacing */
     padding-bottom: 100px;
 }
 
@@ -3251,20 +3252,34 @@ body {
     color: var(--bg-primary);
     box-shadow: 0 8px 24px rgba(212, 175, 55, 0.3);
     transform: rotate(30deg) scale(1.05);
+    background: transparent;
+    padding: 6px 12px 14px 12px;
 }
 
+/* Cleaned up styles */
 .notifications-filters {
     display: flex;
     gap: 10px;
-    padding: 14px 12px;
+    padding: 14px 12px 6px 12px;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
-    background: transparent;
+    width: 100%;
+}
+
+.sticky-controls {
+    background: var(--bg-primary);
+    backdrop-filter: blur(10px);
     position: sticky;
-    top: 80px;
-    z-index: 10;
-    margin-bottom: 12px;
+    top: var(--sticky-top, 80px) !important;
+    /* Counteract padding to stick to 0 viewport */
+    z-index: 9999 !important;
+    margin-bottom: 0;
+    transition: top 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border-bottom: 1px solid rgba(212, 175, 55, 0.08);
+}
+
+body.header-hidden .sticky-controls {
+    top: 0px !important;
 }
 
 .filter-btn {
@@ -4007,7 +4022,8 @@ body {
         gap: 8px;
         padding: 12px 10px;
         margin-bottom: 10px;
-        top: 74px;
+        top: 80px;
+        /* Falls back to global rule transition, but sets base to 80px if needed */
     }
 
     .filter-btn {

@@ -89,7 +89,7 @@ class AccountController {
         // 1. Update Profile Card
         if (this.profileNameEl) this.profileNameEl.textContent = 'Guest User';
         if (this.profileEmailEl) this.profileEmailEl.textContent = 'Sign in to access exclusive perks';
-        if (this.profileAvatarEl) this.profileAvatarEl.innerHTML = '<div class="avatar-placeholder" style="background:#ddd; color:#666;">?</div>';
+        if (this.profileAvatarEl) this.profileAvatarEl.innerHTML = `<div class="avatar-placeholder" style="display: flex; align-items: center; justify-content: center; height: 100%; width: 100%;"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#B8860B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></div>`;
 
         // 2. Hide Member-Only Sections
         this.toggleMemberSections(false);

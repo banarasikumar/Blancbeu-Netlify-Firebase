@@ -3003,6 +3003,7 @@ function slideBA(direction) {
     baFilteredSlides[baCurrentSlide].classList.add('active');
     updateBADots();
 }
+window.slideBA = slideBA; // Expose to global scope for onclick handlers
 
 function goToBASlide(index) {
     baFilteredSlides[baCurrentSlide].classList.remove('active');
@@ -3203,7 +3204,46 @@ document.addEventListener('DOMContentLoaded', () => {
             carousel.style.transform = `translateX(-${staffPosition * cardWidth}px)`;
         }
     }, 5000);
+
+    // Add swipe support for staff carousel
+    initStaffCarouselSwipe();
 });
+
+// ===== STAFF CAROUSEL SWIPE SUPPORT =====
+function initStaffCarouselSwipe() {
+    const carousel = document.getElementById('staffCarousel');
+    if (!carousel) return;
+
+    let touchStartX = 0;
+    let touchEndX = 0;
+    let touchStartY = 0;
+    let touchEndY = 0;
+    const minSwipeDistance = 50;
+
+    carousel.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+
+    carousel.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].clientX;
+        touchEndY = e.changedTouches[0].clientY;
+
+        const diffX = touchStartX - touchEndX;
+        const diffY = Math.abs(touchStartY - touchEndY);
+
+        // Only trigger if horizontal swipe is greater than vertical (prevents scroll interference)
+        if (Math.abs(diffX) > diffY && Math.abs(diffX) > minSwipeDistance) {
+            if (diffX > 0) {
+                // Swipe left - go to next
+                slideStaff(1);
+            } else {
+                // Swipe right - go to previous
+                slideStaff(-1);
+            }
+        }
+    }, { passive: true });
+}
 
 // ===== SAVINGS CALCULATOR =====
 function initSavingsCalculator() {
@@ -5163,3 +5203,16 @@ window.addEventListener('load', () => {
     }
 });
 
+// =========================================
+// EXPOSE FUNCTIONS TO GLOBAL SCOPE FOR ONCLICK HANDLERS
+// (Required because script.js is loaded as type="module")
+// =========================================
+window.moveCarousel = moveCarousel;
+window.goToSlide = goToSlide;
+window.showTC = showTC;
+window.closeTC = closeTC;
+window.openBlancbeuMaps = openBlancbeuMaps;
+window.openWhatsAppChat = openWhatsAppChat;
+window.slideTestimonial = slideTestimonial;
+window.slideStaff = slideStaff;
+window.slideServiceCarousel = slideServiceCarousel;

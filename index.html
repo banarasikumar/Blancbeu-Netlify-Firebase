@@ -172,7 +172,7 @@ PHASE 3: PREMIUM FEATURES (Week 4)
         rel="stylesheet">
 
     <link rel="stylesheet" href="theme-variables.css">
-    <link rel="stylesheet" href="styles.css?v=2.34">
+    <link rel="stylesheet" href="styles.css?v=2.36">
 
     <style>
         /* FIX: Full Width Transformation Gallery on Mobile */
@@ -351,26 +351,7 @@ PHASE 3: PREMIUM FEATURES (Week 4)
             background: linear-gradient(135deg, var(--gold-bright), var(--gold-primary));
         }
 
-        /* View All Menu Button Fix */
-        .view-all-services-btn {
-            background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
-            color: #fff !important;
-            border: none;
-            border-radius: 30px;
-            padding: 14px 40px;
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-            box-shadow: 0 4px 15px rgba(212, 160, 23, 0.4);
-            animation: btnPulse 2s infinite;
-        }
+
 
         .view-all-services-btn:hover {
             color: #000 !important;
@@ -586,11 +567,15 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                         <p class="section-subtitle">Popular premium treatments</p>
                     </div>
 
-                    <div class="view-all-btn-container" style="text-align: right; margin-bottom: 30px;">
+                    <div class="view-all-btn-container"
+                        style="max-width: 360px; margin: 0 auto 30px; text-align: right;">
                         <button class="view-all-services-btn"
-                            onclick="document.querySelector('.bottom-nav .nav-item[data-page=\'services\']').click()"
-                            style="padding: 10px 30px; font-size: 15px;">
-                            View All Menu
+                            onclick="document.querySelector('.bottom-nav .nav-item[data-page=\'services\']').click()">
+                            <span>View All Menu</span>
+                            <svg class="btn-arrow-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M9 18l6-6-6-6" />
+                            </svg>
                         </button>
                     </div>
 
@@ -602,10 +587,10 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                                         <div class="service-img-container">
                                             <img src="assets/featured_services/haircut.png" alt="Premium Haircut"
                                                 class="service-highlight-img">
+                                            <h3>Premium Haircut & Style</h3>
                                         </div>
                                         <div class="service-content">
                                             <div>
-                                                <h3>Premium Haircut & Style</h3>
                                                 <p class="service-desc">Expert cutting and styling techniques</p>
                                             </div>
                                             <div>
@@ -625,10 +610,10 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                                         <div class="service-img-container">
                                             <img src="assets/featured_services/facial.png" alt="Facial & Skincare"
                                                 class="service-highlight-img">
+                                            <h3>Facial & Skincare</h3>
                                         </div>
                                         <div class="service-content">
                                             <div>
-                                                <h3>Facial & Skincare</h3>
                                                 <p class="service-desc">Rejuvenating facials with premium products</p>
                                             </div>
                                             <div>
@@ -646,10 +631,10 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                                         <div class="service-img-container">
                                             <img src="assets/featured_services/makeup.png" alt="Makeup & Bridal"
                                                 class="service-highlight-img">
+                                            <h3>Makeup & Bridal</h3>
                                         </div>
                                         <div class="service-content">
                                             <div>
-                                                <h3>Makeup & Bridal</h3>
                                                 <p class="service-desc">Professional makeup for all occasions</p>
                                             </div>
                                             <div>
@@ -669,10 +654,10 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                                         <div class="service-img-container">
                                             <img src="assets/featured_services/threading.png" alt="Threading & Waxing"
                                                 class="service-highlight-img">
+                                            <h3>Threading & Waxing</h3>
                                         </div>
                                         <div class="service-content">
                                             <div>
-                                                <h3>Threading & Waxing</h3>
                                                 <p class="service-desc">Gentle hair removal solutions</p>
                                             </div>
                                             <div>
@@ -931,10 +916,12 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                                     <div class="staff-photo-wrapper">
                                         <img src="attached_assets/stock_images/professional_beauty__59c2cb84.jpg"
                                             alt="Priya Sharma" class="staff-photo">
-                                        <div class="staff-rating">⭐ 4.9</div>
                                     </div>
                                     <div class="staff-info">
-                                        <h3 class="staff-name">Priya Sharma</h3>
+                                        <div class="staff-name-wrapper">
+                                            <h3 class="staff-name">Priya Sharma</h3>
+                                            <div class="staff-rating">⭐ 4.9</div>
+                                        </div>
                                         <p class="staff-title">Senior Hair Stylist</p>
                                         <div class="staff-experience">
                                             <span class="exp-badge">12+ Years Experience</span>
@@ -953,10 +940,12 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                                     <div class="staff-photo-wrapper">
                                         <img src="attached_assets/stock_images/professional_beauty__30f1cabb.jpg"
                                             alt="Meera Patel" class="staff-photo">
-                                        <div class="staff-rating">⭐ 4.8</div>
                                     </div>
                                     <div class="staff-info">
-                                        <h3 class="staff-name">Meera Patel</h3>
+                                        <div class="staff-name-wrapper">
+                                            <h3 class="staff-name">Meera Patel</h3>
+                                            <div class="staff-rating">⭐ 4.8</div>
+                                        </div>
                                         <p class="staff-title">Makeup Artist</p>
                                         <div class="staff-experience">
                                             <span class="exp-badge">8+ Years Experience</span>
@@ -975,10 +964,12 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                                     <div class="staff-photo-wrapper">
                                         <img src="attached_assets/stock_images/professional_beauty__4b0e7940.jpg"
                                             alt="Anjali Singh" class="staff-photo">
-                                        <div class="staff-rating">⭐ 4.9</div>
                                     </div>
                                     <div class="staff-info">
-                                        <h3 class="staff-name">Anjali Singh</h3>
+                                        <div class="staff-name-wrapper">
+                                            <h3 class="staff-name">Anjali Singh</h3>
+                                            <div class="staff-rating">⭐ 4.9</div>
+                                        </div>
                                         <p class="staff-title">Skin Care Specialist</p>
                                         <div class="staff-experience">
                                             <span class="exp-badge">10+ Years Experience</span>
@@ -997,10 +988,12 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                                     <div class="staff-photo-wrapper">
                                         <img src="attached_assets/stock_images/professional_beauty__bd79d0cb.jpg"
                                             alt="Riya Gupta" class="staff-photo">
-                                        <div class="staff-rating">⭐ 4.7</div>
                                     </div>
                                     <div class="staff-info">
-                                        <h3 class="staff-name">Riya Gupta</h3>
+                                        <div class="staff-name-wrapper">
+                                            <h3 class="staff-name">Riya Gupta</h3>
+                                            <div class="staff-rating">⭐ 4.7</div>
+                                        </div>
                                         <p class="staff-title">Nail Art Expert</p>
                                         <div class="staff-experience">
                                             <span class="exp-badge">6+ Years Experience</span>
@@ -1683,16 +1676,35 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                     <div class="profile-card">
                         <div class="profile-avatar-wrapper">
                             <div class="profile-avatar">
-                                <div class="avatar-placeholder">👸</div>
+                                <div class="avatar-placeholder"
+                                    style="display: flex; align-items: center; justify-content: center; height: 100%; width: 100%;">
+                                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#B8860B"
+                                        stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="12" cy="7" r="4"></circle>
+                                    </svg>
+                                </div>
                             </div>
                             <div class="tier-badge-premium">Gold</div>
                         </div>
                         <div class="profile-info">
                             <h2 class="profile-name">Priya Sharma</h2>
                             <p class="profile-email">priya.sharma@email.com</p>
-                            <div class="member-badge">
+                            <div class="member-badge" id="premiumBadge" style="display: none; justify-content: center;">
                                 <span class="badge-icon">⭐</span>
-                                <span class="badge-text">Premium Member</span>
+                                <span class="badge-text" style="font-weight: 600;">Premium Member</span>
+                            </div>
+                            <!-- Dynamic Sign In Button -->
+                            <div class="member-badge sign-in-trigger" id="signInBadge"
+                                style="display: flex; justify-content: center; cursor: pointer; background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); color: #000; box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3); border: none; transition: transform 0.2s;">
+                                <span class="badge-icon" style="display: flex; align-items: center;">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                    </svg>
+                                </span>
+                                <span class="badge-text" style="font-weight: 700;">Sign In</span>
                             </div>
                         </div>
                         <button class="edit-profile-btn">✏️</button>

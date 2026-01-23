@@ -711,14 +711,7 @@ body.light-mode .fireworks-overlay {
     opacity: 0 !important;
 }
 
-body.light-mode *,
-body.light-mode *::before,
-body.light-mode *::after {
-    animation: none !important;
-    animation-duration: 0s !important;
-    animation-delay: 0s !important;
-    animation-iteration-count: 1 !important;
-}
+
 
 @keyframes rainbowPulse {
     0% {
@@ -3065,8 +3058,8 @@ body {
 
 .app-page {
     display: none;
-    padding-top: 100px;
-    /* 80px Header + 20px Spacing */
+    padding-top: 10px;
+    /* Small spacer, container handles header offset */
     padding-bottom: 100px;
 }
 
@@ -3274,7 +3267,7 @@ body {
     /* Counteract padding to stick to 0 viewport */
     z-index: 9999 !important;
     margin-bottom: 0;
-    transition: top 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    /* transition: top 0.3s cubic-bezier(0.4, 0, 0.2, 1); REMOVED for instant JS sync */
     border-bottom: 1px solid rgba(212, 175, 55, 0.08);
 }
 
@@ -5811,12 +5804,11 @@ body.light-mode .feature-card p {
 
 .service-card-item {
     width: 100%;
-    height: 380px;
-    /* Fixed height for consistent card size */
+    max-width: 360px;
+    margin: 0 auto;
+    height: auto;
     min-width: 0;
-    /* animation: slideInUp 0.6s ease-out forwards; */
     opacity: 1;
-    /* Ensure visible */
 }
 
 .service-card-item:nth-child(1) {
@@ -5846,8 +5838,8 @@ body.light-mode .feature-card p {
 .service-highlight-card {
     background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(212, 175, 55, 0.08));
     border: 1px solid rgba(212, 175, 55, 0.3);
-    border-radius: 24px;
-    padding: 40px 30px;
+    border-radius: 20px;
+    padding: 8px;
     text-align: center;
     backdrop-filter: blur(15px);
     transition: all 0.3s ease;
@@ -5855,7 +5847,30 @@ body.light-mode .feature-card p {
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    overflow: hidden;
+}
+
+.service-img-container {
+    position: relative;
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 0;
+}
+
+.service-highlight-img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.service-highlight-card:hover .service-highlight-img {
+    transform: scale(1.05);
+}
+
+.service-desc {
+    display: none;
 }
 
 .service-highlight-card:hover {
@@ -5873,12 +5888,24 @@ body.light-mode .feature-card p {
     filter: drop-shadow(0 4px 12px rgba(212, 175, 55, 0.3));
 }
 
-.service-highlight-card h3 {
-    font-size: 22px;
-    font-weight: 700;
-    color: var(--text-primary);
-    margin-bottom: 12px;
-    letter-spacing: 0.5px;
+.service-highlight-card h3,
+.service-img-container h3 {
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    margin: 0 !important;
+    padding: 25px 15px 12px !important;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.7) 60%, transparent 100%) !important;
+    color: #fff !important;
+    font-size: 18px !important;
+    font-weight: 600 !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8) !important;
+    letter-spacing: 0.3px;
+    z-index: 10 !important;
+    text-align: left;
+    border-bottom-left-radius: 14px;
+    border-bottom-right-radius: 14px;
 }
 
 .service-desc {
@@ -5890,28 +5917,52 @@ body.light-mode .feature-card p {
 
 .service-price {
     font-family: 'Cinzel', serif;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 700;
     background: linear-gradient(135deg, var(--gold-24k), var(--gold-bright));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    margin-bottom: 16px;
+    margin: 0;
+    text-align: left;
+}
+
+.service-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 5px;
+    gap: 10px;
+    border-top: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+.service-content>div:first-child {
+    display: none;
+}
+
+.service-content>div:last-child {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
 }
 
 .service-btn {
     background: linear-gradient(135deg, var(--gold-24k), var(--gold-bright));
     color: var(--bg-primary);
     border: none;
-    padding: 12px 28px;
+    padding: 8px 18px;
     border-radius: 50px;
     font-size: 13px;
     font-weight: 700;
     cursor: pointer;
     transition: all 0.3s ease;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.3);
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+    flex-shrink: 0;
 }
 
 .service-btn:hover {
@@ -7547,28 +7598,37 @@ body.light-mode .ba-nav-btn:hover {
 }
 
 .staff-rating {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(10px);
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 13px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(255, 215, 0, 0.15);
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-size: 12px;
     font-weight: 600;
     color: var(--gold-400);
+    margin-left: 8px;
+    vertical-align: middle;
 }
 
 .staff-info {
-    padding: 25px;
+    padding: 20px;
+    text-align: center;
+}
+
+.staff-name-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5px;
 }
 
 .staff-name {
     font-family: 'Cinzel', serif;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
     color: var(--gold-400);
-    margin-bottom: 5px;
+    margin: 0;
 }
 
 .staff-title {
@@ -8752,7 +8812,7 @@ body.light-mode .service-carousel-track .service-card-item .service-highlight-ca
 
 /* Card Redesign */
 .service-highlight-card {
-    height: 400px;
+    height: 250px;
     /* Fixed height for consistency */
     display: flex;
     flex-direction: column;
@@ -8767,74 +8827,7 @@ body.light-mode .service-carousel-track .service-card-item .service-highlight-ca
     border-radius: 12px;
 }
 
-/* Image container */
-.service-img-container {
-    height: 60%;
-    /* Occupy top 60% */
-    width: 100%;
-    position: relative;
-    overflow: hidden;
-}
-
-.service-highlight-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-}
-
-.service-highlight-card:hover .service-highlight-img {
-    transform: scale(1.1);
-}
-
-/* Content container */
-.service-content {
-    height: 40%;
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    /* Simplified background to ensure contrast */
-    background: rgba(10, 10, 10, 0.95) !important;
-    border-top: 1px solid rgba(212, 160, 23, 0.2);
-    position: relative;
-    z-index: 2;
-}
-
-/* Typography Overrides */
-/* Typography Overrides */
-.service-highlight-card h3 {
-    margin: 0;
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: #FFD700 !important;
-    /* Force Gold */
-    text-shadow: 0 1px 2px #000 !important;
-    /* Force Shadow */
-    position: relative;
-    z-index: 10;
-    opacity: 1 !important;
-    visibility: visible !important;
-}
-
-.service-highlight-card .service-desc {
-    font-size: 0.85rem;
-    margin: 0.5rem 0;
-    color: rgba(255, 255, 255, 0.7);
-    line-height: 1.4;
-}
-
-.service-highlight-card .service-price {
-    font-weight: 600;
-    color: #fff;
-    margin-bottom: 0.5rem;
-}
-
-/* Remove old placeholder styles if they interfere, or just override above */
-.service-image-placeholder {
-    display: none;
-}
+/* DUPLICATE STYLES REMOVED - See lines 5838-5970 for active service card styles */
 
 /* ==========================================================================
 /* ==========================================================================
@@ -10017,10 +10010,10 @@ body.light-mode .services-empty-title {
 
 .view-all-services-btn {
     position: relative;
-    background: transparent;
+    background: transparent !important;
     border: none;
     border-radius: 30px;
-    padding: 14px 40px;
+    padding: 12px 15px;
     font-size: 16px;
     font-weight: 700;
     cursor: pointer;
@@ -10028,12 +10021,14 @@ body.light-mode .services-empty-title {
     letter-spacing: 2px;
     display: inline-flex;
     align-items: center;
-    gap: 12px;
+    justify-content: center;
+    gap: 6px;
     text-decoration: none;
-    /* Create the colorful border effect using a pseudo-element behind */
     z-index: 1;
     overflow: hidden;
+    color: #fff;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+
 }
 
 /* The Animated Gradient Border Layer */
@@ -10042,31 +10037,37 @@ body.light-mode .services-empty-title {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 300%;
-    height: 300%;
+    width: 400%;
+    aspect-ratio: 1;
     background: conic-gradient(from 0deg,
-            #D4AF37,
-            /* Gold */
-            #FF00C8,
-            /* Magenta */
-            #00FFD5,
+            #FF0000,
+            /* Red */
+            #FF6600,
+            /* Orange */
+            #00FF00,
+            /* Green */
+            #00FFFF,
             /* Cyan */
-            #7A00FF,
+            #0066FF,
+            /* Blue */
+            #9900FF,
             /* Purple */
-            #D4AF37
-            /* Back to Gold */
+            #FF00FF,
+            /* Magenta */
+            #FF0066,
+            /* Hot Pink */
+            #FF0000
+            /* Back to Red */
         );
     z-index: -2;
-    z-index: -2;
-    -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
-    animation: premiumBorderAnim 8s linear infinite;
-    -webkit-animation: premiumBorderAnim 8s linear infinite;
+    animation: premiumBorderAnim 4s linear infinite;
     border-radius: 0;
 }
 
 /* The Inner Background Layer to hide the center of the gradient */
 .view-all-services-btn::after {
+    /* Ensure this is the inner background layer only */
     content: '';
     position: absolute;
     top: 3px;
@@ -10076,6 +10077,7 @@ body.light-mode .services-empty-title {
     background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
     border-radius: 28px;
     z-index: -1;
+    transition: background 0.3s ease;
 }
 
 @keyframes premiumBorderAnim {
@@ -10094,46 +10096,34 @@ body.light-mode .services-empty-title {
     }
 }
 
-/* Hover Effects */
 .view-all-services-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
-    /* Gold Glow */
-}
-
-/* Ensure text is on top */
-.view-all-services-btn span {
-    position: relative;
-    z-index: 2;
-}
-
-
-
-.view-all-services-btn::after {
-    content: '→';
-    font-size: 20px;
-    transition: transform 0.3s ease;
-}
-
-.view-all-services-btn:hover {
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 8px 25px rgba(212, 160, 23, 0.6);
-    background: linear-gradient(135deg, var(--gold-bright), var(--gold-primary));
-    color: #000;
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 10px 30px rgba(212, 160, 23, 0.5);
+    color: #fff;
 }
 
 .view-all-services-btn:hover::after {
+    background: linear-gradient(135deg, var(--gold-bright), var(--gold-primary));
+}
+
+.btn-arrow-icon {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s ease;
+}
+
+.view-all-services-btn:hover .btn-arrow-icon {
     transform: translateX(5px);
 }
 
 body.light-mode .view-all-services-btn {
-    color: #B8860B;
-    border-color: #D4A017;
+    color: #fff;
+    /* Maintain white text for contrast on gold button */
 }
 
 body.light-mode .view-all-services-btn:hover {
-    color: white;
-    background: #D4A017;
+    color: #fff;
+    background: transparent !important;
 }
 
 /* =========================================
@@ -13327,4 +13317,75 @@ body.light-mode .logout-btn.signin-mode:hover {
     align-items: center;
     justify-content: center;
     color: var(--gold-dark);
+}
+
+/* FIX: Remove yellow blurred border/background from chat assistant */
+/* FIX: Refined Chat Fab Styling - 2px Inset Blurred Gold Border (Above Nav) */
+.chat-fab,
+#chatFab {
+    box-shadow: none !important;
+    background: none !important;
+    border: none !important;
+    /* Remove solid border */
+    border-radius: 50% !important;
+    box-sizing: border-box !important;
+    position: fixed !important;
+    bottom: 90px !important;
+    /* Elevated above bottom nav */
+    right: 15px !important;
+    /* Moved closer to right edge */
+    width: 48px !important;
+    /* Reduced size (~20% smaller) */
+    height: 48px !important;
+    /* Reduced size (~20% smaller) */
+    /* Ensure positioning context (likely fixed, but ensuring) */
+    overflow: visible !important;
+    /* Allow pseudo-element to be visible if needed, though it's inside */
+}
+
+/* Remove the inner pulse element entirely */
+.chat-fab .fab-pulse {
+    display: none !important;
+    background: none !important;
+}
+
+/* Remove shadow/border from the icon image */
+.chat-fab .fab-icon-img {
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 50% !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    padding: 0 !important;
+    /* Ensure no padding affects the image */
+}
+
+/* Create the 2px blurred border overlay */
+.chat-fab::after,
+#chatFab::after {
+    display: block !important;
+    content: '' !important;
+    position: absolute !important;
+    top: 2px !important;
+    left: 2px !important;
+    right: 2px !important;
+    bottom: 2px !important;
+    border: 2px solid #FFD700 !important;
+    /* Bright Gold/Yellow */
+    border-radius: 50% !important;
+    filter: blur(1px) !important;
+    /* Soft blur */
+    box-shadow: 0 0 4px #FFD700 !important;
+    /* Additional glow/blur effect */
+    z-index: 10 !important;
+    /* Overlay the image */
+    pointer-events: none !important;
+    /* Let clicks pass through */
+    background: transparent !important;
+}
+
+.chat-fab::before,
+#chatFab::before {
+    display: none !important;
 }

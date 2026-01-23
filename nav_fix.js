@@ -168,11 +168,17 @@ IMPORTANT: This app uses #appContent as the scrollable container, NOT window.
         // Apply physical transformation
         header.style.transform = `translateY(${currentTranslateY}px)`;
 
+        // Apply physical transformation
+        header.style.transform = `translateY(${currentTranslateY}px)`;
+
+        // REMOVED: Class toggling logic (caused CSS conflict with top: 0px !important)
+        // We now rely purely on --sticky-top variable for smooth positioning
+
         // SYNC STICKY CONTROLS
         // The sticky top should be: Header Height - |scrolled away amount|
         // If header is fully visible (translateY=0), sticky top = 80px
         // If header is fully hidden (translateY=-80), sticky top = 0px
-        const stickyTop = HEADER_HEIGHT + currentTranslateY;
+        const stickyTop = currentTranslateY; // Ranges from 0 to -80
         document.documentElement.style.setProperty('--sticky-top', `${stickyTop}px`);
 
         lastScrollY = currentScrollY;

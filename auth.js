@@ -488,10 +488,22 @@ function updateUIForLogin(user) {
         document.dispatchEvent(new CustomEvent('user-logged-in', { detail: user }));
         showToast(`Welcome back, ${user.displayName || 'Member'}! ✨`, "success");
     }
+
+    // Toggle Premium Badge
+    const premiumBadge = document.getElementById('premiumBadge');
+    const signInBadge = document.getElementById('signInBadge');
+    if (premiumBadge) premiumBadge.style.display = 'flex';
+    if (signInBadge) signInBadge.style.display = 'none';
 }
 
 function updateUIForLogout(user) {
     // Reset UI if needed
+
+    // Toggle Sign In Badge
+    const premiumBadge = document.getElementById('premiumBadge');
+    const signInBadge = document.getElementById('signInBadge');
+    if (premiumBadge) premiumBadge.style.display = 'none';
+    if (signInBadge) signInBadge.style.display = 'flex';
 }
 
 // --- Magic Link Handler ---
@@ -599,6 +611,14 @@ document.addEventListener('open-login-modal', (e) => {
 document.addEventListener('DOMContentLoaded', () => {
     checkMagicLink();
     checkTestRoute();
+
+    // Sign In Badge Click Listener
+    const signInBadge = document.getElementById('signInBadge');
+    if (signInBadge) {
+        signInBadge.addEventListener('click', () => {
+            openLoginModal();
+        });
+    }
 });
 
 function checkTestRoute() {

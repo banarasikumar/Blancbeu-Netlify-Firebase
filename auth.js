@@ -88,20 +88,32 @@ if (googleBtn) {
             showToast(`Welcome, ${user.displayName}! ✨`);
             closeAuthModal();
 
+            // Restore any pending action (e.g., open booking modal)
+            restoreLoginState();
+
         } catch (error) {
             console.error("Google Login Error:", error);
+
+            let errorMessage = `Login failed: ${error.message}`;
+            let errorType = "error";
+
             if (error.code === 'auth/popup-closed-by-user') {
-                return;
+                return; // Ignore
             }
+
             if (error.code === 'auth/unauthorized-domain') {
-                showToast("Login Failed: Domain not authorized in Firebase Console.", "error");
-                alert("Error: This domain is not authorized for OAuth operations for your Firebase project. Please add it in the Firebase Console -> Authentication -> Settings -> Authorized Domains.");
+                errorMessage = "Login Failed: Domain/Port not authorized in Firebase Console.";
+
+                // Add visual overlay for this specific error to guide the user
+                const port = window.location.port;
+                alert(`⚠️ Google Login Error: Unauthorized Domain\n\nYou are running on port ${port}, but Firebase/Google Console likely only authorizes port 5173 or localhost (default).\n\nPlease add "http://localhost:${port}" to your Google Cloud Console > Authorized Javascript Origins.`);
             } else if (error.code === 'auth/configuration-not-found') {
-                showToast("Login Failed: Firebase config missing.", "error");
-                alert("Error: Firebase configuration not found. Please check your environment variables.");
-            } else {
-                showToast(`Login failed: ${error.message}`, "error");
+                errorMessage = "Login Failed: Firebase config missing.";
+            } else if (error.message.includes("origin")) {
+                errorMessage = `Origin mismatch. Try port 5173. (${error.message})`;
             }
+
+            showToast(errorMessage, errorType);
         }
     });
 }
@@ -285,7 +297,7 @@ async function saveUserProfile(uid, data) {
     }
 }
 
-function showToast(message, type = "success") {
+export function showToast(message, type = "success") {
     // Remove existing toasts to prevent stacking overload
     const existingToasts = document.querySelectorAll('.auth-toast');
     existingToasts.forEach(t => t.remove());
@@ -487,6 +499,9 @@ function updateUIForLogin(user) {
         // Dispatch event for other listeners
         document.dispatchEvent(new CustomEvent('user-logged-in', { detail: user }));
         showToast(`Welcome back, ${user.displayName || 'Member'}! ✨`, "success");
+
+        // Restore any pending action (e.g., open booking modal if user clicked Book Now before login)
+        restoreLoginState();
     }
 
     // Toggle Premium Badge
@@ -651,6 +666,17 @@ export function openLoginModal(pendingAction = null) {
     if (pendingAction) {
         saveLoginState(pendingAction);
     }
+
+    // Ensure header is visible when login modal opens (fix for service page hidden header)
+    // The header uses both classes AND transform to hide, so we reset all
+    const mainHeader = document.getElementById('mainHeader');
+    if (mainHeader) {
+        mainHeader.classList.remove('hidden');
+        mainHeader.classList.remove('force-hidden');
+        mainHeader.style.transform = 'translateY(0)';  // Reset transform (nav_fix.js uses this)
+        document.documentElement.style.setProperty('--sticky-top', '80px');  // Reset sticky control position
+    }
+
     // Reset to login view with animation
     if (authLoginView) {
         authLoginView.style.display = 'block';
@@ -661,3 +687,5 @@ export function openLoginModal(pendingAction = null) {
     if (authProfileView) authProfileView.style.display = 'none';
     if (authModal) authModal.style.display = 'flex';
 }
+
+

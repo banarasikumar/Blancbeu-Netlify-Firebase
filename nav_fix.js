@@ -28,6 +28,7 @@ IMPORTANT: This app uses #appContent as the scrollable container, NOT window.
     // ==========================================
     let lastScrollY = 0;
     let currentTab = 'home';
+    let lastNonNotificationTab = 'home'; // Track where to return to
     let scrollTicking = false;
     let isTabSwitching = false;
 
@@ -276,6 +277,12 @@ IMPORTANT: This app uses #appContent as the scrollable container, NOT window.
 
             // 4. Update current tab state
             const previousTab = currentTab;
+
+            // Track history for toggle back feature
+            if (previousTab !== 'notifications' && previousTab !== null) {
+                lastNonNotificationTab = previousTab;
+            }
+
             currentTab = targetTabId;
 
             // Update URL hash without finding scrolling (history API)
@@ -369,7 +376,24 @@ IMPORTANT: This app uses #appContent as the scrollable container, NOT window.
             e.preventDefault();
             const targetPageId = notifyBtn.getAttribute('data-page') || 'notifications';
 
-            if (targetPageId === currentTab) return;
+            if (targetPageId === currentTab) {
+                // TOGGLE FEATURE: If already on notifications, go back
+                if (targetPageId === 'notifications') {
+                    console.log(`🔙 Toggling Notifications OFF -> Returning to ${lastNonNotificationTab}`);
+                    switchToTab(lastNonNotificationTab || 'home');
+
+                    // Remove active state from notify button
+                    notifyBtn.classList.remove('active');
+                }
+                return;
+            }
+
+            // Create visual active state for the button
+            if (targetPageId === 'notifications') {
+                notifyBtn.classList.add('active');
+            } else {
+                notifyBtn.classList.remove('active');
+            }
 
             saveScrollPosition(currentTab, contentArea.scrollTop);
             currentTab = targetPageId;

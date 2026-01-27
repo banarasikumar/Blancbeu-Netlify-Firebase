@@ -154,6 +154,22 @@ function removeService(index) {
 
 // Navigate to booking page (Full Page Logic)
 function internalNavigateToBookingPage() {
+    // RESET HEADER (Fix for missing header on navigation)
+    const header = document.getElementById('mainHeader');
+    if (header) {
+        header.classList.remove('hidden');
+        header.style.transition = 'none'; // Instant reset
+        header.style.transform = 'translateY(0)';
+        header.style.opacity = '1';
+        header.style.visibility = 'visible';
+        document.documentElement.style.setProperty('--sticky-top', '80px');
+
+        // Restore transition after small delay
+        setTimeout(() => {
+            header.style.transition = '';
+        }, 50);
+    }
+
     // Hide all pages
     document.querySelectorAll('.app-page').forEach(page => {
         page.classList.remove('active');
@@ -163,7 +179,15 @@ function internalNavigateToBookingPage() {
     const bookingPage = document.getElementById('booking');
     if (bookingPage) {
         bookingPage.classList.add('active');
-        window.scrollTo(0, 0);
+
+        // Scroll Content to Top (Fix for physical scroll compatibility)
+        const appContent = document.getElementById('appContent');
+        if (appContent) {
+            appContent.scrollTop = 0;
+        } else {
+            window.scrollTo(0, 0);
+        }
+
         window.location.hash = 'booking';
 
         // Render current list
@@ -661,7 +685,7 @@ document.addEventListener('open-booking-modal', () => {
 });
 
 // Handle "Book Now" / "Add" buttons globally
-document.addEventListener('click', (e) => {
+document.addEventListener('click', async (e) => {
     const targetBtn = e.target.closest('.service-btn') ||
         e.target.closest('.hero-btn.primary-btn') ||
         e.target.closest('.service-page-book-btn');
@@ -677,6 +701,9 @@ document.addEventListener('click', (e) => {
                 showToast("System Error: Setup incomplete. Please refresh or contact support.", "error");
                 return;
             }
+
+            // WAIT for Auth to be ready (Fix for "login flash" on reload)
+            await auth.authStateReady();
 
             const serviceName = getServiceNameFromCard(e.target);
 
@@ -701,7 +728,10 @@ document.addEventListener('click', (e) => {
                     if (serviceName) {
                         localStorage.setItem('pending_booking_service', serviceName);
                     }
-                    showToast("Please login to book an appointment 🔐", "error");
+                    // No error toast needed here usually if it's just a prompt to login, 
+                    // but keeping logic consistent with previous behavior or improving UX.
+                    // Ideally, just open modal gracefully.
+
                     openLoginModal('openBookingModal');
                 } else {
                     // Logged in

@@ -134,28 +134,7 @@ PHASE 3: PREMIUM FEATURES (Week 4)
     <meta name="apple-mobile-web-app-title" content="Blancbeu">
 
     <!-- Critical: Apply theme IMMEDIATELY before page renders using data-theme attribute -->
-    <script>
-        (function () {
-            try {
-                const savedTheme = localStorage.getItem('theme');
-                let shouldBeLightMode = false;
 
-                if (savedTheme) {
-                    shouldBeLightMode = savedTheme === 'light';
-                } else {
-                    shouldBeLightMode = true; // Default to light mode
-                }
-
-                if (shouldBeLightMode) {
-                    document.documentElement.setAttribute('data-theme', 'light');
-                    document.body.classList.add('light-mode');
-                }
-                // Dark mode is fallback (no attribute needed)
-            } catch (e) {
-                // Fail silently if localStorage is not available
-            }
-        })();
-    </script>
     <link rel="apple-touch-icon" href="/icon-192x192.png">
     <link rel="apple-touch-startup-image" href="/splash-750x1334.png"
         media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)">
@@ -171,8 +150,8 @@ PHASE 3: PREMIUM FEATURES (Week 4)
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Poppins:wght@300;400;500;600;700&family=Cinzel:wght@400;600;700&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="theme-variables.css?v=3.5">
-    <link rel="stylesheet" href="styles.css?v=3.5">
+    <link rel="stylesheet" href="theme-variables.css">
+    <link rel="stylesheet" href="styles.css">
 
     <style>
         /* FIX: Full Width Transformation Gallery on Mobile */
@@ -422,6 +401,28 @@ PHASE 3: PREMIUM FEATURES (Week 4)
 </head>
 
 <body>
+    <script>
+        (function () {
+            try {
+                const savedTheme = localStorage.getItem('theme');
+                let shouldBeLightMode = false;
+
+                if (savedTheme) {
+                    shouldBeLightMode = savedTheme === 'light';
+                } else {
+                    shouldBeLightMode = true; // Default to light mode
+                }
+
+                if (shouldBeLightMode) {
+                    document.documentElement.setAttribute('data-theme', 'light');
+                    document.body.classList.add('light-mode');
+                }
+                // Dark mode is fallback (no attribute needed)
+            } catch (e) {
+                // Fail silently if localStorage is not available
+            }
+        })();
+    </script>
     <!-- Premium App Loader -->
     <div id="app-loader">
         <div class="loader-content">
@@ -2133,9 +2134,6 @@ PHASE 3: PREMIUM FEATURES (Week 4)
     <script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/329180/fscreen%401.0.1.js'></script>
     <script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/329180/Stage%400.1.4.js'></script>
     <script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/329180/MyMath.js'></script>
-    <!-- Firebase SDKs -->
-    <script type="module" src="firebase-config.js"></script>
-    <script type="module" src="auth.js"></script>
     <!-- Custom Date Picker Modal -->
     <div id="customDatePickerModal" class="custom-picker-modal hidden">
         <div class="picker-content glass-card">
@@ -2171,8 +2169,7 @@ PHASE 3: PREMIUM FEATURES (Week 4)
         </div>
     </div>
 
-    <script type="module" src="booking.js"></script>
-    <script type="module" src="my-bookings.js"></script>
+
 
     <!-- Premium Full-Screen Auth Modal -->
     <div id="authModal" class="auth-overlay" style="display: none;">
@@ -2326,13 +2323,13 @@ PHASE 3: PREMIUM FEATURES (Week 4)
     </div>
 
 
-    <script type="module" src="script.js?v=3.5"></script>
-    <script type="module" src="firebase-config.js?v=3.5"></script>
-    <script type="module" src="auth.js?v=3.5"></script>
-    <script type="module" src="booking.js?v=3.5"></script>
-    <script type="module" src="my-bookings.js?v=3.5"></script>
-    <script type="module" src="account.js?v=3.5"></script>
-    <script type="module" src="nav_fix.js?v=3.5"></script>
+    <script type="module" src="script.js"></script>
+    <script type="module" src="firebase-config.js"></script>
+    <script type="module" src="auth.js"></script>
+    <script type="module" src="booking.js"></script>
+    <script type="module" src="my-bookings.js"></script>
+    <script type="module" src="account.js"></script>
+    <script type="module" src="nav_fix.js"></script>
 
 </body>
 

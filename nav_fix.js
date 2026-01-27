@@ -200,20 +200,42 @@ IMPORTANT: This app uses #appContent as the scrollable container, NOT window.
     // ==========================================
     // TAB NAVIGATION
     // ==========================================
+    // GLOBAL EXPORT for other scripts (like booking.js)
+    window.navigateToPage = function (pageId) {
+        console.log(`Global navigation requested to: ${pageId}`);
+        switchToTab(pageId);
+    };
+
     function switchToTab(targetTabId, isActiveTabClick = false) {
         if (!targetTabId) return;
 
-        // CASE A: Clicking the ACTIVE tab → Scroll to top smoothly
-        if (targetTabId === currentTab && isActiveTabClick) {
-            contentArea.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-            showHeader();
-            return;
+        // CASE A: Clicking the ACTIVE tab
+        if (targetTabId === currentTab) {
+            // CHECK IF ACTUALLY VISIBLE
+            // If the element is not active, we must force switch (Fix for Booking Page issue)
+            const targetPage = document.querySelector(`[data-page="${targetTabId}"]`);
+            const isVisible = targetPage && targetPage.classList.contains('active');
+
+            if (isVisible) {
+                // It is visible, so just scroll to top
+                if (isActiveTabClick) {
+                    contentArea.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                    showHeader();
+                }
+                return;
+            } else {
+                // It matches currentTab but is NOT visible? 
+                // This means internal state drift (e.g. booking.js hid it manually). 
+                // Force proceed to CASE B.
+                console.warn(`[NavFix] State mismatch: ${targetTabId} is current but hidden. Forcing re-render.`);
+                currentTab = null; // Reset currentTab to force clean switch
+            }
         }
 
-        // CASE B: Switching to a DIFFERENT tab
+        // CASE B: Switching to a DIFFERENT tab (or fixing state)
         if (targetTabId !== currentTab) {
             isTabSwitching = true;
 
@@ -288,6 +310,11 @@ IMPORTANT: This app uses #appContent as the scrollable container, NOT window.
                 }, 50);
 
                 console.log(`📱 Tab: ${previousTab} → ${targetTabId} | Scroll: ${savedPosition}px`);
+
+                // Update Service Cart Visibility (Fix for sticky cart bar on home)
+                if (window.updateServiceCartVisibility) {
+                    window.updateServiceCartVisibility();
+                }
             });
         }
     }

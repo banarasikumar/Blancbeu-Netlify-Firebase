@@ -72,17 +72,33 @@ export async function loadBookings() {
             const serviceName = data.service || 'General Service';
             const dateStr = formatDate(data.date);
             const timeStr = formatTime(data.time);
-            const status = data.status || 'requested'; // Default status
-            const statusBadgeClass = status === 'confirmed' ? 'upcoming-badge' : 'completed-badge'; // Just using existing classes for color
-            const displayStatus = status.charAt(0).toUpperCase() + status.slice(1);
+            const status = data.status || 'pending';
+            let statusColor = '#f39c12'; // Default Orange for Pending
+            let displayStatus = 'Pending';
+
+            if (status === 'confirmed') {
+                statusColor = '#27ae60'; // Green
+                displayStatus = 'Confirmed';
+            } else if (status === 'completed') {
+                statusColor = '#7f8c8d'; // Grey
+                displayStatus = 'Completed';
+            }
 
             html += `
-            <div class="booking-card upcoming-card" data-status="upcoming">
-                <div class="booking-status-badge ${statusBadgeClass}" style="background: var(--gold-dark); color:white;">${displayStatus}</div>
+            <div class="booking-card upcoming-card" data-status="${status}">
+                <div class="booking-status-badge" style="background: ${statusColor}; color:white;">${displayStatus}</div>
                 <div class="booking-header-row">
                     <div class="booking-service-info">
-                        <h3 class="booking-service-name">${serviceName}</h3>
-                        <p class="booking-beautician" style="opacity:0.7; font-size:0.9em;">Blancbeu Redirection</p>
+                        <div class="booking-service-tags">
+                            ${(data.servicesList || serviceName.split(',')).map((s, index) => {
+                // Generate a deterministic pastel color based on string
+                const colors = ['#e3f2fd', '#f3e5f5', '#e8f5e9', '#fff3e0', '#fce4ec', '#fff8e1', '#e0f2f1', '#f1f8e9'];
+                const textColors = ['#1565c0', '#7b1fa2', '#2e7d32', '#ef6c00', '#c2185b', '#f57f17', '#00695c', '#33691e'];
+                const colorIndex = (s.length + index) % colors.length;
+                return `<span class="service-tag-chip" style="background:${colors[colorIndex]}; color:${textColors[colorIndex]};">${s.trim()}</span>`;
+            }).join('')}
+                        </div>
+                        <p class="booking-beautician" style="opacity:0.7; font-size:0.9em; margin-top:8px;">Blancbeu Redirection</p>
                     </div>
                     <div class="booking-time-block">
                         <div class="booking-time">${dateStr}</div>

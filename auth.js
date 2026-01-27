@@ -1,6 +1,8 @@
 import { auth, db } from './firebase-config.js';
 import {
     signInWithPopup,
+    signInWithRedirect,
+    getRedirectResult,
     GoogleAuthProvider,
     signOut,
     onAuthStateChanged,
@@ -24,6 +26,31 @@ const skipProfileBtn = document.getElementById('skipProfileBtn');
 // Track pending user data for profile completion
 let pendingUserData = null;
 let isProfileMandatory = false;
+
+// --- Helper: Handle Successful Login for both Popup and Redirect ---
+async function handleLoginSuccess(user) {
+    console.log("User logged in with Google:", user);
+
+    try {
+        // Save/update user profile in Firestore
+        await saveUserProfile(user.uid, {
+            name: user.displayName || '',
+            email: user.email || '',
+            photoURL: user.photoURL || '',
+            provider: 'google',
+            lastLogin: serverTimestamp()
+        });
+
+        showToast(`Welcome, ${user.displayName}! ✨`);
+        closeAuthModal();
+
+        // Restore any pending action (e.g., open booking modal)
+        restoreLoginState();
+    } catch (saveError) {
+        console.error("Error saving user profile after login:", saveError);
+        showToast("Login successful, but profile update failed.", "error");
+    }
+}
 
 // --- Event Listeners ---
 
@@ -72,34 +99,28 @@ if (googleBtn) {
 
         try {
             const result = await signInWithPopup(auth, provider);
-            const user = result.user;
-
-            console.log("User logged in with Google:", user);
-
-            // Save/update user profile in Firestore
-            await saveUserProfile(user.uid, {
-                name: user.displayName || '',
-                email: user.email || '',
-                photoURL: user.photoURL || '',
-                provider: 'google',
-                lastLogin: serverTimestamp()
-            });
-
-            showToast(`Welcome, ${user.displayName}! ✨`);
-            closeAuthModal();
-
-            // Restore any pending action (e.g., open booking modal)
-            restoreLoginState();
+            await handleLoginSuccess(result.user);
 
         } catch (error) {
             console.error("Google Login Error:", error);
 
+            // Handle Popup Blocking -> Fallback to Redirect
+            if (error.code === 'auth/popup-blocked' || error.code === 'auth/popup-closed-by-user') {
+                console.warn("Popup blocked or closed. Falling back to redirect...");
+                showToast("Redirecting to Google Sign In... 🔄", "success"); // Use success style for "working on it"
+
+                try {
+                    await signInWithRedirect(auth, provider);
+                    return; // Redirecting...
+                } catch (redirectError) {
+                    console.error("Redirect Login Failed:", redirectError);
+                    showToast(`Login failed: ${redirectError.message}`, "error");
+                    return;
+                }
+            }
+
             let errorMessage = `Login failed: ${error.message}`;
             let errorType = "error";
-
-            if (error.code === 'auth/popup-closed-by-user') {
-                return; // Ignore
-            }
 
             if (error.code === 'auth/unauthorized-domain') {
                 errorMessage = "Login Failed: Domain/Port not authorized in Firebase Console.";
@@ -509,6 +530,9 @@ function updateUIForLogin(user) {
     const signInBadge = document.getElementById('signInBadge');
     if (premiumBadge) premiumBadge.style.display = 'flex';
     if (signInBadge) signInBadge.style.display = 'none';
+
+    // Update Navigation Profile (YOU)
+    updateNavigationProfile(user);
 }
 
 function updateUIForLogout(user) {
@@ -519,6 +543,9 @@ function updateUIForLogout(user) {
     const signInBadge = document.getElementById('signInBadge');
     if (premiumBadge) premiumBadge.style.display = 'none';
     if (signInBadge) signInBadge.style.display = 'flex';
+
+    // Reset Navigation Profile (YOU)
+    updateNavigationProfile(null);
 }
 
 // --- Magic Link Handler ---
@@ -624,6 +651,7 @@ document.addEventListener('open-login-modal', (e) => {
 
 // Check on load
 document.addEventListener('DOMContentLoaded', () => {
+    checkRedirectLogin(); // Check for Redirect Result First
     checkMagicLink();
     checkTestRoute();
 
@@ -635,6 +663,22 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+// --- Redirect Result Handler ---
+async function checkRedirectLogin() {
+    try {
+        const result = await getRedirectResult(auth);
+        if (result) {
+            console.log("Redirect Login Successful:", result.user);
+            await handleLoginSuccess(result.user);
+        }
+    } catch (error) {
+        console.error("Redirect Login Error:", error);
+        if (error.code !== 'auth/popup-closed-by-user') { // Ignore optional cancellation
+            showToast(`Login failed: ${error.message}`, "error");
+        }
+    }
+}
 
 function checkTestRoute() {
     // Check if path is /t or /t/
@@ -660,6 +704,76 @@ function checkTestRoute() {
     }
 }
 
+
+
+// --- Navigation Profile Update Helper ---
+function updateNavigationProfile(user) {
+    const accountNav = document.querySelector('.nav-item[data-page="account"]');
+    if (!accountNav) return;
+
+    // Default SVG Icon (Account Person)
+    const defaultIconSvgString = `<svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" /></svg>`;
+
+    // Find existing icon elements
+    const existingImg = accountNav.querySelector('.nav-profile-img');
+    const existingInitial = accountNav.querySelector('.nav-profile-initial');
+    const existingSvg = accountNav.querySelector('svg.nav-icon');
+
+    // Helper to replace content
+    const currentIcon = existingImg || existingInitial || existingSvg;
+
+    if (user) {
+        let newElement;
+
+        if (user.photoURL) {
+            // Use Profile Picture
+            newElement = document.createElement('img');
+            newElement.className = 'nav-profile-img nav-icon'; // Keep nav-icon for layout
+            newElement.src = user.photoURL;
+            newElement.alt = "You";
+        } else {
+            // Use First Initial
+            const name = user.displayName || "User";
+            const initial = name.charAt(0).toUpperCase();
+
+            newElement = document.createElement('div');
+            newElement.className = 'nav-profile-initial nav-icon'; // Keep nav-icon for layout
+            newElement.innerText = initial;
+
+            // Generate consistent colorful background based on name length
+            const colors = [
+                'linear-gradient(135deg, #FF6B6B, #EE5253)', // Red
+                'linear-gradient(135deg, #1DD1A1, #10AC84)', // Green
+                'linear-gradient(135deg, #5F27CD, #341F97)', // Purple
+                'linear-gradient(135deg, #54A0FF, #2E86DE)', // Blue
+                'linear-gradient(135deg, #FFA502, #FF9F43)', // Orange
+                'linear-gradient(135deg, #fda7df, #9980FA)'  // Pink/PM
+            ];
+            const colorIndex = name.length % colors.length;
+            newElement.style.background = colors[colorIndex];
+        }
+
+        if (currentIcon) {
+            currentIcon.replaceWith(newElement);
+        } else {
+            accountNav.prepend(newElement);
+        }
+
+    } else {
+        // LOGGED OUT: Revert to Default SVG
+        if (!existingSvg) {
+            const tempWrapper = document.createElement('div');
+            tempWrapper.innerHTML = defaultIconSvgString;
+            const newSvg = tempWrapper.firstChild;
+
+            if (currentIcon) {
+                currentIcon.replaceWith(newSvg);
+            } else {
+                accountNav.prepend(newSvg);
+            }
+        }
+    }
+}
 
 // Export helpful functions
 export function openLoginModal(pendingAction = null) {

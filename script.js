@@ -2571,6 +2571,7 @@ if (document.readyState === 'loading') {
         // window.appShell = new AppShellNavigator(); // Disabled: nav_fix.js handles this
         initNotificationsController();
         initBookingsController();
+        if (typeof initServicesPage === 'function') initServicesPage();
     });
 } else {
     // window.appShell = new AppShellNavigator(); // Disabled: nav_fix.js handles this
@@ -4118,6 +4119,8 @@ function initServicesPage() {
     const categoryCardsContainer = document.getElementById('servicesCategoryCards');
     const categoryCards = document.querySelectorAll('.category-image-card');
 
+    console.log(`[Services] Init called. Found ${categoryCards.length} category cards.`);
+
     // Render services initially
     renderServicesPage();
 
@@ -4297,6 +4300,7 @@ function initServicesPage() {
     // ---------------------------------------------------------
     categoryCards.forEach(card => {
         card.addEventListener('click', (e) => {
+            console.log(`[Services] Card clicked: ${card.dataset.category}`);
             const category = card.dataset.category;
             const subtitle = document.querySelector('.services-page-subtitle');
 
@@ -4560,6 +4564,13 @@ document.addEventListener('DOMContentLoaded', () => {
         link.addEventListener('click', () => {
             setTimeout(onServicesPageVisible, 100);
         });
+    });
+
+    // Handle Hash Change (e.g. from "Add Services" button)
+    window.addEventListener('hashchange', () => {
+        if (window.location.hash === '#services') {
+            setTimeout(onServicesPageVisible, 100);
+        }
     });
 });
 

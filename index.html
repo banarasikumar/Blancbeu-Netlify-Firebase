@@ -1950,6 +1950,10 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                 <!-- Header -->
                 <!-- Header -->
                 <div class="services-page-header">
+                    <button onclick="window.navigateToPage('services')" class="header-back-btn"
+                        style="position: absolute; right: 20px; top: 25px; background: rgba(255,255,255,0.2); border: none; width: 40px; height: 40px; border-radius: 50%; color: var(--gold-primary); font-size: 20px; cursor: pointer; backdrop-filter: blur(5px); z-index: 10;">
+                        ✕
+                    </button>
                     <h1 class="services-page-title greeting-title">
                         Hello, <br> <span id="bookingUserName" class="highlight-name">Guest</span>! ✨
                     </h1>
@@ -1971,8 +1975,7 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                                 </div>
 
                                 <!-- Button to add more services -->
-                                <button type="button" id="addServicesBtn" class="add-services-btn"
-                                    onclick="addMoreServices()">
+                                <button type="button" id="addServicesBtn" class="add-services-btn">
                                     Add Services +
                                 </button>
                             </div>
@@ -1982,17 +1985,22 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                                     style="display: block; margin-bottom: 8px; font-weight: 600; color: var(--text-color);">Date</label>
                                 <div class="date-input-wrapper-booking"
                                     style="position: relative; display: flex; align-items: center;">
-                                    <input type="date" id="bookingDate" required
-                                        style="width: 100%; padding: 15px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.1); background: var(--input-bg); color: var(--text-color); font-size: 16px;">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                    <input type="text" id="bookingDate" required class="premium-input" readonly
+                                        placeholder="Select Date">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                         stroke-linejoin="round" class="custom-calendar-icon-booking"
-                                        style="position: absolute; right: 15px; pointer-events: none; opacity: 0.7;">
+                                        style="position: absolute; right: 20px; pointer-events: none; opacity: 0.8; color: var(--gold-primary);">
                                         <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
                                         <line x1="16" y1="2" x2="16" y2="6"></line>
                                         <line x1="8" y1="2" x2="8" y2="6"></line>
                                         <line x1="3" y1="10" x2="21" y2="10"></line>
                                     </svg>
+                                </div>
+                                <div class="date-quick-tags">
+                                    <button type="button" class="date-tag" data-offset="0">Today</button>
+                                    <button type="button" class="date-tag" data-offset="1">Tomorrow</button>
+                                    <button type="button" class="date-tag" data-offset="2">Day After</button>
                                 </div>
                             </div>
 
@@ -2001,22 +2009,10 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                                     style="display: block; margin-bottom: 8px; font-weight: 600; color: var(--text-color);">Preferred
                                     Time</label>
                                 <div class="custom-select-wrapper" style="position: relative;">
-                                    <select id="bookingTime" required
-                                        style="width: 100%; padding: 15px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.1); background: var(--input-bg); color: var(--text-color); font-size: 16px; appearance: none;">
-                                        <option value="">Select Time</option>
-                                        <option value="10:00">10:00 AM</option>
-                                        <option value="11:00">11:00 AM</option>
-                                        <option value="12:00">12:00 PM</option>
-                                        <option value="13:00">01:00 PM</option>
-                                        <option value="14:00">02:00 PM</option>
-                                        <option value="15:00">03:00 PM</option>
-                                        <option value="16:00">04:00 PM</option>
-                                        <option value="17:00">05:00 PM</option>
-                                        <option value="18:00">06:00 PM</option>
-                                        <option value="19:00">07:00 PM</option>
-                                    </select>
+                                    <input type="text" id="bookingTime" required class="premium-input" readonly
+                                        placeholder="Select Time">
                                     <span
-                                        style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); pointer-events: none;">▼</span>
+                                        style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); pointer-events: none; color: var(--gold-primary); font-size: 14px;">▼</span>
                                 </div>
                             </div>
 
@@ -2024,9 +2020,10 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                                 <label for="bookingNotes"
                                     style="display: block; margin-bottom: 8px; font-weight: 600; color: var(--text-color);">Special
                                     Requests (Optional)</label>
-                                <textarea id="bookingNotes" rows="3"
-                                    style="width: 100%; padding: 15px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.1); background: var(--input-bg); color: var(--text-color); font-size: 16px; resize: none;"
-                                    placeholder="Any specific requirements..."></textarea>
+                                <div class="special-request-wrapper">
+                                    <textarea id="bookingNotes" rows="3" class="colorful-textarea"
+                                        placeholder="Any specific requirements..."></textarea>
+                                </div>
                             </div>
 
                             <button type="submit" class="submit-btn"
@@ -2096,7 +2093,7 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                 <path
                     d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" />
             </svg>
-            <span class="nav-label">Account</span>
+            <span class="nav-label">You</span>
         </a>
     </nav>
 
@@ -2139,6 +2136,41 @@ PHASE 3: PREMIUM FEATURES (Week 4)
     <!-- Firebase SDKs -->
     <script type="module" src="firebase-config.js"></script>
     <script type="module" src="auth.js"></script>
+    <!-- Custom Date Picker Modal -->
+    <div id="customDatePickerModal" class="custom-picker-modal hidden">
+        <div class="picker-content glass-card">
+            <div class="picker-header" style="justify-content: center; gap: 20px; border-bottom: none;">
+                <button id="prevMonthBtn" class="nav-arrow-btn">&lt;</button>
+                <h3 id="currentMonthYear" style="min-width: 140px; text-align: center;">Month Year</h3>
+                <button id="nextMonthBtn" class="nav-arrow-btn">&gt;</button>
+            </div>
+            <div class="weekdays-grid">
+                <div>Sun</div>
+                <div>Mon</div>
+                <div>Tue</div>
+                <div>Wed</div>
+                <div>Thu</div>
+                <div>Fri</div>
+                <div>Sat</div>
+            </div>
+            <div id="customCalendarGrid" class="custom-calendar-grid">
+                <!-- Dates generated by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Time Picker Modal -->
+    <div id="customTimePickerModal" class="custom-picker-modal hidden">
+        <div class="picker-content glass-card">
+            <div class="picker-header">
+                <h3>Select Time</h3>
+            </div>
+            <div id="customTimeGrid" class="time-slot-grid">
+                <!-- Time slots generated by JS -->
+            </div>
+        </div>
+    </div>
+
     <script type="module" src="booking.js"></script>
     <script type="module" src="my-bookings.js"></script>
 

@@ -226,13 +226,11 @@ export async function loadBookings() {
                 ${data.notes ? `<span class="detail-item" style="max-width:100%; display:block; margin-top:5px;">📝 "${data.notes}"</span>` : ''}
             </div>
             <div class="booking-location">
-                <div style="display:flex; align-items:center; gap:10px;">
-                    <span style="font-size:18px;">📍</span>
+                <div style="display:flex; align-items:center; gap:8px;">
+                    <span style="font-size:16px;">📍</span>
                     <div>
-                        <div style="font-weight:700; color:var(--text-primary); line-height:1.2; font-size:14px;">Blancbeu Salon</div>
-                        <div style="font-size:11px; color:var(--text-secondary); margin-top:3px; opacity:0.9;">
-                            <span style="color:var(--gold-24k); font-weight:600;">Upper Bazar Branch</span> • 4th Floor, Victory Mall
-                        </div>
+                        <div style="font-weight:700; color:var(--text-primary); line-height:1.2;">Blancbeu Salon</div>
+                        <div style="font-size:11px; color:var(--text-secondary); margin-top:3px; opacity:0.9;">4th Floor, Victory Mall, Upper Bazar</div>
                     </div>
                 </div>
             </div>

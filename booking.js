@@ -74,7 +74,7 @@ function renderSelectedServices() {
             <div class="empty-services-state">
                 <span class="empty-icon">✨</span>
                 <p>No services selected yet</p>
-                <button type="button" onclick="document.getElementById('addServicesBtn').click()" class="btn-text-gold">Browse Services</button>
+                <button type="button" onclick="window.location.hash='#services'" class="btn-text-gold">Browse Services</button>
             </div>
         `;
         return;
@@ -602,38 +602,43 @@ function renderTimeSlots() {
 }
 
 function updateServicesPageButtons() {
-    // This assumes we are on the services page
-    // Change all "Book Now" buttons to "Add +" or "Added" depending on state
+    // Check if we should be in "Add Mode"
+    // STRICT: Only if user has already added items.
+    const showAddButtons = (selectedServices.length > 0);
+
     const buttons = document.querySelectorAll('.service-page-book-btn, .service-btn');
     buttons.forEach(btn => {
         const serviceName = getServiceNameFromCard(btn);
 
-        if (serviceName && selectedServices.includes(serviceName)) {
-            btn.textContent = "ADDED \u2714";
-            btn.classList.add('added-btn');
-            btn.classList.add('add-mode-btn');
+        if (showAddButtons) {
+            if (serviceName && selectedServices.includes(serviceName)) {
+                btn.textContent = "ADDED \u2714";
+                btn.classList.add('added-btn');
+                btn.classList.add('add-mode-btn');
+            } else {
+                btn.textContent = "Add +";
+                btn.classList.remove('added-btn');
+                btn.classList.add('add-mode-btn');
+            }
         } else {
-            btn.textContent = "Add +";
+            // Revert to default "Book Now" state
+            btn.textContent = "Book Now";
             btn.classList.remove('added-btn');
-            btn.classList.add('add-mode-btn');
+            btn.classList.remove('add-mode-btn');
         }
     });
 }
 
 // Observer to handle dynamic content loading (like on search or filter)
-// If we are in 'adding' mode, ensuring buttons act like 'Add'
+// Relaxed: Always update buttons regardless of mode to ensure correct state (added vs book now)
 const serviceGridObserver = new MutationObserver(() => {
-    const mode = localStorage.getItem('booking_mode');
-    if (mode === 'adding' || selectedServices.length > 0) {
-        updateServicesPageButtons();
-    }
+    updateServicesPageButtons();
 });
 const servicesGrid = document.getElementById('servicesPageGrid');
 if (servicesGrid) {
     serviceGridObserver.observe(servicesGrid, { childList: true });
 }
 
-// Update Service Cart Bar Visibility & Count
 // Update Service Cart Bar Visibility & Count
 function updateCartBar() {
     const cartBar = document.getElementById('serviceCartBar');
@@ -658,9 +663,20 @@ function updateCartBar() {
 }
 window.updateServiceCartVisibility = updateCartBar; // Expose for nav_fix.js
 
-// Hook into navigation to update bar
+// Hook into navigation to update bar AND buttons
 window.addEventListener('hashchange', () => {
-    setTimeout(updateCartBar, 100);
+    const hash = window.location.hash;
+
+    // Legacy support for booking hash
+    if (hash === '#booking' || hash === 'booking') {
+        renderSelectedServices();
+    }
+
+    // Always update cart bar and service buttons on navigation
+    setTimeout(() => {
+        updateCartBar();
+        updateServicesPageButtons();
+    }, 100);
 });
 
 // Also hook into our custom navigation function

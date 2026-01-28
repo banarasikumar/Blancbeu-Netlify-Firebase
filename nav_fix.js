@@ -322,6 +322,12 @@ IMPORTANT: This app uses #appContent as the scrollable container, NOT window.
                 if (window.updateServiceCartVisibility) {
                     window.updateServiceCartVisibility();
                 }
+
+                // FIX: Refresh Bookings if navigating to mybookings
+                if (targetTabId === 'mybookings' && window.refreshBookings) {
+                    console.log("🔄 Navigating to Bookings -> Refreshing Data...");
+                    window.refreshBookings();
+                }
             });
         }
     }

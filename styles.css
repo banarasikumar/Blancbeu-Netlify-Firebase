@@ -15008,3 +15008,134 @@ body.light-mode .date-tag.active {
     color: #fff !important;
     background: linear-gradient(135deg, #FFD700, #FFA500);
 }
+
+/* Section Headers for Bookings */
+.booking-section {
+    margin-bottom: 20px;
+}
+
+.section-divider {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.section-label {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--gold-24k);
+    font-family: 'Cinzel', serif;
+    letter-spacing: 0.5px;
+}
+
+/* Fix Visibility */
+.booking-section {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    display: block;
+}
+
+.section-divider {
+    width: 100%;
+    min-height: 30px;
+}
+
+body.light-mode .section-label {
+    color: #b8860b !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Booking Filters */
+/* Booking Filters */
+.booking-filter-container {
+    display: flex;
+    overflow-x: auto;
+    padding: 15px 5px;
+    gap: 12px;
+    margin-bottom: 24px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    align-items: center;
+}
+
+.booking-filter-container::-webkit-scrollbar {
+    display: none;
+}
+
+.filter-chip {
+    padding: 10px 20px;
+    border-radius: 50px;
+    border: 1px solid rgba(184, 134, 11, 0.2);
+    background: rgba(255, 255, 255, 0.5);
+    color: var(--text-secondary);
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+body.light-mode .filter-chip {
+    border: 1px solid rgba(184, 134, 11, 0.15);
+    background: #fff;
+    color: #555;
+}
+
+.filter-chip .chip-count {
+    background: rgba(0, 0, 0, 0.05);
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #888;
+    transition: all 0.2s ease;
+}
+
+.filter-chip.active {
+    background: linear-gradient(135deg, var(--gold-24k), var(--gold-bright));
+    color: #000;
+    border-color: transparent;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+    transform: translateY(-1px);
+}
+
+.filter-chip.active .chip-count {
+    background: rgba(255, 255, 255, 0.3);
+    color: #000;
+}
+
+.filter-chip:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.8);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    border-color: rgba(184, 134, 11, 0.4);
+}
+
+body.light-mode .filter-chip:hover:not(.active) {
+    background: #fff;
+}
+
+/* Unique Booking Label to avoid conflicts */
+.booking-section-label {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--gold-24k);
+    font-family: 'Cinzel', serif;
+    letter-spacing: 0.5px;
+    opacity: 1;
+    visibility: visible;
+    display: inline-block;
+}
+
+body.light-mode .booking-section-label {
+    color: #b8860b !important;
+    -webkit-text-fill-color: initial !important;
+    background: none !important;
+}

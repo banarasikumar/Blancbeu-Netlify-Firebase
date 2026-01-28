@@ -214,6 +214,10 @@ PHASE 3: PREMIUM FEATURES (Week 4)
         .staff-photo-wrapper {
             width: 140px;
             height: 140px;
+            min-width: 140px;
+            min-height: 140px;
+            aspect-ratio: 1 / 1;
+            flex-shrink: 0;
             border-radius: 50%;
             border: 3px solid var(--gold-primary);
             padding: 4px;
@@ -1631,14 +1635,7 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                     <button class="bookings-filter-btn" title="Filter">🔍</button>
                 </div>
 
-                <!-- Status Tabs -->
-                <div class="bookings-tabs">
-                    <button class="booking-tab active" data-status="all">All <span class="tab-count">5</span></button>
-                    <button class="booking-tab" data-status="upcoming">Upcoming <span
-                            class="tab-count">2</span></button>
-                    <button class="booking-tab" data-status="completed">Completed <span
-                            class="tab-count">3</span></button>
-                </div>
+
 
                 <!-- Bookings List -->
                 <div class="bookings-list" id="bookingsListContainer">

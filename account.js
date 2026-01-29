@@ -22,12 +22,16 @@ class AccountController {
         this.init();
     }
 
-    async init() {
-        // 1. IMPROMEDIATE DEFAULT: Force Guest View to prevent flash of member content
+    init() {
+        // 1. IMPROMEDIATE DEFAULT: Force Guest View
         this.showGuestState();
 
-        // 2. Wait for Firebase to load globally (from auth.js / firebase-config.js)
+        // 2. Wait for Firebase
         this.waitForFirebase();
+
+        // 3. Bind Profile Page specific inputs
+        // Wait slightly to ensure DOM is ready if script ran fast
+        setTimeout(() => this.bindProfilePageEvents(), 100);
     }
 
     waitForFirebase() {
@@ -63,26 +67,160 @@ class AccountController {
         });
     }
 
+    /* ------------------------------------------------------------------------
+       PROFILE PAGE LOGIC (NEW)
+       ------------------------------------------------------------------------ */
+    bindProfilePageEvents() {
+        console.log("Binding Profile Page Events...");
+        const editToggle = document.getElementById('editProfileToggle');
+        const saveBtn = document.getElementById('saveProfileBtn');
+        const imgInput = document.getElementById('profileImageInput');
+        const badge = document.querySelector('.edit-avatar-badge');
+
+        if (editToggle) {
+            // Remove old listeners to be safe
+            editToggle.onclick = null;
+            editToggle.onclick = () => {
+                console.log("Edit Toggle Clicked");
+                this.toggleProfilePageEdit();
+            };
+        } else {
+            console.warn("#editProfileToggle not found. Is index.html correct?");
+        }
+
+        if (saveBtn) {
+            saveBtn.onclick = (e) => {
+                e.preventDefault();
+                console.log("Save Button Clicked");
+                this.saveProfileChanges();
+            };
+        }
+
+        // Avatar upload trigger
+        if (badge && imgInput) {
+            badge.addEventListener('click', () => imgInput.click());
+            imgInput.addEventListener('change', (e) => this.handleAvatarUpload(e));
+        }
+    }
+
+    toggleProfilePageEdit() {
+        const container = document.querySelector('.profile-content-scroll');
+        if (!container) return;
+
+        const isEditing = container.classList.contains('editing-mode');
+        const toggleBtn = document.getElementById('editProfileToggle');
+        const saveActions = document.querySelector('.profile-actions');
+        const avatarBadge = document.querySelector('.edit-avatar-badge');
+
+        const inputs = document.querySelectorAll('#profileDetailsForm input, #profileDetailsForm select');
+
+        if (!isEditing) {
+            // ENABLE EDIT
+            container.classList.add('editing-mode');
+            if (toggleBtn) {
+                toggleBtn.textContent = 'Cancel';
+                toggleBtn.classList.add('editing');
+            }
+            if (saveActions) saveActions.style.display = 'block';
+            if (avatarBadge) avatarBadge.style.display = 'flex';
+
+            inputs.forEach(input => {
+                // Unlock Name, Gender, DOB
+                if (['detailName', 'detailGender', 'detailDob'].includes(input.id)) {
+                    input.removeAttribute('readonly');
+                    input.removeAttribute('disabled');
+                }
+            });
+        } else {
+            // CANCEL EDIT
+            container.classList.remove('editing-mode');
+            if (toggleBtn) {
+                toggleBtn.textContent = 'Edit';
+                toggleBtn.classList.remove('editing');
+            }
+            if (saveActions) saveActions.style.display = 'none';
+            if (avatarBadge) avatarBadge.style.display = 'none';
+
+            inputs.forEach(input => {
+                input.setAttribute('readonly', 'true');
+                if (input.tagName === 'SELECT') input.setAttribute('disabled', 'true');
+            });
+
+            // Revert changes by refreshing data
+            if (window.refreshUserData) window.refreshUserData();
+        }
+    }
+
+    async saveProfileChanges() {
+        const newName = document.getElementById('detailName').value;
+        const newDob = document.getElementById('detailDob').value;
+        const newGender = document.getElementById('detailGender').value;
+        const saveBtn = document.getElementById('saveProfileBtn');
+
+        if (saveBtn) {
+            saveBtn.textContent = 'Saving...';
+            saveBtn.disabled = true;
+        }
+
+        try {
+            // 1. Update Auth Profile (Display Name)
+            if (newName && newName !== this.currentUser.displayName) {
+                await this.currentUser.updateProfile({ displayName: newName });
+            }
+
+            // 2. Update Firestore (DOB, Gender, Name)
+            if (window.saveUserProfileGlobal) {
+                await window.saveUserProfileGlobal(this.currentUser.uid, {
+                    name: newName,
+                    dob: newDob,
+                    gender: newGender
+                });
+            } else {
+                console.warn("saveUserProfileGlobal not found");
+            }
+
+            // Success
+            alert("Profile updated successfully! ✨");
+            this.toggleProfilePageEdit(); // Exit edit mode
+
+        } catch (e) {
+            console.error("Save failed", e);
+            alert("Failed to save changes: " + e.message);
+        } finally {
+            if (saveBtn) {
+                saveBtn.textContent = 'Save Changes ✨';
+                saveBtn.disabled = false;
+            }
+        }
+    }
+
+    // Stub for avatar upload (can implement fully if needed)
+    handleAvatarUpload(e) {
+        alert("Avatar upload logic pending... Use 'Edit' to change text details for now.");
+    }
+
+    /* ------------------------------------------------------------------------
+       EXISTING LOGIC
+       ------------------------------------------------------------------------ */
+
     renderUserProfile(user) {
         if (!user) return;
 
-        // Name
+        // --- ACCOUNT DASHBOARD UPDATES ---
         const name = user.displayName || 'Valued Member';
         if (this.profileNameEl) this.profileNameEl.textContent = name;
 
-        // Email
         const email = user.email || 'No email provided';
         if (this.profileEmailEl) this.profileEmailEl.textContent = email;
 
-        // Avatar
         if (user.photoURL && this.profileAvatarEl) {
             this.profileAvatarEl.innerHTML = `<img src="${user.photoURL}" alt="Profile" style="width:100%; height:100%; object-fit:cover; border-radius:50%;">`;
-        } else {
-            // Default placeholder
-            if (this.profileAvatarEl) {
-                this.profileAvatarEl.innerHTML = `<div class="avatar-placeholder">${name.charAt(0).toUpperCase()}</div>`;
-            }
+        } else if (this.profileAvatarEl) {
+            this.profileAvatarEl.innerHTML = `<div class="avatar-placeholder">${name.charAt(0).toUpperCase()}</div>`;
         }
+
+        // --- PROFILE PAGE DETAILS UPDATES ---
+        if (window.refreshUserData) window.refreshUserData();
     }
 
     showGuestState() {
@@ -134,15 +272,12 @@ class AccountController {
         ];
 
         const displayValue = isMember ? 'block' : 'none';
-        const displayGrid = isMember ? 'grid' : 'none'; // Stats/Benefits use grid
 
         sections.forEach(id => {
             const el = document.getElementById(id);
             if (el) {
-                // Special handling for grid sections if needed, or just use CSS toggle class
-                // Simple display toggle:
                 if (id === 'statsSection' && isMember) el.style.display = 'grid';
-                else if (id === 'benefitsSection' && isMember) el.style.display = 'block'; // Benefits usually block with inner grid
+                else if (id === 'benefitsSection' && isMember) el.style.display = 'block';
                 else el.style.display = displayValue;
             }
         });
@@ -150,9 +285,8 @@ class AccountController {
 
     async handleLogout() {
         if (window.logout) {
-            window.logout(); // Use global logout with beautiful toast
+            window.logout();
         } else {
-            // Fallback
             try {
                 await this.auth.signOut();
                 window.location.reload();
@@ -164,7 +298,6 @@ class AccountController {
     }
 
     toggleEditMode() {
-        // Simple prompt based editing for now (can upgrade to modal later)
         const newName = prompt("Enter your new display name:", this.currentUser.displayName);
         if (newName && newName.trim() !== "") {
             this.updateProfileName(newName);
@@ -176,14 +309,11 @@ class AccountController {
             await this.currentUser.updateProfile({
                 displayName: newName
             });
-            // Update UI immediately
             if (this.profileNameEl) this.profileNameEl.textContent = newName;
-
-            // Re-render avatar if using initial
             if (!this.currentUser.photoURL) {
                 this.profileAvatarEl.innerHTML = `<div class="avatar-placeholder">${newName.charAt(0).toUpperCase()}</div>`;
             }
-
+            if (window.refreshUserData) window.refreshUserData();
             console.log('✅ Profile updated');
         } catch (error) {
             console.error('Error updating profile:', error);
@@ -192,27 +322,7 @@ class AccountController {
     }
 
     async fetchUserStats(user) {
-        // 1. Loyalty Points (Mock logic or Firestore field)
-        // 2. Total Saved (Mock)
-        // 3. Bookings Count (Real Firestore Count)
-
-        try {
-            // Mock static stats for now
-            // Future: await this.db.collection('users').doc(user.uid).get()...
-
-            // Example: Fetch real booking count
-            if (this.db) {
-                const bookingsRef = this.db.collection('bookings').where('userId', '==', user.uid);
-                const snapshot = await bookingsRef.get();
-                const count = snapshot.size;
-
-                // Update Bookings Stat Card (assuming index 2 is bookings)
-                if (this.statsValues[2]) this.statsValues[2].textContent = count;
-            }
-
-        } catch (e) {
-            console.warn('Could not fetch specific stats:', e);
-        }
+        // Handled by refreshUserData() now
     }
 }
 

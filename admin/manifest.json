@@ -1,0 +1,22 @@
+{
+  "name": "Blancbeu Admin",
+  "short_name": "Blancbeu Admin",
+  "start_url": "/admin/",
+  "scope": "/admin/",
+  "display": "standalone",
+  "background_color": "#F2F2F7",
+  "theme_color": "#000000",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/vite.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/vite.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml"
+    }
+  ]
+}

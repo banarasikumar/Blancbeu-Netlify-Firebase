@@ -166,9 +166,7 @@ if (authProfileForm) {
         const profileData = {
             name: name,
             gender: gender,
-            dob: dobRaw // Save as string or format standard YYYY-MM-DD? Let's save standard YYYY-MM-DD for backend consistency if needed, but Firestore can take string. 
-            // Existing code used input type=date which gives YYYY-MM-DD.
-            // Let's convert to YYYY-MM-DD for consistency.
+            dob: dobRaw // Save as string
         };
 
         // Convert to YYYY-MM-DD for storage consistency
@@ -422,6 +420,173 @@ async function saveUserProfile(uid, data) {
     }
 }
 
+// Global expose to let AccountController use it
+window.saveUserProfileGlobal = saveUserProfile;
+
+
+// --- Silent User Data Refresh (When 'You' is clicked) ---
+async function refreshUserData() {
+    if (!auth.currentUser) return;
+
+    // console.log("🔄 Silent Refresh: Starting...");
+    try {
+        let userData = {};
+        try {
+            const userRef = doc(db, 'users', auth.currentUser.uid);
+            const userSnap = await getDoc(userRef);
+            if (userSnap.exists()) {
+                userData = userSnap.data();
+            } else {
+                console.warn("Silent Refresh: No Firestore doc found, using Auth defaults.");
+            }
+        } catch (dbErr) {
+            console.error("DB Fetch Error (continuing):", dbErr);
+        }
+
+        // Proceed to update UI regardless of DB result
+
+        // 1. Update Navigation Profile
+        updateNavigationProfile(auth.currentUser);
+
+        // 2. Account Page Dashboard
+        const profileName = document.querySelector('.profile-name');
+        const profileEmail = document.querySelector('.profile-email');
+
+        const safeName = userData.name || userData.displayName || auth.currentUser.displayName || "Member";
+        const safeEmail = userData.email || auth.currentUser.email || "";
+
+        if (profileName) {
+            if (profileName.textContent !== safeName) {
+                profileName.textContent = safeName;
+                profileName.style.opacity = '0.5';
+                setTimeout(() => profileName.style.opacity = '1', 100);
+            }
+        }
+        if (profileEmail) profileEmail.textContent = safeEmail;
+
+        // 3. Stats
+        if (userData.stats) {
+            const pointsElem = document.querySelector('.stat-card-1 .stat-value');
+            if (pointsElem) pointsElem.textContent = userData.stats.points || 0;
+
+            const savedElem = document.querySelector('.stat-card-2 .stat-value');
+            if (savedElem) savedElem.textContent = `₹${userData.stats.saved || 0}`;
+
+            const bookingCountElem = document.querySelector('.stat-card-3 .stat-value');
+            if (bookingCountElem) bookingCountElem.textContent = userData.stats.bookings || 0;
+        }
+
+        // 4. Premium Badge
+        const premiumBadge = document.getElementById('premiumBadge');
+        const tierLabel = document.querySelector('.tier-label');
+        if (userData.isPremium) {
+            if (premiumBadge) premiumBadge.style.display = 'flex';
+            if (tierLabel) tierLabel.textContent = "Platinum Tier";
+        }
+
+        // 5. Update Profile Page Details
+        const dName = document.getElementById('detailName');
+        const dPhone = document.getElementById('detailPhone');
+        const dEmail = document.getElementById('detailEmail');
+        const dGender = document.getElementById('detailGender');
+        const dDob = document.getElementById('detailDob');
+
+        const dDisplayName = document.getElementById('detailProfileNameDisplay');
+        const dDisplayPhone = document.getElementById('detailProfilePhoneDisplay');
+        const dDisplayImg = document.getElementById('detailProfileImg');
+
+        if (dName) dName.value = safeName;
+        if (dEmail) dEmail.value = safeEmail;
+        if (dDisplayName) dDisplayName.textContent = safeName;
+
+        const safePhone = userData.phone || auth.currentUser.phoneNumber || '';
+        if (dPhone) {
+            dPhone.value = safePhone;
+            if (!safePhone) dPhone.placeholder = "Link your phone number";
+        }
+        if (dDisplayPhone) dDisplayPhone.textContent = safePhone || "No phone linked";
+
+        if (dGender) dGender.value = userData.gender || '';
+        if (dDob) dDob.value = userData.dob || '';
+
+        // Image Logic: Firestore > Auth > Letter Fallback
+        const safePhoto = userData.photoURL || auth.currentUser.photoURL || '';
+        const avatarWrapper = document.querySelector('.large-avatar-wrapper');
+
+        if (avatarWrapper) {
+            let imgEl = document.getElementById('detailProfileImg');
+            let letterEl = document.getElementById('detailProfileLetter');
+
+            if (safePhoto) {
+                // CASE 1: SHOW IMAGE
+                if (imgEl) {
+                    imgEl.src = safePhoto;
+                    imgEl.style.display = 'block';
+                }
+                if (letterEl) letterEl.style.display = 'none';
+
+            } else {
+                // CASE 2: SHOW LETTER AVATAR
+                if (imgEl) imgEl.style.display = 'none';
+
+                if (!letterEl) {
+                    letterEl = document.createElement('div');
+                    letterEl.id = 'detailProfileLetter';
+                    letterEl.className = 'large-avatar letter-avatar-display';
+                    avatarWrapper.insertBefore(letterEl, avatarWrapper.firstElementChild);
+                }
+
+                letterEl.style.display = 'flex';
+                // Safe charAt
+                const letter = (safeName && safeName.length > 0) ? safeName.charAt(0).toUpperCase() : '?';
+                letterEl.textContent = letter;
+
+                // Color Logic
+                const colors = [
+                    'linear-gradient(135deg, #FF6B6B, #EE5253)',
+                    'linear-gradient(135deg, #1DD1A1, #10AC84)',
+                    'linear-gradient(135deg, #5F27CD, #341F97)',
+                    'linear-gradient(135deg, #54A0FF, #2E86DE)',
+                    'linear-gradient(135deg, #FFA502, #FF9F43)'
+                ];
+                let hash = 0;
+                for (let i = 0; i < safeName.length; i++) hash += safeName.charCodeAt(i);
+                const colorIndex = hash % colors.length;
+                letterEl.style.background = colors[colorIndex];
+            }
+        }
+
+        // Sync Account Tab bits
+        const accName = document.querySelector('.profile-name');
+        if (accName) accName.textContent = safeName;
+
+        const accImg = document.querySelector('.nav-profile-img');
+        if (accImg && safePhoto) accImg.src = safePhoto;
+
+        // console.log("✨ UI Updated with fresh data");
+
+    } catch (e) {
+        console.error("Silent Refresh Error:", e);
+    }
+}
+// Expose refresh global
+window.refreshUserData = refreshUserData;
+
+// --- Modal Logic ---
+export function openLoginModal(action = null) {
+    const authModal = document.getElementById('authModal');
+    if (authModal) {
+        authModal.style.display = 'flex';
+        // Add active class for animation (if CSS supports it)
+        setTimeout(() => authModal.classList.add('active'), 10);
+    }
+
+    if (action) {
+        saveLoginState(action);
+    }
+}
+
+
 export function showToast(message, type = "success") {
     // Remove existing toasts to prevent stacking overload
     const existingToasts = document.querySelectorAll('.auth-toast');
@@ -446,6 +611,8 @@ export function showToast(message, type = "success") {
     `;
 
     // Add Premium Styles
+    // Add Premium Styles
+
     if (!document.getElementById('auth-toast-styles-premium')) {
         const styles = document.createElement('style');
         styles.id = 'auth-toast-styles-premium';
@@ -618,16 +785,18 @@ function updateUIForLogin(user) {
     // The efficient way would be events, but for "nothing happens" fix, a reload is safest
     const isAccountPage = window.location.pathname.includes('/account') || document.querySelector('.account-page-container');
     if (isAccountPage) {
-        console.log("On Account page, reloading to refresh state...");
-        window.location.reload();
-    } else {
-        // Dispatch event for other listeners
-        document.dispatchEvent(new CustomEvent('user-logged-in', { detail: user }));
-        showToast(`Welcome back, ${user.displayName || 'Member'}! ✨`, "success");
-
-        // Restore any pending action (e.g., open booking modal if user clicked Book Now before login)
-        restoreLoginState();
+        // console.log("On Account page, reloading to refresh state...");
+        // window.location.reload(); 
+        // NOTE: removed auto-reload as it might loop.
     }
+
+    // Dispatch event for other listeners
+    document.dispatchEvent(new CustomEvent('user-logged-in', { detail: user }));
+    // showToast(`Welcome back, ${user.displayName || 'Member'}! ✨`, "success"); // Spammy on refresh
+
+    // Restore any pending action (e.g., open booking modal if user clicked Book Now before login)
+    restoreLoginState();
+
 
     // Toggle Premium Badge
     const premiumBadge = document.getElementById('premiumBadge');
@@ -808,188 +977,23 @@ function checkTestRoute() {
     }
 }
 
-
-
-// --- Silent User Data Refresh (When 'You' is clicked) ---
-async function refreshUserData() {
-    if (!auth.currentUser) return;
-
-    // console.log("🔄 Silent Refresh: Fetching latest user data...");
-    try {
-        const userRef = doc(db, 'users', auth.currentUser.uid);
-        const userSnap = await getDoc(userRef);
-
-        if (userSnap.exists()) {
-            const userData = userSnap.data();
-            // console.log("✅ Silent Refresh: Data received", userData);
-
-            // 1. Update Navigation Profile (in case image/name changed)
-            updateNavigationProfile(auth.currentUser);
-
-            // 2. Update Account Page UI Elements directly
-            const profileName = document.querySelector('.profile-name');
-            const profileEmail = document.querySelector('.profile-email');
-
-            if (profileName) {
-                // Determine name: user input name > display name > default
-                const newName = userData.name || userData.displayName || auth.currentUser.displayName || "Member";
-                if (profileName.textContent !== newName) {
-                    profileName.textContent = newName;
-                    // Subtle fade hint
-                    profileName.style.transition = 'opacity 0.3s';
-                    profileName.style.opacity = '0.5';
-                    setTimeout(() => profileName.style.opacity = '1', 100);
-                }
-            }
-
-            if (profileEmail) {
-                const newEmail = userData.email || auth.currentUser.email || "";
-                if (profileEmail.textContent !== newEmail) {
-                    profileEmail.textContent = newEmail;
-                }
-            }
-
-            // 3. Update Stats (Member Only Fields)
-            // Assuming the AccountController renders these initially, we just update values if they exist
-            if (userData.stats) {
-                const pointsElem = document.querySelector('.stat-card-1 .stat-value');
-                if (pointsElem) pointsElem.textContent = userData.stats.points || 0;
-
-                const savedElem = document.querySelector('.stat-card-2 .stat-value');
-                if (savedElem) savedElem.textContent = `₹${userData.stats.saved || 0}`;
-
-                const bookingCountElem = document.querySelector('.stat-card-3 .stat-value');
-                if (bookingCountElem) bookingCountElem.textContent = userData.stats.bookings || 0;
-            }
-
-            // 4. Update Badge/Tier if relevant
-            const premiumBadge = document.getElementById('premiumBadge');
-            const tierLabel = document.querySelector('.tier-label');
-            const isPremium = userData.isPremium || false;  // Adjust based on your schema
-
-            if (isPremium) {
-                if (premiumBadge) premiumBadge.style.display = 'flex';
-                if (tierLabel) tierLabel.textContent = "Platinum Tier"; // Example
-            }
-
-            // console.log("✨ UI Updated with fresh data");
-        }
-    } catch (e) {
-        console.error("Silent Refresh Error:", e);
-    }
-}
-
-function bindProfileRefresh() {
-    // Find the 'You' nav item
-    const accountNav = document.querySelector('.nav-item[data-page="account"]');
-    if (accountNav) {
-        accountNav.addEventListener('click', () => {
-            // Fetch and update silently
-            refreshUserData();
-        });
-        // console.log("✅ Bound silent refresh listener to 'You' button");
-    }
-}
-
-// Call on load
-document.addEventListener('DOMContentLoaded', () => {
-    bindProfileRefresh();
-});
-
-// --- Navigation Profile Update Helper ---
 function updateNavigationProfile(user) {
-    const accountNav = document.querySelector('.nav-item[data-page="account"]');
-    if (!accountNav) return;
+    // Also update the Account Tab inputs if they exist (sync)
+    const accName = document.querySelector('.profile-name');
+    if (!user) {
+        if (accName) accName.textContent = "Guest User";
+        return;
+    }
 
-    // Default SVG Icon (Account Person)
-    const defaultIconSvgString = `<svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" /></svg>`;
+    const safeName = user.displayName || 'Member';
+    const safePhoto = user.photoURL || '';
 
-    // Find existing icon elements
-    const existingImg = accountNav.querySelector('.nav-profile-img');
-    const existingInitial = accountNav.querySelector('.nav-profile-initial');
-    const existingSvg = accountNav.querySelector('svg.nav-icon');
+    if (accName) accName.textContent = safeName;
 
-    // Helper to replace content
-    const currentIcon = existingImg || existingInitial || existingSvg;
-
-    if (user) {
-        let newElement;
-
-        if (user.photoURL) {
-            // Use Profile Picture
-            newElement = document.createElement('img');
-            newElement.className = 'nav-profile-img nav-icon'; // Keep nav-icon for layout
-            newElement.src = user.photoURL;
-            newElement.alt = "You";
-        } else {
-            // Use First Initial
-            const name = user.displayName || "User";
-            const initial = name.charAt(0).toUpperCase();
-
-            newElement = document.createElement('div');
-            newElement.className = 'nav-profile-initial nav-icon'; // Keep nav-icon for layout
-            newElement.innerText = initial;
-
-            // Generate consistent colorful background based on name length
-            const colors = [
-                'linear-gradient(135deg, #FF6B6B, #EE5253)', // Red
-                'linear-gradient(135deg, #1DD1A1, #10AC84)', // Green
-                'linear-gradient(135deg, #5F27CD, #341F97)', // Purple
-                'linear-gradient(135deg, #54A0FF, #2E86DE)', // Blue
-                'linear-gradient(135deg, #FFA502, #FF9F43)', // Orange
-                'linear-gradient(135deg, #fda7df, #9980FA)'  // Pink/PM
-            ];
-            const colorIndex = name.length % colors.length;
-            newElement.style.background = colors[colorIndex];
-        }
-
-        if (currentIcon) {
-            currentIcon.replaceWith(newElement);
-        } else {
-            accountNav.prepend(newElement);
-        }
-
-    } else {
-        // LOGGED OUT: Revert to Default SVG
-        if (!existingSvg) {
-            const tempWrapper = document.createElement('div');
-            tempWrapper.innerHTML = defaultIconSvgString;
-            const newSvg = tempWrapper.firstChild;
-
-            if (currentIcon) {
-                currentIcon.replaceWith(newSvg);
-            } else {
-                accountNav.prepend(newSvg);
-            }
-        }
+    // Bottom Nav Image
+    const navImg = document.querySelector('.nav-profile-img'); // selector dependent on index.html
+    // If you have a specific class for the bottom nav profile image
+    if (navImg && safePhoto) {
+        navImg.src = safePhoto;
     }
 }
-
-// Export helpful functions
-export function openLoginModal(pendingAction = null) {
-    if (pendingAction) {
-        saveLoginState(pendingAction);
-    }
-
-    // Ensure header is visible when login modal opens (fix for service page hidden header)
-    // The header uses both classes AND transform to hide, so we reset all
-    const mainHeader = document.getElementById('mainHeader');
-    if (mainHeader) {
-        mainHeader.classList.remove('hidden');
-        mainHeader.classList.remove('force-hidden');
-        mainHeader.style.transform = 'translateY(0)';  // Reset transform (nav_fix.js uses this)
-        document.documentElement.style.setProperty('--sticky-top', '80px');  // Reset sticky control position
-    }
-
-    // Reset to login view with animation
-    if (authLoginView) {
-        authLoginView.style.display = 'block';
-        authLoginView.classList.remove('fade-in-slide');
-        void authLoginView.offsetWidth; // Trigger reflow
-        authLoginView.classList.add('fade-in-slide');
-    }
-    if (authProfileView) authProfileView.style.display = 'none';
-    if (authModal) authModal.style.display = 'flex';
-}
-
-

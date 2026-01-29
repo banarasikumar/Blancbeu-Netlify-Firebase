@@ -2114,12 +2114,17 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                     <div class="auth-form-group">
                         <label for="profileDob" class="auth-label-premium">Birthday (for gifts!) 🎂</label>
                         <div class="auth-input-wrapper-premium date-input-wrapper-premium">
-                            <input type="date" id="profileDob" name="dob" class="auth-input-premium date-input"
-                                required>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
-                                fill="none" stroke="#555" stroke-width="2" stroke-linecap="round"
+                            <input type="tel" id="profileDob" name="dob" class="auth-input-premium date-input"
+                                placeholder="DD/MM/YYYY" maxlength="10" required autocomplete="bday">
+
+                            <!-- Hidden System Date Picker -->
+                            <input type="date" id="profileDobSystem"
+                                style="position: absolute; opacity: 0; pointer-events: none; height: 1px; width: 1px; bottom: 0;">
+
+                            <svg id="profileDobIcon" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" class="custom-calendar-icon"
-                                style="position: absolute; right: 15px; pointer-events: none;">
+                                style="position: absolute; right: 15px; cursor: pointer; pointer-events: auto;">
                                 <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
                                 <line x1="16" y1="2" x2="16" y2="6"></line>
                                 <line x1="8" y1="2" x2="8" y2="6"></line>

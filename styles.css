@@ -14363,10 +14363,10 @@ body:not(.light-mode) .glass-card {
 .auth-input-premium {
     width: 100%;
     padding: 14px 15px 14px 20px;
-    border: 1px solid #eee;
-    background: #f8f9fa;
+    border: 1px solid #ccc;
+    background: #ffffff;
     /* Light grey bg */
-    color: #333333 !important;
+    color: #000000 !important;
     /* Force dark text color */
     border-radius: 12px;
     font-size: 16px;
@@ -14382,7 +14382,8 @@ body:not(.light-mode) .glass-card {
 }
 
 .auth-input-premium::placeholder {
-    color: #999;
+    color: #555555;
+    opacity: 0.8;
 }
 
 /* Specific padding for icon inputs */
@@ -14510,6 +14511,45 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .auth-submit-btn-premium:hover .btn-arrow-svg {
     transform: translateX(5px);
+}
+
+/* MOBILE OPTIMIZATION FOR AUTH PROFILE */
+@media (max-width: 480px) {
+    .auth-input-premium {
+        font-size: 16px !important;
+        /* Prevent iOS zoom */
+        padding: 12px 12px 12px 15px;
+        /* Slightly tighter padding */
+    }
+
+    /* Adjust padding for icon inputs on mobile */
+    .auth-input-premium[style*="padding-left"] {
+        padding-left: 42px !important;
+    }
+
+    .auth-input-icon {
+        left: 12px;
+        font-size: 16px;
+    }
+
+    .custom-calendar-icon {
+        right: 12px !important;
+    }
+
+    .auth-title-large {
+        font-size: 24px;
+        margin-bottom: 15px;
+    }
+
+    .auth-submit-btn-premium {
+        padding: 14px;
+        font-size: 15px;
+    }
+
+    .auth-gender-chip-premium {
+        padding: 10px 4px;
+        font-size: 12px;
+    }
 }
 
 /* =========================================

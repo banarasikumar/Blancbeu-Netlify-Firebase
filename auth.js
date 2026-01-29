@@ -147,15 +147,40 @@ if (authProfileForm) {
         e.preventDefault();
 
         const formData = new FormData(authProfileForm);
+        const name = formData.get('name');
+        const gender = formData.get('gender');
+        const dobRaw = document.getElementById('profileDob').value; // Get directly from input
+
+        let dobDate;
+        // Parse DD/MM/YYYY
+        if (dobRaw) {
+            const parts = dobRaw.split(/[-/]/);
+            if (parts.length === 3) {
+                // Assume DD/MM/YYYY
+                dobDate = new Date(parts[2], parts[1] - 1, parts[0]);
+            } else {
+                dobDate = new Date(dobRaw); // Fallback
+            }
+        }
+
         const profileData = {
-            name: formData.get('name'),
-            gender: formData.get('gender'),
-            dob: formData.get('dob')
+            name: name,
+            gender: gender,
+            dob: dobRaw // Save as string or format standard YYYY-MM-DD? Let's save standard YYYY-MM-DD for backend consistency if needed, but Firestore can take string. 
+            // Existing code used input type=date which gives YYYY-MM-DD.
+            // Let's convert to YYYY-MM-DD for consistency.
         };
 
+        // Convert to YYYY-MM-DD for storage consistency
+        if (dobDate && !isNaN(dobDate.getTime())) {
+            const yyyy = dobDate.getFullYear();
+            const mm = String(dobDate.getMonth() + 1).padStart(2, '0');
+            const dd = String(dobDate.getDate()).padStart(2, '0');
+            profileData.dob = `${yyyy}-${mm}-${dd}`;
+        }
+
         // DOB Validation
-        if (profileData.dob) {
-            const dobDate = new Date(profileData.dob);
+        if (dobDate && !isNaN(dobDate.getTime())) {
             const today = new Date();
             let age = today.getFullYear() - dobDate.getFullYear();
             const m = today.getMonth() - dobDate.getMonth();
@@ -163,14 +188,17 @@ if (authProfileForm) {
                 age--;
             }
 
-            if (age < 5) {
-                showToast("You must be at least 5 years old.", "error");
+            if (age < 13) {
+                showToast("You must be at least 13 years old.", "error");
                 return;
             }
             if (dobDate > today) {
                 showToast("Date of birth cannot be in the future.", "error");
                 return;
             }
+        } else {
+            showToast("Please enter a valid date (DD/MM/YYYY)", "error");
+            return;
         }
 
         try {
@@ -184,7 +212,7 @@ if (authProfileForm) {
 
                 // Save to Firestore
                 await saveUserProfile(pendingUserData.uid, {
-                    ...profileData,
+                    ...profileData, // Contains standardized dob
                     phone: pendingUserData.phone || '',
                     provider: 'whatsapp',
                     profileCompleted: true,
@@ -205,6 +233,82 @@ if (authProfileForm) {
         }
     });
 }
+
+// --- DOB Logic (System Date Picker & Formatting) ---
+function initProfileDobLogic() {
+    const dobInput = document.getElementById('profileDob');
+    const dobSystemInput = document.getElementById('profileDobSystem');
+    const dobIcon = document.getElementById('profileDobIcon');
+    const modal = document.getElementById('customDatePickerModal'); // Not used for profile anymore
+
+    // Calculate Max Date for 13 Years Old
+    const today = new Date();
+    const minAge = 13;
+    const maxDate = new Date(today.getFullYear() - minAge, today.getMonth(), today.getDate());
+    const yyyy = maxDate.getFullYear();
+    const mm = String(maxDate.getMonth() + 1).padStart(2, '0');
+    const dd = String(maxDate.getDate()).padStart(2, '0');
+    const maxDateString = `${yyyy}-${mm}-${dd}`;
+
+    if (dobSystemInput) {
+        dobSystemInput.max = maxDateString; // Enforce in Picker UI
+
+        // Sync System Picker -> Text Input
+        dobSystemInput.addEventListener('change', (e) => {
+            const val = e.target.value; // YYYY-MM-DD
+            if (val) {
+                const [y, m, d] = val.split('-');
+                dobInput.value = `${d}/${m}/${y}`; // DD/MM/YYYY
+            }
+        });
+
+        // Also Sync Text Input -> System Picker (so picker opens on correct year if typed)
+        if (dobInput) {
+            dobInput.addEventListener('change', (e) => {
+                const parts = e.target.value.split('/');
+                if (parts.length === 3) {
+                    dobSystemInput.value = `${parts[2]}-${parts[1]}-${parts[0]}`;
+                }
+            });
+        }
+    }
+
+    if (dobInput) {
+        // 1. Formatting on Type (DD/MM/YYYY)
+        dobInput.addEventListener('input', (e) => {
+            let v = e.target.value.replace(/\D/g, ''); // Remove non-digits
+            if (v.length > 8) v = v.substring(0, 8);
+
+            if (v.length > 4) {
+                e.target.value = `${v.substring(0, 2)}/${v.substring(2, 4)}/${v.substring(4)}`;
+            } else if (v.length > 2) {
+                e.target.value = `${v.substring(0, 2)}/${v.substring(2)}`;
+            } else {
+                e.target.value = v;
+            }
+        });
+    }
+
+    // 2. Open System Picker on Icon Click
+    if (dobIcon && dobSystemInput) {
+        dobIcon.addEventListener('click', (e) => {
+            e.stopPropagation();
+            // Trigger system picker
+            try {
+                dobSystemInput.showPicker();
+            } catch (err) {
+                console.warn("showPicker not supported, falling back to click");
+                dobSystemInput.click(); // Fallback
+            }
+        });
+    }
+}
+// Removed renderProfileCalendar as we use system picker now
+
+// Call init on load
+document.addEventListener('DOMContentLoaded', () => {
+    initProfileDobLogic();
+});
 
 // Skip Profile Button - CHANGED TO LOGOUT IF MANDATORY OR HIDE
 if (skipProfileBtn) {

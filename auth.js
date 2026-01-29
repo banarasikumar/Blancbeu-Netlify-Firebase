@@ -810,6 +810,92 @@ function checkTestRoute() {
 
 
 
+// --- Silent User Data Refresh (When 'You' is clicked) ---
+async function refreshUserData() {
+    if (!auth.currentUser) return;
+
+    // console.log("🔄 Silent Refresh: Fetching latest user data...");
+    try {
+        const userRef = doc(db, 'users', auth.currentUser.uid);
+        const userSnap = await getDoc(userRef);
+
+        if (userSnap.exists()) {
+            const userData = userSnap.data();
+            // console.log("✅ Silent Refresh: Data received", userData);
+
+            // 1. Update Navigation Profile (in case image/name changed)
+            updateNavigationProfile(auth.currentUser);
+
+            // 2. Update Account Page UI Elements directly
+            const profileName = document.querySelector('.profile-name');
+            const profileEmail = document.querySelector('.profile-email');
+
+            if (profileName) {
+                // Determine name: user input name > display name > default
+                const newName = userData.name || userData.displayName || auth.currentUser.displayName || "Member";
+                if (profileName.textContent !== newName) {
+                    profileName.textContent = newName;
+                    // Subtle fade hint
+                    profileName.style.transition = 'opacity 0.3s';
+                    profileName.style.opacity = '0.5';
+                    setTimeout(() => profileName.style.opacity = '1', 100);
+                }
+            }
+
+            if (profileEmail) {
+                const newEmail = userData.email || auth.currentUser.email || "";
+                if (profileEmail.textContent !== newEmail) {
+                    profileEmail.textContent = newEmail;
+                }
+            }
+
+            // 3. Update Stats (Member Only Fields)
+            // Assuming the AccountController renders these initially, we just update values if they exist
+            if (userData.stats) {
+                const pointsElem = document.querySelector('.stat-card-1 .stat-value');
+                if (pointsElem) pointsElem.textContent = userData.stats.points || 0;
+
+                const savedElem = document.querySelector('.stat-card-2 .stat-value');
+                if (savedElem) savedElem.textContent = `₹${userData.stats.saved || 0}`;
+
+                const bookingCountElem = document.querySelector('.stat-card-3 .stat-value');
+                if (bookingCountElem) bookingCountElem.textContent = userData.stats.bookings || 0;
+            }
+
+            // 4. Update Badge/Tier if relevant
+            const premiumBadge = document.getElementById('premiumBadge');
+            const tierLabel = document.querySelector('.tier-label');
+            const isPremium = userData.isPremium || false;  // Adjust based on your schema
+
+            if (isPremium) {
+                if (premiumBadge) premiumBadge.style.display = 'flex';
+                if (tierLabel) tierLabel.textContent = "Platinum Tier"; // Example
+            }
+
+            // console.log("✨ UI Updated with fresh data");
+        }
+    } catch (e) {
+        console.error("Silent Refresh Error:", e);
+    }
+}
+
+function bindProfileRefresh() {
+    // Find the 'You' nav item
+    const accountNav = document.querySelector('.nav-item[data-page="account"]');
+    if (accountNav) {
+        accountNav.addEventListener('click', () => {
+            // Fetch and update silently
+            refreshUserData();
+        });
+        // console.log("✅ Bound silent refresh listener to 'You' button");
+    }
+}
+
+// Call on load
+document.addEventListener('DOMContentLoaded', () => {
+    bindProfileRefresh();
+});
+
 // --- Navigation Profile Update Helper ---
 function updateNavigationProfile(user) {
     const accountNav = document.querySelector('.nav-item[data-page="account"]');

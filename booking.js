@@ -71,14 +71,36 @@ function renderSelectedServices() {
 
     if (selectedServices.length === 0) {
         selectedServicesList.innerHTML = `
-            <div class="empty-services-state">
+            <div class="empty-services-state" style="border: 2px dashed rgba(212, 175, 55, 0.2); padding: 40px 20px;">
                 <span class="empty-icon">✨</span>
-                <p>No services selected yet</p>
-                <button type="button" onclick="window.location.hash='#services'" class="btn-text-gold">Browse Services</button>
+                <p style="margin-bottom: 20px; font-size: 14px; opacity: 0.8;">No services selected yet</p>
+                <button type="button" id="emptyStateAddBtn" class="add-services-btn" style="width: fit-content; min-width: 250px; margin: 15px auto 0; padding: 16px 30px; border-radius: 30px; border: none; background: linear-gradient(135deg, #B76E79, #91515B); color: white; font-weight: 700; font-size: 14px; box-shadow: 0 8px 20px rgba(183, 110, 121, 0.25); cursor: pointer; transition: all 0.3s ease; white-space: nowrap; text-transform: none; letter-spacing: 0.5px;">
+                    Browse & Add Services +
+                </button>
             </div>
         `;
+
+        // Hide global Add Services button when empty to avoid redundancy
+        if (addServicesBtn) addServicesBtn.style.setProperty('display', 'none', 'important');
+
+        // Add listener to the new button
+        const emptyBtn = document.getElementById('emptyStateAddBtn');
+        if (emptyBtn) {
+            emptyBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                localStorage.setItem('booking_mode', 'adding');
+                if (window.navigateToPage) {
+                    window.navigateToPage('services');
+                } else {
+                    window.location.hash = '#services';
+                }
+            });
+        }
         return;
     }
+
+    // Show global Add Services button when we have items
+    if (addServicesBtn) addServicesBtn.style.setProperty('display', 'flex', 'important');
 
     // Create wrapper list
     const listWrapper = document.createElement('ul');
@@ -346,7 +368,18 @@ function initCustomPickers() {
         timeInput.addEventListener('click', (e) => {
             e.preventDefault();
             timeInput.blur();
-            // Optional: Only open if date is selected? For now, open freely.
+            // Auto-select Today if date is empty
+            if (!dateInput.value) {
+                const now = new Date();
+                const yyyy = now.getFullYear();
+                const mm = String(now.getMonth() + 1).padStart(2, '0');
+                const dd = String(now.getDate()).padStart(2, '0');
+                const todayFormatted = `${dd}-${mm}-${yyyy}`;
+
+                dateInput.value = todayFormatted;
+                updateTagState(todayFormatted);
+            }
+
             timeModal.classList.remove('hidden');
             renderTimeSlots();
         });
@@ -410,13 +443,43 @@ function initDateQuickTags() {
 
     if (!tags.length || !dateInput) return;
 
-    tags.forEach(tag => {
-        tag.addEventListener('click', (e) => {
-            e.preventDefault(); // Prevent form submission
+    // Check if it's past 7:30 PM (19:30)
+    const now = new Date();
+    const isPastCutoff = now.getHours() > 19 || (now.getHours() === 19 && now.getMinutes() >= 30);
 
-            const offset = parseInt(tag.getAttribute('data-offset'));
+    const weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+    tags.forEach((tag, index) => {
+        let offset = index;
+        let label = "";
+
+        if (isPastCutoff) {
+            // Shift offsets: Index 0 becomes Tomorrow (1), Index 1 becomes Day After (2), Index 2 becomes DayName (3)
+            offset = index + 1;
+
+            const targetDate = new Date();
+            targetDate.setDate(now.getDate() + offset);
+
+            if (index === 0) label = "Tomorrow";
+            else if (index === 1) label = "Day After";
+            else label = weekDays[targetDate.getDay()];
+        } else {
+            // Standard sequence
+            if (index === 0) label = "Today";
+            else if (index === 1) label = "Tomorrow";
+            else label = "Day After";
+        }
+
+        // Update tag UI and attribute
+        tag.textContent = label;
+        tag.setAttribute('data-offset', offset);
+
+        tag.addEventListener('click', (e) => {
+            e.preventDefault();
+
+            const currentOffset = parseInt(tag.getAttribute('data-offset'));
             const date = new Date();
-            date.setDate(date.getDate() + offset);
+            date.setDate(date.getDate() + currentOffset);
 
             const yyyy = date.getFullYear();
             const mm = String(date.getMonth() + 1).padStart(2, '0');
@@ -429,11 +492,11 @@ function initDateQuickTags() {
             // Sync Highlighting
             updateTagState(formattedDate);
 
-            // Update Global Calendar current view to this month (if defined)
-            if (typeof currentPickerDate !== 'undefined') {
-                currentPickerDate = new Date(date);
-                currentPickerDate.setDate(1);
-            }
+            // Reset Time Selection when date changes
+            const timeInput = document.getElementById('bookingTime');
+            if (timeInput) timeInput.value = '';
+
+            // Update Global Calendar current view to this month
         });
     });
 }
@@ -521,6 +584,10 @@ function renderCalendar(date) {
 
                 document.getElementById('bookingDate').value = formattedDate;
                 document.getElementById('customDatePickerModal').classList.add('hidden');
+
+                // Reset Time Selection when date changes
+                const timeInput = document.getElementById('bookingTime');
+                if (timeInput) timeInput.value = '';
 
                 // Highlight visual selection state if re-opened (optional polish)
                 document.querySelectorAll('.calendar-day').forEach(d => d.classList.remove('selected'));

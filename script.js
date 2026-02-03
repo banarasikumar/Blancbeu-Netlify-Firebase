@@ -5451,41 +5451,9 @@ class GalleryController {
     }
 }
 
-// Gallery Peek Animation - DISABLED (User requested static gallery with View Gallery button)
+// Gallery Peek Animation - REMOVED per user request
 function initGalleryPeek() {
-    // Auto-scroll peek disabled - gallery is now static
-    return;
-
-    /* Original code commented out:
-    const galleryContainer = document.querySelector('.gallery-scroll-container');
-    if (!galleryContainer) return;
-
-    const performPeek = (count) => {
-        if (count <= 0) return;
-        galleryContainer.scrollBy({ left: 250, behavior: 'smooth' });
-        setTimeout(() => {
-            galleryContainer.scrollBy({ left: -250, behavior: 'smooth' });
-            setTimeout(() => {
-                performPeek(count - 1);
-            }, 1200);
-        }, 1500);
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                if (!galleryContainer.dataset.peeked) {
-                    galleryContainer.dataset.peeked = "true";
-                    setTimeout(() => {
-                        performPeek(2);
-                    }, 800);
-                }
-            }
-        });
-    }, { threshold: 0.6 });
-
-    observer.observe(galleryContainer);
-    */
+    // Functionality removed
 }
 
 // Ensure this runs after DOM load

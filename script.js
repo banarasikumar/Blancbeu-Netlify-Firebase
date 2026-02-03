@@ -3441,9 +3441,9 @@ function initMicroInteractions() {
         btn.addEventListener('click', createRipple);
     });
 
-    // Magnetic buttons (desktop only)
+    // Magnetic buttons (desktop only) - Exclude primary-btn as it has custom parallax sticky logic
     if (window.matchMedia('(hover: hover)').matches) {
-        document.querySelectorAll('.hero-btn, .magnetic-btn').forEach(btn => {
+        document.querySelectorAll('.hero-btn:not(.primary-btn), .magnetic-btn').forEach(btn => {
             new MagneticButton(btn, 0.25);
         });
     }
@@ -5508,3 +5508,6 @@ window.openWhatsAppChat = openWhatsAppChat;
 window.slideTestimonial = slideTestimonial;
 window.slideStaff = slideStaff;
 window.slideServiceCarousel = slideServiceCarousel;
+
+
+// Immersive Header logic is now centrally managed by nav_fix.js

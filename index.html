@@ -120,7 +120,8 @@ PHASE 3: PREMIUM FEATURES (Week 4)
         gtag('event', 'conversion', { 'send_to': 'AW-17391198116/SMCACILu99cbEKS_4uRA' });
     </script>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Blancbeu - Premium Beauty & Wellness Salon</title>
 
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
@@ -147,7 +148,7 @@ PHASE 3: PREMIUM FEATURES (Week 4)
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Poppins:wght@300;400;500;600;700&family=Cinzel:wght@400;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=Playfair+Display:wght@400;600;700;900&family=Poppins:wght@300;400;500;600;700&family=Cinzel:wght@400;600;700&display=swap"
         rel="stylesheet">
 
     <link rel="stylesheet" href="theme-variables.css">
@@ -355,26 +356,36 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                     <div class="carousel-dots" id="carouselDots"></div>
                 </div>
 
+                <!-- White Overlay for Scroll Transition -->
+                <div class="hero-scroll-overlay"></div>
+
                 <!-- HERO TEXT SECTION - Below Carousel -->
                 <div class="hero-text-section">
                     <div class="hero-text-content">
+                        <div class="hero-overline">Welcome to Blancbeu</div>
                         <h1 class="hero-title">
-                            <span class="hero-text-line line-1">Transform</span>
-                            <span class="hero-text-line line-2">Your Beauty</span>
+                            Redefining <br> Elegance
                         </h1>
-                        <p class="hero-tagline">Discover luxury beauty treatments at Blancbeu Family Salon</p>
+                        <p class="hero-tagline">Experience the pinnacle of luxury beauty services. Where artistry meets
+                            relaxation in a sanctuary designed for your rejuvenation.</p>
 
                         <div class="hero-cta-buttons">
                             <button class="hero-btn primary-btn">
-                                <span class="btn-label">Book Now</span>
+                                <span class="btn-label">Book Appointment</span>
                             </button>
                             <button class="hero-btn secondary-btn"
-                                onclick="document.querySelector('.bottom-nav .nav-item[data-page=\'chat\']').click()">
-                                <span class="btn-label">Contact Us</span>
+                                onclick="document.querySelector('.bottom-nav .nav-item[data-page=\'services\']').click()">
+                                <span class="btn-label">Explore Services</span>
                             </button>
                         </div>
                     </div>
                 </div>
+                <!-- Scroll Indicator positioned globally in Hero -->
+                <div class="hero-scroll-indicator">
+                    <span class="scroll-text">SCROLL</span>
+                    <div class="scroll-line"></div>
+                </div>
+            </div>
 
 
             </div>
@@ -2262,6 +2273,8 @@ PHASE 3: PREMIUM FEATURES (Week 4)
     <script type="module" src="account.js"></script>
     <script type="module" src="nav_fix.js"></script>
 
+    <!-- Parallax Logic -->
+    <script type="module" src="parallax.js"></script>
 </body>
 
 </html>

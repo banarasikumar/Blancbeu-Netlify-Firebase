@@ -36,6 +36,7 @@ IMPORTANT: This app uses #appContent as the scrollable container, NOT window.
     // DOM ELEMENTS
     // ==========================================
     let header = null;
+    let bottomNav = null;
     let navItems = null;
     let contentArea = null;  // This is the SCROLLABLE container
 
@@ -44,6 +45,7 @@ IMPORTANT: This app uses #appContent as the scrollable container, NOT window.
     // ==========================================
     function init() {
         header = document.getElementById('mainHeader');
+        bottomNav = document.querySelector('.app-shell-bottom-nav') || document.getElementById('bottomNav');
         navItems = document.querySelectorAll('.nav-item');
         contentArea = document.getElementById('appContent');
 
@@ -76,6 +78,11 @@ IMPORTANT: This app uses #appContent as the scrollable container, NOT window.
 
         // Handle initial hash (Deep Linking) immediately
         handleInitialHash();
+
+        // FORCE INITIAL CHECK with a slight delay to ensure DOM paint
+        setTimeout(() => {
+            handleScroll(true);
+        }, 100);
 
         console.log('✅ YouTube-Style Navigation Controller Initialized (using #appContent scroll)');
     }
@@ -136,8 +143,8 @@ IMPORTANT: This app uses #appContent as the scrollable container, NOT window.
     let currentTranslateY = 0;
     const HEADER_HEIGHT = 80;
 
-    function handleScroll() {
-        if (isTabSwitching || !contentArea || !header) return;
+    function handleScroll(force = false) {
+        if ((isTabSwitching && !force) || !contentArea || !header) return;
 
         // Check if auth modal is open - if so, ensure header is visible
         const authModal = document.getElementById('authModal');
@@ -169,16 +176,26 @@ IMPORTANT: This app uses #appContent as the scrollable container, NOT window.
         // Apply physical transformation
         header.style.transform = `translateY(${currentTranslateY}px)`;
 
-        // Apply physical transformation
-        header.style.transform = `translateY(${currentTranslateY}px)`;
+        // IMMERSIVE HEADER LOGIC (Transparency over hero)
+        // STRICT CHECK: Only apply on Home page when near the top
+        // Verify against DOM to ensure we are truly on home page
+        const activePage = document.querySelector('.app-page.active');
+        let isHomePageActive = activePage && activePage.getAttribute('data-page') === 'home';
 
-        // REMOVED: Class toggling logic (caused CSS conflict with top: 0px !important)
-        // We now rely purely on --sticky-top variable for smooth positioning
+        // Fallback: If DOM is not ready or transitioning, rely on internal state
+        if ((!activePage || isTabSwitching) && currentTab === 'home') {
+            isHomePageActive = true;
+        }
+
+        if (isHomePageActive && currentScrollY < 100) {
+            header.classList.add('immersive');
+            if (bottomNav) bottomNav.classList.add('immersive');
+        } else {
+            header.classList.remove('immersive');
+            if (bottomNav) bottomNav.classList.remove('immersive');
+        }
 
         // SYNC STICKY CONTROLS
-        // The sticky top should be: Header Height - |scrolled away amount|
-        // If header is fully visible (translateY=0), sticky top = 80px
-        // If header is fully hidden (translateY=-80), sticky top = 0px
         const stickyTop = currentTranslateY; // Ranges from 0 to -80
         document.documentElement.style.setProperty('--sticky-top', `${stickyTop}px`);
 
@@ -303,6 +320,9 @@ IMPORTANT: This app uses #appContent as the scrollable container, NOT window.
                 header.style.transform = 'translateY(0px)';
                 currentTranslateY = 0;
                 document.documentElement.style.setProperty('--sticky-top', '80px');
+
+                // Force immediate check of header transparency/state
+                handleScroll(true);
 
                 // If the restored position is deep, the header might need to be hidden?
                 // User requirement: "when any tab page it on the topmost ... then it should be displyed"

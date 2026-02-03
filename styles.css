@@ -1012,29 +1012,20 @@ body.light-mode .category-header {
 }
 
 .hero {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+    margin-top: -80px !important;
     padding-top: 80px;
-    /* Compensate for negative margin to keep content centered */
     padding-bottom: 0;
     overflow: hidden;
-    /* Fully hide overflow for parallax */
-    width: 105vw;
-    /* OVERKILL: Extra 5% width to bleed over edges */
-    /* Universal Breakout */
-    height: 100vh;
-    /* Keeps it full screen visual */
-    position: relative;
-    left: 50%;
-    right: 50%;
-    margin-left: -52.5vw;
-    /* Half of 105vw */
-    margin-right: -52.5vw;
     background: #000 !important;
-    /* VISUAL MASK: Hides any sub-pixel gaps */
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: -80px !important;
-    /* Forces banner behind the 80px header */
     box-sizing: border-box !important;
 }
 
@@ -5656,15 +5647,13 @@ body.header-hidden .sticky-controls {
 /* Global Hero Container */
 .hero {
     position: relative;
-    width: 100%;
+    width: 100vw;
     height: 100vh;
     height: 100svh;
-    /* Modern mobile fix */
+    left: 50%;
+    transform: translateX(-50%);
     min-height: 550px;
-    /* Prevent too small height */
     overflow: hidden;
-    /* Prevent content bleeding on scroll */
-    /* Allow scroll indicator to be visible */
     display: block;
 }
 
@@ -12779,7 +12768,7 @@ body.light-mode .auth-gender-option input:checked+.auth-gender-chip {
     display: flex !important;
     gap: 20px;
     overflow-x: auto;
-    scroll-snap-type: x mandatory;
+    /* scroll-snap-type: x mandatory; REMOVED to prevent unwanted snapping */
     padding: 20px 5px 40px 5px;
     /* Bottom padding for hover effects */
     -webkit-overflow-scrolling: touch;
@@ -12810,7 +12799,7 @@ body.light-mode .auth-gender-option input:checked+.auth-gender-chip {
     transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
         box-shadow 0.4s ease,
         border-color 0.3s ease;
-    scroll-snap-align: center;
+    /* scroll-snap-align: center; REMOVED */
     background: #000;
     /* Fallback */
 }
@@ -17636,4 +17625,8 @@ body.login-mode #bottomNav {
     /* Push terms to bottom */
     font-size: 13px;
     opacity: 0.7;
+}
+
+.fab-icon-img {
+    opacity: 0.8;
 }

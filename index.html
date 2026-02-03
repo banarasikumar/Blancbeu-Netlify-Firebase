@@ -303,8 +303,26 @@ PHASE 3: PREMIUM FEATURES (Week 4)
             </button>
 
             <button id="themeToggle" class="theme-toggle-btn" aria-label="Toggle theme">
-                <span class="theme-icon sun">☀️</span>
-                <span class="theme-icon moon">🌙</span>
+                <span class="theme-icon sun">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="4"></circle>
+                        <path d="M12 2v2"></path>
+                        <path d="M12 20v2"></path>
+                        <path d="M4.93 4.93l1.41 1.41"></path>
+                        <path d="M17.66 17.66l1.41 1.41"></path>
+                        <path d="M2 12h2"></path>
+                        <path d="M20 12h2"></path>
+                        <path d="M6.34 17.66l-1.41 1.41"></path>
+                        <path d="M19.07 4.93l-1.41 1.41"></path>
+                    </svg>
+                </span>
+                <span class="theme-icon moon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </span>
             </button>
             <nav class="nav">
                 <a href="#home">Home</a>
@@ -341,14 +359,7 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                             <img src="assets/banner_carousel_images/4.webp" alt="Premium Beauty Banner 4"
                                 loading="lazy">
                         </div>
-                        <div class="carousel-slide">
-                            <img src="assets/banner_carousel_images/3.webp" alt="Premium Beauty Banner 3"
-                                loading="lazy">
-                        </div>
-                        <div class="carousel-slide">
-                            <img src="assets/banner_carousel_images/5.webp" alt="Premium Beauty Banner 5"
-                                loading="lazy">
-                        </div>
+
                     </div>
 
                     <button class="carousel-btn prev" onclick="moveCarousel(-1)">❮</button>
@@ -368,18 +379,20 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                         </h1>
                         <p class="hero-tagline">Experience the pinnacle of luxury beauty services. Where artistry meets
                             relaxation in a sanctuary designed for your rejuvenation.</p>
+                    </div>
 
-                        <div class="hero-cta-buttons">
-                            <button class="hero-btn primary-btn">
-                                <span class="btn-label">Book Appointment</span>
-                            </button>
-                            <button class="hero-btn secondary-btn"
-                                onclick="document.querySelector('.bottom-nav .nav-item[data-page=\'services\']').click()">
-                                <span class="btn-label">Explore Services</span>
-                            </button>
-                        </div>
+                    <!-- CTA Buttons - Outside text-content for independent z-index -->
+                    <div class="hero-cta-buttons">
+                        <button class="hero-btn primary-btn">
+                            <span class="btn-label">Book Appointment</span>
+                        </button>
+                        <button class="hero-btn secondary-btn"
+                            onclick="document.querySelector('.bottom-nav .nav-item[data-page=\'services\']').click()">
+                            <span class="btn-label">Explore Services</span>
+                        </button>
                     </div>
                 </div>
+
                 <!-- Scroll Indicator positioned globally in Hero -->
                 <div class="hero-scroll-indicator">
                     <span class="scroll-text">SCROLL</span>
@@ -626,6 +639,18 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                             </div>
 
                             <button class="gallery-scroll-btn gallery-scroll-right" aria-label="Scroll Right">❯</button>
+                        </div>
+
+                        <!-- View Gallery Button -->
+                        <div class="gallery-view-btn-container">
+                            <button class="view-gallery-btn"
+                                onclick="document.getElementById('transformations').scrollIntoView({behavior: 'smooth'})">
+                                <span>View Gallery</span>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M5 12h14M12 5l7 7-7 7" />
+                                </svg>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -917,228 +942,298 @@ PHASE 3: PREMIUM FEATURES (Week 4)
 
 
                 <!-- ABOUT BLANCBEU SECTION -->
-                <div class="about-section">
+                <div class="about-section" id="about">
                     <div class="container">
                         <h2 class="section-title">
-                            <span class="title-decoration">📖</span>
+                            <span class="title-decoration">✨</span>
                             About Blancbeu
                             <span class="title-decoration">✨</span>
                         </h2>
-                        <p class="section-subtitle">Discover our story and passion for beauty</p>
+                        <p class="section-subtitle">Where Beauty Meets Excellence</p>
 
-                        <div class="about-content">
-                            <div class="about-text">
-                                <p>Blancbeu Family Beauty Salon has been serving the community with excellence for
-                                    7 months. We believe that true beauty comes from professional care, premium
-                                    products, and exceptional service.</p>
-                                <p>Our mission is to transform how people feel about themselves by providing
-                                    luxurious beauty treatments in a relaxing, welcoming environment. Every client
-                                    is treated as family, and your satisfaction is our greatest achievement.</p>
-                                <ul class="about-highlights">
-                                    <li>✨ Expert-trained beauty specialists</li>
-                                    <li>💎 Premium international products</li>
-                                    <li>🛍️ Personalized beauty consultations</li>
-                                    <li>🏆 Award-winning salon experience</li>
-                                </ul>
+                        <!-- Premium Badge -->
+                        <div class="premium-salon-badge">
+                            <div class="badge-glow"></div>
+                            <span class="badge-icon">👑</span>
+                            <span class="badge-text">Ranchi's Newest & Most Premium Beauty Destination</span>
+                        </div>
+
+                        <div class="about-cards-container">
+                            <!-- Story Card -->
+                            <div class="about-card glass-card">
+                                <div class="about-card-icon">🏆</div>
+                                <h3 class="about-card-title">Our Story</h3>
+                                <p class="about-card-text">
+                                    <span class="highlight-gold">Blancbeu Family Beauty Salon</span> —
+                                    <span class="highlight-shimmer">Ranchi's newest premium destination</span> for
+                                    beauty & wellness.
+                                    We've set a <span class="highlight-white">new standard of excellence</span> with
+                                    world-class care, luxury products, and unmatched service.
+                                </p>
                             </div>
-                            <!-- Moved Why Trust Blancbeu Section -->
-                            <div class="trust-section">
-                                <div class="container">
-                                    <h2 class="section-title">
-                                        <span class="title-decoration">✨</span>
-                                        Why Trust Blancbeu
-                                        <span class="title-decoration">✨</span>
-                                    </h2>
-                                    <p class="section-subtitle">Trusted by thousands for premium beauty care</p>
 
-                                    <div class="trust-grid">
-                                        <div class="trust-card premium-hover glass-card scroll-reveal">
-                                            <div class="stat-number" data-value="7">7+</div>
-                                            <div class="stat-label">Months of Excellence</div>
-                                            <div class="stat-description">Serving the community with premium beauty
-                                                treatments</div>
-                                        </div>
+                            <!-- Mission Card -->
+                            <div class="about-card glass-card">
+                                <div class="about-card-icon">💎</div>
+                                <h3 class="about-card-title">Our Promise</h3>
+                                <p class="about-card-text">
+                                    You deserve to feel <span class="highlight-shimmer">special & extraordinary</span>.
+                                    We transform how you feel with <span class="highlight-white">luxurious
+                                        treatments</span>
+                                    in a relaxing sanctuary. <span class="highlight-gold">You're family here</span> —
+                                    your glow is our pride.
+                                </p>
+                            </div>
+                        </div>
 
-                                        <div class="trust-card premium-hover glass-card scroll-reveal">
-                                            <div class="stat-number" data-value="1000">0</div>
-                                            <div class="stat-label">Happy Clients</div>
-                                            <div class="stat-description">Thousands of satisfied customers every
-                                                year</div>
-                                        </div>
+                        <!-- Highlights Pills -->
+                        <div class="about-highlights-pills">
+                            <div class="highlight-pill premium-pill">
+                                <span class="pill-icon">🥇</span>
+                                <span class="pill-text">Top Rated in Ranchi</span>
+                            </div>
+                            <div class="highlight-pill">
+                                <span class="pill-icon">👩‍🎨</span>
+                                <span class="pill-text">Expert Stylists</span>
+                            </div>
+                            <div class="highlight-pill">
+                                <span class="pill-icon">💫</span>
+                                <span class="pill-text">Luxury Products</span>
+                            </div>
+                            <div class="highlight-pill">
+                                <span class="pill-icon">🎯</span>
+                                <span class="pill-text">VIP Experience</span>
+                            </div>
+                        </div>
 
-                                        <div class="trust-card premium-hover glass-card scroll-reveal">
-                                            <div class="stat-number" data-value="50">0</div>
-                                            <div class="stat-label">Services Offered</div>
-                                            <div class="stat-description">Comprehensive beauty and wellness
-                                                solutions</div>
-                                        </div>
-                                    </div>
+                        <!-- Address Card for SEO -->
+                        <div class="about-address-card">
+                            <div class="address-icon">📍</div>
+                            <address class="address-text" itemscope itemtype="http://schema.org/BeautySalon">
+                                <span itemprop="name">Blancbeu Family Beauty Salon</span><br>
+                                <span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+                                    <span itemprop="streetAddress">4th Floor, Victory Mall, Rangrej Gali, Saraswati
+                                        Market, Upper Bazar</span>,
+                                    <span itemprop="addressLocality">Ranchi</span>,
+                                    <span itemprop="addressRegion">Jharkhand</span>
+                                    <span itemprop="postalCode">834001</span>,
+                                    <span itemprop="addressCountry">India</span>
+                                </span>
+                            </address>
+                        </div>
+                    </div>
+                    <!-- Moved Why Trust Blancbeu Section -->
+                    <div class="trust-section">
+                        <div class="container">
+                            <h2 class="section-title">
+                                <span class="title-decoration">✨</span>
+                                Why Trust Blancbeu
+                                <span class="title-decoration">✨</span>
+                            </h2>
+                            <p class="section-subtitle">Trusted by thousands for premium beauty care</p>
+
+                            <div class="trust-grid">
+                                <div class="trust-card premium-hover glass-card scroll-reveal">
+                                    <div class="stat-number" data-value="7">7+</div>
+                                    <div class="stat-label">Months of Excellence</div>
+                                    <div class="stat-description">Serving the community with premium beauty
+                                        treatments</div>
+                                </div>
+
+                                <div class="trust-card premium-hover glass-card scroll-reveal">
+                                    <div class="stat-number" data-value="1000">0</div>
+                                    <div class="stat-label">Happy Clients</div>
+                                    <div class="stat-description">Thousands of satisfied customers every
+                                        year</div>
+                                </div>
+
+                                <div class="trust-card premium-hover glass-card scroll-reveal">
+                                    <div class="stat-number" data-value="50">0</div>
+                                    <div class="stat-label">Services Offered</div>
+                                    <div class="stat-description">Comprehensive beauty and wellness
+                                        solutions</div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+            </div>
 
-                <!-- CTA SECTION -->
-                <div class="cta-section">
-                    <div class="container">
-                        <h2>Ready to Transform Your Look?</h2>
-                        <p>Book your appointment today and experience premium beauty care</p>
-                        <div class="cta-buttons">
-                            <a href="tel:+919229915277" class="btn-cta primary">📞 Call Now</a>
-                            <a href="https://wa.me/919229915277" class="btn-cta secondary">💬 WhatsApp</a>
+            <!-- CTA SECTION - Premium Redesign -->
+            <div class="cta-section-premium">
+                <div class="cta-glow-bg"></div>
+                <div class="container">
+                    <div class="cta-content">
+                        <span class="cta-badge">✨ Book Today</span>
+                        <h2 class="cta-title">Ready to <span class="cta-highlight">Transform</span> Your Look?</h2>
+                        <p class="cta-subtitle">Experience the luxury of premium beauty care. Your transformation
+                            awaits.</p>
+
+                        <div class="cta-buttons-premium">
+                            <a href="tel:+919229915277" class="cta-btn-gold">
+                                <span class="cta-btn-icon">📞</span>
+                                <span class="cta-btn-text">Call Now</span>
+                            </a>
+                            <a href="https://wa.me/919229915277" class="cta-btn-outline">
+                                <span class="cta-btn-icon">💬</span>
+                                <span class="cta-btn-text">WhatsApp</span>
+                            </a>
+                        </div>
+
+                        <p class="cta-response-time">⚡ We respond within 5 minutes</p>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- FAQ SECTION -->
+            <section class="faq-section" id="faq">
+                <div class="container">
+                    <h2 class="section-title">
+                        <span class="title-decoration">❓</span>
+                        Frequently Asked Questions
+                        <span class="title-decoration">💬</span>
+                    </h2>
+                    <p class="section-subtitle">Everything you need to know about our services</p>
+
+                    <div class="faq-container">
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>What are your salon hours?</h3>
+                                <span class="faq-icon">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                <div class="faq-answer-content">
+                                    We are open from 10:00 AM to 8:00 PM, Monday through Sunday. We recommend
+                                    booking an appointment in advance to ensure your preferred time slot is
+                                    available.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>How do I book an appointment?</h3>
+                                <span class="faq-icon">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                <div class="faq-answer-content">
+                                    You can book an appointment by calling us at +91 92299 15277, messaging us
+                                    on WhatsApp, or visiting our salon directly. We also accept walk-ins based
+                                    on availability.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>What products do you use?</h3>
+                                <span class="faq-icon">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                <div class="faq-answer-content">
+                                    We use only premium, professional-grade products from trusted international
+                                    and Indian brands. Our products are carefully selected for quality, safety,
+                                    and effectiveness.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>Do you offer bridal packages?</h3>
+                                <span class="faq-icon">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                <div class="faq-answer-content">
+                                    Yes! We offer comprehensive bridal packages that include pre-bridal
+                                    treatments, makeup, hair styling, and more. Contact us for a personalized
+                                    consultation and package details.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>What is your cancellation policy?</h3>
+                                <span class="faq-icon">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                <div class="faq-answer-content">
+                                    We request at least 2 hours notice for cancellations. This helps us
+                                    accommodate other clients and maintain our service quality. For bridal
+                                    appointments, please provide 24 hours notice.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>Do you offer services for men?</h3>
+                                <span class="faq-icon">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                <div class="faq-answer-content">
+                                    Absolutely! Blancbeu is a family salon that caters to men, women, and
+                                    children. We offer a full range of grooming services for men including
+                                    haircuts, beard styling, facials, and more.
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+            </section>
 
-
-
-                <!-- FAQ SECTION -->
-                <section class="faq-section" id="faq">
-                    <div class="container">
-                        <h2 class="section-title">
-                            <span class="title-decoration">❓</span>
-                            Frequently Asked Questions
-                            <span class="title-decoration">💬</span>
-                        </h2>
-                        <p class="section-subtitle">Everything you need to know about our services</p>
-
-                        <div class="faq-container">
-                            <div class="faq-item">
-                                <div class="faq-question">
-                                    <h3>What are your salon hours?</h3>
-                                    <span class="faq-icon">+</span>
-                                </div>
-                                <div class="faq-answer">
-                                    <div class="faq-answer-content">
-                                        We are open from 10:00 AM to 8:00 PM, Monday through Sunday. We recommend
-                                        booking an appointment in advance to ensure your preferred time slot is
-                                        available.
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="faq-item">
-                                <div class="faq-question">
-                                    <h3>How do I book an appointment?</h3>
-                                    <span class="faq-icon">+</span>
-                                </div>
-                                <div class="faq-answer">
-                                    <div class="faq-answer-content">
-                                        You can book an appointment by calling us at +91 92299 15277, messaging us
-                                        on WhatsApp, or visiting our salon directly. We also accept walk-ins based
-                                        on availability.
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="faq-item">
-                                <div class="faq-question">
-                                    <h3>What products do you use?</h3>
-                                    <span class="faq-icon">+</span>
-                                </div>
-                                <div class="faq-answer">
-                                    <div class="faq-answer-content">
-                                        We use only premium, professional-grade products from trusted international
-                                        and Indian brands. Our products are carefully selected for quality, safety,
-                                        and effectiveness.
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="faq-item">
-                                <div class="faq-question">
-                                    <h3>Do you offer bridal packages?</h3>
-                                    <span class="faq-icon">+</span>
-                                </div>
-                                <div class="faq-answer">
-                                    <div class="faq-answer-content">
-                                        Yes! We offer comprehensive bridal packages that include pre-bridal
-                                        treatments, makeup, hair styling, and more. Contact us for a personalized
-                                        consultation and package details.
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="faq-item">
-                                <div class="faq-question">
-                                    <h3>What is your cancellation policy?</h3>
-                                    <span class="faq-icon">+</span>
-                                </div>
-                                <div class="faq-answer">
-                                    <div class="faq-answer-content">
-                                        We request at least 2 hours notice for cancellations. This helps us
-                                        accommodate other clients and maintain our service quality. For bridal
-                                        appointments, please provide 24 hours notice.
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="faq-item">
-                                <div class="faq-question">
-                                    <h3>Do you offer services for men?</h3>
-                                    <span class="faq-icon">+</span>
-                                </div>
-                                <div class="faq-answer">
-                                    <div class="faq-answer-content">
-                                        Absolutely! Blancbeu is a family salon that caters to men, women, and
-                                        children. We offer a full range of grooming services for men including
-                                        haircuts, beard styling, facials, and more.
-                                    </div>
-                                </div>
+            <!-- FOOTER -->
+            <footer class="footer">
+                <div class="container">
+                    <div class="footer-content">
+                        <div class="footer-section">
+                            <h3>Blancbeu</h3>
+                            <p>Premium Beauty & Wellness Salon</p>
+                            <p>✨ Where Beauty Meets Excellence ✨</p>
+                        </div>
+                        <div class="footer-section">
+                            <h4>Quick Links</h4>
+                            <a href="#home">Home</a>
+                            <a href="#offers">Offers</a>
+                            <a href="#services">Services</a>
+                            <a href="#reviews">Reviews</a>
+                        </div>
+                        <div class="footer-section">
+                            <h4>Follow Us</h4>
+                            <div class="social-icons">
+                                <a href="https://youtube.com/@blancbeubeautysalon?si=_Go7ZSGSFzTS-j_M" target="_blank"
+                                    class="social-icon youtube" aria-label="YouTube">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path
+                                            d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z" />
+                                    </svg>
+                                </a>
+                                <a href="https://www.instagram.com/blancbeu_salon_ranchi?igsh=MTRpbGV0YWt4aHFzaw=="
+                                    target="_blank" class="social-icon instagram" aria-label="Instagram">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path
+                                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                                    </svg>
+                                </a>
+                                <a href="https://www.facebook.com/p/BlancBeu-Family-Beauty-Salon-61578977241367/"
+                                    target="_blank" class="social-icon facebook" aria-label="Facebook">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path
+                                            d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z" />
+                                    </svg>
+                                </a>
                             </div>
                         </div>
                     </div>
-                </section>
-
-                <!-- FOOTER -->
-                <footer class="footer">
-                    <div class="container">
-                        <div class="footer-content">
-                            <div class="footer-section">
-                                <h3>Blancbeu</h3>
-                                <p>Premium Beauty & Wellness Salon</p>
-                                <p>✨ Where Beauty Meets Excellence ✨</p>
-                            </div>
-                            <div class="footer-section">
-                                <h4>Quick Links</h4>
-                                <a href="#home">Home</a>
-                                <a href="#offers">Offers</a>
-                                <a href="#services">Services</a>
-                                <a href="#reviews">Reviews</a>
-                            </div>
-                            <div class="footer-section">
-                                <h4>Follow Us</h4>
-                                <div class="social-icons">
-                                    <a href="https://youtube.com/@blancbeubeautysalon?si=_Go7ZSGSFzTS-j_M"
-                                        target="_blank" class="social-icon youtube" aria-label="YouTube">
-                                        <svg viewBox="0 0 24 24" fill="currentColor">
-                                            <path
-                                                d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z" />
-                                        </svg>
-                                    </a>
-                                    <a href="https://www.instagram.com/blancbeu_salon_ranchi?igsh=MTRpbGV0YWt4aHFzaw=="
-                                        target="_blank" class="social-icon instagram" aria-label="Instagram">
-                                        <svg viewBox="0 0 24 24" fill="currentColor">
-                                            <path
-                                                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-                                        </svg>
-                                    </a>
-                                    <a href="https://www.facebook.com/p/BlancBeu-Family-Beauty-Salon-61578977241367/"
-                                        target="_blank" class="social-icon facebook" aria-label="Facebook">
-                                        <svg viewBox="0 0 24 24" fill="currentColor">
-                                            <path
-                                                d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z" />
-                                        </svg>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="footer-bottom">
-                            <p>&copy; Blancbeu 2025. All rights reserved.</p>
-                        </div>
+                    <div class="footer-bottom">
+                        <p>&copy; Blancbeu 2025. All rights reserved.</p>
                     </div>
-                </footer>
+                </div>
+            </footer>
         </section>
 
         <!-- SERVICES PAGE - Dedicated services browsing experience -->
@@ -1247,6 +1342,71 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                         target="_blank" class="quick-book-btn">
                         💬 Chat with us
                     </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- LOGIN PAGE -->
+        <section id="login" class="app-page" data-page="login">
+            <div class="login-page-container">
+                <!-- Immersive Close Button (Premium) -->
+                <button class="login-close-btn" onclick="window.location.hash='home'">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" stroke-opacity="0.3" />
+                        <path d="M15 9L9 15M9 9L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </button>
+
+                <div class="login-card">
+                    <div class="auth-brand">
+                        <div class="auth-brand-icon">
+                            <img src="icon-512x512.png" alt="Blancbeu" class="auth-logo">
+                        </div>
+                        <h1 class="auth-title">Welcome to Blancbeu</h1>
+                        <p class="auth-subtitle">Sign in to book appointments & manage your beauty journey</p>
+                    </div>
+
+                    <div class="auth-buttons">
+                        <!-- WhatsApp Login -->
+                        <button id="whatsappLoginBtnPage" class="auth-btn auth-btn-whatsapp">
+                            <div class="auth-btn-icon">
+                                <img src="attached_assets/new_icons/icons8-whatsapp.apng" alt="WhatsApp">
+                            </div>
+                            <div class="auth-btn-content">
+                                <span class="auth-btn-text">Continue with WhatsApp</span>
+                                <span class="auth-btn-subtext">Quick & secure login</span>
+                            </div>
+                            <span class="auth-btn-badge">Recommended</span>
+                        </button>
+
+                        <div class="auth-divider">
+                            <span>or continue with</span>
+                        </div>
+
+                        <!-- Google Login -->
+                        <button id="googleLoginBtnPage" class="auth-btn auth-btn-google">
+                            <div class="auth-btn-icon">
+                                <svg viewBox="0 0 24 24" width="24" height="24">
+                                    <path fill="#4285F4"
+                                        d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                                    <path fill="#34A853"
+                                        d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                                    <path fill="#FBBC05"
+                                        d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                                    <path fill="#EA4335"
+                                        d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+                                </svg>
+                            </div>
+                            <span class="auth-btn-text">Continue with Google</span>
+                        </button>
+                    </div>
+
+                    <p class="auth-terms">
+                        By continuing, you agree to our <a href="#" onclick="showTC(); return false;">Terms of
+                            Service</a> &
+                        <a href="#" onclick="showTC(); return false;">Privacy Policy</a>
+                    </p>
                 </div>
             </div>
         </section>
@@ -1520,17 +1680,15 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                                 <span class="badge-text" style="font-weight: 600;">Premium Member</span>
                             </div>
                             <!-- Dynamic Sign In Button -->
-                            <div class="member-badge sign-in-trigger" id="signInBadge"
-                                style="display: flex; justify-content: center; cursor: pointer; background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); color: #000; box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3); border: none; transition: transform 0.2s;">
-                                <span class="badge-icon" style="display: flex; align-items: center;">
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                                    </svg>
-                                </span>
-                                <span class="badge-text" style="font-weight: 700;">Sign In</span>
-                            </div>
+                            <!-- Dynamic Sign In Button -->
+                            <button class="sign-in-btn-premium sign-in-trigger" id="signInBadge">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                </svg>
+                                <span>Sign In</span>
+                            </button>
                         </div>
                         <button class="edit-profile-btn">✏️</button>
                     </div>
@@ -2107,161 +2265,7 @@ PHASE 3: PREMIUM FEATURES (Week 4)
 
 
     <!-- Premium Full-Screen Auth Modal -->
-    <div id="authModal" class="auth-overlay" style="display: none;">
-        <div class="auth-modal-container">
-            <!-- Close Button -->
-            <!-- Premium Close Button (Top-Right) -->
-            <button class="auth-close-btn-premium" id="closeAuthModal" aria-label="Close" onclick="closeAuthModal()">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" />
-                    <path d="M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" />
-                </svg>
-            </button>
-
-            <!-- Login View (default) -->
-            <div id="authLoginView" class="auth-view">
-                <!-- Brand Header -->
-                <div class="auth-brand">
-                    <div class="auth-brand-icon">
-                        <img src="icon-512x512.png" alt="Blancbeu" class="auth-logo">
-                    </div>
-                    <h1 class="auth-title">Welcome to Blancbeu</h1>
-                    <p class="auth-subtitle">Sign in to book appointments & manage your beauty journey</p>
-                </div>
-
-                <!-- Login Buttons -->
-                <div class="auth-buttons">
-                    <!-- WhatsApp Login - Recommended -->
-                    <button id="whatsappLoginBtn" class="auth-btn auth-btn-whatsapp">
-                        <div class="auth-btn-icon">
-                            <img src="attached_assets/new_icons/icons8-whatsapp.apng" alt="WhatsApp">
-                        </div>
-                        <div class="auth-btn-content">
-                            <span class="auth-btn-text">Continue with WhatsApp</span>
-                            <span class="auth-btn-subtext">Quick & secure login</span>
-                        </div>
-                        <span class="auth-btn-badge">Recommended</span>
-                    </button>
-
-                    <!-- Divider -->
-                    <div class="auth-divider">
-                        <span>or continue with</span>
-                    </div>
-
-                    <!-- Google Login -->
-                    <button id="googleLoginBtn" class="auth-btn auth-btn-google">
-                        <div class="auth-btn-icon">
-                            <svg viewBox="0 0 24 24" width="24" height="24">
-                                <path fill="#4285F4"
-                                    d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
-                                <path fill="#34A853"
-                                    d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
-                                <path fill="#FBBC05"
-                                    d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
-                                <path fill="#EA4335"
-                                    d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
-                            </svg>
-                        </div>
-                        <span class="auth-btn-text">Continue with Google</span>
-                    </button>
-                </div>
-
-                <!-- Terms -->
-                <p class="auth-terms">
-                    By continuing, you agree to our <a href="#" onclick="showTC(); return false;">Terms of Service</a> &
-                    <a href="#" onclick="showTC(); return false;">Privacy Policy</a>
-                </p>
-            </div>
-
-            <!-- Profile Form View (shown for new WhatsApp users) -->
-            <div id="authProfileView" class="auth-view" style="display: none;">
-                <div class="auth-brand">
-                    <div class="auth-brand-icon-large">
-                        ✨
-                    </div>
-                    <h2 class="auth-title-large">Almost There!</h2>
-                    <p class="auth-subtitle">Complete your profile to unlock personalized rewards & birthday treats.</p>
-                    <div class="auth-divider-gold"></div>
-                </div>
-
-                <form id="authProfileForm" class="auth-profile-form">
-                    <!-- Name Field -->
-                    <div class="auth-form-group">
-                        <label for="profileName" class="auth-label-premium">Your Name</label>
-                        <div class="auth-input-wrapper-premium">
-                            <span class="auth-input-icon">👤</span>
-                            <input type="text" id="profileName" name="name" class="auth-input-premium"
-                                style="padding-left: 50px !important;" placeholder="Enter your full name" required
-                                autocomplete="name">
-                        </div>
-                    </div>
-
-                    <!-- Gender Field -->
-                    <div class="auth-form-group">
-                        <label class="auth-label-premium">Gender</label>
-                        <div class="auth-gender-options-premium">
-                            <label class="auth-gender-option-premium">
-                                <input type="radio" name="gender" value="female" required checked>
-                                <span class="auth-gender-chip-premium">
-                                    <span class="gender-emoji">👩</span> Female
-                                </span>
-                            </label>
-                            <label class="auth-gender-option-premium">
-                                <input type="radio" name="gender" value="male">
-                                <span class="auth-gender-chip-premium">
-                                    <span class="gender-emoji">👨</span> Male
-                                </span>
-                            </label>
-                            <label class="auth-gender-option-premium">
-                                <input type="radio" name="gender" value="other">
-                                <span class="auth-gender-chip-premium">
-                                    <span class="gender-emoji">🌈</span> Other
-                                </span>
-                            </label>
-                        </div>
-                    </div>
-
-                    <!-- Date of Birth Field -->
-                    <div class="auth-form-group">
-                        <label for="profileDob" class="auth-label-premium">Birthday (for personalized offers & gifts!)
-                            🎂</label>
-                        <div class="auth-input-wrapper-premium date-input-wrapper-premium">
-                            <input type="tel" id="profileDob" name="dob" class="auth-input-premium date-input"
-                                placeholder="DD/MM/YYYY" maxlength="10" required autocomplete="bday">
-
-                            <!-- Hidden System Date Picker -->
-                            <input type="date" id="profileDobSystem"
-                                style="position: absolute; opacity: 0; pointer-events: none; height: 1px; width: 1px; bottom: 0;">
-
-                            <svg id="profileDobIcon" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-                                viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="custom-calendar-icon"
-                                style="position: absolute; right: 15px; cursor: pointer; pointer-events: auto;">
-                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                                <line x1="16" y1="2" x2="16" y2="6"></line>
-                                <line x1="8" y1="2" x2="8" y2="6"></line>
-                                <line x1="3" y1="10" x2="21" y2="10"></line>
-                            </svg>
-                        </div>
-                    </div>
-
-                    <!-- Submit Button -->
-                    <button type="submit" class="auth-submit-btn-premium">
-                        <span>Save & Continue</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                            class="btn-arrow-svg">
-                            <path d="M9 18l6-6-6-6" />
-                        </svg>
-                    </button>
-                </form>
-
-                <button id="skipProfileBtn" class="auth-skip-link">I'll do this later</button>
-            </div>
-        </div>
-    </div>
+    <!-- Auth Modal Removed (Replaced by Dedicated Login Page) -->
 
 
     <script src="services-mock.js"></script>

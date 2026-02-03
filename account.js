@@ -240,7 +240,12 @@ class AccountController {
             this.logoutBtn.textContent = 'Sign In / Sign Up';
             this.logoutBtn.classList.add('signin-mode'); // Optional styling hook
             this.logoutBtn.onclick = () => {
-                document.dispatchEvent(new CustomEvent('open-login-modal'));
+                // Redirect to dedicated Login Page (preserves header)
+                if (window.navigateToPage) {
+                    window.navigateToPage('login');
+                } else {
+                    window.location.hash = 'login';
+                }
             };
         }
     }

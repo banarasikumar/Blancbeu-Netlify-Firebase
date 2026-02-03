@@ -2,8 +2,6 @@ export function initParallax() {
     const hero = document.querySelector('.hero');
     const banner = document.querySelector('.carousel');
     const textSection = document.querySelector('.hero-text-section');
-    const header = document.querySelector('.header');
-    const primaryBtn = document.querySelector('.hero-btn.primary-btn');
 
     // Target the actual scroll container
     const scroller = document.querySelector('.app-shell-content') || window;
@@ -13,111 +11,67 @@ export function initParallax() {
     // GPU HARDWARE ACCELERATION HINTS
     textSection.style.willChange = 'transform, opacity';
     banner.style.willChange = 'transform';
-    if (primaryBtn) primaryBtn.style.willChange = 'transform';
 
-    // 1. Set static styles for text section FIRST (Move down 20px as requested)
+    // Set static styles for text section
     if (textSection) {
         Object.assign(textSection.style, {
             visibility: 'visible',
-            left: '50%',
-            top: 'calc(50% + 55px)',
-            position: 'absolute',
-            display: 'flex',
-            flexDirection: 'column',
-            background: 'transparent',
-            border: 'none',
             zIndex: '100'
         });
     }
 
-    // 2. INITIALIZATION: Cache static dimensions (Measure after repositioning)
-    const heroHeight = hero.offsetHeight;
-    const initialHeroTopViewport = hero.getBoundingClientRect().top + (scroller === window ? window.pageYOffset : scroller.scrollTop);
-
-    let btnHeroOffset = 0;
-    let btnHeight = 0;
-    if (primaryBtn) {
-        const heroRect = hero.getBoundingClientRect();
-        const btnRect = primaryBtn.getBoundingClientRect();
-        btnHeroOffset = btnRect.top - heroRect.top;
-        btnHeight = primaryBtn.offsetHeight;
-        primaryBtn.style.transition = 'transform 0s !important, background 0.3s ease, box-shadow 0.3s ease';
-    }
-
-    // LERP STATE
-    let currentScroll = (scroller === window ? window.pageYOffset : scroller.scrollTop);
-    let targetScroll = currentScroll;
-    const lerpFactor = 0.1;
-
     function updateParallax() {
-        // 1. LERP SCROLL: Smoothly chase the real scroll position
-        const diffScroll = targetScroll - currentScroll;
-        if (Math.abs(diffScroll) < 0.05) {
-            currentScroll = targetScroll;
-        } else {
-            currentScroll += diffScroll * lerpFactor;
-        }
+        // Get current scroll position directly (no LERP)
+        const scrollY = (scroller === window)
+            ? (window.pageYOffset || document.documentElement.scrollTop)
+            : scroller.scrollTop;
 
-        // 2. LIVE MEASUREMENTS: Get real-time viewport positions for hard constraints
+        // Only apply effects when hero is visible
         const heroRect = hero.getBoundingClientRect();
-        const liveHeroTop = heroRect.top;
+        if (heroRect.bottom < 0) return; // Hero scrolled out of view
 
-        // 3. FADES (Based on smoothed currentScroll)
+        // 1. FADES - Based on direct scroll
         const whiteOverlay = document.querySelector('.hero-scroll-overlay');
         if (whiteOverlay) {
-            whiteOverlay.style.opacity = Math.min(0.85, currentScroll / 600);
+            whiteOverlay.style.opacity = Math.min(0.85, scrollY / 600);
         }
 
+        // Fade text elements but keep primary button always visible
         const textContent = textSection.querySelector('.hero-text-content');
         if (textContent) {
-            textContent.style.opacity = Math.max(0, 1 - (currentScroll / 400));
+            const fadeOpacity = Math.max(0, 1 - (scrollY / 400));
+
+            // Fade only text elements, not buttons
+            const overline = textContent.querySelector('.hero-overline');
+            const title = textContent.querySelector('.hero-title');
+            const tagline = textContent.querySelector('.hero-tagline');
+            const secondaryBtn = textContent.querySelector('.secondary-btn');
+
+            if (overline) overline.style.opacity = fadeOpacity;
+            if (title) title.style.opacity = fadeOpacity;
+            if (tagline) tagline.style.opacity = fadeOpacity;
+            if (secondaryBtn) secondaryBtn.style.opacity = fadeOpacity;
+
+            // Primary button stays at full opacity (crystal clear)
         }
 
-        // 4. MOTION (Text & Banner use smoothed LERP for "Buttery" feel)
-        const textOffset = currentScroll * -0.5;
-        textSection.style.transform = `translate3d(-50%, -50%, 0) translate3d(0, ${textOffset.toFixed(2)}px, 0)`;
+        // 2. PARALLAX MOTION - Direct scroll with subtle multipliers
+        const textOffset = scrollY * -0.4; // Text moves up slower
+        textSection.style.transform = `translate3d(0, ${textOffset}px, 0)`;
 
-        const bannerOffset = (currentScroll * 0.4).toFixed(2);
+        const bannerOffset = scrollY * 0.3; // Banner moves down slower
         banner.style.transform = `translate3d(0, ${bannerOffset}px, 0) scale(1.1)`;
-
-        // 5. STICKY LOGIC (Uses LIVE clamping for absolute 80px stop)
-        if (primaryBtn) {
-            // Natural Viewport Position = RealHeroTop + InitialOffset + SmoothParallaxOffset
-            // We use liveHeroTop to ensure the button can't "lag" past its lock point
-            const naturalBtnTop = liveHeroTop + btnHeroOffset + textOffset;
-
-            // Absolute Constraints (80px from top, Release at 50px remaining)
-            const stickyLimit = 80;
-            const releaseLimit = liveHeroTop + heroHeight - btnHeight - 50;
-
-            // Determine Target Viewport Top
-            let targetTop = Math.max(naturalBtnTop, stickyLimit);
-            targetTop = Math.min(targetTop, releaseLimit);
-
-            // Calculate exact transform required to reach targetTop
-            const applyMove = (targetTop - naturalBtnTop).toFixed(2);
-            primaryBtn.style.transform = `translate3d(0, ${applyMove}px, 0)`;
-            primaryBtn.style.zIndex = "100";
-        }
-
-        // Header Style logic moved to nav_fix.js (Strict Home Page Check)
-
-        // Continue loop if not settled
-        if (currentScroll !== targetScroll) {
-            requestAnimationFrame(updateParallax);
-        }
     }
 
+    // Use scroll event with requestAnimationFrame for optimal performance
+    let ticking = false;
     const onScroll = () => {
-        const newTarget = (scroller === window) ?
-            (window.pageYOffset || document.documentElement.scrollTop) :
-            scroller.scrollTop;
-
-        const wasSettled = (currentScroll === targetScroll);
-        targetScroll = newTarget;
-
-        if (wasSettled) {
-            requestAnimationFrame(updateParallax);
+        if (!ticking) {
+            requestAnimationFrame(() => {
+                updateParallax();
+                ticking = false;
+            });
+            ticking = true;
         }
     };
 

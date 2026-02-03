@@ -1776,7 +1776,7 @@ function startAutoPlay() {
     console.log('▶️ Starting carousel auto-play');
     carouselInterval = setInterval(() => {
         moveCarousel(1);
-    }, 5000);
+    }, 8000);
 }
 
 function moveCarousel(direction) {
@@ -2519,10 +2519,26 @@ class AppShellNavigator {
             this.pageScrollPositions[this.currentPage] = window.scrollY;
             console.log(`📍 Page scroll saved - ${this.currentPage}: ${window.scrollY}px`);
         }, { passive: true });
+
+        // Handle initial hash on load
+        const initialHash = window.location.hash.slice(1);
+        if (initialHash) {
+            setTimeout(() => this.navigateTo(initialHash), 100);
+        }
     }
 
     navigateTo(page) {
         if (!page || page === '') page = 'home'; // Default to home if page is empty
+
+        // Force Header for Login Page (Fixes visibility issues)
+        const mainHeader = document.getElementById('mainHeader');
+        if (mainHeader) {
+            if (page === 'login') {
+                mainHeader.classList.add('force-solid-header');
+            } else {
+                mainHeader.classList.remove('force-solid-header');
+            }
+        }
 
         // If same page clicked: just scroll to top (no page transition)
         if (page === this.currentPage) {
@@ -5435,27 +5451,24 @@ class GalleryController {
     }
 }
 
-// Gallery Peek Animation
+// Gallery Peek Animation - DISABLED (User requested static gallery with View Gallery button)
 function initGalleryPeek() {
+    // Auto-scroll peek disabled - gallery is now static
+    return;
+
+    /* Original code commented out:
     const galleryContainer = document.querySelector('.gallery-scroll-container');
     if (!galleryContainer) return;
 
     const performPeek = (count) => {
         if (count <= 0) return;
-
-        // Smooth scroll right (slide left effect) - Much wider peek (250px)
         galleryContainer.scrollBy({ left: 250, behavior: 'smooth' });
-
-        // Wait 1.5s (as requested: "1.5 sec is enough")
         setTimeout(() => {
-            // Scroll back
             galleryContainer.scrollBy({ left: -250, behavior: 'smooth' });
-
-            // Wait before next peek if needed
             setTimeout(() => {
-                performPeek(count - 1); // Recursive call for second time
+                performPeek(count - 1);
             }, 1200);
-        }, 1500); // 1.5s hold time
+        }, 1500);
     };
 
     const observer = new IntersectionObserver((entries) => {
@@ -5463,10 +5476,8 @@ function initGalleryPeek() {
             if (entry.isIntersecting) {
                 if (!galleryContainer.dataset.peeked) {
                     galleryContainer.dataset.peeked = "true";
-
-                    // Initial delay
                     setTimeout(() => {
-                        performPeek(2); // "Twice"
+                        performPeek(2);
                     }, 800);
                 }
             }
@@ -5474,6 +5485,7 @@ function initGalleryPeek() {
     }, { threshold: 0.6 });
 
     observer.observe(galleryContainer);
+    */
 }
 
 // Ensure this runs after DOM load

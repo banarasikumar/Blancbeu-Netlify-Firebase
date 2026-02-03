@@ -14,8 +14,8 @@ import { doc, setDoc, getDoc, serverTimestamp } from "firebase/firestore";
 // DOM Elements
 const authModal = document.getElementById('authModal');
 const closeAuthModalBtn = document.getElementById('closeAuthModal');
-const whatsappBtn = document.getElementById('whatsappLoginBtn');
-const googleBtn = document.getElementById('googleLoginBtn');
+const whatsappBtns = document.querySelectorAll('#whatsappLoginBtn, #whatsappLoginBtnPage');
+const googleBtns = document.querySelectorAll('#googleLoginBtn, #googleLoginBtnPage');
 
 // Profile form elements
 const authLoginView = document.getElementById('authLoginView');
@@ -43,6 +43,7 @@ async function handleLoginSuccess(user) {
 
         showToast(`Welcome, ${user.displayName}! ✨`);
         closeAuthModal();
+        if (window.location.hash === '#login') window.location.hash = '';
 
         // Restore any pending action (e.g., open booking modal)
         restoreLoginState();
@@ -73,69 +74,76 @@ if (authModal) {
 }
 
 // WhatsApp Login Handler
-if (whatsappBtn) {
-    whatsappBtn.addEventListener('click', () => {
-        const phoneNumber = "919229915277";
-        const message = "*Hi BlancBeu, please help me log in.*\n\n_Send this message without editing_";
-        const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+// WhatsApp Login Handler
+if (whatsappBtns.length > 0) {
+    whatsappBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const phoneNumber = "919229915277";
+            const message = "*Hi BlancBeu, please help me log in.*\n\n_Send this message without editing_";
+            const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
-        // Open WhatsApp
-        window.open(url, '_blank');
+            // Open WhatsApp
+            window.open(url, '_blank');
 
-        // Show a toast notification
-        showToast('Check WhatsApp for your login link! 📱');
+            // Show a toast notification
+            showToast('Check WhatsApp for your login link! 📱');
 
-        // Close modal after a delay
-        setTimeout(() => {
-            closeAuthModal();
-        }, 2000);
+            // Close modal after a delay
+            setTimeout(() => {
+                closeAuthModal();
+                if (window.location.hash === '#login') window.location.hash = '';
+            }, 2000);
+        });
     });
 }
 
 // Google Login Handler
-if (googleBtn) {
-    googleBtn.addEventListener('click', async () => {
-        const provider = new GoogleAuthProvider();
+// Google Login Handler
+if (googleBtns.length > 0) {
+    googleBtns.forEach(btn => {
+        btn.addEventListener('click', async () => {
+            const provider = new GoogleAuthProvider();
 
-        try {
-            const result = await signInWithPopup(auth, provider);
-            await handleLoginSuccess(result.user);
+            try {
+                const result = await signInWithPopup(auth, provider);
+                await handleLoginSuccess(result.user);
 
-        } catch (error) {
-            console.error("Google Login Error:", error);
+            } catch (error) {
+                console.error("Google Login Error:", error);
 
-            // Handle Popup Blocking -> Fallback to Redirect
-            if (error.code === 'auth/popup-blocked' || error.code === 'auth/popup-closed-by-user') {
-                console.warn("Popup blocked or closed. Falling back to redirect...");
-                showToast("Redirecting to Google Sign In... 🔄", "success"); // Use success style for "working on it"
+                // Handle Popup Blocking -> Fallback to Redirect
+                if (error.code === 'auth/popup-blocked' || error.code === 'auth/popup-closed-by-user') {
+                    console.warn("Popup blocked or closed. Falling back to redirect...");
+                    showToast("Redirecting to Google Sign In... 🔄", "success"); // Use success style for "working on it"
 
-                try {
-                    await signInWithRedirect(auth, provider);
-                    return; // Redirecting...
-                } catch (redirectError) {
-                    console.error("Redirect Login Failed:", redirectError);
-                    showToast(`Login failed: ${redirectError.message}`, "error");
-                    return;
+                    try {
+                        await signInWithRedirect(auth, provider);
+                        return; // Redirecting...
+                    } catch (redirectError) {
+                        console.error("Redirect Login Failed:", redirectError);
+                        showToast(`Login failed: ${redirectError.message}`, "error");
+                        return;
+                    }
                 }
+
+                let errorMessage = `Login failed: ${error.message}`;
+                let errorType = "error";
+
+                if (error.code === 'auth/unauthorized-domain') {
+                    errorMessage = "Login Failed: Domain/Port not authorized in Firebase Console.";
+
+                    // Add visual overlay for this specific error to guide the user
+                    const port = window.location.port;
+                    alert(`⚠️ Google Login Error: Unauthorized Domain\n\nYou are running on port ${port}, but Firebase/Google Console likely only authorizes port 5173 or localhost (default).\n\nPlease add "http://localhost:${port}" to your Google Cloud Console > Authorized Javascript Origins.`);
+                } else if (error.code === 'auth/configuration-not-found') {
+                    errorMessage = "Login Failed: Firebase config missing.";
+                } else if (error.message.includes("origin")) {
+                    errorMessage = `Origin mismatch. Try port 5173. (${error.message})`;
+                }
+
+                showToast(errorMessage, errorType);
             }
-
-            let errorMessage = `Login failed: ${error.message}`;
-            let errorType = "error";
-
-            if (error.code === 'auth/unauthorized-domain') {
-                errorMessage = "Login Failed: Domain/Port not authorized in Firebase Console.";
-
-                // Add visual overlay for this specific error to guide the user
-                const port = window.location.port;
-                alert(`⚠️ Google Login Error: Unauthorized Domain\n\nYou are running on port ${port}, but Firebase/Google Console likely only authorizes port 5173 or localhost (default).\n\nPlease add "http://localhost:${port}" to your Google Cloud Console > Authorized Javascript Origins.`);
-            } else if (error.code === 'auth/configuration-not-found') {
-                errorMessage = "Login Failed: Firebase config missing.";
-            } else if (error.message.includes("origin")) {
-                errorMessage = `Origin mismatch. Try port 5173. (${error.message})`;
-            }
-
-            showToast(errorMessage, errorType);
-        }
+        });
     });
 }
 
@@ -573,16 +581,17 @@ async function refreshUserData() {
 window.refreshUserData = refreshUserData;
 
 // --- Modal Logic ---
+// --- Modal Logic REPLACED by Login Page ---
 export function openLoginModal(action = null) {
-    const authModal = document.getElementById('authModal');
-    if (authModal) {
-        authModal.style.display = 'flex';
-        // Add active class for animation (if CSS supports it)
-        setTimeout(() => authModal.classList.add('active'), 10);
-    }
-
     if (action) {
         saveLoginState(action);
+    }
+
+    // Navigate to dedicated Login Page
+    if (window.navigateToPage) {
+        window.navigateToPage('login');
+    } else {
+        window.location.hash = 'login';
     }
 }
 

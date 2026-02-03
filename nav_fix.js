@@ -146,12 +146,22 @@ IMPORTANT: This app uses #appContent as the scrollable container, NOT window.
     function handleScroll(force = false) {
         if ((isTabSwitching && !force) || !contentArea || !header) return;
 
-        // Check if auth modal is open - if so, ensure header is visible
-        const authModal = document.getElementById('authModal');
-        if (authModal && window.getComputedStyle(authModal).display !== 'none') {
+        // Auth Modal check removed (Modal replaced by Page)
+
+        // LOGIN PAGE EXCEPTION: ALWAYS SHOW
+        // User requires strict visibility on login page
+        if (currentTab === 'login') {
             header.style.transform = 'translateY(0)';
             currentTranslateY = 0;
+            header.classList.add('force-solid-header');
+            header.classList.remove('immersive');
             return;
+        } else {
+            // Safety: Ensure login locks are removed
+            header.classList.remove('force-solid-header');
+            if (document.body.classList.contains('login-mode')) {
+                document.body.classList.remove('login-mode');
+            }
         }
 
         const currentScrollY = contentArea.scrollTop;
@@ -321,6 +331,19 @@ IMPORTANT: This app uses #appContent as the scrollable container, NOT window.
                 currentTranslateY = 0;
                 document.documentElement.style.setProperty('--sticky-top', '80px');
 
+                // Header Visibility Logic: Force Solid for Login
+                const bottomNav = document.getElementById('bottomNav');
+                if (targetTabId === 'login') {
+                    header.classList.add('force-solid-header');
+                    header.classList.remove('immersive');
+                    document.body.classList.add('login-mode'); // Add class to body
+                    if (bottomNav) bottomNav.style.display = 'none';
+                } else {
+                    header.classList.remove('force-solid-header');
+                    document.body.classList.remove('login-mode'); // Remove class
+                    if (bottomNav) bottomNav.style.display = '';
+                }
+
                 // Force immediate check of header transparency/state
                 handleScroll(true);
 
@@ -376,10 +399,14 @@ IMPORTANT: This app uses #appContent as the scrollable container, NOT window.
         console.log('🔍 [NavFix] Initial Hash Check:', hash);
 
         if (hash) {
-            const targetTab = document.querySelector(`.nav-item[data-page="${hash}"]`);
-            if (targetTab) {
-                console.log("Deep linking to tab:", hash);
+            // Check for ANY page matching the hash (by data-page or ID), not just nav items
+            const targetPage = document.querySelector(`[data-page="${hash}"]`) || document.getElementById(hash);
+            if (targetPage) {
+                console.log("Deep linking to page:", hash);
                 switchToTab(hash);
+            } else {
+                console.log('⚠️ [NavFix] Hash page not found, defaulting to HOME');
+                switchToTab('home');
             }
         } else {
             console.log('🏠 [NavFix] No hash found, defaulting to HOME');

@@ -40,7 +40,7 @@ try {
     alert(`Critical Error: Firebase configuration is missing or invalid.\n\n${error.message}\n\nCheck console for details.`);
 }
 
-export { auth, db };
+
 
 // Expose to window for AccountController
 window.auth = auth;

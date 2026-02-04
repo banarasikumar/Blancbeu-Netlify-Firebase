@@ -4837,6 +4837,9 @@ function onServicesPageVisible() {
     }
 }
 
+// Expose globally for navigation controller
+window.onServicesPageVisible = onServicesPageVisible;
+
 // Hook into page navigation
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize on page load if services page is active

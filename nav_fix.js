@@ -75,6 +75,7 @@ IMPORTANT: This app uses #appContent as the scrollable container, NOT window.
         bindScrollHandler();
         bindNavClickHandlers();
         bindNotifyButton();
+        bindBrandIconClickHandler();
 
         // Handle initial hash (Deep Linking) immediately
         handleInitialHash();
@@ -371,6 +372,11 @@ IMPORTANT: This app uses #appContent as the scrollable container, NOT window.
                     console.log("🔄 Navigating to Bookings -> Refreshing Data...");
                     window.refreshBookings();
                 }
+
+                // FIX: Initialize Services Page when navigating to services
+                if (targetTabId === 'services' && window.onServicesPageVisible) {
+                    window.onServicesPageVisible();
+                }
             });
         }
     }
@@ -471,6 +477,23 @@ IMPORTANT: This app uses #appContent as the scrollable container, NOT window.
                 showHeader();
                 lastScrollY = 0;
             });
+        });
+    }
+
+    // ==========================================
+    // BRAND ICON HOME NAVIGATION
+    // ==========================================
+    function bindBrandIconClickHandler() {
+        const brandIconWrapper = document.querySelector('.brand-icon-wrapper');
+        if (!brandIconWrapper) return;
+
+        // Add cursor pointer for better UX
+        brandIconWrapper.style.cursor = 'pointer';
+
+        brandIconWrapper.addEventListener('click', (e) => {
+            e.preventDefault();
+            console.log('🏠 Brand icon clicked -> Navigating to Home');
+            switchToTab('home', true);
         });
     }
 

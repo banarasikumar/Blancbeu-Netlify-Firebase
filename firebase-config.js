@@ -46,3 +46,8 @@ export { auth, db };
 window.auth = auth;
 window.db = db;
 window.firebase = { auth: auth }; // Mock structure for AccountController check
+
+// Initialize Messaging
+import { getMessaging } from "firebase/messaging";
+const messaging = getMessaging(app);
+export { app, auth, db, messaging };

@@ -1,9 +1,4 @@
 /*
-// [CRITICAL FIX] Redirect /admin to /admin/ to prevent homepage loading
-if (window.location.pathname === '/admin') {
-    window.location.replace('/admin/');
-}
-
 ================================================================================
 BLANCBEU SALON - WORLD-CLASS JAVASCRIPT IMPLEMENTATION ROADMAP
 ================================================================================
@@ -5499,3 +5494,253 @@ window.slideServiceCarousel = slideServiceCarousel;
 
 
 // Immersive Header logic is now centrally managed by nav_fix.js
+
+// =========================================
+// PWA LOGIC (Appended)
+// =========================================
+
+async function initPWA() {
+    // 1. VERSION CHECK & CACHE CLEANUP
+    try {
+        const response = await fetch('/version.json', { cache: "no-store" });
+        const data = await response.json();
+        const latestVersion = data.build;
+        const currentVersion = localStorage.getItem('appVersion');
+
+        if (currentVersion && parseInt(currentVersion) !== latestVersion) {
+            console.log(`[PWA] New version detected: ${latestVersion} (Current: ${currentVersion}). Refreshing...`);
+
+            // Unregister SW
+            if ('serviceWorker' in navigator) {
+                const registrations = await navigator.serviceWorker.getRegistrations();
+                for (const registration of registrations) {
+                    await registration.unregister();
+                }
+            }
+
+            // Clear Caches
+            if ('caches' in window) {
+                const keys = await caches.keys();
+                await Promise.all(keys.map(key => caches.delete(key)));
+            }
+
+            // Update Version and Reload
+            localStorage.setItem('appVersion', latestVersion.toString());
+            window.location.reload(true);
+            return;
+        } else {
+            localStorage.setItem('appVersion', latestVersion.toString());
+        }
+    } catch (e) {
+        console.log('[PWA] Version check skipped (offline or missing file)');
+    }
+
+    // 2. REGISTER SERVICE WORKER
+    if ('serviceWorker' in navigator) {
+        try {
+            const registration = await navigator.serviceWorker.register('/service-worker.js');
+            console.log('[PWA] Service Worker registered with scope:', registration.scope);
+        } catch (error) {
+            console.error('[PWA] Service Worker registration failed:', error);
+        }
+    }
+
+    const navInstallBtn = document.getElementById('installBtn');
+
+    // Initial check - hide button if already installed
+    if (typeof updateInstallButtonVisibility === 'function') {
+        updateInstallButtonVisibility();
+    }
+
+    // Monitor display mode changes
+    const displayModeQuery = window.matchMedia('(display-mode: standalone)');
+    displayModeQuery.addListener(() => {
+        if (typeof updateInstallButtonVisibility === 'function') {
+            updateInstallButtonVisibility();
+        }
+    });
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+        console.log('📲 PWA Install prompt available');
+        e.preventDefault();
+        deferredPrompt = e;
+
+        // Show nav install button only if not standalone
+        if (!checkIfStandalone() && navInstallBtn) {
+            navInstallBtn.style.display = 'flex';
+            console.log('✅ Showing install button - prompt is available');
+        }
+        setTimeout(() => {
+            showInstallPromotion();
+        }, 30000);
+    });
+
+    window.addEventListener('appinstalled', () => {
+        console.log('✅ PWA was installed successfully');
+        sessionStorage.setItem('appInstalled', 'true');
+        sessionStorage.setItem('isStandalone', 'true');
+        deferredPrompt = null;
+
+        // Hide install button
+        if (typeof updateInstallButtonVisibility === 'function') {
+            updateInstallButtonVisibility();
+        }
+        hideInstallPromotion();
+    });
+
+    // Nav button click handler
+    if (navInstallBtn) {
+        navInstallBtn.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                try {
+                    await deferredPrompt.prompt();
+                    const { outcome } = await deferredPrompt.userChoice;
+                    console.log(`User response: ${outcome}`);
+                    if (outcome === 'accepted') {
+                        sessionStorage.setItem('appInstalled', 'true');
+                        sessionStorage.setItem('isStandalone', 'true');
+                    }
+                    deferredPrompt = null;
+                    if (typeof updateInstallButtonVisibility === 'function') {
+                        updateInstallButtonVisibility();
+                    }
+                } catch (error) {
+                    console.error('Install error:', error);
+                }
+            }
+        });
+    }
+
+    const isStandalone = checkIfStandalone();
+
+    if (!isStandalone && !deferredPrompt) {
+        setTimeout(() => {
+            showBrowserSpecificInstallPrompt();
+        }, 30000);
+    }
+}
+
+function showInstallPromotion() {
+    const isStandalone = checkIfStandalone();
+    if (isStandalone || sessionStorage.getItem('installPromptDismissed') === 'true') {
+        return;
+    }
+
+    // Prevent duplicates
+    if (document.querySelector('.install-banner')) return;
+
+    installButton = document.createElement('div');
+    installButton.className = 'install-banner';
+    installButton.innerHTML = `
+        <div class="install-area-1-model">
+            <img src="assets/install_model_new.png" alt="Install App" class="install-model-img">
+        </div>
+        <div class="install-content-wrapper">
+            <div class="install-row-top">
+                <div class="install-area-2-button">
+                    <button id="pwaInstallBtn" class="pwa-install-btn">Install App</button>
+                </div>
+                <div class="install-area-4-close">
+                    <button id="pwaCloseBtn" class="pwa-close-btn" aria-label="Close">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+                    </button>
+                </div>
+            </div>
+            <div class="install-area-3-text">
+                Install the app for better experience.
+            </div>
+        </div>
+    `;
+
+    document.body.appendChild(installButton);
+
+    const installBtn = installButton.querySelector('#pwaInstallBtn');
+    const closeBtn = installButton.querySelector('#pwaCloseBtn');
+
+    if (installBtn) {
+        installBtn.onclick = async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                if (outcome === 'accepted') {
+                    sessionStorage.setItem('appInstalled', 'true');
+                } else {
+                    sessionStorage.setItem('installPromptDismissed', 'true');
+                }
+                deferredPrompt = null;
+                hideInstallPromotion();
+            } else {
+                showBrowserSpecificInstructions();
+            }
+        };
+    }
+
+    if (closeBtn) {
+        const closeHandler = (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            hideInstallPromotion();
+            sessionStorage.setItem('installPromptDismissed', 'true');
+        };
+        closeBtn.addEventListener('click', closeHandler);
+        closeBtn.addEventListener('touchend', closeHandler);
+    }
+
+    setTimeout(() => {
+        if (installButton) installButton.classList.add('show');
+    }, 3000);
+}
+
+function showBrowserSpecificInstallPrompt() {
+    const isStandalone = checkIfStandalone();
+    if (isStandalone || sessionStorage.getItem('installPromptDismissed') === 'true') {
+        return;
+    }
+
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    const isFirefox = /Firefox/.test(navigator.userAgent);
+    const isSafari = /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
+
+    if (isIOS || isSafari || isFirefox) {
+        showInstallPromotion();
+    }
+}
+
+function showBrowserSpecificInstructions() {
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    const isFirefox = /Firefox/.test(navigator.userAgent);
+    const isSafari = /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
+
+    let message = '';
+    if (isIOS || isSafari) {
+        message = 'To install this app:\n\n1. Tap the Share button (box with arrow)\n2. Scroll down and tap "Add to Home Screen"\n3. Tap "Add" in the top right corner';
+    } else if (isFirefox) {
+        message = 'To install this app:\n\n1. Tap the menu button (three dots)\n2. Tap "Install"\n3. Follow the prompts to add to home screen';
+    } else {
+        message = 'To install this app:\n\nPlease use your browser\'s menu to add this website to your home screen.';
+    }
+    alert(message);
+}
+
+function hideInstallPromotion() {
+    const banner = document.querySelector('.install-banner');
+    if (banner) {
+        banner.classList.remove('show');
+        setTimeout(() => {
+            banner.remove();
+        }, 300);
+    }
+    installButton = null;
+}
+
+function checkIfStandalone() {
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches ||
+        window.navigator.standalone === true ||
+        document.referrer.includes('android-app://') ||
+        sessionStorage.getItem('isStandalone') === 'true' ||
+        sessionStorage.getItem('appInstalled') === 'true';
+    return isStandalone;
+}
+
+// Initialize Logic
+initPWA();

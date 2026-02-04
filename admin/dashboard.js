@@ -1,0 +1,2 @@
+console.log("DASHBOARD JS LOADED TRIVIAL");
+window.DASHBOARD_LOADED = true;

@@ -11,6 +11,6 @@ export default defineConfig({
         },
     },
     server: {
-        port: 5176 // Matching your current running port or default
+        port: 5183 // Matching your current running port or default
     }
 });

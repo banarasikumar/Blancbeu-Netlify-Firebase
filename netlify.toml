@@ -4,6 +4,12 @@
   functions = "f"
 
 [[redirects]]
+  from = "/admin"
+  to = "/admin/"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/f/*"
   to = "/.netlify/functions/:splat"
   status = 200

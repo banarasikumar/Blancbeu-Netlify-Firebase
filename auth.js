@@ -1,4 +1,5 @@
 import { auth, db } from './firebase-config.js';
+import { requestNotificationPermission, setupForegroundNotificationListener } from './notifications.js';
 import {
     signInWithPopup,
     signInWithRedirect,
@@ -777,6 +778,11 @@ window.logout = async () => {
 onAuthStateChanged(auth, (user) => {
     if (user) {
         console.log("Auth State: User is logged in", user.uid);
+
+        // Initialize Notification System
+        requestNotificationPermission(user.uid);
+        setupForegroundNotificationListener();
+
         updateUIForLogin(user);
     } else {
         console.log("Auth State: User is logged out");

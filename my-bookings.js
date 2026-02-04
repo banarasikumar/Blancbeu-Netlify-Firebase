@@ -37,6 +37,81 @@ function formatTime(timeString) {
     return `${formattedHour}:${m} ${ampm}`;
 }
 
+// Calculate remaining time to appointment
+function getRemainingTime(dateStr, timeStr) {
+    if (!dateStr) return null;
+
+    try {
+        const [d, m, y] = dateStr.split('-').map(Number);
+        let h = 0, min = 0;
+
+        if (timeStr) {
+            const timeParts = timeStr.match(/(\d+):(\d+)\s*(AM|PM)?/i);
+            if (timeParts) {
+                h = parseInt(timeParts[1], 10);
+                min = parseInt(timeParts[2], 10);
+                const ampm = timeParts[3];
+                if (ampm) {
+                    if (ampm.toUpperCase() === 'PM' && h < 12) h += 12;
+                    if (ampm.toUpperCase() === 'AM' && h === 12) h = 0;
+                }
+            }
+        }
+
+        const appointmentTime = new Date(y, m - 1, d, h, min).getTime();
+        const now = Date.now();
+        const diff = appointmentTime - now;
+
+        if (diff <= 0) return null; // Already passed
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+
+        return { days, hours, minutes, totalMs: diff };
+    } catch (e) {
+        return null;
+    }
+}
+
+// Format remaining time for display
+function formatRemainingTime(remaining) {
+    if (!remaining) return '';
+
+    const { days, hours, minutes, totalMs } = remaining;
+
+    // Less than 1 hour
+    if (totalMs < 60 * 60 * 1000) {
+        return `${minutes}m left`;
+    }
+
+    // Less than 24 hours
+    if (days === 0) {
+        if (hours === 1) return `1h ${minutes}m left`;
+        return `${hours}h ${minutes}m left`;
+    }
+
+    // 1-7 days
+    if (days === 1) {
+        return `1 day ${hours}h left`;
+    }
+
+    if (days <= 7) {
+        return `${days} days left`;
+    }
+
+    // More than a week
+    const weeks = Math.floor(days / 7);
+    const remainingDays = days % 7;
+
+    if (weeks === 1) {
+        if (remainingDays > 0) return `1 week ${remainingDays}d left`;
+        return `1 week left`;
+    }
+
+    return `${weeks} weeks left`;
+}
+
 // Filter UI Helper
 function renderFilterChips(counts) {
     const filters = [
@@ -186,56 +261,130 @@ export async function loadBookings() {
             let displayStatus = 'Pending';
 
             if (status === 'confirmed') { statusColor = '#27ae60'; displayStatus = 'Confirmed'; }
-            else if (status === 'completed') { statusColor = '#7f8c8d'; displayStatus = 'Completed'; }
+            else if (status === 'completed') { statusColor = '#2c3e50'; displayStatus = 'Completed'; }
             else if (status === 'cancelled' || status === 'declined') { statusColor = '#e74c3c'; displayStatus = 'Cancelled'; }
 
             // ... (rest of render logic remains same)
             let bookedOnStr = '';
+            let relativeTime = '';
             if (data.createdAt) {
                 try {
                     const createdDate = data.createdAt.toDate ? data.createdAt.toDate() : new Date(data.createdAt);
+                    const now = new Date();
+                    const diffMs = now - createdDate;
+                    const diffMins = Math.floor(diffMs / 60000);
+                    const diffHours = Math.floor(diffMins / 60);
+                    const diffDays = Math.floor(diffHours / 24);
+
+                    if (diffMins < 60) relativeTime = `(${diffMins}m ago)`;
+                    else if (diffHours < 24) relativeTime = `(${diffHours}h ago)`;
+                    else relativeTime = `(${diffDays}d ago)`;
+
                     const dateIdx = createdDate.toLocaleDateString('en-US', { day: 'numeric', month: 'short' });
                     const timeIdx = createdDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
-                    bookedOnStr = `Placed on: ${dateIdx}, ${timeIdx}`;
+                    bookedOnStr = `${dateIdx}, ${timeIdx}`;
                 } catch (e) { }
+            }
+
+            // Calculate remaining time for confirmed bookings
+            let remainingTimeHtml = '';
+            if (status === 'confirmed') {
+                const remaining = getRemainingTime(data.date, data.time);
+                if (remaining) {
+                    const remainingText = formatRemainingTime(remaining);
+                    let urgencyClass = 'remaining-time-normal';
+                    if (remaining.days === 0 && remaining.hours < 2) urgencyClass = 'remaining-time-urgent';
+                    else if (remaining.days === 0) urgencyClass = 'remaining-time-soon';
+
+                    remainingTimeHtml = `<div class="remaining-time-badge ${urgencyClass}">${remainingText}</div>`;
+                }
             }
 
             return `
             <div class="booking-card upcoming-card" data-status="${status}">
-                <div class="booking-status-badge" style="background: ${statusColor}; color:white;">${displayStatus}</div>
-                <div class="booking-header-row">
-                    <div class="booking-service-info">
+                <div class="booking-card-top-header">
+                    <span class="booking-ref-number">REF: ${doc.id.slice(0, 8).toUpperCase()}</span>
+                    <div class="booking-status-badge ${status}" style="background: ${statusColor}; color:white;">${displayStatus}</div>
+                </div>
+
+                <div class="booking-main-content">
+                    <div class="appointment-header-row">
+                        <span class="appointment-label-mini">
+                            <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                            </svg>
+                            APPOINTMENT
+                        </span>
+                    </div>
+                    
+                    <div class="booking-time-row">
+                        <div class="unified-timing">
+                            ${dateStr} <span class="timing-dot">•</span> ${timeStr}
+                        </div>
+                        <div class="remaining-time-wrapper">
+                            ${remainingTimeHtml}
+                        </div>
+                    </div>
+
+                    <div class="booking-services-section">
+                        <p class="section-title-small">SERVICES</p>
                         <div class="booking-service-tags">
                             ${(data.servicesList || serviceName.split(',')).map((s, index) => {
-                const colors = ['#e3f2fd', '#f3e5f5', '#e8f5e9', '#fff3e0', '#fce4ec', '#fff8e1', '#e0f2f1', '#f1f8e9'];
-                const textColors = ['#1565c0', '#7b1fa2', '#2e7d32', '#ef6c00', '#c2185b', '#f57f17', '#00695c', '#33691e'];
+                const colors = [{ bg: '#2c3e50', text: '#ffffff' }, { bg: '#8e44ad', text: '#ffffff' }, { bg: '#27ae60', text: '#ffffff' }, { bg: '#d35400', text: '#ffffff' }, { bg: '#c0392b', text: '#ffffff' }, { bg: '#2980b9', text: '#ffffff' }, { bg: '#16a085', text: '#ffffff' }, { bg: '#2c2c2c', text: '#d4af37' }];
                 const colorIndex = (s.length + index) % colors.length;
-                return `<span class="service-tag-chip" style="background:${colors[colorIndex]}; color:${textColors[colorIndex]};">${s.trim()}</span>`;
+                const palette = colors[colorIndex];
+                return `<span class="service-tag-chip" style="background:${palette.bg}; color:${palette.text};">${s.trim()}</span>`;
             }).join('')}
-                    </div>
-                    <p class="booking-beautician" style="opacity:0.7; font-size:0.9em; margin-top:8px;">Premium Service</p>
-                </div>
-                <div class="booking-time-block">
-                    <div class="booking-time">${dateStr}</div>
-                    <div class="booking-time-detail">${timeStr}</div>
-                </div>
-            </div>
-            <div class="booking-details">
-                <span class="detail-item" style="font-family:monospace; background:rgba(0,0,0,0.03); padding:2px 6px; border-radius:4px;">Ref: ${doc.id.slice(0, 8).toUpperCase()}</span>
-                ${bookedOnStr ? `<span class="detail-item" style="display:inline-block; margin-left:10px; font-size: 11px; opacity: 0.6;">🕒 ${bookedOnStr}</span>` : ''}
-                ${data.notes ? `<span class="detail-item" style="max-width:100%; display:block; margin-top:5px;">📝 "${data.notes}"</span>` : ''}
-            </div>
-            <div class="booking-location">
-                <div style="display:flex; align-items:center; gap:8px;">
-                    <span style="font-size:16px;">📍</span>
-                    <div>
-                        <div style="font-weight:700; color:var(--text-primary); line-height:1.2;">Blancbeu Salon</div>
-                        <div style="font-size:11px; color:var(--text-secondary); margin-top:3px; opacity:0.9;">4th Floor, Victory Mall, Upper Bazar</div>
+                        </div>
+                        <p class="booking-premium-label">✨ Premium Service</p>
                     </div>
                 </div>
-            </div>
-        </div>`;
+
+                <div class="booking-footer-grid">
+                    <div class="footer-info-box full-width">
+                        <div class="box-header">
+                            <svg viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                            BOOKED ON
+                        </div>
+                        <div class="box-value">${bookedOnStr} <span class="relative-time">${relativeTime}</span></div>
+                    </div>
+
+                    <div class="footer-info-box full-width">
+                        <div class="box-header">
+                            <svg viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                            </svg>
+                            SPECIAL REQUEST
+                        </div>
+                        <div class="box-value note-value">${data.notes || 'None'}</div>
+                    </div>
+                </div>
+
+                <div class="booking-location-bar">
+                    <div class="location-content">
+                        <span class="loc-pin">📍</span>
+                        <div class="loc-text">
+                            <span class="salon-name">Blancbeu Salon</span>
+                            <span class="salon-addr">4th Floor, Victory Mall, Upper Bazar</span>
+                        </div>
+                    </div>
+                    ${status === 'confirmed' ? `
+                        <a href="tel:+919229915277" class="footer-call-btn">
+                            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l2.25-2.25a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                            </svg>
+                        </a>
+                    ` : ''}
+                </div>
+            </div>`;
         };
+
 
         // --- FILTERING & RENDERING LOGIC ---
         // const now = new Date(); // Already declared above

@@ -1,0 +1,67 @@
+/* 
+================================================================================
+THEME CORE — VARIABLE MAPPINGS & FORCED PRIORITY
+Maps legacy variable names to new theme system variables
+================================================================================
+*/
+
+@import url('theme-variables.css');
+
+:root {
+    /* LEGACY → NEW VARIABLE MAPPINGS */
+    --bg-primary: var(--bg-body);
+    --bg-secondary: var(--bg-surface);
+
+    /* Gold legacy aliases → brand system */
+    --gold-24k: var(--brand-primary);
+    --gold-accent: var(--brand-secondary);
+    --gold-bright: var(--color-accent);
+    --gold-dark: var(--brand-secondary);
+    --gold-light: var(--brand-gradient-end);
+
+    /* Text legacy aliases */
+    --text-primary: var(--text-main);
+    --text-secondary: var(--text-muted);
+    --text-white: var(--text-main);
+    --text-gray: var(--text-muted);
+
+    /* Header legacy aliases */
+    --header-bg: var(--bg-header);
+    --header-shadow: var(--shadow-sm);
+    --header-border: 1px solid var(--border-light);
+
+    /* Dark legacy aliases → now theme-aware */
+    --black: var(--bg-body);
+    --deep-black: var(--bg-surface);
+
+    /* Shadow legacy aliases */
+    --shadow-dark: var(--shadow-md);
+    --shadow-light: var(--shadow-sm);
+    --shadow-medium: var(--shadow-md);
+}
+
+/* FORCED BODY RULES */
+body {
+    background-color: var(--bg-primary) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Ensure data-theme attributes on html take precedence */
+html[data-theme] {
+    --bg-primary: var(--bg-body);
+    --bg-secondary: var(--bg-surface);
+}
+
+/* Smooth theme transitions */
+body,
+body * {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Exclude elements that shouldn't transition (animations, transforms) */
+.carousel-slide,
+.carousel-slide img,
+[class*="animate"],
+.loader-bar {
+    transition: none !important;
+}

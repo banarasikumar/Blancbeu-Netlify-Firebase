@@ -112,22 +112,67 @@ async function verifyAdminRole(uid) {
 }
 
 // --- Navigation Logic ---
+// --- Navigation Logic (History API) ---
 function initNavigation() {
+    // 1. Click Listeners (Intercept)
     navItems.forEach(item => {
         item.addEventListener('click', (e) => {
             e.preventDefault();
             const target = item.dataset.target;
 
-            // Update Active State
-            navItems.forEach(nav => nav.classList.remove('active'));
-            item.classList.add('active');
-
-            navigateTo(target);
+            // Navigate
+            routerNavigate(target);
         });
+    });
+
+    // 2. Popstate Listener (Back/Forward)
+    window.addEventListener('popstate', (e) => {
+        const view = e.state?.view || 'home';
+        renderView(view);
+        updateActiveNav(view);
+    });
+
+    // 3. Initial Load Route Check
+    const path = window.location.pathname; // e.g., /admin/bookings
+    let initialView = 'home';
+
+    if (path.includes('/admin/bookings')) initialView = 'bookings';
+    if (path.includes('/admin/users')) initialView = 'users';
+    if (path.includes('/admin/settings')) initialView = 'settings';
+
+    // Replace current state so we have a valid history entry
+    history.replaceState({ view: initialView }, '', '/admin/' + (initialView === 'home' ? '' : initialView));
+
+    renderView(initialView);
+    updateActiveNav(initialView);
+}
+
+function routerNavigate(view) {
+    if (window.currentView === view) return;
+
+    // 1. Update URL
+    const url = view === 'home' ? '/admin/' : `/admin/${view}`;
+    history.pushState({ view: view }, '', url);
+
+    // 2. Render
+    renderView(view);
+    updateActiveNav(view);
+}
+
+function updateActiveNav(view) {
+    navItems.forEach(nav => {
+        if (nav.dataset.target === view) nav.classList.add('active');
+        else nav.classList.remove('active');
     });
 }
 
 function navigateTo(view) {
+    // Legacy support or internal calls
+    routerNavigate(view);
+}
+
+function renderView(view) {
+    window.currentView = view;
     // Clear content
     contentArea.innerHTML = '';
 
@@ -1459,3 +1504,7 @@ if (menuBtn) {
         alert("Menu clicked! (Sidebar toggle coming soon)");
     });
 }
+
+// Expose Router for HTML onclicks
+window.navigateTo = routerNavigate;
+window.routerNavigate = routerNavigate;

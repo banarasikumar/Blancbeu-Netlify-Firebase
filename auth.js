@@ -44,7 +44,9 @@ async function handleLoginSuccess(user) {
 
         showToast(`Welcome, ${user.displayName}! ✨`);
         closeAuthModal();
-        if (window.location.hash === '#login') window.location.hash = '';
+        if (window.navigateToPage) {
+            // Optional: navigate to home or intended destination if not already there
+        }
 
         // Restore any pending action (e.g., open booking modal)
         restoreLoginState();
@@ -92,7 +94,7 @@ if (whatsappBtns.length > 0) {
             // Close modal after a delay
             setTimeout(() => {
                 closeAuthModal();
-                if (window.location.hash === '#login') window.location.hash = '';
+                if (window.navigateToPage) window.navigateToPage('/'); // Redirect home
             }, 2000);
         });
     });
@@ -591,8 +593,6 @@ export function openLoginModal(action = null) {
     // Navigate to dedicated Login Page
     if (window.navigateToPage) {
         window.navigateToPage('login');
-    } else {
-        window.location.hash = 'login';
     }
 }
 

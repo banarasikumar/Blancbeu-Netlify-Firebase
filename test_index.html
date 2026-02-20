@@ -1,0 +1,3158 @@
+<!DOCTYPE html>
+<!--
+================================================================================
+BLANCBEU SALON - WORLD-CLASS UI IMPLEMENTATION ROADMAP
+================================================================================
+Reference: TASKS.md for full implementation details
+
+PHASE 0: VISUAL EXCELLENCE (HIGHEST PRIORITY - Week 1)
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+0.1 MICRO-INTERACTIONS & ANIMATIONS
+    [ ] Magnetic button effects (cursor follow on hover)
+    [ ] Ripple effect on button clicks
+    [ ] Scale + glow on hover (1.02 scale, gold glow)
+    [ ] Scroll-triggered fade-in for all sections
+    [ ] Parallax on hero images (0.3 speed)
+    [ ] Staggered card animations
+    [ ] Confetti on booking success
+    [ ] Skeleton loading states
+
+0.2 TYPOGRAPHY SYSTEM
+    [ ] Type scale: H1:64px, H2:48px, H3:36px, H4:24px, Body:16px
+    [ ] Font pairing: Cinzel (headings) + Poppins (body)
+    [ ] Gradient text for hero headings
+    [ ] Text glow for premium CTAs
+
+0.3 COLOR SYSTEM
+    [ ] 8 gold shades (#6B4423 to #FFD700)
+    [ ] Layered blacks for depth
+    [ ] Rose gold accent (#B76E79)
+    [ ] Champagne highlights (#F7E7CE)
+
+0.4 GLASSMORPHISM & DEPTH
+    [ ] Glass effect presets (light, medium, dark)
+    [ ] 4-level shadow system (sm, md, lg, xl)
+    [ ] Gold glow shadows
+    [ ] Gradient borders
+
+0.5 MOBILE-FIRST EXPERIENCE
+    [ ] Swipe gestures for carousels
+    [ ] Pull-to-refresh with gold spinner
+    [ ] Bottom sheet modals
+    [ ] 44px minimum touch targets
+
+PHASE 1: CORE FEATURES (HIGH PRIORITY - Week 2)
+---------------------------------------------------------------------------------------------------------------------------------------------
+1.0 SERVICE FILTERING & SEARCH
+    Location: Above services section
+    [ ] Sticky filter bar with category buttons
+    [ ] Search input with debouncing (300ms)
+    [ ] "X services found" counter
+    [ ] Smooth filter animations
+
+2.0 REAL PRICING & DURATION
+    Location: On each service card
+    [ ] Large gold price display
+    [ ] Duration badge with clock icon
+    [ ] Member discount badge
+    [ ] Detailed service modal
+
+3.0 BEFORE & AFTER GALLERY
+    Location: New section below existing gallery
+    [ ] Image comparison slider (draggable)
+    [ ] Before/After labels
+    [ ] Category filter
+    [ ] Swipe on mobile
+
+4.0 STAFF SPOTLIGHT
+    Location: New "Meet Our Team" section
+    [ ] Staff profile cards
+    [ ] Photo, name, experience, specialties
+    [ ] "Book with [Name]" button
+    [ ] Auto-rotating carousel
+
+5.0 MEMBERSHIP TIERS
+    Location: New section before footer
+    [ ] Gold, Platinum, Diamond cards
+    [ ] Benefits list with checkmarks
+    [ ] Savings calculator
+    [ ] "Join Now" CTA
+
+6.0 BRAND STORYTELLING
+    Location: After About section
+    [ ] Animated timeline
+    [ ] Founder spotlight
+    [ ] Values cards with icons
+    [ ] Awards & certifications
+
+PHASE 2: ENGAGEMENT FEATURES (Week 3)
+------------------------------------------------------------------------------------------------------------------
+7.0  Live Availability Calendar
+8.0  Video Testimonials
+9.0  FAQ Accordion
+10.0 Service Comparison Tool
+11.0 Real-Time Chat Widget
+
+PHASE 3: PREMIUM FEATURES (Week 4)
+---------------------------------------------------------------------------------------------------------
+12.0 Virtual 360-- Tour
+13.0 Gift Cards
+14.0 Referral Program
+15.0 Promo Banners
+16.0 Instagram Feed
+17.0 Seasonal Themes
+================================================================================
+-->
+<html lang="en">
+
+<head>
+  <script type="module" src="/@vite/client"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17391198116"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'AW-17391198116');
+    </script>
+    <!-- Event snippet for Book appointment (1) conversion page -->
+    <script>
+        gtag('event', 'conversion', { 'send_to': 'AW-17391198116/SMCACILu99cbEKS_4uRA' });
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Blancbeu - Premium Beauty & Wellness Salon</title>
+
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#000000" id="metaThemeColor">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" id="appleStatusBar">
+    <meta name="apple-mobile-web-app-title" content="Blancbeu">
+
+    <!-- Critical: Apply theme IMMEDIATELY before page renders using data-theme attribute -->
+
+    <link rel="apple-touch-icon" href="/icon-192x192.png">
+    <link rel="apple-touch-startup-image" href="/splash-750x1334.png"
+        media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)">
+    <link rel="apple-touch-startup-image" href="/splash-1170x2532.png"
+        media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3)">
+    <link rel="icon" type="image/webp" href="/icon-192x192.webp">
+    <link rel="icon" type="image/png" href="/icon-192x192.png">
+    <link rel="shortcut icon" href="/icon-192x192.webp">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Preload Hero Image for LCP -->
+    <link rel="preload" as="image" href="/assets/banner_carousel_images/1.avif" type="image/avif" fetchpriority="high">
+    <!-- Async Google Fonts -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@200;300;400;500;600;700&family=Playfair+Display:wght@400;600;700;900&family=Poppins:wght@300;400;500;600;700&family=Russo+One&display=swap"
+        media="print" onload="this.media='all'">
+    <noscript>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@200;300;400;500;600;700&family=Playfair+Display:wght@400;600;700;900&family=Poppins:wght@300;400;500;600;700&family=Russo+One&display=swap"
+            rel="stylesheet">
+    </noscript>
+
+    <!-- Critical CSS & Theme Variables -->
+    <link rel="stylesheet" href="/theme-variables.css">
+    <link rel="stylesheet" href="/theme-core.css">
+    <script type="module" src="/theme-switcher.js"></script>
+    <style>
+        /* Critical Reset & Body */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            overflow-x: hidden !important;
+            width: 100%;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* Loader Styles - Optimized */
+        #app-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease-out, visibility 0.5s;
+        }
+
+        #app-loader.fade-out {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-content {
+            text-align: center;
+        }
+
+        .loader-logo {
+            margin-bottom: 20px;
+            font-family: 'Cinzel', serif;
+        }
+
+        .loader-icon {
+            font-size: 32px;
+            display: block;
+            margin-bottom: 10px;
+            animation: pulse 1.5s infinite;
+        }
+
+        .loader-text {
+            color: #FFD700;
+            font-size: 24px;
+            letter-spacing: 5px;
+            font-weight: 700;
+        }
+
+        .loader-bar-wrapper {
+            width: 200px;
+            height: 2px;
+            background: rgba(255, 215, 0, 0.1);
+            margin: 0 auto;
+            border-radius: 1px;
+            overflow: hidden;
+        }
+
+        .loader-bar {
+            width: 40%;
+            height: 100%;
+            background: #FFD700;
+            animation: loading 2s infinite ease-in-out;
+        }
+
+        @keyframes loading {
+            0% {
+                transform: translateX(-100%);
+            }
+
+            50% {
+                transform: translateX(100%);
+            }
+
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(1.2);
+                opacity: 0.7;
+            }
+        }
+
+        /* Critical Header */
+        .header {
+            background: var(--header-bg);
+            padding: 12px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 2147483647 !important;
+            border-bottom: var(--header-border);
+            height: 80px;
+            display: flex;
+            align-items: center;
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding: 0 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            flex: 1;
+        }
+
+        .brand-name {
+            font-family: 'Cinzel', serif;
+            font-size: 32px;
+            font-weight: 900;
+            color: var(--gold-24k);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            line-height: 1.1;
+        }
+
+        .brand-subtitle {
+            font-family: 'Poppins', sans-serif;
+            font-size: 10px;
+            color: rgba(255, 237, 78, 0.95);
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            line-height: 1;
+        }
+
+        /* Critical Hero Area */
+        .hero {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .carousel {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .carousel-slide.active {
+            opacity: 1;
+            z-index: 2;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+
+    <!-- Main Stylesheet (Directly to source for development transparency) -->
+    <link rel="stylesheet" href="/styles.css?v=2.1">
+
+
+    <style>
+        /* FIX: Full Width Transformation Gallery on Mobile */
+        @media (max-width: 768px) {
+            .before-after-section .container {
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+
+            .ba-carousel-wrapper {
+                width: 92% !important;
+                margin: 0 auto !important;
+                overflow: visible;
+            }
+
+            .ba-carousel {
+                width: 100%;
+                padding: 0;
+            }
+
+            .comparison-slider {
+                width: 100% !important;
+                margin: 0 auto;
+                border-radius: 0;
+                /* Optional: Remove radius for full edge-to-edge look */
+            }
+
+            .comparison-slider img {
+                width: 100%;
+                height: auto;
+                object-fit: cover;
+            }
+        }
+
+        .view-all-services-btn:hover {
+            color: #000 !important;
+        }
+    </style>
+
+
+    <!-- HEADER ENFORCER SCRIPT -->
+    <script>
+        (function () {
+            // Force Header Visibility when Auth Modal is open
+            const authModal = document.getElementById('authModal');
+            if (!authModal) return;
+
+            const enforceHeaderStyle = () => {
+                const isAuthVisible = window.getComputedStyle(authModal).display !== 'none';
+                if (isAuthVisible) {
+                    const header = document.querySelector('.header');
+                    if (header) {
+                        header.classList.remove('hidden');
+                        header.style.setProperty('display', 'flex', 'important');
+                        header.style.setProperty('visibility', 'visible', 'important');
+                        header.style.setProperty('opacity', '1', 'important');
+                        header.style.setProperty('z-index', '2147483647', 'important');
+                        header.style.setProperty('top', '0', 'important');
+
+                        const shellHeader = document.querySelector('.app-shell-header');
+                        if (shellHeader) {
+                            shellHeader.style.setProperty('z-index', '2147483647', 'important');
+                            shellHeader.style.setProperty('display', 'flex', 'important');
+                            shellHeader.style.setProperty('visibility', 'visible', 'important');
+                            shellHeader.style.setProperty('opacity', '1', 'important');
+                        }
+                    }
+                }
+            };
+
+            // Initial check
+            enforceHeaderStyle();
+
+            // Use MutationObserver instead of setInterval
+            const observer = new MutationObserver((mutations) => {
+                mutations.forEach((mutation) => {
+                    if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+                        enforceHeaderStyle();
+                    }
+                });
+            });
+
+            observer.observe(authModal, { attributes: true });
+        })();
+    </script>
+
+</head>
+
+<body>
+
+    <!-- Premium App Loader -->
+    <div id="app-loader">
+        <div class="loader-content">
+            <div class="loader-logo">
+                <span class="loader-icon">✨</span>
+                <span class="loader-text">BLANCBEU</span>
+            </div>
+            <div class="loader-bar-wrapper">
+                <div class="loader-bar"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        (function () {
+            const loader = document.getElementById('app-loader');
+            if (loader) {
+                const fadeOut = () => {
+                    if (loader.classList.contains('fade-out')) return;
+                    loader.classList.add('fade-out');
+                    setTimeout(() => {
+                        loader.style.display = 'none';
+                    }, 500);
+                };
+
+                // Strategy: Fade out as early as possible
+                // 1. When Hero is ready (best case for LCP)
+                // 2. DOMContentLoaded (fallback)
+                // 3. 2s absolute timeout (safety)
+                document.addEventListener('DOMContentLoaded', fadeOut);
+                window.addEventListener('load', fadeOut);
+                setTimeout(fadeOut, 2000);
+            }
+        })();
+    </script>
+    <!-- PWA Splash Screen -->
+    <div id="pwaSplash" class="pwa-splash-overlay hidden">
+        <div class="pwa-splash-content">
+            <div class="pwa-splash-logo">
+                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                    data-src="assets/brand_icon_optimized.webp" alt="BlancBeu Logo">
+            </div>
+            <div class="pwa-splash-text">BLANCBEU</div>
+            <div class="pwa-splash-subtitle">Family Beauty Salon</div>
+        </div>
+    </div>
+
+    <div class="rose-petals" id="rosePetals"></div>
+
+
+
+    <!-- APP SHELL: Fixed Header -->
+    <header class="header app-shell-header" id="mainHeader">
+        <div class="container">
+            <div class="logo">
+                <div class="brand-icon-wrapper">
+                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                        data-src="assets/brand_icon_optimized.webp" alt="BlancBeu Icon" class="brand-icon">
+                </div>
+                <div class="logo-content">
+                    <div class="brand-name">BLANCBEU</div>
+                    <div class="brand-subtitle">Family Beauty Salon</div>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button id="notifyBtn" class="theme-toggle-btn" data-page="notifications">
+                    <svg class="theme-icon" viewBox="0 0 24 24" fill="currentColor" style="width: 24px; height: 24px;">
+                        <path
+                            d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z" />
+                    </svg>
+                </button>
+
+                <div style="position: relative;" id="theme-switcher">
+                    <button class="theme-toggle-btn" onclick="toggleThemeMenu()" aria-label="Select Theme">
+                        <svg class="theme-icon" viewBox="0 0 24 24" width="24" height="24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path
+                                d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                            </path>
+                        </svg>
+                    </button>
+                    <!-- Theme Menu Dropdown -->
+                    <div class="theme-menu" id="theme-menu">
+                        <button class="theme-option" data-theme="velvet" onclick="setTheme('velvet')">
+                            <span class="theme-preview velvet"></span> Velvet Sage
+                        </button>
+                        <button class="theme-option" data-theme="pop" onclick="setTheme('pop')">
+                            <span class="theme-preview pop"></span> Sun & Violet
+                        </button>
+                        <button class="theme-option" data-theme="olive" onclick="setTheme('olive')">
+                            <span class="theme-preview olive"></span> Olive & Chrome
+                        </button>
+                        <button class="theme-option" data-theme="blackgold" onclick="setTheme('blackgold')">
+                            <span class="theme-preview blackgold"></span> BlackGold 👑
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <nav class="nav">
+                <a href="/" data-link>
+                    <svg class="nav-icon-desktop" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+                    </svg>
+                    Home
+                </a>
+                <a href="/offers" data-link>
+                    <svg class="nav-icon-desktop" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M21.41 11.58l-9-9C12.05 2.22 11.55 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .55.22 1.05.59 1.42l9 9c.36.36.86.58 1.41.58.55 0 1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41 0-.55-.23-1.06-.59-1.42zM5.5 7C4.67 7 4 6.33 4 5.5S4.67 4 5.5 4 7 4.67 7 5.5 6.33 7 5.5 7z" />
+                    </svg>
+                    Offers
+                </a>
+                <a href="/services" data-link>
+                    <svg class="nav-icon-desktop" viewBox="0 0 24 24" fill="currentColor">
+                        <circle cx="12" cy="12" r="3.2" />
+                        <path
+                            d="M9 2L7.17 6H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-3.17L15 2H9zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z" />
+                    </svg>
+                    Services
+                </a>
+                <a href="/gallery" data-link>
+                    <svg class="nav-icon-desktop" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z" />
+                    </svg>
+                    Gallery
+                </a>
+                <a href="/reviews" data-link>
+                    <svg class="nav-icon-desktop" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                    </svg>
+                    Reviews
+                </a>
+                <button id="installBtn" class="install-app-btn" style="display: none;">
+                    <span class="install-icon">📲</span>
+                    <span class="install-text">Install App</span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- APP SHELL: Content Area (scrollable) -->
+    <main class="app-shell-content" id="appContent">
+        <!-- HOME PAGE: Single section containing all home content -->
+        <section id="home" class="app-page active" data-page="home">
+            <!-- HERO/CAROUSEL SECTION -->
+            <div class="hero">
+                <div class="carousel">
+                    <div class="carousel-track" id="carouselTrack">
+                        <div class="carousel-slide active">
+                            <picture>
+                                <source srcset="/assets/banner_carousel_images/1.avif" type="image/avif">
+                                <source srcset="/assets/banner_carousel_images/1.webp" type="image/webp">
+                                <img src="/assets/banner_carousel_images/1.webp" alt="Premium Beauty Banner 1"
+                                    loading="eager" fetchpriority="high">
+                            </picture>
+                        </div>
+                        <div class="carousel-slide">
+                            <picture>
+                                <source data-srcset="assets/banner_carousel_images/2.avif" type="image/avif">
+                                <source data-srcset="assets/banner_carousel_images/2.webp" type="image/webp">
+                                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                    data-src="assets/banner_carousel_images/2.webp" alt="Premium Beauty Banner 2"
+                                    loading="lazy">
+                            </picture>
+                        </div>
+                        <div class="carousel-slide">
+                            <picture>
+                                <source data-srcset="assets/banner_carousel_images/4.avif" type="image/avif">
+                                <source data-srcset="assets/banner_carousel_images/4.webp" type="image/webp">
+                                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                    data-src="assets/banner_carousel_images/4.webp" alt="Premium Beauty Banner 4"
+                                    loading="lazy">
+                            </picture>
+                        </div>
+
+                    </div>
+
+                    <button class="carousel-btn prev" onclick="moveCarousel(-1)">---</button>
+                    <button class="carousel-btn next" onclick="moveCarousel(1)">---</button>
+                    <div class="carousel-dots" id="carouselDots"></div>
+                </div>
+
+                <!-- White Overlay for Scroll Transition -->
+                <div class="hero-scroll-overlay"></div>
+
+                <!-- HERO TEXT SECTION - Below Carousel -->
+                <div class="hero-text-section">
+                    <div class="hero-text-content">
+                        <div class="hero-overline">Welcome to Blancbeu</div>
+                        <h1 class="hero-title">
+                            Redefining <br> Elegance
+                        </h1>
+                        <p class="hero-tagline">Experience the pinnacle of luxury beauty services. Where artistry meets
+                            relaxation in a sanctuary designed for your rejuvenation.</p>
+                    </div>
+
+                    <!-- CTA Buttons - Outside text-content for independent z-index -->
+                    <div class="hero-cta-buttons">
+                        <button class="hero-btn primary-btn">
+                            <span class="btn-label">Book Appointment</span>
+                        </button>
+                        <button class="hero-btn secondary-btn" onclick="window.navigateToPage('services')">
+                            <span class="btn-label">Explore Services</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Scroll Indicator positioned globally in Hero -->
+                <div class="hero-scroll-indicator">
+                    <span class="scroll-text">SCROLL</span>
+                    <div class="scroll-line"></div>
+
+                </div>
+            </div>
+
+
+            </div>
+
+            <!-- TRUST & SOCIAL PROOF SECTION -->
+
+
+            <!-- WHY CHOOSE US SECTION -->
+
+
+            <!-- SERVICE HIGHLIGHTS CAROUSEL SECTION -->
+            <div class="service-highlights-section">
+                <div class="container">
+                    <div class="section-header-text" style="margin-bottom: 20px; text-align: center;">
+                        <h2 class="section-title">
+                            <span class="title-decoration">⭐</span>
+                            Featured Services
+                        </h2>
+                        <p class="section-subtitle">Popular premium treatments</p>
+                    </div>
+
+                    <div class="view-all-btn-container"
+                        style="max-width: 360px; margin: 0 auto 30px; text-align: right;">
+                        <button class="view-all-services-btn" onclick="window.navigateToPage('services')">
+                            <span>View All Menu</span>
+                            <svg class="btn-arrow-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M9 18l6-6-6-6" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="service-carousel-wrapper">
+                        <div class="service-carousel" id="serviceCarousel">
+                            <div class="service-carousel-track" id="serviceCarouselTrack">
+                                <div class="service-card-item">
+                                    <div class="service-highlight-card">
+                                        <div class="service-img-container">
+                                            <picture>
+                                                <source data-srcset="assets/featured_services/haircut.avif"
+                                                    type="image/avif">
+                                                <source data-srcset="assets/featured_services/haircut.webp"
+                                                    type="image/webp">
+                                                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                                    data-src="assets/featured_services/haircut.webp"
+                                                    alt="Premium Haircut" class="service-highlight-img">
+                                            </picture>
+                                            <h3>Premium Haircut & Style</h3>
+                                        </div>
+                                        <div class="service-content">
+                                            <div>
+                                                <p class="service-desc">Expert cutting and styling techniques</p>
+                                            </div>
+                                            <div>
+                                                <div class="service-price">Starting from ---200</div>
+                                                <button class="service-btn">Book Now</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="service-card-item">
+                                    <div class="service-highlight-card">
+                                        <div class="service-img-container">
+                                            <picture>
+                                                <source data-srcset="assets/featured_services/facial.avif"
+                                                    type="image/avif">
+                                                <source data-srcset="assets/featured_services/facial.webp"
+                                                    type="image/webp">
+                                                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                                    data-src="assets/featured_services/facial.webp"
+                                                    alt="Facial & Skincare" class="service-highlight-img">
+                                            </picture>
+                                            <h3>Facial & Skincare</h3>
+                                        </div>
+                                        <div class="service-content">
+                                            <div>
+                                                <p class="service-desc">Rejuvenating facials with premium products</p>
+                                            </div>
+                                            <div>
+                                                <div class="service-price">Starting from ---500</div>
+                                                <button class="service-btn">Book Now</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="service-card-item">
+                                    <div class="service-highlight-card">
+                                        <div class="service-img-container">
+                                            <picture>
+                                                <source data-srcset="assets/featured_services/makeup.avif"
+                                                    type="image/avif">
+                                                <source data-srcset="assets/featured_services/makeup.webp"
+                                                    type="image/webp">
+                                                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                                    data-src="assets/featured_services/makeup.webp"
+                                                    alt="Makeup & Bridal" class="service-highlight-img">
+                                            </picture>
+                                            <h3>Makeup & Bridal</h3>
+                                        </div>
+                                        <div class="service-content">
+                                            <div>
+                                                <p class="service-desc">Professional makeup for all occasions</p>
+                                            </div>
+                                            <div>
+                                                <div class="service-price">Starting from ---400</div>
+                                                <button class="service-btn">Book Now</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="service-card-item">
+                                    <div class="service-highlight-card">
+                                        <div class="service-img-container">
+                                            <picture>
+                                                <source data-srcset="assets/featured_services/threading.avif"
+                                                    type="image/avif">
+                                                <source data-srcset="assets/featured_services/threading.webp"
+                                                    type="image/webp">
+                                                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                                    data-src="assets/featured_services/threading.webp"
+                                                    alt="Threading & Waxing" class="service-highlight-img">
+                                            </picture>
+                                            <h3>Threading & Waxing</h3>
+                                        </div>
+                                        <div class="service-content">
+                                            <div>
+                                                <p class="service-desc">Gentle hair removal solutions</p>
+                                            </div>
+                                            <div>
+                                                <div class="service-price">Starting from ---80</div>
+                                                <button class="service-btn">Book Now</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- OFFERS SECTION -->
+            <div id="offers" class="offers-section">
+                <div class="container">
+                    <h2 class="section-title">
+                        <span class="title-decoration">---</span>
+                        Special Offers
+                        <span class="title-decoration">---</span>
+                    </h2>
+                    <p class="section-subtitle">Limited time deals just for you</p>
+
+                    <div class="offers-grid">
+                        <div class="offer-card glow-card">
+                            <div class="offer-badge hot">HOT DEAL</div>
+                            <div class="offer-icon">------</div>
+                            <h3>All Haircuts @ ---99</h3>
+                            <p>Get any haircut style for just ---99! Limited time offer on all cuts.</p>
+                            <div class="offer-price">
+                                <span class="old-price">---100-600</span>
+                                <span class="new-price">---99</span>
+                            </div>
+                            <button class="tc-btn" onclick="showTC()">T&C</button>
+                        </div>
+
+                        <div class="offer-card glow-card">
+                            <div class="offer-badge festive">FESTIVE SPECIAL</div>
+                            <div class="offer-icon">----</div>
+                            <h3>Festive Beauty Package</h3>
+                            <p>50% off* prices are inclusive of the offer</p>
+                            <div class="offer-price">
+                                <span class="new-price">50% OFF*</span>
+                            </div>
+                            <button class="tc-btn" onclick="showTC()">T&C</button>
+                        </div>
+
+                        <div class="offer-card glow-card">
+                            <div class="offer-badge student">STUDENT OFFER</div>
+                            <div class="offer-icon">----</div>
+                            <h3>College Student Discount</h3>
+                            <p>Get 25% off on all services with valid student ID</p>
+                            <div class="offer-price">
+                                <span class="new-price">25% OFF</span>
+                            </div>
+                            <button class="tc-btn" onclick="showTC()">T&C</button>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <!-- GALLERY SECTION -->
+                <div id="gallery" class="gallery-section">
+                    <div class="container">
+                        <h2 class="section-title">
+                            <span class="title-decoration">----</span>
+                            Gallery
+                            <span class="title-decoration">----</span>
+                        </h2>
+                        <p class="section-subtitle">Witness the transformation</p>
+
+                        <div class="gallery-wrapper">
+                            <button class="gallery-scroll-btn gallery-scroll-left" aria-label="Scroll Left">---</button>
+
+                            <div class="gallery-grid" id="galleryGrid">
+                                <div class="gallery-item">
+                                    <picture>
+                                        <source data-srcset="attached_assets/stock_images/gallery_facial.avif"
+                                            type="image/avif">
+                                        <source data-srcset="attached_assets/stock_images/gallery_facial.webp"
+                                            type="image/webp">
+                                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                            data-src="attached_assets/stock_images/gallery_facial.webp"
+                                            alt="Facial Treatments">
+                                    </picture>
+                                    <div class="gallery-overlay">
+                                        <h3>Facial Treatments</h3>
+                                    </div>
+                                </div>
+                                <div class="gallery-item">
+                                    <picture>
+                                        <source data-srcset="attached_assets/stock_images/gallery_makeup.avif"
+                                            type="image/avif">
+                                        <source data-srcset="attached_assets/stock_images/gallery_makeup.webp"
+                                            type="image/webp">
+                                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                            data-src="attached_assets/stock_images/gallery_makeup.webp"
+                                            alt="Makeup Styling">
+                                    </picture>
+                                    <div class="gallery-overlay">
+                                        <h3>Makeup Styling</h3>
+                                    </div>
+                                </div>
+                                <div class="gallery-item">
+                                    <picture>
+                                        <source data-srcset="attached_assets/stock_images/gallery_hair.avif"
+                                            type="image/avif">
+                                        <source data-srcset="attached_assets/stock_images/gallery_hair.webp"
+                                            type="image/webp">
+                                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                            data-src="attached_assets/stock_images/gallery_hair.webp"
+                                            alt="Hair Coloring">
+                                    </picture>
+                                    <div class="gallery-overlay">
+                                        <h3>Hair Coloring</h3>
+                                    </div>
+                                </div>
+                                <div class="gallery-item">
+                                    <picture>
+                                        <source data-srcset="attached_assets/stock_images/gallery_spa.avif"
+                                            type="image/avif">
+                                        <source data-srcset="attached_assets/stock_images/gallery_spa.webp"
+                                            type="image/webp">
+                                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                            data-src="attached_assets/stock_images/gallery_spa.webp"
+                                            alt="Spa & Nourish">
+                                    </picture>
+                                    <div class="gallery-overlay">
+                                        <h3>Spa & Nourish</h3>
+                                    </div>
+                                </div>
+                                <!-- Duplicates for scroll demo -->
+                                <div class="gallery-item">
+                                    <picture>
+                                        <source data-srcset="attached_assets/stock_images/gallery_facial.avif"
+                                            type="image/avif">
+                                        <source data-srcset="attached_assets/stock_images/gallery_facial.webp"
+                                            type="image/webp">
+                                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                            data-src="attached_assets/stock_images/gallery_facial.webp"
+                                            alt="Advanced Facials">
+                                    </picture>
+                                    <div class="gallery-overlay">
+                                        <h3>Advanced Facials</h3>
+                                    </div>
+                                </div>
+                                <div class="gallery-item">
+                                    <picture>
+                                        <source data-srcset="attached_assets/stock_images/gallery_makeup.avif"
+                                            type="image/avif">
+                                        <source data-srcset="attached_assets/stock_images/gallery_makeup.webp"
+                                            type="image/webp">
+                                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                            data-src="attached_assets/stock_images/gallery_makeup.webp"
+                                            alt="Bridal Makeup">
+                                    </picture>
+                                    <div class="gallery-overlay">
+                                        <h3>Bridal Makeup</h3>
+                                    </div>
+                                </div>
+                                <div class="gallery-item">
+                                    <picture>
+                                        <source data-srcset="attached_assets/stock_images/gallery_hair.avif"
+                                            type="image/avif">
+                                        <source data-srcset="attached_assets/stock_images/gallery_hair.webp"
+                                            type="image/webp">
+                                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                            data-src="attached_assets/stock_images/gallery_hair.webp"
+                                            alt="Style & Cuts">
+                                    </picture>
+                                    <div class="gallery-overlay">
+                                        <h3>Style & Cuts</h3>
+                                    </div>
+                                </div>
+                                <div class="gallery-item">
+                                    <picture>
+                                        <source data-srcset="attached_assets/stock_images/gallery_spa.avif"
+                                            type="image/avif">
+                                        <source data-srcset="attached_assets/stock_images/gallery_spa.webp"
+                                            type="image/webp">
+                                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                            data-src="attached_assets/stock_images/gallery_spa.webp" alt="Relaxing Spa">
+                                    </picture>
+                                    <div class="gallery-overlay">
+                                        <h3>Relaxing Spa</h3>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button class="gallery-scroll-btn gallery-scroll-right"
+                                aria-label="Scroll Right">---</button>
+                        </div>
+
+                        <!-- View Gallery Button -->
+                        <div class="gallery-view-btn-container">
+                            <button class="view-gallery-btn"
+                                onclick="document.getElementById('transformations').scrollIntoView({behavior: 'smooth'})">
+                                <span>View Gallery</span>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M5 12h14M12 5l7 7-7 7" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BEFORE & AFTER TRANSFORMATION GALLERY -->
+                <div class="before-after-section" id="transformations">
+                    <div class="container">
+                        <h2 class="section-title">
+                            <span class="title-decoration">⭐</span>
+                            Transformation Gallery
+                            <span class="title-decoration">⭐</span>
+                        </h2>
+                        <p class="section-subtitle">Witness the magic of our expert stylists</p>
+
+                        <div class="ba-filter-tabs">
+                            <button class="ba-filter-btn active" data-category="all">All</button>
+                            <button class="ba-filter-btn" data-category="hair">Hair</button>
+                            <button class="ba-filter-btn" data-category="makeup">Makeup</button>
+                            <button class="ba-filter-btn" data-category="nails">Nails</button>
+                        </div>
+
+                        <div class="ba-carousel-wrapper">
+                            <div class="ba-carousel" id="baCarousel">
+                                <div class="ba-slide active" data-category="hair">
+                                    <div class="comparison-slider" data-position="50">
+                                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                            data-src="attached_assets/stock_images/hair_color_after.avif"
+                                            alt="After transformation" class="after-img">
+                                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                            data-src="attached_assets/stock_images/hair_color_before.avif"
+                                            alt="Before transformation" class="before-img">
+                                        <div class="slider-handle">
+                                            <span class="handle-icon">---</span>
+                                        </div>
+                                        <span class="ba-label before-label">Before</span>
+                                        <span class="ba-label after-label">After</span>
+                                    </div>
+                                    <div class="ba-info">
+                                        <h4>Hair Color Transformation</h4>
+                                        <p>Beautiful balayage highlights by our expert colorists</p>
+                                    </div>
+                                </div>
+
+                                <div class="ba-slide" data-category="hair">
+                                    <div class="comparison-slider" data-position="50">
+                                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                            data-src="attached_assets/stock_images/keratin_after.avif"
+                                            alt="After Keratin Treatment" class="after-img">
+                                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                            data-src="attached_assets/stock_images/keratin_before.avif"
+                                            alt="Before Keratin Treatment" class="before-img">
+                                        <div class="slider-handle">
+                                            <span class="handle-icon">---</span>
+                                        </div>
+                                        <span class="ba-label before-label">Before</span>
+                                        <span class="ba-label after-label">After</span>
+                                    </div>
+                                    <div class="ba-info">
+                                        <h4>Keratin & Color Transformation</h4>
+                                        <p>Premium Keratin treatment with Rose Gold Balayage</p>
+                                    </div>
+                                </div>
+
+                                <div class="ba-slide" data-category="makeup">
+                                    <div class="comparison-slider" data-position="50">
+                                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                            data-src="attached_assets/stock_images/makeup_zenz_after.avif"
+                                            alt="After makeup" class="after-img">
+                                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                            data-src="attached_assets/stock_images/makeup_zenz_before.avif"
+                                            alt="Before makeup" class="before-img">
+                                        <div class="slider-handle">
+                                            <span class="handle-icon">---</span>
+                                        </div>
+                                        <span class="ba-label before-label">Before</span>
+                                        <span class="ba-label after-label">After</span>
+                                    </div>
+                                    <div class="ba-info">
+                                        <h4>Celebrity Glam Makeup</h4>
+                                        <p>Red carpet ready look with flawless finish</p>
+                                    </div>
+                                </div>
+
+                                <div class="ba-slide" data-category="nails">
+                                    <div class="comparison-slider" data-position="50">
+                                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                            data-src="attached_assets/stock_images/nails_art_after.avif"
+                                            alt="After nails" class="after-img">
+                                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                            data-src="attached_assets/stock_images/nails_art_before.avif"
+                                            alt="Before nails" class="before-img">
+                                        <div class="slider-handle">
+                                            <span class="handle-icon">---</span>
+                                        </div>
+                                        <span class="ba-label before-label">Before</span>
+                                        <span class="ba-label after-label">After</span>
+                                    </div>
+                                    <div class="ba-info">
+                                        <h4>Creative Nail Art</h4>
+                                        <p>Stunning extensions with custom hand-painted design</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button class="ba-nav-btn prev" onclick="slideBA(-1)">---</button>
+                            <button class="ba-nav-btn next" onclick="slideBA(1)">---</button>
+
+                            <div class="ba-dots" id="baDots"></div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <!-- STAFF SPOTLIGHT SECTION -->
+                <div class="staff-section" id="team">
+                    <div class="container">
+                        <h2 class="section-title">
+                            <span class="title-decoration">----</span>
+                            Meet Our Expert Team
+                            <span class="title-decoration">----</span>
+                        </h2>
+                        <p class="section-subtitle">Passionate professionals dedicated to your beauty</p>
+
+                        <div class="staff-carousel-wrapper">
+                            <div class="staff-carousel" id="staffCarousel">
+                                <div class="staff-card">
+                                    <div class="staff-photo-wrapper">
+                                        <picture>
+                                            <source
+                                                data-srcset="attached_assets/stock_images/professional_beauty__59c2cb84.avif"
+                                                type="image/avif">
+                                            <source
+                                                data-srcset="attached_assets/stock_images/professional_beauty__59c2cb84.webp"
+                                                type="image/webp">
+                                            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                                data-src="attached_assets/stock_images/professional_beauty__59c2cb84.jpg"
+                                                alt="Priya Sharma" class="staff-photo">
+                                        </picture>
+                                    </div>
+                                    <div class="staff-info">
+                                        <div class="staff-name-wrapper">
+                                            <h3 class="staff-name">Priya Sharma</h3>
+                                            <div class="staff-rating">--- 4.9</div>
+                                        </div>
+                                        <p class="staff-title">Senior Hair Stylist</p>
+                                        <div class="staff-experience">
+                                            <span class="exp-badge">12+ Years Experience</span>
+                                        </div>
+                                        <div class="staff-specialties">
+                                            <span class="specialty-tag">Hair Coloring</span>
+                                            <span class="specialty-tag">Balayage</span>
+                                            <span class="specialty-tag">Bridal Hair</span>
+                                        </div>
+                                        <a href="https://wa.me/919229915277?text=Hi%2C%20I%20want%20to%20book%20with%20Priya%20Sharma"
+                                            target="_blank" class="book-staff-btn">Book with Priya</a>
+                                    </div>
+                                </div>
+
+                                <div class="staff-card">
+                                    <div class="staff-photo-wrapper">
+                                        <picture>
+                                            <source
+                                                data-srcset="attached_assets/stock_images/professional_beauty__30f1cabb.avif"
+                                                type="image/avif">
+                                            <source
+                                                data-srcset="attached_assets/stock_images/professional_beauty__30f1cabb.webp"
+                                                type="image/webp">
+                                            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                                data-src="attached_assets/stock_images/professional_beauty__30f1cabb.jpg"
+                                                alt="Meera Patel" class="staff-photo">
+                                        </picture>
+                                    </div>
+                                    <div class="staff-info">
+                                        <div class="staff-name-wrapper">
+                                            <h3 class="staff-name">Meera Patel</h3>
+                                            <div class="staff-rating">--- 4.8</div>
+                                        </div>
+                                        <p class="staff-title">Makeup Artist</p>
+                                        <div class="staff-experience">
+                                            <span class="exp-badge">8+ Years Experience</span>
+                                        </div>
+                                        <div class="staff-specialties">
+                                            <span class="specialty-tag">Bridal Makeup</span>
+                                            <span class="specialty-tag">HD Makeup</span>
+                                            <span class="specialty-tag">Party Looks</span>
+                                        </div>
+                                        <a href="https://wa.me/919229915277?text=Hi%2C%20I%20want%20to%20book%20with%20Meera%20Patel"
+                                            target="_blank" class="book-staff-btn">Book with Meera</a>
+                                    </div>
+                                </div>
+
+                                <div class="staff-card">
+                                    <div class="staff-photo-wrapper">
+                                        <picture>
+                                            <source
+                                                data-srcset="attached_assets/stock_images/professional_beauty__4b0e7940.avif"
+                                                type="image/avif">
+                                            <source
+                                                data-srcset="attached_assets/stock_images/professional_beauty__4b0e7940.webp"
+                                                type="image/webp">
+                                            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                                data-src="attached_assets/stock_images/professional_beauty__4b0e7940.jpg"
+                                                alt="Anjali Singh" class="staff-photo">
+                                        </picture>
+                                    </div>
+                                    <div class="staff-info">
+                                        <div class="staff-name-wrapper">
+                                            <h3 class="staff-name">Anjali Singh</h3>
+                                            <div class="staff-rating">--- 4.9</div>
+                                        </div>
+                                        <p class="staff-title">Skin Care Specialist</p>
+                                        <div class="staff-experience">
+                                            <span class="exp-badge">10+ Years Experience</span>
+                                        </div>
+                                        <div class="staff-specialties">
+                                            <span class="specialty-tag">Facials</span>
+                                            <span class="specialty-tag">Skin Treatments</span>
+                                            <span class="specialty-tag">Anti-Aging</span>
+                                        </div>
+                                        <a href="https://wa.me/919229915277?text=Hi%2C%20I%20want%20to%20book%20with%20Anjali%20Singh"
+                                            target="_blank" class="book-staff-btn">Book with Anjali</a>
+                                    </div>
+                                </div>
+
+                                <div class="staff-card">
+                                    <div class="staff-photo-wrapper">
+                                        <picture>
+                                            <source
+                                                data-srcset="attached_assets/stock_images/professional_beauty__bd79d0cb.avif"
+                                                type="image/avif">
+                                            <source
+                                                data-srcset="attached_assets/stock_images/professional_beauty__bd79d0cb.webp"
+                                                type="image/webp">
+                                            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                                data-src="attached_assets/stock_images/professional_beauty__bd79d0cb.jpg"
+                                                alt="Riya Gupta" class="staff-photo">
+                                        </picture>
+                                    </div>
+                                    <div class="staff-info">
+                                        <div class="staff-name-wrapper">
+                                            <h3 class="staff-name">Riya Gupta</h3>
+                                            <div class="staff-rating">--- 4.7</div>
+                                        </div>
+                                        <p class="staff-title">Nail Art Expert</p>
+                                        <div class="staff-experience">
+                                            <span class="exp-badge">6+ Years Experience</span>
+                                        </div>
+                                        <div class="staff-specialties">
+                                            <span class="specialty-tag">Gel Nails</span>
+                                            <span class="specialty-tag">Nail Art</span>
+                                            <span class="specialty-tag">Extensions</span>
+                                        </div>
+                                        <a href="https://wa.me/919229915277?text=Hi%2C%20I%20want%20to%20book%20with%20Riya%20Gupta"
+                                            target="_blank" class="book-staff-btn">Book with Riya</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button class="staff-nav-btn prev" onclick="slideStaff(-1)">---</button>
+                            <button class="staff-nav-btn next" onclick="slideStaff(1)">---</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- REVIEWS SECTION - TESTIMONIAL CAROUSEL -->
+                <div id="reviews" class="reviews-section">
+                    <div class="container">
+                        <h2 class="section-title">
+                            <span class="title-decoration">⭐</span>
+                            Customer Testimonials
+                            <span class="title-decoration">⭐</span>
+                        </h2>
+                        <p class="section-subtitle">Hear from our satisfied clients</p>
+
+                        <div class="testimonial-carousel-wrapper">
+                            <div class="testimonial-carousel" id="testimonialCarousel">
+                                <div class="testimonial-carousel-track" id="testimonialTrack">
+                                    <div class="testimonial-card-item">
+                                        <div class="testimonial-card">
+                                            <div class="testimonial-stars">---------------</div>
+                                            <p class="testimonial-text">"Blancbeu gave me the best haircut ever! The
+                                                professionalism and care are unmatched. Highly recommended!"</p>
+                                            <div class="testimonial-author">
+                                                <strong>Sarah Johnson</strong>
+                                                <span class="testimonial-date">Premium Member</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="testimonial-card-item">
+                                        <div class="testimonial-card">
+                                            <div class="testimonial-stars">---------------</div>
+                                            <p class="testimonial-text">"The bridal makeup service was absolutely
+                                                stunning. I felt like a queen on my special day!"</p>
+                                            <div class="testimonial-author">
+                                                <strong>Priya Patel</strong>
+                                                <span class="testimonial-date">Bridal Customer</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="testimonial-card-item">
+                                        <div class="testimonial-card">
+                                            <div class="testimonial-stars">★★★★★</div>
+                                            <p class="testimonial-text">"Spa treatments are heavenly! I always leave
+                                                feeling completely rejuvenated and refreshed."</p>
+                                            <div class="testimonial-author">
+                                                <strong>Anjali Sharma</strong>
+                                                <span class="testimonial-date">Regular Customer</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="testimonial-card-item">
+                                        <div class="testimonial-card">
+                                            <div class="testimonial-stars">★★★★★</div>
+                                            <p class="testimonial-text">"Best facial treatment I've ever had. The
+                                                staff is so knowledgeable and friendly!"</p>
+                                            <div class="testimonial-author">
+                                                <strong>Meera Singh</strong>
+                                                <span class="testimonial-date">Skincare Enthusiast</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="testimonial-nav-btn prev" onclick="slideTestimonial(-1)">
+                                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2"
+                                    fill="none">
+                                    <polyline points="15 18 9 12 15 6"></polyline>
+                                </svg>
+                            </button>
+                            <button class="testimonial-nav-btn next" onclick="slideTestimonial(1)">
+                                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2"
+                                    fill="none">
+                                    <polyline points="9 18 15 12 9 6"></polyline>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- ABOUT BLANCBEU SECTION -->
+                <div class="about-section" id="about">
+                    <div class="container">
+                        <h2 class="section-title">
+                            <span class="title-decoration">⭐</span>
+                            About Blancbeu
+                            <span class="title-decoration">⭐</span>
+                        </h2>
+                        <p class="section-subtitle">Where Beauty Meets Excellence</p>
+
+                        <!-- Premium Badge -->
+                        <div class="premium-salon-badge">
+                            <span class="badge-icon">
+                                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                                    <polygon
+                                        points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                    </polygon>
+                                </svg>
+                            </span>
+                            <span class="badge-text">Ranchi's Newest & Most Premium Beauty Destination</span>
+                        </div>
+
+                        <div class="about-cards-container">
+                            <!-- Story Card -->
+                            <div class="about-card glass-card">
+                                <div class="about-card-icon">
+                                    <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor"
+                                        stroke-width="1.5" fill="none">
+                                        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                                        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="about-card-title">Our Story</h3>
+                                <p class="about-card-text">
+                                    <span class="highlight-gold">Blancbeu Family Beauty Salon</span> —
+                                    <span class="highlight-shimmer">Ranchi's newest premium destination</span> for
+                                    beauty & wellness.
+                                    We've set a <span class="highlight-white">new standard of excellence</span> with
+                                    world-class care, luxury products, and unmatched service.
+                                </p>
+                            </div>
+
+                            <!-- Mission Card -->
+                            <div class="about-card glass-card">
+                                <div class="about-card-icon">
+                                    <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor"
+                                        stroke-width="1.5" fill="none">
+                                        <path
+                                            d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <h3 class="about-card-title">Our Promise</h3>
+                                <p class="about-card-text">
+                                    You deserve to feel <span class="highlight-shimmer">special & extraordinary</span>.
+                                    We transform how you feel with <span class="highlight-white">luxurious
+                                        treatments</span>
+                                    in a relaxing sanctuary. <span class="highlight-gold">You're family here</span> —
+                                    your glow is our pride.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Highlights Pills -->
+                        <div class="about-highlights-pills">
+                            <div class="highlight-pill premium-pill">
+                                <span class="pill-icon">🏆</span>
+                                <span class="pill-text">Top Rated in Ranchi</span>
+                            </div>
+                            <div class="highlight-pill">
+                                <span class="pill-icon">✂️</span>
+                                <span class="pill-text">Expert Stylists</span>
+                            </div>
+                            <div class="highlight-pill">
+                                <span class="pill-icon">✨</span>
+                                <span class="pill-text">Luxury Products</span>
+                            </div>
+                            <div class="highlight-pill">
+                                <span class="pill-icon">👑</span>
+                                <span class="pill-text">VIP Experience</span>
+                            </div>
+                        </div>
+
+                        <!-- Address Card for SEO -->
+                        <div class="about-address-card">
+                            <div class="address-icon">
+                                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2"
+                                    fill="none">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                            </div>
+                            <address class="address-text" itemscope itemtype="http://schema.org/BeautySalon">
+                                <span itemprop="name">Blancbeu Family Beauty Salon</span><br>
+                                <span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+                                    <span itemprop="streetAddress">4th Floor, Victory Mall, Rangrej Gali, Saraswati
+                                        Market, Upper Bazar</span>,
+                                    <span itemprop="addressLocality">Ranchi</span>,
+                                    <span itemprop="addressRegion">Jharkhand</span>
+                                    <span itemprop="postalCode">834001</span>,
+                                    <span itemprop="addressCountry">India</span>
+                                </span>
+                            </address>
+                        </div>
+                    </div>
+                    <!-- Moved Why Trust Blancbeu Section -->
+                    <div class="trust-section">
+                        <div class="container">
+                            <h2 class="section-title">
+                                <span class="title-decoration">⭐</span>
+                                Why Trust Blancbeu
+                                <span class="title-decoration">⭐</span>
+                            </h2>
+                            <p class="section-subtitle">Trusted by thousands for premium beauty care</p>
+
+                            <div class="trust-grid">
+                                <div class="trust-card premium-hover glass-card scroll-reveal">
+                                    <div class="stat-number" data-value="7">7+</div>
+                                    <div class="stat-label">Months of Excellence</div>
+                                    <div class="stat-description">Serving the community with premium beauty
+                                        treatments</div>
+                                </div>
+
+                                <div class="trust-card premium-hover glass-card scroll-reveal">
+                                    <div class="stat-number" data-value="1000">0</div>
+                                    <div class="stat-label">Happy Clients</div>
+                                    <div class="stat-description">Thousands of satisfied customers every
+                                        year</div>
+                                </div>
+
+                                <div class="trust-card premium-hover glass-card scroll-reveal">
+                                    <div class="stat-number" data-value="50">0</div>
+                                    <div class="stat-label">Services Offered</div>
+                                    <div class="stat-description">Comprehensive beauty and wellness
+                                        solutions</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+            <!-- CTA SECTION - Premium Redesign -->
+            <div class="cta-section-premium">
+                <div class="cta-glow-bg"></div>
+                <div class="container">
+                    <div class="cta-content">
+                        <span class="cta-badge">📅 Book Today</span>
+                        <h2 class="cta-title">Ready to <span class="cta-highlight">Transform</span> Your Look?</h2>
+                        <p class="cta-subtitle">Experience the luxury of premium beauty care. Your transformation
+                            awaits.</p>
+
+                        <div class="cta-buttons-premium">
+                            <a href="tel:+919229915277" class="cta-btn-gold">
+                                <span class="cta-btn-icon">
+                                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                                        <path
+                                            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                                        </path>
+                                    </svg>
+                                </span>
+                                <span class="cta-btn-text">Call Now</span>
+                            </a>
+                            <a href="https://wa.me/919229915277" class="cta-btn-outline">
+                                <a href="https://wa.me/919229915277" class="cta-btn-outline">
+                                    <span class="cta-btn-icon">
+                                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                                            <path
+                                                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.008-.57-.008-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z" />
+                                        </svg>
+                                    </span>
+                                    <span class="cta-btn-text">WhatsApp</span>
+                                </a>
+                        </div>
+
+                        <p class="cta-response-time">⚡ We respond within 5 minutes</p>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- FAQ SECTION -->
+            <section class="faq-section" id="faq">
+                <div class="container">
+                    <h2 class="section-title">
+                        <span class="title-decoration">✨</span>
+                        Frequently Asked Questions
+                        <span class="title-decoration">✨</span>
+                    </h2>
+                    <p class="section-subtitle">Everything you need to know about our services</p>
+
+                    <div class="faq-container">
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>What are your salon hours?</h3>
+                                <span class="faq-icon">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                <div class="faq-answer-content">
+                                    We are open from 10:00 AM to 8:00 PM, Monday through Sunday. We recommend
+                                    booking an appointment in advance to ensure your preferred time slot is
+                                    available.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>How do I book an appointment?</h3>
+                                <span class="faq-icon">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                <div class="faq-answer-content">
+                                    You can book an appointment by calling us at +91 92299 15277, messaging us
+                                    on WhatsApp, or visiting our salon directly. We also accept walk-ins based
+                                    on availability.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>What products do you use?</h3>
+                                <span class="faq-icon">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                <div class="faq-answer-content">
+                                    We use only premium, professional-grade products from trusted international
+                                    and Indian brands. Our products are carefully selected for quality, safety,
+                                    and effectiveness.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>Do you offer bridal packages?</h3>
+                                <span class="faq-icon">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                <div class="faq-answer-content">
+                                    Yes! We offer comprehensive bridal packages that include pre-bridal
+                                    treatments, makeup, hair styling, and more. Contact us for a personalized
+                                    consultation and package details.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>What is your cancellation policy?</h3>
+                                <span class="faq-icon">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                <div class="faq-answer-content">
+                                    We request at least 2 hours notice for cancellations. This helps us
+                                    accommodate other clients and maintain our service quality. For bridal
+                                    appointments, please provide 24 hours notice.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>Do you offer services for men?</h3>
+                                <span class="faq-icon">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                <div class="faq-answer-content">
+                                    Absolutely! Blancbeu is a family salon that caters to men, women, and
+                                    children. We offer a full range of grooming services for men including
+                                    haircuts, beard styling, facials, and more.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FOOTER -->
+            <footer class="footer">
+                <div class="container">
+                    <div class="footer-content">
+                        <div class="footer-section">
+                            <h3>Blancbeu</h3>
+                            <p>Premium Beauty & Wellness Salon</p>
+                            <p>— Where Beauty Meets Excellence —</p>
+                        </div>
+                        <div class="footer-section">
+                            <h4>Quick Links</h4>
+                            <a href="#home">Home</a>
+                            <a href="#offers">Offers</a>
+                            <a href="#services">Services</a>
+                            <a href="#reviews">Reviews</a>
+                        </div>
+                        <div class="footer-section">
+                            <h4>Follow Us</h4>
+                            <div class="social-icons">
+                                <a href="https://youtube.com/@blancbeubeautysalon?si=_Go7ZSGSFzTS-j_M" target="_blank"
+                                    class="social-icon youtube" aria-label="YouTube">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path
+                                            d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z" />
+                                    </svg>
+                                </a>
+                                <a href="https://www.instagram.com/blancbeu_salon_ranchi?igsh=MTRpbGV0YWt4aHFzaw=="
+                                    target="_blank" class="social-icon instagram" aria-label="Instagram">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path
+                                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                                    </svg>
+                                </a>
+                                <a href="https://www.facebook.com/p/BlancBeu-Family-Beauty-Salon-61578977241367/"
+                                    target="_blank" class="social-icon facebook" aria-label="Facebook">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path
+                                            d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer-bottom">
+                        <p>&copy; Blancbeu 2025. All rights reserved.</p>
+                    </div>
+                </div>
+            </footer>
+        </section>
+
+        <!-- SERVICES PAGE - Dedicated services browsing experience -->
+        <section id="services" class="app-page" data-page="services">
+            <div class="services-page-container">
+                <!-- Services Header -->
+                <div class="services-page-header">
+                    <h1 class="services-page-title">Our Premium Services</h1>
+                </div>
+
+                <!-- Search Bar -->
+                <div class="services-search-wrapper">
+                    <div class="services-search-bar">
+                        <span class="search-icon">
+                            <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2"
+                                fill="none">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                            </svg>
+                        </span>
+                        <input type="text" id="servicesPageSearch" placeholder="Search services..."
+                            class="services-search-input">
+                        <button id="clearServicesSearch" class="clear-search-btn" style="display: none;">
+                            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2"
+                                fill="none">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <p class="services-page-subtitle" style="text-align: center; margin: 15px 0; color: var(--text-gray);">
+                    Filter Services By Category</p>
+
+                <!-- Category Image Cards - Visual Navigation -->
+                <div class="services-category-cards" id="servicesCategoryCards">
+                    <div class="category-image-card active" data-category="all">
+                        <!-- Use a generic beauty collage or general salon image for 'All' -->
+                        <picture>
+                            <source data-srcset="assets/all_services_indian_young.avif" type="image/avif">
+                            <source data-srcset="assets/all_services_indian_young.webp" type="image/webp">
+                            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                data-src="assets/all_services_indian_young.webp" alt="All Services" loading="lazy">
+                        </picture>
+                        <div class="category-card-overlay">
+                            <h3>All Services</h3>
+                        </div>
+                    </div>
+                    <div class="category-image-card" data-category="Hair cutting">
+                        <picture>
+                            <source data-srcset="assets/featured_services/haircut.avif" type="image/avif">
+                            <source data-srcset="assets/featured_services/haircut.webp" type="image/webp">
+                            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                data-src="assets/featured_services/haircut.webp" alt="Hair Cutting" loading="lazy">
+                        </picture>
+                        <div class="category-card-overlay">
+                            <h3>Hair Cutting</h3>
+                        </div>
+                    </div>
+                    <div class="category-image-card" data-category="Facial">
+                        <picture>
+                            <source data-srcset="assets/featured_services/facial.avif" type="image/avif">
+                            <source data-srcset="assets/featured_services/facial.webp" type="image/webp">
+                            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                data-src="assets/featured_services/facial.webp" alt="Facial" loading="lazy">
+                        </picture>
+                        <div class="category-card-overlay">
+                            <h3>Facial</h3>
+                        </div>
+                    </div>
+                    <div class="category-image-card" data-category="Makeup & Styling">
+                        <picture>
+                            <source data-srcset="assets/featured_services/makeup.avif" type="image/avif">
+                            <source data-srcset="assets/featured_services/makeup.webp" type="image/webp">
+                            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                data-src="assets/featured_services/makeup.webp" alt="Makeup & Styling" loading="lazy">
+                        </picture>
+                        <div class="category-card-overlay">
+                            <h3>Makeup</h3>
+                        </div>
+                    </div>
+                    <div class="category-image-card" data-category="Nails & Beauty">
+                        <picture>
+                            <source data-srcset="assets/featured_services/nails.avif" type="image/avif">
+                            <source data-srcset="assets/featured_services/nails.webp" type="image/webp">
+                            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                data-src="assets/featured_services/nails.webp" alt="Nails & Beauty" loading="lazy">
+                        </picture>
+                        <div class="category-card-overlay">
+                            <h3>Nails</h3>
+                        </div>
+                    </div>
+                    <div class="category-image-card" data-category="Premium services">
+                        <picture>
+                            <source data-srcset="assets/featured_services/premium.avif" type="image/avif">
+                            <source data-srcset="assets/featured_services/premium.webp" type="image/webp">
+                            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                data-src="assets/featured_services/premium.webp" alt="Premium Services" loading="lazy">
+                        </picture>
+                        <div class="category-card-overlay">
+                            <span class="popular-badge">VIP</span>
+                            <h3>Premium</h3>
+                        </div>
+                    </div>
+                    <div class="category-image-card" data-category="Hairs & Treatment">
+                        <picture>
+                            <source data-srcset="assets/featured_services/treatment.avif" type="image/avif">
+                            <source data-srcset="assets/featured_services/treatment.webp" type="image/webp">
+                            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                data-src="assets/featured_services/treatment.webp" alt="Hair Treatment" loading="lazy">
+                        </picture>
+                        <div class="category-card-overlay">
+                            <h3>Treatment</h3>
+                        </div>
+                    </div>
+                    <div class="category-image-card" data-category="Clean up">
+                        <picture>
+                            <source data-srcset="assets/featured_services/cleanup.avif" type="image/avif">
+                            <source data-srcset="assets/featured_services/cleanup.webp" type="image/webp">
+                            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                data-src="assets/featured_services/cleanup.webp" alt="Clean Up" loading="lazy">
+                        </picture>
+                        <div class="category-card-overlay">
+                            <h3>Clean Up</h3>
+                        </div>
+                    </div>
+                    <div class="category-image-card" data-category="Hair colour">
+                        <picture>
+                            <source data-srcset="assets/featured_services/spa.avif" type="image/avif">
+                            <source data-srcset="assets/featured_services/spa.webp" type="image/webp">
+                            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                data-src="assets/featured_services/spa.webp" alt="Hair Colour" loading="lazy">
+                        </picture>
+                        <div class="category-card-overlay">
+                            <h3>Hair Colour</h3>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <!-- Services Count -->
+                <div class="services-count-bar">
+                    <span id="servicesPageCount" class="services-count-text">Showing all services</span>
+                </div>
+
+                <!-- Services Grid Container -->
+                <div class="services-page-grid" id="servicesPageGrid">
+                    <!-- Services will be dynamically rendered here -->
+                </div>
+
+                <!-- Quick Book CTA -->
+                <div class="services-quick-book-cta">
+                    <div class="quick-book-content">
+                        <span class="quick-book-icon">
+                            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2"
+                                fill="none">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                                <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                            </svg>
+                        </span>
+                        <div class="quick-book-text">
+                            <strong>Can't find what you're looking for?</strong>
+                            <span>Contact us for custom services</span>
+                        </div>
+                    </div>
+                    <a href="https://wa.me/919229915277?text=Hi%2C%20I%20need%20help%20with%20a%20service"
+                        target="_blank" class="quick-book-btn">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="margin-right: 6px;">
+                            <path
+                                d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z">
+                            </path>
+                        </svg> Chat with us
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- LOGIN PAGE -->
+        <section id="login" class="app-page" data-page="login">
+            <div class="login-page-container">
+                <!-- Immersive Close Button (Premium) -->
+                <button class="login-close-btn" onclick="window.location.hash='home'">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" stroke-opacity="0.3" />
+                        <path d="M15 9L9 15M9 9L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </button>
+
+                <div class="login-card">
+                    <div class="auth-brand">
+                        <div class="auth-brand-icon">
+                            <picture>
+                                <source srcset="/icon-512x512.avif" type="image/avif">
+                                <source srcset="/icon-512x512.webp" type="image/webp">
+                                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                    data-src="icon-512x512.png" alt="Blancbeu" class="auth-logo">
+                            </picture>
+                        </div>
+                        <h1 class="auth-title">Welcome to Blancbeu</h1>
+                        <p class="auth-subtitle">Sign in to book appointments & manage your beauty journey</p>
+                    </div>
+
+                    <div class="auth-buttons">
+                        <!-- WhatsApp Login -->
+                        <button id="whatsappLoginBtnPage" class="auth-btn auth-btn-whatsapp">
+                            <div class="auth-btn-icon">
+                                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                    data-src="attached_assets/new_icons/icons8-whatsapp.apng" alt="WhatsApp">
+                            </div>
+                            <div class="auth-btn-content">
+                                <span class="auth-btn-text">Continue with WhatsApp</span>
+                                <span class="auth-btn-subtext">Quick & secure login</span>
+                            </div>
+                            <span class="auth-btn-badge">Recommended</span>
+                        </button>
+
+                        <div class="auth-divider">
+                            <span>or continue with</span>
+                        </div>
+
+                        <!-- Google Login -->
+                        <button id="googleLoginBtnPage" class="auth-btn auth-btn-google">
+                            <div class="auth-btn-icon">
+                                <svg viewBox="0 0 24 24" width="24" height="24">
+                                    <path fill="#4285F4"
+                                        d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                                    <path fill="#34A853"
+                                        d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                                    <path fill="#FBBC05"
+                                        d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                                    <path fill="#EA4335"
+                                        d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+                                </svg>
+                            </div>
+                            <span class="auth-btn-text">Continue with Google</span>
+                        </button>
+                    </div>
+
+                    <p class="auth-terms">
+                        By continuing, you agree to our <a href="#" onclick="showTC(); return false;">Terms of
+                            Service</a> &
+                        <a href="#" onclick="showTC(); return false;">Privacy Policy</a>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- NOTIFICATIONS PAGE -->
+
+        <section id="notifications" class="app-page" data-page="notifications">
+            <div class="notifications-container">
+                <!-- Header with Settings -->
+                <div class="notifications-header">
+                    <div class="notifications-header-content">
+                        <h1 class="premium-page-title">Notifications</h1>
+                        <span class="unread-count"
+                            style="display: none; background: var(--gold-24k); color: var(--bg-primary); border-radius: 20px; padding: 2px 8px; font-size: 12px; font-weight: bold;">7</span>
+                    </div>
+                    <button class="notifications-settings-btn" title="Settings">
+                        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2"
+                            fill="none">
+                            <circle cx="12" cy="12" r="3"></circle>
+                            <path
+                                d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Filter Tabs with Badge Counts -->
+                <!-- Sticky Wrapper for Filters and Quick Actions -->
+                <div class="sticky-controls">
+                    <!-- Filter Tabs with Badge Counts -->
+                    <div class="notifications-filters">
+                        <button class="filter-btn active" data-filter="all" data-count="7">All <span
+                                class="count-badge">7</span></button>
+                        <button class="filter-btn" data-filter="appointments" data-count="2">Appointments <span
+                                class="count-badge">2</span></button>
+                        <button class="filter-btn" data-filter="offers" data-count="3">Offers <span
+                                class="count-badge">3</span></button>
+                        <button class="filter-btn" data-filter="reviews" data-count="2">Reviews <span
+                                class="count-badge">2</span></button>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="quick-actions">
+                        <button class="quick-action-chip" data-action="mark-all-read">Mark all as read</button>
+                        <button class="quick-action-chip" data-action="clear-all">Clear all</button>
+                    </div>
+                </div>
+
+                <!-- Notifications List -->
+                <div class="notifications-list">
+                    <!-- TODAY SECTION -->
+                    <div class="notification-section">
+                        <div class="section-divider">
+                            <span class="section-label">Today</span>
+                        </div>
+
+                        <!-- Appointment Notification - Priority High -->
+                        <div class="notification-card appointments" data-type="appointments" data-priority="high"
+                            data-unread="true">
+                            <div class="notification-badge unread"></div>
+                            <div class="priority-indicator high"></div>
+                            <div class="notification-icon appointment-icon">
+                                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2"
+                                    fill="none">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                                </svg>
+                            </div>
+                            <div class="notification-content">
+                                <div class="notification-header">
+                                    <h3 class="notification-title">Your Booking Confirmed</h3>
+                                    <span class="priority-label high-label">Urgent</span>
+                                </div>
+                                <p class="notification-message">Hair Spa on Nov 28, 2025 at 3:00 PM | Service ID:
+                                    #BS2025</p>
+                                <div class="notification-meta">
+                                    <span class="meta-tag">Confirmed</span>
+                                    <span class="notification-time">2 hours ago</span>
+                                </div>
+                            </div>
+                            <div class="notification-actions">
+                                <button class="action-btn view-appointment">View Details</button>
+                                <button class="action-btn dismiss-btn" title="Dismiss">
+                                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor"
+                                        stroke-width="2" fill="none">
+                                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Offer Notification - Priority High -->
+                        <div class="notification-card offers" data-type="offers" data-priority="high"
+                            data-unread="true">
+                            <div class="notification-badge unread"></div>
+                            <div class="priority-indicator high"></div>
+                            <div class="notification-icon offer-icon">
+                                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2"
+                                    fill="none">
+                                    <path
+                                        d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z">
+                                    </path>
+                                    <line x1="7" y1="7" x2="7.01" y2="7"></line>
+                                </svg>
+                            </div>
+                            <div class="notification-content">
+                                <div class="notification-header">
+                                    <h3 class="notification-title">Special Offer: 40% Off!</h3>
+                                    <span class="priority-label high-label">Hot Deal</span>
+                                </div>
+                                <p class="notification-message">Get amazing discounts on all beauty treatments this week
+                                    only</p>
+                                <div class="offer-preview">
+                                    <span class="offer-amount">40% OFF</span>
+                                    <span class="offer-expiry">Expires in 2 days</span>
+                                </div>
+                                <p class="notification-time">6 hours ago</p>
+                            </div>
+                            <div class="notification-actions">
+                                <button class="action-btn view-btn">View Offer</button>
+                                <button class="action-btn dismiss-btn" title="Dismiss">
+                                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor"
+                                        stroke-width="2" fill="none">
+                                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- YESTERDAY SECTION -->
+                    <div class="notification-section">
+                        <div class="section-divider">
+                            <span class="section-label">Yesterday</span>
+                        </div>
+
+                        <!-- Review Request -->
+                        <div class="notification-card reviews" data-type="reviews" data-priority="normal"
+                            data-unread="false">
+                            <div class="notification-icon review-icon">
+                                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2"
+                                    fill="none">
+                                    <path
+                                        d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <div class="notification-content">
+                                <h3 class="notification-title">Share Your Experience</h3>
+                                <p class="notification-message">We'd love to hear about your recent visit! Rate your
+                                    experience</p>
+                                <p class="notification-time">1 day ago</p>
+                            </div>
+                            <div class="notification-actions">
+                                <button class="action-btn review-btn">Leave Review</button>
+                                <button class="action-btn dismiss-btn" title="Dismiss">
+                                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor"
+                                        stroke-width="2" fill="none">
+                                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Appointment Reminder -->
+                        <div class="notification-card appointments" data-type="appointments" data-priority="normal"
+                            data-unread="false">
+                            <div class="notification-icon reminder-icon">
+                                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2"
+                                    fill="none">
+                                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                                    <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                                </svg>
+                            </div>
+                            <div class="notification-content">
+                                <h3 class="notification-title">Appointment Reminder</h3>
+                                <p class="notification-message">Your Hair Coloring appointment is tomorrow at 2:00 PM
+                                </p>
+                                <p class="notification-time">1 day ago</p>
+                            </div>
+                            <div class="notification-actions">
+                                <button class="action-btn like-btn" title="Like">
+                                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor"
+                                        stroke-width="2" fill="none">
+                                        <path
+                                            d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3">
+                                        </path>
+                                    </svg>
+                                </button>
+                                <button class="action-btn dismiss-btn" title="Dismiss">
+                                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor"
+                                        stroke-width="2" fill="none">
+                                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- EARLIER SECTION -->
+                    <div class="notification-section">
+                        <div class="section-divider">
+                            <span class="section-label">Earlier</span>
+                        </div>
+
+                        <!-- Loyalty Points Notification -->
+                        <div class="notification-card offers" data-type="offers" data-priority="normal"
+                            data-unread="false">
+                            <div class="notification-icon loyalty-icon">
+                                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2"
+                                    fill="none">
+                                    <polygon
+                                        points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                    </polygon>
+                                </svg>
+                            </div>
+                            <div class="notification-content">
+                                <h3 class="notification-title">You've Earned 150 Points!</h3>
+                                <p class="notification-message">Congratulations! Redeem them for exclusive rewards and
+                                    discounts</p>
+                                <div class="points-preview">
+                                    <span class="points-amount">150 Points</span>
+                                </div>
+                                <p class="notification-time">2 days ago</p>
+                            </div>
+                            <div class="notification-actions">
+                                <button class="action-btn redeem-btn">Redeem</button>
+                                <button class="action-btn dismiss-btn" title="Dismiss">
+                                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor"
+                                        stroke-width="2" fill="none">
+                                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- New Service Alert -->
+                        <div class="notification-card offers" data-type="offers" data-priority="normal"
+                            data-unread="false">
+                            <div class="notification-icon new-service-icon">
+                                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2"
+                                    fill="none">
+                                    <path d="M12 20h9"></path>
+                                    <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                                </svg>
+                            </div>
+                            <div class="notification-content">
+                                <h3 class="notification-title">New Service: Bridal Makeup</h3>
+                                <p class="notification-message">Experience our premium bridal makeup service with expert
+                                    artists</p>
+                                <p class="notification-time">3 days ago</p>
+                            </div>
+                            <div class="notification-actions">
+                                <button class="action-btn explore-btn">Explore</button>
+                                <button class="action-btn dismiss-btn" title="Dismiss">
+                                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor"
+                                        stroke-width="2" fill="none">
+                                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Review Alert -->
+                        <div class="notification-card reviews" data-type="reviews" data-priority="normal"
+                            data-unread="false">
+                            <div class="notification-icon review-alert-icon">
+                                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2"
+                                    fill="none">
+                                    <path
+                                        d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3">
+                                    </path>
+                                </svg>
+                            </div>
+                            <div class="notification-content">
+                                <h3 class="notification-title">New Review from Sarah M.</h3>
+                                <p class="notification-message">"Amazing experience! The staff was very professional and
+                                    friendly."</p>
+                                <div class="review-preview">
+                                    <span class="stars">★★★★★</span>
+                                </div>
+                                <p class="notification-time">5 days ago</p>
+                            </div>
+                            <div class="notification-actions">
+                                <button class="action-btn like-btn" title="Like">
+                                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor"
+                                        stroke-width="2" fill="none">
+                                        <path
+                                            d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3">
+                                        </path>
+                                    </svg>
+                                </button>
+                                <button class="action-btn dismiss-btn" title="Dismiss">
+                                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor"
+                                        stroke-width="2" fill="none">
+                                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Empty State (hidden by default) -->
+                <div class="empty-state" style="display: none; text-align: center; padding: 80px 20px;">
+                    <div style="font-size: 60px; margin-bottom: 20px; color: var(--text-muted);">
+                        <svg viewBox="0 0 24 24" width="60" height="60" stroke="currentColor" stroke-width="1"
+                            fill="none">
+                            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                            <path d="M18.63 13A17.89 17.89 0 0 1 18 8"></path>
+                            <path d="M6.26 6.26A5.86 5.86 0 0 0 6 8c0 7-3 9-3 9h14"></path>
+                            <path d="M18 8a6 6 0 0 0-9.33-5"></path>
+                            <line x1="1" y1="1" x2="23" y2="23"></line>
+                        </svg>
+                    </div>
+                    <h2 style="color: var(--text-primary); margin-bottom: 10px; font-size: 24px;">All Caught Up!</h2>
+                    <p style="color: var(--text-secondary); font-size: 14px;">You have no new notifications. Check back
+                        later for updates about your appointments and special offers.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="mybookings" class="app-page" data-page="mybookings">
+            <div class="bookings-container">
+                <!-- Header with Filters -->
+                <div class="bookings-header">
+                    <div class="bookings-header-content">
+                        <h1 class="premium-page-title">My Bookings</h1>
+                    </div>
+                    <button class="bookings-filter-btn" title="Filter">
+                        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2"
+                            fill="none">
+                            <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                        </svg>
+                    </button>
+                </div>
+
+
+
+                <!-- Bookings List -->
+                <div class="bookings-list" id="bookingsListContainer">
+                    <!-- Dynamic bookings will be injected here by my-bookings.js -->
+                    <div style="text-align:center; padding: 20px; color: var(--text-secondary);">
+                        <p>Loading your appointments...</p>
+                    </div>
+                </div>
+
+                <!-- Empty State (hidden by default) -->
+                <div class="empty-state-bookings" style="display: none; text-align: center; padding: 100px 20px;">
+                    <div style="font-size: 60px; margin-bottom: 20px; color: var(--text-muted);">
+                        <svg viewBox="0 0 24 24" width="60" height="60" stroke="currentColor" stroke-width="1"
+                            fill="none">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                        </svg>
+                    </div>
+                    <h2 style="color: var(--text-primary); margin-bottom: 10px; font-size: 24px;">No Bookings Yet</h2>
+                    <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 20px;">Schedule your first
+                        beauty appointment and experience our premium services!</p>
+                    <button class="book-now-btn" onclick="window.navigateToPage('booking')">Book an Appointment</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ACCOUNT PAGE -->
+        <section id="account" class="app-page" data-page="account">
+            <div class="account-container">
+                <!-- Profile Header -->
+                <div class="account-header">
+                    <div class="profile-card">
+                        <div class="profile-avatar-wrapper">
+                            <div class="profile-avatar">
+                                <div class="avatar-placeholder"
+                                    style="display: flex; align-items: center; justify-content: center; height: 100%; width: 100%;">
+                                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#B8860B"
+                                        stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="12" cy="7" r="4"></circle>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="tier-badge-premium">Gold</div>
+                        </div>
+                        <div class="profile-info">
+                            <h2 class="profile-name">Priya Sharma</h2>
+                            <p class="profile-email">priya.sharma@email.com</p>
+                            <div class="member-badge" id="premiumBadge" style="display: none; justify-content: center;">
+                                <span class="badge-icon">---</span>
+                                <span class="badge-text" style="font-weight: 600;">Premium Member</span>
+                            </div>
+                            <!-- Dynamic Sign In Button -->
+                            <!-- Dynamic Sign In Button -->
+                            <button class="sign-in-btn-premium sign-in-trigger" id="signInBadge">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                </svg>
+                                <span>Sign In</span>
+                            </button>
+                        </div>
+                        <button class="edit-profile-btn">------</button>
+                    </div>
+
+                    <!-- Tier Progress -->
+                    <!-- Tier Progress (Member Only) -->
+                    <div id="tierSection" class="tier-progress-card">
+                        <div class="tier-progress-header">
+                            <span class="tier-label">Gold Tier</span>
+                            <span class="tier-next">4,550 / 5,000 points to Platinum</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 91%"></div>
+                        </div>
+                        <div class="tier-benefits">
+                            <span class="benefit-badge">--- 15% Discount</span>
+                            <span class="benefit-badge">--- Free Shipping</span>
+                        </div>
+                    </div>
+
+                    <!-- Stats Cards (Member Only) -->
+                    <div id="statsSection" class="stats-section">
+                        <div class="stat-card stat-card-1">
+                            <div class="stat-icon">----</div>
+                            <div class="stat-content">
+                                <div class="stat-label">Loyalty Points</div>
+                                <div class="stat-value">2,450</div>
+                                <div class="stat-bar">
+                                    <div class="stat-bar-fill" style="width: 75%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="stat-card stat-card-2">
+                            <div class="stat-icon">----</div>
+                            <div class="stat-content">
+                                <div class="stat-label">Total Saved</div>
+                                <div class="stat-value">---4,850</div>
+                                <div class="stat-bar">
+                                    <div class="stat-bar-fill" style="width: 65%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="stat-card stat-card-3">
+                            <div class="stat-icon">---</div>
+                            <div class="stat-content">
+                                <div class="stat-label">Bookings</div>
+                                <div class="stat-value">24</div>
+                                <div class="stat-bar">
+                                    <div class="stat-bar-fill" style="width: 80%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Exclusive Benefits (Member Only) -->
+                    <div id="benefitsSection" class="benefits-section">
+                        <h3 class="section-title">Exclusive Perks</h3>
+                        <div class="benefits-grid">
+                            <div class="benefit-card">
+                                <span class="benefit-icon">----</span>
+                                <span class="benefit-name">Birthday Gift</span>
+                            </div>
+                            <div class="benefit-card">
+                                <span class="benefit-icon">----</span>
+                                <span class="benefit-name">Early Access</span>
+                            </div>
+                            <div class="benefit-card">
+                                <span class="benefit-icon">----</span>
+                                <span class="benefit-name">VIP Support</span>
+                            </div>
+                            <div class="benefit-card">
+                                <span class="benefit-icon">----</span>
+                                <span class="benefit-name">Rewards</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div id="quickActionsSection" class="quick-actions-section">
+                        <h3 class="section-title">My Account</h3>
+                        <div class="action-items">
+                            <button class="action-item"
+                                onclick="if(window.refreshUserData) window.refreshUserData(); window.navigateToPage('profile-details')">
+                                <span class="action-icon">----</span>
+                                <div class="action-text">
+                                    <span class="action-label">My Profile</span>
+                                    <span class="action-desc">View & edit personal details</span>
+                                </div>
+                                <span class="action-arrow">---</span>
+                            </button>
+                            <button class="action-item">
+                                <span class="action-icon">----</span>
+                                <div class="action-text">
+                                    <span class="action-label">Addresses</span>
+                                    <span class="action-desc">Manage delivery addresses</span>
+                                </div>
+                                <span class="action-arrow">---</span>
+                            </button>
+                            <button class="action-item">
+                                <span class="action-icon">----</span>
+                                <div class="action-text">
+                                    <span class="action-label">Payment Methods</span>
+                                    <span class="action-desc">Save & manage cards</span>
+                                </div>
+                                <span class="action-arrow">---</span>
+                            </button>
+                            <button class="action-item">
+                                <span class="action-icon">------</span>
+                                <div class="action-text">
+                                    <span class="action-label">Favorite Services</span>
+                                    <span class="action-desc">Your preferred treatments</span>
+                                </div>
+                                <span class="action-arrow">---</span>
+                            </button>
+                            <button class="action-item">
+                                <span class="action-icon">----</span>
+                                <div class="action-text">
+                                    <span class="action-label">Referral Code</span>
+                                    <span class="action-desc">Invite friends & earn</span>
+                                </div>
+                                <span class="action-arrow">---</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Settings -->
+                    <div class="settings-section">
+                        <h3 class="section-title">Settings</h3>
+                        <div class="action-items">
+                            <button class="action-item">
+                                <span class="action-icon">----</span>
+                                <div class="action-text">
+                                    <span class="action-label">Notifications</span>
+                                    <span class="action-desc">Booking & offer alerts</span>
+                                </div>
+                                <span class="action-arrow">---</span>
+                            </button>
+                            <button class="action-item">
+                                <span class="action-icon">----</span>
+                                <div class="action-text">
+                                    <span class="action-label">Language</span>
+                                    <span class="action-desc">English</span>
+                                </div>
+                                <span class="action-arrow">---</span>
+                            </button>
+                            <button class="action-item">
+                                <span class="action-icon">----</span>
+                                <div class="action-text">
+                                    <span class="action-label">Privacy & Security</span>
+                                    <span class="action-desc">Manage your data</span>
+                                </div>
+                                <span class="action-arrow">---</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Help & Support -->
+                    <div class="support-section">
+                        <h3 class="section-title">Support</h3>
+                        <div class="action-items">
+                            <button class="action-item">
+                                <span class="action-icon">---</span>
+                                <div class="action-text">
+                                    <span class="action-label">Help & Support</span>
+                                    <span class="action-desc">FAQ & contact us</span>
+                                </div>
+                                <span class="action-arrow">---</span>
+                            </button>
+                            <button class="action-item">
+                                <span class="action-icon">------</span>
+                                <div class="action-text">
+                                    <span class="action-label">About Blancbeu</span>
+                                    <span class="action-desc">Version 16.3.3</span>
+                                </div>
+                                <span class="action-arrow">---</span>
+                            </button>
+                            <button class="action-item" onclick="showTC()">
+                                <span class="action-icon">----</span>
+                                <div class="action-text">
+                                    <span class="action-label">Terms & Privacy</span>
+                                    <span class="action-desc">Legal information</span>
+                                </div>
+                                <span class="action-arrow">---</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Logout Button -->
+                    <button class="logout-btn">Sign Out</button>
+                </div>
+        </section>
+
+        <!-- CHAT PAGE -->
+        <section id="chat" class="app-page" data-page="chat">
+            <div class="chat-container">
+                <!-- Header -->
+                <div class="chat-header">
+                    <div class="chat-header-content">
+                        <h1 class="premium-page-title">Connect with Us</h1>
+                        <p class="chat-subtitle">Locate us or Connect with our beauty experts</p>
+                    </div>
+                </div>
+
+                <!-- Chat Interface (Restored) -->
+                <div class="immersive-chat-container">
+                    <div id="chatMessages" class="chat-messages">
+                        <div class="message bot-message">
+                            <div class="message-content">
+                                Hello! I'm your AI beauty assistant. How can I help you today? ---
+                            </div>
+                            <div class="chat-suggestion-chips">
+                                <button class="chip" onclick="handleQuickAction('booking')">Book Appointment
+                                    ----</button>
+                                <button class="chip" onclick="handleQuickAction('services')">View Services
+                                    -------------</button>
+                                <button class="chip" onclick="handleQuickAction('offers')">Check Offers ----</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chat-input-wrapper">
+                        <button id="voiceInputBtn" class="chat-voice-btn">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z" />
+                                <path
+                                    d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z" />
+                            </svg>
+                        </button>
+                        <input type="text" id="chatInput" placeholder="Type or speak..." autocomplete="off">
+                        <button id="sendMessageBtn" class="chat-send-btn">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Location Section -->
+                <div class="chat-location-section">
+                    <!-- Map Container -->
+                    <div class="map-container">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3773.0166255555!2d72.83445!3d19.04295!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f4e1c240639433%3A0x3dda633cf2333290!2sBlancBeu%20Family%20Beauty%20Salon!5e0!3m2!1sen!2sin!4v1700000000000"
+                            class="google-map" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                </div>
+
+                <!-- Action Buttons Section -->
+                <div class="chat-actions-section">
+                    <button class="chat-action-btn open-maps-btn" onclick="openBlancbeuMaps()">
+                        <img class="btn-icon"
+                            src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                            data-src="attached_assets/maps_icons/icons8-google-maps-48.svg" alt="Google Maps">
+                        <div class="btn-content">
+                            <div class="btn-label">Open in Maps</div>
+                            <div class="btn-desc">View full directions</div>
+                        </div>
+                    </button>
+                    <button class="chat-action-btn whatsapp-btn" onclick="openWhatsAppChat()">
+                        <img class="btn-icon slow-anim"
+                            src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                            data-src="attached_assets/new_icons/icons8-whatsapp.apng" alt="WhatsApp">
+                        <div class="btn-content">
+                            <div class="btn-label">Chat on WhatsApp</div>
+                            <div class="btn-desc">Quick messages & support</div>
+                        </div>
+                    </button>
+                </div>
+
+                <!-- Info Cards -->
+                <div class="chat-info-section">
+                    <div class="info-card">
+                        <img class="info-icon-img slow-anim"
+                            src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                            data-src="attached_assets/new_icons/icons8-phone.apng" alt="Call Us">
+                        <div class="info-content">
+                            <h4>Call Us</h4>
+                            <p>+91 9229915277</p>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <img class="info-icon-img slow-anim"
+                            src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                            data-src="attached_assets/new_icons/icons8-clock.svg" alt="Response Time">
+                        <div class="info-content">
+                            <h4>Response Time</h4>
+                            <p>1-10 mins</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- BOOKING PAGE - Full Page Booking Form -->
+        <section id="booking" class="app-page" data-page="booking">
+            <div class="services-page-container">
+                <!-- Header -->
+                <!-- Header -->
+                <div class="services-page-header">
+                    <button onclick="window.navigateToPage('services')" class="header-back-btn"
+                        style="position: absolute; right: 20px; top: 25px; background: rgba(255,255,255,0.2); border: none; width: 40px; height: 40px; border-radius: 50%; color: var(--gold-primary); font-size: 20px; cursor: pointer; backdrop-filter: blur(5px); z-index: 10;">
+                        ---
+                    </button>
+                    <h1 class="services-page-title greeting-title">
+                        Hello, <br> <span id="bookingUserName" class="highlight-name">Guest</span>! ---
+                    </h1>
+                    <p class="greeting-subtitle">Ready to pamper yourself today?</p>
+                </div>
+
+                <div class="container" style="padding-bottom: 100px;">
+                    <!-- Booking Form Wrapper -->
+                    <div class="booking-page-wrapper glass-card">
+                        <form id="bookingForm">
+                            <div class="form-group" style="margin-bottom: 20px;">
+                                <label
+                                    style="display: block; margin-bottom: 8px; font-weight: 600; color: var(--text-color);">Selected
+                                    Services</label>
+
+                                <!-- Component to list selected services (Polished UI) -->
+                                <div id="selectedServicesList" class="selected-services-list">
+                                    <p class="no-services-msg">No services selected yet.</p>
+                                </div>
+
+                                <!-- Button to add more services -->
+                                <button type="button" id="addServicesBtn" class="add-services-btn">
+                                    Add Services +
+                                </button>
+                            </div>
+
+                            <div class="form-group" style="margin-bottom: 20px;">
+                                <label for="bookingDate"
+                                    style="display: block; margin-bottom: 8px; font-weight: 600; color: var(--text-color);">Date</label>
+                                <div class="date-input-wrapper-booking"
+                                    style="position: relative; display: flex; align-items: center;">
+                                    <input type="text" id="bookingDate" required class="premium-input" readonly
+                                        placeholder="Select Date">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="custom-calendar-icon-booking"
+                                        style="position: absolute; right: 20px; pointer-events: none; opacity: 0.8; color: var(--gold-primary);">
+                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                                    </svg>
+                                </div>
+                                <div class="date-quick-tags">
+                                    <button type="button" class="date-tag" data-offset="0">Today</button>
+                                    <button type="button" class="date-tag" data-offset="1">Tomorrow</button>
+                                    <button type="button" class="date-tag" data-offset="2">Day After</button>
+                                </div>
+                            </div>
+
+                            <div class="form-group" style="margin-bottom: 20px;">
+                                <label for="bookingTime"
+                                    style="display: block; margin-bottom: 8px; font-weight: 600; color: var(--text-color);">Preferred
+                                    Time</label>
+                                <div class="custom-select-wrapper" style="position: relative;">
+                                    <input type="text" id="bookingTime" required class="premium-input" readonly
+                                        placeholder="Select Time">
+                                    <span
+                                        style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); pointer-events: none; color: var(--gold-primary); font-size: 14px;">---</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group" style="margin-bottom: 25px;">
+                                <label for="bookingNotes"
+                                    style="display: block; margin-bottom: 8px; font-weight: 600; color: var(--text-color);">Special
+                                    Requests (Optional)</label>
+                                <div class="special-request-wrapper">
+                                    <textarea id="bookingNotes" rows="3" class="colorful-textarea"
+                                        placeholder="Any specific requirements..."></textarea>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="submit-btn"
+                                style="width: 100%; padding: 16px; border-radius: 30px; border: none; background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark)); color: white; font-weight: 700; font-size: 16px; box-shadow: 0 5px 20px rgba(212, 160, 23, 0.3); cursor: pointer; transition: transform 0.2s;">
+                                Confirm Appointment ---
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- 3D Art Background Animation -->
+                <div class="art-background-container">
+                    <div class="orb orb-1"></div>
+                    <div class="orb orb-2"></div>
+                    <div class="orb orb-3"></div>
+                    <div class="orb orb-4"></div>
+                    <div class="grid-overlay"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROFILE DETAILS PAGE -->
+        <section id="profile-details" class="app-page" data-page="profile-details">
+            <div class="profile-page-container">
+                <!-- Header -->
+                <div class="profile-page-header glass-header">
+                    <button class="back-btn" onclick="window.navigateToPage('account')">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M19 12H5M12 19l-7-7 7-7" />
+                        </svg>
+                    </button>
+                    <h1>My Profile</h1>
+                    <button id="editProfileToggle" class="edit-toggle-btn">Edit</button>
+                </div>
+
+                <div class="profile-content-scroll">
+                    <!-- Avatar Section -->
+                    <div class="profile-avatar-section">
+                        <div class="large-avatar-wrapper">
+                            <picture>
+                                <source data-srcset="assets/brand_icon_optimized.avif" type="image/avif">
+                                <source data-srcset="assets/brand_icon_optimized.webp" type="image/webp">
+                                <img id="detailProfileImg"
+                                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                    data-src="assets/brand_icon_optimized.webp" alt="Profile" class="large-avatar">
+                            </picture>
+                            <div class="edit-avatar-badge" style="display: none;">----</div>
+                            <input type="file" id="profileImageInput" accept="image/*" style="display: none;">
+                        </div>
+                        <h2 id="detailProfileNameDisplay">Guest User</h2>
+                        <p id="detailProfilePhoneDisplay">+91 99999 99999</p>
+                    </div>
+
+                    <!-- Details Form -->
+                    <form id="profileDetailsForm" class="profile-details-form glass-card">
+                        <div class="form-group-premium">
+                            <label>Full Name</label>
+                            <div class="input-wrapper">
+                                <span class="input-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="12" cy="7" r="4"></circle>
+                                    </svg>
+                                </span>
+                                <input type="text" id="detailName" class="premium-input-field" readonly
+                                    placeholder="Enter your name">
+                            </div>
+                        </div>
+
+                        <div class="form-group-premium">
+                            <label>Phone Number</label>
+                            <div class="input-wrapper">
+                                <span class="input-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path
+                                            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                                        </path>
+                                    </svg>
+                                </span>
+                                <input type="tel" id="detailPhone" class="premium-input-field" readonly disabled
+                                    placeholder="+91">
+                            </div>
+                        </div>
+
+                        <div class="form-group-premium">
+                            <label>Email Address</label>
+                            <div class="input-wrapper">
+                                <span class="input-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path
+                                            d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                        </path>
+                                        <polyline points="22,6 12,13 2,6"></polyline>
+                                    </svg>
+                                </span>
+                                <input type="email" id="detailEmail" class="premium-input-field" readonly
+                                    placeholder="Enter email">
+                            </div>
+                        </div>
+
+                        <div class="form-group-premium">
+                            <label>Gender</label>
+                            <div class="input-wrapper">
+                                <span class="input-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <path d="M12 16v-4"></path>
+                                        <path d="M12 8h.01"></path>
+                                    </svg>
+                                </span>
+                                <select id="detailGender" class="premium-input-field" disabled>
+                                    <option value="" disabled selected>Select Gender</option>
+                                    <option value="female">Female</option>
+                                    <option value="male">Male</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group-premium">
+                            <label>Date of Birth</label>
+                            <div class="input-wrapper">
+                                <span class="input-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                                    </svg>
+                                </span>
+                                <input type="date" id="detailDob" class="premium-input-field" readonly>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- Save Button (Hidden by default) -->
+                    <div class="profile-actions" style="display: none;">
+                        <button id="saveProfileBtn" class="save-profile-btn">
+                            Save Changes ---
+                        </button>
+                    </div>
+
+                    <div class="profile-footer-info">
+                        <p>Member since <span id="memberSinceDate">...</span></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Bottom Navigation (Mobile) -->
+    <!-- Bottom Navigation (Mobile) - Duplicate Removed -->
+
+    <!-- Service Cart Floating Bar -->
+    <div id="serviceCartBar" class="service-cart-bar hidden">
+        <div class="cart-content">
+            <div class="cart-info">
+                <span class="cart-icon">-------</span>
+                <span class="cart-text"><span id="cartCount">0</span> services added</span>
+            </div>
+            <button class="view-list-btn" onclick="navigateToBookingPage()">
+                View List <span class="btn-arrow">---</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- APP SHELL: Fixed Bottom Navigation -->
+    <nav class="bottom-nav app-shell-bottom-nav" id="bottomNav">
+        <a href="/" class="nav-item active" data-page="home">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2L2 10v10c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V10l-10-8zm0 4l6 5v9h-3v-5h-6v5H6v-9l6-5z" />
+            </svg>
+            <span class="nav-label">Home</span>
+        </a>
+        <a href="/services" class="nav-item" data-page="services">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                    d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 11 8.76l1-1.36 1 1.36L15.38 12 17 10.83 14.92 8H20v6z" />
+            </svg>
+            <span class="nav-label">Services</span>
+        </a>
+        <a href="/mybookings" class="nav-item" data-page="mybookings">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                    d="M19 3H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zm-6-7h-2v2h2v-2zm0 4h-2v2h2v-2zm4-4h-2v2h2v-2zm0 4h-2v2h2v-2zm4-4h-2v2h2v-2zm0 4h-2v2h2v-2z" />
+            </svg>
+            <span class="nav-label">My Bookings</span>
+        </a>
+        <a href="/chat" class="nav-item" data-page="chat">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                    d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z" />
+            </svg>
+            <span class="nav-label">Contact</span>
+        </a>
+        <a href="/account" class="nav-item" data-page="account">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" />
+            </svg>
+            <span class="nav-label">You</span>
+        </a>
+    </nav>
+
+    <!-- T&C Modal -->
+    <div id="tcModal" class="tc-modal">
+        <div class="tc-modal-content">
+            <span class="tc-close" onclick="closeTC()">&times;</span>
+            <h2>--- Offer Terms & Conditions ---</h2>
+            <div class="tc-content">
+                <ol>
+                    <li>Only one offer is applicable per transaction at a time.</li>
+                    <li>A maximum of 10% of the total bill can be redeemed through coupon cash on the final price.</li>
+                    <li>All offers are subject to cancellation at any time without prior notice.</li>
+                    <li>The same offer may not be applicable multiple times for the same customer.</li>
+                    <li>Offers cannot be combined with other ongoing promotions or discounts.</li>
+                    <li>Valid ID proof is required for student discounts and other eligibility-based offers.</li>
+                    <li>Services must be availed within the offer validity period mentioned.</li>
+                    <li>BlancBeu reserves the right to modify or withdraw any offer without prior intimation.</li>
+                    <li>Prices mentioned are inclusive of all applicable taxes unless stated otherwise.</li>
+                    <li>Advance booking is recommended for availing festive and special offers.</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox">
+        <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+        <div class="lightbox-nav prev" onclick="prevImage()">&#10094;</div>
+        <div class="lightbox-content-wrapper">
+            <img id="lightboxImg" class="lightbox-img" src="" alt="Gallery Preview">
+        </div>
+        <div class="lightbox-nav next" onclick="nextImage()">&#10095;</div>
+    </div>
+
+
+    <!-- Custom Date Picker Modal -->
+    <div id="customDatePickerModal" class="custom-picker-modal hidden">
+        <div class="picker-content glass-card">
+            <div class="picker-header" style="justify-content: center; gap: 20px; border-bottom: none;">
+                <button id="prevMonthBtn" class="nav-arrow-btn">&lt;</button>
+                <h3 id="currentMonthYear" style="min-width: 140px; text-align: center;">Month Year</h3>
+                <button id="nextMonthBtn" class="nav-arrow-btn">&gt;</button>
+            </div>
+            <div class="weekdays-grid">
+                <div>Sun</div>
+                <div>Mon</div>
+                <div>Tue</div>
+                <div>Wed</div>
+                <div>Thu</div>
+                <div>Fri</div>
+                <div>Sat</div>
+            </div>
+            <div id="customCalendarGrid" class="custom-calendar-grid">
+                <!-- Dates generated by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Time Picker Modal -->
+    <div id="customTimePickerModal" class="custom-picker-modal hidden">
+        <div class="picker-content glass-card">
+            <div class="picker-header">
+                <h3>Select Time</h3>
+            </div>
+            <div id="customTimeGrid" class="time-slot-grid">
+                <!-- Time slots generated by JS -->
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Premium Full-Screen Auth Modal -->
+    <!-- Auth Modal Removed (Replaced by Dedicated Login Page) -->
+
+
+    <!-- Floating Chat Widget -->
+
+
+
+    <script type="module" src="/services-mock.js"></script>
+
+    <script type="module" src="/firebase-config.js"></script>
+    <script type="module" src="/auth.js"></script>
+    <script type="module" src="/booking.js"></script>
+    <script type="module" src="/my-bookings.js"></script>
+    <script type="module" src="/account.js"></script>
+    <script type="module" src="/nav_fix.js"></script>
+    <!-- Theme Switcher Logic (Menu is in Header) -->
+    <style>
+        /* Theme Menu Styles used in Header */
+        .theme-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 12px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            padding: 8px;
+            box-shadow: var(--shadow-lg);
+            display: none;
+            flex-direction: column;
+            width: 180px;
+            animation: slideDown 0.2s ease;
+            z-index: 10000;
+        }
+
+        .theme-menu.active {
+            display: flex;
+        }
+
+        .theme-option {
+            background: none;
+            border: 2px solid transparent;
+            padding: 10px;
+            text-align: left;
+            cursor: pointer;
+            color: var(--text-main);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            width: 100%;
+            transition: all 0.2s ease;
+        }
+
+        .theme-option:hover {
+            background: var(--color-accent-subtle);
+        }
+
+        .theme-option.selected {
+            border-color: var(--brand-primary);
+            background: var(--color-accent-subtle);
+            font-weight: 600;
+        }
+
+        .theme-preview {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            border: 2px solid var(--border-light);
+            flex-shrink: 0;
+        }
+
+        .theme-preview.velvet {
+            background: linear-gradient(135deg, #7AA98A, #F5A8A0);
+        }
+
+        .theme-preview.pop {
+            background: linear-gradient(135deg, #FFCE00, #6C63FF);
+        }
+
+        .theme-preview.olive {
+            background: linear-gradient(135deg, #6B8F7A, #D18B5A);
+        }
+
+        .theme-preview.blackgold {
+            background: linear-gradient(135deg, #0A0A0A, #D4AF37);
+            border-color: rgba(212, 175, 55, 0.4);
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+
+
+
+    <nav class="bottom-nav app-shell-bottom-nav" id="bottomNav">
+        <a href="/" class="nav-item active" data-page="home">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2L2 10v10c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V10l-10-8zm0 4l6 5v9h-3v-5h-6v5H6v-9l6-5z"></path>
+            </svg>
+            <span class="nav-label">Home</span>
+        </a>
+        <a href="/services" class="nav-item" data-page="services">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                    d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 11 8.76l1-1.36 1 1.36L15.38 12 17 10.83 14.92 8H20v6z">
+                </path>
+            </svg>
+            <span class="nav-label">Services</span>
+        </a>
+        <a href="/mybookings" class="nav-item" data-page="mybookings">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                    d="M19 3H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zm-6-7h-2v2h2v-2zm0 4h-2v2h2v-2zm4-4h-2v2h2v-2zm0 4h-2v2h2v-2zm4-4h-2v2h2v-2zm0 4h-2v2h2v-2z">
+                </path>
+            </svg>
+            <span class="nav-label">My Bookings</span>
+        </a>
+        <a href="/chat" class="nav-item" data-page="chat">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                    d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z">
+                </path>
+            </svg>
+            <span class="nav-label">Contact</span>
+        </a>
+        <a href="/account" class="nav-item" data-page="account">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z">
+                </path>
+            </svg>
+            <span class="nav-label">You</span>
+        </a>
+    </nav>
+    <script type="module" src="/script.js?t=1770742198462"></script>
+
+    <!-- Parallax Logic -->
+    <script type="module" src="/parallax.js"></script>
+    <script src="/image-cache-manager.js" type="module" defer></script>
+</body>
+
+</html>

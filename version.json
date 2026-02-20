@@ -1,4 +1,6 @@
 {
-    "version": "1.0.41",
-    "build": 202602041000
+    "version": "1.2.0",
+    "timestamp": 1707563284,
+    "buildTime": "2026-02-10T11:08:04+05:30",
+    "desc": "Performance Optimization: Minified CSS/JS + LCP Fixes"
 }

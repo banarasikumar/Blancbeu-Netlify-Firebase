@@ -1,0 +1,109 @@
+let me tell you, I want Multi-Application Structure for the Website
+
+I want three separate applications for the same website ecosystem. Each application will have a different purpose and user role, but all of them should work together smoothly.
+
+
+---
+
+1. User App (Main Application)
+
+This will be the main application for customers or general users.
+
+
+
+Installable as an app on mobile (PWA or native)
+
+
+
+---
+
+2. Admin Panel App
+
+This application will be used only by administrators.
+
+
+3. Staff App
+
+This application will be for employees or operational staff.
+
+
+
+Installation & Behavior Requirements
+
+All three apps must be installable on the same smartphone
+
+They must not conflict or overwrite each other
+
+Each app should have its own icon, name, and storage
+
+
+
+---
+
+Technology Stack & App Type
+
+All three applications should be built as modern History API based Single Page Applications (SPA) combined with Progressive Web App (PWA) capabilities.
+
+Core Requirements:
+
+Use real routing with the History API (no hash-based URLs)
+
+Fast loading and app-like navigation
+
+Offline support (where possible)
+
+Push notifications
+
+Home screen installation like native apps
+
+
+App Behavior:
+
+Each app must be a separate PWA package
+
+Each must have its own:
+
+App name
+
+Icon
+
+Manifest file
+
+Scope and start URL
+
+
+
+This ensures:
+
+All three apps can be installed on the same smartphone
+
+They behave like real standalone apps
+
+No conflicts between storage, cache, or permissions
+
+
+
+---
+
+Smart Auto-Launch from Browser
+
+When a user enters a specific website address in the browser:
+
+User site → opens User App automatically
+
+Admin URL → opens Admin Panel App automatically
+
+Staff URL → opens Staff App automatically
+
+
+Example links structure:
+
+Main App (User App) → www.blancbeu.in
+
+Admin App → www.blancbeu.in/admin
+
+Staff App → www.blancbeu.in/staff
+
+
+If the app is installed, it should open directly instead of loading in the browser.
+

@@ -16,6 +16,14 @@
         "destination": "/admin/index.html"
       },
       {
+        "source": "/staff",
+        "destination": "/staff/index.html"
+      },
+      {
+        "source": "/staff/**",
+        "destination": "/staff/index.html"
+      },
+      {
         "source": "**",
         "destination": "/index.html"
       }

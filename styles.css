@@ -1,26 +1,5 @@
-/*
-================================================================================
-BLANCBEU SALON - PREMIUM BEAUTY SALON STYLES
-================================================================================
-*/
-
-
-/* Import comprehensive theme variables */
-@import url('theme-variables.css');
-
-/* Legacy variable mappings for backward compatibility */
-:root {
-    --black: var(--bg-primary);
-    --deep-black: var(--bg-secondary);
-    --gold-24k: var(--gold-primary);
-    --gold-bright: var(--gold-bright);
-    --gold-dark: var(--gold-dark);
-    --gold-light: var(--gold-light);
-    --text-white: var(--text-primary);
-    --text-gray: var(--text-secondary);
-    --pink-rose: #FFB6C1;
-    --green-whatsapp: #25D366;
-}
+/* Theme System: Variables + Core imported via theme-core.css in HTML */
+/* Legacy :root mappings now handled by theme-core.css */
 
 * {
     margin: 0;
@@ -35,8 +14,8 @@ body {
     margin: 0;
     padding: 0;
     width: 100%;
-    background-color: #000 !important;
-    /* VISUAL MASK: Root is black to hide gaps */
+    background-color: var(--bg-primary) !important;
+    /* VISUAL MASK: Root background matching theme */
 }
 
 body {
@@ -45,6 +24,8 @@ body {
     color: var(--text-primary);
     line-height: 1.6;
     transition: background 0.3s ease, color 0.3s ease;
+    overscroll-behavior: none;
+    /* Prevent white background bounce */
 }
 
 body.light-mode {
@@ -69,38 +50,6 @@ body.light-mode {
     }
 }
 
-.sparkles {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 1;
-    background-image:
-        radial-gradient(2px 2px at 20% 30%, var(--gold-24k), transparent),
-        radial-gradient(2px 2px at 60% 70%, var(--gold-bright), transparent),
-        radial-gradient(1px 1px at 50% 50%, var(--gold-light), transparent),
-        radial-gradient(1px 1px at 80% 10%, var(--gold-24k), transparent),
-        radial-gradient(2px 2px at 90% 60%, var(--gold-bright), transparent),
-        radial-gradient(1px 1px at 33% 80%, var(--gold-24k), transparent);
-    background-size: 200% 200%;
-    animation: sparkleFloat 20s ease-in-out infinite;
-}
-
-@keyframes sparkleFloat {
-
-    0%,
-    100% {
-        opacity: 0.3;
-        background-position: 0% 0%;
-    }
-
-    50% {
-        opacity: 0.6;
-        background-position: 100% 100%;
-    }
-}
 
 .rose-petals {
     position: fixed;
@@ -148,15 +97,16 @@ body.light-mode {
 }
 
 .header.immersive {
-    background: rgba(0, 0, 0, 0.2) !important;
-    backdrop-filter: blur(15px);
-    box-shadow: none !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    background: var(--header-bg) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow: var(--header-shadow) !important;
+    border-bottom: none !important;
 }
 
 body.light-mode .header.immersive {
-    background: rgba(255, 255, 255, 0.1) !important;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+    background: var(--header-bg) !important;
+    border-bottom: none !important;
 }
 
 .header.immersive .brand-name {
@@ -200,6 +150,7 @@ body.light-mode .header.immersive {
     align-items: center;
     width: 100%;
     padding: 0 20px;
+    gap: 20px;
 }
 
 .logo {
@@ -337,7 +288,7 @@ body.light-mode .header.immersive {
 .brand-subtitle {
     font-family: 'Poppins', sans-serif;
     font-size: 10px;
-    color: rgba(255, 237, 78, 0.95);
+    color: var(--text-muted);
     font-weight: 600;
     letter-spacing: 2px;
     text-transform: uppercase;
@@ -382,19 +333,6 @@ body.light-mode .header.immersive {
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
-.sparkle {
-    animation: rotate 3s linear infinite;
-}
-
-@keyframes rotate {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
-}
 
 .nav {
     display: flex;
@@ -402,14 +340,36 @@ body.light-mode .header.immersive {
     align-items: center;
 }
 
+@media (max-width: 1023px) {
+    .nav {
+        display: none !important;
+    }
+}
+
 .nav a {
-    color: rgba(255, 255, 255, 0.9);
+    color: var(--text-main);
     text-decoration: none;
     font-weight: 500;
     font-size: 15px;
     transition: all 0.3s ease;
     position: relative;
     padding: 5px 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.nav-icon-desktop {
+    width: 18px;
+    height: 18px;
+    display: block;
+    transition: transform 0.3s ease, fill 0.3s ease;
+}
+
+.nav a:hover .nav-icon-desktop {
+    transform: translateY(-2px);
+    fill: var(--brand-primary);
+    filter: drop-shadow(0 2px 4px var(--glow-brand));
 }
 
 .nav a::before {
@@ -426,8 +386,8 @@ body.light-mode .header.immersive {
 }
 
 .nav a:hover {
-    color: var(--gold-24k);
-    text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+    color: var(--brand-primary);
+    text-shadow: 0 0 10px var(--glow-brand);
 }
 
 .nav a:hover::before {
@@ -435,8 +395,8 @@ body.light-mode .header.immersive {
 }
 
 .install-app-btn {
-    background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
-    color: var(--bg-primary);
+    background: linear-gradient(135deg, var(--brand-gradient-start) 0%, var(--brand-gradient-end) 100%);
+    color: var(--text-on-brand);
     border: none;
     padding: 10px 22px;
     border-radius: 25px;
@@ -447,7 +407,7 @@ body.light-mode .header.immersive {
     align-items: center;
     gap: 8px;
     transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    box-shadow: 0 4px 20px rgba(255, 215, 0, 0.5);
+    box-shadow: 0 4px 20px var(--glow-brand);
     animation: installPulse 2s ease-in-out infinite;
     position: relative;
     overflow: hidden;
@@ -458,12 +418,12 @@ body.light-mode .header.immersive {
     0%,
     100% {
         transform: scale(1);
-        box-shadow: 0 4px 20px rgba(255, 215, 0, 0.5);
+        box-shadow: 0 4px 20px var(--glow-brand);
     }
 
     50% {
         transform: scale(1.05);
-        box-shadow: 0 6px 30px rgba(255, 215, 0, 0.8);
+        box-shadow: 0 6px 30px var(--glow-brand);
     }
 }
 
@@ -491,7 +451,7 @@ body.light-mode .header.immersive {
 
 .install-app-btn:hover {
     transform: translateY(-3px) scale(1.08);
-    box-shadow: 0 8px 35px rgba(255, 215, 0, 0.9);
+    box-shadow: 0 8px 35px var(--glow-brand);
     animation: none;
 }
 
@@ -509,23 +469,15 @@ body.light-mode .header.immersive {
     z-index: 1;
 }
 
-.install-sparkle {
-    font-size: 14px;
-    animation: sparkleRotate 2s linear infinite;
-}
 
-@keyframes sparkleRotate {
-
-    0%,
-    100% {
-        transform: rotate(0deg);
-    }
-
-    50% {}
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
 .theme-toggle-btn {
-    background: rgba(255, 255, 255, 0.02);
+    background: var(--color-accent-subtle);
     backdrop-filter: blur(10px);
     border: none;
     padding: 10px;
@@ -537,21 +489,20 @@ body.light-mode .header.immersive {
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    /* Cleaner shadow */
+    box-shadow: var(--shadow-sm);
     z-index: 1000;
-    width: 48px;
-    height: 48px;
-    margin-left: auto;
+    width: 44px;
+    height: 44px;
     flex-shrink: 0;
     align-self: center;
     transform: none;
+    color: var(--text-main);
 }
 
 .theme-toggle-btn:hover {
-    background: rgba(255, 255, 255, 0.2);
+    background: var(--nav-active-bg);
     transform: scale(1.05);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--shadow-md);
 }
 
 .theme-icon {
@@ -606,410 +557,11 @@ body.light-mode .theme-icon.moon {
     }
 }
 
-body.light-mode {
-    background: linear-gradient(135deg, #fef5e7 0%, #fdecea 50%, #f8f9f9 100%);
-    background-attachment: fixed;
-    color: #1a1a1a;
-}
-
-body.light-mode .sparkles {
-    background-image:
-        radial-gradient(3px 3px at 20% 30%, #FF6B6B, transparent),
-        radial-gradient(3px 3px at 60% 70%, #4ECDC4, transparent),
-        radial-gradient(2px 2px at 50% 50%, #FFE66D, transparent),
-        radial-gradient(2px 2px at 80% 10%, #95E1D3, transparent),
-        radial-gradient(3px 3px at 90% 60%, #A8E6CF, transparent),
-        radial-gradient(2px 2px at 33% 80%, #FF6B9D, transparent);
-    animation: none !important;
-}
-
-@keyframes colorfulSparkle {
-
-    0%,
-    100% {
-        opacity: 0.6;
-        background-position: 0% 0%;
-        filter: hue-rotate(0deg);
-    }
-
-    33% {
-        opacity: 0.8;
-        background-position: 50% 50%;
-        filter: hue-rotate(120deg);
-    }
-
-    66% {
-        opacity: 0.7;
-        background-position: 100% 100%;
-        filter: hue-rotate(240deg);
-    }
-}
-
-body.light-mode .header {
-    background: rgba(255, 255, 255, 0.95);
-    box-shadow: 0 2px 20px var(--shadow-light);
-    border-bottom: 1px solid rgba(212, 160, 23, 0.2);
-}
-
-body.light-mode .brand-icon-wrapper {
-    background: linear-gradient(135deg, rgba(212, 160, 23, 0.3), rgba(230, 184, 0, 0.25));
-    box-shadow: 0 0 20px rgba(212, 160, 23, 0.4);
-}
-
-body.light-mode .brand-icon-wrapper:hover {
-    background: linear-gradient(135deg, rgba(212, 160, 23, 0.4), rgba(230, 184, 0, 0.3));
-    box-shadow: 0 8px 35px rgba(212, 160, 23, 0.6);
-}
-
-body.light-mode .brand-name {
-    background: linear-gradient(135deg, #b8860b 0%, #d4a017 30%, #e6b800 60%, #b8860b 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    filter: drop-shadow(0 2px 8px rgba(212, 160, 23, 0.3));
-}
-
-body.light-mode .brand-subtitle {
-    color: rgba(184, 134, 11, 0.9);
-    text-shadow: 0 1px 4px rgba(212, 160, 23, 0.3);
-}
-
-body.light-mode .nav a {
-    color: rgba(26, 26, 26, 0.9);
-}
-
-body.light-mode .nav a:hover {
-    color: #b8860b;
-    text-shadow: 0 0 8px rgba(212, 160, 23, 0.3);
-}
-
-body.light-mode .theme-toggle-btn {
-    background: rgba(0, 0, 0, 0.05);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05), inset 0 1px 2px rgba(255, 255, 255, 0.5);
-    transform: none;
-    align-self: center;
-}
-
-body.light-mode .theme-toggle-btn:hover {
-    background: linear-gradient(135deg, rgba(255, 193, 7, 0.3), rgba(255, 152, 0, 0.2));
-    box-shadow: 0 12px 40px rgba(212, 160, 23, 0.35), inset 0 1px 2px rgba(255, 255, 255, 0.4);
-}
-
-body.light-mode .install-app-btn {
-    background: linear-gradient(135deg, #FFD54F 0%, #FF9800 100%);
-    color: #1a1a1a;
-    box-shadow: 0 4px 20px rgba(255, 193, 7, 0.5);
-}
-
-body.light-mode .carousel {
-    background: linear-gradient(135deg, #fef5e7 0%, #fdecea 50%, #f8f9f9 100%);
-    background-attachment: fixed;
-    box-shadow: 0 4px 12px rgba(212, 160, 23, 0.15);
-    border: 2px solid rgba(212, 160, 23, 0.2);
-    animation: none !important;
-}
-
-body.light-mode .carousel-track {
-    background: #ffffff;
-}
-
-body.light-mode .carousel-slide img {
-    background: #ffffff;
-}
-
-body.light-mode .fireworks-overlay {
-    display: none !important;
-    visibility: hidden !important;
-    opacity: 0 !important;
-}
-
-
-
-@keyframes rainbowPulse {
-    0% {
-        box-shadow: 0 0 20px rgba(255, 107, 107, 0.6), 0 0 40px rgba(78, 205, 196, 0.4);
-    }
-
-    25% {
-        box-shadow: 0 0 20px rgba(78, 205, 196, 0.6), 0 0 40px rgba(255, 230, 109, 0.4);
-    }
-
-    50% {
-        box-shadow: 0 0 20px rgba(255, 230, 109, 0.6), 0 0 40px rgba(149, 225, 211, 0.4);
-    }
-
-    75% {
-        box-shadow: 0 0 20px rgba(149, 225, 211, 0.6), 0 0 40px rgba(255, 107, 157, 0.4);
-    }
-
-    100% {
-        box-shadow: 0 0 20px rgba(255, 107, 107, 0.6), 0 0 40px rgba(78, 205, 196, 0.4);
-    }
-}
-
-@keyframes floatBounce {
-
-    0%,
-    100% {
-        transform: translateY(0px) scale(1);
-    }
-
-    50% {
-        transform: translateY(-10px) scale(1.05);
-    }
-}
-
-body.light-mode .section-title {
-    color: #1a1a1a;
-    text-shadow: 0 2px 15px rgba(212, 160, 23, 0.4);
-}
-
-body.light-mode .section-subtitle {
-    color: #333333;
-}
-
-body.light-mode .offer-card,
-body.light-mode .service-card,
-body.light-mode .review-card {
-    background: rgba(255, 255, 255, 0.9);
-    border: 2px solid rgba(212, 160, 23, 0.3);
-    box-shadow: 0 8px 30px var(--shadow-light);
-    animation: none !important;
-}
-
-body.light-mode .offer-card:hover,
-body.light-mode .service-card:hover,
-body.light-mode .review-card:hover {
-    animation: none !important;
-    transform: translateY(-8px) scale(1.02);
-}
-
-body.light-mode .glow-card {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 250, 240, 0.9) 100%);
-}
-
-body.light-mode .contact-btn {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 245, 220, 0.95));
-    color: #1a1a1a;
-    border: 2px solid rgba(212, 160, 23, 0.4);
-    box-shadow: 0 6px 25px rgba(255, 193, 7, 0.3);
-}
-
-body.light-mode .contact-btn:hover {
-    background: linear-gradient(135deg, rgba(255, 245, 220, 1), rgba(255, 255, 255, 1));
-}
-
-body.light-mode .footer {
-    background: linear-gradient(135deg, #fef5e7 0%, #fdecea 50%, #f8f9f9 100%) !important;
-    background-attachment: fixed !important;
-    color: #2c3e50 !important;
-    box-shadow: none !important;
-    border-top: 3px solid rgba(212, 160, 23, 0.4) !important;
-    padding: 70px 0 40px !important;
-    margin: 0 0 0 0 !important;
-}
-
-body.light-mode .footer .container {
-    padding-bottom: 0 !important;
-}
-
-body.light-mode .footer-section h3 {
-    background: linear-gradient(135deg, #b8860b 0%, #d4a017 100%) !important;
-    -webkit-background-clip: text !important;
-    -webkit-text-fill-color: transparent !important;
-    background-clip: text !important;
-}
-
-body.light-mode .footer-section h4 {
-    color: #d4a017 !important;
-}
-
-body.light-mode .footer-section p,
-body.light-mode .footer-section a {
-    color: #555555 !important;
-}
-
-body.light-mode .footer-section a:hover {
-    color: #b8860b;
-}
-
-body.light-mode .footer-bottom {
-    color: #666666;
-    border-top: 1px solid rgba(212, 160, 23, 0.3);
-}
-
-body.light-mode .carousel-btn {
-    background: rgba(255, 255, 255, 0.9);
-    color: #1a1a1a;
-    border: 2px solid rgba(212, 160, 23, 0.4);
-    box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
-}
-
-body.light-mode .carousel-btn:hover {
-    background: rgba(255, 255, 255, 1);
-    transform: scale(1.1);
-    box-shadow: 0 6px 25px rgba(255, 193, 7, 0.5);
-}
-
-body.light-mode .carousel-dots span {
-    background: rgba(212, 160, 23, 0.4);
-    border: 2px solid rgba(212, 160, 23, 0.6);
-}
-
-body.light-mode .carousel-dots span.active {
-    background: linear-gradient(135deg, #FFD54F, #FF9800);
-    box-shadow: 0 0 15px rgba(255, 193, 7, 0.6);
-}
-
-body.light-mode .contact-buttons {
-    background: linear-gradient(135deg, #fef5e7 0%, #fdecea 50%, #f8f9f9 100%);
-    background-attachment: fixed;
-}
-
-body.light-mode .contact-title {
-    color: #8B6914;
-    font-weight: 700;
-    text-shadow: 0 2px 8px rgba(139, 105, 20, 0.3);
-    animation: none !important;
-}
-
-body.light-mode .locate-btn {
-    background: linear-gradient(135deg, rgba(156, 39, 176, 0.1), rgba(103, 58, 183, 0.15));
-    color: #4A148C;
-    border: 2px solid rgba(156, 39, 176, 0.4);
-    box-shadow: 0 6px 20px rgba(156, 39, 176, 0.3);
-}
-
-body.light-mode .locate-btn:hover {
-    background: linear-gradient(135deg, rgba(156, 39, 176, 0.2), rgba(103, 58, 183, 0.25));
-    box-shadow: 0 8px 30px rgba(156, 39, 176, 0.5);
-}
-
-body.light-mode .whatsapp-btn {
-    background: linear-gradient(135deg, rgba(37, 211, 102, 0.15), rgba(18, 140, 126, 0.2));
-    color: #0a5f4f;
-    border: 2px solid rgba(37, 211, 102, 0.5);
-    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.3);
-}
-
-body.light-mode .whatsapp-btn:hover {
-    background: linear-gradient(135deg, rgba(37, 211, 102, 0.25), rgba(18, 140, 126, 0.3));
-    box-shadow: 0 8px 30px rgba(37, 211, 102, 0.5);
-}
-
-body.light-mode .call-btn {
-    background: linear-gradient(135deg, rgba(33, 150, 243, 0.15), rgba(25, 118, 210, 0.2));
-    color: #0d47a1;
-    border: 2px solid rgba(33, 150, 243, 0.5);
-    box-shadow: 0 6px 20px rgba(33, 150, 243, 0.3);
-}
-
-body.light-mode .call-btn:hover {
-    background: linear-gradient(135deg, rgba(33, 150, 243, 0.25), rgba(25, 118, 210, 0.3));
-    box-shadow: 0 8px 30px rgba(33, 150, 243, 0.5);
-}
-
-body.light-mode .offer-badge {
-    background: linear-gradient(135deg, #FF6B6B, #FF8E53);
-    color: #ffffff;
-    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.5);
-}
-
-body.light-mode .offer-badge.hot {
-    background: linear-gradient(135deg, #FF416C, #FF4B2B);
-}
-
-body.light-mode .offer-badge.festive {
-    background: linear-gradient(135deg, #4ECDC4, #44A08D);
-}
-
-body.light-mode .offer-badge.student {
-    background: linear-gradient(135deg, #667eea, #764ba2);
-}
-
-body.light-mode .old-price {
-    color: #666666;
-}
-
-body.light-mode .new-price {
-    color: #d4a017;
-    text-shadow: 0 2px 8px rgba(212, 160, 23, 0.3);
-}
-
-body.light-mode .offer-icon,
-body.light-mode .service-icon {
-    filter: drop-shadow(0 4px 10px rgba(212, 160, 23, 0.4));
-}
-
-body.light-mode h3,
-body.light-mode h2 {
-    color: #1a1a1a;
-}
-
-body.light-mode p {
-    color: #333333;
-}
-
-body.light-mode .service-name {
-    color: #1a1a1a;
-}
-
-body.light-mode .service-price {
-    color: #d4a017;
-}
-
-body.light-mode .review-text {
-    color: #444444;
-}
-
-body.light-mode .reviewer-name {
-    color: #1a1a1a;
-}
-
-body.light-mode .review-date {
-    color: #666666;
-}
-
-body.light-mode .stars,
-body.light-mode .hearts {
-    filter: drop-shadow(0 2px 8px rgba(255, 193, 7, 0.4));
-}
-
-body.light-mode .offers-section {
-    background: none !important;
-}
-
-body.light-mode .services-section {
-    background: none !important;
-}
-
-body.light-mode .gallery-section {
-    background: none !important;
-}
-
-body.light-mode .reviews-section {
-    background: none !important;
-}
-
-body.light-mode .cta-section {
-    background: none !important;
-}
-
-body.light-mode .section-title {
-    background: linear-gradient(135deg, #b8860b 0%, #d4a017 50%, #b8860b 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-shadow: none;
-    filter: drop-shadow(0 2px 8px rgba(212, 160, 23, 0.3));
-}
-
-body.light-mode .category-header {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(254, 245, 231, 0.8));
-    border-top: 3px solid #d4a017;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-}
+/* LEGACY LIGHT MODE STYLES REMOVED - NEW THEME SYSTEM HANDLES THIS VIA VARIABLES */
+/* See theme-variables.css for [data-theme] definitions */
+/* LEGACY LIGHT MODE STYLES REMOVED - NEW THEME SYSTEM HANDLES THIS VIA VARIABLES */
+
+/* LEGACY LIGHT MODE BLOCKS REMOVED — theme system handles all via data-theme */
 
 .hero {
     position: relative;
@@ -1022,7 +574,7 @@ body.light-mode .category-header {
     padding-top: 80px;
     padding-bottom: 0;
     overflow: hidden;
-    background: #000 !important;
+    background: var(--bg-surface) !important;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1055,7 +607,7 @@ body.light-mode .category-header {
     margin: 0;
     padding: 0;
     border-radius: 0;
-    background: #000;
+    background: var(--bg-surface);
     box-shadow: none;
     border: none;
     animation: none;
@@ -1072,7 +624,7 @@ body.light-mode .category-header {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.85) 100%);
+    background: var(--overlay-gradient);
     z-index: 2;
     pointer-events: none;
 }
@@ -1082,18 +634,18 @@ body.light-mode .category-header {
     0%,
     100% {
         box-shadow:
-            0 0 20px rgba(255, 215, 0, 0.2),
-            inset 0 0 15px rgba(255, 215, 0, 0.05),
-            0 10px 30px rgba(0, 0, 0, 0.5);
-        border-color: rgba(255, 215, 0, 0.3);
+            0 0 20px var(--glow-brand),
+            inset 0 0 15px var(--card-glow),
+            0 10px 30px var(--shadow-md);
+        border-color: var(--border-brand);
     }
 
     50% {
         box-shadow:
-            0 0 30px rgba(255, 215, 0, 0.3),
-            inset 0 0 20px rgba(255, 215, 0, 0.1),
-            0 15px 40px rgba(0, 0, 0, 0.6);
-        border-color: rgba(255, 215, 0, 0.5);
+            0 0 30px var(--glow-brand),
+            inset 0 0 20px var(--card-glow),
+            0 15px 40px var(--shadow-lg);
+        border-color: var(--card-hover-border);
     }
 }
 
@@ -1182,7 +734,7 @@ body.light-mode .category-header {
     -webkit-text-fill-color: transparent;
     background-clip: text;
     margin-bottom: 20px;
-    text-shadow: 0 0 40px rgba(255, 215, 0, 0.8);
+    text-shadow: 0 0 40px var(--glow-brand);
     animation: shimmer 3s ease-in-out infinite;
     width: 100%;
     max-width: 100%;
@@ -1212,7 +764,7 @@ body.light-mode .category-header {
     font-weight: 500;
     line-height: 20px;
     letter-spacing: 0.2em;
-    color: #D4AF35;
+    color: var(--brand-primary);
     text-transform: uppercase;
     margin-bottom: 0;
 }
@@ -1243,7 +795,7 @@ body.light-mode .category-header {
     top: 50%;
     transform: translateY(-50%);
     background: var(--shadow-medium);
-    border: 1px solid rgba(255, 215, 0, 0.4);
+    border: 1px solid var(--border-brand);
     color: var(--gold-24k);
     font-size: 20px;
     padding: 8px 15px;
@@ -1443,11 +995,11 @@ body.light-mode .category-header {
     font-size: 56px;
     text-align: center;
     margin-bottom: 10px;
-    background: linear-gradient(135deg, var(--gold-24k), var(--gold-light), var(--gold-24k));
+    background: linear-gradient(135deg, var(--brand-gradient-start), var(--brand-gradient-end), var(--brand-gradient-start));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+    text-shadow: 0 0 30px var(--glow-brand);
     animation: shimmer 3s ease-in-out infinite;
 }
 
@@ -1475,20 +1027,7 @@ body.light-mode .category-header {
     font-size: 20px;
 }
 
-body.light-mode .section-subtitle {
-    color: #666666;
-}
-
-.offers-section {
-    padding: 30px 0;
-    background: none !important;
-    overflow-x: hidden;
-    width: 100%;
-}
-
-body.light-mode .offers-section {
-    background: none !important;
-}
+/* body.light-mode blocks removed — theme system handles via data-theme */
 
 .offers-grid {
     display: grid;
@@ -1499,9 +1038,9 @@ body.light-mode .offers-section {
 }
 
 .offer-card {
-    background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 215, 0, 0.05));
+    background: var(--offer-card-bg);
     padding: 30px 25px;
-    border-radius: 20px;
+    border-radius: var(--radius-md);
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -1537,7 +1076,7 @@ body.light-mode .offers-section {
 
 .offer-card:hover {
     transform: translateY(-15px) scale(1.05);
-    box-shadow: 0 25px 60px rgba(255, 215, 0, 0.6);
+    box-shadow: 0 25px 60px var(--glow-brand);
 }
 
 .offer-badge {
@@ -1558,8 +1097,8 @@ body.light-mode .offers-section {
     font-size: 14px;
     font-weight: 800;
     white-space: nowrap;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-sm);
     letter-spacing: 0.5px;
     transition: all 0.3s ease;
 }
@@ -1614,13 +1153,7 @@ body.light-mode .offers-section {
     position: relative;
 }
 
-body.light-mode .offer-card {
-    background: linear-gradient(135deg, rgba(212, 160, 23, 0.1), rgba(212, 160, 23, 0.05));
-}
-
-body.light-mode .offer-card p {
-    color: #666666;
-}
+/* body.light-mode .offer-card blocks removed — handled by theme variables */
 
 .offer-price {
     display: flex;
@@ -1634,7 +1167,7 @@ body.light-mode .offer-card p {
 
 .old-price {
     text-decoration: line-through;
-    color: #888;
+    color: var(--offer-old-price-color);
     font-size: 20px;
 }
 
@@ -1648,40 +1181,7 @@ body.light-mode .offer-card p {
     text-shadow: 0 0 30px var(--gold-24k);
 }
 
-body.light-mode .old-price {
-    color: #999999;
-    text-decoration-color: #999999;
-}
-
-body.light-mode .new-price {
-    background: linear-gradient(135deg, #8B6914, #B8860B);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-shadow: none;
-    font-weight: 900;
-}
-
-.sparkle-line {
-    height: 3px;
-    background: linear-gradient(90deg, transparent, var(--gold-24k), transparent);
-    margin-top: 30px;
-    animation: shimmerLine 2s ease-in-out infinite;
-    position: relative;
-    z-index: 2;
-}
-
-@keyframes shimmerLine {
-
-    0%,
-    100% {
-        opacity: 0.5;
-    }
-
-    50% {
-        opacity: 1;
-    }
-}
+/* body.light-mode price blocks removed — handled by theme variables */
 
 .services-section {
     padding: 30px 0;
@@ -2961,82 +2461,7 @@ body.light-mode .footer-bottom {
     }
 }
 
-/* Fireworks Overlay - Auto-play on website */
-.fireworks-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 10000;
-    background: transparent;
-    opacity: 0;
-    /* Performance optimizations for scroll smoothness */
-    pointer-events: none;
-    will-change: contents;
-    contain: layout style;
-    visibility: hidden;
-    transition: opacity 0.5s, visibility 0.5s;
-    pointer-events: none !important;
-    touch-action: auto !important;
-}
 
-.fireworks-overlay * {
-    pointer-events: none !important;
-    touch-action: auto !important;
-}
-
-.fireworks-overlay.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-.fw-container {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-/* Hide all fireworks controls */
-.fireworks-overlay .controls,
-.fireworks-overlay .btn,
-.fireworks-overlay .menu,
-.fireworks-overlay .credits {
-    display: none !important;
-    visibility: hidden !important;
-}
-
-/* Override fireworks.css container to fit full screen with transparent background */
-.fireworks-overlay .fw-container {
-    position: relative;
-    box-sizing: border-box;
-    background: transparent !important;
-}
-
-.fireworks-overlay .stage-container {
-    width: 100vw;
-    height: 100vh;
-    background: transparent !important;
-}
-
-.fireworks-overlay .canvas-container {
-    background: transparent !important;
-    /* Performance optimizations */
-    will-change: transform;
-    contain: layout style paint;
-}
-
-/* Make sure canvas blends properly */
-.fireworks-overlay canvas {
-    mix-blend-mode: screen !important;
-    /* GPU acceleration and performance hints */
-    transform: translateZ(0);
-    backface-visibility: hidden;
-    perspective: 1000px;
-    will-change: transform, opacity;
-}
 
 /* PWA Install Button */
 .install-app-button {
@@ -3231,17 +2656,20 @@ body.dark-mode .pwa-splash-overlay.hidden {
     bottom: 0;
     left: 0;
     right: 0;
-    z-index: 999;
+    z-index: 1000 !important;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding: 12px 0 max(12px, env(safe-area-inset-bottom));
-    background: rgba(10, 10, 10, 0.95);
-    backdrop-filter: blur(30px) saturate(180%);
-    -webkit-backdrop-filter: blur(30px) saturate(180%);
-    box-shadow: 0 -4px 24px var(--shadow-dark);
+    padding: 12px 0 max(16px, env(safe-area-inset-bottom));
+    background: var(--bg-nav) !important;
+    backdrop-filter: blur(30px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(30px) saturate(180%) !important;
+    box-shadow: 0 -4px 24px var(--shadow-md) !important;
     transform: translateY(0);
     transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    height: auto !important;
+    /* Allow padding to define height */
+    min-height: 70px;
 }
 
 .bottom-nav.hidden {
@@ -3257,8 +2685,8 @@ body.dark-mode .pwa-splash-overlay.hidden {
     height: 1px;
     background: linear-gradient(90deg,
             transparent,
-            rgba(255, 215, 0, 0.2) 20%,
-            rgba(255, 215, 0, 0.2) 80%,
+            var(--nav-border-top) 20%,
+            var(--nav-border-top) 80%,
             transparent);
 }
 
@@ -3267,14 +2695,14 @@ body.dark-mode .pwa-splash-overlay.hidden {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 6px;
-    padding: 10px 14px;
-    border-radius: 16px;
+    gap: 4px;
+    padding: 8px 12px;
+    border-radius: 18px;
     text-decoration: none;
-    color: rgba(255, 255, 255, 0.65);
+    color: var(--nav-text) !important;
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     position: relative;
-    min-width: 68px;
+    min-width: 64px;
     -webkit-tap-highlight-color: transparent;
 }
 
@@ -3283,38 +2711,39 @@ body.dark-mode .pwa-splash-overlay.hidden {
 }
 
 .nav-item.active {
-    color: var(--gold-24k);
-    background: linear-gradient(135deg,
-            rgba(255, 215, 0, 0.12),
-            rgba(255, 215, 0, 0.06));
+    color: var(--nav-active-text) !important;
+    background: var(--nav-active-bg) !important;
     box-shadow:
-        0 2px 12px rgba(255, 215, 0, 0.15),
-        inset 0 1px 0 rgba(255, 215, 0, 0.2);
+        0 2px 12px var(--nav-active-glow),
+        inset 0 1px 0 var(--nav-active-glow) !important;
 }
 
 .nav-item.active .nav-icon {
-    filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.4));
+    filter: drop-shadow(0 0 8px var(--glow-brand));
 }
 
 .nav-item:hover:not(.active) {
-    color: rgba(255, 255, 255, 0.85);
-    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-main) !important;
+    background: var(--color-accent-subtle) !important;
 }
 
 .nav-icon {
-    width: 28px;
-    height: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 26px;
+    height: 26px;
     transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
     filter: drop-shadow(0 2px 4px var(--shadow-light));
 }
 
 .nav-item.active .nav-icon {
-    transform: translateY(-3px) scale(1.1);
-    filter: drop-shadow(0 4px 8px rgba(255, 215, 0, 0.4));
+    transform: translateY(-2px) scale(1.1);
+    filter: drop-shadow(0 4px 8px var(--glow-brand));
 }
 
 .nav-label {
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 600;
     letter-spacing: 0.2px;
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -3333,91 +2762,7 @@ body {
     flex-direction: column;
 }
 
-body.light-mode {
-    background: linear-gradient(135deg, #fef5e7 0%, #fdecea 50%, #f8f9f9 100%);
-    background-attachment: fixed;
-}
-
-/* Responsive adjustments */
-@media (max-width: 480px) {
-    .bottom-nav {
-        padding: 6px 0 max(6px, env(safe-area-inset-bottom));
-    }
-
-    .nav-item {
-        padding: 6px 8px;
-        min-width: 52px;
-    }
-
-    .nav-icon {
-        width: 22px;
-        height: 22px;
-    }
-
-    .nav-label {
-        font-size: 9px;
-    }
-
-}
-
-/* Dark mode enhancements for iOS */
-@media (prefers-color-scheme: dark) {
-    .bottom-nav {
-        background: rgba(18, 18, 18, 0.9);
-    }
-}
-
-/* Light mode styles for bottom navigation */
-body.light-mode .bottom-nav {
-    background: rgba(255, 255, 255, 0.95) !important;
-    backdrop-filter: blur(30px) saturate(180%) !important;
-    -webkit-backdrop-filter: blur(30px) saturate(180%) !important;
-    box-shadow: 0 -4px 24px var(--shadow-light) !important;
-    border-top: 1px solid rgba(212, 160, 23, 0.2) !important;
-}
-
-body.light-mode .bottom-nav::before {
-    background: linear-gradient(90deg,
-            transparent,
-            rgba(212, 160, 23, 0.3) 20%,
-            rgba(212, 160, 23, 0.3) 80%,
-            transparent);
-}
-
-body.light-mode .nav-item {
-    color: rgba(26, 26, 26, 0.7) !important;
-}
-
-body.light-mode .nav-item.active {
-    color: #d4a017;
-    background: linear-gradient(135deg,
-            rgba(212, 160, 23, 0.15),
-            rgba(212, 160, 23, 0.08));
-    box-shadow:
-        0 2px 12px rgba(212, 160, 23, 0.2),
-        inset 0 1px 0 rgba(212, 160, 23, 0.25);
-}
-
-body.light-mode .nav-item.active .nav-icon {
-    filter: drop-shadow(0 0 8px rgba(212, 160, 23, 0.5));
-}
-
-body.light-mode .nav-item:hover:not(.active) {
-    color: rgba(26, 26, 26, 0.9);
-    background: rgba(212, 160, 23, 0.08);
-}
-
-body.light-mode .nav-icon {
-    filter: drop-shadow(0 2px 4px var(--shadow-light));
-}
-
-body.light-mode .nav-item.active .nav-icon {
-    filter: drop-shadow(0 4px 8px rgba(212, 160, 23, 0.5));
-}
-
-body.light-mode .nav-label {
-    text-shadow: 0 1px 2px var(--shadow-light);
-}
+/* body.light-mode nav blocks removed — theme system handles all via data-theme */
 
 /* Smooth animations for nav appearance removed - conflicts with scroll behavior */
 
@@ -3447,6 +2792,7 @@ body {
     flex: 1;
     margin-top: 0;
     padding-top: 80px;
+    /* Restored standard padding */
     margin-bottom: 0;
     padding-bottom: 0;
     padding-left: 0 !important;
@@ -3463,7 +2809,7 @@ body {
 
 .app-page {
     display: none;
-    /* padding-top: 10px; Removed to prevent layout gaps, use margins on content instead */
+    /* padding-top: 80px; REMOVED */
     width: 100%;
     margin: 0;
     padding: 0;
@@ -3499,11 +2845,14 @@ body {
     right: 0 !important;
     z-index: 1000 !important;
     width: 100% !important;
-    height: 80px !important;
+    height: auto !important;
+    /* Allow padding to define height */
+    min-height: 70px !important;
     display: flex !important;
     justify-content: space-around !important;
     align-items: center !important;
-    background: var(--bg-primary) !important;
+    background: var(--bg-nav) !important;
+    padding-bottom: env(safe-area-inset-bottom) !important;
     border-top: 1px solid var(--border-light) !important;
     box-shadow: 0 -4px 12px var(--shadow-light) !important;
     transition: background 0.3s ease, box-shadow 0.3s ease, border 0.3s ease !important;
@@ -3513,11 +2862,12 @@ body {
 body .app-shell-bottom-nav.immersive,
 body.light-mode .app-shell-bottom-nav.immersive,
 body.dark-mode .app-shell-bottom-nav.immersive {
-    background: rgba(255, 255, 255, 0.05) !important;
-    box-shadow: none !important;
-    backdrop-filter: blur(10px) !important;
+    background: var(--header-bg) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow: var(--header-shadow) !important;
     border-top: none !important;
-    transition: background 0.3s ease, border 0.3s ease !important;
+    transition: all 0.3s ease !important;
 }
 
 /* Force transparent items in immersive mode with high specificity */
@@ -3547,28 +2897,30 @@ body.light-mode .app-shell-bottom-nav.immersive .nav-item.active {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: var(--text-secondary) !important;
+    color: var(--nav-text) !important;
     text-decoration: none !important;
     transition: all 0.3s ease !important;
     cursor: pointer;
     gap: 4px;
+    padding: 10px 0;
 }
 
 .app-shell-bottom-nav.immersive {
-    background: rgba(255, 255, 255, 0.05) !important;
-    backdrop-filter: blur(15px) !important;
-    -webkit-backdrop-filter: blur(15px) !important;
-    border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
-    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.1) !important;
+    background: var(--header-bg) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border-top: none !important;
+    box-shadow: var(--header-shadow) !important;
 }
 
 .app-shell-bottom-nav .nav-item:hover {
-    background: var(--bg-secondary) !important;
+    background: var(--nav-active-bg) !important;
+    opacity: 0.9;
 }
 
 .app-shell-bottom-nav .nav-item.active {
-    color: var(--gold-24k) !important;
-    background: var(--bg-secondary) !important;
+    color: var(--nav-active-text) !important;
+    background: var(--nav-active-bg) !important;
 }
 
 .app-shell-bottom-nav .nav-icon {
@@ -3578,7 +2930,7 @@ body.light-mode .app-shell-bottom-nav.immersive .nav-item.active {
 }
 
 .app-shell-bottom-nav .nav-label {
-    font-size: 11px !important;
+    font-size: 10px !important;
     font-weight: 600 !important;
     white-space: nowrap;
 }
@@ -3601,6 +2953,14 @@ body.light-mode .app-shell-bottom-nav.immersive .nav-item.active {
         padding-top: 70px;
         margin-bottom: 0;
         padding-bottom: 0;
+    }
+
+    .app-page {
+        /* padding-top: 70px; REMOVED */
+    }
+
+    #home.app-page {
+        /* padding-top: 0; REMOVED */
     }
 
     .app-shell-bottom-nav {
@@ -6492,8 +5852,6 @@ body .hero-text-line {
 /* ===== LIGHT MODE - HERO TEXT SECTION ===== */
 body.light-mode .hero-text-section {
     background: linear-gradient(180deg, #faf8f5 0%, #fff9f0 50%, #faf8f5 100%);
-    border-top: 1px solid rgba(139, 90, 43, 0.3);
-    border-bottom: 1px solid rgba(139, 90, 43, 0.2);
 }
 
 body.dark-mode .hero {
@@ -8057,8 +7415,8 @@ body.light-mode .section-subtitle {
 
 .offer-card {
     background: rgba(20, 20, 20, 0.6);
-    border: 1px solid rgba(212, 175, 55, 0.2);
-    border-radius: 20px;
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-md);
     padding: 30px 25px;
     position: relative;
     transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -8071,9 +7429,9 @@ body.light-mode .section-subtitle {
 
 .offer-card:hover {
     transform: translateY(-8px);
-    border-color: rgba(212, 175, 55, 0.6);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4),
-        0 0 20px rgba(212, 175, 55, 0.15);
+    border-color: var(--card-hover-border);
+    box-shadow: 0 15px 40px var(--shadow-lg),
+        0 0 20px var(--card-glow);
 }
 
 .offer-card.glow-card::before {
@@ -8083,7 +7441,7 @@ body.light-mode .section-subtitle {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, rgba(255, 215, 0, 0.05), transparent 50%);
+    background: linear-gradient(135deg, var(--card-glow), transparent 50%);
     pointer-events: none;
     z-index: 1;
 }
@@ -8098,8 +7456,8 @@ body.light-mode .section-subtitle {
     padding: 6px 14px;
     border-radius: 20px;
     letter-spacing: 0.5px;
-    color: #000;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    color: var(--text-on-brand);
+    box-shadow: var(--shadow-sm);
     z-index: 5;
 }
 
@@ -8108,7 +7466,6 @@ body.light-mode .section-subtitle {
 .offer-card h3,
 .offer-card p,
 .offer-price,
-.sparkle-line,
 .tc-btn {
     position: relative;
     z-index: 5;
@@ -8138,20 +7495,20 @@ body.light-mode .section-subtitle {
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    border: 1px solid rgba(255, 215, 0, 0.2);
+    border: 1px solid var(--border-brand);
 }
 
 .offer-card h3 {
     font-family: 'Cinzel', serif;
     font-size: 22px;
-    color: var(--gold-400);
+    color: var(--brand-primary);
     margin-bottom: 12px;
     line-height: 1.3;
 }
 
 .offer-card p {
     font-size: 14px;
-    color: rgba(255, 255, 255, 0.9);
+    color: var(--text-main);
     margin-bottom: 20px;
     line-height: 1.6;
 }
@@ -8166,28 +7523,21 @@ body.light-mode .section-subtitle {
 
 .old-price {
     text-decoration: line-through;
-    color: rgba(255, 255, 255, 0.6);
+    color: var(--offer-old-price-color);
     font-size: 14px;
 }
 
 .new-price {
     font-family: 'Cinzel', serif;
     font-size: 26px;
-    color: var(--gold-500);
+    color: var(--offer-price-color);
     font-weight: 700;
 }
 
-.sparkle-line {
-    width: 100%;
-    height: 1px;
-    background: radial-gradient(circle, rgba(212, 175, 55, 0.6) 0%, transparent 100%);
-    margin-bottom: 15px;
-    opacity: 0.5;
-}
 
 .tc-btn {
     font-size: 12px;
-    color: rgba(255, 215, 0, 0.8);
+    color: var(--brand-primary);
     background: transparent;
     border: none;
     cursor: pointer;
@@ -8199,50 +7549,11 @@ body.light-mode .section-subtitle {
 }
 
 .tc-btn:hover {
-    color: #FFD700;
+    color: var(--color-accent);
     text-decoration: underline;
 }
 
-/* Light Mode Overrides for Offers */
-body.light-mode .offers-section {
-    background: #fdfdfd;
-}
-
-body.light-mode .offer-card {
-    background: linear-gradient(135deg, rgba(255, 252, 240, 0.95), rgba(255, 245, 225, 0.9));
-    border-color: rgba(212, 160, 23, 0.3);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-}
-
-body.light-mode .offer-card:hover {
-    border-color: rgba(212, 160, 23, 0.6);
-    box-shadow: 0 15px 40px rgba(212, 160, 23, 0.15);
-}
-
-body.light-mode .offer-icon {
-    background: rgba(212, 160, 23, 0.08);
-    border-color: rgba(212, 160, 23, 0.3);
-}
-
-body.light-mode .offer-card h3 {
-    color: #4A3B22;
-}
-
-body.light-mode .offer-card p {
-    color: #6C5B3F;
-}
-
-body.light-mode .old-price {
-    color: #998877;
-}
-
-body.light-mode .new-price {
-    color: #B8860B;
-}
-
-body.light-mode .tc-btn {
-    color: #B8860B;
-}
+/* body.light-mode offer blocks removed — handled by theme variables */
 
 /* ===== T&C MODAL ===== */
 .tc-modal {
@@ -10438,12 +9749,6 @@ body.light-mode .skeleton {
 }
 
 /* Divider - Finer V2 */
-.sparkle-line {
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(212, 160, 23, 0.3), transparent);
-    margin: 0.5rem 0;
-    opacity: 0.4;
-}
 
 /* Glow Effect Refined */
 .glow-card::before {
@@ -18052,4 +17357,271 @@ body.light-mode .premium-input-field::-webkit-calendar-picker-indicator {
 .premium-input-field::placeholder {
     color: var(--text-secondary) !important;
     opacity: 1 !important;
+}
+
+/* =========================================
+   RESTORED CHAT WIDGET & FAB STYLES
+   ========================================= */
+.chat-widget {
+    position: fixed;
+    bottom: 100px;
+    right: 24px;
+    z-index: 9998;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    /* Ensure it's visible by default */
+    display: block;
+}
+
+.chat-widget:hover {
+    transform: scale(1.1);
+}
+
+.fab-icon-img {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 6px 24px rgba(255, 215, 0, 0.35), 0 0 12px rgba(255, 215, 0, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.9);
+    background-color: #fff;
+    /* Fallback background */
+}
+
+/* =========================================
+   IMMERSIVE CHAT INTERFACE STYLES
+   ========================================= */
+.immersive-chat-container {
+    display: flex;
+    flex-direction: column;
+    height: 60vh;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    margin: 20px 0;
+    overflow: hidden;
+    position: relative;
+}
+
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--gold-primary) rgba(0, 0, 0, 0.1);
+}
+
+.message {
+    max-width: 80%;
+    padding: 12px 16px;
+    border-radius: 18px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    animation: fadeIn 0.3s ease;
+    word-wrap: break-word;
+}
+
+.bot-message {
+    background: rgba(255, 255, 255, 0.1);
+    border-bottom-left-radius: 4px;
+    align-self: flex-start;
+    color: var(--text-light);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.user-message {
+    background: var(--gold-primary);
+    background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+    border-bottom-right-radius: 4px;
+    align-self: flex-end;
+    color: #000;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2);
+}
+
+.chat-suggestion-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.chip {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    color: var(--text-light);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.chip:hover {
+    background: rgba(255, 215, 0, 0.2);
+    border-color: var(--gold-primary);
+    transform: translateY(-2px);
+}
+
+.chat-input-wrapper {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.4);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    gap: 10px;
+}
+
+.chat-voice-btn,
+.chat-send-btn {
+    background: none;
+    border: none;
+    color: var(--gold-primary);
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+
+.chat-voice-btn:hover,
+.chat-send-btn:hover {
+    background: rgba(255, 215, 0, 0.1);
+}
+
+.chat-voice-btn svg,
+.chat-send-btn svg {
+    width: 24px;
+    height: 24px;
+}
+
+#chatInput {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 25px;
+    outline: none;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+#chatInput:focus {
+    border-color: var(--gold-primary);
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.1);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes confettiFall {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+/* =========================================
+   MOBILE NAVIGATION RESTORATION
+   ========================================= */
+@media (max-width: 1023px) {
+    .bottom-nav {
+        display: flex !important;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.95);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-top: 1px solid rgba(255, 215, 0, 0.2);
+        padding: 10px 0 25px;
+        /* Extra padding for safe area */
+        justify-content: space-around;
+        align-items: center;
+        z-index: 2147483647;
+        box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Ensure content isn't hidden behind bottom nav */
+    .app-shell-content {
+        padding-bottom: 90px !important;
+    }
+
+    body.light-mode .bottom-nav {
+        background: rgba(255, 255, 255, 0.95);
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        color: var(--text-muted, #888);
+        gap: 4px;
+        transition: all 0.3s ease;
+        position: relative;
+        padding: 5px;
+        flex: 1;
+    }
+
+    .nav-icon {
+        width: 24px !important;
+        height: 24px !important;
+        min-width: 24px;
+        min-height: 24px;
+        display: block;
+        fill: currentColor;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+    }
+
+    .nav-label {
+        font-size: 10px;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+    }
+
+    .nav-item.active {
+        color: var(--gold-24k, #FFD700);
+    }
+
+    .nav-item.active .nav-icon {
+        transform: translateY(-3px);
+        filter: drop-shadow(0 0 8px var(--glow-brand, rgba(255, 215, 0, 0.6)));
+    }
+
+    .nav-item:active {
+        transform: scale(0.95);
+    }
+}
+
+@media (min-width: 1024px) {
+    .bottom-nav {
+        display: none !important;
+    }
 }

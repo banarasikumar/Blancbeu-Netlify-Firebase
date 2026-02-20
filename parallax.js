@@ -20,15 +20,20 @@ export function initParallax() {
         });
     }
 
+    // Use IntersectionObserver to track visibility
+    let isHeroVisible = true;
+    const observer = new IntersectionObserver((entries) => {
+        isHeroVisible = entries[0].isIntersecting;
+    }, { threshold: 0 });
+    observer.observe(hero);
+
     function updateParallax() {
+        if (!isHeroVisible) return;
+
         // Get current scroll position directly (no LERP)
         const scrollY = (scroller === window)
             ? (window.pageYOffset || document.documentElement.scrollTop)
             : scroller.scrollTop;
-
-        // Only apply effects when hero is visible
-        const heroRect = hero.getBoundingClientRect();
-        if (heroRect.bottom < 0) return; // Hero scrolled out of view
 
         // 1. FADES - Based on direct scroll
         const whiteOverlay = document.querySelector('.hero-scroll-overlay');
@@ -51,8 +56,6 @@ export function initParallax() {
             if (title) title.style.opacity = fadeOpacity;
             if (tagline) tagline.style.opacity = fadeOpacity;
             if (secondaryBtn) secondaryBtn.style.opacity = fadeOpacity;
-
-            // Primary button stays at full opacity (crystal clear)
         }
 
         // 2. PARALLAX MOTION - Direct scroll with subtle multipliers

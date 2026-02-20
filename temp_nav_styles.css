@@ -1,0 +1,151 @@
+/* ================================================================================
+   BOTTOM NAVIGATION BAR - PREMIUM GLASSMORPHISM
+   ================================================================================ */
+.bottom-nav {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 500px;
+    height: 70px;
+    background: rgba(22, 22, 24, 0.85);
+    /* Darker glass for better contrast */
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 35px;
+    /* Pill shape */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 10px;
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    z-index: 2147483647;
+    /* Highest priority */
+    border: 1px solid rgba(255, 215, 0, 0.15);
+    /* Subtle gold border */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Light Mode Override */
+body.light-mode .bottom-nav {
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    box-shadow:
+        0 10px 30px rgba(212, 175, 55, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+/* Nav Items */
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 10px;
+    font-weight: 500;
+    width: 60px;
+    height: 100%;
+    position: relative;
+    transition: all 0.3s ease;
+    gap: 4px;
+    border-radius: 12px;
+}
+
+/* Icons */
+.nav-icon {
+    width: 24px;
+    height: 24px;
+    stroke-width: 2px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0.7;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+/* Text Labels */
+.nav-label {
+    opacity: 0.7;
+    transition: all 0.3s ease;
+    letter-spacing: 0.3px;
+    font-family: 'Poppins', sans-serif;
+    transform: translateY(0);
+}
+
+/* Active State */
+.nav-item.active {
+    color: var(--gold-primary);
+}
+
+.nav-item.active .nav-icon {
+    transform: translateY(-2px) scale(1.1);
+    opacity: 1;
+    color: var(--gold-primary);
+    /* For currentcolor fill */
+    filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.6));
+    stroke: var(--gold-primary);
+}
+
+.nav-item.active .nav-label {
+    opacity: 1;
+    font-weight: 600;
+    color: var(--gold-primary);
+}
+
+/* Active Indicator Dot */
+.nav-item.active::after {
+    content: '';
+    position: absolute;
+    bottom: 5px;
+    width: 4px;
+    height: 4px;
+    background: var(--gold-primary);
+    border-radius: 50%;
+    box-shadow: 0 0 6px var(--gold-primary);
+    animation: fadeInDot 0.3s forwards;
+}
+
+@keyframes fadeInDot {
+    from {
+        opacity: 0;
+        transform: scale(0);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Hover Effects (Desktop) */
+@media (hover: hover) {
+    .nav-item:hover:not(.active) .nav-icon {
+        color: var(--text-primary);
+        transform: translateY(-2px);
+        opacity: 0.9;
+    }
+}
+
+/* Mobile Adjustments */
+@media (max-width: 480px) {
+    .bottom-nav {
+        width: 94%;
+        bottom: 15px;
+        /* Slightly lower on small screens */
+        height: 65px;
+    }
+
+    .nav-label {
+        font-size: 9px;
+    }
+}
+
+/* Hide on Desktop (if desired, usually > 1024px) */
+@media (min-width: 1024px) {
+    .bottom-nav {
+        display: none !important;
+    }
+}

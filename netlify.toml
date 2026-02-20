@@ -4,8 +4,24 @@
   functions = "f"
 
 [[redirects]]
+  from = "/admin/*"
+  to = "/admin/index.html"
+  status = 200
+
+[[redirects]]
   from = "/admin"
   to = "/admin/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/staff/*"
+  to = "/staff/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/staff"
+  to = "/staff/"
   status = 301
   force = true
 

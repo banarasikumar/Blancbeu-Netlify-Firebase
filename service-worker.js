@@ -1,20 +1,30 @@
 importScripts('https://www.gstatic.com/firebasejs/10.9.0/firebase-app-compat.js');
 importScripts('https://www.gstatic.com/firebasejs/10.9.0/firebase-messaging-compat.js');
 
-const CACHE_NAME = 'blancbeu-static-v3';
-const DYNAMIC_CACHE = 'blancbeu-dynamic-v1';
+const CACHE_NAME = 'blancbeu-static-v6';
+const DYNAMIC_CACHE = 'blancbeu-dynamic-v2';
 
 // Assets to pre-cache (Core Application Shell)
 const ASSETS_TO_CACHE = [
     '/',
     '/index.html',
-    '/styles.css',
+    '/styles.min.css',
     '/theme-variables.css',
-    '/script_pwa.js',
+
     '/theme-toggle.js',
     '/parallax.js',
     '/manifest.json',
-    '/assets/brand_icon_optimized.webp'
+    '/assets/brand_icon_optimized.webp',
+
+    // Core JS Modules (Critical for History API Router)
+    '/nav_fix.js',
+    '/script.min.js',
+    '/booking.js',
+    '/auth.js',
+    '/account.js',
+    '/my-bookings.js',
+    '/firebase-config.js',
+    '/services-mock.js'
 ];
 
 // Install Event - Cache Core Assets
@@ -28,21 +38,24 @@ self.addEventListener('install', (event) => {
     self.skipWaiting(); // Activate immediately
 });
 
-// Activate Event - Cleanup Old Caches
+// Activate Event - NUCLEAR OPTION (Clear EVERYTHING on new version)
 self.addEventListener('activate', (event) => {
+    console.log('[Service Worker] Activating new version... Wiping ALL old caches.');
+
     event.waitUntil(
         caches.keys().then((keys) => {
             return Promise.all(
                 keys.map((key) => {
-                    if (key !== CACHE_NAME && key !== DYNAMIC_CACHE) {
-                        console.log('[Service Worker] Removing old cache:', key);
-                        return caches.delete(key);
-                    }
+                    // aggressive: delete everything to ensure no stale data survives an update
+                    console.log('[Service Worker] Deleting cache:', key);
+                    return caches.delete(key);
                 })
             );
+        }).then(() => {
+            console.log('[Service Worker] All caches wiped. Claiming clients.');
+            return self.clients.claim();
         })
     );
-    return self.clients.claim();
 });
 
 // Fetch Event - Strategy Implementation

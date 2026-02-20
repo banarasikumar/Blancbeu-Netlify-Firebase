@@ -243,8 +243,6 @@ class AccountController {
                 // Redirect to dedicated Login Page (preserves header)
                 if (window.navigateToPage) {
                     window.navigateToPage('login');
-                } else {
-                    window.location.hash = 'login';
                 }
             };
         }

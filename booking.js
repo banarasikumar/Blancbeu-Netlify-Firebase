@@ -21,20 +21,9 @@ if (addServicesBtn) {
         localStorage.setItem('booking_mode', 'adding');
 
         // 2. Navigation
-        // Use the global router if available for smooth transition
         if (window.navigateToPage) {
             window.navigateToPage('services');
-        } else {
-            // Fallback to hash navigation
-            window.location.hash = '#services';
         }
-
-        // 3. Ensure Services Page Logic Initializes
-        // We dispatch a hashchange event to ensure script.js picks it up
-        // even if navigateToPage used replaceState
-        setTimeout(() => {
-            window.dispatchEvent(new Event('hashchange'));
-        }, 100);
     });
 }
 
@@ -91,8 +80,6 @@ function renderSelectedServices() {
                 localStorage.setItem('booking_mode', 'adding');
                 if (window.navigateToPage) {
                     window.navigateToPage('services');
-                } else {
-                    window.location.hash = '#services';
                 }
             });
         }
@@ -210,7 +197,8 @@ function internalNavigateToBookingPage() {
             window.scrollTo(0, 0);
         }
 
-        window.location.hash = 'booking';
+        // Removed: window.location.hash = 'booking'; 
+        // We rely on the router having already updated the URL or UI state.
 
         // Render current list
         renderSelectedServices();
@@ -282,8 +270,6 @@ document.addEventListener('DOMContentLoaded', () => {
             // Navigate via Global Helper (Robust)
             if (window.navigateToPage) {
                 window.navigateToPage('services');
-            } else {
-                window.location.hash = '#services';
             }
 
             // Fallback for button state (runs after navigation)
@@ -313,13 +299,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Navigation Re-render Fix ---
     // Ensure services are rendered whenever the booking page becomes active
 
-    // 1. Hash Change listener
-    window.addEventListener('hashchange', () => {
-        if (window.location.hash === '#booking' || window.location.hash === 'booking') {
-            console.log("Hash changed to #booking, re-rendering services...");
+    // 1. Route Change listener (Replaces hashchange)
+    window.addEventListener('routeChange', (e) => {
+        if (e.detail.page === 'booking') {
+            console.log("Route changed to booking, re-rendering services...");
             renderSelectedServices();
         }
     });
+    // Also expose hook
+    window.onBookingPageVisible = renderSelectedServices;
 
     // 2. MutationObserver for 'active' class on the booking section
     const bookingSection = document.getElementById('booking');
@@ -714,7 +702,7 @@ function updateCartBar() {
     // Logic: Show only if services > 0 AND we are on 'services' page (or home page effectively)
     // Actually user requested: "when the user is in the services page"
     // We can check current hash or active section
-    const isServicesPage = window.location.hash === '#services' ||
+    const isServicesPage = window.location.pathname === '/services' ||
         (document.getElementById('services') && document.getElementById('services').classList.contains('active'));
 
     if (selectedServices.length > 0 && isServicesPage) {
@@ -731,11 +719,10 @@ function updateCartBar() {
 window.updateServiceCartVisibility = updateCartBar; // Expose for nav_fix.js
 
 // Hook into navigation to update bar AND buttons
-window.addEventListener('hashchange', () => {
-    const hash = window.location.hash;
-
-    // Legacy support for booking hash
-    if (hash === '#booking' || hash === 'booking') {
+window.addEventListener('routeChange', (e) => {
+    // Only care about navigation that affects us
+    // e.g., if we navigate to booking, render
+    if (e.detail.page === 'booking') {
         renderSelectedServices();
     }
 

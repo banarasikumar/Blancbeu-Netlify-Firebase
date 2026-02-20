@@ -6,7 +6,7 @@ BLANCBEU SALON - WORLD-CLASS UI IMPLEMENTATION ROADMAP
 Reference: TASKS.md for full implementation details
 
 PHASE 0: VISUAL EXCELLENCE (HIGHEST PRIORITY - Week 1)
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
 0.1 MICRO-INTERACTIONS & ANIMATIONS
     [ ] Magnetic button effects (cursor follow on hover)
     [ ] Ripple effect on button clicks
@@ -42,7 +42,7 @@ PHASE 0: VISUAL EXCELLENCE (HIGHEST PRIORITY - Week 1)
     [ ] 44px minimum touch targets
 
 PHASE 1: CORE FEATURES (HIGH PRIORITY - Week 2)
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+---------------------------------------------------------------------------------------------------------------------------------------------
 1.0 SERVICE FILTERING & SEARCH
     Location: Above services section
     [ ] Sticky filter bar with category buttons
@@ -86,7 +86,7 @@ PHASE 1: CORE FEATURES (HIGH PRIORITY - Week 2)
     [ ] Awards & certifications
 
 PHASE 2: ENGAGEMENT FEATURES (Week 3)
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+------------------------------------------------------------------------------------------------------------------
 7.0  Live Availability Calendar
 8.0  Video Testimonials
 9.0  FAQ Accordion
@@ -94,8 +94,8 @@ PHASE 2: ENGAGEMENT FEATURES (Week 3)
 11.0 Real-Time Chat Widget
 
 PHASE 3: PREMIUM FEATURES (Week 4)
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-12.0 Virtual 360° Tour
+---------------------------------------------------------------------------------------------------------
+12.0 Virtual 360-- Tour
 13.0 Gift Cards
 14.0 Referral Program
 15.0 Promo Banners
@@ -124,10 +124,6 @@ PHASE 3: PREMIUM FEATURES (Week 4)
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Blancbeu - Premium Beauty & Wellness Salon</title>
 
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
-
     <link rel="manifest" href="/manifest.json">
     <meta name="theme-color" content="#000000" id="metaThemeColor">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -147,12 +143,225 @@ PHASE 3: PREMIUM FEATURES (Week 4)
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=Playfair+Display:wght@400;600;700;900&family=Poppins:wght@300;400;500;600;700&family=Cinzel:wght@400;600;700&display=swap"
-        rel="stylesheet">
+    <!-- Preload Hero Image for LCP -->
+    <link rel="preload" as="image" href="assets/banner_carousel_images/1.avif" type="image/avif" fetchpriority="high">
+    <!-- Async Google Fonts -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@200;300;400;500;600;700&family=Playfair+Display:wght@400;600;700;900&family=Poppins:wght@300;400;500;600;700&family=Russo+One&display=swap"
+        media="print" onload="this.media='all'">
+    <noscript>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@200;300;400;500;600;700&family=Playfair+Display:wght@400;600;700;900&family=Poppins:wght@300;400;500;600;700&family=Russo+One&display=swap"
+            rel="stylesheet">
+    </noscript>
 
+    <!-- Critical CSS & Theme Variables -->
     <link rel="stylesheet" href="theme-variables.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="theme-core.css">
+    <script type="module" src="theme-switcher.js"></script>
+    <style>
+        /* Critical Reset & Body */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            overflow-x: hidden !important;
+            width: 100%;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* Loader Styles - Optimized */
+        #app-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease-out, visibility 0.5s;
+        }
+
+        #app-loader.fade-out {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-content {
+            text-align: center;
+        }
+
+        .loader-logo {
+            margin-bottom: 20px;
+            font-family: 'Cinzel', serif;
+        }
+
+        .loader-icon {
+            font-size: 32px;
+            display: block;
+            margin-bottom: 10px;
+            animation: pulse 1.5s infinite;
+        }
+
+        .loader-text {
+            color: #FFD700;
+            font-size: 24px;
+            letter-spacing: 5px;
+            font-weight: 700;
+        }
+
+        .loader-bar-wrapper {
+            width: 200px;
+            height: 2px;
+            background: rgba(255, 215, 0, 0.1);
+            margin: 0 auto;
+            border-radius: 1px;
+            overflow: hidden;
+        }
+
+        .loader-bar {
+            width: 40%;
+            height: 100%;
+            background: #FFD700;
+            animation: loading 2s infinite ease-in-out;
+        }
+
+        @keyframes loading {
+            0% {
+                transform: translateX(-100%);
+            }
+
+            50% {
+                transform: translateX(100%);
+            }
+
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(1.2);
+                opacity: 0.7;
+            }
+        }
+
+        /* Critical Header */
+        .header {
+            background: var(--header-bg);
+            padding: 12px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 2147483647 !important;
+            border-bottom: var(--header-border);
+            height: 80px;
+            display: flex;
+            align-items: center;
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding: 0 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            flex: 1;
+        }
+
+        .brand-name {
+            font-family: 'Cinzel', serif;
+            font-size: 32px;
+            font-weight: 900;
+            color: var(--gold-24k);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            line-height: 1.1;
+        }
+
+        .brand-subtitle {
+            font-family: 'Poppins', sans-serif;
+            font-size: 10px;
+            color: rgba(255, 237, 78, 0.95);
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            line-height: 1;
+        }
+
+        /* Critical Hero Area */
+        .hero {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .carousel {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .carousel-slide.active {
+            opacity: 1;
+            z-index: 2;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+
+    <!-- Main Stylesheet (Directly to source for development transparency) -->
+    <link rel="stylesheet" href="styles.css?v=2.1">
+
 
     <style>
         /* FIX: Full Width Transformation Gallery on Mobile */
@@ -194,28 +403,26 @@ PHASE 3: PREMIUM FEATURES (Week 4)
         }
     </style>
 
-    <link href="https://fonts.googleapis.com/css?family=Russo+One" rel="stylesheet">
+
     <!-- HEADER ENFORCER SCRIPT -->
     <script>
         (function () {
             // Force Header Visibility when Auth Modal is open
-            setInterval(() => {
-                const authModal = document.getElementById('authModal');
-                const isAuthVisible = authModal && (window.getComputedStyle(authModal).display !== 'none');
+            const authModal = document.getElementById('authModal');
+            if (!authModal) return;
 
+            const enforceHeaderStyle = () => {
+                const isAuthVisible = window.getComputedStyle(authModal).display !== 'none';
                 if (isAuthVisible) {
                     const header = document.querySelector('.header');
                     if (header) {
-                        // AGGRESSIVE VISIBILITY ENFORCEMENT
-                        if (header.classList.contains('hidden')) header.classList.remove('hidden');
-
+                        header.classList.remove('hidden');
                         header.style.setProperty('display', 'flex', 'important');
                         header.style.setProperty('visibility', 'visible', 'important');
                         header.style.setProperty('opacity', '1', 'important');
                         header.style.setProperty('z-index', '2147483647', 'important');
                         header.style.setProperty('top', '0', 'important');
 
-                        // Force app-shell-header too
                         const shellHeader = document.querySelector('.app-shell-header');
                         if (shellHeader) {
                             shellHeader.style.setProperty('z-index', '2147483647', 'important');
@@ -225,34 +432,28 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                         }
                     }
                 }
-            }, 100); // Fast check (100ms)
+            };
+
+            // Initial check
+            enforceHeaderStyle();
+
+            // Use MutationObserver instead of setInterval
+            const observer = new MutationObserver((mutations) => {
+                mutations.forEach((mutation) => {
+                    if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+                        enforceHeaderStyle();
+                    }
+                });
+            });
+
+            observer.observe(authModal, { attributes: true });
         })();
     </script>
+
 </head>
 
 <body>
-    <script>
-        (function () {
-            try {
-                const savedTheme = localStorage.getItem('theme');
-                let shouldBeLightMode = false;
 
-                if (savedTheme) {
-                    shouldBeLightMode = savedTheme === 'light';
-                } else {
-                    shouldBeLightMode = true; // Default to light mode
-                }
-
-                if (shouldBeLightMode) {
-                    document.documentElement.setAttribute('data-theme', 'light');
-                    document.body.classList.add('light-mode');
-                }
-                // Dark mode is fallback (no attribute needed)
-            } catch (e) {
-                // Fail silently if localStorage is not available
-            }
-        })();
-    </script>
     <!-- Premium App Loader -->
     <div id="app-loader">
         <div class="loader-content">
@@ -265,18 +466,40 @@ PHASE 3: PREMIUM FEATURES (Week 4)
             </div>
         </div>
     </div>
+    <script>
+        (function () {
+            const loader = document.getElementById('app-loader');
+            if (loader) {
+                const fadeOut = () => {
+                    if (loader.classList.contains('fade-out')) return;
+                    loader.classList.add('fade-out');
+                    setTimeout(() => {
+                        loader.style.display = 'none';
+                    }, 500);
+                };
+
+                // Strategy: Fade out as early as possible
+                // 1. When Hero is ready (best case for LCP)
+                // 2. DOMContentLoaded (fallback)
+                // 3. 2s absolute timeout (safety)
+                document.addEventListener('DOMContentLoaded', fadeOut);
+                window.addEventListener('load', fadeOut);
+                setTimeout(fadeOut, 2000);
+            }
+        })();
+    </script>
     <!-- PWA Splash Screen -->
     <div id="pwaSplash" class="pwa-splash-overlay hidden">
         <div class="pwa-splash-content">
             <div class="pwa-splash-logo">
-                <img src="assets/brand_icon_optimized.webp" alt="BlancBeu Logo">
+                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                    data-src="assets/brand_icon_optimized.webp" alt="BlancBeu Logo">
             </div>
             <div class="pwa-splash-text">BLANCBEU</div>
             <div class="pwa-splash-subtitle">Family Beauty Salon</div>
         </div>
     </div>
 
-    <div class="sparkles"></div>
     <div class="rose-petals" id="rosePetals"></div>
 
 
@@ -286,54 +509,88 @@ PHASE 3: PREMIUM FEATURES (Week 4)
         <div class="container">
             <div class="logo">
                 <div class="brand-icon-wrapper">
-                    <img src="assets/brand_icon_optimized.webp" alt="BlancBeu Icon" class="brand-icon">
+                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                        data-src="assets/brand_icon_optimized.webp" alt="BlancBeu Icon" class="brand-icon">
                 </div>
                 <div class="logo-content">
                     <div class="brand-name">BLANCBEU</div>
                     <div class="brand-subtitle">Family Beauty Salon</div>
                 </div>
             </div>
-            <!-- Notify Button -->
-            <button id="notifyBtn" class="theme-toggle-btn" style="margin-right: 10px; margin-left: auto;"
-                data-page="notifications">
-                <svg class="theme-icon" viewBox="0 0 24 24" fill="currentColor" style="width: 24px; height: 24px;">
-                    <path
-                        d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z" />
-                </svg>
-            </button>
+            <div class="header-actions">
+                <button id="notifyBtn" class="theme-toggle-btn" data-page="notifications">
+                    <svg class="theme-icon" viewBox="0 0 24 24" fill="currentColor" style="width: 24px; height: 24px;">
+                        <path
+                            d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z" />
+                    </svg>
+                </button>
 
-            <button id="themeToggle" class="theme-toggle-btn" aria-label="Toggle theme">
-                <span class="theme-icon sun">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="4"></circle>
-                        <path d="M12 2v2"></path>
-                        <path d="M12 20v2"></path>
-                        <path d="M4.93 4.93l1.41 1.41"></path>
-                        <path d="M17.66 17.66l1.41 1.41"></path>
-                        <path d="M2 12h2"></path>
-                        <path d="M20 12h2"></path>
-                        <path d="M6.34 17.66l-1.41 1.41"></path>
-                        <path d="M19.07 4.93l-1.41 1.41"></path>
-                    </svg>
-                </span>
-                <span class="theme-icon moon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                    </svg>
-                </span>
-            </button>
+                <div style="position: relative;" id="theme-switcher">
+                    <button class="theme-toggle-btn" onclick="toggleThemeMenu()" aria-label="Select Theme">
+                        <svg class="theme-icon" viewBox="0 0 24 24" width="24" height="24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path
+                                d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                            </path>
+                        </svg>
+                    </button>
+                    <!-- Theme Menu Dropdown -->
+                    <div class="theme-menu" id="theme-menu">
+                        <button class="theme-option" data-theme="velvet" onclick="setTheme('velvet')">
+                            <span class="theme-preview velvet"></span> Velvet Sage
+                        </button>
+                        <button class="theme-option" data-theme="pop" onclick="setTheme('pop')">
+                            <span class="theme-preview pop"></span> Sun & Violet
+                        </button>
+                        <button class="theme-option" data-theme="olive" onclick="setTheme('olive')">
+                            <span class="theme-preview olive"></span> Olive & Chrome
+                        </button>
+                        <button class="theme-option" data-theme="blackgold" onclick="setTheme('blackgold')">
+                            <span class="theme-preview blackgold"></span> BlackGold 👑
+                        </button>
+                    </div>
+                </div>
+            </div>
             <nav class="nav">
-                <a href="#home">Home</a>
-                <a href="#offers">Offers</a>
-                <a href="#services">Services</a>
-                <a href="#gallery">Gallery</a>
-                <a href="#reviews">Reviews</a>
+                <a href="/" data-link>
+                    <svg class="nav-icon-desktop" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+                    </svg>
+                    Home
+                </a>
+                <a href="/offers" data-link>
+                    <svg class="nav-icon-desktop" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M21.41 11.58l-9-9C12.05 2.22 11.55 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .55.22 1.05.59 1.42l9 9c.36.36.86.58 1.41.58.55 0 1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41 0-.55-.23-1.06-.59-1.42zM5.5 7C4.67 7 4 6.33 4 5.5S4.67 4 5.5 4 7 4.67 7 5.5 6.33 7 5.5 7z" />
+                    </svg>
+                    Offers
+                </a>
+                <a href="/services" data-link>
+                    <svg class="nav-icon-desktop" viewBox="0 0 24 24" fill="currentColor">
+                        <circle cx="12" cy="12" r="3.2" />
+                        <path
+                            d="M9 2L7.17 6H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-3.17L15 2H9zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z" />
+                    </svg>
+                    Services
+                </a>
+                <a href="/gallery" data-link>
+                    <svg class="nav-icon-desktop" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z" />
+                    </svg>
+                    Gallery
+                </a>
+                <a href="/reviews" data-link>
+                    <svg class="nav-icon-desktop" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                    </svg>
+                    Reviews
+                </a>
                 <button id="installBtn" class="install-app-btn" style="display: none;">
                     <span class="install-icon">📲</span>
                     <span class="install-text">Install App</span>
-                    <span class="install-sparkle">✨</span>
                 </button>
             </nav>
         </div>
@@ -348,22 +605,36 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                 <div class="carousel">
                     <div class="carousel-track" id="carouselTrack">
                         <div class="carousel-slide active">
-                            <img src="assets/banner_carousel_images/1.webp" alt="Premium Beauty Banner 1"
-                                loading="eager">
+                            <picture>
+                                <source srcset="assets/banner_carousel_images/1.avif" type="image/avif">
+                                <source srcset="assets/banner_carousel_images/1.webp" type="image/webp">
+                                <img src="assets/banner_carousel_images/1.webp" alt="Premium Beauty Banner 1"
+                                    loading="eager" fetchpriority="high">
+                            </picture>
                         </div>
                         <div class="carousel-slide">
-                            <img src="assets/banner_carousel_images/2.webp" alt="Premium Beauty Banner 2"
-                                loading="lazy">
+                            <picture>
+                                <source data-srcset="assets/banner_carousel_images/2.avif" type="image/avif">
+                                <source data-srcset="assets/banner_carousel_images/2.webp" type="image/webp">
+                                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                    data-src="assets/banner_carousel_images/2.webp" alt="Premium Beauty Banner 2"
+                                    loading="lazy">
+                            </picture>
                         </div>
                         <div class="carousel-slide">
-                            <img src="assets/banner_carousel_images/4.webp" alt="Premium Beauty Banner 4"
-                                loading="lazy">
+                            <picture>
+                                <source data-srcset="assets/banner_carousel_images/4.avif" type="image/avif">
+                                <source data-srcset="assets/banner_carousel_images/4.webp" type="image/webp">
+                                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                    data-src="assets/banner_carousel_images/4.webp" alt="Premium Beauty Banner 4"
+                                    loading="lazy">
+                            </picture>
                         </div>
 
                     </div>
 
-                    <button class="carousel-btn prev" onclick="moveCarousel(-1)">❮</button>
-                    <button class="carousel-btn next" onclick="moveCarousel(1)">❯</button>
+                    <button class="carousel-btn prev" onclick="moveCarousel(-1)">---</button>
+                    <button class="carousel-btn next" onclick="moveCarousel(1)">---</button>
                     <div class="carousel-dots" id="carouselDots"></div>
                 </div>
 
@@ -386,8 +657,7 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                         <button class="hero-btn primary-btn">
                             <span class="btn-label">Book Appointment</span>
                         </button>
-                        <button class="hero-btn secondary-btn"
-                            onclick="document.querySelector('.bottom-nav .nav-item[data-page=\'services\']').click()">
+                        <button class="hero-btn secondary-btn" onclick="window.navigateToPage('services')">
                             <span class="btn-label">Explore Services</span>
                         </button>
                     </div>
@@ -397,6 +667,7 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                 <div class="hero-scroll-indicator">
                     <span class="scroll-text">SCROLL</span>
                     <div class="scroll-line"></div>
+
                 </div>
             </div>
 
@@ -422,8 +693,7 @@ PHASE 3: PREMIUM FEATURES (Week 4)
 
                     <div class="view-all-btn-container"
                         style="max-width: 360px; margin: 0 auto 30px; text-align: right;">
-                        <button class="view-all-services-btn"
-                            onclick="document.querySelector('.bottom-nav .nav-item[data-page=\'services\']').click()">
+                        <button class="view-all-services-btn" onclick="window.navigateToPage('services')">
                             <span>View All Menu</span>
                             <svg class="btn-arrow-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
                                 stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -438,8 +708,15 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                                 <div class="service-card-item">
                                     <div class="service-highlight-card">
                                         <div class="service-img-container">
-                                            <img src="assets/featured_services/haircut.png" alt="Premium Haircut"
-                                                class="service-highlight-img">
+                                            <picture>
+                                                <source data-srcset="assets/featured_services/haircut.avif"
+                                                    type="image/avif">
+                                                <source data-srcset="assets/featured_services/haircut.webp"
+                                                    type="image/webp">
+                                                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                                    data-src="assets/featured_services/haircut.webp"
+                                                    alt="Premium Haircut" class="service-highlight-img">
+                                            </picture>
                                             <h3>Premium Haircut & Style</h3>
                                         </div>
                                         <div class="service-content">
@@ -447,7 +724,7 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                                                 <p class="service-desc">Expert cutting and styling techniques</p>
                                             </div>
                                             <div>
-                                                <div class="service-price">Starting from ₹200</div>
+                                                <div class="service-price">Starting from ---200</div>
                                                 <button class="service-btn">Book Now</button>
                                             </div>
                                         </div>
@@ -459,8 +736,15 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                                 <div class="service-card-item">
                                     <div class="service-highlight-card">
                                         <div class="service-img-container">
-                                            <img src="assets/featured_services/facial.png" alt="Facial & Skincare"
-                                                class="service-highlight-img">
+                                            <picture>
+                                                <source data-srcset="assets/featured_services/facial.avif"
+                                                    type="image/avif">
+                                                <source data-srcset="assets/featured_services/facial.webp"
+                                                    type="image/webp">
+                                                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                                    data-src="assets/featured_services/facial.webp"
+                                                    alt="Facial & Skincare" class="service-highlight-img">
+                                            </picture>
                                             <h3>Facial & Skincare</h3>
                                         </div>
                                         <div class="service-content">
@@ -468,7 +752,7 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                                                 <p class="service-desc">Rejuvenating facials with premium products</p>
                                             </div>
                                             <div>
-                                                <div class="service-price">Starting from ₹500</div>
+                                                <div class="service-price">Starting from ---500</div>
                                                 <button class="service-btn">Book Now</button>
                                             </div>
                                         </div>
@@ -478,8 +762,15 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                                 <div class="service-card-item">
                                     <div class="service-highlight-card">
                                         <div class="service-img-container">
-                                            <img src="assets/featured_services/makeup.png" alt="Makeup & Bridal"
-                                                class="service-highlight-img">
+                                            <picture>
+                                                <source data-srcset="assets/featured_services/makeup.avif"
+                                                    type="image/avif">
+                                                <source data-srcset="assets/featured_services/makeup.webp"
+                                                    type="image/webp">
+                                                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                                    data-src="assets/featured_services/makeup.webp"
+                                                    alt="Makeup & Bridal" class="service-highlight-img">
+                                            </picture>
                                             <h3>Makeup & Bridal</h3>
                                         </div>
                                         <div class="service-content">
@@ -487,7 +778,7 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                                                 <p class="service-desc">Professional makeup for all occasions</p>
                                             </div>
                                             <div>
-                                                <div class="service-price">Starting from ₹400</div>
+                                                <div class="service-price">Starting from ---400</div>
                                                 <button class="service-btn">Book Now</button>
                                             </div>
                                         </div>
@@ -499,8 +790,15 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                                 <div class="service-card-item">
                                     <div class="service-highlight-card">
                                         <div class="service-img-container">
-                                            <img src="assets/featured_services/threading.png" alt="Threading & Waxing"
-                                                class="service-highlight-img">
+                                            <picture>
+                                                <source data-srcset="assets/featured_services/threading.avif"
+                                                    type="image/avif">
+                                                <source data-srcset="assets/featured_services/threading.webp"
+                                                    type="image/webp">
+                                                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                                    data-src="assets/featured_services/threading.webp"
+                                                    alt="Threading & Waxing" class="service-highlight-img">
+                                            </picture>
                                             <h3>Threading & Waxing</h3>
                                         </div>
                                         <div class="service-content">
@@ -508,7 +806,7 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                                                 <p class="service-desc">Gentle hair removal solutions</p>
                                             </div>
                                             <div>
-                                                <div class="service-price">Starting from ₹80</div>
+                                                <div class="service-price">Starting from ---80</div>
                                                 <button class="service-btn">Book Now</button>
                                             </div>
                                         </div>
@@ -524,47 +822,44 @@ PHASE 3: PREMIUM FEATURES (Week 4)
             <div id="offers" class="offers-section">
                 <div class="container">
                     <h2 class="section-title">
-                        <span class="title-decoration">✨</span>
+                        <span class="title-decoration">---</span>
                         Special Offers
-                        <span class="title-decoration">✨</span>
+                        <span class="title-decoration">---</span>
                     </h2>
                     <p class="section-subtitle">Limited time deals just for you</p>
 
                     <div class="offers-grid">
                         <div class="offer-card glow-card">
                             <div class="offer-badge hot">HOT DEAL</div>
-                            <div class="offer-icon">✂️</div>
-                            <h3>All Haircuts @ ₹99</h3>
-                            <p>Get any haircut style for just ₹99! Limited time offer on all cuts.</p>
+                            <div class="offer-icon">------</div>
+                            <h3>All Haircuts @ ---99</h3>
+                            <p>Get any haircut style for just ---99! Limited time offer on all cuts.</p>
                             <div class="offer-price">
-                                <span class="old-price">₹100-600</span>
-                                <span class="new-price">₹99</span>
+                                <span class="old-price">---100-600</span>
+                                <span class="new-price">---99</span>
                             </div>
-                            <div class="sparkle-line"></div>
                             <button class="tc-btn" onclick="showTC()">T&C</button>
                         </div>
 
                         <div class="offer-card glow-card">
                             <div class="offer-badge festive">FESTIVE SPECIAL</div>
-                            <div class="offer-icon">🪔</div>
+                            <div class="offer-icon">----</div>
                             <h3>Festive Beauty Package</h3>
                             <p>50% off* prices are inclusive of the offer</p>
                             <div class="offer-price">
                                 <span class="new-price">50% OFF*</span>
                             </div>
-                            <div class="sparkle-line"></div>
                             <button class="tc-btn" onclick="showTC()">T&C</button>
                         </div>
 
                         <div class="offer-card glow-card">
                             <div class="offer-badge student">STUDENT OFFER</div>
-                            <div class="offer-icon">🎓</div>
+                            <div class="offer-icon">----</div>
                             <h3>College Student Discount</h3>
                             <p>Get 25% off on all services with valid student ID</p>
                             <div class="offer-price">
                                 <span class="new-price">25% OFF</span>
                             </div>
-                            <div class="sparkle-line"></div>
                             <button class="tc-btn" onclick="showTC()">T&C</button>
                         </div>
                     </div>
@@ -577,68 +872,132 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                 <div id="gallery" class="gallery-section">
                     <div class="container">
                         <h2 class="section-title">
-                            <span class="title-decoration">🌟</span>
+                            <span class="title-decoration">----</span>
                             Gallery
-                            <span class="title-decoration">🌟</span>
+                            <span class="title-decoration">----</span>
                         </h2>
                         <p class="section-subtitle">Witness the transformation</p>
 
                         <div class="gallery-wrapper">
-                            <button class="gallery-scroll-btn gallery-scroll-left" aria-label="Scroll Left">❮</button>
+                            <button class="gallery-scroll-btn gallery-scroll-left" aria-label="Scroll Left">---</button>
 
                             <div class="gallery-grid" id="galleryGrid">
                                 <div class="gallery-item">
-                                    <img src="attached_assets/stock_images/gallery_facial.webp" alt="Facial Treatments">
+                                    <picture>
+                                        <source data-srcset="attached_assets/stock_images/gallery_facial.avif"
+                                            type="image/avif">
+                                        <source data-srcset="attached_assets/stock_images/gallery_facial.webp"
+                                            type="image/webp">
+                                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                            data-src="attached_assets/stock_images/gallery_facial.webp"
+                                            alt="Facial Treatments">
+                                    </picture>
                                     <div class="gallery-overlay">
                                         <h3>Facial Treatments</h3>
                                     </div>
                                 </div>
                                 <div class="gallery-item">
-                                    <img src="attached_assets/stock_images/gallery_makeup.webp" alt="Makeup Styling">
+                                    <picture>
+                                        <source data-srcset="attached_assets/stock_images/gallery_makeup.avif"
+                                            type="image/avif">
+                                        <source data-srcset="attached_assets/stock_images/gallery_makeup.webp"
+                                            type="image/webp">
+                                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                            data-src="attached_assets/stock_images/gallery_makeup.webp"
+                                            alt="Makeup Styling">
+                                    </picture>
                                     <div class="gallery-overlay">
                                         <h3>Makeup Styling</h3>
                                     </div>
                                 </div>
                                 <div class="gallery-item">
-                                    <img src="attached_assets/stock_images/gallery_hair.webp" alt="Hair Coloring">
+                                    <picture>
+                                        <source data-srcset="attached_assets/stock_images/gallery_hair.avif"
+                                            type="image/avif">
+                                        <source data-srcset="attached_assets/stock_images/gallery_hair.webp"
+                                            type="image/webp">
+                                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                            data-src="attached_assets/stock_images/gallery_hair.webp"
+                                            alt="Hair Coloring">
+                                    </picture>
                                     <div class="gallery-overlay">
                                         <h3>Hair Coloring</h3>
                                     </div>
                                 </div>
                                 <div class="gallery-item">
-                                    <img src="attached_assets/stock_images/gallery_spa.webp" alt="Spa & Nourish">
+                                    <picture>
+                                        <source data-srcset="attached_assets/stock_images/gallery_spa.avif"
+                                            type="image/avif">
+                                        <source data-srcset="attached_assets/stock_images/gallery_spa.webp"
+                                            type="image/webp">
+                                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                            data-src="attached_assets/stock_images/gallery_spa.webp"
+                                            alt="Spa & Nourish">
+                                    </picture>
                                     <div class="gallery-overlay">
                                         <h3>Spa & Nourish</h3>
                                     </div>
                                 </div>
                                 <!-- Duplicates for scroll demo -->
                                 <div class="gallery-item">
-                                    <img src="attached_assets/stock_images/gallery_facial.webp" alt="Advanced Facials">
+                                    <picture>
+                                        <source data-srcset="attached_assets/stock_images/gallery_facial.avif"
+                                            type="image/avif">
+                                        <source data-srcset="attached_assets/stock_images/gallery_facial.webp"
+                                            type="image/webp">
+                                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                            data-src="attached_assets/stock_images/gallery_facial.webp"
+                                            alt="Advanced Facials">
+                                    </picture>
                                     <div class="gallery-overlay">
                                         <h3>Advanced Facials</h3>
                                     </div>
                                 </div>
                                 <div class="gallery-item">
-                                    <img src="attached_assets/stock_images/gallery_makeup.webp" alt="Bridal Makeup">
+                                    <picture>
+                                        <source data-srcset="attached_assets/stock_images/gallery_makeup.avif"
+                                            type="image/avif">
+                                        <source data-srcset="attached_assets/stock_images/gallery_makeup.webp"
+                                            type="image/webp">
+                                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                            data-src="attached_assets/stock_images/gallery_makeup.webp"
+                                            alt="Bridal Makeup">
+                                    </picture>
                                     <div class="gallery-overlay">
                                         <h3>Bridal Makeup</h3>
                                     </div>
                                 </div>
                                 <div class="gallery-item">
-                                    <img src="attached_assets/stock_images/gallery_hair.webp" alt="Style & Cuts">
+                                    <picture>
+                                        <source data-srcset="attached_assets/stock_images/gallery_hair.avif"
+                                            type="image/avif">
+                                        <source data-srcset="attached_assets/stock_images/gallery_hair.webp"
+                                            type="image/webp">
+                                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                            data-src="attached_assets/stock_images/gallery_hair.webp"
+                                            alt="Style & Cuts">
+                                    </picture>
                                     <div class="gallery-overlay">
                                         <h3>Style & Cuts</h3>
                                     </div>
                                 </div>
                                 <div class="gallery-item">
-                                    <img src="attached_assets/stock_images/gallery_spa.webp" alt="Relaxing Spa">
+                                    <picture>
+                                        <source data-srcset="attached_assets/stock_images/gallery_spa.avif"
+                                            type="image/avif">
+                                        <source data-srcset="attached_assets/stock_images/gallery_spa.webp"
+                                            type="image/webp">
+                                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                            data-src="attached_assets/stock_images/gallery_spa.webp" alt="Relaxing Spa">
+                                    </picture>
                                     <div class="gallery-overlay">
                                         <h3>Relaxing Spa</h3>
                                     </div>
                                 </div>
                             </div>
 
-                            <button class="gallery-scroll-btn gallery-scroll-right" aria-label="Scroll Right">❯</button>
+                            <button class="gallery-scroll-btn gallery-scroll-right"
+                                aria-label="Scroll Right">---</button>
                         </div>
 
                         <!-- View Gallery Button -->
@@ -659,9 +1018,9 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                 <div class="before-after-section" id="transformations">
                     <div class="container">
                         <h2 class="section-title">
-                            <span class="title-decoration">✨</span>
+                            <span class="title-decoration">⭐</span>
                             Transformation Gallery
-                            <span class="title-decoration">✨</span>
+                            <span class="title-decoration">⭐</span>
                         </h2>
                         <p class="section-subtitle">Witness the magic of our expert stylists</p>
 
@@ -676,12 +1035,14 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                             <div class="ba-carousel" id="baCarousel">
                                 <div class="ba-slide active" data-category="hair">
                                     <div class="comparison-slider" data-position="50">
-                                        <img src="attached_assets/stock_images/hair_color_after.png"
+                                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                            data-src="attached_assets/stock_images/hair_color_after.avif"
                                             alt="After transformation" class="after-img">
-                                        <img src="attached_assets/stock_images/hair_color_before.png"
+                                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                            data-src="attached_assets/stock_images/hair_color_before.avif"
                                             alt="Before transformation" class="before-img">
                                         <div class="slider-handle">
-                                            <span class="handle-icon">↔</span>
+                                            <span class="handle-icon">---</span>
                                         </div>
                                         <span class="ba-label before-label">Before</span>
                                         <span class="ba-label after-label">After</span>
@@ -694,12 +1055,14 @@ PHASE 3: PREMIUM FEATURES (Week 4)
 
                                 <div class="ba-slide" data-category="hair">
                                     <div class="comparison-slider" data-position="50">
-                                        <img src="attached_assets/stock_images/keratin_after.png"
+                                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                            data-src="attached_assets/stock_images/keratin_after.avif"
                                             alt="After Keratin Treatment" class="after-img">
-                                        <img src="attached_assets/stock_images/keratin_before.png"
+                                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                            data-src="attached_assets/stock_images/keratin_before.avif"
                                             alt="Before Keratin Treatment" class="before-img">
                                         <div class="slider-handle">
-                                            <span class="handle-icon">↔</span>
+                                            <span class="handle-icon">---</span>
                                         </div>
                                         <span class="ba-label before-label">Before</span>
                                         <span class="ba-label after-label">After</span>
@@ -712,12 +1075,14 @@ PHASE 3: PREMIUM FEATURES (Week 4)
 
                                 <div class="ba-slide" data-category="makeup">
                                     <div class="comparison-slider" data-position="50">
-                                        <img src="attached_assets/stock_images/makeup_zenz_after.png" alt="After makeup"
-                                            class="after-img">
-                                        <img src="attached_assets/stock_images/makeup_zenz_before.png"
+                                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                            data-src="attached_assets/stock_images/makeup_zenz_after.avif"
+                                            alt="After makeup" class="after-img">
+                                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                            data-src="attached_assets/stock_images/makeup_zenz_before.avif"
                                             alt="Before makeup" class="before-img">
                                         <div class="slider-handle">
-                                            <span class="handle-icon">↔</span>
+                                            <span class="handle-icon">---</span>
                                         </div>
                                         <span class="ba-label before-label">Before</span>
                                         <span class="ba-label after-label">After</span>
@@ -730,12 +1095,14 @@ PHASE 3: PREMIUM FEATURES (Week 4)
 
                                 <div class="ba-slide" data-category="nails">
                                     <div class="comparison-slider" data-position="50">
-                                        <img src="attached_assets/stock_images/nails_art_after.png" alt="After nails"
-                                            class="after-img">
-                                        <img src="attached_assets/stock_images/nails_art_before.png" alt="Before nails"
-                                            class="before-img">
+                                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                            data-src="attached_assets/stock_images/nails_art_after.avif"
+                                            alt="After nails" class="after-img">
+                                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                            data-src="attached_assets/stock_images/nails_art_before.avif"
+                                            alt="Before nails" class="before-img">
                                         <div class="slider-handle">
-                                            <span class="handle-icon">↔</span>
+                                            <span class="handle-icon">---</span>
                                         </div>
                                         <span class="ba-label before-label">Before</span>
                                         <span class="ba-label after-label">After</span>
@@ -747,8 +1114,8 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                                 </div>
                             </div>
 
-                            <button class="ba-nav-btn prev" onclick="slideBA(-1)">❮</button>
-                            <button class="ba-nav-btn next" onclick="slideBA(1)">❯</button>
+                            <button class="ba-nav-btn prev" onclick="slideBA(-1)">---</button>
+                            <button class="ba-nav-btn next" onclick="slideBA(1)">---</button>
 
                             <div class="ba-dots" id="baDots"></div>
                         </div>
@@ -761,9 +1128,9 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                 <div class="staff-section" id="team">
                     <div class="container">
                         <h2 class="section-title">
-                            <span class="title-decoration">💇</span>
+                            <span class="title-decoration">----</span>
                             Meet Our Expert Team
-                            <span class="title-decoration">💇</span>
+                            <span class="title-decoration">----</span>
                         </h2>
                         <p class="section-subtitle">Passionate professionals dedicated to your beauty</p>
 
@@ -771,13 +1138,22 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                             <div class="staff-carousel" id="staffCarousel">
                                 <div class="staff-card">
                                     <div class="staff-photo-wrapper">
-                                        <img src="attached_assets/stock_images/professional_beauty__59c2cb84.jpg"
-                                            alt="Priya Sharma" class="staff-photo">
+                                        <picture>
+                                            <source
+                                                data-srcset="attached_assets/stock_images/professional_beauty__59c2cb84.avif"
+                                                type="image/avif">
+                                            <source
+                                                data-srcset="attached_assets/stock_images/professional_beauty__59c2cb84.webp"
+                                                type="image/webp">
+                                            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                                data-src="attached_assets/stock_images/professional_beauty__59c2cb84.jpg"
+                                                alt="Priya Sharma" class="staff-photo">
+                                        </picture>
                                     </div>
                                     <div class="staff-info">
                                         <div class="staff-name-wrapper">
                                             <h3 class="staff-name">Priya Sharma</h3>
-                                            <div class="staff-rating">⭐ 4.9</div>
+                                            <div class="staff-rating">--- 4.9</div>
                                         </div>
                                         <p class="staff-title">Senior Hair Stylist</p>
                                         <div class="staff-experience">
@@ -795,13 +1171,22 @@ PHASE 3: PREMIUM FEATURES (Week 4)
 
                                 <div class="staff-card">
                                     <div class="staff-photo-wrapper">
-                                        <img src="attached_assets/stock_images/professional_beauty__30f1cabb.jpg"
-                                            alt="Meera Patel" class="staff-photo">
+                                        <picture>
+                                            <source
+                                                data-srcset="attached_assets/stock_images/professional_beauty__30f1cabb.avif"
+                                                type="image/avif">
+                                            <source
+                                                data-srcset="attached_assets/stock_images/professional_beauty__30f1cabb.webp"
+                                                type="image/webp">
+                                            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                                data-src="attached_assets/stock_images/professional_beauty__30f1cabb.jpg"
+                                                alt="Meera Patel" class="staff-photo">
+                                        </picture>
                                     </div>
                                     <div class="staff-info">
                                         <div class="staff-name-wrapper">
                                             <h3 class="staff-name">Meera Patel</h3>
-                                            <div class="staff-rating">⭐ 4.8</div>
+                                            <div class="staff-rating">--- 4.8</div>
                                         </div>
                                         <p class="staff-title">Makeup Artist</p>
                                         <div class="staff-experience">
@@ -819,13 +1204,22 @@ PHASE 3: PREMIUM FEATURES (Week 4)
 
                                 <div class="staff-card">
                                     <div class="staff-photo-wrapper">
-                                        <img src="attached_assets/stock_images/professional_beauty__4b0e7940.jpg"
-                                            alt="Anjali Singh" class="staff-photo">
+                                        <picture>
+                                            <source
+                                                data-srcset="attached_assets/stock_images/professional_beauty__4b0e7940.avif"
+                                                type="image/avif">
+                                            <source
+                                                data-srcset="attached_assets/stock_images/professional_beauty__4b0e7940.webp"
+                                                type="image/webp">
+                                            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                                data-src="attached_assets/stock_images/professional_beauty__4b0e7940.jpg"
+                                                alt="Anjali Singh" class="staff-photo">
+                                        </picture>
                                     </div>
                                     <div class="staff-info">
                                         <div class="staff-name-wrapper">
                                             <h3 class="staff-name">Anjali Singh</h3>
-                                            <div class="staff-rating">⭐ 4.9</div>
+                                            <div class="staff-rating">--- 4.9</div>
                                         </div>
                                         <p class="staff-title">Skin Care Specialist</p>
                                         <div class="staff-experience">
@@ -843,13 +1237,22 @@ PHASE 3: PREMIUM FEATURES (Week 4)
 
                                 <div class="staff-card">
                                     <div class="staff-photo-wrapper">
-                                        <img src="attached_assets/stock_images/professional_beauty__bd79d0cb.jpg"
-                                            alt="Riya Gupta" class="staff-photo">
+                                        <picture>
+                                            <source
+                                                data-srcset="attached_assets/stock_images/professional_beauty__bd79d0cb.avif"
+                                                type="image/avif">
+                                            <source
+                                                data-srcset="attached_assets/stock_images/professional_beauty__bd79d0cb.webp"
+                                                type="image/webp">
+                                            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                                data-src="attached_assets/stock_images/professional_beauty__bd79d0cb.jpg"
+                                                alt="Riya Gupta" class="staff-photo">
+                                        </picture>
                                     </div>
                                     <div class="staff-info">
                                         <div class="staff-name-wrapper">
                                             <h3 class="staff-name">Riya Gupta</h3>
-                                            <div class="staff-rating">⭐ 4.7</div>
+                                            <div class="staff-rating">--- 4.7</div>
                                         </div>
                                         <p class="staff-title">Nail Art Expert</p>
                                         <div class="staff-experience">
@@ -866,8 +1269,8 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                                 </div>
                             </div>
 
-                            <button class="staff-nav-btn prev" onclick="slideStaff(-1)">❮</button>
-                            <button class="staff-nav-btn next" onclick="slideStaff(1)">❯</button>
+                            <button class="staff-nav-btn prev" onclick="slideStaff(-1)">---</button>
+                            <button class="staff-nav-btn next" onclick="slideStaff(1)">---</button>
                         </div>
                     </div>
                 </div>
@@ -887,7 +1290,7 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                                 <div class="testimonial-carousel-track" id="testimonialTrack">
                                     <div class="testimonial-card-item">
                                         <div class="testimonial-card">
-                                            <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                                            <div class="testimonial-stars">---------------</div>
                                             <p class="testimonial-text">"Blancbeu gave me the best haircut ever! The
                                                 professionalism and care are unmatched. Highly recommended!"</p>
                                             <div class="testimonial-author">
@@ -899,7 +1302,7 @@ PHASE 3: PREMIUM FEATURES (Week 4)
 
                                     <div class="testimonial-card-item">
                                         <div class="testimonial-card">
-                                            <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                                            <div class="testimonial-stars">---------------</div>
                                             <p class="testimonial-text">"The bridal makeup service was absolutely
                                                 stunning. I felt like a queen on my special day!"</p>
                                             <div class="testimonial-author">
@@ -911,7 +1314,7 @@ PHASE 3: PREMIUM FEATURES (Week 4)
 
                                     <div class="testimonial-card-item">
                                         <div class="testimonial-card">
-                                            <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                                            <div class="testimonial-stars">★★★★★</div>
                                             <p class="testimonial-text">"Spa treatments are heavenly! I always leave
                                                 feeling completely rejuvenated and refreshed."</p>
                                             <div class="testimonial-author">
@@ -923,7 +1326,7 @@ PHASE 3: PREMIUM FEATURES (Week 4)
 
                                     <div class="testimonial-card-item">
                                         <div class="testimonial-card">
-                                            <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                                            <div class="testimonial-stars">★★★★★</div>
                                             <p class="testimonial-text">"Best facial treatment I've ever had. The
                                                 staff is so knowledgeable and friendly!"</p>
                                             <div class="testimonial-author">
@@ -934,8 +1337,18 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                                     </div>
                                 </div>
                             </div>
-                            <button class="testimonial-nav-btn prev" onclick="slideTestimonial(-1)">❮</button>
-                            <button class="testimonial-nav-btn next" onclick="slideTestimonial(1)">❯</button>
+                            <button class="testimonial-nav-btn prev" onclick="slideTestimonial(-1)">
+                                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2"
+                                    fill="none">
+                                    <polyline points="15 18 9 12 15 6"></polyline>
+                                </svg>
+                            </button>
+                            <button class="testimonial-nav-btn next" onclick="slideTestimonial(1)">
+                                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2"
+                                    fill="none">
+                                    <polyline points="9 18 15 12 9 6"></polyline>
+                                </svg>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -945,23 +1358,34 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                 <div class="about-section" id="about">
                     <div class="container">
                         <h2 class="section-title">
-                            <span class="title-decoration">✨</span>
+                            <span class="title-decoration">⭐</span>
                             About Blancbeu
-                            <span class="title-decoration">✨</span>
+                            <span class="title-decoration">⭐</span>
                         </h2>
                         <p class="section-subtitle">Where Beauty Meets Excellence</p>
 
                         <!-- Premium Badge -->
                         <div class="premium-salon-badge">
-                            <div class="badge-glow"></div>
-                            <span class="badge-icon">👑</span>
+                            <span class="badge-icon">
+                                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                                    <polygon
+                                        points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                    </polygon>
+                                </svg>
+                            </span>
                             <span class="badge-text">Ranchi's Newest & Most Premium Beauty Destination</span>
                         </div>
 
                         <div class="about-cards-container">
                             <!-- Story Card -->
                             <div class="about-card glass-card">
-                                <div class="about-card-icon">🏆</div>
+                                <div class="about-card-icon">
+                                    <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor"
+                                        stroke-width="1.5" fill="none">
+                                        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                                        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                                    </svg>
+                                </div>
                                 <h3 class="about-card-title">Our Story</h3>
                                 <p class="about-card-text">
                                     <span class="highlight-gold">Blancbeu Family Beauty Salon</span> —
@@ -974,7 +1398,14 @@ PHASE 3: PREMIUM FEATURES (Week 4)
 
                             <!-- Mission Card -->
                             <div class="about-card glass-card">
-                                <div class="about-card-icon">💎</div>
+                                <div class="about-card-icon">
+                                    <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor"
+                                        stroke-width="1.5" fill="none">
+                                        <path
+                                            d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                                        </path>
+                                    </svg>
+                                </div>
                                 <h3 class="about-card-title">Our Promise</h3>
                                 <p class="about-card-text">
                                     You deserve to feel <span class="highlight-shimmer">special & extraordinary</span>.
@@ -989,26 +1420,32 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                         <!-- Highlights Pills -->
                         <div class="about-highlights-pills">
                             <div class="highlight-pill premium-pill">
-                                <span class="pill-icon">🥇</span>
+                                <span class="pill-icon">🏆</span>
                                 <span class="pill-text">Top Rated in Ranchi</span>
                             </div>
                             <div class="highlight-pill">
-                                <span class="pill-icon">👩‍🎨</span>
+                                <span class="pill-icon">✂️</span>
                                 <span class="pill-text">Expert Stylists</span>
                             </div>
                             <div class="highlight-pill">
-                                <span class="pill-icon">💫</span>
+                                <span class="pill-icon">✨</span>
                                 <span class="pill-text">Luxury Products</span>
                             </div>
                             <div class="highlight-pill">
-                                <span class="pill-icon">🎯</span>
+                                <span class="pill-icon">👑</span>
                                 <span class="pill-text">VIP Experience</span>
                             </div>
                         </div>
 
                         <!-- Address Card for SEO -->
                         <div class="about-address-card">
-                            <div class="address-icon">📍</div>
+                            <div class="address-icon">
+                                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2"
+                                    fill="none">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                            </div>
                             <address class="address-text" itemscope itemtype="http://schema.org/BeautySalon">
                                 <span itemprop="name">Blancbeu Family Beauty Salon</span><br>
                                 <span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
@@ -1026,9 +1463,9 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                     <div class="trust-section">
                         <div class="container">
                             <h2 class="section-title">
-                                <span class="title-decoration">✨</span>
+                                <span class="title-decoration">⭐</span>
                                 Why Trust Blancbeu
-                                <span class="title-decoration">✨</span>
+                                <span class="title-decoration">⭐</span>
                             </h2>
                             <p class="section-subtitle">Trusted by thousands for premium beauty care</p>
 
@@ -1065,20 +1502,32 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                 <div class="cta-glow-bg"></div>
                 <div class="container">
                     <div class="cta-content">
-                        <span class="cta-badge">✨ Book Today</span>
+                        <span class="cta-badge">📅 Book Today</span>
                         <h2 class="cta-title">Ready to <span class="cta-highlight">Transform</span> Your Look?</h2>
                         <p class="cta-subtitle">Experience the luxury of premium beauty care. Your transformation
                             awaits.</p>
 
                         <div class="cta-buttons-premium">
                             <a href="tel:+919229915277" class="cta-btn-gold">
-                                <span class="cta-btn-icon">📞</span>
+                                <span class="cta-btn-icon">
+                                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                                        <path
+                                            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                                        </path>
+                                    </svg>
+                                </span>
                                 <span class="cta-btn-text">Call Now</span>
                             </a>
                             <a href="https://wa.me/919229915277" class="cta-btn-outline">
-                                <span class="cta-btn-icon">💬</span>
-                                <span class="cta-btn-text">WhatsApp</span>
-                            </a>
+                                <a href="https://wa.me/919229915277" class="cta-btn-outline">
+                                    <span class="cta-btn-icon">
+                                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                                            <path
+                                                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.008-.57-.008-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z" />
+                                        </svg>
+                                    </span>
+                                    <span class="cta-btn-text">WhatsApp</span>
+                                </a>
                         </div>
 
                         <p class="cta-response-time">⚡ We respond within 5 minutes</p>
@@ -1092,9 +1541,9 @@ PHASE 3: PREMIUM FEATURES (Week 4)
             <section class="faq-section" id="faq">
                 <div class="container">
                     <h2 class="section-title">
-                        <span class="title-decoration">❓</span>
+                        <span class="title-decoration">✨</span>
                         Frequently Asked Questions
-                        <span class="title-decoration">💬</span>
+                        <span class="title-decoration">✨</span>
                     </h2>
                     <p class="section-subtitle">Everything you need to know about our services</p>
 
@@ -1193,7 +1642,7 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                         <div class="footer-section">
                             <h3>Blancbeu</h3>
                             <p>Premium Beauty & Wellness Salon</p>
-                            <p>✨ Where Beauty Meets Excellence ✨</p>
+                            <p>— Where Beauty Meets Excellence —</p>
                         </div>
                         <div class="footer-section">
                             <h4>Quick Links</h4>
@@ -1247,10 +1696,22 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                 <!-- Search Bar -->
                 <div class="services-search-wrapper">
                     <div class="services-search-bar">
-                        <span class="search-icon">🔍</span>
+                        <span class="search-icon">
+                            <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2"
+                                fill="none">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                            </svg>
+                        </span>
                         <input type="text" id="servicesPageSearch" placeholder="Search services..."
                             class="services-search-input">
-                        <button id="clearServicesSearch" class="clear-search-btn" style="display: none;">✕</button>
+                        <button id="clearServicesSearch" class="clear-search-btn" style="display: none;">
+                            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2"
+                                fill="none">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </button>
                     </div>
                 </div>
 
@@ -1261,56 +1722,101 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                 <div class="services-category-cards" id="servicesCategoryCards">
                     <div class="category-image-card active" data-category="all">
                         <!-- Use a generic beauty collage or general salon image for 'All' -->
-                        <img src="assets/all_services_indian_young.png" alt="All Services" loading="lazy">
+                        <picture>
+                            <source data-srcset="assets/all_services_indian_young.avif" type="image/avif">
+                            <source data-srcset="assets/all_services_indian_young.webp" type="image/webp">
+                            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                data-src="assets/all_services_indian_young.webp" alt="All Services" loading="lazy">
+                        </picture>
                         <div class="category-card-overlay">
                             <h3>All Services</h3>
                         </div>
                     </div>
                     <div class="category-image-card" data-category="Hair cutting">
-                        <img src="assets/featured_services/haircut.png" alt="Hair Cutting" loading="lazy">
+                        <picture>
+                            <source data-srcset="assets/featured_services/haircut.avif" type="image/avif">
+                            <source data-srcset="assets/featured_services/haircut.webp" type="image/webp">
+                            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                data-src="assets/featured_services/haircut.webp" alt="Hair Cutting" loading="lazy">
+                        </picture>
                         <div class="category-card-overlay">
                             <h3>Hair Cutting</h3>
                         </div>
                     </div>
                     <div class="category-image-card" data-category="Facial">
-                        <img src="assets/featured_services/facial.png" alt="Facial" loading="lazy">
+                        <picture>
+                            <source data-srcset="assets/featured_services/facial.avif" type="image/avif">
+                            <source data-srcset="assets/featured_services/facial.webp" type="image/webp">
+                            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                data-src="assets/featured_services/facial.webp" alt="Facial" loading="lazy">
+                        </picture>
                         <div class="category-card-overlay">
                             <h3>Facial</h3>
                         </div>
                     </div>
                     <div class="category-image-card" data-category="Makeup & Styling">
-                        <img src="assets/featured_services/makeup.png" alt="Makeup & Styling" loading="lazy">
+                        <picture>
+                            <source data-srcset="assets/featured_services/makeup.avif" type="image/avif">
+                            <source data-srcset="assets/featured_services/makeup.webp" type="image/webp">
+                            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                data-src="assets/featured_services/makeup.webp" alt="Makeup & Styling" loading="lazy">
+                        </picture>
                         <div class="category-card-overlay">
                             <h3>Makeup</h3>
                         </div>
                     </div>
                     <div class="category-image-card" data-category="Nails & Beauty">
-                        <img src="assets/featured_services/nails.png" alt="Nails & Beauty" loading="lazy">
+                        <picture>
+                            <source data-srcset="assets/featured_services/nails.avif" type="image/avif">
+                            <source data-srcset="assets/featured_services/nails.webp" type="image/webp">
+                            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                data-src="assets/featured_services/nails.webp" alt="Nails & Beauty" loading="lazy">
+                        </picture>
                         <div class="category-card-overlay">
                             <h3>Nails</h3>
                         </div>
                     </div>
                     <div class="category-image-card" data-category="Premium services">
-                        <img src="assets/featured_services/premium.png" alt="Premium Services" loading="lazy">
+                        <picture>
+                            <source data-srcset="assets/featured_services/premium.avif" type="image/avif">
+                            <source data-srcset="assets/featured_services/premium.webp" type="image/webp">
+                            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                data-src="assets/featured_services/premium.webp" alt="Premium Services" loading="lazy">
+                        </picture>
                         <div class="category-card-overlay">
                             <span class="popular-badge">VIP</span>
                             <h3>Premium</h3>
                         </div>
                     </div>
                     <div class="category-image-card" data-category="Hairs & Treatment">
-                        <img src="assets/featured_services/treatment.png" alt="Hair Treatment" loading="lazy">
+                        <picture>
+                            <source data-srcset="assets/featured_services/treatment.avif" type="image/avif">
+                            <source data-srcset="assets/featured_services/treatment.webp" type="image/webp">
+                            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                data-src="assets/featured_services/treatment.webp" alt="Hair Treatment" loading="lazy">
+                        </picture>
                         <div class="category-card-overlay">
                             <h3>Treatment</h3>
                         </div>
                     </div>
                     <div class="category-image-card" data-category="Clean up">
-                        <img src="assets/featured_services/cleanup.png" alt="Clean Up" loading="lazy">
+                        <picture>
+                            <source data-srcset="assets/featured_services/cleanup.avif" type="image/avif">
+                            <source data-srcset="assets/featured_services/cleanup.webp" type="image/webp">
+                            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                data-src="assets/featured_services/cleanup.webp" alt="Clean Up" loading="lazy">
+                        </picture>
                         <div class="category-card-overlay">
                             <h3>Clean Up</h3>
                         </div>
                     </div>
                     <div class="category-image-card" data-category="Hair colour">
-                        <img src="assets/featured_services/spa.png" alt="Hair Colour" loading="lazy">
+                        <picture>
+                            <source data-srcset="assets/featured_services/spa.avif" type="image/avif">
+                            <source data-srcset="assets/featured_services/spa.webp" type="image/webp">
+                            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                data-src="assets/featured_services/spa.webp" alt="Hair Colour" loading="lazy">
+                        </picture>
                         <div class="category-card-overlay">
                             <h3>Hair Colour</h3>
                         </div>
@@ -1332,7 +1838,14 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                 <!-- Quick Book CTA -->
                 <div class="services-quick-book-cta">
                     <div class="quick-book-content">
-                        <span class="quick-book-icon">📱</span>
+                        <span class="quick-book-icon">
+                            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2"
+                                fill="none">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                                <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                            </svg>
+                        </span>
                         <div class="quick-book-text">
                             <strong>Can't find what you're looking for?</strong>
                             <span>Contact us for custom services</span>
@@ -1340,7 +1853,11 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                     </div>
                     <a href="https://wa.me/919229915277?text=Hi%2C%20I%20need%20help%20with%20a%20service"
                         target="_blank" class="quick-book-btn">
-                        💬 Chat with us
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="margin-right: 6px;">
+                            <path
+                                d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z">
+                            </path>
+                        </svg> Chat with us
                     </a>
                 </div>
             </div>
@@ -1361,7 +1878,12 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                 <div class="login-card">
                     <div class="auth-brand">
                         <div class="auth-brand-icon">
-                            <img src="icon-512x512.png" alt="Blancbeu" class="auth-logo">
+                            <picture>
+                                <source srcset="icon-512x512.avif" type="image/avif">
+                                <source srcset="icon-512x512.webp" type="image/webp">
+                                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                    data-src="icon-512x512.png" alt="Blancbeu" class="auth-logo">
+                            </picture>
                         </div>
                         <h1 class="auth-title">Welcome to Blancbeu</h1>
                         <p class="auth-subtitle">Sign in to book appointments & manage your beauty journey</p>
@@ -1371,7 +1893,8 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                         <!-- WhatsApp Login -->
                         <button id="whatsappLoginBtnPage" class="auth-btn auth-btn-whatsapp">
                             <div class="auth-btn-icon">
-                                <img src="attached_assets/new_icons/icons8-whatsapp.apng" alt="WhatsApp">
+                                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                    data-src="attached_assets/new_icons/icons8-whatsapp.apng" alt="WhatsApp">
                             </div>
                             <div class="auth-btn-content">
                                 <span class="auth-btn-text">Continue with WhatsApp</span>
@@ -1422,7 +1945,15 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                         <span class="unread-count"
                             style="display: none; background: var(--gold-24k); color: var(--bg-primary); border-radius: 20px; padding: 2px 8px; font-size: 12px; font-weight: bold;">7</span>
                     </div>
-                    <button class="notifications-settings-btn" title="Settings">⚙️</button>
+                    <button class="notifications-settings-btn" title="Settings">
+                        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2"
+                            fill="none">
+                            <circle cx="12" cy="12" r="3"></circle>
+                            <path
+                                d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+                            </path>
+                        </svg>
+                    </button>
                 </div>
 
                 <!-- Filter Tabs with Badge Counts -->
@@ -1460,13 +1991,21 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                             data-unread="true">
                             <div class="notification-badge unread"></div>
                             <div class="priority-indicator high"></div>
-                            <div class="notification-icon appointment-icon">📅</div>
+                            <div class="notification-icon appointment-icon">
+                                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2"
+                                    fill="none">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                                </svg>
+                            </div>
                             <div class="notification-content">
                                 <div class="notification-header">
                                     <h3 class="notification-title">Your Booking Confirmed</h3>
                                     <span class="priority-label high-label">Urgent</span>
                                 </div>
-                                <p class="notification-message">Hair Spa on Nov 28, 2025 at 3:00 PM • Service ID:
+                                <p class="notification-message">Hair Spa on Nov 28, 2025 at 3:00 PM | Service ID:
                                     #BS2025</p>
                                 <div class="notification-meta">
                                     <span class="meta-tag">Confirmed</span>
@@ -1475,7 +2014,13 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                             </div>
                             <div class="notification-actions">
                                 <button class="action-btn view-appointment">View Details</button>
-                                <button class="action-btn dismiss-btn" title="Dismiss">✕</button>
+                                <button class="action-btn dismiss-btn" title="Dismiss">
+                                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor"
+                                        stroke-width="2" fill="none">
+                                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                                    </svg>
+                                </button>
                             </div>
                         </div>
 
@@ -1484,7 +2029,15 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                             data-unread="true">
                             <div class="notification-badge unread"></div>
                             <div class="priority-indicator high"></div>
-                            <div class="notification-icon offer-icon">✨</div>
+                            <div class="notification-icon offer-icon">
+                                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2"
+                                    fill="none">
+                                    <path
+                                        d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z">
+                                    </path>
+                                    <line x1="7" y1="7" x2="7.01" y2="7"></line>
+                                </svg>
+                            </div>
                             <div class="notification-content">
                                 <div class="notification-header">
                                     <h3 class="notification-title">Special Offer: 40% Off!</h3>
@@ -1500,7 +2053,13 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                             </div>
                             <div class="notification-actions">
                                 <button class="action-btn view-btn">View Offer</button>
-                                <button class="action-btn dismiss-btn" title="Dismiss">✕</button>
+                                <button class="action-btn dismiss-btn" title="Dismiss">
+                                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor"
+                                        stroke-width="2" fill="none">
+                                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                                    </svg>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -1514,7 +2073,14 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                         <!-- Review Request -->
                         <div class="notification-card reviews" data-type="reviews" data-priority="normal"
                             data-unread="false">
-                            <div class="notification-icon review-icon">⭐</div>
+                            <div class="notification-icon review-icon">
+                                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2"
+                                    fill="none">
+                                    <path
+                                        d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z">
+                                    </path>
+                                </svg>
+                            </div>
                             <div class="notification-content">
                                 <h3 class="notification-title">Share Your Experience</h3>
                                 <p class="notification-message">We'd love to hear about your recent visit! Rate your
@@ -1523,14 +2089,26 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                             </div>
                             <div class="notification-actions">
                                 <button class="action-btn review-btn">Leave Review</button>
-                                <button class="action-btn dismiss-btn" title="Dismiss">✕</button>
+                                <button class="action-btn dismiss-btn" title="Dismiss">
+                                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor"
+                                        stroke-width="2" fill="none">
+                                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                                    </svg>
+                                </button>
                             </div>
                         </div>
 
                         <!-- Appointment Reminder -->
                         <div class="notification-card appointments" data-type="appointments" data-priority="normal"
                             data-unread="false">
-                            <div class="notification-icon reminder-icon">🔔</div>
+                            <div class="notification-icon reminder-icon">
+                                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2"
+                                    fill="none">
+                                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                                    <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                                </svg>
+                            </div>
                             <div class="notification-content">
                                 <h3 class="notification-title">Appointment Reminder</h3>
                                 <p class="notification-message">Your Hair Coloring appointment is tomorrow at 2:00 PM
@@ -1538,8 +2116,21 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                                 <p class="notification-time">1 day ago</p>
                             </div>
                             <div class="notification-actions">
-                                <button class="action-btn like-btn" title="Like">❤️</button>
-                                <button class="action-btn dismiss-btn" title="Dismiss">✕</button>
+                                <button class="action-btn like-btn" title="Like">
+                                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor"
+                                        stroke-width="2" fill="none">
+                                        <path
+                                            d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3">
+                                        </path>
+                                    </svg>
+                                </button>
+                                <button class="action-btn dismiss-btn" title="Dismiss">
+                                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor"
+                                        stroke-width="2" fill="none">
+                                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                                    </svg>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -1553,7 +2144,14 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                         <!-- Loyalty Points Notification -->
                         <div class="notification-card offers" data-type="offers" data-priority="normal"
                             data-unread="false">
-                            <div class="notification-icon loyalty-icon">🎁</div>
+                            <div class="notification-icon loyalty-icon">
+                                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2"
+                                    fill="none">
+                                    <polygon
+                                        points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                    </polygon>
+                                </svg>
+                            </div>
                             <div class="notification-content">
                                 <h3 class="notification-title">You've Earned 150 Points!</h3>
                                 <p class="notification-message">Congratulations! Redeem them for exclusive rewards and
@@ -1565,14 +2163,26 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                             </div>
                             <div class="notification-actions">
                                 <button class="action-btn redeem-btn">Redeem</button>
-                                <button class="action-btn dismiss-btn" title="Dismiss">✕</button>
+                                <button class="action-btn dismiss-btn" title="Dismiss">
+                                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor"
+                                        stroke-width="2" fill="none">
+                                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                                    </svg>
+                                </button>
                             </div>
                         </div>
 
                         <!-- New Service Alert -->
                         <div class="notification-card offers" data-type="offers" data-priority="normal"
                             data-unread="false">
-                            <div class="notification-icon new-service-icon">🌟</div>
+                            <div class="notification-icon new-service-icon">
+                                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2"
+                                    fill="none">
+                                    <path d="M12 20h9"></path>
+                                    <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                                </svg>
+                            </div>
                             <div class="notification-content">
                                 <h3 class="notification-title">New Service: Bridal Makeup</h3>
                                 <p class="notification-message">Experience our premium bridal makeup service with expert
@@ -1581,26 +2191,52 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                             </div>
                             <div class="notification-actions">
                                 <button class="action-btn explore-btn">Explore</button>
-                                <button class="action-btn dismiss-btn" title="Dismiss">✕</button>
+                                <button class="action-btn dismiss-btn" title="Dismiss">
+                                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor"
+                                        stroke-width="2" fill="none">
+                                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                                    </svg>
+                                </button>
                             </div>
                         </div>
 
                         <!-- Review Alert -->
                         <div class="notification-card reviews" data-type="reviews" data-priority="normal"
                             data-unread="false">
-                            <div class="notification-icon review-alert-icon">💬</div>
+                            <div class="notification-icon review-alert-icon">
+                                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2"
+                                    fill="none">
+                                    <path
+                                        d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3">
+                                    </path>
+                                </svg>
+                            </div>
                             <div class="notification-content">
                                 <h3 class="notification-title">New Review from Sarah M.</h3>
                                 <p class="notification-message">"Amazing experience! The staff was very professional and
                                     friendly."</p>
                                 <div class="review-preview">
-                                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                                    <span class="stars">★★★★★</span>
                                 </div>
                                 <p class="notification-time">5 days ago</p>
                             </div>
                             <div class="notification-actions">
-                                <button class="action-btn like-btn" title="Like">❤️</button>
-                                <button class="action-btn dismiss-btn" title="Dismiss">✕</button>
+                                <button class="action-btn like-btn" title="Like">
+                                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor"
+                                        stroke-width="2" fill="none">
+                                        <path
+                                            d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3">
+                                        </path>
+                                    </svg>
+                                </button>
+                                <button class="action-btn dismiss-btn" title="Dismiss">
+                                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor"
+                                        stroke-width="2" fill="none">
+                                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                                    </svg>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -1608,7 +2244,15 @@ PHASE 3: PREMIUM FEATURES (Week 4)
 
                 <!-- Empty State (hidden by default) -->
                 <div class="empty-state" style="display: none; text-align: center; padding: 80px 20px;">
-                    <div style="font-size: 100px; margin-bottom: 20px; animation: float 3s ease-in-out infinite;">🔔
+                    <div style="font-size: 60px; margin-bottom: 20px; color: var(--text-muted);">
+                        <svg viewBox="0 0 24 24" width="60" height="60" stroke="currentColor" stroke-width="1"
+                            fill="none">
+                            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                            <path d="M18.63 13A17.89 17.89 0 0 1 18 8"></path>
+                            <path d="M6.26 6.26A5.86 5.86 0 0 0 6 8c0 7-3 9-3 9h14"></path>
+                            <path d="M18 8a6 6 0 0 0-9.33-5"></path>
+                            <line x1="1" y1="1" x2="23" y2="23"></line>
+                        </svg>
                     </div>
                     <h2 style="color: var(--text-primary); margin-bottom: 10px; font-size: 24px;">All Caught Up!</h2>
                     <p style="color: var(--text-secondary); font-size: 14px;">You have no new notifications. Check back
@@ -1624,7 +2268,12 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                     <div class="bookings-header-content">
                         <h1 class="premium-page-title">My Bookings</h1>
                     </div>
-                    <button class="bookings-filter-btn" title="Filter">🔍</button>
+                    <button class="bookings-filter-btn" title="Filter">
+                        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2"
+                            fill="none">
+                            <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                        </svg>
+                    </button>
                 </div>
 
 
@@ -1639,7 +2288,14 @@ PHASE 3: PREMIUM FEATURES (Week 4)
 
                 <!-- Empty State (hidden by default) -->
                 <div class="empty-state-bookings" style="display: none; text-align: center; padding: 100px 20px;">
-                    <div style="font-size: 120px; margin-bottom: 20px; animation: float 3s ease-in-out infinite;">📅
+                    <div style="font-size: 60px; margin-bottom: 20px; color: var(--text-muted);">
+                        <svg viewBox="0 0 24 24" width="60" height="60" stroke="currentColor" stroke-width="1"
+                            fill="none">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                        </svg>
                     </div>
                     <h2 style="color: var(--text-primary); margin-bottom: 10px; font-size: 24px;">No Bookings Yet</h2>
                     <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 20px;">Schedule your first
@@ -1672,7 +2328,7 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                             <h2 class="profile-name">Priya Sharma</h2>
                             <p class="profile-email">priya.sharma@email.com</p>
                             <div class="member-badge" id="premiumBadge" style="display: none; justify-content: center;">
-                                <span class="badge-icon">⭐</span>
+                                <span class="badge-icon">---</span>
                                 <span class="badge-text" style="font-weight: 600;">Premium Member</span>
                             </div>
                             <!-- Dynamic Sign In Button -->
@@ -1686,7 +2342,7 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                                 <span>Sign In</span>
                             </button>
                         </div>
-                        <button class="edit-profile-btn">✏️</button>
+                        <button class="edit-profile-btn">------</button>
                     </div>
 
                     <!-- Tier Progress -->
@@ -1700,15 +2356,15 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                             <div class="progress-fill" style="width: 91%"></div>
                         </div>
                         <div class="tier-benefits">
-                            <span class="benefit-badge">✓ 15% Discount</span>
-                            <span class="benefit-badge">✓ Free Shipping</span>
+                            <span class="benefit-badge">--- 15% Discount</span>
+                            <span class="benefit-badge">--- Free Shipping</span>
                         </div>
                     </div>
 
                     <!-- Stats Cards (Member Only) -->
                     <div id="statsSection" class="stats-section">
                         <div class="stat-card stat-card-1">
-                            <div class="stat-icon">💎</div>
+                            <div class="stat-icon">----</div>
                             <div class="stat-content">
                                 <div class="stat-label">Loyalty Points</div>
                                 <div class="stat-value">2,450</div>
@@ -1718,17 +2374,17 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                             </div>
                         </div>
                         <div class="stat-card stat-card-2">
-                            <div class="stat-icon">💰</div>
+                            <div class="stat-icon">----</div>
                             <div class="stat-content">
                                 <div class="stat-label">Total Saved</div>
-                                <div class="stat-value">₹4,850</div>
+                                <div class="stat-value">---4,850</div>
                                 <div class="stat-bar">
                                     <div class="stat-bar-fill" style="width: 65%"></div>
                                 </div>
                             </div>
                         </div>
                         <div class="stat-card stat-card-3">
-                            <div class="stat-icon">✅</div>
+                            <div class="stat-icon">---</div>
                             <div class="stat-content">
                                 <div class="stat-label">Bookings</div>
                                 <div class="stat-value">24</div>
@@ -1744,19 +2400,19 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                         <h3 class="section-title">Exclusive Perks</h3>
                         <div class="benefits-grid">
                             <div class="benefit-card">
-                                <span class="benefit-icon">🎉</span>
+                                <span class="benefit-icon">----</span>
                                 <span class="benefit-name">Birthday Gift</span>
                             </div>
                             <div class="benefit-card">
-                                <span class="benefit-icon">🚀</span>
+                                <span class="benefit-icon">----</span>
                                 <span class="benefit-name">Early Access</span>
                             </div>
                             <div class="benefit-card">
-                                <span class="benefit-icon">👑</span>
+                                <span class="benefit-icon">----</span>
                                 <span class="benefit-name">VIP Support</span>
                             </div>
                             <div class="benefit-card">
-                                <span class="benefit-icon">🎁</span>
+                                <span class="benefit-icon">----</span>
                                 <span class="benefit-name">Rewards</span>
                             </div>
                         </div>
@@ -1768,44 +2424,44 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                         <div class="action-items">
                             <button class="action-item"
                                 onclick="if(window.refreshUserData) window.refreshUserData(); window.navigateToPage('profile-details')">
-                                <span class="action-icon">👤</span>
+                                <span class="action-icon">----</span>
                                 <div class="action-text">
                                     <span class="action-label">My Profile</span>
                                     <span class="action-desc">View & edit personal details</span>
                                 </div>
-                                <span class="action-arrow">›</span>
+                                <span class="action-arrow">---</span>
                             </button>
                             <button class="action-item">
-                                <span class="action-icon">📍</span>
+                                <span class="action-icon">----</span>
                                 <div class="action-text">
                                     <span class="action-label">Addresses</span>
                                     <span class="action-desc">Manage delivery addresses</span>
                                 </div>
-                                <span class="action-arrow">›</span>
+                                <span class="action-arrow">---</span>
                             </button>
                             <button class="action-item">
-                                <span class="action-icon">💳</span>
+                                <span class="action-icon">----</span>
                                 <div class="action-text">
                                     <span class="action-label">Payment Methods</span>
                                     <span class="action-desc">Save & manage cards</span>
                                 </div>
-                                <span class="action-arrow">›</span>
+                                <span class="action-arrow">---</span>
                             </button>
                             <button class="action-item">
-                                <span class="action-icon">❤️</span>
+                                <span class="action-icon">------</span>
                                 <div class="action-text">
                                     <span class="action-label">Favorite Services</span>
                                     <span class="action-desc">Your preferred treatments</span>
                                 </div>
-                                <span class="action-arrow">›</span>
+                                <span class="action-arrow">---</span>
                             </button>
                             <button class="action-item">
-                                <span class="action-icon">🎁</span>
+                                <span class="action-icon">----</span>
                                 <div class="action-text">
                                     <span class="action-label">Referral Code</span>
                                     <span class="action-desc">Invite friends & earn</span>
                                 </div>
-                                <span class="action-arrow">›</span>
+                                <span class="action-arrow">---</span>
                             </button>
                         </div>
                     </div>
@@ -1815,28 +2471,28 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                         <h3 class="section-title">Settings</h3>
                         <div class="action-items">
                             <button class="action-item">
-                                <span class="action-icon">🔔</span>
+                                <span class="action-icon">----</span>
                                 <div class="action-text">
                                     <span class="action-label">Notifications</span>
                                     <span class="action-desc">Booking & offer alerts</span>
                                 </div>
-                                <span class="action-arrow">›</span>
+                                <span class="action-arrow">---</span>
                             </button>
                             <button class="action-item">
-                                <span class="action-icon">🌐</span>
+                                <span class="action-icon">----</span>
                                 <div class="action-text">
                                     <span class="action-label">Language</span>
                                     <span class="action-desc">English</span>
                                 </div>
-                                <span class="action-arrow">›</span>
+                                <span class="action-arrow">---</span>
                             </button>
                             <button class="action-item">
-                                <span class="action-icon">🔒</span>
+                                <span class="action-icon">----</span>
                                 <div class="action-text">
                                     <span class="action-label">Privacy & Security</span>
                                     <span class="action-desc">Manage your data</span>
                                 </div>
-                                <span class="action-arrow">›</span>
+                                <span class="action-arrow">---</span>
                             </button>
                         </div>
                     </div>
@@ -1846,28 +2502,28 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                         <h3 class="section-title">Support</h3>
                         <div class="action-items">
                             <button class="action-item">
-                                <span class="action-icon">❓</span>
+                                <span class="action-icon">---</span>
                                 <div class="action-text">
                                     <span class="action-label">Help & Support</span>
                                     <span class="action-desc">FAQ & contact us</span>
                                 </div>
-                                <span class="action-arrow">›</span>
+                                <span class="action-arrow">---</span>
                             </button>
                             <button class="action-item">
-                                <span class="action-icon">ℹ️</span>
+                                <span class="action-icon">------</span>
                                 <div class="action-text">
                                     <span class="action-label">About Blancbeu</span>
                                     <span class="action-desc">Version 16.3.3</span>
                                 </div>
-                                <span class="action-arrow">›</span>
+                                <span class="action-arrow">---</span>
                             </button>
                             <button class="action-item" onclick="showTC()">
-                                <span class="action-icon">📋</span>
+                                <span class="action-icon">----</span>
                                 <div class="action-text">
                                     <span class="action-label">Terms & Privacy</span>
                                     <span class="action-desc">Legal information</span>
                                 </div>
-                                <span class="action-arrow">›</span>
+                                <span class="action-arrow">---</span>
                             </button>
                         </div>
                     </div>
@@ -1888,6 +2544,40 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                     </div>
                 </div>
 
+                <!-- Chat Interface (Restored) -->
+                <div class="immersive-chat-container">
+                    <div id="chatMessages" class="chat-messages">
+                        <div class="message bot-message">
+                            <div class="message-content">
+                                Hello! I'm your AI beauty assistant. How can I help you today? ---
+                            </div>
+                            <div class="chat-suggestion-chips">
+                                <button class="chip" onclick="handleQuickAction('booking')">Book Appointment
+                                    ----</button>
+                                <button class="chip" onclick="handleQuickAction('services')">View Services
+                                    -------------</button>
+                                <button class="chip" onclick="handleQuickAction('offers')">Check Offers ----</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chat-input-wrapper">
+                        <button id="voiceInputBtn" class="chat-voice-btn">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z" />
+                                <path
+                                    d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z" />
+                            </svg>
+                        </button>
+                        <input type="text" id="chatInput" placeholder="Type or speak..." autocomplete="off">
+                        <button id="sendMessageBtn" class="chat-send-btn">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
                 <!-- Location Section -->
                 <div class="chat-location-section">
                     <!-- Map Container -->
@@ -1903,16 +2593,18 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                 <!-- Action Buttons Section -->
                 <div class="chat-actions-section">
                     <button class="chat-action-btn open-maps-btn" onclick="openBlancbeuMaps()">
-                        <img class="btn-icon" src="attached_assets/maps_icons/icons8-google-maps-48.svg"
-                            alt="Google Maps">
+                        <img class="btn-icon"
+                            src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                            data-src="attached_assets/maps_icons/icons8-google-maps-48.svg" alt="Google Maps">
                         <div class="btn-content">
                             <div class="btn-label">Open in Maps</div>
                             <div class="btn-desc">View full directions</div>
                         </div>
                     </button>
                     <button class="chat-action-btn whatsapp-btn" onclick="openWhatsAppChat()">
-                        <img class="btn-icon slow-anim" src="attached_assets/new_icons/icons8-whatsapp.apng"
-                            alt="WhatsApp">
+                        <img class="btn-icon slow-anim"
+                            src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                            data-src="attached_assets/new_icons/icons8-whatsapp.apng" alt="WhatsApp">
                         <div class="btn-content">
                             <div class="btn-label">Chat on WhatsApp</div>
                             <div class="btn-desc">Quick messages & support</div>
@@ -1923,16 +2615,18 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                 <!-- Info Cards -->
                 <div class="chat-info-section">
                     <div class="info-card">
-                        <img class="info-icon-img slow-anim" src="attached_assets/new_icons/icons8-phone.apng"
-                            alt="Call Us">
+                        <img class="info-icon-img slow-anim"
+                            src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                            data-src="attached_assets/new_icons/icons8-phone.apng" alt="Call Us">
                         <div class="info-content">
                             <h4>Call Us</h4>
                             <p>+91 9229915277</p>
                         </div>
                     </div>
                     <div class="info-card">
-                        <img class="info-icon-img slow-anim" src="attached_assets/new_icons/icons8-clock.svg"
-                            alt="Response Time">
+                        <img class="info-icon-img slow-anim"
+                            src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                            data-src="attached_assets/new_icons/icons8-clock.svg" alt="Response Time">
                         <div class="info-content">
                             <h4>Response Time</h4>
                             <p>1-10 mins</p>
@@ -1949,10 +2643,10 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                 <div class="services-page-header">
                     <button onclick="window.navigateToPage('services')" class="header-back-btn"
                         style="position: absolute; right: 20px; top: 25px; background: rgba(255,255,255,0.2); border: none; width: 40px; height: 40px; border-radius: 50%; color: var(--gold-primary); font-size: 20px; cursor: pointer; backdrop-filter: blur(5px); z-index: 10;">
-                        ✕
+                        ---
                     </button>
                     <h1 class="services-page-title greeting-title">
-                        Hello, <br> <span id="bookingUserName" class="highlight-name">Guest</span>! ✨
+                        Hello, <br> <span id="bookingUserName" class="highlight-name">Guest</span>! ---
                     </h1>
                     <p class="greeting-subtitle">Ready to pamper yourself today?</p>
                 </div>
@@ -2009,7 +2703,7 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                                     <input type="text" id="bookingTime" required class="premium-input" readonly
                                         placeholder="Select Time">
                                     <span
-                                        style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); pointer-events: none; color: var(--gold-primary); font-size: 14px;">▼</span>
+                                        style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); pointer-events: none; color: var(--gold-primary); font-size: 14px;">---</span>
                                 </div>
                             </div>
 
@@ -2025,7 +2719,7 @@ PHASE 3: PREMIUM FEATURES (Week 4)
 
                             <button type="submit" class="submit-btn"
                                 style="width: 100%; padding: 16px; border-radius: 30px; border: none; background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark)); color: white; font-weight: 700; font-size: 16px; box-shadow: 0 5px 20px rgba(212, 160, 23, 0.3); cursor: pointer; transition: transform 0.2s;">
-                                Confirm Appointment ✨
+                                Confirm Appointment ---
                             </button>
                         </form>
                     </div>
@@ -2061,9 +2755,14 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                     <!-- Avatar Section -->
                     <div class="profile-avatar-section">
                         <div class="large-avatar-wrapper">
-                            <img id="detailProfileImg" src="assets/default_avatar.png" alt="Profile"
-                                class="large-avatar">
-                            <div class="edit-avatar-badge" style="display: none;">📷</div>
+                            <picture>
+                                <source data-srcset="assets/brand_icon_optimized.avif" type="image/avif">
+                                <source data-srcset="assets/brand_icon_optimized.webp" type="image/webp">
+                                <img id="detailProfileImg"
+                                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                    data-src="assets/brand_icon_optimized.webp" alt="Profile" class="large-avatar">
+                            </picture>
+                            <div class="edit-avatar-badge" style="display: none;">----</div>
                             <input type="file" id="profileImageInput" accept="image/*" style="display: none;">
                         </div>
                         <h2 id="detailProfileNameDisplay">Guest User</h2>
@@ -2165,7 +2864,7 @@ PHASE 3: PREMIUM FEATURES (Week 4)
                     <!-- Save Button (Hidden by default) -->
                     <div class="profile-actions" style="display: none;">
                         <button id="saveProfileBtn" class="save-profile-btn">
-                            Save Changes ✨
+                            Save Changes ---
                         </button>
                     </div>
 
@@ -2177,49 +2876,52 @@ PHASE 3: PREMIUM FEATURES (Week 4)
         </section>
     </main>
 
+    <!-- Bottom Navigation (Mobile) -->
+    <!-- Bottom Navigation (Mobile) - Duplicate Removed -->
+
     <!-- Service Cart Floating Bar -->
     <div id="serviceCartBar" class="service-cart-bar hidden">
         <div class="cart-content">
             <div class="cart-info">
-                <span class="cart-icon">🛍️</span>
+                <span class="cart-icon">-------</span>
                 <span class="cart-text"><span id="cartCount">0</span> services added</span>
             </div>
             <button class="view-list-btn" onclick="navigateToBookingPage()">
-                View List <span class="btn-arrow">›</span>
+                View List <span class="btn-arrow">---</span>
             </button>
         </div>
     </div>
 
     <!-- APP SHELL: Fixed Bottom Navigation -->
     <nav class="bottom-nav app-shell-bottom-nav" id="bottomNav">
-        <a href="#" class="nav-item active" data-page="home">
+        <a href="/" class="nav-item active" data-page="home">
             <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 2L2 10v10c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V10l-10-8zm0 4l6 5v9h-3v-5h-6v5H6v-9l6-5z" />
             </svg>
             <span class="nav-label">Home</span>
         </a>
-        <a href="#services" class="nav-item" data-page="services">
+        <a href="/services" class="nav-item" data-page="services">
             <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
                 <path
                     d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 11 8.76l1-1.36 1 1.36L15.38 12 17 10.83 14.92 8H20v6z" />
             </svg>
             <span class="nav-label">Services</span>
         </a>
-        <a href="#mybookings" class="nav-item" data-page="mybookings">
+        <a href="/mybookings" class="nav-item" data-page="mybookings">
             <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
                 <path
                     d="M19 3H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zm-6-7h-2v2h2v-2zm0 4h-2v2h2v-2zm4-4h-2v2h2v-2zm0 4h-2v2h2v-2zm4-4h-2v2h2v-2zm0 4h-2v2h2v-2z" />
             </svg>
             <span class="nav-label">My Bookings</span>
         </a>
-        <a href="#" class="nav-item" data-page="chat">
+        <a href="/chat" class="nav-item" data-page="chat">
             <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
                 <path
                     d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z" />
             </svg>
             <span class="nav-label">Contact</span>
         </a>
-        <a href="#" class="nav-item" data-page="account">
+        <a href="/account" class="nav-item" data-page="account">
             <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
                 <path
                     d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" />
@@ -2232,7 +2934,7 @@ PHASE 3: PREMIUM FEATURES (Week 4)
     <div id="tcModal" class="tc-modal">
         <div class="tc-modal-content">
             <span class="tc-close" onclick="closeTC()">&times;</span>
-            <h2>✨ Offer Terms & Conditions ✨</h2>
+            <h2>--- Offer Terms & Conditions ---</h2>
             <div class="tc-content">
                 <ol>
                     <li>Only one offer is applicable per transaction at a time.</li>
@@ -2261,9 +2963,6 @@ PHASE 3: PREMIUM FEATURES (Week 4)
     </div>
 
 
-    <script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/329180/fscreen%401.0.1.js'></script>
-    <script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/329180/Stage%400.1.4.js'></script>
-    <script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/329180/MyMath.js'></script>
     <!-- Custom Date Picker Modal -->
     <div id="customDatePickerModal" class="custom-picker-modal hidden">
         <div class="picker-content glass-card">
@@ -2305,18 +3004,153 @@ PHASE 3: PREMIUM FEATURES (Week 4)
     <!-- Auth Modal Removed (Replaced by Dedicated Login Page) -->
 
 
-    <script src="services-mock.js"></script>
-    <script type="module" src="script_pwa.js?v=2"></script>
+    <!-- Floating Chat Widget -->
+
+
+
+    <script type="module" src="services-mock.js"></script>
+
     <script type="module" src="firebase-config.js"></script>
     <script type="module" src="auth.js"></script>
     <script type="module" src="booking.js"></script>
     <script type="module" src="my-bookings.js"></script>
     <script type="module" src="account.js"></script>
     <script type="module" src="nav_fix.js"></script>
+    <!-- Theme Switcher Logic (Menu is in Header) -->
+    <style>
+        /* Theme Menu Styles used in Header */
+        .theme-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 12px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            padding: 8px;
+            box-shadow: var(--shadow-lg);
+            display: none;
+            flex-direction: column;
+            width: 180px;
+            animation: slideDown 0.2s ease;
+            z-index: 10000;
+        }
+
+        .theme-menu.active {
+            display: flex;
+        }
+
+        .theme-option {
+            background: none;
+            border: 2px solid transparent;
+            padding: 10px;
+            text-align: left;
+            cursor: pointer;
+            color: var(--text-main);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            width: 100%;
+            transition: all 0.2s ease;
+        }
+
+        .theme-option:hover {
+            background: var(--color-accent-subtle);
+        }
+
+        .theme-option.selected {
+            border-color: var(--brand-primary);
+            background: var(--color-accent-subtle);
+            font-weight: 600;
+        }
+
+        .theme-preview {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            border: 2px solid var(--border-light);
+            flex-shrink: 0;
+        }
+
+        .theme-preview.velvet {
+            background: linear-gradient(135deg, #7AA98A, #F5A8A0);
+        }
+
+        .theme-preview.pop {
+            background: linear-gradient(135deg, #FFCE00, #6C63FF);
+        }
+
+        .theme-preview.olive {
+            background: linear-gradient(135deg, #6B8F7A, #D18B5A);
+        }
+
+        .theme-preview.blackgold {
+            background: linear-gradient(135deg, #0A0A0A, #D4AF37);
+            border-color: rgba(212, 175, 55, 0.4);
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+
+
+
+    <nav class="bottom-nav app-shell-bottom-nav" id="bottomNav">
+        <a href="/" class="nav-item active" data-page="home">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2L2 10v10c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V10l-10-8zm0 4l6 5v9h-3v-5h-6v5H6v-9l6-5z"></path>
+            </svg>
+            <span class="nav-label">Home</span>
+        </a>
+        <a href="/services" class="nav-item" data-page="services">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                    d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 11 8.76l1-1.36 1 1.36L15.38 12 17 10.83 14.92 8H20v6z">
+                </path>
+            </svg>
+            <span class="nav-label">Services</span>
+        </a>
+        <a href="/mybookings" class="nav-item" data-page="mybookings">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                    d="M19 3H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zm-6-7h-2v2h2v-2zm0 4h-2v2h2v-2zm4-4h-2v2h2v-2zm0 4h-2v2h2v-2zm4-4h-2v2h2v-2zm0 4h-2v2h2v-2z">
+                </path>
+            </svg>
+            <span class="nav-label">My Bookings</span>
+        </a>
+        <a href="/chat" class="nav-item" data-page="chat">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                    d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z">
+                </path>
+            </svg>
+            <span class="nav-label">Contact</span>
+        </a>
+        <a href="/account" class="nav-item" data-page="account">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z">
+                </path>
+            </svg>
+            <span class="nav-label">You</span>
+        </a>
+    </nav>
+    <script type="module" src="script.js"></script>
 
     <!-- Parallax Logic -->
     <script type="module" src="parallax.js"></script>
-    <!-- <script type="module" src="theme-toggle.js"></script> -->
+    <script src="image-cache-manager.js" type="module" defer></script>
 </body>
 
 </html>

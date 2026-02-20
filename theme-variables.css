@@ -1,144 +1,407 @@
-/* ========================================
-   COMPREHENSIVE THEME SYSTEM
-   All theme colors and values defined as CSS variables
-   Switch between themes by updating these variables
-   ======================================== */
+/* =========================================
+   BLANCBEU — PREMIUM THEME SYSTEM
+   4 Themes × 40+ Variables Each
+   ========================================= */
 
+/* =============================================
+   1. UNIVERSAL DEFAULTS (Velvet Sage baseline)
+   ============================================= */
 :root {
-    /* ===== DARK THEME (DEFAULT) ===== */
-    --bg-primary: #000000;
-    --bg-secondary: #0a0a0a;
-    --bg-tertiary: rgba(10, 10, 10, 0.95);
-    --bg-overlay: rgba(0, 0, 0, 0.98);
-    
-    --text-primary: #ffffff;
-    --text-secondary: #e0e0e0;
-    --text-muted: rgba(255, 255, 255, 0.65);
-    --text-header: #ffffff;
-    
-    --gold-24k: #FFD700;
-    --gold-primary: #FFD700;
-    --gold-bright: #FFC700;
-    --gold-dark: #B8860B;
-    --gold-light: #FFED4E;
-    --gold-accent: rgba(255, 215, 0, 0.2);
-    
-    --border-dark: rgba(255, 215, 0, 0.1);
-    --border-light: rgba(255, 215, 0, 0.2);
-    --border-medium: rgba(255, 215, 0, 0.3);
-    
-    --shadow-dark: rgba(0, 0, 0, 0.6);
-    --shadow-medium: rgba(0, 0, 0, 0.3);
-    --shadow-light: rgba(0, 0, 0, 0.1);
-    
-    --header-bg: rgba(0, 0, 0, 0.98);
-    --header-shadow: 0 2px 30px rgba(0, 0, 0, 0.8);
-    --header-border: 1px solid rgba(255, 215, 0, 0.1);
-    
-    --nav-bg: rgba(10, 10, 10, 0.95);
-    --nav-text: rgba(255, 255, 255, 0.65);
-    --nav-active-text: #FFD700;
-    --nav-active-bg: rgba(255, 215, 0, 0.12);
-    --nav-shadow: 0 -4px 24px rgba(0, 0, 0, 0.6);
-    --nav-border: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.2) 20%, rgba(255, 215, 0, 0.2) 80%, transparent);
-    
-    --footer-bg: #1a1a1a;
-    --footer-text: #e0e0e0;
-    --footer-title: #FFD700;
-    --footer-shadow: 0 -8px 30px rgba(0, 0, 0, 0.5);
-    --footer-border: 1px solid rgba(255, 215, 0, 0.2);
-    
-    --card-bg: rgba(20, 20, 20, 0.8);
-    --card-border: 2px solid rgba(255, 215, 0, 0.2);
-    --card-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
-    --card-hover-shadow: 0 12px 40px rgba(255, 215, 0, 0.3);
-    
-    --button-bg: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 140, 0, 0.1));
-    --button-text: #FFD700;
-    --button-hover-bg: linear-gradient(135deg, rgba(255, 215, 0, 0.25), rgba(255, 140, 0, 0.15));
-    --button-shadow: 0 8px 32px rgba(255, 215, 0, 0.3);
-    
-    --carousel-bg: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 140, 0, 0.05) 100%);
-    --carousel-shadow: 0 0 40px rgba(255, 215, 0, 0.4), inset 0 0 30px rgba(255, 215, 0, 0.1), 0 20px 60px rgba(0, 0, 0, 0.8);
-    
-    --section-bg: #000000;
-    --gradient-bg: linear-gradient(135deg, #000000 0%, #0a0a0a 50%, #000000 100%);
-    
-    --offer-badge-red: linear-gradient(135deg, #FF6B6B, #FF8E53);
-    --offer-badge-hot: linear-gradient(135deg, #FF416C, #FF4B2B);
-    --offer-badge-festive: linear-gradient(135deg, #4ECDC4, #44A08D);
-    --offer-badge-student: linear-gradient(135deg, #667eea, #764ba2);
-    
-    --sparkle-color-1: #FFD700;
-    --sparkle-color-2: #FFC700;
-    --sparkle-color-3: #FFED4E;
+    /* --- Backgrounds --- */
+    --bg-body: #FBF9F7;
+    --bg-surface: #F3ECEA;
+    --bg-card: #FFFFFF;
+    --bg-overlay: rgba(251, 249, 247, 0.95);
+    --bg-input: #FFFFFF;
+    --bg-nav: rgba(251, 249, 247, 0.92);
+    --bg-header: rgba(251, 249, 247, 0.95);
+
+    /* --- Brand Colors --- */
+    --brand-primary: #7AA98A;
+    --brand-secondary: #5E9A70;
+    --brand-gradient-start: #7AA98A;
+    --brand-gradient-end: #A8D5BA;
+
+    /* --- Accent / CTA --- */
+    --color-accent: #F5A8A0;
+    --color-accent-hover: #E89890;
+    --color-accent-subtle: rgba(245, 168, 160, 0.1);
+
+    /* --- Typography --- */
+    --text-main: #111114;
+    --text-heading: #111114;
+    --text-muted: #AFA6A3;
+    --text-on-brand: #FFFFFF;
+    --text-on-accent: #FFFFFF;
+    --text-on-card: #333333;
+
+    /* --- Cards & Surfaces --- */
+    --card-bg: rgba(255, 255, 255, 0.7);
+    --card-border: rgba(0, 0, 0, 0.06);
+    --card-hover-border: rgba(122, 169, 138, 0.3);
+    --card-glow: rgba(122, 169, 138, 0.08);
+
+    /* --- Navigation --- */
+    --nav-text: rgba(17, 17, 20, 0.6);
+    --nav-active-text: #7AA98A;
+    --nav-active-bg: rgba(122, 169, 138, 0.1);
+    --nav-active-glow: rgba(122, 169, 138, 0.15);
+    --nav-border-top: rgba(122, 169, 138, 0.15);
+
+    /* --- Buttons --- */
+    --btn-primary-bg: #7AA98A;
+    --btn-primary-text: #FFFFFF;
+    --btn-primary-hover: #5E9A70;
+    --btn-secondary-bg: transparent;
+    --btn-secondary-text: #7AA98A;
+    --btn-secondary-border: #7AA98A;
+
+    /* --- Shadows & Glows --- */
+    --shadow-sm: 0 4px 12px rgba(122, 169, 138, 0.08);
+    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.08);
+    --glow-brand: rgba(122, 169, 138, 0.3);
+    --glow-accent: rgba(245, 168, 160, 0.3);
+
+    /* --- Borders --- */
+    --border-light: rgba(0, 0, 0, 0.06);
+    --border-brand: rgba(122, 169, 138, 0.2);
+    --border-subtle: rgba(0, 0, 0, 0.04);
+
+    /* --- UI Properties --- */
+    --radius-sm: 8px;
+    --radius-md: 16px;
+    --radius-lg: 20px;
+    --radius-full: 9999px;
+
+    /* --- Loader --- */
+    --loader-bg: #FBF9F7;
+    --loader-accent: #7AA98A;
+    --loader-text: #7AA98A;
+
+    /* --- Badges --- */
+    --badge-hot-bg: linear-gradient(135deg, #FF6B6B, #FF8E53);
+    --badge-festive-bg: linear-gradient(135deg, #FFB347, #FF6B6B);
+    --badge-student-bg: linear-gradient(135deg, #43E97B, #38F9D7);
+
+    /* --- Offer Cards --- */
+    --offer-card-bg: rgba(122, 169, 138, 0.06);
+    --offer-icon-bg: rgba(122, 169, 138, 0.08);
+    --offer-price-color: #F5A8A0;
+    --offer-old-price-color: #AFA6A3;
+
+    /* --- Section --- */
+    --section-bg-alt: rgba(122, 169, 138, 0.03);
+    --overlay-gradient: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7));
+
+    /* --- Misc --- */
+    --divider: rgba(0, 0, 0, 0.06);
+    --scrollbar-thumb: rgba(122, 169, 138, 0.3);
+    --scrollbar-track: transparent;
 }
 
-/* ===== LIGHT THEME ===== */
-:root[data-theme="light"] {
-    --bg-primary: #ffffff;
-    --bg-secondary: #f8f9fa;
-    --bg-tertiary: rgba(255, 255, 255, 0.95);
-    --bg-overlay: rgba(255, 255, 255, 0.95);
-    
-    --text-primary: #1a1a1a;
-    --text-secondary: #333333;
-    --text-muted: rgba(26, 26, 26, 0.7);
-    --text-header: #1a1a1a;
-    
-    --gold-primary: #b8860b;
-    --gold-bright: #d4a017;
-    --gold-dark: #8B6914;
-    --gold-light: #c9a961;
-    --gold-accent: rgba(212, 160, 23, 0.3);
-    
-    --border-dark: rgba(212, 160, 23, 0.2);
-    --border-light: rgba(212, 160, 23, 0.3);
-    --border-medium: rgba(212, 160, 23, 0.4);
-    
-    --shadow-dark: rgba(0, 0, 0, 0.15);
-    --shadow-medium: rgba(0, 0, 0, 0.1);
-    --shadow-light: rgba(0, 0, 0, 0.05);
-    
-    --header-bg: rgba(255, 255, 255, 0.95);
-    --header-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-    --header-border: 1px solid rgba(212, 160, 23, 0.2);
-    
-    --nav-bg: rgba(255, 255, 255, 0.95);
-    --nav-text: rgba(26, 26, 26, 0.7);
-    --nav-active-text: #d4a017;
-    --nav-active-bg: rgba(212, 160, 23, 0.15);
-    --nav-shadow: 0 -4px 24px rgba(0, 0, 0, 0.15);
-    --nav-border: linear-gradient(90deg, transparent, rgba(212, 160, 23, 0.3) 20%, rgba(212, 160, 23, 0.3) 80%, transparent);
-    
-    --footer-bg: #ffffff;
-    --footer-text: #555555;
-    --footer-title: #b8860b;
-    --footer-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
-    --footer-border: 3px solid rgba(212, 160, 23, 0.4);
-    
-    --card-bg: rgba(255, 255, 255, 0.9);
-    --card-border: 2px solid rgba(212, 160, 23, 0.3);
-    --card-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-    --card-hover-shadow: 0 12px 40px rgba(212, 160, 23, 0.2);
-    
-    --button-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 245, 220, 0.95));
-    --button-text: #1a1a1a;
-    --button-hover-bg: linear-gradient(135deg, rgba(255, 245, 220, 1), rgba(255, 255, 255, 1));
-    --button-shadow: 0 6px 25px rgba(255, 193, 7, 0.3);
-    
-    --carousel-bg: linear-gradient(135deg, #fef5e7 0%, #fdecea 50%, #f8f9f9 100%);
-    --carousel-shadow: 0 8px 30px rgba(212, 160, 23, 0.25);
-    
-    --section-bg: #f8f9fa;
-    --gradient-bg: linear-gradient(135deg, #fef5e7 0%, #ffffff 50%, #f8f9f9 100%);
-    
-    --offer-badge-red: linear-gradient(135deg, #FF6B6B, #FF8E53);
-    --offer-badge-hot: linear-gradient(135deg, #FF416C, #FF4B2B);
-    --offer-badge-festive: linear-gradient(135deg, #4ECDC4, #44A08D);
-    --offer-badge-student: linear-gradient(135deg, #667eea, #764ba2);
-    
-    --sparkle-color-1: #FF6B6B;
-    --sparkle-color-2: #4ECDC4;
-    --sparkle-color-3: #FFE66D;
+
+/* =============================================
+   2. THEME: VELVET SAGE — "Spa Sanctuary"
+   ============================================= */
+[data-theme="velvet"] {
+    --bg-body: #FBF9F7;
+    --bg-surface: #F3ECEA;
+    --bg-card: #FFFFFF;
+    --bg-overlay: rgba(251, 249, 247, 0.95);
+    --bg-input: #FFFFFF;
+    --bg-nav: rgba(251, 249, 247, 0.92);
+    --bg-header: rgba(251, 249, 247, 0.95);
+
+    --brand-primary: #7AA98A;
+    --brand-secondary: #5E9A70;
+    --brand-gradient-start: #7AA98A;
+    --brand-gradient-end: #A8D5BA;
+
+    --color-accent: #F5A8A0;
+    --color-accent-hover: #E89890;
+    --color-accent-subtle: rgba(245, 168, 160, 0.1);
+
+    --text-main: #111114;
+    --text-heading: #111114;
+    --text-muted: #AFA6A3;
+    --text-on-brand: #FFFFFF;
+    --text-on-accent: #FFFFFF;
+    --text-on-card: #333333;
+
+    --card-bg: rgba(255, 255, 255, 0.7);
+    --card-border: rgba(0, 0, 0, 0.06);
+    --card-hover-border: rgba(122, 169, 138, 0.3);
+    --card-glow: rgba(122, 169, 138, 0.08);
+
+    --nav-text: rgba(17, 17, 20, 0.6);
+    --nav-active-text: #7AA98A;
+    --nav-active-bg: rgba(122, 169, 138, 0.1);
+    --nav-active-glow: rgba(122, 169, 138, 0.15);
+    --nav-border-top: rgba(122, 169, 138, 0.15);
+
+    --btn-primary-bg: #7AA98A;
+    --btn-primary-text: #FFFFFF;
+    --btn-primary-hover: #5E9A70;
+    --btn-secondary-bg: transparent;
+    --btn-secondary-text: #7AA98A;
+    --btn-secondary-border: #7AA98A;
+
+    --shadow-sm: 0 4px 12px rgba(122, 169, 138, 0.08);
+    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.08);
+    --glow-brand: rgba(122, 169, 138, 0.3);
+    --glow-accent: rgba(245, 168, 160, 0.3);
+
+    --border-light: rgba(0, 0, 0, 0.06);
+    --border-brand: rgba(122, 169, 138, 0.2);
+    --border-subtle: rgba(0, 0, 0, 0.04);
+
+    --loader-bg: #FBF9F7;
+    --loader-accent: #7AA98A;
+    --loader-text: #7AA98A;
+
+    --offer-card-bg: rgba(122, 169, 138, 0.06);
+    --offer-icon-bg: rgba(122, 169, 138, 0.08);
+    --offer-price-color: #F5A8A0;
+    --offer-old-price-color: #AFA6A3;
+
+    --section-bg-alt: rgba(122, 169, 138, 0.03);
+    --overlay-gradient: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7));
+
+    --divider: rgba(0, 0, 0, 0.06);
+    --scrollbar-thumb: rgba(122, 169, 138, 0.3);
+}
+
+
+/* =============================================
+   3. THEME: SUN & VIOLET — "Gen-Z Energy"
+   ============================================= */
+[data-theme="pop"] {
+    --bg-body: #FFF9EE;
+    --bg-surface: #FFF1F8;
+    --bg-card: #FFFFFF;
+    --bg-overlay: rgba(255, 249, 238, 0.95);
+    --bg-input: #FFFFFF;
+    --bg-nav: rgba(255, 241, 248, 0.92);
+    --bg-header: rgba(255, 249, 238, 0.95);
+
+    --brand-primary: #FFCE00;
+    --brand-secondary: #6C63FF;
+    --brand-gradient-start: #FFCE00;
+    --brand-gradient-end: #6C63FF;
+
+    --color-accent: #6C63FF;
+    --color-accent-hover: #5A52E0;
+    --color-accent-subtle: rgba(108, 99, 255, 0.08);
+
+    --text-main: #0F172A;
+    --text-heading: #0F172A;
+    --text-muted: #64748B;
+    --text-on-brand: #0F172A;
+    --text-on-accent: #FFFFFF;
+    --text-on-card: #1E293B;
+
+    --card-bg: rgba(255, 255, 255, 0.8);
+    --card-border: rgba(108, 99, 255, 0.1);
+    --card-hover-border: rgba(108, 99, 255, 0.35);
+    --card-glow: rgba(108, 99, 255, 0.08);
+
+    --nav-text: rgba(15, 23, 42, 0.55);
+    --nav-active-text: #6C63FF;
+    --nav-active-bg: rgba(108, 99, 255, 0.1);
+    --nav-active-glow: rgba(108, 99, 255, 0.2);
+    --nav-border-top: rgba(108, 99, 255, 0.15);
+
+    --btn-primary-bg: #6C63FF;
+    --btn-primary-text: #FFFFFF;
+    --btn-primary-hover: #5A52E0;
+    --btn-secondary-bg: rgba(255, 206, 0, 0.15);
+    --btn-secondary-text: #0F172A;
+    --btn-secondary-border: #FFCE00;
+
+    --shadow-sm: 4px 4px 0px rgba(108, 99, 255, 0.12);
+    --shadow-md: 6px 6px 0px rgba(108, 99, 255, 0.1);
+    --shadow-lg: 8px 8px 0px rgba(108, 99, 255, 0.08);
+    --glow-brand: rgba(255, 206, 0, 0.4);
+    --glow-accent: rgba(108, 99, 255, 0.4);
+
+    --border-light: rgba(108, 99, 255, 0.08);
+    --border-brand: rgba(255, 206, 0, 0.3);
+    --border-subtle: rgba(108, 99, 255, 0.05);
+
+    --radius-md: 12px;
+
+    --loader-bg: #FFF9EE;
+    --loader-accent: #6C63FF;
+    --loader-text: #FFCE00;
+
+    --badge-hot-bg: linear-gradient(135deg, #FF6B6B, #FF8E53);
+    --badge-festive-bg: linear-gradient(135deg, #FFCE00, #FF6B6B);
+    --badge-student-bg: linear-gradient(135deg, #6C63FF, #A78BFA);
+
+    --offer-card-bg: rgba(108, 99, 255, 0.05);
+    --offer-icon-bg: rgba(255, 206, 0, 0.12);
+    --offer-price-color: #6C63FF;
+    --offer-old-price-color: #94A3B8;
+
+    --section-bg-alt: rgba(108, 99, 255, 0.03);
+    --overlay-gradient: linear-gradient(to bottom, rgba(15, 23, 42, 0.3), rgba(15, 23, 42, 0.7));
+
+    --divider: rgba(108, 99, 255, 0.08);
+    --scrollbar-thumb: rgba(108, 99, 255, 0.3);
+}
+
+
+/* =============================================
+   4. THEME: OLIVE & CHROME — "Architectural Minimalism"
+   ============================================= */
+[data-theme="olive"] {
+    --bg-body: #F7F9F6;
+    --bg-surface: #E9F0EA;
+    --bg-card: #F2F5F2;
+    --bg-overlay: rgba(247, 249, 246, 0.95);
+    --bg-input: #FFFFFF;
+    --bg-nav: rgba(233, 240, 234, 0.92);
+    --bg-header: rgba(247, 249, 246, 0.95);
+
+    --brand-primary: #6B8F7A;
+    --brand-secondary: #5A7A68;
+    --brand-gradient-start: #6B8F7A;
+    --brand-gradient-end: #4A7A5A;
+
+    --color-accent: #D18B5A;
+    --color-accent-hover: #C07A4B;
+    --color-accent-subtle: rgba(209, 139, 90, 0.08);
+
+    --text-main: #0E1512;
+    --text-heading: #0E1512;
+    --text-muted: #7E8C85;
+    --text-on-brand: #FFFFFF;
+    --text-on-accent: #FFFFFF;
+    --text-on-card: #1A2A20;
+
+    --card-bg: rgba(242, 245, 242, 0.8);
+    --card-border: rgba(107, 143, 122, 0.12);
+    --card-hover-border: rgba(107, 143, 122, 0.3);
+    --card-glow: rgba(107, 143, 122, 0.06);
+
+    --nav-text: rgba(14, 21, 18, 0.55);
+    --nav-active-text: #D18B5A;
+    --nav-active-bg: rgba(209, 139, 90, 0.1);
+    --nav-active-glow: rgba(209, 139, 90, 0.15);
+    --nav-border-top: rgba(107, 143, 122, 0.15);
+
+    --btn-primary-bg: #6B8F7A;
+    --btn-primary-text: #FFFFFF;
+    --btn-primary-hover: #5A7A68;
+    --btn-secondary-bg: transparent;
+    --btn-secondary-text: #D18B5A;
+    --btn-secondary-border: #D18B5A;
+
+    --shadow-sm: 0 4px 20px rgba(107, 143, 122, 0.08);
+    --shadow-md: 0 10px 30px rgba(107, 143, 122, 0.1);
+    --shadow-lg: 0 16px 40px rgba(107, 143, 122, 0.12);
+    --glow-brand: rgba(107, 143, 122, 0.3);
+    --glow-accent: rgba(209, 139, 90, 0.3);
+
+    --border-light: rgba(107, 143, 122, 0.08);
+    --border-brand: rgba(107, 143, 122, 0.2);
+    --border-subtle: rgba(107, 143, 122, 0.05);
+
+    --radius-md: 18px;
+
+    --loader-bg: #F7F9F6;
+    --loader-accent: #6B8F7A;
+    --loader-text: #6B8F7A;
+
+    --offer-card-bg: rgba(107, 143, 122, 0.05);
+    --offer-icon-bg: rgba(209, 139, 90, 0.08);
+    --offer-price-color: #D18B5A;
+    --offer-old-price-color: #7E8C85;
+
+    --section-bg-alt: rgba(107, 143, 122, 0.03);
+    --overlay-gradient: linear-gradient(to bottom, rgba(14, 21, 18, 0.3), rgba(14, 21, 18, 0.7));
+
+    --divider: rgba(107, 143, 122, 0.08);
+    --scrollbar-thumb: rgba(107, 143, 122, 0.3);
+}
+
+
+/* =============================================
+   5. THEME: BLACKGOLD — "Luxury After Dark" 👑
+   ============================================= */
+[data-theme="blackgold"] {
+    --bg-body: #0A0A0A;
+    --bg-surface: #141414;
+    --bg-card: rgba(20, 20, 20, 0.8);
+    --bg-overlay: rgba(10, 10, 10, 0.96);
+    --bg-input: rgba(25, 25, 25, 0.9);
+    --bg-nav: rgba(10, 10, 10, 0.95);
+    --bg-header: rgba(10, 10, 10, 0.96);
+
+    --brand-primary: #D4AF37;
+    --brand-secondary: #B8962E;
+    --brand-gradient-start: #D4AF37;
+    --brand-gradient-end: #FFD700;
+
+    --color-accent: #FFD700;
+    --color-accent-hover: #E6C200;
+    --color-accent-subtle: rgba(212, 175, 55, 0.1);
+
+    --text-main: #F5F0E8;
+    --text-heading: #F5F0E8;
+    --text-muted: #8A8175;
+    --text-on-brand: #0A0A0A;
+    --text-on-accent: #0A0A0A;
+    --text-on-card: #E8E0D4;
+
+    --card-bg: rgba(20, 20, 20, 0.75);
+    --card-border: rgba(212, 175, 55, 0.15);
+    --card-hover-border: rgba(212, 175, 55, 0.45);
+    --card-glow: rgba(212, 175, 55, 0.08);
+
+    --nav-text: rgba(245, 240, 232, 0.55);
+    --nav-active-text: #D4AF37;
+    --nav-active-bg: rgba(212, 175, 55, 0.12);
+    --nav-active-glow: rgba(212, 175, 55, 0.2);
+    --nav-border-top: rgba(212, 175, 55, 0.2);
+
+    --btn-primary-bg: linear-gradient(135deg, #D4AF37, #FFD700);
+    --btn-primary-text: #0A0A0A;
+    --btn-primary-hover: #E6C200;
+    --btn-secondary-bg: transparent;
+    --btn-secondary-text: #D4AF37;
+    --btn-secondary-border: rgba(212, 175, 55, 0.4);
+
+    --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.5);
+    --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.6);
+    --glow-brand: rgba(212, 175, 55, 0.25);
+    --glow-accent: rgba(255, 215, 0, 0.3);
+
+    --border-light: rgba(212, 175, 55, 0.1);
+    --border-brand: rgba(212, 175, 55, 0.25);
+    --border-subtle: rgba(255, 255, 255, 0.04);
+
+    --radius-md: 14px;
+
+    --loader-bg: #0A0A0A;
+    --loader-accent: #D4AF37;
+    --loader-text: #D4AF37;
+
+    --badge-hot-bg: linear-gradient(135deg, #FF4444, #FF6B6B);
+    --badge-festive-bg: linear-gradient(135deg, #D4AF37, #FFD700);
+    --badge-student-bg: linear-gradient(135deg, #00C9A7, #00E5BF);
+
+    --offer-card-bg: rgba(212, 175, 55, 0.06);
+    --offer-icon-bg: rgba(212, 175, 55, 0.1);
+    --offer-price-color: #FFD700;
+    --offer-old-price-color: #8A8175;
+
+    --section-bg-alt: rgba(212, 175, 55, 0.02);
+    --overlay-gradient: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.85));
+
+    --divider: rgba(212, 175, 55, 0.1);
+    --scrollbar-thumb: rgba(212, 175, 55, 0.3);
 }

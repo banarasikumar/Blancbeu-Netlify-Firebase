@@ -9,7 +9,11 @@
   "orientation": "portrait-primary",
   "scope": "/",
   "lang": "en",
-  "categories": ["beauty", "lifestyle", "health"],
+  "categories": [
+    "beauty",
+    "lifestyle",
+    "health"
+  ],
   "icons": [
     {
       "src": "/icon-72x72.webp",
@@ -68,7 +72,7 @@
   "shortcuts": [
     {
       "name": "Book Appointment",
-      "url": "/?action=book",
+      "url": "/booking",
       "description": "Quick booking for beauty services"
     },
     {
@@ -82,7 +86,10 @@
       "description": "Chat with us on WhatsApp"
     }
   ],
-  "display_override": ["standalone", "minimal-ui"],
+  "display_override": [
+    "standalone",
+    "minimal-ui"
+  ],
   "edge_side_panel": {
     "preferred_width": 400
   }

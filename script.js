@@ -1,9 +1,50 @@
-/*
+
 // [CRITICAL FIX] Redirect /admin to /admin/ to prevent homepage loading
 if (window.location.pathname === '/admin') {
     window.location.replace('/admin/');
 }
 
+// --- VERSION SENTINEL: Enforce Updates ---
+(function checkVersion() {
+    fetch('/version.json?t=' + Date.now())
+        .then(res => res.json())
+        .then(data => {
+            const serverVersion = data.version;
+            const serverBuild = data.buildTime;
+            const localVersion = localStorage.getItem('app_version');
+
+            console.log(`[Version Check] Server: ${serverVersion}, Local: ${localVersion}`);
+
+            if (localVersion && localVersion !== serverVersion) {
+                console.warn('[Version Check] Mismatch detected! Nuking cache and reloading...');
+
+                // 1. Unregister SW
+                if ('serviceWorker' in navigator) {
+                    navigator.serviceWorker.getRegistrations().then(registrations => {
+                        for (let registration of registrations) {
+                            registration.unregister();
+                        }
+                    });
+                }
+
+                // 2. Clear Storage
+                localStorage.clear();
+                sessionStorage.clear();
+
+                // 3. Update Version
+                localStorage.setItem('app_version', serverVersion);
+
+                // 4. Force Reload (bypass cache)
+                window.location.reload(true);
+            } else {
+                // First visit or same version
+                localStorage.setItem('app_version', serverVersion);
+            }
+        })
+        .catch(err => console.error('[Version Check] Failed:', err));
+})();
+
+/*
 ================================================================================
 BLANCBEU SALON - WORLD-CLASS JAVASCRIPT IMPLEMENTATION ROADMAP
 ================================================================================
@@ -25,52 +66,52 @@ class MagneticButton {
         this.element = element;
         this.strength = options.strength || 0.3;  // How much button follows cursor
         this.ease = options.ease || 0.15;         // Smoothness of movement
-        
+
         this.bounds = null;
         this.position = { x: 0, y: 0 };
         this.target = { x: 0, y: 0 };
-        
+
         this.init();
     }
-    
+
     init() {
         this.element.addEventListener('mouseenter', () => this.onEnter());
         this.element.addEventListener('mousemove', (e) => this.onMove(e));
         this.element.addEventListener('mouseleave', () => this.onLeave());
     }
-    
+
     onEnter() {
         this.bounds = this.element.getBoundingClientRect();
         this.animate();
     }
-    
+
     onMove(e) {
         // Calculate distance from center
         const centerX = this.bounds.left + this.bounds.width / 2;
         const centerY = this.bounds.top + this.bounds.height / 2;
-        
+
         const distX = e.clientX - centerX;
         const distY = e.clientY - centerY;
-        
+
         // Set target position (limited by strength)
         this.target.x = distX * this.strength;
         this.target.y = distY * this.strength;
     }
-    
+
     onLeave() {
         // Return to center with spring animation
         this.target = { x: 0, y: 0 };
     }
-    
+
     animate() {
         // Smooth interpolation toward target
         this.position.x += (this.target.x - this.position.x) * this.ease;
         this.position.y += (this.target.y - this.position.y) * this.ease;
-        
+
         this.element.style.transform = `
             translate(${this.position.x}px, ${this.position.y}px)
         `;
-        
+
         // Continue animation if still moving
         if (Math.abs(this.target.x - this.position.x) > 0.01 ||
             Math.abs(this.target.y - this.position.y) > 0.01) {
@@ -89,28 +130,30 @@ document.querySelectorAll('.magnetic-btn').forEach(btn => {
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 0.2 RIPPLE EFFECT ON CLICK
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+*/
 
+/*
 IMPLEMENTATION:
 --------------
-function createRipple(e) {
-    const button = e.currentTarget;
-    
-    // Remove any existing ripple
-    const existingRipple = button.querySelector('.ripple');
-    if (existingRipple) existingRipple.remove();
-    
-    // Create ripple element
-    const ripple = document.createElement('span');
-    ripple.className = 'ripple';
-    
-    // Calculate position
-    const rect = button.getBoundingClientRect();
-    const size = Math.max(rect.width, rect.height);
-    const x = e.clientX - rect.left - size / 2;
-    const y = e.clientY - rect.top - size / 2;
-    
-    // Apply styles
-    ripple.style.cssText = `
+    function createRipple(e) {
+        const button = e.currentTarget;
+
+        // Remove any existing ripple
+        const existingRipple = button.querySelector('.ripple');
+        if (existingRipple) existingRipple.remove();
+
+        // Create ripple element
+        const ripple = document.createElement('span');
+        ripple.className = 'ripple';
+
+        // Calculate position
+        const rect = button.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        const x = e.clientX - rect.left - size / 2;
+        const y = e.clientY - rect.top - size / 2;
+
+        // Apply styles
+        ripple.style.cssText = `
         position: absolute;
         width: ${size}px;
         height: ${size}px;
@@ -122,97 +165,97 @@ function createRipple(e) {
         animation: ripple-expand 0.6s ease-out forwards;
         pointer-events: none;
     `;
-    
-    button.appendChild(ripple);
-    
-    // Remove after animation
-    ripple.addEventListener('animationend', () => ripple.remove());
-}
+
+        button.appendChild(ripple);
+
+        // Remove after animation
+        ripple.addEventListener('animationend', () => ripple.remove());
+    }
 
 USAGE:
 ------
-document.querySelectorAll('.ripple-btn').forEach(btn => {
-    btn.style.position = 'relative';
-    btn.style.overflow = 'hidden';
-    btn.addEventListener('click', createRipple);
-});
+    document.querySelectorAll('.ripple-btn').forEach(btn => {
+        btn.style.position = 'relative';
+        btn.style.overflow = 'hidden';
+        btn.addEventListener('click', createRipple);
+    });
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-0.3 SCROLL-TRIGGERED ANIMATIONS (Intersection Observer)
+0.3 SCROLL - TRIGGERED ANIMATIONS(Intersection Observer)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 IMPLEMENTATION:
 --------------
-class ScrollReveal {
-    constructor(options = {}) {
-        this.threshold = options.threshold || 0.15;  // % visible before triggering
-        this.rootMargin = options.rootMargin || '0px';
-        this.staggerDelay = options.staggerDelay || 100;  // ms between items
-        
-        this.init();
-    }
-    
-    init() {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry, index) => {
-                if (entry.isIntersecting) {
-                    // Apply staggered delay for grouped elements
-                    const siblings = entry.target.parentElement.querySelectorAll('.scroll-reveal');
-                    const siblingIndex = Array.from(siblings).indexOf(entry.target);
-                    
-                    setTimeout(() => {
-                        entry.target.classList.add('visible');
-                    }, siblingIndex * this.staggerDelay);
-                    
-                    // Unobserve after animation (one-time only)
-                    observer.unobserve(entry.target);
-                }
+    class ScrollReveal {
+        constructor(options = {}) {
+            this.threshold = options.threshold || 0.15;  // % visible before triggering
+            this.rootMargin = options.rootMargin || '0px';
+            this.staggerDelay = options.staggerDelay || 100;  // ms between items
+
+            this.init();
+        }
+
+        init() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        // Apply staggered delay for grouped elements
+                        const siblings = entry.target.parentElement.querySelectorAll('.scroll-reveal');
+                        const siblingIndex = Array.from(siblings).indexOf(entry.target);
+
+                        setTimeout(() => {
+                            entry.target.classList.add('visible');
+                        }, siblingIndex * this.staggerDelay);
+
+                        // Unobserve after animation (one-time only)
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: this.threshold,
+                rootMargin: this.rootMargin
             });
-        }, {
-            threshold: this.threshold,
-            rootMargin: this.rootMargin
-        });
-        
-        // Observe all scroll-reveal elements
-        document.querySelectorAll('.scroll-reveal').forEach(el => {
-            observer.observe(el);
-        });
+
+            // Observe all scroll-reveal elements
+            document.querySelectorAll('.scroll-reveal').forEach(el => {
+                observer.observe(el);
+            });
+        }
     }
-}
 
 ANIMATION VARIANTS:
 ------------------
-.scroll-reveal.fade-up {
+.scroll - reveal.fade - up {
     opacity: 0;
     transform: translateY(60px);
 }
-.scroll-reveal.fade-up.visible {
+.scroll - reveal.fade - up.visible {
     opacity: 1;
     transform: translateY(0);
 }
 
-.scroll-reveal.fade-left {
+.scroll - reveal.fade - left {
     opacity: 0;
     transform: translateX(-60px);
 }
-.scroll-reveal.fade-left.visible {
+.scroll - reveal.fade - left.visible {
     opacity: 1;
     transform: translateX(0);
 }
 
-.scroll-reveal.zoom-in {
+.scroll - reveal.zoom -in {
     opacity: 0;
     transform: scale(0.8);
 }
-.scroll-reveal.zoom-in.visible {
+    .scroll - reveal.zoom -in.visible {
     opacity: 1;
     transform: scale(1);
 }
 
 USAGE:
 ------
-new ScrollReveal({ threshold: 0.2, staggerDelay: 150 });
+    new ScrollReveal({ threshold: 0.2, staggerDelay: 150 });
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -221,59 +264,59 @@ new ScrollReveal({ threshold: 0.2, staggerDelay: 150 });
 
 IMPLEMENTATION:
 --------------
-class ParallaxManager {
-    constructor() {
-        this.elements = [];
-        this.ticking = false;
-        
-        this.init();
-    }
-    
-    init() {
-        // Collect all parallax elements with data-speed attribute
-        document.querySelectorAll('[data-parallax]').forEach(el => {
-            this.elements.push({
-                element: el,
-                speed: parseFloat(el.dataset.parallax) || 0.3,
-                direction: el.dataset.parallaxDirection || 'y'
+    class ParallaxManager {
+        constructor() {
+            this.elements = [];
+            this.ticking = false;
+
+            this.init();
+        }
+
+        init() {
+            // Collect all parallax elements with data-speed attribute
+            document.querySelectorAll('[data-parallax]').forEach(el => {
+                this.elements.push({
+                    element: el,
+                    speed: parseFloat(el.dataset.parallax) || 0.3,
+                    direction: el.dataset.parallaxDirection || 'y'
+                });
             });
-        });
-        
-        // Listen for scroll with throttling
-        window.addEventListener('scroll', () => this.requestTick(), { passive: true });
-    }
-    
-    requestTick() {
-        if (!this.ticking) {
-            requestAnimationFrame(() => this.update());
-            this.ticking = true;
+
+            // Listen for scroll with throttling
+            window.addEventListener('scroll', () => this.requestTick(), { passive: true });
+        }
+
+        requestTick() {
+            if (!this.ticking) {
+                requestAnimationFrame(() => this.update());
+                this.ticking = true;
+            }
+        }
+
+        update() {
+            const scrollY = window.scrollY;
+
+            this.elements.forEach(({ element, speed, direction }) => {
+                const rect = element.getBoundingClientRect();
+                const elementTop = rect.top + scrollY;
+
+                // Only apply parallax when element is in viewport
+                if (scrollY + window.innerHeight > elementTop &&
+                    scrollY < elementTop + rect.height) {
+
+                    const offset = (scrollY - elementTop) * speed;
+
+                    if (direction === 'y') {
+                        element.style.transform = `translateY(${offset}px)`;
+                    } else {
+                        element.style.transform = `translateX(${offset}px)`;
+                    }
+                }
+            });
+
+            this.ticking = false;
         }
     }
-    
-    update() {
-        const scrollY = window.scrollY;
-        
-        this.elements.forEach(({ element, speed, direction }) => {
-            const rect = element.getBoundingClientRect();
-            const elementTop = rect.top + scrollY;
-            
-            // Only apply parallax when element is in viewport
-            if (scrollY + window.innerHeight > elementTop && 
-                scrollY < elementTop + rect.height) {
-                
-                const offset = (scrollY - elementTop) * speed;
-                
-                if (direction === 'y') {
-                    element.style.transform = `translateY(${offset}px)`;
-                } else {
-                    element.style.transform = `translateX(${offset}px)`;
-                }
-            }
-        });
-        
-        this.ticking = false;
-    }
-}
 
 USAGE IN HTML:
 -------------
@@ -286,118 +329,6 @@ USAGE IN HTML:
 </div>
 
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-0.5 CONFETTI CELEBRATION EFFECT
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-IMPLEMENTATION:
---------------
-class ConfettiBurst {
-    constructor(options = {}) {
-        this.colors = options.colors || [
-            '#FFD700',  // Gold
-            '#FFB6C1',  // Rose
-            '#FFFFFF',  // White
-            '#F7E7CE',  // Champagne
-            '#B76E79'   // Rose Gold
-        ];
-        this.particleCount = options.count || 100;
-        this.duration = options.duration || 3000;  // ms
-        this.spread = options.spread || 360;       // degrees
-        this.velocity = options.velocity || 30;
-    }
-    
-    fire(originX = 0.5, originY = 0.5) {
-        const container = document.createElement('div');
-        container.className = 'confetti-container';
-        container.style.cssText = `
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: 99999;
-            overflow: hidden;
-        `;
-        document.body.appendChild(container);
-        
-        // Create particles
-        for (let i = 0; i < this.particleCount; i++) {
-            const particle = document.createElement('div');
-            const color = this.colors[Math.floor(Math.random() * this.colors.length)];
-            const size = Math.random() * 10 + 5;
-            const shape = Math.random() > 0.5 ? '50%' : '0';  // Circle or square
-            
-            // Random angle within spread
-            const angle = (Math.random() * this.spread - this.spread / 2) * (Math.PI / 180);
-            const velocity = this.velocity * (0.5 + Math.random() * 0.5);
-            const vx = Math.cos(angle) * velocity;
-            const vy = Math.sin(angle) * velocity - 20;  // Initial upward boost
-            
-            particle.style.cssText = `
-                position: absolute;
-                left: ${originX * 100}%;
-                top: ${originY * 100}%;
-                width: ${size}px;
-                height: ${size}px;
-                background: ${color};
-                border-radius: ${shape};
-                transform: rotate(${Math.random() * 360}deg);
-            `;
-            
-            container.appendChild(particle);
-            
-            // Animate with physics
-            this.animateParticle(particle, vx, vy);
-        }
-        
-        // Clean up after duration
-        setTimeout(() => container.remove(), this.duration);
-    }
-    
-    animateParticle(particle, vx, vy) {
-        let x = 0, y = 0;
-        let rotation = Math.random() * 360;
-        const gravity = 0.5;
-        const friction = 0.99;
-        const rotationSpeed = Math.random() * 10 - 5;
-        
-        const animate = () => {
-            vy += gravity;  // Apply gravity
-            vx *= friction; // Apply friction
-            vy *= friction;
-            
-            x += vx;
-            y += vy;
-            rotation += rotationSpeed;
-            
-            particle.style.transform = `
-                translate(${x}px, ${y}px)
-                rotate(${rotation}deg)
-            `;
-            particle.style.opacity = Math.max(0, 1 - y / 500);
-            
-            if (y < 500 && particle.style.opacity > 0) {
-                requestAnimationFrame(animate);
-            }
-        };
-        
-        requestAnimationFrame(animate);
-    }
-}
-
-USAGE:
-------
-const confetti = new ConfettiBurst({
-    colors: ['#FFD700', '#FFB6C1', '#FFFFFF'],
-    count: 80
-});
-
-// Fire on booking success
-function onBookingSuccess() {
-    confetti.fire(0.5, 0.3);  // From center-top
-    showSuccessMessage();
-}
-
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 0.6 SKELETON LOADING MANAGER
@@ -405,10 +336,10 @@ function onBookingSuccess() {
 
 IMPLEMENTATION:
 --------------
-class SkeletonLoader {
-    constructor() {
-        this.skeletonTemplates = {
-            'service-card': `
+    class SkeletonLoader {
+        constructor() {
+            this.skeletonTemplates = {
+                'service-card': `
                 <div class="skeleton-card">
                     <div class="skeleton skeleton-image" style="height: 200px;"></div>
                     <div class="skeleton-content" style="padding: 16px;">
@@ -419,14 +350,14 @@ class SkeletonLoader {
                     </div>
                 </div>
             `,
-            'staff-card': `
+                'staff-card': `
                 <div class="skeleton-card">
                     <div class="skeleton skeleton-avatar" style="width: 120px; height: 120px; border-radius: 50%; margin: 0 auto;"></div>
                     <div class="skeleton skeleton-title" style="height: 24px; width: 60%; margin: 16px auto 8px;"></div>
                     <div class="skeleton skeleton-text" style="height: 16px; width: 40%; margin: 0 auto;"></div>
                 </div>
             `,
-            'review-card': `
+                'review-card': `
                 <div class="skeleton-card">
                     <div style="display: flex; gap: 12px; margin-bottom: 16px;">
                         <div class="skeleton" style="width: 50px; height: 50px; border-radius: 50%;"></div>
@@ -440,30 +371,30 @@ class SkeletonLoader {
                     <div class="skeleton" style="height: 16px; width: 70%; margin-top: 8px;"></div>
                 </div>
             `
-        };
-    }
-    
-    show(container, type, count = 1) {
-        const template = this.skeletonTemplates[type];
-        if (!template) return;
-        
-        container.innerHTML = '';
-        for (let i = 0; i < count; i++) {
-            container.innerHTML += template;
+            };
+        }
+
+        show(container, type, count = 1) {
+            const template = this.skeletonTemplates[type];
+            if (!template) return;
+
+            container.innerHTML = '';
+            for (let i = 0; i < count; i++) {
+                container.innerHTML += template;
+            }
+        }
+
+        hide(container, realContent) {
+            // Fade out skeletons
+            container.style.opacity = '0';
+            container.style.transition = 'opacity 0.3s ease';
+
+            setTimeout(() => {
+                container.innerHTML = realContent;
+                container.style.opacity = '1';
+            }, 300);
         }
     }
-    
-    hide(container, realContent) {
-        // Fade out skeletons
-        container.style.opacity = '0';
-        container.style.transition = 'opacity 0.3s ease';
-        
-        setTimeout(() => {
-            container.innerHTML = realContent;
-            container.style.opacity = '1';
-        }, 300);
-    }
-}
 
 USAGE:
 ------
@@ -497,28 +428,28 @@ class ServiceFilter {
         this.filterBar = document.querySelector(options.filterBar);
         this.searchInput = document.querySelector(options.searchInput);
         this.countDisplay = document.querySelector(options.countDisplay);
-        
+
         this.services = [];           // All services data
         this.filteredServices = [];   // Currently filtered
         this.activeCategory = 'all';
         this.searchQuery = '';
         this.debounceTimer = null;
-        
+
         this.init();
     }
-    
+
     init() {
         // Load services from DOM or API
         this.services = this.parseServicesFromDOM();
         this.filteredServices = [...this.services];
-        
+
         // Category filter buttons
         this.filterBar.querySelectorAll('.filter-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 this.setActiveCategory(btn.dataset.category);
             });
         });
-        
+
         // Search input with debouncing
         this.searchInput.addEventListener('input', (e) => {
             clearTimeout(this.debounceTimer);
@@ -527,7 +458,7 @@ class ServiceFilter {
             }, 300);  // 300ms debounce
         });
     }
-    
+
     parseServicesFromDOM() {
         return Array.from(this.container.querySelectorAll('.service-card')).map(card => ({
             element: card,
@@ -538,49 +469,49 @@ class ServiceFilter {
             description: card.querySelector('.service-description')?.textContent.toLowerCase() || ''
         }));
     }
-    
+
     setActiveCategory(category) {
         this.activeCategory = category;
-        
+
         // Update button states
         this.filterBar.querySelectorAll('.filter-btn').forEach(btn => {
             btn.classList.toggle('active', btn.dataset.category === category);
         });
-        
+
         this.applyFilters();
     }
-    
+
     setSearchQuery(query) {
         this.searchQuery = query.toLowerCase().trim();
         this.applyFilters();
     }
-    
+
     applyFilters() {
         this.filteredServices = this.services.filter(service => {
             // Category filter
-            const matchesCategory = this.activeCategory === 'all' || 
+            const matchesCategory = this.activeCategory === 'all' ||
                                     service.category === this.activeCategory;
-            
+
             // Search filter (name OR description)
             const matchesSearch = this.searchQuery === '' ||
                                   service.name.includes(this.searchQuery) ||
                                   service.description.includes(this.searchQuery);
-            
+
             return matchesCategory && matchesSearch;
         });
-        
+
         this.render();
     }
-    
+
     render() {
         // Update count display
         const count = this.filteredServices.length;
         this.countDisplay.textContent = `${count} service${count !== 1 ? 's' : ''} found`;
-        
+
         // Animate cards
         this.services.forEach(service => {
             const isVisible = this.filteredServices.includes(service);
-            
+
             if (isVisible) {
                 service.element.style.display = '';
                 service.element.style.animation = 'fadeInUp 0.4s ease forwards';
@@ -616,21 +547,21 @@ class BeforeAfterSlider {
         this.beforeImage = element.querySelector('.before-image');
         this.handle = element.querySelector('.slider-handle');
         this.isDragging = false;
-        
+
         this.init();
     }
-    
+
     init() {
         // Mouse events
         this.handle.addEventListener('mousedown', () => this.startDrag());
         document.addEventListener('mousemove', (e) => this.onDrag(e));
         document.addEventListener('mouseup', () => this.stopDrag());
-        
+
         // Touch events for mobile
         this.handle.addEventListener('touchstart', () => this.startDrag());
         document.addEventListener('touchmove', (e) => this.onDrag(e.touches[0]));
         document.addEventListener('touchend', () => this.stopDrag());
-        
+
         // Click on container to move handle
         this.container.addEventListener('click', (e) => {
             if (e.target !== this.handle) {
@@ -638,34 +569,34 @@ class BeforeAfterSlider {
             }
         });
     }
-    
+
     startDrag() {
         this.isDragging = true;
         this.container.classList.add('dragging');
     }
-    
+
     stopDrag() {
         this.isDragging = false;
         this.container.classList.remove('dragging');
     }
-    
+
     onDrag(e) {
         if (!this.isDragging) return;
         this.setPosition(e);
     }
-    
+
     setPosition(e) {
         const rect = this.container.getBoundingClientRect();
         let x = e.clientX - rect.left;
-        
+
         // Clamp between 0 and container width
         x = Math.max(0, Math.min(x, rect.width));
-        
+
         const percentage = (x / rect.width) * 100;
-        
+
         // Update before image clip path
         this.beforeImage.style.clipPath = `inset(0 ${100 - percentage}% 0 0)`;
-        
+
         // Update handle position
         this.handle.style.left = `${percentage}%`;
     }
@@ -689,26 +620,26 @@ class AvailabilityCalendar {
         this.container = document.querySelector(options.container);
         this.onDateSelect = options.onDateSelect || (() => {});
         this.onTimeSelect = options.onTimeSelect || (() => {});
-        
+
         this.currentDate = new Date();
         this.selectedDate = null;
         this.selectedTime = null;
         this.availabilityData = {};  // Fetched from API
-        
+
         this.init();
     }
-    
+
     init() {
         this.render();
         this.fetchAvailability();
     }
-    
+
     async fetchAvailability() {
         // Mock API call - replace with real endpoint
         try {
             // const response = await fetch('/api/availability?month=' + this.currentDate.toISOString());
             // this.availabilityData = await response.json();
-            
+
             // Mock data for demonstration
             this.availabilityData = this.generateMockAvailability();
             this.render();
@@ -716,46 +647,46 @@ class AvailabilityCalendar {
             console.error('Failed to fetch availability:', error);
         }
     }
-    
+
     generateMockAvailability() {
         const data = {};
         const today = new Date();
-        
+
         for (let i = 0; i < 30; i++) {
             const date = new Date(today);
             date.setDate(date.getDate() + i);
             const dateKey = date.toISOString().split('T')[0];
-            
+
             // Random availability (some days full, some have slots)
             const slotsAvailable = Math.floor(Math.random() * 8);
-            
+
             data[dateKey] = {
                 slotsAvailable,
                 slots: this.generateTimeSlots(slotsAvailable)
             };
         }
-        
+
         return data;
     }
-    
+
     generateTimeSlots(available) {
         const allSlots = [
             '09:00', '09:30', '10:00', '10:30', '11:00', '11:30',
             '12:00', '14:00', '14:30', '15:00', '15:30', '16:00',
             '16:30', '17:00', '17:30', '18:00'
         ];
-        
+
         return allSlots.map(time => ({
             time,
             available: Math.random() < (available / 8),
             therapist: ['Priya', 'Anita', 'Meera'][Math.floor(Math.random() * 3)]
         }));
     }
-    
+
     render() {
         const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
                            'July', 'August', 'September', 'October', 'November', 'December'];
-        
+
         this.container.innerHTML = `
             <div class="calendar-widget">
                 <div class="calendar-header">
@@ -765,54 +696,54 @@ class AvailabilityCalendar {
                     </span>
                     <button class="calendar-nav-btn next" onclick="calendar.nextMonth()">→</button>
                 </div>
-                
+
                 <div class="calendar-weekdays">
                     ${['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
                         .map(day => `<div class="weekday">${day}</div>`).join('')}
                 </div>
-                
+
                 <div class="calendar-days">
                     ${this.renderDays()}
                 </div>
-                
+
                 ${this.selectedDate ? this.renderTimeSlots() : ''}
             </div>
         `;
-        
+
         this.attachEventListeners();
     }
-    
+
     renderDays() {
         const year = this.currentDate.getFullYear();
         const month = this.currentDate.getMonth();
         const firstDay = new Date(year, month, 1).getDay();
         const daysInMonth = new Date(year, month + 1, 0).getDate();
         const today = new Date().toISOString().split('T')[0];
-        
+
         let html = '';
-        
+
         // Empty cells for days before month starts
         for (let i = 0; i < firstDay; i++) {
             html += '<div class="calendar-day empty"></div>';
         }
-        
+
         // Days of the month
         for (let day = 1; day <= daysInMonth; day++) {
             const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
             const availability = this.availabilityData[dateStr];
             const slots = availability?.slotsAvailable || 0;
-            
+
             const isToday = dateStr === today;
             const isPast = new Date(dateStr) < new Date(today);
             const isSelected = dateStr === this.selectedDate;
-            
+
             let classes = 'calendar-day';
             if (isToday) classes += ' today';
             if (isPast) classes += ' disabled';
             if (isSelected) classes += ' selected';
             if (slots > 3) classes += ' has-slots';
             else if (slots > 0) classes += ' few-slots';
-            
+
             html += `
                 <div class="${classes}" data-date="${dateStr}" ${isPast ? 'disabled' : ''}>
                     <span class="day-number">${day}</span>
@@ -820,20 +751,20 @@ class AvailabilityCalendar {
                 </div>
             `;
         }
-        
+
         return html;
     }
-    
+
     renderTimeSlots() {
         const availability = this.availabilityData[this.selectedDate];
         if (!availability) return '';
-        
+
         return `
             <div class="time-slots-section">
                 <h4>Available Times for ${this.formatDate(this.selectedDate)}</h4>
                 <div class="time-slots-grid">
                     ${availability.slots.map(slot => `
-                        <div class="time-slot ${slot.available ? '' : 'booked'} 
+                        <div class="time-slot ${slot.available ? '' : 'booked'}
                                     ${slot.time === this.selectedTime ? 'selected' : ''}"
                              data-time="${slot.time}"
                              ${!slot.available ? 'disabled' : ''}>
@@ -845,7 +776,7 @@ class AvailabilityCalendar {
             </div>
         `;
     }
-    
+
     formatDate(dateStr) {
         return new Date(dateStr).toLocaleDateString('en-US', {
             weekday: 'long',
@@ -853,7 +784,7 @@ class AvailabilityCalendar {
             day: 'numeric'
         });
     }
-    
+
     attachEventListeners() {
         // Day selection
         this.container.querySelectorAll('.calendar-day:not(.disabled):not(.empty)').forEach(day => {
@@ -864,7 +795,7 @@ class AvailabilityCalendar {
                 this.render();
             });
         });
-        
+
         // Time slot selection
         this.container.querySelectorAll('.time-slot:not(.booked)').forEach(slot => {
             slot.addEventListener('click', () => {
@@ -874,12 +805,12 @@ class AvailabilityCalendar {
             });
         });
     }
-    
+
     prevMonth() {
         this.currentDate.setMonth(this.currentDate.getMonth() - 1);
         this.fetchAvailability();
     }
-    
+
     nextMonth() {
         this.currentDate.setMonth(this.currentDate.getMonth() + 1);
         this.fetchAvailability();
@@ -912,37 +843,37 @@ class StaffCarousel {
         this.track = this.container.querySelector('.carousel-track');
         this.cards = Array.from(this.track.querySelectorAll('.staff-card'));
         this.dotsContainer = this.container.querySelector('.carousel-dots');
-        
+
         this.currentIndex = 0;
         this.autoPlayInterval = options.autoPlay || 8000;  // 8 seconds
         this.autoPlayTimer = null;
         this.cardsPerView = this.calculateCardsPerView();
-        
+
         this.init();
     }
-    
+
     calculateCardsPerView() {
         const containerWidth = this.container.offsetWidth;
         if (containerWidth < 640) return 1;
         if (containerWidth < 1024) return 2;
         return 3;
     }
-    
+
     init() {
         this.createDots();
         this.attachEventListeners();
         this.startAutoPlay();
-        
+
         // Recalculate on resize
         window.addEventListener('resize', () => {
             this.cardsPerView = this.calculateCardsPerView();
             this.goToSlide(this.currentIndex);
         });
     }
-    
+
     createDots() {
         const totalSlides = Math.ceil(this.cards.length / this.cardsPerView);
-        
+
         this.dotsContainer.innerHTML = '';
         for (let i = 0; i < totalSlides; i++) {
             const dot = document.createElement('button');
@@ -951,28 +882,28 @@ class StaffCarousel {
             this.dotsContainer.appendChild(dot);
         }
     }
-    
+
     attachEventListeners() {
         // Navigation buttons
         this.container.querySelector('.prev-btn')?.addEventListener('click', () => this.prev());
         this.container.querySelector('.next-btn')?.addEventListener('click', () => this.next());
-        
+
         // Pause on hover
         this.container.addEventListener('mouseenter', () => this.stopAutoPlay());
         this.container.addEventListener('mouseleave', () => this.startAutoPlay());
-        
+
         // Touch/swipe support
         let startX, moveX;
-        
+
         this.track.addEventListener('touchstart', (e) => {
             startX = e.touches[0].clientX;
             this.stopAutoPlay();
         });
-        
+
         this.track.addEventListener('touchmove', (e) => {
             moveX = e.touches[0].clientX;
         });
-        
+
         this.track.addEventListener('touchend', () => {
             const diff = startX - moveX;
             if (Math.abs(diff) > 50) {
@@ -981,36 +912,36 @@ class StaffCarousel {
             this.startAutoPlay();
         });
     }
-    
+
     goToSlide(index) {
         const totalSlides = Math.ceil(this.cards.length / this.cardsPerView);
         this.currentIndex = Math.max(0, Math.min(index, totalSlides - 1));
-        
+
         const cardWidth = this.cards[0].offsetWidth + 24;  // Include gap
         const offset = this.currentIndex * this.cardsPerView * cardWidth;
-        
+
         this.track.style.transform = `translateX(-${offset}px)`;
-        
+
         // Update dots
         this.dotsContainer.querySelectorAll('.carousel-dot').forEach((dot, i) => {
             dot.classList.toggle('active', i === this.currentIndex);
         });
     }
-    
+
     next() {
         const totalSlides = Math.ceil(this.cards.length / this.cardsPerView);
         this.goToSlide((this.currentIndex + 1) % totalSlides);
     }
-    
+
     prev() {
         const totalSlides = Math.ceil(this.cards.length / this.cardsPerView);
         this.goToSlide((this.currentIndex - 1 + totalSlides) % totalSlides);
     }
-    
+
     startAutoPlay() {
         this.autoPlayTimer = setInterval(() => this.next(), this.autoPlayInterval);
     }
-    
+
     stopAutoPlay() {
         clearInterval(this.autoPlayTimer);
     }
@@ -1035,7 +966,7 @@ class ChatWidget {
         this.container = null;
         this.isOpen = false;
         this.messages = [];
-        
+
         this.botResponses = {
             greeting: "Hello! Welcome to Blancbeu Beauty Salon. How can I help you today?",
             services: "We offer a wide range of services including Hair Styling, Makeup, Facials, Manicures, Pedicures, and Spa treatments. Which would you like to know more about?",
@@ -1044,28 +975,28 @@ class ChatWidget {
             location: "We're located in Ranchi. You can find us on Google Maps. Would you like me to share the directions?",
             default: "Thank you for your message! Our team will get back to you shortly. In the meantime, you can also reach us at +91 92299 15277."
         };
-        
+
         this.quickActions = [
             { label: "View Services", action: "services" },
             { label: "Book Appointment", action: "booking" },
             { label: "Our Hours", action: "hours" },
             { label: "Location", action: "location" }
         ];
-        
+
         this.init();
     }
-    
+
     init() {
         this.createWidget();
         this.attachEventListeners();
-        
+
         // Show greeting after short delay
         setTimeout(() => {
             this.addBotMessage(this.botResponses.greeting);
             this.renderQuickActions();
         }, 1000);
     }
-    
+
     createWidget() {
         this.container = document.createElement('div');
         this.container.className = 'chat-widget';
@@ -1074,7 +1005,7 @@ class ChatWidget {
                 <span class="chat-bubble-icon">💬</span>
                 <span class="chat-unread-badge" style="display: none;">1</span>
             </button>
-            
+
             <div class="chat-window">
                 <div class="chat-header">
                     <div class="chat-header-info">
@@ -1086,40 +1017,40 @@ class ChatWidget {
                     </div>
                     <button class="chat-close" aria-label="Close chat">✕</button>
                 </div>
-                
+
                 <div class="chat-messages"></div>
-                
+
                 <div class="chat-quick-actions"></div>
-                
+
                 <div class="chat-input-area">
                     <input type="text" class="chat-input" placeholder="Type a message...">
                     <button class="chat-send" aria-label="Send message">➤</button>
                 </div>
             </div>
         `;
-        
+
         document.body.appendChild(this.container);
     }
-    
+
     attachEventListeners() {
         const bubble = this.container.querySelector('.chat-bubble');
         const closeBtn = this.container.querySelector('.chat-close');
         const input = this.container.querySelector('.chat-input');
         const sendBtn = this.container.querySelector('.chat-send');
-        
+
         bubble.addEventListener('click', () => this.toggle());
         closeBtn.addEventListener('click', () => this.close());
-        
+
         sendBtn.addEventListener('click', () => this.sendMessage());
         input.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') this.sendMessage();
         });
     }
-    
+
     toggle() {
         this.isOpen ? this.close() : this.open();
     }
-    
+
     open() {
         this.isOpen = true;
         this.container.querySelector('.chat-window').classList.add('open');
@@ -1127,53 +1058,53 @@ class ChatWidget {
         this.container.querySelector('.chat-unread-badge').style.display = 'none';
         this.container.querySelector('.chat-input').focus();
     }
-    
+
     close() {
         this.isOpen = false;
         this.container.querySelector('.chat-window').classList.remove('open');
         this.container.querySelector('.chat-bubble').classList.remove('active');
     }
-    
+
     sendMessage() {
         const input = this.container.querySelector('.chat-input');
         const message = input.value.trim();
-        
+
         if (!message) return;
-        
+
         this.addUserMessage(message);
         input.value = '';
-        
+
         // Simulate bot response after delay
         setTimeout(() => {
             this.processUserMessage(message);
         }, 500 + Math.random() * 1000);
     }
-    
+
     addUserMessage(text) {
         this.messages.push({ type: 'user', text });
         this.renderMessage({ type: 'user', text });
     }
-    
+
     addBotMessage(text) {
         this.messages.push({ type: 'bot', text });
         this.renderMessage({ type: 'bot', text });
-        
+
         // Show unread badge if chat is closed
         if (!this.isOpen) {
             this.container.querySelector('.chat-unread-badge').style.display = 'flex';
         }
     }
-    
+
     renderMessage(message) {
         const messagesContainer = this.container.querySelector('.chat-messages');
         const messageEl = document.createElement('div');
         messageEl.className = `chat-message ${message.type}`;
         messageEl.textContent = message.text;
-        
+
         messagesContainer.appendChild(messageEl);
         messagesContainer.scrollTop = messagesContainer.scrollHeight;
     }
-    
+
     renderQuickActions() {
         const container = this.container.querySelector('.chat-quick-actions');
         container.innerHTML = this.quickActions.map(action => `
@@ -1181,7 +1112,7 @@ class ChatWidget {
                 ${action.label}
             </button>
         `).join('');
-        
+
         container.querySelectorAll('.quick-action-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 const action = btn.dataset.action;
@@ -1189,12 +1120,12 @@ class ChatWidget {
             });
         });
     }
-    
+
     processUserMessage(message) {
         const lowerMessage = message.toLowerCase();
-        
+
         let response = this.botResponses.default;
-        
+
         if (lowerMessage.includes('service') || lowerMessage.includes('offer') || lowerMessage.includes('treatment')) {
             response = this.botResponses.services;
         } else if (lowerMessage.includes('book') || lowerMessage.includes('appointment')) {
@@ -1206,295 +1137,14 @@ class ChatWidget {
         } else if (lowerMessage.includes('hello') || lowerMessage.includes('hi') || lowerMessage.includes('hey')) {
             response = this.botResponses.greeting;
         }
-        
+
         this.addBotMessage(response);
     }
 }
 
-USAGE:
-------
-const chatWidget = new ChatWidget();
 
+// Phase 2 features moved to documentation
 
-================================================================================
-PHASE 2: ADVANCED FEATURES - JAVASCRIPT IMPLEMENTATIONS
-================================================================================
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-6.0 MEMBERSHIP TIER CALCULATOR
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-class MembershipCalculator {
-    constructor() {
-        this.tiers = {
-            gold: {
-                name: 'Gold',
-                price: 999,
-                discount: 0.05,  // 5%
-                benefits: ['5% off all services', 'Priority booking']
-            },
-            platinum: {
-                name: 'Platinum',
-                price: 1999,
-                discount: 0.10,  // 10%
-                benefits: ['10% off all services', 'Free birthday treatment', 'Early access']
-            },
-            diamond: {
-                name: 'Diamond',
-                price: 3999,
-                discount: 0.15,  // 15%
-                benefits: ['15% off all services', 'VIP lounge access', 'Complimentary drinks', 'Free monthly treatment']
-            }
-        };
-    }
-    
-    calculateSavings(tier, annualSpend) {
-        const tierData = this.tiers[tier];
-        if (!tierData) return null;
-        
-        const savings = annualSpend * tierData.discount;
-        const netSavings = savings - tierData.price;
-        const roi = (netSavings / tierData.price * 100).toFixed(0);
-        
-        return {
-            grossSavings: savings,
-            membershipCost: tierData.price,
-            netSavings,
-            roi: netSavings > 0 ? roi : 0,
-            worthIt: netSavings > 0
-        };
-    }
-    
-    recommendTier(annualSpend) {
-        let bestTier = null;
-        let bestSavings = -Infinity;
-        
-        for (const [tierKey, tierData] of Object.entries(this.tiers)) {
-            const result = this.calculateSavings(tierKey, annualSpend);
-            if (result.netSavings > bestSavings) {
-                bestSavings = result.netSavings;
-                bestTier = tierKey;
-            }
-        }
-        
-        return bestTier;
-    }
-}
-
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-7.0 FAQ ACCORDION
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-class FAQAccordion {
-    constructor(container) {
-        this.container = document.querySelector(container);
-        this.items = this.container.querySelectorAll('.faq-item');
-        this.allowMultiple = false;  // Only one open at a time
-        
-        this.init();
-    }
-    
-    init() {
-        this.items.forEach(item => {
-            const question = item.querySelector('.faq-question');
-            const answer = item.querySelector('.faq-answer');
-            
-            question.addEventListener('click', () => {
-                const isOpen = item.classList.contains('open');
-                
-                if (!this.allowMultiple) {
-                    this.closeAll();
-                }
-                
-                if (!isOpen) {
-                    item.classList.add('open');
-                    answer.style.maxHeight = answer.scrollHeight + 'px';
-                } else {
-                    item.classList.remove('open');
-                    answer.style.maxHeight = '0';
-                }
-            });
-        });
-    }
-    
-    closeAll() {
-        this.items.forEach(item => {
-            item.classList.remove('open');
-            item.querySelector('.faq-answer').style.maxHeight = '0';
-        });
-    }
-}
-
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-8.0 GIFT CARD SYSTEM
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-class GiftCardManager {
-    constructor() {
-        this.cards = [];
-        this.presetAmounts = [500, 1000, 2000, 5000];
-    }
-    
-    generateCardCode() {
-        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-        let code = 'BB-';
-        for (let i = 0; i < 12; i++) {
-            if (i === 4 || i === 8) code += '-';
-            code += chars.charAt(Math.floor(Math.random() * chars.length));
-        }
-        return code;  // e.g., BB-ABCD-EFGH-IJKL
-    }
-    
-    createGiftCard(amount, recipientName, recipientEmail, message, senderName) {
-        const card = {
-            code: this.generateCardCode(),
-            amount,
-            balance: amount,
-            recipientName,
-            recipientEmail,
-            message,
-            senderName,
-            createdAt: new Date(),
-            expiresAt: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000),  // 1 year
-            isActive: true
-        };
-        
-        this.cards.push(card);
-        this.sendGiftCardEmail(card);
-        
-        return card;
-    }
-    
-    redeemCard(code, amount) {
-        const card = this.cards.find(c => c.code === code);
-        
-        if (!card) return { success: false, error: 'Invalid card code' };
-        if (!card.isActive) return { success: false, error: 'Card is no longer active' };
-        if (card.expiresAt < new Date()) return { success: false, error: 'Card has expired' };
-        if (amount > card.balance) return { success: false, error: 'Insufficient balance' };
-        
-        card.balance -= amount;
-        if (card.balance === 0) card.isActive = false;
-        
-        return { 
-            success: true, 
-            remainingBalance: card.balance,
-            message: `₹${amount} redeemed successfully!`
-        };
-    }
-    
-    checkBalance(code) {
-        const card = this.cards.find(c => c.code === code);
-        if (!card) return null;
-        
-        return {
-            balance: card.balance,
-            isActive: card.isActive,
-            expiresAt: card.expiresAt
-        };
-    }
-    
-    async sendGiftCardEmail(card) {
-        // Integration with email service
-        console.log('Sending gift card email to:', card.recipientEmail);
-        // await emailService.send({...})
-    }
-}
-
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-9.0 REFERRAL PROGRAM
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-class ReferralProgram {
-    constructor() {
-        this.referrerReward = 200;   // ₹200 for referrer
-        this.refereeDiscount = 100;  // ₹100 off for new customer
-    }
-    
-    generateReferralCode(userId) {
-        return `REF-${userId.substring(0, 4).toUpperCase()}-${Date.now().toString(36).toUpperCase()}`;
-    }
-    
-    async processReferral(referralCode, newCustomerId) {
-        // Find referrer
-        const referrer = await this.findReferrerByCode(referralCode);
-        if (!referrer) return { success: false, error: 'Invalid referral code' };
-        
-        // Apply rewards
-        await this.creditReward(referrer.id, this.referrerReward);
-        await this.applyDiscount(newCustomerId, this.refereeDiscount);
-        
-        // Track referral
-        await this.recordReferral(referrer.id, newCustomerId, referralCode);
-        
-        return {
-            success: true,
-            referrerReward: this.referrerReward,
-            refereeDiscount: this.refereeDiscount
-        };
-    }
-    
-    generateShareLinks(code) {
-        const baseUrl = 'https://blancbeu.com';
-        const message = encodeURIComponent(`Get ₹${this.refereeDiscount} off your first visit at Blancbeu Beauty Salon! Use my referral code: ${code}`);
-        
-        return {
-            whatsapp: `https://wa.me/?text=${message}%20${baseUrl}/ref/${code}`,
-            facebook: `https://www.facebook.com/sharer/sharer.php?u=${baseUrl}/ref/${code}`,
-            twitter: `https://twitter.com/intent/tweet?text=${message}&url=${baseUrl}/ref/${code}`,
-            copy: `${baseUrl}/ref/${code}`
-        };
-    }
-}
-
-
-================================================================================
-INITIALIZATION
-================================================================================
-
-// Initialize all components when DOM is ready
-document.addEventListener('DOMContentLoaded', () => {
-    // Phase 0: Visual Effects
-    new ScrollReveal({ threshold: 0.15, staggerDelay: 100 });
-    new ParallaxManager();
-    
-    // Apply magnetic effect to premium buttons
-    document.querySelectorAll('.hero-btn, .book-service-btn, .tier-cta').forEach(btn => {
-        new MagneticButton(btn, { strength: 0.3 });
-    });
-    
-    // Apply ripple effect to all buttons
-    document.querySelectorAll('button, .btn').forEach(btn => {
-        btn.addEventListener('click', createRipple);
-    });
-    
-    // Initialize confetti for booking success
-    window.confetti = new ConfettiBurst({
-        colors: ['#FFD700', '#FFB6C1', '#FFFFFF', '#F7E7CE'],
-        count: 80
-    });
-    
-    // Initialize skeleton loader
-    window.skeletonLoader = new SkeletonLoader();
-    
-    // Phase 1: Core Features (uncomment when ready)
-    // new ServiceFilter({ ... });
-    // new AvailabilityCalendar({ ... });
-    // new StaffCarousel({ ... });
-    // new ChatWidget();
-    
-    // Phase 2: Advanced Features (uncomment when ready)
-    // new FAQAccordion('.faq-container');
-    // window.giftCards = new GiftCardManager();
-    // window.referralProgram = new ReferralProgram();
-    // window.membershipCalc = new MembershipCalculator();
-});
-
-================================================================================
-*/
 
 // ===== Smart Cache Update System =====
 let lastKnownVersion = null;
@@ -1559,40 +1209,40 @@ async function initUpdateChecker() {
 async function clearAllCacheAndCookies() {
     try {
         // Clear all cookies
-        document.cookie.split(";").forEach((c) => {
-            document.cookie = c
-                .replace(/^ +/, "")
-                .replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+        document.cookie.split(";").forEach((cookie) => {
+            const eqPos = cookie.indexOf("=");
+            const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+            document.cookie = name + "=;expires=" + new Date(0).toUTCString() + ";path=/";
         });
 
-        // Clear localStorage (except version info and theme preference which we need to preserve)
-        const versionData = {
-            version: localStorage.getItem('blancbeu_version'),
-            timestamp: localStorage.getItem('blancbeu_timestamp'),
-            theme: localStorage.getItem('theme')
-        };
-        localStorage.clear();
-        localStorage.setItem('blancbeu_version', versionData.version);
-        localStorage.setItem('blancbeu_timestamp', versionData.timestamp);
-        if (versionData.theme) {
-            localStorage.setItem('theme', versionData.theme);
-        }
+// Clear localStorage (except version info and theme preference which we need to preserve)
+const versionData = {
+    version: localStorage.getItem('blancbeu_version'),
+    timestamp: localStorage.getItem('blancbeu_timestamp'),
+    theme: localStorage.getItem('theme')
+};
+localStorage.clear();
+localStorage.setItem('blancbeu_version', versionData.version);
+localStorage.setItem('blancbeu_timestamp', versionData.timestamp);
+if (versionData.theme) {
+    localStorage.setItem('theme', versionData.theme);
+}
 
-        // Clear sessionStorage
-        sessionStorage.clear();
+// Clear sessionStorage
+sessionStorage.clear();
 
-        // Clear all caches (for service worker)
-        if ('caches' in window) {
-            const cacheNames = await caches.keys();
-            await Promise.all(
-                cacheNames.map(cacheName => caches.delete(cacheName))
-            );
-        }
+// Clear all caches (for service worker)
+if ('caches' in window) {
+    const cacheNames = await caches.keys();
+    await Promise.all(
+        cacheNames.map(cacheName => caches.delete(cacheName))
+    );
+}
 
-        console.log('✨ All cache and cookies cleared!');
+console.log('✨ All cache and cookies cleared!');
     } catch (error) {
-        console.error('Error clearing cache:', error);
-    }
+    console.error('Error clearing cache:', error);
+}
 }
 
 const servicesData = {
@@ -1893,15 +1543,17 @@ class ScrollBehaviorManager {
         this.scrollThreshold = 5;
         this.header = null;
         this.bottomNav = null;
-        this.fireworksResumeTimer = null;
         this.isScrolling = false;
-        this.fireworksWerePausedByScroll = false;
         this.ticking = false; // For requestAnimationFrame throttling
     }
 
     init() {
         this.header = document.getElementById('mainHeader');
         this.bottomNav = document.getElementById('bottomNav');
+
+        // Cache height values to avoid layout thrashing on scroll
+        this.updateCachedHeights();
+        window.addEventListener('resize', () => this.updateCachedHeights(), { passive: true });
 
         if (!this.header) {
             console.warn('❌ Header element not found - navbar auto-hide disabled');
@@ -1911,6 +1563,11 @@ class ScrollBehaviorManager {
             console.warn('❌ Bottom nav element not found - bottom nav auto-hide disabled');
         }
         window.addEventListener('scroll', this.onScroll.bind(this), { passive: true });
+    }
+
+    updateCachedHeights() {
+        this.windowHeight = window.innerHeight;
+        this.documentHeight = document.documentElement.scrollHeight;
     }
 
     onScroll() {
@@ -1929,8 +1586,6 @@ class ScrollBehaviorManager {
 
         this.updateNavbarVisibility(currentScroll);
 
-        this.handleFireworksScroll();
-
         this.lastScroll = currentScroll;
     }
 
@@ -1938,44 +1593,12 @@ class ScrollBehaviorManager {
         // NOTE: Header visibility is now handled by nav_fix.js (YouTube-style)
         // This method only handles bottom nav at-bottom detection
 
-        const windowHeight = window.innerHeight;
-        const documentHeight = document.documentElement.scrollHeight;
-        const isAtBottom = (currentScroll + windowHeight) >= (documentHeight - 50);
+        const isAtBottom = (currentScroll + this.windowHeight) >= (this.documentHeight - 50);
 
         // Always show bottom nav when at bottom of page
         if (isAtBottom) {
             if (this.bottomNav) this.bottomNav.classList.remove('hidden');
         }
-    }
-
-    handleFireworksScroll() {
-        if (typeof togglePause !== 'function' || typeof store === 'undefined') {
-            return;
-        }
-
-        if (!this.isScrolling) {
-            this.isScrolling = true;
-
-            const wasAlreadyPaused = store.state && store.state.paused;
-
-            if (!wasAlreadyPaused) {
-                this.fireworksWerePausedByScroll = true;
-                togglePause(true);
-            } else {
-                this.fireworksWerePausedByScroll = false;
-            }
-        }
-
-        clearTimeout(this.fireworksResumeTimer);
-
-        // Resume fireworks after 0.5 seconds of no scrolling
-        this.fireworksResumeTimer = setTimeout(() => {
-            this.isScrolling = false;
-            if (this.fireworksWerePausedByScroll) {
-                togglePause(false);
-                this.fireworksWerePausedByScroll = false;
-            }
-        }, 500);
     }
 }
 
@@ -3668,10 +3291,10 @@ function initFloatingChatWidget() {
     const chatHTML = `
         <div class="floating-chat-widget" id="floatingChatWidget">
             <button class="chat-fab" id="chatFab" aria-label="Open chat">
-                <img src="assets/ai_assistant_icon.png" alt="AI Assistant" class="fab-icon-img">
+                <img src="assets/ai_assistant_icon.webp" alt="AI Assistant" class="fab-icon-img">
                 <span class="fab-pulse"></span>
             </button>
-            
+
             <div class="chat-window-float" id="chatWindowFloat">
                 <div class="chat-header-float">
                     <div class="chat-header-info-float">
@@ -3683,16 +3306,16 @@ function initFloatingChatWidget() {
                     </div>
                     <button class="chat-close-float" id="chatCloseFloat">✕</button>
                 </div>
-                
+
                 <div class="chat-messages-float" id="chatMessagesFloat"></div>
-                
+
                 <div class="chat-quick-float" id="chatQuickFloat">
                     <button class="quick-btn-float" data-action="services">View Services</button>
                     <button class="quick-btn-float" data-action="booking">Book Now</button>
                     <button class="quick-btn-float" data-action="hours">Hours</button>
                     <button class="quick-btn-float" data-action="location">Location</button>
                 </div>
-                
+
                 <div class="chat-input-float">
                     <input type="text" id="chatInputFloat" placeholder="Type a message...">
                     <button id="chatSendFloat">➤</button>
@@ -3709,7 +3332,7 @@ function initFloatingChatWidget() {
             right: 24px;
             z-index: 9998;
         }
-        
+
         .chat-fab {
             width: 64px;
             height: 64px;
@@ -3721,23 +3344,23 @@ function initFloatingChatWidget() {
             align-items: center;
             justify-content: center;
             position: relative;
-            box-shadow: 
+            box-shadow:
                 0 6px 24px rgba(255, 215, 0, 0.35),
                 0 0 12px rgba(255, 215, 0, 0.2);
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        
+
         .chat-fab:hover {
             transform: scale(1.1);
-            box-shadow: 
+            box-shadow:
                 0 10px 35px rgba(255, 215, 0, 0.45),
                 0 0 18px rgba(255, 215, 0, 0.3);
         }
-        
+
         .chat-fab:active {
             transform: scale(1.02);
         }
-        
+
         .fab-icon-img {
             width: 50px;
             height: 50px;
@@ -3748,11 +3371,11 @@ function initFloatingChatWidget() {
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s ease;
         }
-        
+
         .chat-fab:hover .fab-icon-img {
             transform: scale(1.03);
         }
-        
+
         .fab-pulse {
             position: absolute;
             inset: -5px;
@@ -3760,12 +3383,12 @@ function initFloatingChatWidget() {
             background: radial-gradient(circle, rgba(255, 215, 0, 0.25) 0%, transparent 70%);
             animation: fabPulseGlow 2.5s ease-in-out infinite;
         }
-        
+
         @keyframes fabPulseGlow {
             0%, 100% { transform: scale(1); opacity: 0.5; }
             50% { transform: scale(1.25); opacity: 0; }
         }
-        
+
         /* ===== FULLSCREEN CHAT WINDOW ===== */
         .chat-window-float {
             position: fixed;
@@ -3782,7 +3405,7 @@ function initFloatingChatWidget() {
             flex-direction: column;
             z-index: 99999;
         }
-        
+
         .chat-window-float::before {
             content: '';
             position: absolute;
@@ -3790,23 +3413,23 @@ function initFloatingChatWidget() {
             left: 0;
             right: 0;
             bottom: 0;
-            background: 
+            background:
                 radial-gradient(ellipse at 20% 0%, rgba(255, 215, 0, 0.04) 0%, transparent 50%),
                 radial-gradient(ellipse at 80% 100%, rgba(255, 215, 0, 0.03) 0%, transparent 50%);
             pointer-events: none;
             z-index: 0;
         }
-        
+
         .chat-window-float.open {
             display: flex;
             animation: chatWindowOpen 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        
+
         @keyframes chatWindowOpen {
             0% { opacity: 0; transform: scale(0.95); }
             100% { opacity: 1; transform: scale(1); }
         }
-        
+
         /* ===== HEADER - Matching App Header ===== */
         .chat-header-float {
             background: var(--header-bg, rgba(0, 0, 0, 0.98));
@@ -3820,13 +3443,13 @@ function initFloatingChatWidget() {
             position: relative;
             z-index: 10;
         }
-        
+
         .chat-header-info-float {
             display: flex;
             align-items: center;
             gap: 14px;
         }
-        
+
         .chat-avatar-float {
             width: 44px;
             height: 44px;
@@ -3835,7 +3458,7 @@ function initFloatingChatWidget() {
             box-shadow: 0 3px 12px rgba(0, 0, 0, 0.25);
             object-fit: cover;
         }
-        
+
         .chat-title-float {
             font-family: 'Cinzel', serif;
             font-size: 17px;
@@ -3843,7 +3466,7 @@ function initFloatingChatWidget() {
             color: var(--gold-primary, #FFD700);
             letter-spacing: 0.5px;
         }
-        
+
         .chat-status-float {
             font-size: 12px;
             color: var(--text-muted, rgba(255, 255, 255, 0.65));
@@ -3852,7 +3475,7 @@ function initFloatingChatWidget() {
             gap: 6px;
             font-weight: 500;
         }
-        
+
         .chat-status-float .status-dot {
             position: static !important;
             display: inline-block !important;
@@ -3871,12 +3494,12 @@ function initFloatingChatWidget() {
             right: auto !important;
             bottom: auto !important;
         }
-        
+
         @keyframes statusPulse {
             0%, 100% { box-shadow: 0 0 6px rgba(34, 197, 94, 0.5); }
             50% { box-shadow: 0 0 10px rgba(34, 197, 94, 0.7); }
         }
-        
+
         .chat-close-float {
             background: rgba(255, 215, 0, 0.1);
             border: 1px solid rgba(255, 215, 0, 0.2);
@@ -3892,12 +3515,12 @@ function initFloatingChatWidget() {
             align-items: center;
             justify-content: center;
         }
-        
+
         .chat-close-float:hover {
             background: rgba(255, 215, 0, 0.2);
             transform: rotate(90deg);
         }
-        
+
         /* ===== MESSAGES AREA ===== */
         .chat-messages-float {
             flex: 1;
@@ -3911,20 +3534,20 @@ function initFloatingChatWidget() {
             position: relative;
             z-index: 1;
         }
-        
+
         .chat-messages-float::-webkit-scrollbar {
             width: 4px;
         }
-        
+
         .chat-messages-float::-webkit-scrollbar-track {
             background: transparent;
         }
-        
+
         .chat-messages-float::-webkit-scrollbar-thumb {
             background: rgba(255, 215, 0, 0.2);
             border-radius: 4px;
         }
-        
+
         /* ===== CHAT BUBBLES ===== */
         .chat-msg {
             max-width: 85%;
@@ -3935,12 +3558,12 @@ function initFloatingChatWidget() {
             animation: msgSlideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
         }
-        
+
         @keyframes msgSlideIn {
             0% { opacity: 0; transform: translateY(15px) scale(0.97); }
             100% { opacity: 1; transform: translateY(0) scale(1); }
         }
-        
+
         .chat-msg.bot {
             align-self: flex-start;
             background: rgba(255, 215, 0, 0.08);
@@ -3949,7 +3572,7 @@ function initFloatingChatWidget() {
             border-bottom-left-radius: 6px;
             box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
         }
-        
+
         .chat-msg.bot::before {
             content: '✨';
             position: absolute;
@@ -3958,7 +3581,7 @@ function initFloatingChatWidget() {
             font-size: 18px;
             opacity: 0.8;
         }
-        
+
         .chat-msg.user {
             align-self: flex-end;
             background: linear-gradient(135deg, var(--gold-primary, #FFD700), var(--gold-dark, #B8860B));
@@ -3967,7 +3590,7 @@ function initFloatingChatWidget() {
             font-weight: 500;
             box-shadow: 0 4px 15px rgba(255, 215, 0, 0.25);
         }
-        
+
         /* ===== QUICK ACTIONS ===== */
         .chat-quick-float {
             padding: 14px 16px;
@@ -3979,7 +3602,7 @@ function initFloatingChatWidget() {
             position: relative;
             z-index: 1;
         }
-        
+
         .quick-btn-float {
             padding: 8px 16px;
             background: rgba(255, 215, 0, 0.06);
@@ -3991,17 +3614,17 @@ function initFloatingChatWidget() {
             cursor: pointer;
             transition: all 0.25s ease;
         }
-        
+
         .quick-btn-float:hover {
             background: rgba(255, 215, 0, 0.12);
             border-color: rgba(255, 215, 0, 0.3);
             transform: translateY(-1px);
         }
-        
+
         .quick-btn-float:active {
             transform: translateY(0) scale(0.98);
         }
-        
+
         /* ===== INPUT AREA ===== */
         .chat-input-float {
             padding: 14px 16px;
@@ -4014,7 +3637,7 @@ function initFloatingChatWidget() {
             position: relative;
             z-index: 1;
         }
-        
+
         .chat-input-float input {
             flex: 1;
             padding: 12px 18px;
@@ -4026,17 +3649,17 @@ function initFloatingChatWidget() {
             outline: none;
             transition: all 0.25s ease;
         }
-        
+
         .chat-input-float input::placeholder {
             color: var(--text-muted, rgba(255, 255, 255, 0.5));
         }
-        
+
         .chat-input-float input:focus {
             border-color: rgba(255, 215, 0, 0.4);
             background: rgba(255, 255, 255, 0.06);
             box-shadow: 0 0 12px rgba(255, 215, 0, 0.1);
         }
-        
+
         .chat-input-float button {
             width: 46px;
             height: 46px;
@@ -4053,110 +3676,110 @@ function initFloatingChatWidget() {
             align-items: center;
             justify-content: center;
         }
-        
+
         .chat-input-float button:hover {
             transform: scale(1.08);
             box-shadow: 0 5px 18px rgba(255, 215, 0, 0.35);
         }
-        
+
         .chat-input-float button:active {
             transform: scale(0.96);
         }
-        
+
         @media (max-width: 480px) {
             .floating-chat-widget {
                 right: 16px;
                 bottom: 90px;
             }
-            
+
             .chat-msg {
                 max-width: 88%;
             }
-            
+
             .chat-msg.bot::before {
                 display: none;
             }
         }
-        
+
         /* ===== LIGHT MODE ===== */
         body.light-mode .chat-window-float {
             background: var(--bg-primary, #fff);
         }
-        
+
         body.light-mode .chat-window-float::before {
-            background: 
+            background:
                 radial-gradient(ellipse at 20% 0%, rgba(212, 160, 23, 0.06) 0%, transparent 50%),
                 radial-gradient(ellipse at 80% 100%, rgba(212, 160, 23, 0.04) 0%, transparent 50%);
         }
-        
+
         body.light-mode .chat-header-float {
             background: var(--header-bg, rgba(255, 255, 255, 0.95));
             box-shadow: var(--header-shadow, 0 2px 20px rgba(0, 0, 0, 0.1));
             border-bottom-color: rgba(212, 160, 23, 0.15);
         }
-        
+
         body.light-mode .chat-title-float {
             color: var(--gold-primary, #b8860b);
         }
-        
+
         body.light-mode .chat-avatar-float {
             border-color: var(--gold-primary, #b8860b);
         }
-        
+
         body.light-mode .chat-close-float {
             background: rgba(212, 160, 23, 0.1);
             border-color: rgba(212, 160, 23, 0.2);
             color: var(--gold-primary, #b8860b);
         }
-        
+
         body.light-mode .chat-msg.bot {
             background: rgba(212, 160, 23, 0.08);
             border-color: rgba(212, 160, 23, 0.15);
             color: var(--text-primary, #333);
         }
-        
+
         body.light-mode .chat-msg.user {
             background: linear-gradient(135deg, var(--gold-bright, #d4a017), var(--gold-dark, #8B6914));
         }
-        
+
         body.light-mode .chat-input-float {
             background: var(--bg-secondary, #f8f9fa);
             border-top-color: rgba(212, 160, 23, 0.1);
         }
-        
+
         body.light-mode .chat-input-float input {
             background: rgba(0, 0, 0, 0.03);
             color: var(--text-primary, #333);
             border-color: rgba(212, 160, 23, 0.15);
         }
-        
+
         body.light-mode .chat-input-float input::placeholder {
             color: var(--text-muted, rgba(0, 0, 0, 0.5));
         }
-        
+
         body.light-mode .chat-input-float input:focus {
             border-color: rgba(212, 160, 23, 0.35);
             box-shadow: 0 0 10px rgba(212, 160, 23, 0.1);
         }
-        
+
         body.light-mode .chat-input-float button {
             background: linear-gradient(135deg, var(--gold-bright, #d4a017), var(--gold-dark, #8B6914));
         }
-        
+
         body.light-mode .quick-btn-float {
             background: rgba(212, 160, 23, 0.08);
             color: var(--gold-primary, #b8860b);
             border-color: rgba(212, 160, 23, 0.2);
         }
-        
+
         body.light-mode .chat-quick-float {
             border-top-color: rgba(212, 160, 23, 0.08);
         }
-        
+
         body.light-mode .chat-messages-float::-webkit-scrollbar-thumb {
             background: rgba(212, 160, 23, 0.25);
         }
-        
+
         /* ===== TYPING INDICATOR ===== */
         .typing-indicator {
             display: flex;
@@ -4170,7 +3793,7 @@ function initFloatingChatWidget() {
             align-self: flex-start;
             animation: msgSlideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        
+
         .typing-indicator span {
             width: 8px;
             height: 8px;
@@ -4178,35 +3801,35 @@ function initFloatingChatWidget() {
             border-radius: 50%;
             animation: typingBounce 1.4s ease-in-out infinite;
         }
-        
+
         .typing-indicator span:nth-child(1) {
             animation-delay: 0s;
         }
-        
+
         .typing-indicator span:nth-child(2) {
             animation-delay: 0.2s;
         }
-        
+
         .typing-indicator span:nth-child(3) {
             animation-delay: 0.4s;
         }
-        
+
         @keyframes typingBounce {
-            0%, 60%, 100% { 
+            0%, 60%, 100% {
                 transform: translateY(0);
                 opacity: 0.4;
             }
-            30% { 
+            30% {
                 transform: translateY(-8px);
                 opacity: 1;
             }
         }
-        
+
         body.light-mode .typing-indicator {
             background: rgba(212, 160, 23, 0.08);
             border-color: rgba(212, 160, 23, 0.15);
         }
-        
+
         body.light-mode .typing-indicator span {
             background: var(--gold-primary, #b8860b);
         }
@@ -4362,50 +3985,6 @@ function initFloatingChatWidget() {
     console.log('💬 Chat widget initialized');
 }
 
-// ================================================================================
-// CONFETTI CELEBRATION
-// ================================================================================
-function triggerConfetti() {
-    const colors = ['#FFD700', '#FFB6C1', '#FFFFFF', '#F7E7CE', '#B76E79'];
-    const container = document.createElement('div');
-    container.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:99999;overflow:hidden;';
-    document.body.appendChild(container);
-
-    for (let i = 0; i < 80; i++) {
-        const particle = document.createElement('div');
-        const color = colors[Math.floor(Math.random() * colors.length)];
-        const size = 6 + Math.random() * 8;
-        const left = Math.random() * 100;
-        const delay = Math.random() * 0.5;
-
-        particle.style.cssText = `
-            position:absolute;
-            left:${left}%;
-            top:-20px;
-            width:${size}px;
-            height:${size}px;
-            background:${color};
-            border-radius:${Math.random() > 0.5 ? '50%' : '2px'};
-            animation:confettiFall ${2 + Math.random()}s ease-out ${delay}s forwards;
-        `;
-        container.appendChild(particle);
-    }
-
-    setTimeout(() => container.remove(), 4000);
-}
-
-// Add confetti keyframes
-const confettiStyle = document.createElement('style');
-confettiStyle.textContent = `
-    @keyframes confettiFall {
-        0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-        100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
-    }
-`;
-document.head.appendChild(confettiStyle);
-
-// Export for booking success
-window.triggerConfetti = triggerConfetti;
 
 // ================================================================================
 // SERVICES PAGE - Dedicated Services Tab Functionality
@@ -4766,7 +4345,7 @@ function renderServicesPage() {
         categoryCards.forEach(card => card.style.display = '');
     }
 
-    // DEFAULT EMPTY STATE: 
+    // DEFAULT EMPTY STATE:
     // If category is 'all' AND no search query AND no interaction, show NOTHING
     if (servicesPageCurrentCategory === 'all' && !servicesPageSearchQuery && !servicesPageHasInteracted) {
         grid.innerHTML = ''; // Clear grid
@@ -5272,7 +4851,7 @@ class GalleryController {
             <div class="lightbox-track-container">
                 ${slidesHTML}
             </div>
-            
+
             <div class="lightbox-controls">
                 <button class="lightbox-btn lightbox-close" aria-label="Close">✕</button>
                 <div class="lightbox-gradient-left"></div>
@@ -5464,6 +5043,7 @@ function initGalleryPeek() {
     // Functionality removed
 }
 
+
 // Ensure this runs after DOM load
 // =========================================
 // PREMIUM APP LOADER LOGIC
@@ -5499,3 +5079,151 @@ window.slideServiceCarousel = slideServiceCarousel;
 
 
 // Immersive Header logic is now centrally managed by nav_fix.js
+
+// ================================================================================
+// PWA INSTALLATION LOGIC
+// ================================================================================
+window.deferredPrompt = null;
+
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Service Worker Registration
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/service-worker.js')
+                .then(registration => {
+                    console.log('✅ ServiceWorker registration successful with scope: ', registration.scope);
+                })
+                .catch(err => {
+                    console.log('❌ ServiceWorker registration failed: ', err);
+                });
+        });
+    }
+
+    // 2. Install Prompt Logic
+    const installBtn = document.getElementById('installBtn');
+
+    // Listen for the 'beforeinstallprompt' event
+    window.addEventListener('beforeinstallprompt', (e) => {
+        // Prevent Chrome 67 and earlier from automatically showing the prompt
+        e.preventDefault();
+        // Stash the event so it can be triggered later.
+        window.deferredPrompt = e;
+
+        console.log('📲 PWA Install Prompt captured');
+
+        // Show the install button after 30 seconds
+        setTimeout(() => {
+            if (installBtn) {
+                // Ensure it's visible (remove 'display: none' from style or class)
+                installBtn.style.display = 'flex';
+                // Add a simple fade-in effect if CSS supports it
+                installBtn.style.opacity = '0';
+                installBtn.style.transition = 'opacity 0.5s ease';
+                requestAnimationFrame(() => {
+                    installBtn.style.opacity = '1';
+                });
+
+                console.log('🕒 30s elapsed: Showing Install Button');
+            }
+        }, 30000); // 30 seconds
+    });
+
+    // 3. Handle Install Button Click
+    if (installBtn) {
+        installBtn.addEventListener('click', async () => {
+            const promptEvent = window.deferredPrompt;
+            if (!promptEvent) {
+                // The deferred prompt isn't available.
+                return;
+            }
+            // Show the install prompt
+            promptEvent.prompt();
+            // Log the result
+            const result = await promptEvent.userChoice;
+            console.log('👍 User choice:', result.outcome);
+
+            // Reset the deferred prompt variable, since it can only be used once.
+            window.deferredPrompt = null;
+
+            // Hide the install button
+            installBtn.style.display = 'none';
+        });
+    }
+
+    // 4. Handle App Uninstalled
+    window.addEventListener('appinstalled', (evt) => {
+        console.log('🎉 App installed successfully');
+        if (installBtn) installBtn.style.display = 'none';
+
+    });
+
+    // Initialize Chat Widget
+    if (typeof initFloatingChatWidget === 'function') {
+        initFloatingChatWidget();
+    }
+});
+// ================================================================================
+// CONFETTI CELEBRATION (Triggered on Booking Success)
+// ================================================================================
+class ConfettiBurst {
+    constructor(options = {}) {
+        this.colors = options.colors || ['#FFD700', '#FFB6C1', '#FFFFFF', '#F7E7CE', '#B76E79'];
+        this.particleCount = options.count || 100;
+        this.duration = options.duration || 3000;
+        this.spread = options.spread || 360;
+        this.velocity = options.velocity || 30;
+    }
+
+    fire(originX = 0.5, originY = 0.5) {
+        const container = document.createElement('div');
+        container.className = 'confetti-container';
+        container.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:99999;overflow:hidden;';
+        document.body.appendChild(container);
+
+        for (let i = 0; i < this.particleCount; i++) {
+            const particle = document.createElement('div');
+            const color = this.colors[Math.floor(Math.random() * this.colors.length)];
+            const size = Math.random() * 10 + 5;
+            const shape = Math.random() > 0.5 ? '50%' : '0';
+
+            const angle = (Math.random() * this.spread - this.spread / 2) * (Math.PI / 180);
+            const velocity = this.velocity * (0.5 + Math.random() * 0.5);
+            const vx = Math.cos(angle) * velocity;
+            const vy = Math.sin(angle) * velocity - 20;
+
+            particle.style.cssText = `
+                position: absolute;
+                left: ${originX * 100}%;
+                top: ${originY * 100}%;
+                width: ${size}px;
+                height: ${size}px;
+                background: ${color};
+                border-radius: ${shape};
+                transform: rotate(${Math.random() * 360}deg);
+                animation: confettiFall 3s ease-out forwards;
+            `;
+            container.appendChild(particle);
+            this.animateParticle(particle, vx, vy);
+        }
+        setTimeout(() => container.remove(), this.duration);
+    }
+
+    animateParticle(particle, vx, vy) {
+        let x = 0, y = 0, rotation = Math.random() * 360;
+        const gravity = 0.5, friction = 0.99, rotationSpeed = Math.random() * 10 - 5;
+        const animate = () => {
+            vy += gravity; vx *= friction; vy *= friction;
+            x += vx; y += vy; rotation += rotationSpeed;
+            particle.style.transform = `translate(${x}px, ${y}px) rotate(${rotation}deg)`;
+            particle.style.opacity = Math.max(0, 1 - y / 800);
+            if (y < 1000 && particle.style.opacity > 0) requestAnimationFrame(animate);
+        };
+        requestAnimationFrame(animate);
+    }
+}
+
+function triggerConfetti() {
+    new ConfettiBurst({ count: 80 }).fire(0.5, 0.3);
+}
+
+window.triggerConfetti = triggerConfetti;
